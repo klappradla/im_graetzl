@@ -12,12 +12,12 @@ class Notifications::AvatarService
   attr_reader :owner, :type
 
   def refile_img
-    Refile.attachment_url(@owner, :avatar, :fill, 100, 100, host: host)
+    Refile.attachment_url(@owner, :avatar, :fill, 40, 40, host: host)
   end
 
   def fallback_img
     type = ActiveModel::Naming.singular @owner
-    path = "avatar/#{type}/100x100.png"
+    path = "avatar/#{type}/40x40.png"
     ApplicationController.helpers.image_url(path, host: host)
   end
 
