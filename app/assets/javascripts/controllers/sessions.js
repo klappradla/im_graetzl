@@ -9,12 +9,12 @@ APP.controllers.sessions = (function() {
           var newRegConfUser = $("#flash .alert");
           if (newRegConfUser.exists()) {
             if( newRegConfUser.html().indexOf('Dein Account ist nun freigeschaltet') >= 0){
-              var graetzl = localStorage.getItem('Graetzl');
+              var reggraetzl = localStorage.getItem('Graetzl');
               // FB
               fbq('track', 'CompleteRegistration');
               // Analytics
               gtag('event', 'Registration', {
-                'event_category': graetzl
+                'event_category': reggraetzl
               });
             }
           }
