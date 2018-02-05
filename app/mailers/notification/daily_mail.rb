@@ -1,7 +1,16 @@
 class Notification::DailyMail
   include MailUtils
 
-  MANDRILL_TEMPLATE = 'daily-notifications'
+  if Rails.env.staging?
+    {
+      MANDRILL_TEMPLATE = 'staging-daily-notifications'
+    }
+  else
+    {
+      MANDRILL_TEMPLATE = 'daily-notifications'
+    }
+  end
+
   BLOCKS = [
     {
       name: 'Neue Location Updates',
