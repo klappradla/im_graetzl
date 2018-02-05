@@ -25,6 +25,8 @@ class Notifications::NewMeeting < Notification
       meeting_starts_at: (activity.trackable.starts_at_date && activity.trackable.starts_at_time) ? "#{I18n.localize(activity.trackable.starts_at_date, format:'%A %d. %B')}, #{I18n.localize(activity.trackable.starts_at_time, format:'%H:%M')} Uhr" : '',
       meeting_starts_at_date: activity.trackable.starts_at_date ? I18n.localize(activity.trackable.starts_at_date, format:'%A %d. %B') : '',
       meeting_starts_at_time: activity.trackable.starts_at_time ? I18n.localize(activity.trackable.starts_at_time, format:'%H:%M') : '',
+      meeting_starts_at_day: activity.trackable.starts_at_date ? I18n.localize(activity.trackable.starts_at_date, format:'%d.') : '',
+      meeting_starts_at_month: activity.trackable.starts_at_date ? I18n.localize(activity.trackable.starts_at_date, format:'%b') : '',
       meeting_description: activity.trackable.description.truncate(255, separator: ' ')
     }
   end
