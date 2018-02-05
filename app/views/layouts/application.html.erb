@@ -14,39 +14,7 @@
   <%= favicon_link_tag 'favicon.ico' %>
   <!-- js -->
   <%= javascript_include_tag 'application' %>
-
-  <% if Rails.env.production? %>
-
-  <!-- Global site tag (gtag.js) - Google Analytics - Production -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-59844253-2"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'UA-59844253-2');
-  </script>
-
-  <% elsif Rails.env.staging? %>
-
-  <!-- Global site tag (gtag.js) - Google Analytics - Staging -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-59844253-4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'UA-59844253-4');
-
-    <% if current_user %>
-      var dimensionLoggedInValue = 'logged-in';
-      ga('set', 'dimension1', dimensionLoggedInValue);
-    <% end %>
-
-  </script>
-
-  <% end %>
-
+  <%= render 'tracking_tags' %>
 </head>
 
 <body data-controller=<%= controller_name %>>

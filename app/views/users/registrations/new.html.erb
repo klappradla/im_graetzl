@@ -2,7 +2,7 @@
 
 <section class="register-personalInfo">
   <div class="wrp">
-    <h1>Willkommen im Grätzl <span><%= resource.graetzl.name %></span></h1>
+    <h1>Willkommen im Grätzl <span id="graetzl"><%= resource.graetzl.name %></span></h1>
     <%= link_to 'Nicht dein Grätzl?', graetzls_registration_path(feature: params[:feature]), class: 'link-subtle' %>
   </div>
 
@@ -111,7 +111,7 @@
         </div>
       </div>
 
-      <%= f.button "Jetzt registrieren!", data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
+      <%= f.button "Jetzt registrieren!", data: { disable_with: 'speichert...' }, class: 'btn-primary', id: 'btn-register' %>
 
   <% end %>
 
