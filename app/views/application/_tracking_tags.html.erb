@@ -12,8 +12,9 @@
     <script>
       // Maps 'dimension1' to 'Logged-In'.
       gtag('config', 'UA-59844253-2', {
-        'dimension1': '<%= current_user.graetzl.district.zip =%> <%= current_user.graetzl.name =%>'
+        'custom_map': {'dimension1': 'logged_in_user'}
       });
+      gtag('event', 'logged_in_traffic', {'logged_in_user': '<%= current_user.graetzl.district.zip =%> <%= current_user.graetzl.name =%>'});
     </script>
   <% else %>
     <script>
@@ -55,8 +56,9 @@
     <script>
       // Maps 'dimension1' to 'Logged-In'.
       gtag('config', 'UA-59844253-4', {
-        'dimension1': '<%= current_user.graetzl.district.zip =%> <%= current_user.graetzl.name =%>'
+        'custom_map': {'dimension1': 'logged_in_user'}
       });
+      gtag('event', 'logged_in_traffic', {'logged_in_user': '<%= current_user.graetzl.district.zip =%> <%= current_user.graetzl.name =%>'});
     </script>
   <% else %>
     <script>

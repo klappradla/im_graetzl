@@ -4,6 +4,7 @@
   <div class="wrp">
     <h1>Willkommen im Grätzl <span id="graetzl"><%= resource.graetzl.name %></span></h1>
     <%= link_to 'Nicht dein Grätzl?', graetzls_registration_path(feature: params[:feature]), class: 'link-subtle' %>
+    <span id="district" style="display:none;"><%= resource.graetzl.district.zip %></span>
   </div>
 
   <%= form_for(resource, as: resource_name, url: registration_path, html: {}) do |f| %>

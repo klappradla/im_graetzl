@@ -10,8 +10,9 @@ APP.controllers.registrations = (function() {
         $(document).ready(function() {
           $('#btn-register').on('click', function() {
             var reggraetzl = $('#graetzl').html();
+            var regdistrict = $('#district').html();
             reggraetzl = reggraetzl.replace('&amp;','&');
-            localStorage.setItem('Graetzl', reggraetzl);
+            localStorage.setItem('Graetzl', regdistrict + ' ' + reggraetzl);
           });
         });
 
