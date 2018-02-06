@@ -20,7 +20,6 @@ class LocationPostsController < ApplicationController
     @location_post = LocationPost.find(params[:id]).destroy
   end
 
-
   private
 
   def location_post_params

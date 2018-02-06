@@ -10,9 +10,6 @@ RSpec.describe LocationPostsController, type: :routing do
       expect(post: '/location_posts/post-slug/comments').to route_to('location_posts#comment', location_post_id: 'post-slug')
     end
 
-    it 'routes GET /location_posts/post-slug/comments to #comments' do
-      expect(get: '/location_posts/post-slug/comments').to route_to('location_posts#comments', location_post_id: 'post-slug')
-    end
   end
   describe 'named routes' do
     it 'routes POST location_posts_path to #create' do
@@ -21,10 +18,6 @@ RSpec.describe LocationPostsController, type: :routing do
 
     it 'routes POST location_post_comments_path to #comment' do
       expect(post: location_post_comments_path('post-slug')).to route_to('location_posts#comment', location_post_id: 'post-slug')
-    end
-
-    it 'routes GET location_post_comments_path to #comments' do
-      expect(get: location_post_comments_path('post-slug')).to route_to('location_posts#comments', location_post_id: 'post-slug')
     end
   end
 end

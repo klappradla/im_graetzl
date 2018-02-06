@@ -121,7 +121,6 @@ Rails.application.routes.draw do
 
   resources :location_posts, only: [:create, :destroy] do
     post :comments, action: :comment
-    get :comments
   end
   resources :admin_posts, path: 'ideen', only: [:show, :destroy]
 
