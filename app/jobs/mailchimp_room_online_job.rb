@@ -11,7 +11,8 @@ class MailchimpRoomOnlineJob < ApplicationJob
       g.lists(list_id).members(member_id).update(body: {
         merge_fields: {
           ROOM_TITLE: room.slogan,
-          ROOM_URL: Rails.application.routes.url_helpers.room_offer_path(room)
+          ROOM_URL: Rails.application.routes.url_helpers.room_offer_path(room),
+          'GROUPINGS' => {0 => {'id' => '9e9d77d5c4', 'groups' => room.district.zip }}
         }
       })
     rescue Gibbon::MailChimpError => mce
