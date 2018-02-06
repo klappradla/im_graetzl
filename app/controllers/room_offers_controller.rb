@@ -21,6 +21,7 @@ class RoomOffersController < ApplicationController
     @room_offer.address = Address.from_feature(params[:feature])
     if @room_offer.save
       RoomsMailer.new.send_new_room_offer_email(@room_offer)
+      MailchimpRoomOnlineJob.perform_later(@room_offer)
       @room_offer.create_activity(:create, owner: @room_offer.user)
       redirect_to @room_offer
     else
