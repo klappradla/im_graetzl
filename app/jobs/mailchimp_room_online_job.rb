@@ -10,7 +10,8 @@ class MailchimpRoomOnlineJob < ApplicationJob
       g.timeout = 30
       g.lists(list_id).members(member_id).update(body: {
         merge_fields: {
-          ROOM_TITLE: room.slogan
+          ROOM_TITLE: room.slogan,
+          ROOM_URL: Rails.application.routes.url_helpers.room_offer_path(room_offer)
         }
       })
     rescue Gibbon::MailChimpError => mce
