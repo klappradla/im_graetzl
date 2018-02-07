@@ -47,6 +47,7 @@ class Location < ApplicationRecord
   def approve
     if pending?
       approved!
+      create_activity(:create)
       create_activity(:approve)
       MailchimpLocationApprovedJob.perform_later(self)
     end

@@ -43,7 +43,7 @@ RSpec.describe Notification::DailyMail do
       end
 
       it 'has basic mandrill keys' do
-        expect(message.keys).to contain_exactly(:to,
+        expect(message.keys).to include(:to,
           :from_email,
           :from_name,
           :subject,

@@ -70,6 +70,7 @@ module User::Notifiable
     self.daily_mail_notifications = [
       Notifications::NewMeeting,
       Notifications::NewLocationPost,
+      Notifications::NewLocation,
       Notifications::NewUserPost,
       Notifications::NewRoomOffer,
       Notifications::NewRoomDemand,

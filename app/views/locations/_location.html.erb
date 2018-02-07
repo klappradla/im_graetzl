@@ -10,6 +10,7 @@
     </div>
     <%= graetzl_flag(location.graetzl) %>
   </div>
+
   <div class="cardBoxContent">
     <div class="location-shortfacts">
       <%= link_to [location.graetzl, location], class: 'locationlogo' do %>
@@ -32,6 +33,10 @@
     <div class="txt">
       <p><%= truncate location.description, length: 100 %></p>
     </div>
+
+    <% if local_assigns[:appendix].present? %>
+      <%= render 'activities/appendix', appendix: local_assigns[:appendix], parent: location %>
+    <% end %>
 
     <% if location_post = location.posts.sort_by(&:created_at).last %>
       <%= link_to [location.graetzl, location, anchor: dom_id(location_post)], class: 'updateteaser' do %>

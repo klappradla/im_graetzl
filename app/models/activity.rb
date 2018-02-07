@@ -11,7 +11,9 @@ class Activity < ApplicationRecord
   before_destroy :destroy_notifications, prepend: true
 
   def appendix
-    if key.end_with?('.comment')
+    if key == 'location.create'
+      { message: { title: "Neu auf imGrätzl", content: "Sag Hallo!"}}
+    elsif key.end_with?('.comment')
       { comment: trackable.comments.last }
     elsif key.end_with?('.go_to')
       { participant: owner }

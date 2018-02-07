@@ -1,6 +1,7 @@
 module NotificationSettingsHelper
   DAILY_NOTIFICATION_TYPES = [
     Notifications::NewLocationPost,
+    Notifications::NewLocation,
     Notifications::NewMeeting,
     Notifications::NewUserPost,
     Notifications::NewRoomOffer,

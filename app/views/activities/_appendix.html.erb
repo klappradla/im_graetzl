@@ -21,3 +21,14 @@
     <span class="userAndType"><%= link_to participant.username, participant %> <span>nimmt am Treffen teil</span></span>
   </div>
 <% end %>
+
+<% if message = appendix[:message] %>
+  <%= link_to [parent.graetzl, parent], class: "basic-message-box" do %>
+    <div class="hl">
+      <%= message[:title] %>
+    </div>
+    <div class="title">
+      <%= message[:content] %>
+    </div>
+  <% end %>
+<% end %>

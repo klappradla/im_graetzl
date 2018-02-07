@@ -149,7 +149,7 @@
   }
 
 
-  .updateteaser, .zuckerlteasertxt, .event-teaser-box {
+  .updateteaser, .zuckerlteasertxt, .event-teaser-box, .basic-message-box {
     display: block;
     padding: 10px 15px;
     border-left-width: 1px;
@@ -192,6 +192,11 @@
     }
   }
   .event-teaser-box {
+    border-color: $color-ambient-mint-dark;
+    background-color: $color-ambient-mint-light;
+    color: $color-ambient-mint-dark;
+  }
+  .basic-message-box {
     border-color: $color-ambient-mint-dark;
     background-color: $color-ambient-mint-light;
     color: $color-ambient-mint-dark;
