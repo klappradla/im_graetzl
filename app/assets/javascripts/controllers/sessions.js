@@ -12,14 +12,13 @@ APP.controllers.sessions = (function() {
             //if( newRegConfUser.html().indexOf('Dein Account ist nun freigeschaltet') >= 0){
               var reggraetzl;
               reggraetzl = localStorage.getItem('Graetzl');
-              console.log(reggraetzl);
-              // FB
-              fbq('track', 'CompleteRegistration');
               // Analytics
               gtag('event', 'sign_up', {
                 'event_category': 'Registration',
                 'event_label': reggraetzl
               });
+              // FB
+              fbq('track', 'CompleteRegistration');
             }
           }
         });

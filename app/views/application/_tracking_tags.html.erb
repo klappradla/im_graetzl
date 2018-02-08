@@ -7,18 +7,11 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
+    gtag('config', 'UA-59844253-2', { 'anonymize_ip': true });
   </script>
   <% if current_user %>
     <script>
-      // Maps 'dimension1' to 'Logged-In'.
-      gtag('config', 'UA-59844253-2', {
-        'custom_map': {'dimension1': 'logged_in_user'}
-      });
-      gtag('event', 'logged_in_traffic', {'logged_in_user': '<%= current_user.graetzl.district.zip =%> <%= current_user.graetzl.name =%>'});
-    </script>
-  <% else %>
-    <script>
-      gtag('config', 'UA-59844253-2');
+    gtag('set', {'user_id': '<%= current_user.id =%>'});
     </script>
   <% end %>
   <!-- /GA -->
@@ -51,18 +44,11 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
+    gtag('config', 'UA-59844253-4', { 'anonymize_ip': true });
   </script>
   <% if current_user %>
     <script>
-      // Maps 'dimension1' to 'Logged-In'.
-      gtag('config', 'UA-59844253-4', {
-        'custom_map': {'dimension1': 'logged_in_user'}
-      });
-      gtag('event', 'logged_in_traffic', {'logged_in_user': '<%= current_user.graetzl.district.zip =%> <%= current_user.graetzl.name =%>'});
-    </script>
-  <% else %>
-    <script>
-      gtag('config', 'UA-59844253-4');
+      gtag('set', {'user_id': '<%= current_user.id =%>'});
     </script>
   <% end %>
   <!-- /GA -->
