@@ -12,7 +12,7 @@ class MailchimpRoomOnlineJob < ApplicationJob
         merge_fields: {
           ROOM_TITLE: room.slogan,
           ROOM_URL: Rails.application.routes.url_helpers.room_offer_path(room),
-          :groupings => [{:name => '9e9d77d5c4', :groups => [room.district.zip]}]
+          :groupings => [{name: '9e9d77d5c4', groups: [room.district.zip]}]
         }
       })
     rescue Gibbon::MailChimpError => mce
