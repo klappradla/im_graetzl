@@ -10,7 +10,7 @@ class MailchimpRoomDemandOnlineJob < ApplicationJob
       g.timeout = 30
       g.lists(list_id).members(member_id).update(body: {
         merge_fields: {
-          ROOM_TYPE: I18n.t("activerecord.attributes.room_demand.demand_types.#{room_demand.demand_type}"),
+          ROOM_TYPE: I18n.t("activerecord.attributes.room_demand.demand_types.#{room.demand_type}"),
           ROOM_TITLE: room.slogan,
           ROOM_URL: Rails.application.routes.url_helpers.room_demand_path(room),
           ROOM_PLZ: compact_room_demand_graetzl_list(room).map(&:zip_name).join(", "),
