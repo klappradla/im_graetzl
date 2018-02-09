@@ -23,7 +23,7 @@ class Notifications::NewRoomOffer < Notification
       room_description: activity.trackable.room_description,
       owner_name: activity.owner.username,
       owner_url: user_url(activity.owner, DEFAULT_URL_OPTIONS),
-      owner_avatar_url: Notifications::AvatarService.new(activity.owner).call,
+      owner_avatar_url: Notifications::AvatarService.new(activity.trackable).call,
     }
   end
 
