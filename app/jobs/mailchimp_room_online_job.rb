@@ -14,8 +14,7 @@ class MailchimpRoomOnlineJob < ApplicationJob
           ROOM_TITLE: room.slogan,
           ROOM_URL: Rails.application.routes.url_helpers.room_offer_path(room),
           ROOM_PLZ: room.district.zip,
-          ROOM_CAT: room.room_categories.map(&:name).join(", "),
-          ROOM_DATE: room.created_at
+          ROOM_CAT: room.room_categories.map(&:name).join(", ")
         }
       })
     rescue Gibbon::MailChimpError => mce
