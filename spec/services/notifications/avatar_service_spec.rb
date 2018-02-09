@@ -18,7 +18,7 @@ RSpec.describe Notifications::AvatarService do
         subject(:url) { service.call }
 
         it 'returns cdn url for avatar' do
-          expect(url).to eq "http://123.cloudfront.com/attachments/token/store/fill/40/40/abcdefg2000/avatar.jpeg"
+          expect(url).to eq "http://123.cloudfront.com/attachments/token/store/fill/200/200/abcdefg2000/avatar.jpeg"
         end
       end
       context 'when user withou avatar' do
@@ -28,7 +28,7 @@ RSpec.describe Notifications::AvatarService do
         subject(:url) { service.call }
 
         it 'returns cdn url for fallback user avatar' do
-          expect(url).to match /^http:\/\/123.cloudfront.com\/assets\/avatar\/user\/40x40-\w*.png/
+          expect(url).to match /^http:\/\/123.cloudfront.com\/assets\/avatar\/user\/200x200-\w*.png/
         end
       end
       context 'when location withou avatar' do
@@ -38,7 +38,7 @@ RSpec.describe Notifications::AvatarService do
         subject(:url) { service.call }
 
         it 'returns cdn url for fallback location avatar' do
-          expect(url).to match /^http:\/\/123.cloudfront.com\/assets\/avatar\/location\/40x40-\w*.png/
+          expect(url).to match /^http:\/\/123.cloudfront.com\/assets\/avatar\/location\/200x200-\w*.png/
         end
       end
     end
@@ -51,7 +51,7 @@ RSpec.describe Notifications::AvatarService do
         subject(:url) { service.call }
 
         it 'returns app url for avatar' do
-          expect(url).to eq "http://test.yourhost.com/attachments/token/store/fill/40/40/abcdefg2000/avatar.jpeg"
+          expect(url).to eq "http://test.yourhost.com/attachments/token/store/fill/200/200/abcdefg2000/avatar.jpeg"
         end
       end
       context 'when user withou avatar' do
@@ -61,7 +61,7 @@ RSpec.describe Notifications::AvatarService do
         subject(:url) { service.call }
 
         it 'returns app url for fallback user avatar' do
-          expect(url).to match /^http:\/\/test.yourhost.com\/assets\/avatar\/user\/40x40-\w*.png/
+          expect(url).to match /^http:\/\/test.yourhost.com\/assets\/avatar\/user\/200x200-\w*.png/
         end
       end
       context 'when location withou avatar' do
@@ -71,7 +71,7 @@ RSpec.describe Notifications::AvatarService do
         subject(:url) { service.call }
 
         it 'returns app url for fallback location avatar' do
-          expect(url).to match /^http:\/\/test.yourhost.com\/assets\/avatar\/location\/40x40-\w*.png/
+          expect(url).to match /^http:\/\/test.yourhost.com\/assets\/avatar\/location\/200x200-\w*.png/
         end
       end
     end

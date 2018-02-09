@@ -16,6 +16,7 @@ class Notifications::NewLocation < Notification
       location_name: activity.trackable.name,
       location_url: graetzl_location_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
       location_slogan: activity.trackable.slogan,
+      location_category: activity.trackable.category.try(:name),
       location_address: printable_address(activity.trackable),
     }
   end
@@ -27,7 +28,9 @@ class Notifications::NewLocation < Notification
   private
 
   def printable_address(location)
-    "#{location.address.street_name} #{location.address.street_number}, #{location.address.zip} #{location.address.city}"
+    if location.address
+      "#{location.address.street_name} #{location.address.street_number}, #{location.address.zip} #{location.address.city}"
+    end
   end
 
 end
