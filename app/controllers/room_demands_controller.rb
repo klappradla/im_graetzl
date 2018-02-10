@@ -41,8 +41,8 @@ class RoomDemandsController < ApplicationController
 
   def destroy
     @room_demand = current_user.room_demands.find(params[:id])
-    @room_demand.destroy
     MailchimpRoomDeleteJob.perform_later(@room_demand)
+    @room_demand.destroy
 
     redirect_to rooms_user_path
   end
