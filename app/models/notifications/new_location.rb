@@ -7,7 +7,7 @@ class Notifications::NewLocation < Notification
   end
 
   def self.description
-    'New location TODO'
+    'Es gibt eine neue Location in deinem Grätzl'
   end
 
   def mail_vars
@@ -18,11 +18,13 @@ class Notifications::NewLocation < Notification
       location_slogan: activity.trackable.slogan,
       location_category: activity.trackable.category.try(:name),
       location_address: printable_address(activity.trackable),
+      owner_avatar_url: Notifications::AvatarService.new(activity.trackable.author).call
+
     }
   end
 
   def mail_subject
-    'Deine Location wurde freigeschalten'
+    'Es gibt eine neue Location in deinem Grätzl'
   end
 
   private

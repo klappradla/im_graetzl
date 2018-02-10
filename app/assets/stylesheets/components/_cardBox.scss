@@ -181,7 +181,10 @@
   .updateteaser {
     border-color: $color-font-primary;
     color: $color-font-primary;
-
+    /* Hide Sag Hallo wenn anderer Content vorhanden */
+    ~ a.basic-message-box {
+      display: none;
+    }
   }
   .zuckerlteasertxt {
     border-color: $color-ambient-rosa-dark;
@@ -195,6 +198,10 @@
     border-color: $color-ambient-mint-dark;
     background-color: $color-ambient-mint-light;
     color: $color-ambient-mint-dark;
+    /* Hide Sag Hallo wenn anderer Content vorhanden */
+    ~ a.basic-message-box {
+      display: none;
+    }
   }
   .basic-message-box {
     border-color: $color-ambient-mint-dark;

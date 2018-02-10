@@ -12,7 +12,7 @@ class Activity < ApplicationRecord
 
   def appendix
     if key == 'location.create'
-      { message: { title: "Neu auf imGrätzl", content: "Sag Hallo!"}}
+      { message: { title: "Neu auf imGrätzl", content: "Sag gleich Hallo!"}}
     elsif key.end_with?('.comment')
       { comment: trackable.comments.last }
     elsif key.end_with?('.go_to')
