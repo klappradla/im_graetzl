@@ -32,6 +32,7 @@ class RoomDemandsController < ApplicationController
   def update
     @room_demand = current_user.room_demands.find(params[:id])
     if @room_demand.update(room_demand_params)
+      MailchimpRoomDemandOnlineJob.perform_later(@room_demand)
       redirect_to @room_demand
     else
       render 'edit'
