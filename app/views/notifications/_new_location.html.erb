@@ -5,7 +5,7 @@
     <%= attachment_image_tag location, :avatar, :fill, 40, 40, fallback: 'avatar/location/40x40.png', class: 'img-square' %>
     <div class="msg">
       <div class="timeago">vor <%= time_ago_in_words(notification.activity.created_at) %></div>
-      Neu dabei im Grätzl: <span class="matter"><%= location.name %></span> - Sag Hallo!
+      Neu auf imGrätzl: <span class="matter"><%= location.name %></span> - Sag gleich Hallo!
     </div>
   <% end %>
 <% end %>

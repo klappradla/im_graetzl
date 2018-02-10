@@ -18,7 +18,7 @@ class Notifications::NewLocation < Notification
       location_slogan: activity.trackable.slogan,
       location_category: activity.trackable.category.try(:name),
       location_address: printable_address(activity.trackable),
-      owner_avatar_url: Notifications::AvatarService.new(activity.trackable.author).call
+      owner_avatar_url: Notifications::AvatarService.new(activity.trackable).call
 
     }
   end
