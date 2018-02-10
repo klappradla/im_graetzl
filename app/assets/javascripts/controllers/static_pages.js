@@ -3,7 +3,6 @@ APP.controllers.static_pages = (function() {
     function init() {
       if($("section.help").exists()) initHelp();
       if($("section.help").exists()) initMobileNav();
-      if($("section.error").exists()) initMobileNav();
       if($("section.homeOut").exists()) initMobileNav();
       if($("section.-raumteilerguide").exists()) initGuideDownload();
     }
