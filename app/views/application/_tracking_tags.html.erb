@@ -7,13 +7,11 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
+    <% if current_user %>
+      gtag('set', {'user_id': '<%= current_user.id =%>'});
+    <% end %>
     gtag('config', 'UA-59844253-2', { 'anonymize_ip': true });
   </script>
-  <% if current_user %>
-    <script>
-    gtag('set', {'user_id': '<%= current_user.id =%>'});
-    </script>
-  <% end %>
   <!-- /GA -->
 
   <!-- FB -->
@@ -44,13 +42,11 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
+    <% if current_user %>
+        gtag('set', {'user_id': '<%= current_user.id =%>'});
+    <% end %>
     gtag('config', 'UA-59844253-4', { 'anonymize_ip': true });
   </script>
-  <% if current_user %>
-    <script>
-      gtag('set', {'user_id': '<%= current_user.id =%>'});
-    </script>
-  <% end %>
   <!-- /GA -->
 
   <!-- FB -->
