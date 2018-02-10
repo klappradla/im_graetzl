@@ -8,7 +8,7 @@ class Notification::DailyMail
       types: [Notifications::NewLocationPost]
     },
     {
-      name: 'Neue dabei im Grätzl - Sag Hallo',
+      name: 'Neu auf imGrätzl - Sag Hallo',
       types: [Notifications::NewLocation]
     },
     {
