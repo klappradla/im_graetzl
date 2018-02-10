@@ -1,4 +1,4 @@
-class MailchimpRoomOfferOnlineJob < ApplicationJob
+class MailchimpRoomDeleteJob < ApplicationJob
 
   def perform(room)
     list_id = Rails.application.secrets.mailchimp_list_id
@@ -10,11 +10,11 @@ class MailchimpRoomOfferOnlineJob < ApplicationJob
       g.timeout = 30
       g.lists(list_id).members(member_id).update(body: {
         merge_fields: {
-          ROOM_TYPE: I18n.t("activerecord.attributes.room_offer.offer_types.#{room.offer_type}"),
-          ROOM_TITLE: room.slogan,
-          ROOM_URL: Rails.application.routes.url_helpers.room_offer_path(room),
-          ROOM_PLZ: room.district.zip,
-          ROOM_CAT: room.room_categories.map(&:name).join(", ")
+          ROOM_TYPE: '',
+          ROOM_TITLE: '',
+          ROOM_URL: '',
+          ROOM_PLZ: '',
+          ROOM_CAT: ''
         }
       })
     rescue Gibbon::MailChimpError => mce

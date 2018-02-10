@@ -46,7 +46,7 @@ class RoomOffersController < ApplicationController
   def destroy
     @room_offer = current_user.room_offers.find(params[:id])
     @room_offer.destroy
-    MailchimpRoomOfferOnlineJob.delete_later(@room_offer)
+    MailchimpRoomDeleteJob.perform_later(@room_offer)
 
     redirect_to rooms_user_path
   end
