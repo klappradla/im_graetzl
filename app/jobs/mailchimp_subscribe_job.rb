@@ -19,7 +19,8 @@ class MailchimpSubscribeJob < ApplicationJob
           PLZ: user.graetzl.districts.first.try(:zip),
           USERNAME: user.username,
           PROFIL_URL: Rails.application.routes.url_helpers.user_path(user),
-          NEWSLETTER: user.newsletter.to_s
+          NEWSLETTER: user.newsletter.to_s,
+          SIGNUP: user.created_at
         }
       })
     rescue Gibbon::MailChimpError => mce
