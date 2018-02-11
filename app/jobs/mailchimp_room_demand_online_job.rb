@@ -13,7 +13,9 @@ class MailchimpRoomDemandOnlineJob < ApplicationJob
           ROOM_TYPE: I18n.t("activerecord.attributes.room_demand.demand_types.#{room.demand_type}"),
           ROOM_TITLE: room.slogan,
           ROOM_URL: Rails.application.routes.url_helpers.room_demand_path(room),
-          ROOM_CAT: room.room_categories.map(&:name).join(", ")
+          ROOM_CAT: room.room_categories.map(&:name).join(", "),
+          ROOM_ID: room.id,
+          ROOM_DATE: room.created_at
         }
       })
     rescue Gibbon::MailChimpError => mce

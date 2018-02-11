@@ -14,7 +14,9 @@ class MailchimpRoomDeleteJob < ApplicationJob
           ROOM_TITLE: '',
           ROOM_URL: '',
           ROOM_PLZ: '',
-          ROOM_CAT: ''
+          ROOM_CAT: '',
+          ROOM_ID: '',
+          ROOM_DATE: ''
         }
       })
     rescue Gibbon::MailChimpError => mce
