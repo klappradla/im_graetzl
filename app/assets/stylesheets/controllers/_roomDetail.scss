@@ -358,6 +358,23 @@ section.roomDetail {
     a {
       color: #cd891b;
     }
+    &.-show {
+      @include font-size-primaryFont('base');
+      background-color: white;
+      font-style: normal;
+      color: $color-font-primary;
+      a {
+        color: $color-ambient-mint;
+      }
+      #show-contact-link {
+        font-weight:bold;
+        font-style: italic;
+      }
+    }
+  }
+
+  #GAinfos {
+    display:none;
   }
 
   .contact {

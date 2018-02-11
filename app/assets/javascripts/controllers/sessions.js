@@ -8,8 +8,8 @@ APP.controllers.sessions = (function() {
           // Set FB and Analytics Tracking for new registered Users
           var newRegConfUser = $("#flash .alert");
           if (newRegConfUser.exists()) {
-            if( newRegConfUser.html().indexOf('Anmeldedaten') >= 0){
-            //if( newRegConfUser.html().indexOf('Dein Account ist nun freigeschaltet') >= 0){
+            //if( newRegConfUser.html().indexOf('Anmeldedaten') > 0){
+            if( newRegConfUser.html().indexOf('Dein Account ist nun freigeschaltet') > 0){
               var reggraetzl;
               reggraetzl = localStorage.getItem('Graetzl');
               // Analytics
@@ -19,6 +19,7 @@ APP.controllers.sessions = (function() {
               });
               // FB
               fbq('track', 'CompleteRegistration');
+              localStorage.removeItem('Graetzl');
             }
           }
         });

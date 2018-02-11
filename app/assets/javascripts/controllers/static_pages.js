@@ -4,12 +4,23 @@ APP.controllers.static_pages = (function() {
       if($("section.help").exists()) initHelp();
       if($("section.help").exists()) initMobileNav();
       if($("section.homeOut").exists()) initMobileNav();
-      if($("section.-raumteilerguide").exists()) initGuideDownload();
+      if($("section.-raumteilerguide").exists()) initGuideLP();
+      if($("#guide-download").exists()) initGuideDownload();
     }
 
 // ---------------------------------------------------------------------- Public
 
 function initGuideDownload() {
+
+  $('#guide-download').on('click', function(){
+    gtag('event', 'Download', {
+      'event_category': 'Raumteiler-Guide'
+    });
+  });
+  
+}
+
+function initGuideLP() {
 
   $(document).ready( function () {
     var $form = $('#mc-embedded-subscribe-form');

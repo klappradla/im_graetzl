@@ -67,38 +67,60 @@
         <div class="txt">Kontakt-Infos</div>
       </div>
 
+
       <% if current_user %>
-        <div class="contact-infos">
-          <% if @room_demand.first_name.present? && @room_demand.last_name.present? %>
-            <div class="icontxt">
-              <%= icon_tag "user-avatar" %>
-              <div class="txt"><%= "#{@room_demand.first_name} #{@room_demand.last_name}" %></div>
-            </div>
-          <% end %>
+        <!-- Contact Block -->
+        <div class="contact-login-msg -show">
+          <!-- Show Contact Link -->
+          <a href="#" id="show-contact-link">Kontaktinformationen einblenden</a>
+          <!-- /Show Contact Link -->
 
-          <% if @room_demand.phone.present? %>
-            <div class="icontxt">
-              <%= icon_tag "phone" %>
-              <div class="txt"><%= @room_demand.phone %></div>
-            </div>
-          <% end %>
-
-          <% if @room_demand.email.present? %>
-            <%= mail_to @room_demand.email do %>
+          <div class="contact-infos" id="contact-infos-block">
+            <% if @room_demand.first_name.present? && @room_demand.last_name.present? %>
               <div class="icontxt">
-                <%= icon_tag "at-symbol" %>
-                <div class="txt"><%= @room_demand.email %></div>
+                <%= icon_tag "user-avatar" %>
+                <div class="txt"><%= "#{@room_demand.first_name} #{@room_demand.last_name}" %></div>
               </div>
             <% end %>
-          <% end %>
 
-        <% if @room_demand.website.present? %>
-          <%= link_to @room_demand.website, class: 'icontxt', target: '_blank' do %>
-            <%= icon_tag "globe" %>
-            <%= @room_demand.website.sub(/^https?\:\/\//,'') %>
+            <% if @room_demand.phone.present? %>
+              <div class="icontxt">
+                <%= icon_tag "phone" %>
+                <div class="txt"><%= @room_demand.phone %></div>
+              </div>
+            <% end %>
+
+            <% if @room_demand.email.present? %>
+              <%= mail_to @room_demand.email do %>
+                <div class="icontxt">
+                  <%= icon_tag "at-symbol" %>
+                  <div class="txt"><%= @room_demand.email %></div>
+                </div>
+              <% end %>
+            <% end %>
+
+          <% if @room_demand.website.present? %>
+            <%= link_to @room_demand.website, class: 'icontxt', target: '_blank' do %>
+              <%= icon_tag "globe" %>
+              <%= @room_demand.website.sub(/^https?\:\/\//,'') %>
+            <% end %>
           <% end %>
+          </div>
+        </div>
+        <!-- /Contact Block -->
+        <% if user_signed_in? && current_user == @room_demand.user || user_signed_in? && current_user.admin? %>
+          <script>
+            $('#contact-infos-block').show();
+            $('#show-contact-link').hide();
+          </script>
+        <% else %>
+          <div id="GAinfos">
+            <span id="roomContact_url" data-id="<%= room_demand_url(@room_demand) =%>"></span>
+            <span id="roomContact_id" data-id="<%= @room_demand.id =%>"></span>
+            <span id="roomContactClick_id" data-id="<%= current_user.id =%>"></span>
+          </div>
         <% end %>
-      </div>
+
       <% else %>
         <div class="contact-login-msg">
             Du musst eingeloggt sein, um die vollständigen Kontaktinformationen zu sehen.<br />
@@ -106,6 +128,7 @@
             <%= link_to 'Zur Registrierung', new_registration_path %>
         </div>
       <% end %>
+
 
     </section>
 

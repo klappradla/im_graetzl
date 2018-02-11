@@ -48,7 +48,7 @@
   <% end %>
 
   <% if @room_demand.email.present? && current_user %>
-    <%= mail_to @room_demand.email, "Anbieter kontaktieren", class: 'btn-primary -mint -contact', subject: "Raumteiler Kontakt" %>
+    <%= mail_to @room_demand.email, "Anbieter kontaktieren", class: 'btn-primary -mint -contact', id: 'room-contact-btn', subject: "Raumteiler Kontakt" %>
   <% end %>
 
   <%= link_to "Alle Raumteiler", rooms_wien_path, class: 'btn-primary -mint' %>
