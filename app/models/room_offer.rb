@@ -33,7 +33,9 @@ class RoomOffer < ApplicationRecord
 
   validates_presence_of :address, :slogan, :room_description, :owner_description, :tenant_description, :cover_photo, :first_name, :last_name, :email
   validate :has_one_category_at_least
+
   before_create :set_graetzl_and_district
+  after_destroy { MailchimpRoomDeleteJob.perform_later(user) }
 
   scope :by_currentness, -> { order(created_at: :desc) }
 

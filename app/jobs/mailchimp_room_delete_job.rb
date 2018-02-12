@@ -1,22 +1,21 @@
 class MailchimpRoomDeleteJob < ApplicationJob
 
-  def perform(room)
+  def perform(user)
     list_id = Rails.application.secrets.mailchimp_list_id
-
-    member_id = mailchimp_member_id(room.user)
+    member_id = mailchimp_member_id(user)
 
     begin
       g = Gibbon::Request.new
       g.timeout = 30
       g.lists(list_id).members(member_id).update(body: {
         merge_fields: {
-          ROOM_TYPE: '',
-          ROOM_TITLE: '',
-          ROOM_URL: '',
-          ROOM_PLZ: '',
-          ROOM_CAT: '',
-          ROOM_ID: '',
-          ROOM_DATE: ''
+          ROOM_TYPE: nil,
+          ROOM_TITLE: nil,
+          ROOM_URL: nil,
+          ROOM_PLZ: nil,
+          ROOM_CAT: nil,
+          ROOM_ID: nil,
+          ROOM_DATE: nil
         }
       })
     rescue Gibbon::MailChimpError => mce
