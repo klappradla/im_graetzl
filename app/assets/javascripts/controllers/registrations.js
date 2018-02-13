@@ -12,7 +12,7 @@ APP.controllers.registrations = (function() {
             var form = $(this).parents("form");
             var graetzl = form.data("graetzl");
             var zip = form.data("zip");
-            localStorage.setItem('Graetzl', graetzl + ' ' + zip);
+            localStorage.setItem('Graetzl', zip + ' ' + graetzl);
           });
         });
 
