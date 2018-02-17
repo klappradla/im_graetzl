@@ -1,6 +1,8 @@
 class RoomsController < ApplicationController
 
   def index
+    head :ok and return if request.format.html? && browser.bot?
+
     room_offers = room_offers_scope.includes(:user, :graetzl, :district)
     room_offers = filter_offers(room_offers)
     room_offers = room_offers.by_currentness.page(params[:page]).per(15)

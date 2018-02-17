@@ -1,6 +1,7 @@
 class ActivitiesController < ApplicationController
 
   def index
+    head :ok and return if request.format.html? && browser.bot?
     @graetzl = Graetzl.find(params[:graetzl_id])
     stream = ActivityStream.new(@graetzl)
     @activity = stream.fetch.page(params[:page]).per(12)

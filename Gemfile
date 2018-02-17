@@ -17,6 +17,7 @@ gem 'rack-rewrite'
 gem 'aasm'
 gem 'acts-as-taggable-on'
 gem 'actionview-encoded_mail_to'
+gem 'browser'
 gem 'cocoon'
 gem 'devise'
 gem 'friendly_id'
@@ -30,7 +31,7 @@ gem 'mandrill-api', '~> 1.0.53', require: "mandrill"
 gem 'gibbon', '~> 3.0', '>= 3.0.2'
 gem 'newrelic_rpm'
 gem 'rollbar'
-gem "skylight"
+gem 'scout_apm'
 
 gem 'refile', github: 'refile/refile', require: 'refile/rails'
 gem 'refile-mini_magick', github: 'refile/refile-mini_magick'
