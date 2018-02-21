@@ -2,7 +2,7 @@ class LocationsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    head :ok and return if request.format.html? && browser.bot?
+    head :ok and return if browser.bot? && !request.format.js?
     @locations = collection_scope.approved.include_for_box
     @locations = filter_collections(@locations)
     @locations = @locations.order("last_activity_at DESC").page(params[:page]).per(15)

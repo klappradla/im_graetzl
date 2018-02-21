@@ -1,7 +1,7 @@
 class RoomsController < ApplicationController
 
   def index
-    head :ok and return if request.format.html? && browser.bot?
+    head :ok and return if browser.bot? && !request.format.js?
 
     room_offers = room_offers_scope.includes(:user, :graetzl, :district)
     room_offers = filter_offers(room_offers)

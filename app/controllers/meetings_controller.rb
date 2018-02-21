@@ -2,7 +2,7 @@ class MeetingsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
 
   def index
-    head :ok and return if request.format.html? && browser.bot?
+    head :ok and return if browser.bot? && !request.format.js?
     @meetings = collection_scope.include_for_box
     @meetings = filter_collection(@meetings)
     @meetings = @meetings.by_currentness.page(params[:page]).per(params[:per_page] || 15)

@@ -2,7 +2,7 @@ class ZuckerlsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
-    head :ok and return if request.format.html? && browser.bot?
+    head :ok and return if browser.bot? && !request.format.js?
     @zuckerls = collection_scope
     @zuckerls = @zuckerls.page(params[:page]).per(15).order("RANDOM()")
   end

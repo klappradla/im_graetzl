@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:destroy]
 
   def index
-    head :ok and return if request.format.html? && browser.bot?
+    head :ok and return if browser.bot? && !request.format.js?
     @posts = collection_scope.includes(:author).order(created_at: :desc)
     @posts = @posts.page(params[:page]).per(15)
   end
