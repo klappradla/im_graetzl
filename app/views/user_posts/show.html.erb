@@ -24,7 +24,7 @@
       <% end %>
     </div>
     <% if @post.edit_permission?(current_user) %>
-      <%= button_to 'Beitrag löschen', post_path(@post),
+      <%= button_to 'Beitrag löschen', [@post.graetzl, @post],
                     data: { confirm: 'Bist du dir sicher?' },
                     method: :delete,
                     class: 'btn-destroy' %>

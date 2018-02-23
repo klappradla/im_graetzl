@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, only: [:destroy]
 
   def index
     head :ok and return if browser.bot? && !request.format.js?

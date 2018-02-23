@@ -137,7 +137,7 @@ Rails.application.routes.draw do
     resources :meetings, path: 'treffen', only: [:show]
     resources :locations, only: [:show]
     resources :users, only: [:show]
-    resources :user_posts, path: 'ideen', only: [:new, :show, :create]
+    resources :user_posts, path: 'ideen', only: [:new, :show, :create, :destroy]
   end
 
 end

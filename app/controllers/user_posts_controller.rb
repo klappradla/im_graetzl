@@ -24,6 +24,12 @@ class UserPostsController < ApplicationController
     end
   end
 
+  def destroy
+    @user_post = UserPost.find(params[:id])
+    @user_post.destroy
+    redirect_to @user_post.graetzl, notice: 'Beitrag gelöscht'
+  end
+
   private
 
   def set_graetzl
