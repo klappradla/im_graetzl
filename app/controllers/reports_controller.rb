@@ -3,11 +3,15 @@ class ReportsController < ApplicationController
   def mailchimp
 
     list_id = Rails.application.secrets.mailchimp_list_id
-    g = Gibbon::Request.new
-    g.timeout = 30
-    g.lists(list_id).retrieve
+    gibbon = Gibbon::Request.new
 
-    render :json => g
+    gibbon.lists(list_id).members.retrieve
+
+    respond_to do |format|
+      format.json{render :json => gibbon}
+    end
+
+    #render :json => gibbon
 
   end
 
