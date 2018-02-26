@@ -1,6 +1,5 @@
 ActiveAdmin.register Initiative do
-  menu priority: 5
-
+  menu parent: 'Weitere Einstellungen'
   index { render 'index', context: self }
   show { render 'show', context: self }
   form partial: 'form'

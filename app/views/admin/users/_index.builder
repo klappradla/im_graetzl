@@ -4,6 +4,6 @@ context.instance_eval do
   column :username
   column :email
   column :graetzl
-  column :last_sign_in_at
+  column :created_at
   actions
 end

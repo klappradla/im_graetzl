@@ -14,20 +14,20 @@ de:
       address: Adresse
       billing_address: Rechnungsadresse
       category:
-        one: Kategorie
-        other: Kategorien
+        one: Location Kategorie
+        other: Location Kategorien
       contact: Kontakt
       curator:
         one: Grätzlbotschafter
         other: Grätzlbotschafter
       graetzl:
-        one: Graetzl
-        other: Graetzl
+        one: Grätzl
+        other: Grätzl
       image:
         one: Bild
         other: Bilder
       initiative:
-        one: Initiative
+        one: Initiativen
         other: Initiativen
       meeting:
         one: Treffen
@@ -45,11 +45,11 @@ de:
         one: Zuckerl
         other: Zuckerl
       room_offer:
-        one: Raumteiler
-        other: Raumteiler
+        one: Habe Raum
+        other: Habe Raum
       room_demand:
-        one: Raumteiler
-        other: Raumteiler
+        one: Suche Raum
+        other: Suche Raum
     attributes:
       address:
         street_name: Straße

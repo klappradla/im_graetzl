@@ -17,4 +17,13 @@ ActiveAdmin.register UserPost do
     :graetzl_id,
     :author_id, :author_type,
     images_attributes: [:id, :file, :_destroy]
+
+  # Within app/admin/resource_name.rb
+  # Controller pagination overrides
+  controller do
+    def apply_pagination(chain)
+      chain = super unless formats.include?(:json) || formats.include?(:csv)
+      chain
+    end
+  end
 end

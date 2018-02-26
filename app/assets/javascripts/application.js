@@ -40,6 +40,10 @@
 //= require modernizr.custom
 //= require fastclick
 //= require autogrow
+//= require datatables.min
+//= require moment-with-locales.min
+//= require datetime-moment
+//= require Chart.min
 //= require cocoon
 //= require refile
 //= require cookieconsent

@@ -4,6 +4,21 @@ ActiveAdmin.register_page "Dashboard" do
   content title: proc{ I18n.t("active_admin.dashboard") } do
     columns do
       column do
+        panel 'Neu registrierte User' do
+          table_for User.order(created_at: :desc).limit(10) do
+            column :id
+            column :username do |user|
+              link_to user.username, admin_user_path(user)
+            end
+            column :graetzl
+            column :created_at
+          end
+          span do
+            link_to 'Alle anzeigen', '/admin/users', class: 'btn-light'
+          end
+        end
+      end
+      column do
         panel 'Offene Location Anfragen' do
           table_for Location.pending.order(updated_at: :asc) do
             column(:location, sortable: :name) do |location|
@@ -18,16 +33,7 @@ ActiveAdmin.register_page "Dashboard" do
             column('status') { |location| status_tag(location.state) }
           end
           span do
-            link_to 'Offene Anfragen Bearbeiten', '/admin/locations?scope=offene_anfragen', class: 'btn-light'
-          end
-        end
-      end
-      column do
-        panel 'Aktuelle Grätzlbotschafter' do
-          table_for Curator.order(:id).limit(10) do
-            column('Botschafter') { |c| link_to c.id, admin_curator_path(c) }
-            column :user
-            column :graetzl
+            link_to 'Offene Anfragen Bearbeiten', '/admin/locations?scope=pending', class: 'btn-light'
           end
         end
       end

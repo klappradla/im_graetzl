@@ -1,6 +1,6 @@
 ActiveAdmin.register RoomOffer do
   include ViewInApp
-  menu parent: 'Rooms'
+  menu parent: 'Raumteiler'
   includes :graetzl, :location, :user, :comments
   actions :all, except: [:new, :create]
 
@@ -26,4 +26,12 @@ ActiveAdmin.register RoomOffer do
     address_attributes: [ :id, :_destroy, :street_name, :street_number, :zip, :city, :coordinates, :description],
     room_offer_prices_attributes: [ :id, :name, :amount, :_destroy],
     images_attributes: [:id, :file, :_destroy]
+  # Within app/admin/resource_name.rb
+  # Controller pagination overrides
+  controller do
+    def apply_pagination(chain)
+      chain = super unless formats.include?(:json) || formats.include?(:csv)
+      chain
+    end
+  end
 end

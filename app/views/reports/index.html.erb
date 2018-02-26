@@ -1,0 +1,485 @@
+<% meta(
+    title: t('.title'),
+    description: t('.description'),
+    robots: 'noindex, nofollow',
+  )
+%>
+
+<style>
+
+</style>
+
+
+<% if user_signed_in? && current_user.admin? %>
+  <!-- BEGIN ADMIN REPORT JS -->
+    <script>
+    (function () {
+    // ----------------------- BEGIN PROJECT JS WORKING AREA ----------------------- //
+
+      /*********************************
+          Init Vars
+      *********************************/
+      moment.locale('de-at');
+
+      // TimeTable Object for Charts - Including Unit & Date Range
+      var timePeriod = {
+        unit:'',
+        dates:[],
+        datesFriendly:[]
+      };
+      // Time Period Data for Charts
+      var timePeriodData = [];
+
+      var users = []; // Clean Users Array to work with
+      var graetzls = []; // Clean Grätzl Array to work with
+      var locations = []; // Clean Location Array to work with
+      var host = 'http://' + window.location.host + '/'; // Environment Path
+      var host_admin = 'http://' + window.location.host + '/admin/'; // Active Admin Path
+
+
+      /*********************************
+          Page Navigation
+      *********************************/
+
+      var page_loader = function(page) {
+
+        $('#' + page + '').show();
+        $('#report_nav button').prop("disabled",false);
+
+        if ( page == 'page_dashboard' ) {
+
+        }
+        if ( page == 'page_users' ) {
+          datatable_users();
+        }
+        if ( page == 'page_graetzls' ) {
+          datatable_graetzls();
+        }
+      }
+
+      $(document).ready(function() {
+        // Hide Pages on Load
+        $('div.page').hide();
+        $('#report_nav button').prop("disabled",true);
+
+        // Switch Pages on Button Click
+        $('#report_nav button').on( 'click', function() {
+          var page = $(this).attr('data-nav');
+
+          $('div.page').hide();
+          $('#report_nav button.-rosa').removeClass('-rosa').addClass('-mint');
+          $(this).addClass('-rosa').removeClass('-mint');
+          $('#' + page + '').show();
+          page_loader(page);
+
+        })
+      });
+      // END Page Navigation //
+
+
+      /*********************************
+          Init on Document Ready
+      *********************************/
+      $( document ).ready(function() {
+
+        // Init Chartareas
+        var topchart = $("#topchart");
+
+        // Load Data from Server - if all Data loaded, do something ...
+        var p1 = requestUsers();
+        var p2 = requestGraetzls();
+        var p3 = requestLocations();
+
+        Promise.all([p1, p2, p3]).then(function(res) {
+
+          completeArrays();
+          createDateChartValues('users', 30, 'days');
+          page_loader('page_dashboard');
+
+          console.log(users);
+          console.log(locations);
+          console.log(graetzls);
+
+        })//.catch( function() {alert('Error Loading Data ...'); } )
+
+      });
+
+
+      /*********************************
+          HELPER Functions
+      *********************************/
+
+      // Helper - Check if Date is in Date-Range
+      var checkDateRange = function ( checkDate, startDate, unit ) {
+        var tmpDate = new Date();
+        tmpDate.setDate(startDate.getDate() + 1);
+        tmpDate.setHours(0,0,0,0);
+        var endDate = new Date(tmpDate);
+        if (checkDate >= startDate && checkDate <= endDate ){
+          return true;
+        }
+      }
+
+      // Helper - Complete Arrays with missing Infos from other Arrays
+      var completeArrays = function() {
+
+        // Extend Location Array with Grätzl-Infos
+        for ( i=0; i<locations.length; i++ ) {
+          var graetzlinfos = fetchFromID(locations[i].graetzl_id, 'graetzls');
+          for (let key in graetzlinfos) {
+            //console.log(graetzlinfos[key]);
+            locations[i].graetzl_name = graetzlinfos[key].name;
+            locations[i].location_path = graetzlinfos[key].graetzl_path_app;
+          }
+        }
+
+        // Extend User Array with Grätzl-Indos
+        for ( i=0; i<users.length; i++ ) {
+          graetzlinfos = fetchFromID(users[i].graetzl_id, 'graetzls');
+          for (let key in graetzlinfos) {
+            //console.log(graetzlinfos[key]);
+            users[i].graetzl_name = graetzlinfos[key].name;
+            users[i].graetzl_path_app = graetzlinfos[key].graetzl_path_app;
+          }
+        }
+      };
+
+      // Helper - Lookup in other Array over ID
+      var fetchFromID = function(id, type){
+        if ( type == 'graetzls' ) {
+          var result = graetzls.filter(function(e){ return e.id == id; });
+          return result;
+        }
+        if ( type == 'locations' ) {
+          var result = locations.filter(function(e){ return e.user_ids == id; });
+          return result;
+        }
+      }
+      // Helper Functions //
+
+
+      /*********************************
+          AJAX JSON Requests
+      *********************************/
+
+      // Get Users and Set Clean User Array
+      var requestUsers = function(){
+        return new Promise( function(resolve, reject) {
+          $.ajax( {
+            url:'/test/users.json',
+            method:'GET',
+            success:function(response) {
+
+              for( i=0; i < response.length; i++ ) {
+                users.push({
+                  id: response[i].id,
+                  graetzl_id: response[i].graetzl_id,
+                  graetzl_name: '',
+                  graetzl_path_app: '',
+                  created_at: new Date(response[i].created_at),
+                  username: response[i].username,
+                  first_name: response[i].first_name,
+                  last_name: response[i].last_name,
+                  email: response[i].email,
+                  user_path_admin: host_admin + 'users/' + response[i].slug,
+                  user_path_app: host + response[i].slug
+                })
+              }
+              resolve('users');
+            }
+          });
+        });
+      } // Get Users
+
+      // Get Grätzls and Set Clean Grätzl Array
+      var requestGraetzls = function(){
+        return new Promise( function(resolve, reject) {
+          $.ajax( {
+            url:'/admin/graetzls.json',
+            method:'GET',
+            success:function(response) {
+              for( i=0; i < response.length; i++ ) {
+                graetzls.push({
+                  id: response[i].id,
+                  name: response[i].name,
+                  graetzl_path_app: host + response[i].slug,
+                  graetzl_path_admin: host_admin + 'graetzls/' + response[i].slug,
+                  users_count: response[i].users_count
+                });
+              }
+              resolve('graetzls');
+            }
+          });
+        });
+      } // Get Grätzls
+
+      // Get Locations and Set Clean Location Array
+      var requestLocations = function(){
+        return new Promise( function(resolve, reject) {
+          $.ajax( {
+            url:'/admin/locations.json',
+            method:'GET',
+            success:function(response) {
+              for( i=0; i < response.length; i++ ) {
+                locations.push({
+                  id: response[i].id,
+                  name: response[i].name,
+                  created_at: response[i].created_at,
+                  graetzl_id: response[i].graetzl_id,
+                  graetzl_name: '',
+                  category_id: response[i].category_id,
+                  state: response[i].state,
+                  user_ids: response[i].user_ids,
+                  location_path: response[i].slug,
+                  location_path_admin: host_admin + 'locations/' + response[i].slug
+                })
+              }
+              resolve('locations');
+            }
+          });
+        });
+      } // Get Locations
+      // END Ajax JSON Requests //
+
+
+      /*********************************
+          Create DATATABLES
+          (jQuery Plugin)
+      *********************************/
+
+      // Create DATATABLE - USERS //
+      var datatable_users = function() {
+        $('#datatable_users').DataTable( {
+          data: users,
+          "order": [[ 0, "desc" ]],
+          "processing": true,
+          //"scrollY": "400px",
+          //"scrollCollapse": true,
+          "paging": true,
+          "destroy": true,
+          //"responsive": true,
+          columns: [
+            {
+              "className": 'details-control',
+              "orderable": false,
+              "data": null,
+              "defaultContent": 'details'
+            },
+            { data: 'id' },
+            { data: 'username',
+              render: function( data, type, row, meta ){
+                if ( type === 'display' ) {
+                data = '<a href="' + row['user_path_admin'] + '">' + data + '</a>';
+              }
+                return data;
+              }
+            },
+            { data: 'email' },
+            { data: 'graetzl_name',
+              render: function( data, type, row, meta ){
+                if ( type === 'display' ) {
+                data = '<a href="' + row['graetzl_path_app'] + '">' + data + '</a>';
+              }
+                return data;
+              }
+            },
+            { data: 'created_at',
+              render: function(data, type) {
+                if ( type == "sort" || type == 'type' ) {
+                  return data;
+                } else {
+                  // Use Friendly Format for Output
+                  return moment(data).format('lll');
+                }
+              }
+            }
+          ]
+        });
+      }
+      // Data Table - User Detail Row
+      function userDetails ( data ) {
+        var $content = $('<table id="user' + data.id + '">');
+        $($content).append('<tr><td>' + data.first_name + ' ' + data.last_name + '</td></tr>');
+
+        // Get User Locations
+        var locationinfos = fetchFromID(data.id, 'locations');
+        for ( i=0; i<locationinfos.length; i++) {
+          $($content).append('<tr><td>Location: <a href="'+locationinfos[i].location_path_admin+'">' +locationinfos[i].name+ '</td></tr>');
+        }
+        return $content;
+      }
+
+      // Create DATATABLE - GRÄTZLS //
+      var datatable_graetzls = function() {
+        $('#datatable_graetzls').DataTable( {
+          data: graetzls,
+          "order": [[ 1, "desc" ]],
+          "processing": true,
+          //"scrollY": "400px",
+          //"scrollCollapse": true,
+          "paging": false,
+          "destroy": true,
+          columns: [
+            { data: 'name'},
+            { data: 'users_count' }
+          ]
+        });
+      }
+      // END Create Datatables (jQuery Plugin) //
+
+
+      /*********************************
+          Create CHART Arrays
+          for Visualization
+      *********************************/
+
+      // Create Chart Arrays
+      var createDateChartValues = function( type, count, unit ) {
+
+        // Set Length of Time Period Array to Count
+        timePeriodData.length = count;
+        timePeriodData.fill(0); // Prefill all Values with 0
+
+        // Create Timeline Array with Dates
+        var generateTimeline = function( count, unit ) {
+          timePeriod.unit = unit;
+          var currentDate = new Date(); // Today
+          if (unit == 'days') {
+            for ( i=0; i<count; i++ ) {
+
+              var tmpDate = new Date();
+              tmpDate.setDate(currentDate.getDate() - i);
+              tmpDate.setHours(0,0,0,0);
+              var priorDate = new Date(tmpDate);
+              var priorDateFriendly = moment(priorDate).format('ll');
+
+              timePeriod.dates.push(priorDate);
+              timePeriod.datesFriendly.push(priorDateFriendly);
+            }
+          }
+        } // Time Period Array
+        generateTimeline(count, unit); // Set Time Period
+
+        // Create Users Array within Timeperiod Dates (Lookup)
+        for ( i=0; i<users.length; i++ ) {
+          var checkDate = new Date(users[i].created_at);
+
+          // Loop Check every single User for all Dates in Range
+          for ( d=0; d<timePeriod.dates.length; d++ ) {
+            var check = checkDateRange( checkDate, timePeriod.dates[d], unit );
+            if (check == true) {
+              timePeriodData[d] +=1;
+              break;
+            }
+          } // Loop Check every single User for all Dates
+        } // Loop Check all Users
+
+        // Draw User Chart
+        usersChart(timePeriod.datesFriendly.reverse(), timePeriodData.reverse());
+
+      } // Create Chart Arrays
+
+
+      /*********************************
+          Draw CHARTs
+      *********************************/
+
+      var usersChart = function(labeldata, chartdata) {
+        new Chart(topchart, {
+          type: 'line',
+          data: {
+            labels: labeldata,
+            datasets: [{
+              label: 'Registrierungen',
+              data: chartdata,
+            }]
+          }
+        });
+      }
+
+      /*********************************
+          Event Listeners
+      *********************************/
+      $(document).ready(function() {
+
+        // Add event listener for opening and closing detail rows
+        $('#datatable_users').on('click', 'td.details-control', function () {
+          var table = $('#datatable_users').DataTable();
+          var tr = $(this).closest('tr');
+          var row = table.row( tr );
+
+          if ( row.child.isShown() ) {
+            row.child.hide();
+            tr.removeClass('shown');
+          }
+          else {
+            row.child( userDetails(row.data()) ).show();
+            tr.addClass('shown');
+          }
+        }); // Expand User Row
+
+      });
+      // END Event Listeners //
+
+
+
+    // ----------------------- END PROJECT JS WORKING AREA ----------------------- //
+    })();
+    </script>
+<% end %>
+<!-- END ADMIN REPORT JS -->
+
+<section class="reports">
+  <% if user_signed_in? && current_user.admin? %>
+  <!-- ADMIN REPORT INTERFACE -->
+
+
+  <!-- Top Chart -->
+  <canvas id="topchart" width="900" height="200"></canvas>
+
+    <div id="report_nav">
+      <button class="btn-primary -rosa" data-nav="page_dashboard">Dashboard</button>
+      <button class="btn-primary -mint" data-nav="page_users">User</button>
+      <button class="btn-primary -mint" data-nav="page_locatins">Locations</button>
+      <button class="btn-primary -mint" data-nav="page_rooms">Raumteiler</button>
+      <button class="btn-primary -mint" data-nav="page_meetings">Treffen</button>
+      <button class="btn-primary -mint" data-nav="page_graetzls">Grätzl</button>
+    </div>
+
+  <div id="page_users" class="page">
+    <!-- Users Datatable -->
+    <table id="datatable_users" class="stripe hover row-border" width="100%" data-page-length='100'>
+      <thead>
+        <tr>
+          <th></th>
+          <th>ID</th>
+          <th>Username</th>
+          <th>E-Mail</th>
+          <th>Grätzl</th>
+          <th>Registriert</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+
+  <div id="page_graetzls" class="page">
+    <!-- Grätzls Datatable -->
+    <table id="datatable_graetzls" class="stripe hover row-border" width="100%" data-page-length='200'>
+      <thead>
+        <tr>
+          <th>Grätzl</th>
+          <th>Anzahl User</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+
+  <!-- // ADMIN REPORT INTERFACE -->
+  <% else %>
+  <!-- NO ADMIN RIGHTS -->
+
+    Keine Admin Rechte ...
+
+  <% end %>
+
+</section>

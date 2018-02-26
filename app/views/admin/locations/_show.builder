@@ -63,7 +63,7 @@ context.instance_eval do
         end
       end
     end
-    column span: 2 do
+    column do
       panel 'Associations' do
         tabs do
           tab 'User' do

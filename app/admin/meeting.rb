@@ -1,6 +1,6 @@
 ActiveAdmin.register Meeting do
   include ViewInApp
-  menu priority: 6
+  menu priority: 5
   includes :graetzl, :location
 
   scope :all, default: true
@@ -60,6 +60,15 @@ ActiveAdmin.register Meeting do
       flash[:error] = 'Das Treffen kann nicht für die API abgelehnt werden.'
       redirect_to resource_path
     end
+  end
+
+  # Within app/admin/resource_name.rb
+  # Controller pagination overrides
+  controller do
+      def apply_pagination(chain)
+          chain = super unless formats.include?(:json) || formats.include?(:csv)
+          chain
+      end
   end
 
   permit_params :graetzl_id,

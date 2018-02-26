@@ -2,6 +2,8 @@ ActiveAdmin.register LocationOwnership do
   #menu parent: 'Locations', label: 'Location-Inhaber'
   menu false
 
+  #index { render 'index', context: self }
+
   form do
     inputs '' do
       input :user

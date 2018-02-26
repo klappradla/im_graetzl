@@ -40,6 +40,15 @@ ActiveAdmin.register User do
       :description,
       :coordinates]
 
+    # Within app/admin/resource_name.rb
+    # Controller pagination overrides
+    controller do
+        def apply_pagination(chain)
+            chain = super unless formats.include?(:json) || formats.include?(:csv)
+            chain
+        end
+    end
+
     csv do
       column :id
       column :email

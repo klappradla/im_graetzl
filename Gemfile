@@ -47,6 +47,8 @@ gem 'underscore-rails'
 gem 'autoprefixer-rails'
 
 gem 'activeadmin', '~> 1.0.0.pre4'
+gem 'rabl'
+gem 'oj'
 gem 'jquery-ui-rails', '5.0.0'
 
 group :doc do

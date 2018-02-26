@@ -1,5 +1,5 @@
 ActiveAdmin.register RoomCategory do
-  menu parent: 'Rooms'
+  menu parent: 'Raumteiler'
 
   permit_params :name
 end

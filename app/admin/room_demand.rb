@@ -1,6 +1,6 @@
 ActiveAdmin.register RoomDemand do
   include ViewInApp
-  menu parent: 'Rooms'
+  menu parent: 'Raumteiler'
   includes :location, :user, :comments
   actions :all, except: [:new, :create]
 
@@ -21,5 +21,12 @@ ActiveAdmin.register RoomDemand do
     :personal_description, :wants_collaboration, :demand_type, :slug, :avatar, :remove_avatar,
     :first_name, :last_name, :website, :email, :phone,
     room_category_ids: []
-
+  # Within app/admin/resource_name.rb
+  # Controller pagination overrides
+  controller do
+    def apply_pagination(chain)
+      chain = super unless formats.include?(:json) || formats.include?(:csv)
+      chain
+    end
+  end
 end

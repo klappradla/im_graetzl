@@ -1,4 +1,5 @@
 ActiveAdmin.register Curator do
+  menu parent: 'Weitere Einstellungen'
   filter :user
   filter :graetzl
   filter :website
