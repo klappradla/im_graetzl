@@ -6,11 +6,8 @@ Rails.application.routes.draw do
   match "/500", :to => "errors#internal_server_error", :via => :all
 
   # Try to send JSON to View - Michael
-  resources :reports do
-    collection do
-      get "mailchimp" # generate  get "/products/most_popular"
-    end
-  end
+  get 'reports' => 'reports#index'
+  get 'reports/mailchimp'
 
   ActiveAdmin.routes(self)
 
@@ -97,7 +94,6 @@ Rails.application.routes.draw do
     get 'zuckerl', action: 'zuckerls', as: 'zuckerls', on: :member
   end
 
-  get 'admin/reports', to: 'static_pages#admin_reports'
   get 'lp/raumteiler-guide', to: 'static_pages#lp_raumteilerguide'
   get 'lp/raumteiler-guide-danke', to: 'static_pages#lp_raumteilerguide_success'
   get 'info', to: 'static_pages#help'

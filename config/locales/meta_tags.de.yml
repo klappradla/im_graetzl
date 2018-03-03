@@ -25,9 +25,6 @@ de:
       title: 'Anbieter & Locations – Hilfe'
     meetings:
       title: 'Events & Workshops – Hilfe'
-    admin_reports:
-      title: 'Admin Reports'
-      description: 'Michaels JS Learning Project'
     lp_raumteilerguide:
       title: 'Der Raumteiler Guide 2018 - Jetzt kostenlos downloaden'
       description: 'Hol dir jetzt den kostenlosen 60 seitigen Raumteiler Guide 2018. Deine Schritt-für-Schritt Anleitung zum Räume teilen.'
@@ -109,3 +106,7 @@ de:
     show:
       title: 'Raumteiler: %{slogan}'
       description: '%{type}: %{desc}...'
+  reports:
+    index:
+      title: 'Admin Reports'
+      description: 'Reporting Tool'
