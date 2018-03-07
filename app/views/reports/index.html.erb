@@ -81,11 +81,11 @@
       stopSpinner();
 
       if ( page == 'page_dashboard' ) {
-
+        resetTopChart();
       }
       if ( page == 'page_users' ) {
-        datatable_users();
         resetTopChart();
+        datatable_users();
         usersChart();
       }
       if ( page == 'page_locations' ) {
@@ -94,6 +94,7 @@
         datatable_locations();
       }
       if ( page == 'page_graetzls' ) {
+        resetTopChart();
         datatable_graetzls();
       }
       if ( page == 'page_mailings' ) {
@@ -200,16 +201,6 @@
     // Helper - Complete Arrays with missing Infos from other Arrays
     var completeArrays = function() {
 
-      // Extend Location Array with Grätzl-Infos
-      for ( i=0; i<locations.length; i++ ) {
-        var graetzlinfos = fetchFromID(locations[i].graetzl_id, 'graetzls');
-        for (let key in graetzlinfos) {
-          //console.log(graetzlinfos[key]);
-          locations[i].graetzl_name = graetzlinfos[key].name;
-          locations[i].location_path = graetzlinfos[key].graetzl_path_app + '/locations/' + locations[i].location_path;
-        }
-      }
-
       // Extend User Array with Grätzl-Infos
       for ( i=0; i<users.length; i++ ) {
         graetzlinfos = fetchFromID(users[i].graetzl_id, 'graetzls');
@@ -291,8 +282,8 @@
                 user_path_admin: host_admin + 'users/' + response[i].slug,
                 user_path_app: host + response[i].slug,
                 role: response[i].role,
-                newsletter: response[i].newsletter,
-                website: response[i].website,
+                newsletter: response[i].newsletter? response[i].newsletter : '',
+                website: response[i].website? response[i].website : '',
                 districts: [],
                 locations: []
                 //avatar: response[i].backend.directory + '/' + response[i].id
@@ -366,8 +357,34 @@
       });
     } // Get Locations
 
-    // Get User Details
-    var requestUser = function(id){
+
+    // Get Advanced Personal User Details
+    var requestUserDetails = function(id){
+      return new Promise( function(resolve, reject) {
+
+        user = fetchFromID(id, 'users');
+        user = user[0];
+
+        $.ajax( {
+          url:'/admin/users/'+ id +'.json',
+          method:'GET',
+          success:function(response) {
+            console.log(response);
+
+            user.last_login = response.last_sign_in_at? new Date(response.last_sign_in_at) : '';
+            user.newsletter = response.newsletter;
+            user.website = response.website;
+            user.avatar = response.avatar;
+
+            resolve('user');
+          }
+        });
+      });
+    } // Get User Details
+
+
+    // Get User Locations
+    var requestUserLocation = function(id){
       return new Promise( function(resolve, reject) {
 
         user = fetchFromID(id, 'users');
@@ -400,9 +417,8 @@
           // locations already pushed ...
           resolve('user');
         }
-
       });
-    } // Get User Details
+    } // Get User Locations
 
     // Get Mailchimp User
     var requestMCUser = function(email, activity){
@@ -618,7 +634,7 @@
     var datatable_graetzls = function() {
       $('#datatable_graetzls').DataTable( {
         data: graetzls,
-        "order": [[ 1, "desc" ]],
+        "order": [[ 2, "desc" ]],
         "processing": true,
         "paging": false,
         "bDestroy": true,
@@ -646,24 +662,67 @@
 
       resetTopChart();
 
-      // Load only if Start/End Date has changed
+      // Load only if Array is empty
       if ( locations.length > 0 ) {
 
-        //console.log('schon geladen ...');
         stopSpinner();
 
       } else {
         locations = [];
-        // Date has changed - Load new Data
+
+        // Empty - Load new Data
         var getLocations = requestLocations();
         Promise.resolve(getLocations).then(function(res) {
-          //console.log(locations);
+
+
+          // Extend Location Array with Grätzl-Infos
+          for ( i=0; i<locations.length; i++ ) {
+            var graetzlinfos = fetchFromID(locations[i].graetzl_id, 'graetzls');
+            for (let key in graetzlinfos) {
+              //console.log(graetzlinfos[key]);
+              locations[i].graetzl_name = graetzlinfos[key].name;
+              locations[i].location_path = graetzlinfos[key].graetzl_path_app + '/locations/' + locations[i].location_path;
+            }
+          }
+          console.log(locations);
+
+
+          // Create table
+          $('#datatable_locations').DataTable( {
+            data: locations,
+            "order": [[ 3, "desc" ]],
+            "processing": true,
+            "paging": false,
+            "bDestroy": true,
+            "searching": false,
+            columns: [
+              { data: 'name',
+                render: function( data, type, row, meta ){
+                  if ( type === 'display' ) {
+                  data = '<a href="'+row['location_path_admin']+'">' + data + '</a>';
+                }
+                  return data;
+                }
+              },
+              { data: 'state'},
+              { data: 'graetzl_name'},
+              { data: 'created_at',
+                render: function(data, type) {
+                  if ( type == "sort" || type == 'type' ) {
+                    return data;
+                  } else {
+                    // Use Friendly Format for Output
+                    return moment(data).format('lll');
+                  }
+                }
+              }
+            ]
+          });
+
           stopSpinner();
+
         });
-
       }
-
-
     }
 
 
@@ -833,7 +892,6 @@
       $('#u_email').html(user.email);
       $('#u_graetzl').html(user.graetzl_name);
       $('#u_created_at').html(moment(user.created_at).format('ll'));
-      $('#u_last_login').html(user.last_login? moment(user.last_login).format('ll') : 'noch kein Login');
       $('#u_admin').attr('href', user.user_path_admin);
       $('#u_role').html(user.role? '| ' + user.role : '');
       $('#u_zip').html('');
@@ -851,7 +909,16 @@
       //console.log(user_locations);
 
       // Get User Locations
-      var user_locations = requestUser(user.id);
+      var user_details = requestUserDetails(user.id);
+      Promise.resolve(user_details).then(function(res) {
+
+        $('#u_last_login').html(user.last_login? moment(user.last_login).format('ll') : 'noch kein Login');
+        console.log(user);
+      })
+
+
+      // Get User Locations
+      var user_locations = requestUserLocation(user.id);
       Promise.resolve(user_locations).then(function(res) {
 
         for ( i=0; i<user.locations.length; i++ ) {
@@ -1030,8 +1097,8 @@
       margin-left:10px;
     }
     #u_location div, #u_mc_activity div {margin-left: 36px; margin-bottom: 5px;}
-    #u_mc_activity .time {display: inline-block; width:110px;}
-    #u_mc_activity .action {display: inline-block; width:45px;}
+    #u_mc_activity .time {display: inline-block; width:115px;}
+    #u_mc_activity .action {display: inline-block; width:55px;}
 
   </style>
   <!-- Single User View-->
@@ -1100,7 +1167,17 @@
 <!-- PAGE MAILINGS -->
   <div id="page_locations" class="page">
 
-    Locations
+    <!-- Users Datatable -->
+    <table id="datatable_locations" class="stripe hover row-border" width="100%" data-page-length='100'>
+      <thead>
+        <tr>
+          <th>Location</th>
+          <th>Status</th>
+          <th>Grätzl</th>
+          <th>Erstellt am</th>
+        </tr>
+      </thead>
+    </table>
 
   </div>
 <!-- /PAGE MAILINGS -->

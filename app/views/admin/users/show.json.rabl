@@ -3,20 +3,20 @@ def asset_url(resource, asset_name)
   Refile.attachment_url(resource, asset_name, host: host)
 end
 
-collection @users
+collection @user
 attributes :id,
   :username,
   :role,
   :created_at,
-  #:last_sign_in_at,
+  :last_sign_in_at,
   :slug,
   :first_name,
   :last_name,
   :email,
-  #:newsletter,
-  #:website,
-  :graetzl_id
-  #:avatar do |u|
-    #asset_url(u.avatar, :avatar)
+  :newsletter,
+  :website,
+  :graetzl_id,
+  :avatar do |u|
+    asset_url(u.avatar, :avatar)
     #Refile.attachment_url(u, :avatar, :fill, 400, 400, host: request.url)
-  #end
+  end
