@@ -7,13 +7,14 @@ ActiveAdmin.register User do
   scope :business
   scope :admin
 
+  filter :id
   filter :graetzl
   filter :username
   filter :first_name
   filter :last_name
   filter :email
-  filter :role, as: :select, collection: User.roles.keys
   filter :created_at
+  filter :last_sign_in_at
 
   index { render 'index', context: self }
   show { render 'show', context: self }

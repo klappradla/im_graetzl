@@ -4,4 +4,5 @@ attributes :id,
   :users_count,
   :slug,
   #:district_graetzls,
+  #:district_ids
   :districts
