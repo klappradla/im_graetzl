@@ -407,7 +407,8 @@
                   graetzl_name: '',
                   category_id: response[i].category_id,
                   created_at: response[i].created_at,
-                  location_path: ''
+                  location_path: '',
+                  location_path_admin: host_admin + 'locations/' + response[i].slug
                 })
               }
               resolve('user');
@@ -666,6 +667,7 @@
       if ( locations.length > 0 ) {
 
         stopSpinner();
+        locationsChart();
 
       } else {
         locations = [];
@@ -720,6 +722,7 @@
           });
 
           stopSpinner();
+          locationsChart();
 
         });
       }
@@ -823,6 +826,46 @@
     } // Users Chart
 
 
+
+    var locationsChart = function() {
+
+      // Create Users Array within Timeperiod Dates (Lookup)
+      // Set Length of Time Period Array to Length of Actual Dates
+      timePeriodData.length = timePeriod.dates.length;
+      timePeriodData.fill(0); // Prefill all Values with 0
+
+      for ( i=0; i<locations.length; i++ ) {
+        var checkDate = new Date(locations[i].created_at);
+
+        // Loop Check every single Location for all Dates in Range
+        for ( d=timePeriodData.length-1; d>0; d-- ) {
+          var check = checkDateRange( checkDate, timePeriod.dates[d], timePeriod.unit );
+          if (check == true) {
+            timePeriodData[d] +=1;
+            break;
+          }
+        } // Loop Check every single User for all Dates
+      } // Loop Check all Users
+
+      var labeldata = timePeriod.datesFriendly;
+      var chartdata = timePeriodData;
+
+
+      chartTopArea = new Chart(topchart, {
+        type: 'line',
+        data: {
+          labels: labeldata,
+          datasets: [{
+            label: 'Locations',
+            data: chartdata,
+          }]
+        }
+      });
+
+
+    } // Location Chart
+
+
     // Mailing Chart
     var mailingChart = function(labeldata, sent, opens, clicks) {
 
@@ -892,6 +935,7 @@
       $('#u_email').html(user.email);
       $('#u_graetzl').html(user.graetzl_name);
       $('#u_created_at').html(moment(user.created_at).format('ll'));
+      $('#u_last_login').html('');
       $('#u_admin').attr('href', user.user_path_admin);
       $('#u_role').html(user.role? '| ' + user.role : '');
       $('#u_zip').html('');
