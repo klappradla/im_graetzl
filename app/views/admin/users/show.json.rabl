@@ -17,6 +17,6 @@ attributes :id,
   :website,
   :graetzl_id,
   :avatar do |u|
-    asset_url(u.avatar, :avatar)
+    asset_url(u, :avatar)
     #Refile.attachment_url(u, :avatar, :fill, 400, 400, host: request.url)
   end
