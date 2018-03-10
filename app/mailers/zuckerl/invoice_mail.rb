@@ -15,7 +15,7 @@ class Zuckerl::InvoiceMail < Zuckerl::BaseMail
       from_name: FROM_NAME,
       subject: SUBJECT,
       merge_vars: [rcpt: @user.email, vars: message_vars],
-      bcc_address: 'rechnung@imgraetzl.at'
+      bcc_address: 'michael@imgraetzl.at'
     }
   end
 

@@ -53,7 +53,7 @@ RSpec.describe Zuckerl::InvoiceMail do
       end
       it 'has bcc_address' do
         message = subject.send :message
-        expect(message[:bcc_address]).to eq 'rechnung@imgraetzl.at'
+        expect(message[:bcc_address]).to eq 'michael@imgraetzl.at'
       end
       context 'without billing_address' do
         it 'has nil for billing_address' do
