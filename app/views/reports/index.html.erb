@@ -9,12 +9,64 @@
 
   div#top {height:200px;}
   div#report_nav {padding-top:20px; padding-bottom: 30px;}
+
+  div#page_search {margin-bottom:40px;}
+
   img.loading-spinner {padding-top:30px;}
 
   td.details-control svg.over {color:#EC776A; cursor: pointer;}
   th {text-align: left;}
   #datatable_users tr.shown + tr {background-color: #fcfcfc;}
   #datatable_users tr.odd, #datatable_users tr.even {cursor: pointer;}
+
+  /* Single-User Page */
+  #user_top {
+    display:flex; justify-content:space-between; align-items:flex-end;
+    border-bottom: 1px solid #DEEAE6;
+    padding-bottom:30px;
+    margin-bottom:30px;
+  }
+  #user_top img {width:150px; height:150px; margin-right: 10px;}
+  #user_top .profile {display:flex; align-items:center; min-width: 440px;}
+  #user_top .profile div.facts {margin-top: 20px;}
+  #user_top .profile div.name {font-weight: bold;}
+  #user_top .profile div.name a {font-weight: normal;}
+
+  #u_zip span:nth-child(2n)::before {
+    content: ", ";
+  }
+  #user_content {
+    display:flex; justify-content:space-between; align-items:flex-start;
+  }
+  #user_content div.wrp {padding-bottom:50px;}
+  #user_content.-bottom {
+    border-top: 1px solid #DEEAE6;
+    padding-top:30px;
+  }
+  #user_content div.-small {width:50%;}
+  #user_content div.-wide {width:50%;}
+  #user_content .u_block svg {display: inline-block;}
+  #user_content .title {margin-bottom: 10px; display: flex; align-items: center;}
+  #user_content .title span {font-weight:bold; font-size: 2.0rem; padding-left: 8px;}
+  #user_content em.empty {color:#aaaaaa; padding-left:36px; white-space: nowrap;}
+  ul.tag-list li {
+    /*margin-bottom: 0px;*/
+    margin-top:0px;
+    margin-bottom:0px;
+    padding:3px 10px;
+    margin-left:10px;
+    float:none;
+    display: inline-block;
+  }
+  #u_location div, #u_mc_activity div {margin-left: 36px; margin-bottom: 7px;}
+  #u_mc_activities .title {margin-bottom: 20px;}
+  #u_mc_activity .time {display: inline-block; min-width:110px; text-align: right; white-space: nowrap;}
+  #u_mc_activity .action {display: inline-block; min-width:110px; text-align: center;}
+  #u_mc_activity .action .bounce li {background-color: red; color:white;}
+  #u_mc_activity .action .click li {background-color: #EC776A; color:white;}
+  #u_mc_activity .action .open li {background-color: #83C7BD; color:white;}
+  #u_mc_activity .action .sent li {}
+  #u_mc_activity .name {font-style: italic;}
 
 </style>
 
@@ -38,9 +90,11 @@
     };
     // Time Period Data for Charts
     var timePeriodData = [];
-    // Charts
+
+    // Top Chart
     var chartTopArea;
 
+    // Mailchimp Chart
     var mcChartData = {
       labels:[],
       data:{
@@ -51,6 +105,7 @@
     };
 
     var users = []; // Clean Users Array to work with
+    var usersearch = []; // User Serach Result
     var graetzls = []; // Clean Grätzl Array to work with
     var locations = []; // Clean Location Array to work with
     var mc_automations = []; // Mailchimp Automation Mailings
@@ -71,6 +126,136 @@
 
 
     /*********************************
+        USER OBJECT
+    *********************************/
+    var User = function( id ) {
+
+      this.id = id,
+
+      // User Content
+      this.districts = [],
+      this.locations = [],
+      this.updates = [],
+      this.meetings = [],
+      this.raumteiler = [],
+
+      // Get User Infos from Server
+      this.getUser = function() {
+        return new Promise( function(resolve, reject) {
+          $.ajax( {
+            url:'/admin/users/'+ this.id +'.json',
+            method:'GET',
+            success:function(res) {
+
+              this.role = res.role;
+              this.newsletter = res.newsletter;
+              this.created_at = new Date(res.created_at);
+              this.last_login = res.last_sign_in_at? new Date(res.last_sign_in_at) : '';
+              this.username = res.username;
+              this.slug = res.slug;
+              this.user_path_admin = host_admin + 'users/' + res.slug;
+              this.user_path_app = host + res.slug;
+              this.first_name = res.first_name;
+              this.last_name = res.last_name;
+              this.email = res.email;
+              this.website = res.website;
+              this.avatar = res.avatar;
+              this.graetzl_id = res.graetzl_id;
+
+              this.getGraetzlInfos(); // Get Grätzl Infos from Grätzl-Array
+              resolve('user');
+
+            }.bind(this)
+          });
+        }.bind(this));
+      } // getUser Infos from Server
+
+      // Get User Locations from Server
+      this.getLocations = function() {
+        return new Promise( function(resolve, reject) {
+
+          $.ajax( {
+            url:'/admin/locations.json?q%5Blocation_ownerships_user_id_eq%5D=' + this.id,
+            method:'GET',
+            success:function(res) {
+
+              for( i=0; i < res.length; i++ ) {
+                this.locations.push({
+                  id: res[i].id,
+                  name: res[i].name,
+                  slogan: res[i].slogan,
+                  slug: res[i].slug,
+                  state: res[i].state,
+                  graetzl_id: res[i].graetzl_id,
+                  graetzl_name: '',
+                  category_id: res[i].category_id,
+                  created_at: new Date(res[i].created_at),
+                  location_path: '',
+                  location_path_admin: host_admin + 'locations/' + res[i].slug
+                })
+              }
+
+              // Get missing Location Infos from Grätzl Array
+              for ( i=0; i < this.locations.length; i++ ) {
+                res = fetchFromID(this.locations[i].graetzl_id, 'graetzls');
+                for (let key in res) {
+                  this.locations[i].graetzl_name = res[key].name;
+                  this.locations[i].location_path = res[key].graetzl_app_path + '/locations/' + this.locations[i].slug;
+                }
+              }
+
+              resolve('user_location');
+
+            }.bind(this)
+          });
+        }.bind(this));
+      } // get User Locations from Server
+
+
+      // Get Grätzls & District Infos for User from Grätzl-Array
+      this.getGraetzlInfos = function() {
+        res = fetchFromID(this.graetzl_id, 'graetzls');
+        for (let key in res) {
+
+          // Set Grätzl Infos
+          this.graetzl_name = res[key].name;
+          this.graetzl_app_path = res[key].graetzl_app_path;
+
+          // Set District Infos
+          for ( d=0; d<res[key].districts.length; d++ ) {
+            this.districts.push({
+              id: res[key].districts[d].id,
+              name: res[key].districts[d].name,
+              slug: res[key].districts[d].slug,
+              zip: res[key].districts[d].zip
+            });
+          };
+        }
+      }.bind(this) // Get Grätzls & District Infos
+
+
+      // Get Mailchimp User Infos
+      this.getMailings = function(){
+        return new Promise( function(resolve, reject) {
+          $.ajax( {
+            url:'/reports/mailchimp.json',
+            data: {
+              'count': 100,
+              'email' : this.email,
+              'activity' : 'activity'
+            },
+            method:'GET',
+            success:function(response) {
+              resolve(response);
+            }
+          });
+        }.bind(this));
+      } // Get Mailchimp User Infos
+
+    } // USER OBJECT
+
+
+    /*********************************
         Page Navigation
     *********************************/
 
@@ -80,13 +265,10 @@
       $('#report_nav button').prop("disabled",false);
       stopSpinner();
 
-      if ( page == 'page_dashboard' ) {
-        resetTopChart();
-      }
       if ( page == 'page_users' ) {
         resetTopChart();
         usersChart();
-        datatable_users();
+        datatable_users(users);
       }
       if ( page == 'page_locations' ) {
         resetTopChart();
@@ -107,11 +289,11 @@
     $(document).ready(function() {
       // Hide Pages on Load
       $('div.page').hide();
-      $('#report_nav button').prop("disabled",true);
+      $('#report_nav button.pages').prop("disabled",true);
       showSpinner();
 
       // Switch Pages on Button Click
-      $('#report_nav button').on( 'click', function() {
+      $('#report_nav button.pages').on( 'click', function() {
         var page = $(this).attr('data-nav');
 
         $('div.page').hide();
@@ -121,6 +303,61 @@
         page_loader(page);
 
       })
+
+      // Toggle Search Field
+      $('#btn-search').on( 'click', function() {
+        $('#page_search').slideToggle();
+      })
+
+      // Search Form
+      $(document).on( 'submit', '#search-form', function(event) {
+      	event.preventDefault();
+        var searchParam = requestUserSearch($('#search-value').val());
+        Promise.resolve(searchParam).then(function(res) {
+          console.log(usersearch);
+          page_loader('page_users');
+          datatable_users(usersearch);
+        });
+
+      })
+
+      // Search Request for User
+      var requestUserSearch = function(email, id){
+
+        // Emtpy Search Result Array
+        usersearch = [];
+
+        return new Promise( function(resolve, reject) {
+          $.ajax( {
+            url:'/admin/users.json?q%5Bemail_contains%5D=' + email,
+            method:'GET',
+            success:function(response) {
+              for( i=0; i < response.length; i++ ) {
+                usersearch.push({
+                  id: response[i].id,
+                  graetzl_id: response[i].graetzl_id,
+                  graetzl_name: '',
+                  graetzl_app_path: '',
+                  created_at: new Date(response[i].created_at),
+                  username: response[i].username,
+                  first_name: response[i].first_name,
+                  last_name: response[i].last_name,
+                  email: response[i].email,
+                  user_path_admin: host_admin + 'users/' + response[i].slug,
+                  user_path_app: host + response[i].slug,
+                  role: response[i].role,
+                  districts: [],
+                  locations: []
+                })
+              }
+              completeUser(usersearch);
+              resolve('usersearch');
+            }
+          });
+        });
+      } // Search for User
+
+
     });
     // END Page Navigation //
 
@@ -135,16 +372,14 @@
       var topchart = $("#topchart");
       setTimeUnit('days');
 
-      // Load Data from Server - if all Data loaded, do something ...
+      // Load Users and Grätzls on Pageload
       var p1 = requestUsers();
       var p2 = requestGraetzls();
-      //var p3 = requestLocations();
-      //var p4 = requestMailchimp();
 
       Promise.all([p1, p2]).then(function(res) {
 
-        completeArrays();
-        page_loader('page_dashboard');
+        completeUser(users);
+        page_loader('page_users');
 
         //console.log(users);
         //console.log(graetzls);
@@ -198,22 +433,22 @@
       }
     }
 
-    // Helper - Complete Arrays with missing Infos from other Arrays
-    var completeArrays = function() {
-
+    // Helper - Complete User Array with missing Infos from Grätzl Arrays
+    var completeUser = function(type) {
       // Extend User Array with Grätzl-Infos
-      for ( i=0; i<users.length; i++ ) {
-        graetzlinfos = fetchFromID(users[i].graetzl_id, 'graetzls');
-        for (let key in graetzlinfos) {
-          //console.log(graetzlinfos[key]);
-          users[i].graetzl_name = graetzlinfos[key].name;
-          users[i].graetzl_path_app = graetzlinfos[key].graetzl_path_app;
-          for ( d=0; d<graetzlinfos[key].districts.length; d++ ) {
-            users[i].districts.push({
-              id: graetzlinfos[key].districts[d].id,
-              name: graetzlinfos[key].districts[d].name,
-              slug: graetzlinfos[key].districts[d].slug,
-              zip: graetzlinfos[key].districts[d].zip
+      for ( i=0; i<type.length; i++ ) {
+        res = fetchFromID(type[i].graetzl_id, 'graetzls');
+        for (let key in res) {
+          // Get Grätzl Infos
+          type[i].graetzl_name = res[key].name;
+          type[i].graetzl_app_path = res[key].graetzl_app_path;
+          // Get District Infos
+          for ( d=0; d<res[key].districts.length; d++ ) {
+            type[i].districts.push({
+              id: res[key].districts[d].id,
+              name: res[key].districts[d].name,
+              slug: res[key].districts[d].slug,
+              zip: res[key].districts[d].zip
             });
           };
         }
@@ -237,7 +472,7 @@
     }
     // Helper Functions //
 
-    // Show Loading Spinner //
+    // Show & Stop Loading Spinner //
     function showSpinner() {
       var spinnerSrc = "<%= asset_path('svg/loading.svg') %>";
       var spinner = $('<img class="loading-spinner" src="' + spinnerSrc + '">');
@@ -265,16 +500,14 @@
           url:'/admin/users.json?' + ajaxStartDate + startDateStr + ajaxEndDate + endDateStr,
           method:'GET',
           success:function(response) {
-            console.log(response);
-
+            //console.log(response);
             for( i=0; i < response.length; i++ ) {
               users.push({
                 id: response[i].id,
                 graetzl_id: response[i].graetzl_id,
                 graetzl_name: '',
-                graetzl_path_app: '',
+                graetzl_app_path: '',
                 created_at: new Date(response[i].created_at),
-                last_login: response[i].last_sign_in_at? new Date(response[i].last_sign_in_at) : '',
                 username: response[i].username,
                 first_name: response[i].first_name,
                 last_name: response[i].last_name,
@@ -282,11 +515,8 @@
                 user_path_admin: host_admin + 'users/' + response[i].slug,
                 user_path_app: host + response[i].slug,
                 role: response[i].role,
-                newsletter: response[i].newsletter? response[i].newsletter : '',
-                website: response[i].website? response[i].website : '',
                 districts: [],
                 locations: []
-                //avatar: response[i].backend.directory + '/' + response[i].id
               })
             }
             resolve('users');
@@ -303,13 +533,13 @@
           url:'/admin/graetzls.json?q%5Busers_count_greater_than%5D=0',
           method:'GET',
           success:function(response) {
-            console.log(response);
+            //console.log(response);
             for ( i=0; i < response.length; i++ ) {
               graetzls.push({
                 id: response[i].id,
                 name: response[i].name,
-                graetzl_path_app: host + response[i].slug,
-                graetzl_path_admin: host_admin + 'graetzls/' + response[i].slug,
+                graetzl_app_path: host + response[i].slug,
+                graetzl_admin_path: host_admin + 'graetzls/' + response[i].slug,
                 users_count: response[i].users_count,
                 districts: []
               });
@@ -336,8 +566,8 @@
           url:'/admin/locations.json?' + ajaxStartDate + startDateStr + ajaxEndDate + endDateStr,
           method:'GET',
           success:function(response) {
-            console.log(response);
             for( i=0; i < response.length; i++ ) {
+              // Push to LOcations Array
               locations.push({
                 id: response[i].id,
                 name: response[i].name,
@@ -350,6 +580,12 @@
                 location_path: response[i].slug,
                 location_path_admin: host_admin + 'locations/' + response[i].slug
               })
+              // Extend Location Array with Grätzl-Infos from Grätzl Array
+              var res = fetchFromID(locations[i].graetzl_id, 'graetzls');
+              for (let key in res) {
+                locations[i].graetzl_name = res[key].name;
+                locations[i].location_path = res[key].graetzl_app_path + '/locations/' + locations[i].location_path;
+              }
             }
             resolve('locations');
           }
@@ -357,87 +593,6 @@
       });
     } // Get Locations
 
-
-    // Get Advanced Personal User Details
-    var requestUserDetails = function(id){
-      return new Promise( function(resolve, reject) {
-
-        user = fetchFromID(id, 'users');
-        user = user[0];
-
-        $.ajax( {
-          url:'/admin/users/'+ id +'.json',
-          method:'GET',
-          success:function(response) {
-            console.log(response);
-
-            user.last_login = response.last_sign_in_at? new Date(response.last_sign_in_at) : '';
-            user.newsletter = response.newsletter;
-            user.website = response.website;
-            user.avatar = response.avatar;
-
-            resolve('user');
-          }
-        });
-      });
-    } // Get User Details
-
-
-    // Get User Locations
-    var requestUserLocation = function(id){
-      return new Promise( function(resolve, reject) {
-
-        user = fetchFromID(id, 'users');
-        user = user[0];
-
-        // Get Locations from User and Push in Users Array (only once)
-        if ( user.locations.length == 0 ) {
-          $.ajax( {
-            url:'/admin/locations.json?q%5Blocation_ownerships_user_id_eq%5D=' + id,
-            method:'GET',
-            success:function(response) {
-              for( i=0; i < response.length; i++ ) {
-                user.locations.push({
-                  id: response[i].id,
-                  name: response[i].name,
-                  slogan: response[i].slogan,
-                  slug: response[i].slug,
-                  state: response[i].state,
-                  graetzl_id: response[i].graetzl_id,
-                  graetzl_name: '',
-                  category_id: response[i].category_id,
-                  created_at: response[i].created_at,
-                  location_path: '',
-                  location_path_admin: host_admin + 'locations/' + response[i].slug
-                })
-              }
-              resolve('user');
-            }
-        });
-        } else {
-          // locations already pushed ...
-          resolve('user');
-        }
-      });
-    } // Get User Locations
-
-    // Get Mailchimp User
-    var requestMCUser = function(email, activity){
-      return new Promise( function(resolve, reject) {
-        $.ajax( {
-          url:'/reports/mailchimp.json',
-          data: {
-            'count': 100,
-            'email' : email,
-            'activity' : activity
-          },
-          method:'GET',
-          success:function(response) {
-            resolve(response);
-          }
-        });
-      });
-    } // Get Mailchimp User
 
 
     // Get Mailchimp Automations
@@ -467,9 +622,9 @@
     *********************************/
 
     // Create DATATABLE - USERS //
-    var datatable_users = function() {
+    var datatable_users = function(type) {
       $('#datatable_users').DataTable( {
-        data: users,
+        data: type,
         "order": [[ 5, "desc" ]],
         "processing": true,
         "paging": false,
@@ -508,7 +663,7 @@
           { data: 'graetzl_name',
             render: function( data, type, row, meta ){
               if ( type === 'display' ) {
-              data = '<a href="' + row['graetzl_path_app'] + '">' + data + '</a>';
+              data = '<a href="' + row['graetzl_app_path'] + '">' + data + '</a>';
             }
               return data;
             }
@@ -531,13 +686,6 @@
       var $content = $('<div id="user' + data.id + '">');
       $($content).append('<div>' + data.first_name + ' ' + data.last_name + '</div>');
       $($content).append('<div>' + data.email + '</div>');
-
-      // Get User Locations
-      /* var locationinfos = fetchFromID(data.id, 'locations');
-      for ( i=0; i<locationinfos.length; i++) {
-        $($content).append('<tr><td>Location: <a href="'+locationinfos[i].location_path_admin+'">' +locationinfos[i].name+ '</td></tr>');
-      } */
-
       return $content;
     }
 
@@ -598,7 +746,7 @@
       }
     }
 
-    // Draw DATATABLE - Mailchim Automations //
+    // Draw DATATABLE - Mailchimp Automations //
     var datatable_mc_automations = function() {
       $('#datatable_mailings').DataTable( {
         data: mc_automations,
@@ -649,7 +797,6 @@
                   data = row['districts'][0].zip;
                 }
               return data;
-
             }
           },
           { data: 'name'},
@@ -658,12 +805,11 @@
       });
     }
 
+
     // Create DATATABLE LOCATIONS
     var datatable_locations = function() {
 
-      resetTopChart();
-
-      // Load only if Array is empty
+      // Load only from Server if Array is empty
       if ( locations.length > 0 ) {
 
         stopSpinner();
@@ -672,22 +818,9 @@
       } else {
         locations = [];
 
-        // Empty - Load new Data
+        // If Empty - Load new Data from Server
         var getLocations = requestLocations();
         Promise.resolve(getLocations).then(function(res) {
-
-
-          // Extend Location Array with Grätzl-Infos
-          for ( i=0; i<locations.length; i++ ) {
-            var graetzlinfos = fetchFromID(locations[i].graetzl_id, 'graetzls');
-            for (let key in graetzlinfos) {
-              //console.log(graetzlinfos[key]);
-              locations[i].graetzl_name = graetzlinfos[key].name;
-              locations[i].location_path = graetzlinfos[key].graetzl_path_app + '/locations/' + locations[i].location_path;
-            }
-          }
-          console.log(locations);
-
 
           // Create table
           $('#datatable_locations').DataTable( {
@@ -751,7 +884,7 @@
             timePeriod.dates.push(priorDate);
             timePeriod.datesFriendly.push(priorDateFriendly);
           }
-          console.log(timePeriod.dates.length);
+          //console.log(timePeriod.dates.length);
         }
 
       } // Time Period Array
@@ -810,7 +943,6 @@
       var labeldata = timePeriod.datesFriendly;
       var chartdata = timePeriodData;
 
-
       chartTopArea = new Chart(topchart, {
         type: 'line',
         data: {
@@ -821,8 +953,6 @@
           }]
         }
       });
-
-
     } // Users Chart
 
 
@@ -850,7 +980,6 @@
       var labeldata = timePeriod.datesFriendly;
       var chartdata = timePeriodData;
 
-
       chartTopArea = new Chart(topchart, {
         type: 'line',
         data: {
@@ -861,14 +990,11 @@
           }]
         }
       });
-
-
     } // Location Chart
 
 
     // Mailing Chart
     var mailingChart = function(labeldata, sent, opens, clicks) {
-
 
       var chartcolor0 = 'rgba(237, 129, 117, 0.5)';
       var chartcolor1 = 'rgba(131, 199, 189, 0.5)';
@@ -908,111 +1034,97 @@
           }
         }
       });
-
-  }
+    } // Mailing Chart
 
 
   /*********************************
+
       Create SINGLE USER View
 
   *********************************/
 
     var singleUser = function(user_id) {
-      $('#page_users').hide();
+
+      //$('#page_users').hide();
+      $('div.page').hide();
       $('#page_singleuser').show();
       $('html, body').animate({
         scrollTop: $("#report_nav").offset().top
       }, 100);
 
-      user = fetchFromID(user_id, 'users');
-      user = user[0];
-      console.log(user);
-
-      $('#u_id').html('Id: ' + user.id);
-      $('#u_firstname').html(user.first_name);
-      $('#u_lastname').html(user.last_name);
-      $('#u_username').html(user.username);
-      $('#u_email').html(user.email);
-      $('#u_graetzl').html(user.graetzl_name);
-      $('#u_created_at').html(moment(user.created_at).format('ll'));
-      $('#u_last_login').html('');
-      $('#u_admin').attr('href', user.user_path_admin);
-      $('#u_role').html(user.role? '| ' + user.role : '');
-      $('#u_zip').html('');
-      for ( i=0; i<user.districts.length; i++ ) {
-        $('<span>').html(user.districts[i].zip).appendTo('#u_zip');
-      }
-
-      // Reset & Clear Locations
-      $('#u_location').html('');
-      $('<em class="empty">Noch keine Locations</em>')
-      .appendTo('#u_location');
-
-      // Get User Locations
-      //var user_locations = fetchFromID(user_id, 'locations');
-      //console.log(user_locations);
-
-      // Get User Locations
-      var user_details = requestUserDetails(user.id);
-      Promise.resolve(user_details).then(function(res) {
-
-        $('#u_last_login').html(user.last_login? moment(user.last_login).format('ll') : 'noch kein Login');
-        console.log(user);
-      })
-
-
-      // Get User Locations
-      var user_locations = requestUserLocation(user.id);
-      Promise.resolve(user_locations).then(function(res) {
-
-        for ( i=0; i<user.locations.length; i++ ) {
-          user.locations[i].location_path = user.graetzl_path_app + '/locations/' + user.locations[i].slug;
-        }
-
-        for ( i=0; i<user.locations.length; i++ ) {
-          $('<div><a href="' + user.locations[i].location_path + '">' + user.locations[i].name + '</a></div>')
-            .appendTo('#u_location');
-          $('#u_location .empty').hide();
-        }
-
-      })
-
-
-
-      // Reset & Clear Mailings
+      // Reset & Clear Mailing Output
       $('#u_mc_activity').html('');
       $('<em class="empty">Noch keine Mailings</em>')
       .appendTo('#u_mc_activity');
 
+      // Reset & Clear Location Output
+      $('#u_location').html('');
+      $('<em class="empty">Noch keine Locations</em>')
+      .appendTo('#u_location');
 
 
-      // Get User Mailchimp Activities
-      var mailchimpActivity = requestMCUser(user.email, 'activity');
-      Promise.resolve(mailchimpActivity).then(function(res) {
+      // Create new User for ID
+      var user = new User( user_id );
 
-        if (res != 404) {
-          var activity = res.body.activity;
-          console.log(activity);
-          for ( i=0; i<activity.length; i++ ) {
-            $('<div>'
-              + '<span class="time">'
-              + moment(new Date(activity[i].timestamp)).format('ll')
-              + '</span>'
-              + '<span class="action">'
-              + activity[i].action
-              + '</span>'
-              + '<span class="name">'
-              + activity[i].title
-              + '</span></div>')
-              .appendTo('#u_mc_activity');
-            $('#u_mc_activity .empty').hide();
-          }
-          console.log(res.body.activity);
+      // Request User Infos
+      Promise.resolve(user.getUser()).then(function(res) {
+
+        console.log(user);
+
+        $('#u_id').html('Id: ' + user.id);
+        $('#u_firstname').html(user.first_name);
+        $('#u_lastname').html(user.last_name);
+        $('#u_username').html(user.username);
+        $('#u_email').html(user.email);
+        $('#u_graetzl').html(user.graetzl_name);
+        $('#u_created_at').html(moment(user.created_at).format('ll'));
+        $('#u_last_login').html(user.last_login? moment(user.last_login).format('ll') : 'noch kein Login');
+        $('#u_admin').attr('href', user.user_path_admin);
+        $('#u_role').html(user.role? '| ' + user.role : '');
+        $('#u_zip').html('');
+        for ( i=0; i<user.districts.length; i++ ) {
+          $('<span>').html(user.districts[i].zip).appendTo('#u_zip');
         }
+        user.newsletter ? $('#u_newsletter').show() : $('#u_newsletter').hide();
 
-      })
 
-    }
+
+
+        // Request User Mailings when User Infos are loaded!
+        Promise.resolve(user.getMailings()).then(function(res) {
+
+          if (res != 404) {
+            var activity = res.body.activity;
+            console.log(activity);
+            for ( i=0; i<activity.length; i++ ) {
+              $('<div>'
+                + '<span class="time">'
+                + moment(new Date(activity[i].timestamp)).format('ll')
+                + '</span>'
+                + '<span class="action"><ul class="tag-list '+ activity[i].action +'">'
+                + '<li>'+ activity[i].action +'</li>'
+                + '</ul></span>'
+                + '<span class="name">'
+                + activity[i].title
+                + '</span></div>')
+                .appendTo('#u_mc_activity');
+              $('#u_mc_activity .empty').hide();
+            }
+            //console.log(res.body.activity);
+          }
+        });
+      });
+
+      // Request User Locations
+      Promise.resolve(user.getLocations()).then(function(res) {
+        for ( i=0; i<user.locations.length; i++ ) {
+          $('<div><a href="' + user.locations[i].location_path + '" target="_blank">' + user.locations[i].name + '</a></div>')
+            .appendTo('#u_location');
+          $('#u_location .empty').hide();
+        }
+      });
+
+    } // SingleUser Page
 
 
 
@@ -1068,8 +1180,6 @@
 
 
 
-
-
   // ----------------------- END PROJECT JS WORKING AREA ----------------------- //
   })();
 </script>
@@ -1081,18 +1191,32 @@
     <canvas id="topchart" width="900" height="200"></canvas>
   </div>
 
-    <div id="report_nav">
-      <button class="btn-primary -rosa" data-nav="page_dashboard">Dashboard</button>
-      <button class="btn-primary -mint" data-nav="page_users">User</button>
-      <button class="btn-primary -mint" data-nav="page_locations">Locations</button>
-      <button class="btn-primary -mint" data-nav="page_rooms">Raumteiler</button>
-      <button class="btn-primary -mint" data-nav="page_meetings">Treffen</button>
-      <button class="btn-primary -mint" data-nav="page_graetzls">Grätzl</button>
-      <button class="btn-primary -mint" data-nav="page_mailings">Mailings</button>
-    </div>
+  <div id="report_nav">
+    <!--<button class="btn-primary -rosa pages" data-nav="page_dashboard">Dashboard</button>-->
+    <button class="btn-primary -rosa pages" data-nav="page_users">User</button>
+    <button class="btn-primary -mint pages" data-nav="page_locations">Locations</button>
+    <button class="btn-primary -mint pages" data-nav="page_rooms">Raumteiler</button>
+    <button class="btn-primary -mint pages" data-nav="page_meetings">Treffen</button>
+    <button class="btn-primary -mint pages" data-nav="page_graetzls">Grätzl</button>
+    <button class="btn-primary -mint pages" data-nav="page_mailings">Mailings</button>
+    <button class="btn-primary -mint" id="btn-search">Suche</button>
+  </div>
+
+<!-- PAGE SEARCH -->
+  <form id="search-form">
+  <div id="page_search" class="page input-field">
+    <label for="search">
+      <%= icon_tag "search" %>
+      <span>Suche</span>
+    </label>
+    <input placeholder="Suche nach E-Mail Adresse ..." type="text" id="search-value">
+    <button class="btn-primary" id="search-submit">Suchen</button>
+  </div>
+</form>
 
 <!-- PAGE USERS -->
   <div id="page_users" class="page">
+
     <!-- Users Datatable -->
     <table id="datatable_users" class="stripe hover row-border" width="100%" data-page-length='100'>
       <thead>
@@ -1111,40 +1235,7 @@
 <!-- /PAGE USERS -->
 
 <!-- PAGE SINGLE USERS -->
-  <style>
-    #user_top {display:flex; justify-content:space-between; align-items:flex-end;}
-    #user_top img {width:150px; height:150px; margin-right: 10px;}
-    #user_top .profile {display:flex; align-items:center;}
-    #user_top .profile div.facts {margin-top: 20px;}
-    #user_top .profile div.name {font-weight: bold;}
-    #user_top .profile div.name a {font-weight: normal;}
 
-    #u_zip span:nth-child(2n)::before {
-      content: ", ";
-    }
-    #user_content {
-      display:flex; justify-content:space-between; align-items:flex-start;
-      border-top: 1px solid #DEEAE6;
-      padding-top:30px;
-      margin-top:30px;
-    }
-    #user_content div.wrp {}
-    #user_content div.-small {width:50%;}
-    #user_content div.-wide {width:50%;}
-    #user_content .u_block svg {display: inline-block;}
-    #user_content .title {margin-bottom: 10px; display: flex; align-items: center;}
-    #user_content .title span {font-weight:bold; font-size: 2.0rem; padding-left: 8px;}
-    #user_content em.empty {color:#aaaaaa; padding-left:36px; white-space: nowrap;}
-    ul.tag-list li {
-      margin-bottom: 0px;
-      padding:3px 10px;
-      margin-left:10px;
-    }
-    #u_location div, #u_mc_activity div {margin-left: 36px; margin-bottom: 5px;}
-    #u_mc_activity .time {display: inline-block; width:115px;}
-    #u_mc_activity .action {display: inline-block; width:55px;}
-
-  </style>
   <!-- Single User View-->
   <div id="page_singleuser" class="page">
 
@@ -1177,28 +1268,46 @@
     </div>
 
     <div id="user_content">
-
       <div class="wrp -small">
-
         <div id="#u_locations" class="u_block">
           <div class="title"><%= icon_tag "location" %><span>Locations</span></div>
           <div id="u_location"></div>
         </div>
-
       </div>
       <div class="wrp -wide">
-        <div id="#u_mc_activities" class="u_block">
-          <div class="title">
-            <%= icon_tag "at-symbol" %>
-            <span>Mail Activities</span>
-            <ul class="tag-list grey">
-                <li>Newsletter</li>
-            </ul>
-          </div>
-          <div id="u_mc_activity"></div>
+        <div id="#u_raumteilers" class="u_block">
+          <div class="title"><%= icon_tag "raumteiler" %><span>Raumteiler</span></div>
+          <div id="u_raumteiler"></div>
         </div>
       </div>
+    </div>
 
+    <div id="user_content">
+      <div class="wrp -small">
+        <div id="#u_location_updates" class="u_block">
+          <div class="title"><%= icon_tag "horn-promote" %><span>Location Updates</span></div>
+          <div id="u_location_update"></div>
+        </div>
+      </div>
+      <div class="wrp -wide">
+        <div id="#u_meetings" class="u_block">
+          <div class="title"><%= icon_tag "calendar-2" %><span>Treffen</span></div>
+          <div id="u_meeting"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="user_content" class="-bottom">
+      <div id="u_mc_activities" class="u_block">
+        <div class="title">
+          <%= icon_tag "at-symbol" %>
+          <span>Mail Activities</span>
+          <ul id="u_newsletter" class="tag-list grey">
+            <li>Newsletter</li>
+          </ul>
+        </div>
+        <div id="u_mc_activity"></div>
+      </div>
     </div>
 
 
