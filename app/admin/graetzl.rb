@@ -1,7 +1,7 @@
 ActiveAdmin.register Graetzl do
   include ViewInApp
   menu priority: 2
-  includes :users, :posts, :meetings, :locations
+  includes :districts
 
   filter :name
   filter :users_count
