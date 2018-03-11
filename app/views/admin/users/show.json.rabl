@@ -1,8 +1,3 @@
-def asset_url(resource, asset_name)
-  host = "https://#{Refile.cdn_host || default_host}"
-  Refile.attachment_url(resource, asset_name, host: host)
-end
-
 collection @user
 attributes :id,
   :username,
@@ -18,6 +13,7 @@ attributes :id,
   :graetzl_id,
   :avatar_content_type,
   :avatar_id
-  #:avatar do |u|
-    #asset_url(u, :avatar)
-  #end
+
+node :avatar do |u|
+  Refile.attachment_url(u, :avatar, :fill, 400, 400)
+end
