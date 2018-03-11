@@ -17,6 +17,7 @@ attributes :id,
   :website,
   :graetzl_id,
   :avatar_content_type,
-  :avatar do |u|
-    asset_url(u, :avatar)
-  end
+  :avatar_id
+  #:avatar do |u|
+    #asset_url(u, :avatar)
+  #end
