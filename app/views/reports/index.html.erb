@@ -147,6 +147,8 @@
             method:'GET',
             success:function(res) {
 
+              console.log(res);
+
               this.role = res.role;
               this.newsletter = res.newsletter;
               this.created_at = new Date(res.created_at);
