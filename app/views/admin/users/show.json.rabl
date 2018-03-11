@@ -10,9 +10,7 @@ attributes :id,
   :email,
   :newsletter,
   :website,
-  :graetzl_id,
-  :avatar_content_type,
-  :avatar_id
+  :graetzl_id
 
 node :avatar do |u|
   Refile.attachment_url(u, :avatar, :fill, 400, 400)

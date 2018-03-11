@@ -502,7 +502,7 @@
           url:'/admin/users.json?' + ajaxStartDate + startDateStr + ajaxEndDate + endDateStr,
           method:'GET',
           success:function(response) {
-            //console.log(response);
+            console.log(response);
             for( i=0; i < response.length; i++ ) {
               users.push({
                 id: response[i].id,
@@ -535,7 +535,7 @@
           url:'/admin/graetzls.json?q%5Busers_count_greater_than%5D=0',
           method:'GET',
           success:function(response) {
-            //console.log(response);
+            console.log(response);
             for ( i=0; i < response.length; i++ ) {
               graetzls.push({
                 id: response[i].id,
@@ -1084,11 +1084,15 @@
         $('#u_admin').attr('href', user.user_path_admin);
         $('#u_role').html(user.role? '| ' + user.role : '');
         $('#u_zip').html('');
+        user.newsletter ? $('#u_newsletter').show() : $('#u_newsletter').hide();
         for ( i=0; i<user.districts.length; i++ ) {
           $('<span>').html(user.districts[i].zip).appendTo('#u_zip');
         }
-        user.newsletter ? $('#u_newsletter').show() : $('#u_newsletter').hide();
-
+        if (user.avatar == null) {
+          $('#u_avatar').attr('src', '/assets/avatar/user/400x400.png');
+        } else {
+          $('#u_avatar').attr('src', user.avatar);
+        }
 
 
 
@@ -1244,7 +1248,7 @@
     <div id="user_top">
       <button class="btn-secondary -small -grey" id="users_back">Zurück zur Übersicht</button>
         <div class="profile">
-          <img class="attachment user avatar img-round -largest" src="https://d1dcf21ighh4hq.cloudfront.net/attachments/fad5d1e8df9b7eba405c9f2deec155f27c709f09/store/fill/400/400/0a90d925fcde3d6fa5b1b3f35f7ba2753972a5c6164acc222ab2e172d1ae/avatar.png">
+          <img id="u_avatar" class="attachment user avatar img-round -largest" src="/assets/avatar/user/400x400.png">
           <div>
             <div><span id="u_id"></span> | <span id="u_created_at"></span> <span id="u_role"></span></div>
             <div>
