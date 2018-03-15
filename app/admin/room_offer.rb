@@ -7,6 +7,7 @@ ActiveAdmin.register RoomOffer do
   scope :all, default: true
 
   filter :graetzl
+  filter :user
   filter :district
   filter :offer_type
   filter :wants_collaboration

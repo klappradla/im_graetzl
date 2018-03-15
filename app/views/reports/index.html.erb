@@ -13,10 +13,26 @@
     margin-bottom: 25px;
     margin-top: -15px;
   }
+  .dtb td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width:200px;
+  }
+  .dtb th.-id {
+    width:50px;
+  }
+
+  .dtb th.-date {
+    width:150px;
+  }
+  .dtb th.-count {
+    width:100px;
+  }
 
   div#top {height:220px;}
   div#topWideChart {height:220px;}
-  div#topPieChart {width:500px; height:220px; margin:auto;}
+  div#topPieChart {width:700px; height:220px; margin:auto;}
   div#report_nav {padding-top:20px; padding-bottom: 30px;}
 
   div#page_search {margin-bottom:40px;}
@@ -52,7 +68,6 @@
   #user_top ul.tag-list li.business {background-color: #83C7BD; color:white;}
   #user_top ul.tag-list li.admin {background-color: #EC776A; color:white;}
 
-
   #u_zip span:nth-child(2n)::before {
     content: ", ";
   }
@@ -80,7 +95,7 @@
     display: inline-block;
   }
 
-  #u_location div, #u_mc_activity div {margin-left: 36px; margin-bottom: 7px;}
+  #u_location div, #u_room div, #u_meeting div, #u_mc_activity div {margin-left: 36px; margin-bottom: 7px;}
   #u_mc_activities .title {margin-bottom: 10px;}
   #u_mc_activity .time {display: inline-block; min-width:110px; text-align: right; white-space: nowrap;}
   #u_mc_activity .action {display: inline-block; min-width:110px; text-align: center;}
@@ -89,6 +104,10 @@
   #u_mc_activity .action .open li {background-color: #83C7BD; color:white;}
   #u_mc_activity .action .sent li {}
   #u_mc_activity .name {font-style: italic;}
+
+  #user_content .-more div {display:none;}
+  #user_content .-more div:nth-child(-n+3) {display:block}
+  .showmorelink {margin-top:5px; margin-left: 36px; font-style: italic;}
 
 </style>
 
@@ -103,11 +122,12 @@
     *********************************/
     moment.locale('de-at');
 
-    var chartTopArea; // Top Chart Area
-    var chartGraetzlTopArea; // Top Chart Area
+    var chartTopArea; // Top Chart Area for Line-Charts
+    var chartGraetzlTopArea; // Top Chart Area for Pie-Chart
     var users = []; // Clean Users Array to work with
     var usersearch = []; // User Serach Result
     var rooms = []; // Clean Room Array to work with
+    var meetings = []; // Clean Meetings Array to work with
     var graetzls = []; // Clean Grätzl Array to work with
     var locations = []; // Clean Location Array to work with
     var mc_automations = []; // Mailchimp Automation Mailings
@@ -146,8 +166,8 @@
     *********************************/
 
     var initDate = new Date();
-    var initUnit = 'days';
-    var initPeriod = 30;
+    var initUnit = 'days'; // Option for Units
+    var initPeriod = 30; // Option for Setting Default Time Period
 
     var TimeChart = function(end, period) {
 
@@ -208,6 +228,7 @@
           }
         }
         // Draw Chart
+
         chartTopArea = new Chart(topchart, {
           type: 'line',
           data: {
@@ -215,7 +236,26 @@
             datasets: [{
               label: label,
               data: this.data,
+              //backgroundColor : 'rgba(237, 129, 117, 0.2)',
+              borderWidth: 1
             }]
+          },
+          options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  min: 0,
+                  stepSize: 2
+                }
+              }]
+            },
+            legend: {
+              display: true,
+              labels: {
+                fontSize:16,
+                fontStyle:'bold'
+              }
+            }
           }
         });
       }
@@ -226,7 +266,6 @@
           var startDate = this.startDate().toISOString().slice(0, 10);
           var endDate = this.endDate().toISOString().slice(0, 10);
           $.ajax( {
-            //url:'/admin/users.json',
             url:'/admin/users.json?' + ajaxStartDate + startDate + ajaxEndDate + endDate,
             method:'GET',
             success:function(response) {
@@ -295,6 +334,42 @@
       } // Get Locations
 
 
+      // Get Meetings and Set Clean Meeting Array
+      this.requestMeetings = function(){
+        return new Promise( function(resolve, reject) {
+          var startDate = this.startDate().toISOString().slice(0, 10);
+          var endDate = this.endDate().toISOString().slice(0, 10);
+          $.ajax( {
+            url:'/admin/meetings.json?' + ajaxStartDate + startDate + ajaxEndDate + endDate,
+            method:'GET',
+            success:function(response) {
+              meetings = [];
+              for( i=0; i < response.length; i++ ) {
+                // Push to Meetings Array
+                meetings.push({
+                  id: response[i].id,
+                  name: response[i].name,
+                  created_at: response[i].created_at,
+                  graetzl_id: response[i].graetzl_id,
+                  graetzl_name: '',
+                  user_id: response[i].user_id,
+                  meeting_path: response[i].slug,
+                  meetings_path_admin: host_admin + 'meetings/' + response[i].slug
+                })
+                // Extend Location Array with Grätzl-Infos from Grätzl Array
+                var res = fetchFromID(meetings[i].graetzl_id, 'graetzls');
+                for (let key in res) {
+                  meetings[i].graetzl_name = res[key].name;
+                  meetings[i].meetings_path = res[key].graetzl_app_path + '/treffen/' + meetings[i].meetings_path;
+                }
+              }
+              resolve('meetings');
+            }
+          });
+        }.bind(this));
+      } // Get Locations
+
+
       // Get Rooms and Set Clean Rooms Array
       this.requestRooms = function(type){
         return new Promise( function(resolve, reject) {
@@ -304,7 +379,7 @@
             url:'/admin/' + type + '.json?' + ajaxStartDate + startDate + ajaxEndDate + endDate,
             method:'GET',
             success:function(response) {
-              console.log(response);
+              //console.log(response);
               for( i=0; i < response.length; i++ ) {
                 // Push to Rooms Array
                 rooms.push({
@@ -326,7 +401,6 @@
           });
         }.bind(this));
       } // Get Rooms
-
 
     }; // Chart Object
 
@@ -356,9 +430,7 @@
             url:'/admin/users/'+ this.id +'.json',
             method:'GET',
             success:function(res) {
-
-              console.log(res);
-
+              //console.log(res);
               this.role = res.role;
               this.newsletter = res.newsletter;
               this.created_at = new Date(res.created_at);
@@ -385,7 +457,6 @@
       // Get User Locations from Server
       this.getLocations = function() {
         return new Promise( function(resolve, reject) {
-
           $.ajax( {
             url:'/admin/locations.json?q%5Blocation_ownerships_user_id_eq%5D=' + this.id,
             method:'GET',
@@ -406,7 +477,6 @@
                   location_path_admin: host_admin + 'locations/' + res[i].slug
                 })
               }
-
               // Get missing Location Infos from Grätzl Array
               for ( i=0; i < this.locations.length; i++ ) {
                 res = fetchFromID(this.locations[i].graetzl_id, 'graetzls');
@@ -415,13 +485,78 @@
                   this.locations[i].location_path = res[key].graetzl_app_path + '/locations/' + this.locations[i].slug;
                 }
               }
-
               resolve('user_location');
-
             }.bind(this)
           });
         }.bind(this));
       } // get User Locations from Server
+
+
+      // Get User Meetings from Server
+      this.getMeetings = function() {
+        return new Promise( function(resolve, reject) {
+          // TO DO :: INITIATOR STATT GOINGTOs
+          $.ajax( {
+            url:'/admin/meetings.json?q%5Bgoing_tos_user_id_eq%5D=' + this.id,
+            method:'GET',
+            success:function(res) {
+
+              for( i=0; i < res.length; i++ ) {
+                this.meetings.push({
+                  id: res[i].id,
+                  name: res[i].name,
+                  created_at: res[i].created_at,
+                  graetzl_id: res[i].graetzl_id,
+                  graetzl_name: '',
+                  user_id: res[i].user_id,
+                  meetings_path: res[i].slug,
+                  meetings_path_admin: host_admin + 'meetings/' + res[i].slug
+                })
+              }
+              // Get missing Location Infos from Grätzl Array
+              for ( i=0; i < this.meetings.length; i++ ) {
+                res = fetchFromID(this.meetings[i].graetzl_id, 'graetzls');
+                for (let key in res) {
+                  this.meetings[i].graetzl_name = res[key].name;
+                  this.meetings[i].meetings_path = res[key].graetzl_app_path + '/treffen/' + this.meetings[i].meetings_path;
+                }
+              }
+              resolve('user_meetings');
+            }.bind(this)
+          });
+        }.bind(this));
+      } // get User Meetings from Server
+
+
+      // Get User Rooms from Server
+      this.getRooms = function(type) {
+        return new Promise( function(resolve, reject) {
+          $.ajax( {
+            url:'/admin/' + type + '.json?q%5Buser_id_eq%5D=' + this.id,
+            method:'GET',
+            success:function(response) {
+              //console.log(response);
+              for( i=0; i < response.length; i++ ) {
+                // Push to User Rooms Array
+                this.rooms.push({
+                  id: response[i].id,
+                  name: response[i].slogan,
+                  created_at: response[i].created_at,
+                  graetzl_id: response[i].graetzl_id,
+                  user_id: response[i].user_id,
+                  room_path: response[i].slug,
+                  room_path_admin: host_admin + type + '/' + response[i].slug,
+                  category_ids: response[i].room_category_ids,
+                  type : response[i].offer_type ? response[i].offer_type : response[i].demand_type,
+                  type_friendly : response[i].offer_type ? room_type[response[i].offer_type] : room_type[response[i].demand_type], // Translate from Object room_type,
+                  district_ids: response[i].district_id ? [response[i].district_id] : response[i].district_ids
+                })
+              }
+              resolve('user rooms');
+            }.bind(this)
+          });
+        }.bind(this));
+      } // get User Rooms from Server
 
 
       // Get Grätzls & District Infos for User from Grätzl-Array
@@ -485,7 +620,7 @@
         showSpinner();
         var usersChart = new TimeChart(initDate, initPeriod);
         Promise.resolve(usersChart.requestUsers()).then(function(res) {
-          usersChart.drawChart(users, '' + users.length + ' Registrierungen');
+          usersChart.drawChart(users, '' + users.length + ' User');
           stopSpinner();
           // If Search, load Searchresult, else normal Usertable
           info ? datatable_users(usersearch, 'users') : datatable_users(users, 'users');
@@ -503,6 +638,17 @@
         })
       }
 
+      if ( page == 'page_meetings' ) {
+        resetTopChart();
+        showSpinner();
+        var meetingsChart = new TimeChart(initDate, initPeriod);
+        Promise.resolve(meetingsChart.requestMeetings()).then(function(res) {
+          meetingsChart.drawChart(meetings, '' + meetings.length + ' Treffen');
+          stopSpinner();
+          datatable_meetings();
+        })
+      }
+
       if ( page == 'page_rooms' ) {
         resetTopChart();
         showSpinner();
@@ -514,7 +660,7 @@
           roomsChart.drawChart(rooms, '' + rooms.length + ' Raumteiler');
           stopSpinner();
           datatable_rooms();
-          console.log(rooms);
+          //console.log(rooms);
         })
       }
 
@@ -544,6 +690,7 @@
         resetTopChart();
         showSpinner();
         datatable_mailings('automations');
+        stopSpinner();
       }
 
     }
@@ -583,7 +730,7 @@
       // Load Grätzls on Pageload
       Promise.resolve(requestGraetzls()).then(function(res) {
         page_loader('page_users');
-        console.log(graetzls);
+        //console.log(graetzls);
       })//.catch( function() {alert('Error Loading Data ...'); } )
 
     });
@@ -647,6 +794,14 @@
       }
     }
 
+    var showmore = function(type) {
+      event.preventDefault();
+      var dataid = type;
+      //console.log(dataid)
+      var vis = $('#'+dataid+' div:visible').last().index();
+      $('#'+dataid+' div').slice(vis, vis+4).show();
+    }
+
     // Helper - Complete User Array with missing Infos from Grätzl Arrays
     var completeUser = function(type) {
       // Extend User Array with Grätzl-Infos
@@ -691,7 +846,6 @@
 
     // Helper Function for Filling Graetzl Chart Data
     var setGraetzlChartData = function(type) {
-
       // Reset Arrays
       graetzls_count = {
         total: {
@@ -730,7 +884,7 @@
         }
       }
 
-      console.log(type);
+      //console.log(type);
 
       // Sort Array by Count-Value
       type.data.sort(function(a,b) {return (a.count < b.count) ? 1 : ((b.count < a.count) ? -1 : 0);} );
@@ -861,20 +1015,20 @@
     var datatable_users = function(type, name) {
       $('#datatable_' + name + '').DataTable( {
         data: type,
-        "order": [[ 5, "desc" ]],
+        "order": [[ 4, "desc" ]],
         "processing": true,
         "paging": false,
         "destroy": true,
         "searching": false,
         //"responsive": true,
         columns: [
+          //{ data: 'id' },
           {
             "className": 'details-control',
             "orderable": false,
             "data": null,
-            "defaultContent": "<%= icon_tag "layout-text" %>"
+            "defaultContent": "<%= icon_tag "user-info-profile-details" %>"
           },
-          { data: 'id' },
           { data: 'username',
             render: function( data, type, row, meta ){
               if ( type === 'display' ) {
@@ -899,7 +1053,7 @@
           { data: 'graetzl_name',
             render: function( data, type, row, meta ){
               if ( type === 'display' ) {
-              data = '<a href="' + row['graetzl_app_path'] + '">' + data + '</a>';
+              data = '<a href="' + row['graetzl_app_path'] + '" target="_blank">' + data + '</a>';
             }
               return data;
             }
@@ -975,8 +1129,6 @@
 
           // Create Table
           datatable_mc_automations();
-          stopSpinner();
-
         });
       }
     }
@@ -1050,15 +1202,50 @@
         "bDestroy": true,
         "searching": false,
         columns: [
+          { data: 'id'},
           { data: 'name',
             render: function( data, type, row, meta ){
               if ( type === 'display' ) {
-              data = '<a href="'+row['location_path_admin']+'">' + data + '</a>';
+              data = '<a href="'+row['location_path_admin']+'" target="_blank">' + data + '</a>';
             }
               return data;
             }
           },
-          { data: 'state'},
+          { data: 'graetzl_name'},
+          { data: 'created_at',
+            render: function(data, type) {
+              if ( type == "sort" || type == 'type' ) {
+                return data;
+              } else {
+                // Use Friendly Format for Output
+                return moment(data).format('lll');
+              }
+            }
+          }
+        ]
+      });
+    }
+
+
+    // Create DATATABLE MEETINGS
+    var datatable_meetings = function() {
+      $('#datatable_meetings').DataTable( {
+        data: meetings,
+        "order": [[ 3, "desc" ]],
+        "processing": true,
+        "paging": false,
+        "bDestroy": true,
+        "searching": false,
+        columns: [
+          { data: 'id'},
+          { data: 'name',
+            render: function( data, type, row, meta ){
+              if ( type === 'display' ) {
+              data = '<a href="'+row['meetings_path_admin']+'" target="_blank">' + data + '</a>';
+            }
+              return data;
+            }
+          },
           { data: 'graetzl_name'},
           { data: 'created_at',
             render: function(data, type) {
@@ -1089,7 +1276,7 @@
           { data: 'name',
             render: function( data, type, row, meta ){
               if ( type === 'display' ) {
-              data = '<a href="'+row['room_path_admin']+'">' + data + '</a>';
+              data = '<a href="'+row['room_path_admin']+'" target="_blank">' + data + '</a>';
             }
               return data;
             }
@@ -1122,7 +1309,7 @@
     // Chart Graetzls
     var graetzlsChart = function(type) {
 
-      var topGraetzlCount = 7;
+      var topGraetzlCount = 13;
       var sumTopGraetzl = 0; // Reset
       var sumRemainingGraetzl = 0; // Reset
       var headline = '';
@@ -1130,12 +1317,20 @@
       var zeroGraetzl = 0;
 
       var chartlabel, chartdata, sum;
-      var color0 = 'rgba(237, 129, 117, 1.0)';
-      var color1 = 'rgba(237, 129, 117, 0.6)';
-      var color2 = 'rgba(237, 129, 117, 0.2)';
-      var color3 = 'rgba(131, 199, 189, 1.0)';
-      var color4 = 'rgba(131, 199, 189, 0.6)';
-      var color5 = 'rgba(131, 199, 189, 0.2)';
+      var color0 = 'rgba(205, 137, 27, 0.9)';
+      var color1 = 'rgba(205, 137, 27, 0.6)';
+      var color2 = 'rgba(205, 137, 27, 0.4)';
+      var color3 = 'rgba(205, 137, 27, 0.2)';
+      var color4 = 'rgba(237, 129, 117, 1.0)';
+      var color5 = 'rgba(237, 129, 117, 0.7)';
+      var color6 = 'rgba(237, 129, 117, 0.5)';
+      var color7 = 'rgba(237, 129, 117, 0.2)';
+      var color8 = 'rgba(131, 199, 189, 1.0)';
+      var color9 = 'rgba(131, 199, 189, 0.7)';
+      var color10 = 'rgba(131, 199, 189, 0.5)';
+      var color11 = 'rgba(131, 199, 189, 0.3)';
+      var color12 = 'rgba(131, 199, 189, 0.1)';
+
 
       if ( type == 'total' ) {
         chartdata = graetzls_count.total.chartData;
@@ -1167,6 +1362,7 @@
       var activeGraetzls = sumGraetzl - zeroGraetzl;
       var remainingGraetzlCount = activeGraetzls - topGraetzlCount;
 
+      /*
       console.log('Anzahl Top Grätzl :' + topGraetzlCount);
       console.log('Anzahl Grätz ohne User :' + zeroGraetzl);
       console.log('Anzahl Grätzl Array gesamt: ' + sumGraetzl);
@@ -1177,10 +1373,9 @@
       console.log('Summe User in restlichen Grätzln: ' + sumRemainingGraetzl);
       console.log(chartdata);
       console.log(chartlabel);
-      //console.log(initDate);
-      //console.log(initUnit);
-
-
+      console.log(initDate);
+      console.log(initUnit);
+      */
 
       // Friendly Text for Headline
       if ( initUnit == 'days' ) {
@@ -1213,6 +1408,13 @@
 						color3,
             color4,
 						color5,
+            color6,
+            color7,
+						color8,
+            color9,
+            color10,
+						color11,
+            color12,
 					]
         }],
         labels: chartlabel
@@ -1224,12 +1426,12 @@
         options: {
           responsive: true,
           legend: {
-            position: 'right',
+            position: 'right'
           },
             title: {
             display: true,
             text: headline,
-            fontSize: 18,
+            fontSize: 16,
             padding: 10,
             position:'top'
           },
@@ -1262,7 +1464,8 @@
                 clicks[0]
               ],
               backgroundColor: color0,
-              yAxisID: "mailing"
+              yAxisID: "mailing",
+              borderWidth: 1
             },
             {
               label: labeldata[1],
@@ -1272,7 +1475,8 @@
                 clicks[1]
               ],
               backgroundColor: color1,
-              yAxisID: "mailing"
+              yAxisID: "mailing",
+              borderWidth: 1
             }
           ]
         },
@@ -1313,6 +1517,24 @@
       $('<em class="empty">Noch keine Locations</em>')
       .appendTo('#u_location');
 
+      // Reset & Clear Room Output
+      $('#u_room').html('');
+      $('<em class="empty">Noch keine Raumteiler</em>')
+      .appendTo('#u_room');
+
+      // Reset & Clear Meetings Output
+      $('#u_meeting').html('');
+      $('<em class="empty">Noch keine Treffen</em>')
+      .appendTo('#u_meeting');
+
+      // Reset & Clear Updates Output
+      $('#u_update').html('');
+      $('<em class="empty">Noch keine Updates</em>')
+      .appendTo('#u_update');
+
+      // Remove more Links
+      $('.showmorelink').remove();
+
 
       // Create new User for ID
       var user = new User( user_id );
@@ -1351,7 +1573,7 @@
 
           if (res != 404) {
             var activity = res.body.activity;
-            console.log(activity);
+            //console.log(activity);
             for ( i=0; i<activity.length; i++ ) {
               $('<div>'
                 + '<span class="time">'
@@ -1378,9 +1600,37 @@
             .appendTo('#u_location');
           $('#u_location .empty').hide();
         }
+        if (user.locations.length >= 4) {
+          $('<a href="#" data-id="u_location" class="showmorelink">Weitere anzeigen ..</a>').on('click', function(){showmore('u_location');}).appendTo('#u_locations');
+        }
       });
 
-    } // SingleUser Page
+      // Request User Meetings
+      Promise.resolve(user.getMeetings()).then(function(res) {
+        for ( i=0; i<user.meetings.length; i++ ) {
+          $('<div><a href="' + user.meetings[i].meetings_path + '" target="_blank">' + user.meetings[i].name + '</a></div>')
+            .appendTo('#u_meeting');
+          $('#u_meeting .empty').hide();
+        }
+        if (user.meetings.length >= 4) {
+          $('<a href="#" data-id="u_meeting" class="showmorelink">Weitere anzeigen ..</a>').on('click', function(){showmore('u_meeting');}).appendTo('#u_meetings');
+        }
+      });
+
+      var r1 = Promise.resolve(user.getRooms('room_offers'));
+      var r2 = Promise.resolve(user.getRooms('room_demands'));
+      Promise.all([r1, r2]).then(function(res) {
+        for ( i=0; i<user.rooms.length; i++ ) {
+          $('<div><a href="' + user.rooms[i].room_path_admin + '" target="_blank">' + user.rooms[i].name + '</a></div>')
+            .appendTo('#u_room');
+          $('#u_room .empty').hide();
+        }
+        if (user.rooms.length >= 4) {
+          $('<a href="#" data-id="u_room" class="showmorelink">Weitere anzeigen ..</a>').on('click', function(){showmore('u_room');}).appendTo('#u_rooms');
+        }
+      })
+
+    } // Single User Page
 
 
     /*********************************
@@ -1411,7 +1661,6 @@
       // Page Navigation - Switch Pages on Button Click
       $('#report_nav button.pages').on( 'click', function() {
         var page = $(this).attr('data-nav');
-        //$('div.page').hide();
         $('#report_nav button.-rosa').removeClass('-rosa').addClass('-mint');
         $(this).addClass('-rosa').removeClass('-mint');
         page_loader(page);
@@ -1463,7 +1712,7 @@
       $('#datatable_graetzls').on('click', 'th', function (event) {
         event.preventDefault();
         var getSorting = this.getAttribute('data-user');
-        console.log('HUI: ' + getSorting);
+        //console.log('sorting: ' + getSorting);
 
         if ( getSorting == 'actual' ) {
           resetTopChart();
@@ -1533,7 +1782,7 @@
       <canvas id="topchart" height="220" width="900"></canvas>
     </div>
     <div id="topPieChart">
-      <canvas id="graetzlchart" height="220" width="500"></canvas>
+      <canvas id="graetzlchart" height="220" width="700"></canvas>
     </div>
   </div>
 
@@ -1564,15 +1813,14 @@
   <div id="page_users" class="page">
 
     <!-- Users Datatable -->
-    <table id="datatable_users" class="datatable_users stripe hover row-border" width="100%" data-page-length='100'>
+    <table id="datatable_users" class="datatable_users stripe hover row-border dtb" width="100%" data-page-length='100'>
       <thead>
         <tr>
           <th></th>
-          <th>ID</th>
           <th>Username</th>
           <th>E-Mail</th>
           <th>Grätzl</th>
-          <th>Registriert</th>
+          <th class="-date">Registriert</th>
         </tr>
       </thead>
     </table>
@@ -1623,28 +1871,28 @@
 
     <div id="user_content">
       <div class="wrp -small">
-        <div id="#u_locations" class="u_block">
+        <div id="u_locations" class="u_block -more">
           <div class="title"><%= icon_tag "location" %><span>Locations</span></div>
           <div id="u_location"></div>
         </div>
       </div>
       <div class="wrp -wide">
-        <div id="#u_raumteilers" class="u_block">
+        <div id="u_rooms" class="u_block -more">
           <div class="title"><%= icon_tag "raumteiler" %><span>Raumteiler</span></div>
-          <div id="u_raumteiler"></div>
+          <div id="u_room"></div>
         </div>
       </div>
     </div>
 
     <div id="user_content">
       <div class="wrp -small">
-        <div id="#u_location_updates" class="u_block">
+        <div id="u_updates" class="u_block -more">
           <div class="title"><%= icon_tag "horn-promote" %><span>Location Updates</span></div>
-          <div id="u_location_update"></div>
+          <div id="u_update"></div>
         </div>
       </div>
       <div class="wrp -wide">
-        <div id="#u_meetings" class="u_block">
+        <div id="u_meetings" class="u_block -more">
           <div class="title"><%= icon_tag "calendar-2" %><span>Treffen</span></div>
           <div id="u_meeting"></div>
         </div>
@@ -1662,9 +1910,6 @@
     </div>
 
 
-
-
-
   </div>
 <!-- /PAGE SINGLE USERS -->
 
@@ -1672,13 +1917,13 @@
   <div id="page_locations" class="page">
 
     <!-- Users Datatable -->
-    <table id="datatable_locations" class="stripe hover row-border" width="100%" data-page-length='100'>
+    <table id="datatable_locations" class="stripe hover row-border dtb" width="100%" data-page-length='100'>
       <thead>
         <tr>
+          <th class="-id">ID</th>
           <th>Location</th>
-          <th>Status</th>
           <th>Grätzl</th>
-          <th>Erstellt am</th>
+          <th class="-date">Erstellt am</th>
         </tr>
       </thead>
     </table>
@@ -1690,12 +1935,12 @@
   <div id="page_rooms" class="page">
 
     <!-- Users Datatable -->
-    <table id="datatable_rooms" class="stripe hover row-border" width="100%" data-page-length='100'>
+    <table id="datatable_rooms" class="stripe hover row-border dtb" width="100%" data-page-length='100'>
       <thead>
         <tr>
-          <th>Typ</th>
+          <th class="-date">Typ</th>
           <th>Raumteiler</th>
-          <th>Erstellt am</th>
+          <th class="-date">Erstellt am</th>
         </tr>
       </thead>
     </table>
@@ -1706,7 +1951,17 @@
 <!-- PAGE MEETINGS -->
   <div id="page_meetings" class="page">
 
-    Treffen
+    <!-- Users Datatable -->
+    <table id="datatable_meetings" class="stripe hover row-border dtb" width="100%" data-page-length='100'>
+      <thead>
+        <tr>
+          <th class="-id">ID</th>
+          <th>Treffen</th>
+          <th>Grätzl</th>
+          <th class="-date">Erstellt am</th>
+        </tr>
+      </thead>
+    </table>
 
   </div>
 <!-- /PAGE MEETINGS -->
@@ -1714,13 +1969,13 @@
 <!-- PAGE GRÄTZLS -->
   <div id="page_graetzls" class="page">
     <!-- Grätzls Datatable -->
-    <table id="datatable_graetzls" class="stripe hover row-border" width="100%" data-page-length='200'>
+    <table id="datatable_graetzls" class="stripe hover row-border dtb" width="100%" data-page-length='200'>
       <thead>
         <tr>
-          <th>PLZ</th>
+          <th class="-count">PLZ</th>
           <th>Grätzl</th>
-          <th data-user="total">User Gesamt</th>
-          <th data-user="actual">Neue User</th>
+          <th class="-count" data-user="total">User Gesamt</th>
+          <th class="-count" data-user="actual">Neue User</th>
         </tr>
       </thead>
     </table>

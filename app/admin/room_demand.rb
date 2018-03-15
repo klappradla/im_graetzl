@@ -7,6 +7,7 @@ ActiveAdmin.register RoomDemand do
   scope :all, default: true
 
   filter :graetzls
+  filter :user
   filter :districts
   filter :demand_type
   filter :wants_collaboration

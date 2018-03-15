@@ -11,4 +11,9 @@ RSpec.describe Admin::DashboardController, type: :routing do
       expect(get: admin_root_path).to route_to('admin/dashboard#index')
     end
   end
+  describe 'named routes' do
+    it 'routes report_root to #index' do
+      expect(get: report_root_path).to route_to('reports/#index')
+    end
+  end
 end
