@@ -15,7 +15,7 @@
 
     <div class="location-shortfacts roomoffer-shortfacts">
       <%= link_to room_offer, class: 'locationlogo' do %>
-        <%= avatar_for room_offer, 200, 'img-square' %>
+        <%= attachment_image_tag room_offer, :avatar, :fill, 200, 200, fallback: 'avatar/user/200x200.png', class: 'img-square' %>
       <% end %>
       <%= link_to room_offer, class: 'typelink' do %>
         <div class="locationtxt">

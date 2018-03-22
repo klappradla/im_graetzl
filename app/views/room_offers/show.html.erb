@@ -75,7 +75,7 @@
     <section class="owner">
       <div class="bigicontext-element">
         <% if @room_offer.user %>
-          <%= avatar_for(@room_offer, 200) %>
+          <%= attachment_image_tag(@room_offer, :avatar, :fill, 200, 200, class: 'room_offer avatar img-round', fallback: 'avatar/user/200x200.png') %>
         <% else %>
           <%= icon_tag "user-avatar" %>
         <% end %>
