@@ -507,3 +507,11 @@ input::-webkit-inner-spin-button {
   }
 
 }
+
+// Hint for URL Validation
+input[type=url]:invalid + em::after {
+	color: #cd891b;
+  display: block;
+  margin-left: 10px;
+	content: "http:// oder https:// ..";
+}

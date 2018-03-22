@@ -2,12 +2,49 @@ section.roomDetail {
 
   &.-Offer {
 
+    .headContent {
+      z-index: 10;
+      right:0px;
+      text-align: center;
+
+      .category-tags {
+        text-align: center;
+        margin: 20px 0px 10px 0px;
+        justify-content: center;
+      }
+
+      .category-tags ul {
+        display: inline-block;
+        margin-right: 10px;
+        margin-left: 20px;
+      }
+
+      .category-tags li {
+        margin-right: 10px;
+        margin-bottom: 10px;
+        @include respond-to(">=medium") {
+          float: right;
+        }
+      }
+
+    } // headContent
+
+
     .imgHeader {
       position: relative;
       z-index: 10;
       overflow: visible;
+
+      @include respond-to(">=medium") {
+        max-height: 420px;
+      }
       @include respond-to(">=large") {
-        min-height: 370px;
+        min-height: 420px;
+        .titleImg {border-bottom: 10px solid $color-ambient-mint-light;}
+      }
+
+      .introtxt {
+        margin-bottom: 0px;
       }
 
       .dropdown-container {
@@ -35,7 +72,63 @@ section.roomDetail {
         }
       }
     }
-  }
+
+
+    .mainContent {
+      margin: 0px;
+    }
+
+    @include respond-to(">=small") {
+      .headContent {
+        margin-top: 0px;
+        h1 {
+          margin-bottom:10px;
+        }
+      }
+      .mainContent {
+        top:10px;
+      }
+    }
+
+    @include respond-to(">=medium") {
+      aside {
+        top:40px;
+      }
+      .headContent {
+        position: absolute;
+        bottom: 20px;
+        text-align: right;
+
+        h1 {
+          max-width: 450px;
+          display: inline-block;
+          color:white;
+          padding:10px 0px;
+          background: rgba(236, 119, 106, 0.6);
+          box-shadow: 20px 0 0 rgba(236, 119, 106, 0.6), -20px 0 0 rgba(236, 119, 106, 0.6);
+          //margin-bottom: 0px;
+          padding-right:10px;
+          text-shadow: 1px 1px #ba564d;
+        }
+      }
+      .mainContent {
+        top:40px;
+      }
+    }
+    @include respond-to(">=large") {
+      aside {
+        top:-50px;
+      }
+      .mainContent {
+        top:45px;
+      }
+      .headContent {
+        max-width: 675px;
+      }
+    }
+
+
+  } // Room-Offer
 
 
   &.-Demand {

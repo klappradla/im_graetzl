@@ -195,7 +195,7 @@
       <%= icon_tag "globe" %>
       <span>Website</span>
     <% end %>
-    <%= f.text_field :website, placeholder: 'https://...' %>
+    <%= f.url_field :website, placeholder: 'http:// oder https://' %><em></em>
   </div>
   <div class="input-field">
     <%= f.label :email do %>

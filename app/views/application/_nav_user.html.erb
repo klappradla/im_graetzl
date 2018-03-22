@@ -78,6 +78,9 @@
         <%= link_to admin_root_path do %>
           <%= icon_tag "magic-wand" %> Admin
         <% end %>
+        <%= link_to "/reports" do %>
+          <%= icon_tag "bar-chart-growth" %> Reports
+        <% end %>
       <% end %>
       <%= link_to destroy_user_session_path, method: :delete do %>
         <%= icon_tag "power" %> Abmelden

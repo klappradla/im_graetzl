@@ -9,24 +9,32 @@
 %>
 
 <section class="roomDetail -Offer">
-  <div class="imgHeader -cloudy2">
-    <%= attachment_image_tag @room_offer, :cover_photo, :fill, 980, 370, fallback: 'cover_photo/980x370.png', class: 'titleImg' %>
+  <div class="imgHeader">
+    <%= attachment_image_tag @room_offer, :cover_photo, :fill, 980, 420, fallback: 'cover_photo/980x370.png', class: 'titleImg' %>
+
+    <div class="headContent">
+
+      <div class="introtxt">
+        <h1><span><%= t("activerecord.attributes.room_offer.offer_types.#{@room_offer.offer_type}") %></span></h1>
+      </div>
+
+      <div class="category-tags">
+        <% if @room_offer.room_categories.present? %>
+          <ul class="tag-list -mint">
+            <% @room_offer.room_categories.each do |category| %>
+              <li><%= category.name %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+
+    </div>
+
   </div>
+
+
+
   <div class="mainContent">
-
-    <div class="introtxt">
-      <h1><span><%= t("activerecord.attributes.room_offer.offer_types.#{@room_offer.offer_type}") %></span></h1>
-    </div>
-
-    <div class="category-tags">
-      <% if @room_offer.room_categories.present? %>
-        <ul class="tag-list -mint">
-          <% @room_offer.room_categories.each do |category| %>
-            <li><%= category.name %></li>
-          <% end %>
-        </ul>
-      <% end %>
-    </div>
 
     <div class="introtxt">
       <h3><%= @room_offer.slogan %></h3>
