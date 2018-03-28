@@ -110,3 +110,7 @@ de:
     index:
       title: 'Admin Reports'
       description: 'Reporting Tool'
+  landing_pages:
+    raumteiler_festival_2018:
+      title: 'Raumteiler Festival 2018'
+      description: 'Raumteiler Festival 2018'

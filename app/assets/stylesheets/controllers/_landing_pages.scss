@@ -1,0 +1,109 @@
+section.lp {
+
+  h2 {
+    @include font-size-secondaryFont('medium');
+    margin-bottom: 10px;
+  }
+
+  div.page p.txt {
+    @include font-size-primaryFont('large');
+    padding-bottom:25px;
+  }
+
+  div.wrapper {
+    padding-top:25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    //align-items: center;
+
+    div.paperCard, div.cardBox {
+      display: flex;
+      align-items: center;
+      width:47%;
+      margin-bottom:40px;
+      @include respond-to("<=large") {
+        width:100%;
+        margin-right:0px;
+      }
+    }
+
+    div.paperCard .wrp {
+      padding:20px 30px 20px 30px;
+      @include font-size-primaryFont('large');
+    }
+  }
+
+  // Landing Page Nav Buttons
+  #lp_nav {
+    text-align: center;
+    button {display: inline-block;}
+    margin-bottom: 40px;
+
+    &.sticky {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 999;
+    }
+
+  }
+
+  .page {
+    // if Nav is Sticky, set Offset for Content
+    &.sticky_content {
+      padding-top: 110px;
+    }
+  }
+
+
+  // Raumteiler Festival 2018
+  &.-festival {
+
+    .imgHeader {
+      background-color: #deefe1; // Fullwidth Background Color
+      .titleImg {
+        padding: 25px;
+      }
+    }
+
+    button.-active {
+      background-color: #e2226e;
+    }
+    button {
+      background-color: black;
+    }
+    button.-large {
+      margin:auto;
+      margin-top:30px;
+      margin-bottom:50px;
+    }
+
+    // Fullscreen Nav
+    #lp_nav {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      background-color: #deefe1;
+      padding-top:20px;
+      padding-bottom: 15px;
+
+      &.sticky {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding-top:10px;
+        padding-bottom: 10px;
+      }
+    }
+
+    h1 span, h2 span, strong.highlight {
+      color: #e2226e;
+    }
+
+  } // Festival
+
+}
