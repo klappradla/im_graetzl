@@ -30,6 +30,10 @@
     width:100px;
   }
 
+  .user_content .-more div {display:none;}
+  .user_content .-more div:nth-child(-n+3) {display:block}
+  .showmorelink {margin-top:5px; margin-left: 36px; font-style: italic;}
+
   div#top {height:220px;}
   div#topWideChart {height:220px;}
   div#topPieChart {width:700px; height:220px; margin:auto;}
@@ -71,22 +75,22 @@
   #u_zip span:nth-child(2n)::before {
     content: ", ";
   }
-  #user_content {
+  .user_content {
     display:flex; justify-content:space-between; align-items:flex-start;
   }
-  #user_content div.wrp {padding-bottom:50px;}
-  #user_content.-bottom {
+  .user_content div.wrp {padding-bottom:50px;}
+  .user_content.-bottom {
     border-top: 1px solid #DEEAE6;
     padding-top:30px;
   }
-  #user_content div.-small {width:50%;}
-  #user_content div.-wide {width:50%;}
-  #user_content .u_block svg {display: inline-block;}
-  #user_content .title {margin-bottom: 10px; display: flex; align-items: center;}
-  #user_content .title span {font-weight:bold; font-size: 2.0rem; padding-left: 8px;}
-  #user_content em.empty {color:#aaaaaa; padding-left:36px; white-space: nowrap;}
+  .user_content div.-small {width:50%;}
+  .user_content div.-wide {width:50%;}
+  .user_content .u_block svg {display: inline-block;}
+  .user_content div.title {margin-bottom: 10px; display: flex; align-items: center;}
+  .user_content div.title span {font-weight:bold; font-size: 2.0rem; padding-left: 8px;}
+  .user_content em.empty {color:#aaaaaa; padding-left:36px; white-space: nowrap;}
 
-  #user_content ul.tag-list li {
+  .user_content ul.tag-list li {
     margin-top:0px;
     margin-bottom:0px;
     padding:3px 10px;
@@ -95,7 +99,7 @@
     display: inline-block;
   }
 
-  #u_location div, #u_room div, #u_meeting div, #u_mc_activity div {margin-left: 36px; margin-bottom: 7px;}
+  #u_location div, #u_room div, #u_meeting div, #u_update div,#u_mc_activity div {margin-left: 36px; margin-bottom: 7px;}
   #u_mc_activities .title {margin-bottom: 10px;}
   #u_mc_activity .time {display: inline-block; min-width:110px; text-align: right; white-space: nowrap;}
   #u_mc_activity .action {display: inline-block; min-width:110px; text-align: center;}
@@ -104,10 +108,6 @@
   #u_mc_activity .action .open li {background-color: #83C7BD; color:white;}
   #u_mc_activity .action .sent li {}
   #u_mc_activity .name {font-style: italic;}
-
-  #user_content .-more div {display:none;}
-  #user_content .-more div:nth-child(-n+3) {display:block}
-  .showmorelink {margin-top:5px; margin-left: 36px; font-style: italic;}
 
 </style>
 
@@ -181,7 +181,8 @@
       // Set End Date to Midnight
       this.endDate = function() {
         date = new Date(this.end);
-        date.setHours(23,59,0,0);
+        date.setDate(date.getDate() + 1 );
+        date.setHours(0,0,0,0);
         return date;
       }
 
@@ -206,7 +207,8 @@
       this.setTimeUnit = function() {
         if (this.unit == 'days') {
           for ( i=this.startDate(); i<=this.endDate(); i.setDate(i.getDate() + 1 )) {
-            var priorDate = new Date(i).toISOString().slice(0,10);
+            var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds - Summer/Winter
+            var priorDate = new Date(i - tzoffset).toISOString().slice(0,10);
             var priorDateFriendly = moment(i).format('ll');
             this.dates.push(priorDate);
             this.datesFriendly.push(priorDateFriendly);
@@ -228,6 +230,10 @@
           }
         }
         // Draw Chart
+
+        //console.log(this.period);
+        //console.log(this.startDate());
+        //console.log(this.endDate());
 
         chartTopArea = new Chart(topchart, {
           type: 'line',
@@ -490,6 +496,53 @@
           });
         }.bind(this));
       } // get User Locations from Server
+
+
+      // Get Location Updates for each User Location from Server
+      // Has bug: Gets only Updates from first Location
+
+      this.getLocationUpdates = function() {
+
+        if ( this.locations.length == 0 ) {
+
+          return;
+
+        } else {
+
+          return new Promise( function(resolve, reject) {
+            $.ajax( {
+              url:'/admin/location_posts.json?q%5Bauthor_id_eq%5D=' + this.locations[0].id,
+              method:'GET',
+              success:function(res) {
+                console.log(res);
+                for( i=0; i < res.length; i++ ) {
+                  this.updates.push({
+                    id: res[i].id,
+                    location_id: res[i].author_id,
+                    title: res[i].title,
+                    slug: res[i].slug,
+                    graetzl_id: res[i].graetzl_id,
+                    graetzl_name: '',
+                    created_at: new Date(res[i].created_at),
+                    update_path: '',
+                    update_path_admin: host_admin + 'location_posts/' + res[i].slug
+                  })
+                }
+                // Get missing Location Infos from Grätzl Array
+                for ( i=0; i < this.updates.length; i++ ) {
+                  res = fetchFromID(this.updates[i].graetzl_id, 'graetzls');
+                  for (let key in res) {
+                    this.updates[i].graetzl_name = res[key].name;
+                  }
+                }
+                resolve('user_updates');
+              }.bind(this)
+            });
+          }.bind(this));
+        } // get User Locations from Server
+      }
+
+
 
 
       // Get User Meetings from Server
@@ -1603,7 +1656,27 @@
         if (user.locations.length >= 4) {
           $('<a href="#" data-id="u_location" class="showmorelink">Weitere anzeigen ..</a>').on('click', function(){showmore('u_location');}).appendTo('#u_locations');
         }
-      });
+        // After Locations are done, get Updates.
+        requestLocationUpdates();
+      }); // Request User Locations
+
+      // Get Updates from User Locations
+
+      var requestLocationUpdates = function() {
+        Promise.resolve(user.getLocationUpdates()).then(function(res) {
+          console.log(user.updates);
+          for ( u=0; u<user.updates.length; u++ ) {
+            $('<div><a href="' + user.updates[u].update_path_admin + '" target="_blank">' + user.updates[u].title + '</a></div>')
+              .appendTo('#u_update');
+            $('#u_update .empty').hide();
+          }
+          if (user.updates.length >= 4) {
+            $('<a href="#" data-id="u_update" class="showmorelink">Weitere anzeigen ..</a>').on('click', function(){showmore('u_update');}).appendTo('#u_updates');
+          }
+        });
+      }
+
+
 
       // Request User Meetings
       Promise.resolve(user.getMeetings()).then(function(res) {
@@ -1644,10 +1717,14 @@
 
       // onChange Month Navigation Dropdown
       $('#months').change( function() {
-        initDate = new Date(''+this.options[this.selectedIndex].getAttribute('data-day')+'');
+        initDate = new Date(this.options[this.selectedIndex].getAttribute('data-day'));
         checkPeriod = this.options[this.selectedIndex].getAttribute('data-period');
-        checkPeriod ? initPeriod = checkPeriod : initPeriod = initPeriod;
+        //console.log(initPeriod);
+        checkPeriod ? initPeriod = checkPeriod : initPeriod = 0;
         initUnit = this.options[this.selectedIndex].getAttribute('data-unit');
+
+
+
         var actualPage = $("button[class*='-rosa']").attr('data-nav');
         if ( actualPage == 'page_graetzls') {
           // Inform PageLoader to Load new Users for Timeperiod
@@ -1869,37 +1946,37 @@
       <span style="width:80px;"></span>
     </div>
 
-    <div id="user_content">
+    <div class="user_content">
       <div class="wrp -small">
         <div id="u_locations" class="u_block -more">
-          <div class="title"><%= icon_tag "location" %><span>Locations</span></div>
+          <div class="title" style="display: flex;"><%= icon_tag "location" %><span>Locations</span></div>
           <div id="u_location"></div>
         </div>
       </div>
       <div class="wrp -wide">
         <div id="u_rooms" class="u_block -more">
-          <div class="title"><%= icon_tag "raumteiler" %><span>Raumteiler</span></div>
+          <div class="title" style="display: flex;"><%= icon_tag "raumteiler" %><span>Raumteiler</span></div>
           <div id="u_room"></div>
         </div>
       </div>
     </div>
 
-    <div id="user_content">
+    <div class="user_content">
       <div class="wrp -small">
         <div id="u_updates" class="u_block -more">
-          <div class="title"><%= icon_tag "horn-promote" %><span>Location Updates</span></div>
+          <div class="title" style="display: flex;"><%= icon_tag "horn-promote" %><span>Location Updates</span></div>
           <div id="u_update"></div>
         </div>
       </div>
       <div class="wrp -wide">
         <div id="u_meetings" class="u_block -more">
-          <div class="title"><%= icon_tag "calendar-2" %><span>Treffen</span></div>
+          <div class="title" style="display: flex;"><%= icon_tag "calendar-2" %><span>Treffen</span></div>
           <div id="u_meeting"></div>
         </div>
       </div>
     </div>
 
-    <div id="user_content" class="-bottom">
+    <div class="user_content -bottom">
       <div id="u_mc_activities" class="u_block">
         <div class="title">
           <%= icon_tag "at-symbol" %>
