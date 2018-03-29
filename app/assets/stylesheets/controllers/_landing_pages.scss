@@ -62,7 +62,8 @@ section.lp {
 
     .imgHeader {
       background-color: #deefe1; // Fullwidth Background Color
-      background-image: url('/assets/lp/festival/NBH_Magazin.jpg');
+      background-image: url(image_path('lp/festival/NBH_Magazin.jpg'));
+      //background-image: url('/assets/lp/festival/NBH_Magazin.jpg');
 
       .titleImg {
         opacity: 0.8;
@@ -73,7 +74,8 @@ section.lp {
     .NBHbg {
       position: relative;
       height:300px;
-      background-image: url('/assets/lp/festival/NBH_Magazin4.jpg');
+      background-image: url(image_path('lp/festival/NBH_Magazin4.jpg'));
+      //background-image: url('/assets/lp/festival/NBH_Magazin4.jpg');
       background-size: cover;
       display: flex;
       justify-content: center;
