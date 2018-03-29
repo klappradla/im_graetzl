@@ -1,7 +1,7 @@
 section.lp {
 
   h2 {
-    @include font-size-secondaryFont('medium');
+    //@include font-size-secondaryFont('medium');
     margin-bottom: 10px;
   }
 
@@ -125,6 +125,14 @@ section.lp {
         padding-top:10px;
         padding-bottom: 10px;
       }
+    }
+
+    h1, h2 {
+      font-family: $font-lp;
+    }
+
+    h1 {
+      font-weight: bold;
     }
 
     h1 span, h2 span, strong.highlight {
