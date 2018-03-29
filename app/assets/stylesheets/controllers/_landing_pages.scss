@@ -73,7 +73,7 @@ section.lp {
 
     .NBHbg {
       position: relative;
-      height:300px;
+      min-height:300px;
       background-image: url(image_path('lp/festival/NBH_Magazin4.jpg'));
       //background-image: url('/assets/lp/festival/NBH_Magazin4.jpg');
       background-size: cover;
