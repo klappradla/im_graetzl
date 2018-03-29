@@ -62,9 +62,32 @@ section.lp {
 
     .imgHeader {
       background-color: #deefe1; // Fullwidth Background Color
+      background-image: url('/assets/lp/festival/NBH_Magazin.jpg');
+
       .titleImg {
-        padding: 25px;
+        opacity: 0.8;
+        //max-height: 80% !important;
       }
+    }
+
+    .NBHbg {
+      position: relative;
+      height:300px;
+      background-image: url('/assets/lp/festival/NBH_Magazin4.jpg');
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      p.txt {
+        background-color: rgba(0, 0, 0, 0.7);
+        font-size: 2.4rem;
+        margin: 20px;
+        padding:20px;
+        color: white;
+        font-weight: bold;
+      }
+
     }
 
     button.-active {
@@ -87,14 +110,16 @@ section.lp {
       right: 50%;
       margin-left: -50vw;
       margin-right: -50vw;
-      background-color: #deefe1;
-      padding-top:20px;
-      padding-bottom: 15px;
+      //padding-top:20px;
+      margin-bottom: 0px;
+      top:-60px;
+      z-index: 999;
 
       &.sticky {
         position: fixed;
         top: 0;
         width: 100%;
+        background-color: rgba(222, 239, 225, 0.7);
         padding-top:10px;
         padding-bottom: 10px;
       }
