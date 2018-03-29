@@ -1,17 +1,13 @@
 section.lp {
 
-  h2 {
-    //@include font-size-secondaryFont('medium');
-    margin-bottom: 10px;
-  }
-
   div.page p.txt {
     @include font-size-primaryFont('large');
     padding-bottom:25px;
   }
 
   div.wrapper {
-    padding-top:25px;
+    padding-top:30px;;
+    padding-bottom: 30px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -34,31 +30,11 @@ section.lp {
     }
   }
 
-  // Landing Page Nav Buttons
-  #lp_nav {
-    text-align: center;
-    button {display: inline-block;}
-    margin-bottom: 40px;
-
-    &.sticky {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 999;
-    }
-
-  }
-
-  .page {
-    // if Nav is Sticky, set Offset for Content
-    &.sticky_content {
-      padding-top: 110px;
-    }
-  }
-
 
   // Raumteiler Festival 2018
   &.-festival {
+
+    font-family: $font-lp;
 
     .imgHeader {
       background-color: #deefe1; // Fullwidth Background Color
@@ -66,28 +42,53 @@ section.lp {
       //background-image: url('/assets/lp/festival/NBH_Magazin.jpg');
 
       .titleImg {
-        opacity: 0.8;
+        opacity: 0.85;
         //max-height: 80% !important;
       }
     }
 
+
     .NBHbg {
+      background-image: url(image_path('lp/festival/NBH_Feier.jpg'));
+      background-position: center center;
+      background-size:cover;
+      text-align: center;
+      margin-bottom: 40px;
+
+      .wrp {
+        background-color: rgba(0, 0, 0, 0.5);
+        padding:25px;
+        min-height:350px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+      }
+      h1 {
+        color:white;
+        font-size: 4.0rem;
+      }
+      p.txt {
+        font-size: 2.6rem;
+        margin: 0px;
+        padding:10px;
+        color: white;
+      }
+    }
+
+    .NBH2bg {
       position: relative;
       min-height:300px;
-      background-image: url(image_path('lp/festival/NBH_Magazin4.jpg'));
-      //background-image: url('/assets/lp/festival/NBH_Magazin4.jpg');
-      background-size: cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      p.txt {
-        background-color: rgba(0, 0, 0, 0.7);
-        font-size: 2.4rem;
-        margin: 20px;
-        padding:20px;
-        color: white;
+      background-image: url(image_path('lp/festival/rt-people-bg.jpg'));
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: right;
+      div.wrapper {
+        background-color: rgba(255, 255, 255, 0.9);
+      }
+      h2 {
         font-weight: bold;
+        color: #e2226e;
       }
 
     }
@@ -106,15 +107,19 @@ section.lp {
 
     // Fullscreen Nav
     #lp_nav {
+      text-align: center;
+      button {display: inline-block;}
       width: 100vw;
       position: relative;
       left: 50%;
       right: 50%;
       margin-left: -50vw;
       margin-right: -50vw;
-      //padding-top:20px;
-      margin-bottom: 0px;
-      top:-60px;
+      padding-top:10px;
+      padding-bottom: 10px;
+      height: 65px;
+      top:-65px;
+      margin-bottom: -65px;
       z-index: 999;
 
       &.sticky {
@@ -122,8 +127,14 @@ section.lp {
         top: 0;
         width: 100%;
         background-color: rgba(222, 239, 225, 0.7);
-        padding-top:10px;
-        padding-bottom: 10px;
+      }
+    }
+    
+    .page {
+      margin-top:50px;
+      // if Nav is Sticky, set Offset for Content
+      &.sticky_content {
+
       }
     }
 
@@ -133,6 +144,9 @@ section.lp {
 
     h1 {
       font-weight: bold;
+    }
+    h2 {
+      margin-bottom: 10px;
     }
 
     h1 span, h2 span, strong.highlight {

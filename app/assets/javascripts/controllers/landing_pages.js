@@ -11,16 +11,14 @@ APP.controllers.landing_pages = (function() {
     var initStickyNav = function() {
       var lp_nav = $('#lp_nav'); // Navigation Bar
       var lp_content = $('.page'); // Page Content
-      var topHeader = $('header').height(); // Top-Nav Grätzl Header
-      var imgHeader = $('.imgHeader').height(); // Banner Image Area
+      var offsetTop = lp_nav.offset().top; // Top-Nav Grätzl Header
 
       $(window).resize(function() {
-        topHeader = $('header').height(); // Top-Nav Grätzl Header
-        imgHeader = $('.imgHeader').height(); // Banner Image Area
+        offsetTop = lp_nav.offset().top;
       })
 
       $(window).scroll(function() {
-        if( $(this).scrollTop() > topHeader + imgHeader ) {
+        if( $(this).scrollTop() > offsetTop ) {
           lp_nav.addClass('sticky');
           lp_content.addClass('sticky_content');
         } else {
@@ -52,7 +50,7 @@ APP.controllers.landing_pages = (function() {
         $('#' + page + '').fadeIn('fast', function(){
           if ( $('#lp_nav').hasClass( 'sticky' )) { // if StickNav scroll to Page
             $('html, body').animate({
-              scrollTop:$(this).offset().top
+              scrollTop: ($(this).offset().top - 115 )
             });
           }
         });
