@@ -33,7 +33,8 @@ APP.controllers.landing_pages = (function() {
     var initLP = function() {
 
       // Switch Pages on Button Click - DESKTOP Version
-      $('button.pages').on( 'click', function() {
+      $('button.pages, a.pages').on( 'click', function(event) {
+        event.preventDefault();
         var page = $(this).attr('data-nav');
         $('#lp_nav button.-active').removeClass('-active');
         //$(this).addClass('-active');
@@ -46,17 +47,23 @@ APP.controllers.landing_pages = (function() {
 
       // Page Nav Switcher
       var pageNav = function(page) {
-        $('div.page').hide(); // Hide all Pages
+        //$('div.page').hide(); // Hide all Pages
         $('#' + page + '').fadeIn('fast', function(){
-          if ( $('#lp_nav').hasClass( 'sticky' )) { // if StickNav scroll to Page
+          //if ( $('#lp_nav').hasClass( 'sticky' )) { // if StickNav scroll to Page
             $('html, body').animate({
-              scrollTop: ($(this).offset().top - 115 )
+              scrollTop: ($(this).offset().top - 95 )
             });
-          }
+          //}
         });
       } // Page Nav Switcher
 
-      pageNav('page_home'); // Init Home on PageLoad
+      //pageNav('page_home'); // Init Home on PageLoad
+
+      $('iframe').load(function() {
+        this.style.height =
+        this.contentWindow.document.body.offsetHeight + 'px';
+        console.log(this.style.height);
+      });
 
 
 

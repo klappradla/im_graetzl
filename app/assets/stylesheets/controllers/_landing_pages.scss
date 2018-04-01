@@ -1,12 +1,25 @@
 section.lp {
 
+  .section {
+    &.-fullwidth {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      padding-top: 0;
+      max-height: 100%;
+    }
+  }
+
   div.page p.txt {
     @include font-size-primaryFont('large');
     padding-bottom:25px;
   }
 
   div.wrapper {
-    padding-top:30px;;
+    padding-top:30px;
     padding-bottom: 30px;
     display: flex;
     flex-wrap: wrap;
@@ -34,6 +47,109 @@ section.lp {
   // Raumteiler Festival 2018
   &.-festival {
 
+    a {
+      color: #e2226e;
+    }
+
+    div.paperCard {
+      h2 {
+        font-weight: bold;
+      }
+
+      &.-ico h2 {
+        padding-top:50px;
+      }
+
+      &.-workshops h2 {
+        padding-top:20px;
+        background: url('lp/festival/RTF_Icon_Workshop.png') no-repeat;
+      }
+
+      &.-music h2 {
+        background: url('lp/festival/RTF_Icon_Music.png') no-repeat;
+      }
+
+      &.-info h2 {
+        background: url('lp/festival/RTF_Icon_Info.png') no-repeat;
+      }
+
+      &.-ico h2 {
+        background-size: auto 100%;
+        background-position: bottom right;
+        padding-right:140px;
+        @include respond-to("<=small") {
+          background-size: auto 100%;
+          padding-right:80px;
+          padding-top:0px;
+        }
+      }
+      @include respond-to("<=small") {
+        &.-workshops h2 {
+          background-size: auto 50%;
+        }
+      }
+
+      .card {
+        opacity : 0.5;
+      }
+      &.-market {
+        .card {
+          background-color: rgba(222, 239, 225, 0.7);
+          background-image: url(image_path('lp/festival/RTF_Wienplan.png'));
+          background-position: center center;
+          background-size: 300%;
+        }
+      }
+    }
+
+    div.section {
+
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items:flex-end;
+      margin-bottom: 30px;
+      div {
+        width:33%;
+        color:black;
+        text-align: center;
+      }
+      div.facts {
+        font-size: 2.8rem;
+      }
+      div.location {
+        font-size: 2.0rem;
+        text-align: right;
+      }
+      div.logo img {
+        width:100%;
+        max-width: 300px;
+      }
+      @include respond-to("<=large") {
+        div.facts {
+          font-size: 2.4rem;
+        }
+      }
+      @include respond-to("<=medium") {
+        div {
+          width:100%;
+          img {
+            padding-bottom:10px;
+          }
+        }
+        div.location {
+          text-align:center;
+        }
+      }
+
+    }
+
+    img.imgHalle {
+      width:100%;
+    }
+
+
+
     font-family: $font-lp;
 
     .imgHeader {
@@ -43,52 +159,69 @@ section.lp {
 
       .titleImg {
         opacity: 0.85;
+        //background-color: rgba(222, 239, 225, 0.7);
         //max-height: 80% !important;
       }
     }
 
 
     .NBHbg {
-      background-image: url(image_path('lp/festival/NBH_Feier.jpg'));
-      background-position: center center;
-      background-size:cover;
+      //background-image: url(image_path('lp/festival/NBH_Feier.jpg'));
+      //background-position: center center;
+      //background-size:cover;
       text-align: center;
       margin-bottom: 40px;
+      border-top: 5px solid #e2226e;
+      border-bottom: 5px solid #e2226e;
 
       .wrp {
-        background-color: rgba(0, 0, 0, 0.5);
+        //background-color: rgba(0, 0, 0, 0.5);
         padding:25px;
-        min-height:350px;
+        //min-height:350px;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
       }
-      h1 {
-        color:white;
-        font-size: 4.0rem;
-      }
       p.txt {
-        font-size: 2.6rem;
+        font-size: 2.8rem;
         margin: 0px;
         padding:10px;
-        color: white;
+        //color: white;
+        @include respond-to("<=medium") {
+          font-size: 2.2rem;
+        }
       }
     }
 
     .NBH2bg {
-      position: relative;
-      min-height:300px;
-      background-image: url(image_path('lp/festival/rt-people-bg.jpg'));
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: right;
+      background-color: #eee;
+      padding-left:20px;
+      padding-right:20px;
+      //position: relative;
+      //min-height:300px;
+      //background-image: url(image_path('lp/festival/rt-people-bg.jpg'));
+      //background-size: contain;
+      //background-repeat: no-repeat;
+      //background-position: right;
       div.wrapper {
-        background-color: rgba(255, 255, 255, 0.9);
+        //background-color: rgba(255, 255, 255, 0.9);
+      }
+      p:last-child {
+        padding-bottom:0px;
       }
       h2 {
         font-weight: bold;
-        color: #e2226e;
+        width: 100%;
+        @include respond-to("<=small") {
+          font-size: 2.2rem;
+        }
+        //color: #e2226e;
+      }
+
+      ol {
+        margin-left:20px;
+        padding-bottom: 25px;
       }
 
     }
@@ -101,8 +234,8 @@ section.lp {
     }
     button.-large {
       margin:auto;
-      margin-top:30px;
-      margin-bottom:50px;
+      margin-top:40px;
+      margin-bottom:30px;
     }
 
     // Fullscreen Nav
@@ -129,9 +262,9 @@ section.lp {
         background-color: rgba(222, 239, 225, 0.7);
       }
     }
-    
+
     .page {
-      margin-top:50px;
+      margin-top:30px;
       // if Nav is Sticky, set Offset for Content
       &.sticky_content {
 
@@ -140,10 +273,18 @@ section.lp {
 
     h1, h2 {
       font-family: $font-lp;
+      color:#222;
     }
 
     h1 {
+      width:100%;
+      text-align: center;
+      margin-bottom: 20px;
       font-weight: bold;
+      font-size: 5.0rem;
+      @include respond-to("<=medium") {
+        font-size: 4.0rem;
+      }
     }
     h2 {
       margin-bottom: 10px;

@@ -8,13 +8,12 @@
 <section class="lp -festival">
 
   <div class="imgHeader -fullwidth">
-    <%= image_tag('lp/festival/rt-festival-header-2.jpg', class: 'titleImg -fullwidth') %>
+    <%= image_tag('lp/festival/RTF_Header_Bg.png', class: 'titleImg -fullwidth') %>
   </div>
 
   <div id="lp_nav" class="-sticky">
     <button class="btn-primary -active pages" data-nav="page_home">Home</button>
-    <button class="btn-primary pages" data-nav="page_programm">Programm</button>
-    <button class="btn-primary pages" data-nav="page_tickets">Tickets</button>
+    <button class="btn-primary pages" data-nav="page_tickets">Festival Tickets</button>
   </div>
 
 
@@ -22,17 +21,33 @@
 <!-- PAGE -->
   <div id="page_home" class="page">
 
-    <div class="hl-subtext">
+    <div class="section">
+
+      <div class="logo">
+        <%= image_tag('lp/festival/RTF_Logo.png') %>
+      </div>
+
+      <div class="facts">
+        15 / juni / 2018<br>
+        14:00 - 23:00 Uhr
+      </div>
+
+      <div class="location">
+        Nordbahn-Halle, 1020 Wien
+      </div>
+
+    </div>
+
+    <!--<div class="hl-subtext">
       <h1><span>raumteiler festival 2018</span></h1>
       <p>
         <strong>15. Juni, 14:00 - 23:00 Uhr</strong><br>
         Nordbahn-Halle, 1020 Wien
       </p>
-    </div>
+    </div>-->
 
     <div class="NBHbg">
       <div class="wrp">
-        <h1>Gewerbeflächen <span>teilen</span> - Kosten <span>teilen</span></h1>
         <p class="txt">
           Ein Tag lang verwandelt sich die Nordbahn-Halle in einen Schmelztiegel
           für kooperative Nutzungskonzepte und leistbare Gewerbeflächen.
@@ -42,51 +57,64 @@
       </div>
     </div>
 
+    <%= image_tag('lp/festival/RTF_Foto_Halle.png', class: 'imgHalle') %>
+
     <div class="wrapper">
 
-      <div class="paperCard container">
+      <div class="paperCard container -market">
         <div class="wrp">
           <p>
             <h2>Raumteiler <span>Market</span></h2>
-            Die große Halle wird in Bezirke unterteilt.
-            Raumhabende stellen in ihrem Bezirk ihre Räume zum Teilen,
-            ihre Raumunternehmen und Flächen zur gemeinsamen Neuanmietung vor!
+            Möchtest du deinen Raum teilen? Willkommen sind alle
+            Gewerbeflächentypen von Werkstatt, Atelier, Praxis, Studio,
+            Büro bis hin zum Geschäftslokal - treffe auf Menschen, die Raum suchen.
+            Außerdem: Raumunternehmen präsentieren ihre Räume zum Andocken und
+            es werden Flächen zur gemeinsamen Neuanmietung vorgestellt!
+            <br><br>
+            <a href="#" class="pages" data-nav="page_tickets">AusstellerInnen Tickets (Plätze limitiert).</a>
           </p>
         </div>
         <div class="card"></div>
       </div>
 
-      <div class="paperCard container">
+      <div class="paperCard container -ico -workshops">
         <div class="wrp">
           <p>
             <h2><span>Workshops</span>, Austausch & Impulse</h2>
-            ExpertInnen berichten, welche Raumtypen nachgefragt sind und wie
-            Gewerbeflächen in Zukunft gestaltet werden können, um mit einer sich
-            veränderten Arbeitswelt zu korrespondieren. Im Mittelpunkt stehen
-            kooperative Nutzungskonzepte.
+            Für Bauträger, RaumanbieterInnen & RaumunternehmerInnen.
+            Die TeilnehmerInnen erwartet ein spannender Einblick in innovative
+            Bespielungsmöglichkeiten von Gewerbeflächen. Wie können Gewerbeflächen
+            in Zukunft geplant, gestaltet und organisiert werden, damit sie
+            agiler und flexibler mit den Anforderungen einer im Wandel begriffenen
+            Arbeitswelt korrespondieren? Welche Organisationsmodelle für kleinteilige
+            und kooperative Nutzungskonzepte stehen zur Auswahl und sind bereits im Einsatz? <a href="#" class="pages" data-nav="page_tickets">zum BesucherInnen Ticket</a>
           </p>
         </div>
         <div class="card"></div>
       </div>
 
-      <div class="paperCard container">
+      <div class="paperCard container -ico -info">
         <div class="wrp">
           <p>
             <h2>Info & <span>Beratung</span></h2>
-            Interessierte können sich vor Ort beraten lassen:
-            Förderungen, rechtliche Fragen und wie man seine Gewerbefläche teilt.
+            Interessierte können sich bei den Beratungsspots der Kreativen Räume Wien,
+            der Wirtschaftskammer Wien und der Wirtschaftsagentur Wien über
+            Raumangebote, Rechtsfragen, Fördermöglichkeiten & Kooperationspotentiale
+            informieren. Usus gibt Einblick, wie man Gewerbeflächen und Leerstände
+            rasch und kostengünstig aktivieren kann. Das Raumteiler Team checkt euren
+            Raumteilerwunsch und verrät dazu passend die besten Suchstrategien.
           </p>
         </div>
         <div class="card"></div>
       </div>
 
-      <div class="paperCard container">
+      <div class="paperCard container -ico -music">
         <div class="wrp">
           <p>
             <h2>Music, <span>Drinks & Food</span></h2>
             Wir haben zusammen eine gute Zeit. Der Innenhof der Nordbahn-Halle
-            lädt zum Relaxen und Genießen ein. Mit Live-Musik feiern wir in den
-            Abend rein!
+            lädt zum Relaxen und Genießen ein. Am Nachmittag wird der Grill
+            angeworfen und  mit Live-Musik feiern wir in den Sommerabend rein! Raumteiler Olé.
           </p>
         </div>
         <div class="card"></div>
@@ -94,10 +122,30 @@
 
     </div> <!-- //Cardbox Wrapper -->
 
+  </div>
 
-    <div class="hl-subtext">
-      <h1>für wen?</h1>
+<!-- PAGE -->
+
+  <div id="page_tickets" class="page">
+
+    <h1><span>Dein Festival Ticket</span></h1>
+
+    <div style="width:100%; text-align:left;">
+      <iframe src="https://eventbrite.com/tickets-external?eid=44609406937&ref=etckt" frameborder="0" height="600" width="100%" vspace="0" hspace="0" marginheight="5" marginwidth="5" scrolling="auto" allowtransparency="true">
+      </iframe>
+      <div style="font-family:Helvetica, Arial; font-size:12px; padding:10px 0 5px; margin:2px; width:100%; text-align:left;" >
+        <a class="powered-by-eb" style="color: #ADB0B6; text-decoration: none;" target="_blank" href="https://www.eventbrite.com/">Powered by Eventbrite</a>
+      </div>
     </div>
+
+  </div>
+
+<!-- PAGE -->
+
+  <div id="page_fuerwen" class="page">
+
+
+    <h1><span>für wen?</span></h1>
 
     <div class="NBH2bg">
 
@@ -116,8 +164,7 @@
         </p>
         <h2>Bauträger & AnbieterInnen von größeren Gewerbeflächen,</h2>
         <p class="txt">
-          die kooperative
-          Nutzungskonzepte auf ihren Flächen willkommen heißen und sich über innovative
+          die kooperative Nutzungskonzepte auf ihren Flächen willkommen heißen und sich über innovative
           Lösungen im Bereich der kleinteiligen Nutzungsmischung informieren möchten.
         </p>
 
@@ -133,13 +180,68 @@
 
     </div>
 
+    <!--
     <button class="btn-primary -large -active pages" data-nav="page_tickets">Hol dir dein Festival Ticket</button>
+    -->
 
-    <div class="hl-subtext">
-      <h1>Sponsoren & KooperationspartnerInnen</h1>
+  </div>
+
+  <!-- PAGE -->
+
+    <div id="page_ablauf" class="page">
+
+
+      <h1><span>infos für die AusstellerInnen</span></h1>
+
+      <div class="NBH2bg">
+
+        <div class="wrapper">
+
+          <h2>Wenn du Raum zum Teilen anbietest: </h2>
+          <p class="txt">
+            In der großen Halle werden Bezirke eingezeichnet, in jedem Bezirk gibt es eine große Stellwand. Dein Stand-Platz ist in dem Bezirk, in dem sich dein Raum zum Teilen befindet. An der Stellwand kannst du deinen Raum präsentiert. Beim Räume teilen geht es nicht nur um den Raum, sondern darum, ob die gegenseitige Sympathie stimmt. Deshalb: Am wichtigsten ist, dass ihr euch kennenlernt und miteinander plaudert.
+          </p>
+
+          <h2>Was muss du mitbringen?</h2>
+          <p class="txt">
+            <ol>
+              <li>Stelle deinen Raumteiler auf imGrätzl.at ein, drucke dann deine Raumteiler Seite aus. Das ist dein Raumteiler Steckbrief, dieser wird an der Stellwand aufgehängt. Du kannst mehrere Kopien anfertigen, dann können sich die Leute deinen Steckbrief mitnehmen.</li>
+              <li>Drucke zusätzliche Bilder deines Raumes aus, bringe diese Ausdrucke mit, diese werden an der Stellwand aufgehängt.</li>
+              <li>Bring dir vielleicht einen Stuhl mit, ansonsten ist alles vor Ort vorhanden.</li>
+            </ol>
+          </p>
+
+          <h2>Du bist ein Raumunternehmer/in</h2>
+          <p class="txt">
+            Alle Raumunternehmen teilen sich eine Fläche in der Halle. Fülle das Raumteilerformular aus, drucke es ebenfalls mehrmals aus und bringe es mit. Bringe außerdem Bilder deiner Räume mit und schreibt dazu für welche Nutzung deine Räume geeignet sind.
+          </p>
+
+          <h2>Bauträger und GewerbeflächenanbieterInnen mit Flächen, um gemeinsam neu anzumieten:</h2>
+          <p class="txt">
+            Unabhängig davon, ob die Fläche sich in Planung befindet, oder bereits zur Verfügung steht. Bringt Pläne, Bilder und weitere Informationsmaterialien mit. Die Räume und Flächen zur Neuanmietung werden ebenfalls zentral in der Halle auf einer Fläche gebündelt vorgestellt und präsentiert. Stellwände sind vorhanden.
+          </p>
+
+          <h2>Und außerdem?</h2>
+          <p class="txt">
+            Hello weconomy! Das Raumteiler Festival steht unter dem Motto "was einer alleine nicht schafft, das vermögen viele".
+            oViele Selbständige, GründerInnen und Menschen mit Ideen kommen beim Raumteiler Festival zusammen, nicht nur um Räume zu teilen, sondern auch um Gleichgesinnte kennenzulernen. Das Raumteiler Festival ist ein Ort, um sich auszutauschen und zu verbinden. Freue dich auf neue Kontakte und inspirierende Menschen.
+          </p>
+
+        </div>
+
+      </div>
+
+      <!--
+      <button class="btn-primary -large -active pages" data-nav="page_tickets">Hol dir dein Festival Ticket</button>
+      -->
+
     </div>
 
+<!-- PAGE -->
 
+  <div id="page_programm" class="page">
+
+      <h1><span>Das Programm</span></h1>
 
   </div>
 
@@ -147,35 +249,12 @@
 
   <div id="page_programm" class="page">
 
-    <div class="hl-subtext">
-      <h1><span>Das Programm</span></h1>
-      <p>
-        <strong>Yes, Yes, Yes</strong><br>
-        Super sauber
-      </p>
-    </div>
-
-  </div>
-
-<!-- PAGE -->
-
-  <div id="page_tickets" class="page">
-
-    <div class="hl-subtext">
-      <h1><span>Dein Festival Ticket</span></h1>
-    </div>
-
-    <div style="width:100%; text-align:left;">
-      <iframe src="https://eventbrite.com/tickets-external?eid=44609406937&ref=etckt" frameborder="0" height="600" width="100%" vspace="0" hspace="0" marginheight="5" marginwidth="5" scrolling="auto" allowtransparency="true">
-      </iframe>
-      <div style="font-family:Helvetica, Arial; font-size:12px; padding:10px 0 5px; margin:2px; width:100%; text-align:left;" >
-        <a class="powered-by-eb" style="color: #ADB0B6; text-decoration: none;" target="_blank" href="https://www.eventbrite.com/">Powered by Eventbrite</a>
-      </div>
-    </div>
+      <h1><span><h1>Sponsoren & KooperationspartnerInnen</h1></span></h1>
 
   </div>
 
 
-<!-- PAGE -->
+
+
 
 </section>
