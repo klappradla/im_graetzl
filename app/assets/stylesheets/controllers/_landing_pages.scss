@@ -13,14 +13,13 @@ section.lp {
     }
   }
 
-  div.page p.txt {
+  div.page p.txt, div.page ol {
     @include font-size-primaryFont('large');
     padding-bottom:25px;
   }
 
   div.wrapper {
     padding-top:30px;
-    padding-bottom: 30px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -38,7 +37,7 @@ section.lp {
     }
 
     div.paperCard .wrp {
-      padding:20px 30px 20px 30px;
+      padding:20px 30px 30px 30px;
       @include font-size-primaryFont('large');
     }
   }
@@ -147,6 +146,7 @@ section.lp {
 
     img.imgHalle {
       width:100%;
+      margin-bottom:20px;
     }
 
 
@@ -208,14 +208,16 @@ section.lp {
       div.wrapper {
         //background-color: rgba(255, 255, 255, 0.9);
       }
-      p:last-child {
-        padding-bottom:0px;
-      }
+      
       h2 {
         font-weight: bold;
         width: 100%;
-        @include respond-to("<=small") {
+        font-size: 2.4rem;
+        @include respond-to("<=medium") {
           font-size: 2.2rem;
+        }
+        @include respond-to("<=small") {
+          font-size: 2.0rem;
         }
         //color: #e2226e;
       }
@@ -280,11 +282,15 @@ section.lp {
     h1 {
       width:100%;
       text-align: center;
+      padding-top: 10px;
       margin-bottom: 20px;
       font-weight: bold;
       font-size: 5.0rem;
       @include respond-to("<=medium") {
-        font-size: 4.0rem;
+        font-size: 3.0rem;
+      }
+      @include respond-to("<=small") {
+        font-size: 2.6rem;
       }
     }
     h2 {
