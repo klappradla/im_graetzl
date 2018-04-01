@@ -46,6 +46,33 @@ section.lp {
   // Raumteiler Festival 2018
   &.-festival {
 
+    .partner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      img.partner-logo {
+        width:auto;
+        height:60px;
+        margin-left:10px;
+        margin-right:10px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        @include respond-to("<=medium") {
+          height:60px;
+          margin:10px;
+        }
+        @include respond-to("<=small") {
+          height:40px;
+        }
+        &.smaller {
+          width:auto;
+          height:40px;
+          margin-right:15px;
+        }
+      }
+    }
+
     a {
       color: #e2226e;
     }
@@ -156,6 +183,8 @@ section.lp {
     .imgHeader {
       background-color: #deefe1; // Fullwidth Background Color
       background-image: url(image_path('lp/festival/NBH_Magazin.jpg'));
+      background-position: center;
+      background-repeat: no-repeat;
       //background-image: url('/assets/lp/festival/NBH_Magazin.jpg');
 
       .titleImg {
@@ -208,7 +237,7 @@ section.lp {
       div.wrapper {
         //background-color: rgba(255, 255, 255, 0.9);
       }
-      
+
       h2 {
         font-weight: bold;
         width: 100%;
