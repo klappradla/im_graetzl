@@ -62,20 +62,21 @@ section.lp {
 
       &.-workshops h2 {
         padding-top:20px;
-        background: url('/assets/lp/festival/RTF_Icon_Workshop.png') no-repeat;
+        background-image: url(image_path('lp/festival/RTF_Icon_Workshop.png'));
       }
 
       &.-music h2 {
-        background: url('/assets/lp/festival/RTF_Icon_Music.png') no-repeat;
+        background-image: url(image_path('lp/festival/RTF_Icon_Music.png'));
       }
 
       &.-info h2 {
-        background: url('/assets/lp/festival/RTF_Icon_Info.png') no-repeat;
+        background-image: url(image_path('lp/festival/RTF_Icon_Info.png'));
       }
 
       &.-ico h2 {
         background-size: auto 100%;
         background-position: bottom right;
+        background-repeat: no-repeat;
         padding-right:140px;
         @include respond-to("<=small") {
           background-size: auto 100%;
@@ -95,7 +96,7 @@ section.lp {
       &.-market {
         .card {
           background-color: rgba(222, 239, 225, 0.7);
-          background-image: url('/assets/lp/festival/RTF_Wienplan.png');
+          background-image: url(image_path('lp/festival/RTF_Wienplan.png'));
           background-position: center center;
           background-size: 300%;
         }
@@ -154,7 +155,7 @@ section.lp {
 
     .imgHeader {
       background-color: #deefe1; // Fullwidth Background Color
-      background-image: url('/assets/lp/festival/NBH_Magazin.jpg');
+      background-image: url(image_path('lp/festival/NBH_Magazin.jpg'));
       //background-image: url('/assets/lp/festival/NBH_Magazin.jpg');
 
       .titleImg {
