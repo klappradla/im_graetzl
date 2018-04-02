@@ -41,6 +41,7 @@
 //= require fastclick
 //= require autogrow
 //= require datatables.min
+//= require timetable
 //= require moment-with-locales.min
 //= require datetime-moment
 //= require Chart.min

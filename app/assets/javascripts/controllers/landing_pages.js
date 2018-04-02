@@ -59,11 +59,11 @@ APP.controllers.landing_pages = (function() {
 
       //pageNav('page_home'); // Init Home on PageLoad
 
-      $('iframe').load(function() {
+      /*$('iframe').load(function() {
         this.style.height =
         this.contentWindow.document.body.offsetHeight + 'px';
         console.log(this.style.height);
-      });
+      });*/
 
 
 

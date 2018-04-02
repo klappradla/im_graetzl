@@ -273,7 +273,12 @@ section.lp {
     // Fullscreen Nav
     #lp_nav {
       text-align: center;
-      button {display: inline-block;}
+      button {
+        display: inline-block;
+        width:190px;
+        margin-left:3px;
+        margin-right:3px;
+      }
       width: 100vw;
       position: relative;
       left: 50%;
@@ -328,6 +333,17 @@ section.lp {
 
     h1 span, h2 span, strong.highlight {
       color: #e2226e;
+    }
+
+    // Timetable
+    .cd-schedule li.events-group ul {max-height:1000px !important;}
+    .tab-info {
+      p {
+        padding-bottom:20px;
+        @include respond-to("<=medium") {
+          display: inline-block; padding-bottom:0px; padding-right:20px;
+        }
+      }
     }
 
   } // Festival
