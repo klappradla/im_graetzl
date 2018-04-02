@@ -275,9 +275,11 @@ section.lp {
       text-align: center;
       button {
         display: inline-block;
-        width:190px;
         margin-left:3px;
         margin-right:3px;
+        @include respond-to(">=medium") {
+          width:190px;
+        }
       }
       width: 100vw;
       position: relative;
