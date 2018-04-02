@@ -106,6 +106,10 @@ jQuery(document).ready(function($){
 	};
 
 	SchedulePlan.prototype.openModal = function(event) {
+
+		// Raumteiler Festival
+		$('#lp_nav').hide();
+
 		var self = this;
 		var mq = self.mq();
 		this.animating = true;
@@ -115,16 +119,12 @@ jQuery(document).ready(function($){
 		this.modalHeader.find('.event-date').text(event.find('.event-date').text());
 		this.modal.attr('data-event', event.parent().attr('data-event'));
 
-		//update event content
+		// Raumteiler Festival Code
 		var event_content_id = event.parent().attr('data-content');
 		var event_content = $('#'+ event_content_id +'').html();
-		//this.modalBody.find('.event-info').html(event_content);
-
-		//console.log(event_content_id);
-		//console.log(event_content);
 		this.modalBody.find('.event-info').html( event_content );
 		self.element.addClass('content-loaded');
-		//this.modalBody.find('.event-info').load(event.parent().attr('data-content')+'.html .event-info > *', function(data){
+
 		//ORIGINAL CODE:
 		/*this.modalBody.find('.event-info').load(event.parent().attr('data-content')+'.html .event-info > *', function(data){
 			//once the event content has been loaded
@@ -206,6 +206,10 @@ jQuery(document).ready(function($){
 	};
 
 	SchedulePlan.prototype.closeModal = function(event) {
+
+		// Raumteiler Festival
+		$('#lp_nav').show();
+
 		var self = this;
 		var mq = self.mq();
 
