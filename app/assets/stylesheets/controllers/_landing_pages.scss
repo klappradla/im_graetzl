@@ -81,25 +81,9 @@ section.lp {
       h2 {
         font-weight: bold;
       }
-
+      
       &.-ico h2 {
         padding-top:50px;
-      }
-
-      &.-workshops h2 {
-        padding-top:20px;
-        background-image: url(image_path('lp/festival/RTF_Icon_Workshop.png'));
-      }
-
-      &.-music h2 {
-        background-image: url(image_path('lp/festival/RTF_Icon_Music.png'));
-      }
-
-      &.-info h2 {
-        background-image: url(image_path('lp/festival/RTF_Icon_Info.png'));
-      }
-
-      &.-ico h2 {
         background-size: auto 100%;
         background-position: bottom right;
         background-repeat: no-repeat;
@@ -110,10 +94,20 @@ section.lp {
           padding-top:0px;
         }
       }
-      @include respond-to("<=small") {
-        &.-workshops h2 {
+      &.-workshops h2 {
+        padding-top:20px;
+        background-image: url(image_path('lp/festival/RTF_Icon_Workshop.png'));
+        @include respond-to("<=small") {
           background-size: auto 50%;
         }
+      }
+
+      &.-music h2 {
+        background-image: url(image_path('lp/festival/RTF_Icon_Music.png'));
+      }
+
+      &.-info h2 {
+        background-image: url(image_path('lp/festival/RTF_Icon_Info.png'));
       }
 
       .card {
@@ -125,6 +119,46 @@ section.lp {
           background-image: url(image_path('lp/festival/RTF_Wienplan.png'));
           background-position: center center;
           background-size: 300%;
+        }
+      }
+      &.-music {
+        .wrp {
+          padding-left:0px;
+          padding-right:0px;
+          padding-top:100px;
+          div {
+            position: relative;
+            padding-left:30px;
+            padding-right: 30px;
+            margin-left: -3px;
+            margin-top:-50px;
+            padding-top:50px;
+            background-color: #fcfcfc;
+            z-index: -1;
+          }
+          h2 {
+            padding-left:30px;
+            margin-right: 30px;
+          }
+        }
+        .card {
+          opacity : 0.8;
+          background: url(image_path('lp/festival/NBH_Food.jpg'));
+          background-position: center top;
+          background-size: 500px auto;
+          background-repeat: no-repeat;
+          @include respond-to(">=medium") {
+            background: url(image_path('lp/festival/NBH_Food_wide.jpg'));
+            background-position: center top;
+            background-size: 1000px auto;
+            background-repeat: no-repeat;
+          }
+          @include respond-to(">=large") {
+            background: url(image_path('lp/festival/NBH_Food.jpg'));
+            background-position: center top;
+            background-size: 500px auto;
+            background-repeat: no-repeat;
+          }
         }
       }
     }
