@@ -81,7 +81,7 @@ section.lp {
       h2 {
         font-weight: bold;
       }
-      
+
       &.-ico h2 {
         padding-top:50px;
         background-size: auto 100%;
@@ -311,9 +311,9 @@ section.lp {
         display: inline-block;
         margin-left:3px;
         margin-right:3px;
-        @include respond-to(">=medium") {
+        /*@include respond-to(">=medium") {
           width:190px;
-        }
+        }*/
       }
       width: 100vw;
       position: relative;
