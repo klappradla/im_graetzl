@@ -23,7 +23,6 @@ section.lp {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    //align-items: center;
 
     div.paperCard, div.cardBox {
       display: flex;
@@ -45,6 +44,66 @@ section.lp {
 
   // Raumteiler Festival 2018
   &.-festival {
+
+    /*
+    .title {
+      top:0;
+      @include respond-to(">small") {
+        top: 0px;
+      }
+      @include respond-to(">=medium") {
+        top:40px;
+      }
+      @include respond-to(">=large") {
+        top:70px;
+      }
+      position: absolute;
+      z-index: 1000;
+      width: 100%;
+      text-align: center;
+      h1, h2 {
+        text-align: center;
+        margin: auto;
+      }
+      h1 {
+        font-size: 4.0rem;
+        line-height: 120%;
+        @include respond-to(">=small") {
+          font-size: 3.5rem;
+        }
+        @include respond-to(">=medium") {
+          font-size: 4.5rem;
+        }
+        @include respond-to(">=large") {
+          font-size: 6.5rem;
+          width:400px;
+        }
+      }
+      h2 {
+        display: inline-block;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top:0px;
+        font-size: 2.5rem;
+        background-color:#e2226e;
+        opacity : 0.8;
+        color:white;
+        @include respond-to(">=small") {
+          display: none;
+        }
+        @include respond-to(">=medium") {
+          font-size: 3.0rem;
+          margin-top:20px;
+          display: inline-block;
+        }
+        @include respond-to(">=large") {
+          font-size: 3.5rem;
+          margin-top:30px;
+          display: inline-block;
+        }
+      }
+    }*/
+
 
     .partner {
       display: flex;
@@ -213,8 +272,6 @@ section.lp {
       margin-bottom:20px;
     }
 
-
-
     font-family: $font-lp;
 
     .imgHeader {
@@ -231,20 +288,14 @@ section.lp {
       }
     }
 
-
-    .NBHbg {
-      //background-image: url(image_path('lp/festival/NBH_Feier.jpg'));
-      //background-position: center center;
-      //background-size:cover;
+    .section-top {
       text-align: center;
       margin-bottom: 40px;
       border-top: 5px solid #e2226e;
       border-bottom: 5px solid #e2226e;
 
       .wrp {
-        //background-color: rgba(0, 0, 0, 0.5);
         padding:25px;
-        //min-height:350px;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -254,26 +305,16 @@ section.lp {
         font-size: 2.8rem;
         margin: 0px;
         padding:10px;
-        //color: white;
         @include respond-to("<=medium") {
           font-size: 2.2rem;
         }
       }
     }
 
-    .NBH2bg {
+    .section-area {
       background-color: #eee;
       padding-left:20px;
       padding-right:20px;
-      //position: relative;
-      //min-height:300px;
-      //background-image: url(image_path('lp/festival/rt-people-bg.jpg'));
-      //background-size: contain;
-      //background-repeat: no-repeat;
-      //background-position: right;
-      div.wrapper {
-        //background-color: rgba(255, 255, 255, 0.9);
-      }
 
       h2 {
         font-weight: bold;
@@ -285,7 +326,6 @@ section.lp {
         @include respond-to("<=small") {
           font-size: 2.0rem;
         }
-        //color: #e2226e;
       }
 
       ol, ul {
@@ -350,10 +390,6 @@ section.lp {
 
     .page {
       margin-top:30px;
-      // if Nav is Sticky, set Offset for Content
-      &.sticky_content {
-
-      }
     }
 
     p.foerdergeber {

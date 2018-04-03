@@ -1,13 +1,20 @@
 <% meta(
     title: t('.title'),
     description: t('.description'),
-    robots: 'index, follow'
+    robots: 'index, follow',
+    og_image: image_url('lp/festival/RTF_Header_Bg_Logo2.png')
   )
 %>
 
 <section class="lp -festival">
 
+  <!-- header -->
+
   <div class="imgHeader -fullwidth">
+    <!--<div class="title">
+      <h1>raumteiler festival</h1>
+      <h2>Gewerbeflächen teilen - Kosten teilen</h2>
+    </div>-->
     <%= image_tag('lp/festival/RTF_Header_Bg_Logo2.png', class: 'titleImg -fullwidth') %>
   </div>
 
@@ -16,38 +23,26 @@
     <button class="btn-primary pages" data-nav="page_programm">Programm</button>
     <button class="btn-primary pages" data-nav="page_tickets">Tickets</button>
   </div>
+  <!-- header -->
 
 
-
-<!-- PAGE -->
+  <!-- PAGE Home -->
   <div id="page_home" class="page">
 
     <div class="section">
-
       <div class="logo">
         <%= image_tag('lp/festival/RTF_Logo.png') %>
       </div>
-
       <div class="facts">
         15 / juni / 2018<br>
         14:00 - 23:00 Uhr
       </div>
-
       <div class="location">
         Nordbahn-Halle, 1020 Wien
       </div>
-
     </div>
 
-    <!--<div class="hl-subtext">
-      <h1><span>raumteiler festival 2018</span></h1>
-      <p>
-        <strong>15. Juni, 14:00 - 23:00 Uhr</strong><br>
-        Nordbahn-Halle, 1020 Wien
-      </p>
-    </div>-->
-
-    <div class="NBHbg">
+    <div class="section-top">
       <div class="wrp">
         <p class="txt">
           Ein Tag lang verwandelt sich die Nordbahn-Halle in einen Schmelztiegel
@@ -60,6 +55,7 @@
 
     <%= image_tag('lp/festival/RTF_Foto_Halle.png', class: 'imgHalle') %>
 
+    <!-- Boxes -->
     <div class="wrapper">
 
       <div class="paperCard container -market">
@@ -121,16 +117,16 @@
         <div class="card"></div>
       </div>
 
-    </div> <!-- //Cardbox Wrapper -->
+    </div>
+    <!-- /Boxes -->
 
   </div>
 
-<!-- PAGE -->
+  <!-- PAGE Tickets -->
 
   <div id="page_tickets" class="page">
 
     <h1><span>Dein Festival Ticket</span></h1>
-
     <div style="width:100%; text-align:left;">
       <iframe src="https://eventbrite.com/tickets-external?eid=44609406937&ref=etckt" frameborder="0" height="600" width="100%" vspace="0" hspace="0" marginheight="5" marginwidth="5" scrolling="auto" allowtransparency="true">
       </iframe>
@@ -141,23 +137,20 @@
 
   </div>
 
-<!-- PAGE -->
+  <!-- PAGE Für wen-->
 
   <div id="page_fuerwen" class="page">
 
-
     <h1><span>für wen?</span></h1>
 
-    <div class="NBH2bg">
+    <div class="section-area">
 
       <div class="wrapper">
-
         <h2>Selbständige, GründerInnen, kleine Unternehmen, Vereine und Kreative</h2>
         <p class="txt">
           auf der Suche nach Raum zum Andocken! Ihr könnt aus über 100 Raumangeboten wählen.
           Es geht darum Gewerbeflächen zu teilen, um die Kosten zu teilen!
         </p>
-
         <h2>Für Raumhabende,</h2>
         <p class="txt">
           die ihre Praxis, Büro, ihre Werkstatt, Geschäftslokal
@@ -168,7 +161,6 @@
           die kooperative Nutzungskonzepte auf ihren Flächen willkommen heißen und sich über innovative
           Lösungen im Bereich der kleinteiligen Nutzungsmischung informieren möchten.
         </p>
-
         <h2>Raumunternehmen, </h2>
         <p class="txt">
           die ihre Raumkonzepte den Raumsuchenden präsentieren
@@ -176,29 +168,20 @@
           Ihr bekommt Einblick in die unterschiedlichen Projekte, Organisationsformen
           und Business-Modelle.
         </p>
-
       </div>
 
     </div>
 
-    <!--
-    <button class="btn-primary -large -active pages" data-nav="page_tickets">Hol dir dein Festival Ticket</button>
-    -->
-
   </div>
 
 
-<!-- PAGE -->
+  <!-- PAGE Programm -->
 
   <div id="page_programm" class="page">
 
       <h1><span>Das Programm</span></h1>
 
-
-
-
-
-
+      <!-- Timetable Plugin-->
       <div class="cd-schedule loading">
       	<div class="timeline">
       		<ul>
@@ -307,8 +290,6 @@
       						</a>
       					</li>
 
-
-
       				</ul>
       			</li>
 
@@ -331,7 +312,6 @@
 
       				</ul>
       			</li>
-
 
       		</ul>
       	</div>
@@ -357,33 +337,32 @@
       	<div class="cover-layer"></div>
       </div> <!-- .cd-schedule -->
 
+      <!-- /Timetable Plugin-->
+
+      <!-- Timetable Content for Modals-->
       <div class="tt_content" id="event-info-1c">
-        Super sauberer Text ...
+        Infos ...
       </div>
 
   </div>
 
-  <!-- PAGE -->
+  <!-- PAGE Warum -->
 
-    <div id="page_warum" class="page">
+  <div id="page_warum" class="page">
 
+    <h1><span>WARUM das Raumteiler Festival!</span></h1>
 
-      <h1><span>WARUM das Raumteiler Festival!</span></h1>
-
-      <div class="NBH2bg">
-
-        <div class="wrapper">
-
-          <p class="txt">
-            <ul class="warum">
-              <li>Um Platz für diejenigen zu schaffen, die nützliche Dinge machen wollen.</li>
-              <li>Räume eröffnen, um Ideen und Projekte zu ihrer maximalen Wirkungsform zu bringen.</li>
-              <li>Damit Menschen nicht erst im organisatorischen Sumpf eintauchen müssen, bevor sie Raum haben, um ihre Ideen verwirklichen zu können.</li>
-              <li>Denn nichts ist zu kompliziert, wenn wir zusammenarbeiten - der gemeinsame Prozess ist anders.</li>
-            </ul>
-          </p>
-
-          <p class="txt">
+    <div class="section-area">
+      <div class="wrapper">
+        <p class="txt">
+          <ul class="warum">
+            <li>Um Platz für diejenigen zu schaffen, die nützliche Dinge machen wollen.</li>
+            <li>Räume eröffnen, um Ideen und Projekte zu ihrer maximalen Wirkungsform zu bringen.</li>
+            <li>Damit Menschen nicht erst im organisatorischen Sumpf eintauchen müssen, bevor sie Raum haben, um ihre Ideen verwirklichen zu können.</li>
+            <li>Denn nichts ist zu kompliziert, wenn wir zusammenarbeiten - der gemeinsame Prozess ist anders.</li>
+          </ul>
+        </p>
+        <p class="txt">
             Das Raumteiler Festival steht unter dem Motto "was einer alleine nicht schafft, das vermögen viele".
             <br><br>
             Selbständige, GründerInnen, MacherInnen, kurz gesagt: Menschen mit Ideen kommen beim Raumteiler Festival zusammen.
@@ -398,18 +377,15 @@
             Es ist nicht so wichtig, wie oder was es am Ende wird, das Wichtige ist nur, dass es wird, ... frei!"
             Aus dem Brainstorm heraus und dem "ichkönntejamal", den Sturm entfachen!
             Endlich Tun. Kreative Orgien. Dafür sind wir da. Wir sehen uns!
-          </p>
-
-        </div>
-
+        </p>
       </div>
-
-      <button class="btn-primary -large -active pages" data-nav="page_tickets">Hol dir dein Festival Ticket</button>
-
     </div>
 
+    <button class="btn-primary -large -active pages" data-nav="page_tickets">Hol dir dein Festival Ticket</button>
 
-<!-- PAGE -->
+  </div>
+
+  <!-- PAGE Partner-->
 
   <div id="page_partner" class="page">
 
@@ -424,23 +400,18 @@
     </p>
 
     <div class="partner foerderlogos">
-
       <%= image_tag('lp/festival/Logo_klimafond.png', class: 'partner-logo') %>
       <%= image_tag('lp/festival/Logo_TU.png', class: 'partner-logo') %>
-
     </div>
 
     <div class="hl-subtext">
       <p><strong>In Kooperation mit</strong></p>
     </div>
 
-
-    <div class="partner NBH2bg">
-
+    <div class="partner section-area">
       <%= image_tag('lp/festival/Logo_WKO.png', class: 'partner-logo') %>
       <%= image_tag('lp/festival/Logo_KRW.png', class: 'partner-logo') %>
       <%= image_tag('lp/festival/Logo_WAW.png', class: 'partner-logo') %>
-
     </div>
 
     <br><br>
@@ -450,19 +421,13 @@
     </div>
 
     <div class="partner">
-
       <%= image_tag('lp/festival/Logo_TU.png', class: 'partner-logo smaller') %>
       <%= image_tag('lp/festival/Logo_design_build.jpg', class: 'partner-logo smaller') %>
       <%= image_tag('lp/festival/Logo_egw.png', class: 'partner-logo smaller') %>
       <%= image_tag('lp/festival/Logo_isra.png', class: 'partner-logo smaller') %>
       <%= image_tag('lp/festival/Logo_Studio_Vlay.png', class: 'partner-logo smaller') %>
-
     </div>
-
   </div>
-
-
-
 
 
 </section>
