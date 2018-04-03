@@ -428,13 +428,28 @@ section.lp {
 
     // Timetable
     .cd-schedule li.events-group ul {max-height:1000px !important;}
+    li[data-content="event-info-1c"] {
+      @include respond-to("<=large") {
+        width:100% !important;
+        max-width:600px!important;
+        height:100%!important;
+      }
+    }
     .tab-info {
       p {
         padding-bottom:20px;
-        @include respond-to("<=medium") {
-          display: inline-block; padding-bottom:0px; padding-right:20px;
+        @include respond-to("<=large") {
+          padding-bottom:0px;
         }
       }
+    }
+    .event-modal .event-name p {
+      @include respond-to(">=medium") {
+        padding-bottom: 15px;
+      }
+    }
+    .event-modal .event-info {
+      padding: 20px;
     }
 
   } // Festival

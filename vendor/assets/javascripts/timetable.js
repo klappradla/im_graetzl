@@ -70,10 +70,10 @@ jQuery(document).ready(function($){
 			$(this).children('a').prepend($(durationLabel));
 
 			//detect click on the event and open the modal
-			/*$(this).on('click', 'a', function(event){
+			$(this).on('click', 'a', function(event){
 				event.preventDefault();
 				if( !self.animating ) self.openModal($(this));
-			});*/
+			});
 		});
 
 		//close modal window
@@ -115,13 +115,14 @@ jQuery(document).ready(function($){
 		this.animating = true;
 
 		//update event name and time
-		this.modalHeader.find('.event-name').text(event.find('.event-name').text());
+		this.modalHeader.find('.event-name').html(event.find('.event-name').html());
 		this.modalHeader.find('.event-date').text(event.find('.event-date').text());
 		this.modal.attr('data-event', event.parent().attr('data-event'));
 
 		// Raumteiler Festival Code
 		var event_content_id = event.parent().attr('data-content');
 		var event_content = $('#'+ event_content_id +'').html();
+		this.modalBody.find('.event-info').html('');
 		this.modalBody.find('.event-info').html( event_content );
 		self.element.addClass('content-loaded');
 
