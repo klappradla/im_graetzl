@@ -13,7 +13,7 @@ section.lp {
     }
   }
 
-  div.page p.txt, div.page ol {
+  div.page p.txt, div.page ol, div.page ul {
     @include font-size-primaryFont('large');
     padding-bottom:25px;
   }
@@ -126,6 +126,9 @@ section.lp {
           padding-left:0px;
           padding-right:0px;
           padding-top:100px;
+          @include respond-to(">=large") {
+            padding-top:50px;
+          }
           div {
             position: relative;
             padding-left:30px;
@@ -285,9 +288,18 @@ section.lp {
         //color: #e2226e;
       }
 
-      ol {
+      ol, ul {
         margin-left:20px;
         padding-bottom: 25px;
+      }
+
+      ul.warum {
+        margin-top:-20px;
+        padding-bottom: 5px;
+        li {
+          padding-bottom:20px;
+          font-weight: 600;
+        }
       }
 
     }
@@ -342,6 +354,13 @@ section.lp {
       &.sticky_content {
 
       }
+    }
+
+    p.foerdergeber {
+      text-align: center;
+    }
+    div.foerderlogos {
+      padding-bottom:30px;
     }
 
     h1, h2 {

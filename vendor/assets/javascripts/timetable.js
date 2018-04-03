@@ -70,10 +70,10 @@ jQuery(document).ready(function($){
 			$(this).children('a').prepend($(durationLabel));
 
 			//detect click on the event and open the modal
-			$(this).on('click', 'a', function(event){
+			/*$(this).on('click', 'a', function(event){
 				event.preventDefault();
 				if( !self.animating ) self.openModal($(this));
-			});
+			});*/
 		});
 
 		//close modal window
