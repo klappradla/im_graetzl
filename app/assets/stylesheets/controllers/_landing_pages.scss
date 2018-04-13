@@ -169,8 +169,21 @@ section.lp {
         background-image: url(image_path('lp/festival/RTF_Icon_Info.png'));
       }
 
+      &.-nbh h2 {
+        background-image: url(image_path('lp/festival/Logo_NBH.png'));
+        background-size: auto 70%;
+        padding-top:10px;
+      }
+
       .card {
         opacity : 0.5;
+      }
+      &.-nbh {
+        img {
+          padding-top:20px;
+          width:100%;
+          height:auto;
+        }
       }
       &.-market {
         .card {
@@ -334,7 +347,6 @@ section.lp {
       }
 
       ul.warum {
-        margin-top:-20px;
         padding-bottom: 5px;
         li {
           padding-bottom:20px;
