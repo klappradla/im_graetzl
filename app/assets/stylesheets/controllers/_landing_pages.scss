@@ -460,9 +460,9 @@ section.lp {
     .cd-schedule li.events-group ul {max-height:1600px !important;}
 
     @include respond-to(">=large") {
-      .cd-schedule .events ul li.events-group:nth-child(1) {width:25% !important}
-      .cd-schedule .events ul li.events-group:nth-child(2) {width:50% !important}
-      .cd-schedule .events ul li.events-group:nth-child(3) {width:25% !important}
+      .cd-schedule .events ul li.events-group:nth-child(1) {width:40% !important}
+      .cd-schedule .events ul li.events-group:nth-child(2) {width:40% !important}
+      .cd-schedule .events ul li.events-group:nth-child(3) {width:20% !important}
     }
 
 

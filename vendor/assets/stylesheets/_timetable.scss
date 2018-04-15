@@ -361,6 +361,15 @@ Main Components
 	background: lighten($tt_event-color-4, 5%);
 }
 
+.cd-schedule .single-event[data-event="event-5"],
+.cd-schedule [data-event="event-5"] .header-bg {
+	background: $tt_event-color-5;
+}
+
+.cd-schedule .single-event[data-event="event-5"]:hover {
+	background: lighten($tt_event-color-5, 5%);
+}
+
 .cd-schedule .event-modal {
 	position: fixed;
 	z-index: 3;
