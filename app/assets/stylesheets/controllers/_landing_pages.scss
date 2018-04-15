@@ -170,21 +170,39 @@ section.lp {
       }
 
       &.-nbh h2 {
-        background-image: url(image_path('lp/festival/Logo_NBH.png'));
-        background-size: auto 70%;
-        padding-top:10px;
+        //background-image: url(image_path('lp/festival/Logo_NBH.png'));
+        //background-size: auto 70%;
+        //padding-top:10px;
       }
 
       .card {
         opacity : 0.5;
       }
+
       &.-nbh, &.-map {
+        width:100%;
         img {
-          padding-top:20px;
           width:100%;
           height:auto;
         }
       }
+
+      &.-nbh {
+        h2 {padding-top: 0px;}
+        img {padding-top: 10px;}
+        .wrp {
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          div, img {
+            width: 100%;
+          }
+          @include respond-to("<=medium") {
+            flex-wrap: wrap;
+          }
+        }
+      }
+
       &.-market {
         .card {
           background-color: rgba(222, 239, 225, 0.7);
