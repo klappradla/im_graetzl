@@ -178,7 +178,7 @@ section.lp {
       .card {
         opacity : 0.5;
       }
-      &.-nbh {
+      &.-nbh, &.-map {
         img {
           padding-top:20px;
           width:100%;
@@ -439,7 +439,15 @@ section.lp {
     }
 
     // Timetable
-    .cd-schedule li.events-group ul {max-height:1000px !important;}
+    .cd-schedule li.events-group ul {max-height:1600px !important;}
+
+    @include respond-to(">=large") {
+      .cd-schedule .events ul li.events-group:nth-child(1) {width:25% !important}
+      .cd-schedule .events ul li.events-group:nth-child(2) {width:50% !important}
+      .cd-schedule .events ul li.events-group:nth-child(3) {width:25% !important}
+    }
+
+
     li[data-content="event-info-1c"] {
       @include respond-to("<=large") {
         width:100% !important;
