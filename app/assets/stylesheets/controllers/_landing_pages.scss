@@ -274,6 +274,17 @@ section.lp {
       div.location {
         font-size: 2.0rem;
         text-align: right;
+        .fb {
+          display: inline-block;
+          a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            svg.icon-social-facebook {
+              display: inline-block;
+            }
+          }
+        }
       }
       div.logo img {
         width:100%;

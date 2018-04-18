@@ -13,7 +13,7 @@ APP.controllers.application = (function() {
     window.cookieconsent_options = {
       "message":"Diese Website verwendet Cookies. Indem Sie weiter auf dieser Website navigieren, stimmen Sie unserer Verwendung von Cookies zu.",
       "dismiss":"OK!","learnMore":"Mehr Information",
-      "link":"http://www.imgraetzl.at/info/datenschutz",
+      "link":"https://www.imgraetzl.at/info/datenschutz",
       "theme": false
     };
 
@@ -46,13 +46,6 @@ APP.controllers.application = (function() {
     if(APP.utils.URLendsWith('/stuwerviertel') && !APP.utils.isLoggedIn()) {
       $('main').append($markup);
     }
-    if(APP.utils.URLendsWith('/stuwerviertel/locations')) {
-      $('.card-grid .cardBox').eq(2).after($markup);
-    }
-    if(APP.utils.URLendsWith('/leopoldstadt-1020')) {
-      $('main').append($markup);
-    }
-
   }
 
 

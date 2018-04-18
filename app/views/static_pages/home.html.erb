@@ -38,16 +38,19 @@
     </div>
   </div>
 
-  <div class="block-locations">
+  <div class="block-rooms">
     <div class="hl-subtext">
       <h1>Entdecke — <span>Raumteiler</span> im Grätzl</h1>
       <p>Gewerbeflächen zum Teilen - Raumhabende und Raumsuchende finden sich</p>
     </div>
     <div class="cardBoxCollection -tripple -morelink">
-      <%= render @activity_sample.rooms %>
+      <%= render @activity_sample.rooms.first %>
+      <!-- Insert Featured Card - Remove .first above when removing featurebox-->
+      <%= render 'shared/featured_cards/raumteilerfestival' %>
       <%= render 'rooms/action_card', view_all: true %>
     </div>
   </div>
+
 
   <div class="block-meetings">
     <div class="hl-subtext">
