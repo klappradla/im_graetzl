@@ -57,6 +57,7 @@
         <div class="wrp">
           <p>
             <h2>Raumteiler <span>Market</span></h2>
+            (14 - 19 Uhr) <br>
             Möchtest du deinen Raum teilen? Willkommen sind alle
             Gewerbeflächentypen von Werkstatt, Atelier, Praxis, Studio,
             Büro bis hin zum Geschäftslokal - treffe auf Menschen, die Raum suchen.
@@ -73,6 +74,7 @@
         <div class="wrp">
           <p>
             <h2>Info & <span>Beratung</span></h2>
+            (14 - 19 Uhr) <br>
             Interessierte können sich bei den Beratungsspots der Kreativen Räume Wien,
             der Wirtschaftskammer Wien und der Wirtschaftsagentur Wien über
             Raumangebote, Rechtsfragen, Fördermöglichkeiten & Kooperationspotentiale
@@ -88,6 +90,7 @@
         <div class="wrp">
           <p>
             <h2><span>Workshops</span>, Austausch & Impulse</h2>
+            (14 - 19 Uhr) <br>
             Neben dem Raumteiler Market erwartet die BesucherInnen ein umfassender Einblick in
             gemeinschaftliche Bespielungsmöglichkeiten von Gewerbeflächen. Lasst euch inspirieren!
             Die Kreativen Räume Wien stellen spannende Raumunternehmen und kooperative Projekte
@@ -106,7 +109,7 @@
         <div class="wrp">
           <p>
             <h2>Music, <span>Drinks & Food</span></h2>
-            <div>Wir haben zusammen eine gute Zeit. Der Innenhof der Nordbahn-Halle
+            <div>(14 - 23 Uhr) <br>Wir haben zusammen eine gute Zeit. Der Innenhof der Nordbahn-Halle
               lädt zum Relaxen und Genießen ein. Am Nachmittag wird der Grill
               angeworfen und  mit Live-Musik feiern wir in den Sommerabend rein! Raumteiler Olé.</div>
             </p>
@@ -304,7 +307,7 @@
                   </a>
                 </li>
 
-                <li class="single-event" data-start="17:45" data-end="18:00"  data-content="event-info-11b" data-event="event-1">
+                <li class="single-event" data-start="17:45" data-end="18:00"  data-content="event-info-11b" data-event="event-4">
                   <a href="#0">
                     <em class="event-name">Abschluss-Runde mit Thomas Kerekes (KRW) und den vorgestellten Projekte</em>
                   </a>
@@ -453,10 +456,51 @@
           <br>
         </p>
       </div>
+
+      <div class="tt_content" id="event-info-1c">
+        <p>
+          <strong>POOL Kooperations-Service - Wirtschaftskammer Wien</strong><br>
+          Unterstützung bei der Suche nach KooperationspartnerInnen für
+          Shop-Sharing-, Concept-Store- oder Pop up-Konzepte, Lokalgemeinschaften
+        </p>
+        <br>
+        <p>
+          <strong>Start-up Service der Wirtschaftsagentur Wien</strong><br>
+          Start-ups, Gründerinnen und Jungunternehmer erhalten gezielte, individuelle und kostenlose Angebote.
+          Diese Serviceleistungen für Wiener Gründerinnen und Jungunternehmer gibt es mittlerweile in 17 Sprachen und reichen von:
+          <br>
+          - umfassenden Basisinformationen zu<br>
+          - Coachings zu Gründung, Finanzierung und Expansion bis hin zu</br>
+          - Academy Workshops,</br>
+          - Frauenservice für Gründerinnen und Jungunternehmerinnen,</br>
+          - Migrant Enterprises für Unternehmen mit Migrationshintergrund und</br>
+          - Workshops für Personen mit Fluchterfahrung (Teil des EU-Projekts CORE - Integration im Zentrum).</br>
+        </p>
+        <br>
+      </div>
+
       <!-- // Timetable Content for Modals-->
 
 
     </div>
+
+
+
+    <div class="page rooms">
+      <div class="hl-subtext">
+        <h1>Aktuelle <span>Raumteiler</span> auf imGrätzl</h1>
+        <p>
+          Gewerbeflächen zum Teilen - Raumhabende und Raumsuchende finden sich.<br>
+          Wenn du selbst einen Raum zum teilen hast, oder nach Räumlichkeiten zum Andocken suchst,
+          veröffentliche deinen <a href="/wien/raumteiler">Raumteiler auf imGrätzl.at</a> und mach mit beim Raumteiler Market am 15. Juni in der Nordbahn-Halle.
+        </p>
+      </div>
+      <div class="cardBoxCollection -tripple -morelink">
+        <%= render @activity_sample.rooms %>
+        <%= render 'rooms/action_card'%>
+      </div>
+    </div>
+
 
 
     <!-- PAGE Location & Anfahrt -->

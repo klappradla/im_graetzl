@@ -113,7 +113,6 @@ APP.components.cardFilter = (function() {
   // TODO: Hack for Adding Feature Card
   function addFeaturedCard() {
     if ($('.featuredCard').exists()) {
-      console.log('yes');
       var featuredCard = $('.featuredCard').clone().removeClass('-hidden');
       if (cardGrid.children(':eq(2)').exists()) {
         cardGrid.children(':eq(2)').after(featuredCard);

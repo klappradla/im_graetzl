@@ -217,7 +217,7 @@ section.lp {
           padding-right:0px;
           padding-top:100px;
           @include respond-to(">=large") {
-            padding-top:50px;
+            padding-top:0px;
           }
           div {
             position: relative;
@@ -430,7 +430,17 @@ section.lp {
     }
 
     .page {
-      margin-top:30px;
+      margin-top:40px;
+      &.rooms {
+        margin-top: 70px;
+        .cardBoxCollection {
+          a.btn-primary {
+            background-color: #e2226e;
+            color:white;
+          }
+          .roomtype {color: #e2226e;}
+        }
+      }
     }
 
     p.foerdergeber {
