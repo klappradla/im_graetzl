@@ -181,8 +181,8 @@
       // Set End Date to Midnight
       this.endDate = function() {
         date = new Date(this.end);
-        date.setDate(date.getDate() + 1 );
-        date.setHours(0,0,0,0);
+        //date.setDate(date.getDate() + 1 );
+        date.setHours(23,59,59,0);
         return date;
       }
 
@@ -192,13 +192,13 @@
         if ( this.period != 0 ) {
           var date = new Date(this.end);
           date.setDate(this.endDate().getDate() - this.period+1);
-          date.setHours(1,0,0,0);
+          date.setHours(0,0,0,0);
           return date;
         // Set StartDate to 1. od EndDate Month
         } else {
           var date = new Date(this.end);
           date.setDate(1);
-          date.setHours(1,0,0,0);
+          date.setHours(0,0,0,0);
           return date;
         }
       }
@@ -231,9 +231,9 @@
         }
         // Draw Chart
 
-        //console.log(this.period);
-        //console.log(this.startDate());
-        //console.log(this.endDate());
+        console.log(this.period);
+        console.log(this.startDate());
+        console.log(this.endDate());
 
         chartTopArea = new Chart(topchart, {
           type: 'line',
