@@ -1,7 +1,7 @@
 var APP = {
 
     config: {
-        notificationPollInterval: 7000,
+        notificationPollInterval: 30*1000,
         adressSearchOpenGov: 'https://data.wien.gv.at/daten/OGDAddressService.svc/GetAddressInfo?Address=',
         majorBreakpoints: {
             //breakpoints should be the same like in the file include_media.scss
