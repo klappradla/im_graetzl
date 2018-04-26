@@ -7,6 +7,7 @@ APP.controllers.registrations = (function() {
         APP.components.graetzlSelect();
 
         // Set Registration Graetzl In Local Storage (for GA Event Tracking)
+        /*
         $(document).ready(function() {
           $('#btn-register').on('click', function() {
             var form = $(this).parents("form");
@@ -15,6 +16,7 @@ APP.controllers.registrations = (function() {
             localStorage.setItem('Graetzl', zip + ' ' + graetzl);
           });
         });
+        */
 
     }
 

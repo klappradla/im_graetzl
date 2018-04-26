@@ -47,22 +47,3 @@
   </div>
 
 </section>
-
-<script>
-$(document).ready(function() {
-  if ($("#flash .alert").exists()) {
-    //if ( $("#flash .alert").html().indexOf('Anmeldedaten') > 0 ){
-    if ( $("#flash .alert").html().indexOf('Dein Account ist nun freigeschaltet') > 0 ){
-      var reggraetzl = localStorage.getItem('Graetzl');
-      // GA
-      gtag('event', 'sign_up', {
-        'event_category': 'Registration',
-        'event_label': reggraetzl
-      });
-      // FB
-      fbq('track', 'CompleteRegistration');
-      localStorage.removeItem('Graetzl');
-    }
-  }
-});
-</script>
