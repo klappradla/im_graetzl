@@ -1,0 +1,10 @@
+<div class="discussion-create">
+  <%= attachment_image_tag current_user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+  <%= form_for @discussion_post do |f| %>
+    <%= f.hidden_field :discussion_id %>
+    <div class="post-content">
+      <%= f.text_area :content, cols: 80, rows: 3, placeholder: 'Post a reply…', class: 'input-discussion' %>
+    </div>
+    <%= f.button 'Post', data: { disable_with: 'sendet...' }, class: 'btn-secondary' %>
+  <% end %>
+</div>

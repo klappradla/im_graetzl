@@ -72,6 +72,10 @@ Rails.application.routes.draw do
   resources :room_offers, path: 'wien/raumteiler/raum', except: [:index] do
     get 'select', on: :collection
   end
+  
+  resources :groups, except: [:index]
+  resources :discussions, except: [:index]
+  resources :discussion_posts, except: [:index]
 
   get 'wien/raumteiler/raumsuche' => redirect('/wien/raumteiler')
   get 'wien/raumteiler/raum' => redirect('/wien/raumteiler')

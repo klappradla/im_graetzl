@@ -1,0 +1,19 @@
+<section class="discussionPosts">
+  <p><%= link_to "⬅ " + @discussion.group.title, @discussion.group %></p>
+
+  <% @discussion_posts.each do |post| %>
+    <div class="discussion-box">
+      <%= attachment_image_tag post.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+      <span class="username"><%= post.user.first_name %> <%= post.user.last_name %></span>
+      <p>
+        <%= post.content %>
+      </p>
+    </div>
+  <% end %>
+  
+  <div class="discussion-box">
+    <% if current_user %>
+      <%= render 'discussion_posts/form' %>
+    <% end %>
+  </div>
+</section>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180311194023) do
+ActiveRecord::Schema.define(version: 20180413124237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -133,6 +133,26 @@ ActiveRecord::Schema.define(version: 20180311194023) do
     t.index ["user_id"], name: "index_curators_on_user_id", using: :btree
   end
 
+  create_table "discussion_posts", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "discussion_id"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["discussion_id"], name: "index_discussion_posts_on_discussion_id", using: :btree
+    t.index ["user_id"], name: "index_discussion_posts_on_user_id", using: :btree
+  end
+
+  create_table "discussions", force: :cascade do |t|
+    t.string   "title"
+    t.boolean  "closed"
+    t.boolean  "sticky"
+    t.integer  "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_discussions_on_group_id", using: :btree
+  end
+
   create_table "district_graetzls", force: :cascade do |t|
     t.integer "district_id"
     t.integer "graetzl_id"
@@ -180,6 +200,27 @@ ActiveRecord::Schema.define(version: 20180311194023) do
     t.string   "slug",        limit: 255
     t.integer  "users_count",                                      default: 0
     t.index ["slug"], name: "index_graetzls_on_slug", using: :btree
+  end
+
+  create_table "group_users", force: :cascade do |t|
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_group_users_on_group_id", using: :btree
+    t.index ["user_id"], name: "index_group_users_on_user_id", using: :btree
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "admin_id"
+    t.integer  "room_offer_id"
+    t.boolean  "private"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["admin_id"], name: "index_groups_on_admin_id", using: :btree
+    t.index ["room_offer_id"], name: "index_groups_on_room_offer_id", using: :btree
   end
 
   create_table "images", force: :cascade do |t|
@@ -428,20 +469,20 @@ ActiveRecord::Schema.define(version: 20180311194023) do
     t.string   "username",                      limit: 255
     t.string   "first_name",                    limit: 255
     t.string   "last_name",                     limit: 255
-    t.boolean  "newsletter",                                default: false, null: false
     t.integer  "graetzl_id"
     t.string   "avatar_id"
-    t.integer  "enabled_website_notifications",             default: 0
     t.integer  "role"
     t.string   "avatar_content_type"
-    t.integer  "immediate_mail_notifications",              default: 0
-    t.integer  "daily_mail_notifications",                  default: 0
-    t.integer  "weekly_mail_notifications",                 default: 0
     t.string   "slug"
     t.string   "cover_photo_id"
     t.string   "cover_photo_content_type"
     t.text     "bio"
     t.string   "website"
+    t.integer  "weekly_mail_notifications",                 default: 0
+    t.integer  "daily_mail_notifications",                  default: 0
+    t.integer  "immediate_mail_notifications",              default: 0
+    t.integer  "enabled_website_notifications",             default: 0
+    t.boolean  "newsletter",                                default: false, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["created_at"], name: "index_users_on_created_at", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -468,8 +509,13 @@ ActiveRecord::Schema.define(version: 20180311194023) do
     t.index ["slug"], name: "index_zuckerls_on_slug", using: :btree
   end
 
+  add_foreign_key "discussion_posts", "discussions"
+  add_foreign_key "discussion_posts", "users"
+  add_foreign_key "discussions", "groups"
   add_foreign_key "district_graetzls", "districts", on_delete: :cascade
   add_foreign_key "district_graetzls", "graetzls", on_delete: :cascade
+  add_foreign_key "groups", "room_offers"
+  add_foreign_key "groups", "users", column: "admin_id"
   add_foreign_key "room_demand_categories", "room_categories", on_delete: :cascade
   add_foreign_key "room_demand_categories", "room_demands", on_delete: :cascade
   add_foreign_key "room_demand_graetzls", "graetzls", on_delete: :cascade

@@ -1,0 +1,65 @@
+section.groupDetail, section.discussionPosts {
+  // vertical rhythm
+  h1, h2, h3, h4, h5, p, .discussion-box { margin-bottom: 20px; }
+  .discussion-box {
+    border: 1px solid #f0f0f0;
+    background-color: #ffffff;
+    padding: 14px;
+    border-radius: 8px;
+    .avatar {
+      margin-bottom: 20px;
+    }
+    .username {
+      vertical-align: top;
+      margin-left: 20px;
+      font-size: 18px;
+    }
+    a {
+      color: inherit;
+      text-decoration: inherit;
+    }
+    
+    .discussion-create {
+      display: flex;
+      justify-content: flex-start;
+      .avatar { margin-right: 20px; }
+    }
+    
+    .control {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+  }
+  
+  .post-content { flex-grow: 1; margin-right: 20px; }
+  
+  form {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    flex-grow: 1;
+    input, textarea {
+      font-size: 16px;
+      color: $color-font-primary;
+      width: 100%;
+    }
+  }
+  
+  .input-discussion {
+    
+  }
+  
+  // form customization
+  ::-webkit-input-placeholder {
+    @include groupsPlaceholder;
+  }
+  ::-moz-placeholder {
+    @include groupsPlaceholder;
+  }
+  :-ms-input-placeholder {
+    @include groupsPlaceholder;
+  }
+  :-moz-placeholder {
+    @include groupsPlaceholder;
+  }
+}
