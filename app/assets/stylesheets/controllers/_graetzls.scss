@@ -57,7 +57,7 @@ section.graetzls {
 
 // ---------------------------------------------------------------------- blocks for logged categories
 
-.block-locations, .block-meetings, .block-zuckerls, .block-ideas {
+.block-locations, .block-meetings, .block-zuckerls, .block-ideas, .block-rooms {
   margin-bottom: 60px;
   @include respond-to(">=large") {
     margin-bottom: 80px;

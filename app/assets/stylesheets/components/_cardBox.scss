@@ -479,3 +479,20 @@ main > .sponsorstuwerviertel {
     opacity: 0.75;
   }
 }
+
+// Featured CardBoxes
+.cardBox.featuredCard {
+  &.-hidden {
+    display:none;
+  }
+  &#festival {
+    a.btn-primary {background-color: #e2226e;}
+  }
+}
+.homeOut {
+  .cardBox.featuredCard {
+    &.-hidden {
+      display:block;
+    }
+  }
+}

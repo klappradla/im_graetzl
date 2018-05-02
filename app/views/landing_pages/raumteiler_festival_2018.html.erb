@@ -1,30 +1,23 @@
 <% meta(
-    title: t('.title'),
-    description: t('.description'),
-    robots: 'index, follow',
-    og_image: image_url('lp/festival/RTF_Header_Bg_Logo2.png')
-  )
+  title: t('.title'),
+  description: t('.description'),
+  robots: 'index, follow',
+  og_image: image_url('lp/festival/Raumteiler-Festival-Teaser.png')
+)
 %>
 
 <section class="lp -festival">
 
   <!-- header -->
-
   <div class="imgHeader -fullwidth">
-    <!--<div class="title">
-      <h1>raumteiler festival</h1>
-      <h2>Gewerbeflächen teilen - Kosten teilen</h2>
-    </div>-->
     <%= image_tag('lp/festival/RTF_Header_Bg_Logo2.png', class: 'titleImg -fullwidth') %>
   </div>
-
   <div id="lp_nav" class="-sticky">
     <button class="btn-primary -active pages" data-nav="page_home">Home</button>
     <button class="btn-primary pages" data-nav="page_programm">Programm</button>
     <button class="btn-primary pages" data-nav="page_tickets">Tickets</button>
   </div>
   <!-- header -->
-
 
   <!-- PAGE Home -->
   <div id="page_home" class="page">
@@ -38,6 +31,10 @@
         14:00 - 23:00 Uhr
       </div>
       <div class="location">
+        <div class="fb">
+          <a href="https://www.facebook.com/events/160990637913851/" target="_blank"><%= icon_tag "social-facebook" %>Facebook</a>
+        </div>
+        <br>
         Nordbahn-Halle, 1020 Wien
       </div>
     </div>
@@ -45,10 +42,8 @@
     <div class="section-top">
       <div class="wrp">
         <p class="txt">
-          Ein Tag lang verwandelt sich die Nordbahn-Halle in einen Schmelztiegel
+          Raumhabende treffen auf Raumsuchende & werden in Raumpartnerschaften verbunden! Ein Tag lang verwandelt sich die Nordbahn-Halle in einen Schmelztiegel
           für kooperative Nutzungskonzepte und leistbare Gewerbeflächen.
-          <br>
-          Raumhabende treffen auf Raumsuchende & werden in Raumpartnerschaften verbunden!
         </p>
       </div>
     </div>
@@ -62,6 +57,7 @@
         <div class="wrp">
           <p>
             <h2>Raumteiler <span>Market</span></h2>
+            (16 - 19 Uhr) <br>
             Möchtest du deinen Raum teilen? Willkommen sind alle
             Gewerbeflächentypen von Werkstatt, Atelier, Praxis, Studio,
             Büro bis hin zum Geschäftslokal - treffe auf Menschen, die Raum suchen.
@@ -78,6 +74,7 @@
         <div class="wrp">
           <p>
             <h2>Info & <span>Beratung</span></h2>
+            (14 - 19 Uhr) <br>
             Interessierte können sich bei den Beratungsspots der Kreativen Räume Wien,
             der Wirtschaftskammer Wien und der Wirtschaftsagentur Wien über
             Raumangebote, Rechtsfragen, Fördermöglichkeiten & Kooperationspotentiale
@@ -93,13 +90,16 @@
         <div class="wrp">
           <p>
             <h2><span>Workshops</span>, Austausch & Impulse</h2>
-            Für Bauträger, RaumanbieterInnen & RaumunternehmerInnen.
-            Die TeilnehmerInnen erwartet ein spannender Einblick in innovative
-            Bespielungsmöglichkeiten von Gewerbeflächen. Wie können Gewerbeflächen
-            in Zukunft geplant, gestaltet und organisiert werden, damit sie
-            agiler und flexibler mit den Anforderungen einer im Wandel begriffenen
-            Arbeitswelt korrespondieren? Welche Organisationsmodelle für kleinteilige
-            und kooperative Nutzungskonzepte stehen zur Auswahl und sind bereits im Einsatz?
+            (14 - 19 Uhr) <br>
+            Neben dem Raumteiler Market erwartet die BesucherInnen ein umfassender Einblick in
+            gemeinschaftliche Bespielungsmöglichkeiten von Gewerbeflächen. Lasst euch inspirieren!
+            Die Kreativen Räume Wien stellen spannende Raumunternehmen und kooperative Projekte
+            aus ganz Österreich vor. Vernetzt euch mit den MacherInnen dahinter und holt euch
+            Inspiration für eure eigenen Projekte.<br><br>
+
+            <strong>Programm ‚RAUMTEILEN‘</strong><br>
+            Die Inputs und Workshop zum Thema ‚RAUMTEILEN‘ stellen unter anderem erste
+            Ergebnisse aus dem laufenden Forschungsprojekt Mischung: Nordbahnhof (Lead TU Wien) vor.
           </p>
         </div>
         <div class="card"></div>
@@ -109,198 +109,221 @@
         <div class="wrp">
           <p>
             <h2>Music, <span>Drinks & Food</span></h2>
-            <div>Wir haben zusammen eine gute Zeit. Der Innenhof der Nordbahn-Halle
-            lädt zum Relaxen und Genießen ein. Am Nachmittag wird der Grill
-            angeworfen und  mit Live-Musik feiern wir in den Sommerabend rein! Raumteiler Olé.</div>
+            <div>(14 - 23 Uhr) <br>Wir haben zusammen eine gute Zeit. Der Innenhof der Nordbahn-Halle
+              lädt zum Relaxen und Genießen ein. Am Nachmittag wird der Grill
+              angeworfen und  mit Live-Musik feiern wir in den Sommerabend rein! Raumteiler Olé.</div>
+            </p>
+          </div>
+          <div class="card"></div>
+        </div>
+
+      </div>
+      <!-- /Boxes -->
+
+    </div>
+
+    <!-- PAGE Tickets -->
+
+    <div id="page_tickets" class="page">
+
+      <h1><span>Dein Festival Ticket</span></h1>
+      <div style="width:100%; text-align:left;">
+        <iframe src="https://eventbrite.com/tickets-external?eid=44609406937&ref=etckt" frameborder="0" height="600" width="100%" vspace="0" hspace="0" marginheight="5" marginwidth="5" scrolling="auto" allowtransparency="true">
+        </iframe>
+        <div style="font-family:Helvetica, Arial; font-size:12px; padding:10px 0 5px; margin:2px; width:100%; text-align:left;" >
+          <a class="powered-by-eb" style="color: #ADB0B6; text-decoration: none;" target="_blank" href="https://www.eventbrite.com/">Powered by Eventbrite</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PAGE Für wen-->
+
+    <div id="page_fuerwen" class="page">
+
+      <h1><span>für wen?</span></h1>
+
+      <div class="section-area">
+
+        <div class="wrapper">
+          <h2>Selbständige, GründerInnen, kleine Unternehmen, Vereine und Kreative</h2>
+          <p class="txt">
+            auf der Suche nach Raum zum Andocken! Ihr könnt aus zahlreichen Raumangeboten wählen.
+            Es geht darum Gewerbeflächen zu teilen, um die Kosten zu teilen!
+          </p>
+          <h2>Für Raumhabende,</h2>
+          <p class="txt">
+            die ihre Praxis, Atelier, Studio, Büro, ihre Werkstatt oder Geschäftslokal
+            mit anderen teilen möchten und RaumpartnerInnen suchen.
+          </p>
+          <h2>Bauträger & AnbieterInnen von größeren Gewerbeflächen,</h2>
+          <p class="txt">
+            die kooperative Nutzungskonzepte auf ihren Flächen willkommen heißen und sich über innovative
+            Lösungen im Bereich der kleinteiligen Nutzungsmischung informieren möchten.
+          </p>
+          <h2>Raumunternehmen, </h2>
+          <p class="txt">
+            die ihre Raumkonzepte den Raumsuchenden präsentieren
+            und sich mit anderen RaumunternehmerInnen austauschen möchten.
+            Ihr bekommt Einblick in die unterschiedlichen Projekte und Organisationsformen.
           </p>
         </div>
-        <div class="card"></div>
-      </div>
 
-    </div>
-    <!-- /Boxes -->
-
-  </div>
-
-  <!-- PAGE Tickets -->
-
-  <div id="page_tickets" class="page">
-
-    <h1><span>Dein Festival Ticket</span></h1>
-    <div style="width:100%; text-align:left;">
-      <iframe src="https://eventbrite.com/tickets-external?eid=44609406937&ref=etckt" frameborder="0" height="600" width="100%" vspace="0" hspace="0" marginheight="5" marginwidth="5" scrolling="auto" allowtransparency="true">
-      </iframe>
-      <div style="font-family:Helvetica, Arial; font-size:12px; padding:10px 0 5px; margin:2px; width:100%; text-align:left;" >
-        <a class="powered-by-eb" style="color: #ADB0B6; text-decoration: none;" target="_blank" href="https://www.eventbrite.com/">Powered by Eventbrite</a>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- PAGE Für wen-->
-
-  <div id="page_fuerwen" class="page">
-
-    <h1><span>für wen?</span></h1>
-
-    <div class="section-area">
-
-      <div class="wrapper">
-        <h2>Selbständige, GründerInnen, kleine Unternehmen, Vereine und Kreative</h2>
-        <p class="txt">
-          auf der Suche nach Raum zum Andocken! Ihr könnt aus über 100 Raumangeboten wählen.
-          Es geht darum Gewerbeflächen zu teilen, um die Kosten zu teilen!
-        </p>
-        <h2>Für Raumhabende,</h2>
-        <p class="txt">
-          die ihre Praxis, Büro, ihre Werkstatt, Geschäftslokal
-          mit anderen teilen möchten und RaumpartnerInnen suchen.
-        </p>
-        <h2>Bauträger & AnbieterInnen von größeren Gewerbeflächen,</h2>
-        <p class="txt">
-          die kooperative Nutzungskonzepte auf ihren Flächen willkommen heißen und sich über innovative
-          Lösungen im Bereich der kleinteiligen Nutzungsmischung informieren möchten.
-        </p>
-        <h2>Raumunternehmen, </h2>
-        <p class="txt">
-          die ihre Raumkonzepte den Raumsuchenden präsentieren
-          und sich mit anderen RaumunternehmerInnen austauschen möchten.
-          Ihr bekommt Einblick in die unterschiedlichen Projekte, Organisationsformen
-          und Business-Modelle.
-        </p>
       </div>
 
     </div>
 
-  </div>
 
+    <!-- PAGE Programm -->
 
-  <!-- PAGE Programm -->
-
-  <div id="page_programm" class="page">
+    <div id="page_programm" class="page">
 
       <h1><span>Das Programm</span></h1>
 
       <!-- Timetable Plugin-->
       <div class="cd-schedule loading">
-      	<div class="timeline">
-      		<ul>
-      			<li><span>14:00</span></li>
-      			<li><span>14:30</span></li>
-      			<li><span>15:00</span></li>
-      			<li><span>15:30</span></li>
-      			<li><span>16:00</span></li>
-      			<li><span>16:30</span></li>
-      			<li><span>17:00</span></li>
-      			<li><span>17:30</span></li>
-      			<li><span>18:00</span></li>
-      		</ul>
-      	</div> <!-- .timeline -->
+        <div class="timeline">
+          <ul>
+            <li><span>14:00</span></li>
+            <li><span>14:30</span></li>
+            <li><span>15:00</span></li>
+            <li><span>15:30</span></li>
+            <li><span>16:00</span></li>
+            <li><span>16:30</span></li>
+            <li><span>17:00</span></li>
+            <li><span>17:30</span></li>
+            <li><span>18:00</span></li>
+          </ul>
+        </div> <!-- .timeline -->
 
-      	<div class="events">
-      		<ul>
-      			<li class="events-group">
-      				<div class="top-info"><span>Kleine Halle neben Stadtraum</span></div>
+        <div class="events">
+          <ul>
+            <li class="events-group">
+              <div class="top-info"><span>Kooperative Nutzungskonzepte<br>(Kleine Halle neben Stadtraum)</span></div>
 
-      				<ul>
+              <ul>
 
-      					<li class="single-event" data-start="14:30" data-end="15:00" data-content="event-info-1a" data-event="event-1">
-      						<a href="#0">
-      							<em class="event-name">Kooperative Nutzungen von Gewerbeflächen</em>
-      						</a>
-      					</li>
+                <li class="single-event" data-start="14:00" data-end="14:30" data-content="event-info-1a" data-event="event-4">
+                  <a href="#0">
+                    <em class="event-name">Begrüßung Klima- & Energiefonds, TU Wien</em>
+                  </a>
+                </li>
 
-                <li class="single-event" data-start="15:00" data-end="15:30" data-content="event-info-2a" data-event="event-2">
-      						<a href="#0">
-      							<em class="event-name">Gewerbeflächen Nachfrage - freielokale.at</em>
-      						</a>
-      					</li>
+                <li class="single-event" data-start="14:30" data-end="14:45" data-content="event-info-2a" data-event="event-2">
+                  <a href="#0">
+                    <em class="event-name">Einführung Raumteilen - Christian Peer (TU Wien) & Silvia Forlati (TU Wien)</em>
+                  </a>
+                </li>
 
-                <li class="single-event" data-start="15:30" data-end="16:00" data-content="event-info-3a" data-event="event-2">
-      						<a href="#0">
-      							<em class="event-name">Kooperative Nutzungskonzepte am Beispiel - tbd</em>
-      						</a>
-      					</li>
+                <li class="single-event" data-start="14:45" data-end="15:00" data-content="event-info-3a" data-event="event-2">
+                  <a href="#0">
+                    <em class="event-name">Raumteilen: Chancen, Hürden, Modelle - Silvia Forlati (TU Wien), Julian Junker (EGW)</em>
+                  </a>
+                </li>
 
-                <li class="single-event" data-start="16:00" data-end="16:30" data-content="event-info-4a" data-event="event-2">
-      						<a href="#0">
-      							<em class="event-name">Mischnutzung strahlt positiv in den Stadtteil aus - tbd</em>
-      						</a>
-      					</li>
+                <li class="single-event" data-start="15:00" data-end="15:15" data-content="event-info-4a" data-event="event-2">
+                  <a href="#0">
+                    <em class="event-name">Gewerbeflächen Bedarf - Silvia Spendier (Freie Lokale - Wirtschaftskammer Wien)</em>
+                  </a>
+                </li>
 
-                <li class="single-event" data-start="16:30" data-end="17:00" data-content="event-info-5a" data-event="event-2">
-      						<a href="#0">
-      							<em class="event-name">Das Raumteiler Prinzip - imGrätzl.at</em>
-      						</a>
-      					</li>
+                <li class="single-event" data-start="15:15" data-end="15:30" data-content="event-info-5a" data-event="event-2">
+                  <a href="#0">
+                    <em class="event-name">Funding the cooperative City - Daniela Patti (Eutropian)</em>
+                  </a>
+                </li>
 
-                <li class="single-event" data-start="17:00" data-end="17:30" data-content="event-info-6a" data-event="event-2">
-      						<a href="#0">
-      							<em class="event-name">Kooperative Nutzungskonzepte zur Leerstandaktivierung - tbd</em>
-      						</a>
-      					</li>
+                <li class="single-event" data-start="15:45" data-end="18:00" data-content="event-info-6a" data-event="event-1">
+                  <a href="#0">
+                    <em class="event-name">Start der Raumteilen Workshops</em>
+                  </a>
+                </li>
 
-      				</ul>
-      			</li>
-
-      			<li class="events-group">
-      				<div class="top-info"><span>Studio neben dem Magazin</span></div>
-
-      				<ul>
-
-      					<li class="single-event" data-start="14:30" data-end="15:00"  data-content="event-info-1b" data-event="event-3">
-      						<a href="#0">
-      							<em class="event-name">Einführung in das Thema RaumunternehmerInnen</em>
-      						</a>
-      					</li>
-
-                <li class="single-event" data-start="15:00" data-end="15:30"  data-content="event-info-2b" data-event="event-3">
-      						<a href="#0">
-      							<em class="event-name">Wir bauen ein Gewerbehaus</em>
-      						</a>
-      					</li>
-
-                <li class="single-event" data-start="15:30" data-end="16:00"  data-content="event-info-3b" data-event="event-3">
-      						<a href="#0">
-      							<em class="event-name">Kooperatives Coworking Konzept - tbd</em>
-      						</a>
-      					</li>
-
-                <li class="single-event" data-start="16:00" data-end="16:30"  data-content="event-info-4b" data-event="event-3">
-      						<a href="#0">
-      							<em class="event-name">tbd</em>
-      						</a>
-      					</li>
-
-                <li class="single-event" data-start="16:30" data-end="17:00"  data-content="event-info-5b" data-event="event-3">
-      						<a href="#0">
-      							<em class="event-name">tbd</em>
-      						</a>
-      					</li>
-
-                <li class="single-event" data-start="17:00" data-end="17:30"  data-content="event-info-6b" data-event="event-3">
-      						<a href="#0">
-      							<em class="event-name">tbd</em>
-      						</a>
-      					</li>
-
-                <li class="single-event" data-start="17:30" data-end="18:00"  data-content="event-info-7b" data-event="event-3">
-      						<a href="#0">
-      							<em class="event-name">Vor welchen Hürden stehen RaumunternehmerInnen?</em>
-      						</a>
-      					</li>
-
-      				</ul>
-      			</li>
+              </ul>
+            </li>
 
             <li class="events-group">
-      				<div class="top-info"><span>RaumteilerInnen Magazin</span></div>
+              <div class="top-info"><span>Schwerpunkt Raumunternehmen.<br>(Studio neben dem Magazin)</span></div>
 
-      				<ul>
+              <ul>
 
-      					<li class="single-event" data-start="14:00" data-end="18:00"  data-content="event-info-1c" data-event="event-4">
-      						<a href="#0">
-      							<em class="event-name tab-info">
+                <li class="single-event" data-start="14:30" data-end="14:45"  data-content="event-info-1b" data-event="event-3">
+                  <a href="#0">
+                    <em class="event-name">Einführung: Was ist ein Raumunternehmen? - Thomas Kerekes (KRW)</em>
+                  </a>
+                </li>
+
+                <li class="single-event" data-start="14:45" data-end="15:00"  data-content="event-info-2b" data-event="event-3">
+                  <a href="#0">
+                    <em class="event-name">Musikraum, Coworking für MusiklehrerInnen - Martin Schlögl</em>
+                  </a>
+                </li>
+
+                <li class="single-event" data-start="15:00" data-end="15:15"  data-content="event-info-3b" data-event="event-3">
+                  <a href="#0">
+                    <em class="event-name">Gemeinschafts-Werkstatt im Gemeindebau - Anna Tomaselli</em>
+                  </a>
+                </li>
+
+                <li class="single-event" data-start="15:15" data-end="15:30"  data-content="event-info-4b" data-event="event-3">
+                  <a href="#0">
+                    <em class="event-name">Traktorenfabrik, Raum für KünstlerInnen  - Karim EL SEROUI</em>
+                  </a>
+                </li>
+
+                <li class="single-event" data-start="15:30" data-end="16:30"  data-content="event-info-5b" data-event="event-4">
+                  <a href="#0">
+                    <em class="event-name">Pause - Austausch - Vernetzung - gegenseitiges Kennenlernen</em>
+                  </a>
+                </li>
+
+                <li class="single-event" data-start="16:30" data-end="16:45"  data-content="event-info-6b" data-event="event-3">
+                  <a href="#0">
+                    <em class="event-name">Werkstadt 15 Treffpunkt im Stadtteil - Kurt Tanner</em>
+                  </a>
+                </li>
+
+                <li class="single-event" data-start="16:45" data-end="17:00"  data-content="event-info-7b" data-event="event-3">
+                  <a href="#0">
+                    <em class="event-name">Wir bauen ein Gewerbehaus - Peter Rippl</em>
+                  </a>
+                </li>
+
+                <li class="single-event" data-start="17:00" data-end="17:15"  data-content="event-info-8b" data-event="event-3">
+                  <a href="#0">
+                    <em class="event-name">SchloR - solidarisch wirtschaften, selbstverwaltet und kollektiv wohnen - Rafi</em>
+                  </a>
+                </li>
+
+                <li class="single-event" data-start="17:15" data-end="17:30"  data-content="event-info-9b" data-event="event-3">
+                  <a href="#0">
+                    <em class="event-name">Jutta Kleedorfer (Expertin für Mehrfachnutzungen) und Mutmacherin</em>
+                  </a>
+                </li>
+
+                <li class="single-event" data-start="17:30" data-end="17:45"  data-content="event-info-10b" data-event="event-3">
+                  <a href="#0">
+                    <em class="event-name">Klarenbrunn - Zentrum für Nachhaltigkeit & kreatives Handwerk - Lisa</em>
+                  </a>
+                </li>
+
+                <li class="single-event" data-start="17:45" data-end="18:00"  data-content="event-info-11b" data-event="event-4">
+                  <a href="#0">
+                    <em class="event-name">Abschluss-Runde mit Thomas Kerekes (KRW) und den vorgestellten Projekte</em>
+                  </a>
+                </li>
+
+              </ul>
+            </li>
+
+            <li class="events-group">
+              <div class="top-info"><span>Beratung & Infospots<br>(RaumteilerInnen Magazin)</span></div>
+
+              <ul>
+
+                <li class="single-event" data-start="14:30" data-end="18:00"  data-content="event-info-1c" data-event="event-5">
+                  <a href="#0">
+                    <em class="event-name tab-info">
                       <p><strong>Beratung & Infos:</strong></p>
                       <p>Rechtsberatung - Kreative Räume Wien</p>
                       <p>Raumteiler Check - imGrätzl.at</p>
@@ -308,65 +331,238 @@
                       <p>Beratung & Info von Kooperationspool & freielokale.at - Wirtschaftskammer Wien</p>
                       <p>Low cost & low tec Raumaktivierung - usus</p>
                     </em>
-      						</a>
-      					</li>
+                  </a>
+                </li>
 
-      				</ul>
-      			</li>
+              </ul>
+            </li>
 
-      		</ul>
-      	</div>
+          </ul>
+        </div>
 
-      	<div class="event-modal">
-      		<header class="header">
-      			<div class="content">
-      				<span class="event-date"></span>
-      				<h3 class="event-name"></h3>
-      			</div>
+        <div class="event-modal">
+          <header class="header">
+            <div class="content">
+              <span class="event-date"></span>
+              <h3 class="event-name"></h3>
+            </div>
 
-      			<div class="header-bg"></div>
-      		</header>
+            <div class="header-bg"></div>
+          </header>
 
-      		<div class="body">
-      			<div class="event-info"></div>
-      			<div class="body-bg"></div>
-      		</div>
+          <div class="body">
+            <div class="event-info"></div>
+            <div class="body-bg"></div>
+          </div>
 
-      		<a href="#0" class="close">Close</a>
-      	</div>
+          <a href="#0" class="close">Close</a>
+        </div>
 
-      	<div class="cover-layer"></div>
+        <div class="cover-layer"></div>
       </div> <!-- .cd-schedule -->
 
       <!-- /Timetable Plugin-->
 
       <!-- Timetable Content for Modals-->
-      <div class="tt_content" id="event-info-1c">
-        <strong>Info Text</strong>
+      <div class="tt_content" id="event-info-3a">
+        <strong>Silvia Forlati (TU Wien), Julian Junker (EGW):</strong>
+        <br><br>
         <p>
-          Coming soon ...
+          Raumteilen: Welche Nachfrage, welche Anforderungen, welche Zukunftsmodelle gibt es? Erste Ergebnisse aus dem F&E Projekt Mischung: Nordbahnhof
         </p>
       </div>
 
-  </div>
+      <div class="tt_content" id="event-info-4a">
+        <strong>Standort: Suche, Trends & Nachfrage</strong>
+        <br><br>
+        <p>
+          Über 2.500 Standortsuchende wenden sich jährlich an das „Freie Lokale“ Service der WK Wien.
+          <br>
+          Erfahren Sie mehr über die Standort- und Geschäftslokalanforderungen von GründerInnen.
+          <br><br>
+          Silvia Spendier <br>
+          Freie Lokale | Wirtschaftskammer Wien<br>
+          Stubenring 8-10, 1010 Wien <br>
+          freielokale@wkw.at <br>
+          <a href="http://www.freielokale.at" target="_blank">www.freielokale.at</a>
+          <br><br>
+        </p>
+      </div>
 
-  <!-- PAGE Warum -->
+      <div class="tt_content" id="event-info-5a">
+        <strong>Daniela Patti (Eutropian):</strong>
+        <br><br>
+        <p>
+          Funding the cooperative City. New models to finance and organize community spaces and services
+        </p>
+      </div>
 
-  <div id="page_warum" class="page">
+      <div class="tt_content" id="event-info-2b">
+        <p>
+          <strong>MUSIK RAUM</strong>
+          <br><br>
+          Mitten im 15. Bezirk gibt es seit kurzem eine Coworking Musikschule.
+          <br><br>
+          Im MUSIK RAUM haben sich aktuell 11 MusikerInnen zusammengetan,
+          um individuellen Unterricht in einem öffentlich gut angebunden Gassenlokal anzubieten.
+          <br><br>
+          MUSIK RAUM - Coworking Musikschule <br>
+          Henriettenplatz 1/2, 1150 Wien <br>
+          <br>
+          Martin Schlögl <br>
+          Tel.: +43 650 357 53 57 <br>
+          <a href="http://www.musikraum.at" target="_blank">www.musikraum.at</a> <br><br>
 
-    <h1><span>WARUM das Raumteiler Festival!</span></h1>
+        </p>
+      </div>
 
-    <div class="section-area">
+      <div class="tt_content" id="event-info-6b">
+        <p>
+          <strong>Werkstadt 15:</strong><br>
+          Kurt Tanner ist im Grätzl rund um die Reindorfgasse im 15. Bezirk bereits seit vielen Jahren engagiert.
+          <br><br>
+          Im Zuge dessen wurde kurzerhand ein leer stehendes Erdgeschoßlokal mitten in der Reindorfgasse von ihm angemietet. Dieses dient heute unter dem Namen "Werkstadt 15" als möglichst niederschwellige Anlaufstelle für Kunstschaffende sowie sämtliche AnwohnerInnen und die Räumlichkeiten können kostengünstig für verschiedenste Aktivitäten genutzt werden. Die Vision für die Werkstadt 15? Ein Grätzltreffpunkt, ein Ort für gemeinsame Stadtentwicklung von unten!
+          <br><br>
+          Kurt Tanner (kurt@werkstadt15.wien)<br>
+          Reindorfg. 30, 1150 Wien<br><br>
+        </p>
+      </div>
+
+      <div class="tt_content" id="event-info-8b">
+        <p>
+          <strong>Das Projekt SchloR</strong> hat zum Ziel, in Wien langfristig abgesicherte und leistbare Räume für selbstverwaltetes und gemeinschaftliches Arbeiten und Wohnen zu schaffen. Unser Selbstverständnis beruht neben der Selbstverwaltung auf Inklusion, Solidarität, sowie der Idee des Nutzungseigentums (statt Privateigentum) und der Kapitalneutralisierung.
+          <br><br>
+          Selbstverwaltet bedeutet, dass wir uns selbst organisieren und unsere Räume gemeinsam gestalten.
+          Um unser Projekt zu realisieren, planen wir gemeinsam mit dem Dachverband habiTAT den Kauf einer Immobilie in Wien Simmering. Durch das Rechtsmodell des habiTAT wird die Immobilie vergesellschaftet und dauerhaft dem Immobilienmarkt entzogen. Außerdem fallen Personen, die Profite aus dem Grundrecht auf Wohnen bzw. Räumlichkeiten schlagen, weg.
+          Solidarität zeigt sich z.B. dadurch, dass jeder Person – fernab von sozialen Status & Eigenkapital – eine gleichberechtigte Teilhabe, (Mitbestimmungs-)möglichkeiten & Rechte gegeben werden. Somit sollen soziale Ungleichheiten ausbalanciert werden ohne dabei Hierarchien einzuziehen.
+          <br><br>
+          Verein zur Förderung kollektiven Wohnens und kreativer Lebensvisionen e.V.<br>
+          Taborstraße 91/12, A-1200 Wien<br>
+          Email: contact@schlor.org<br>
+          <a href="http://schlor.org" target="_blank">http://schlor.org</a><br><br>
+        </p>
+      </div>
+
+      <div class="tt_content" id="event-info-10b">
+        <p>
+          <strong>Fabrik Klarenbrunn</strong>
+          <br><br>
+          Lisa Vesely von der Koje gibt einen Einblick in die Entstehungsgeschichte der Fabrik Klarenbrunn in Bludenz , einem Zentrum für Handwerk, Coworking und Nachhaltigkeit.
+          <br><br>
+          Neben einem Coworking Space, der gerade im Entstehen ist, und einem Shop und Werkstätten der Caritas, produziert dort unter anderem das Unternehmen Koje, dessen Gründer die Fabrik gekauft haben und nun renovieren. Die Adaptierung der zuvor über 100 Jahre leer stehenden Fabrik läuft bereits seit über einem Jahr und es haben sich bereits erste Kooperationen zwischen den angesiedelten Unternehmen gebildet.
+          <br><br>
+          Lisa Vesely (design@diekoje.com)<br>
+          Klarenbrunnstr. 46, 6700 Bludenz<br>
+          <br>
+        </p>
+      </div>
+
+      <div class="tt_content" id="event-info-1c">
+        <p>
+          <strong>Freie Lokale der WK Wien</strong><br>
+          Wir unterstützen Sie bei der Geschäftslokalsuche in Wien und liefern wichtige Standortinformationen.
+        </p>
+        <br>
+        <p>
+          <strong>POOL Kooperations-Service - Wirtschaftskammer Wien</strong><br>
+          Unterstützung bei der Suche nach KooperationspartnerInnen für
+          Shop-Sharing-, Concept-Store- oder Pop up-Konzepte, Lokalgemeinschaften
+        </p>
+        <br>
+        <p>
+          <strong>Start-up Service der Wirtschaftsagentur Wien</strong><br>
+          Start-ups, Gründerinnen und Jungunternehmer erhalten gezielte, individuelle und kostenlose Angebote.
+          Diese Serviceleistungen für Wiener Gründerinnen und Jungunternehmer gibt es mittlerweile in 17 Sprachen und reichen von:
+          <br>
+          - umfassenden Basisinformationen zu<br>
+          - Coachings zu Gründung, Finanzierung und Expansion bis hin zu</br>
+          - Academy Workshops,</br>
+          - Frauenservice für Gründerinnen und Jungunternehmerinnen,</br>
+          - Migrant Enterprises für Unternehmen mit Migrationshintergrund und</br>
+          - Workshops für Personen mit Fluchterfahrung (Teil des EU-Projekts CORE - Integration im Zentrum).</br>
+        </p>
+        <br>
+      </div>
+
+      <!-- // Timetable Content for Modals-->
+
+
+    </div>
+
+
+
+    <div class="page rooms">
+      <div class="hl-subtext">
+        <h1>Aktuelle <span>Raumteiler</span> auf imGrätzl</h1>
+        <p>
+          Gewerbeflächen zum Teilen - Raumhabende und Raumsuchende finden sich jetzt schon auf imGrätzl.at .<br>
+          <a href="/wien/raumteiler">Veröffentliche deinen Raumteiler</a> und mach mit beim Raumteiler Market am 15. Juni in der Nordbahn-Halle.
+        </p>
+      </div>
+      <div class="cardBoxCollection -tripple -morelink">
+        <%= render @activity_sample.rooms %>
+        <%= render 'rooms/action_card'%>
+      </div>
+    </div>
+
+
+
+    <!-- PAGE Location & Anfahrt -->
+
+    <div id="page_location" class="page">
+
+      <h1><span>Location & Anfahrt</span></h1>
+
+      <!-- Boxes -->
       <div class="wrapper">
-        <p class="txt">
+
+        <div class="paperCard container -ico -nbh">
+          <div class="wrp">
+            <div>
+              <h2><span>Anfahrt</span><br>Nordbahn-Halle</h2>
+              <strong>Nordbahn-Halle beim Wasserturm</strong><br>
+              Leystraße/Ecke Taborstraße, 1020 Wien<br>
+              Anfahrtsadresse Navi: Leystraße 157<br>
+              <br>
+              U-Bahn: U1 – “Vorgartenstraße” (Fußweg 10 Minuten)<br>
+              Bus: 11A, 11B – “Pensionsversicherungsanstalt”​<br>
+              Bus: 11A, 11B – “Holubstrasse”​<br>
+              Straßenbahn: 2 – “Innstrasse”​<br>
+            </div>
+            <%= link_to( image_tag('lp/festival/Lageplan_Nordbahnhalle.jpg'), image_path('lp/festival/Lageplan_Nordbahnhalle.jpg')) %>
+          </div>
+          <div class="card"></div>
+        </div>
+
+        <div class="paperCard container -map">
+          <div class="wrp">
+            <p>
+              <h2><span>Orientierungs</span>plan</h2>
+              <%= link_to( image_tag('lp/festival/NBH-Festvalplan.png'), image_path('lp/festival/NBH-Festvalplan.png')) %>
+            </p>
+          </div>
+          <div class="card"></div>
+        </div>
+
+    </div>
+
+
+
+    <!-- PAGE Warum -->
+
+    <div id="page_warum" class="page">
+
+      <h1><span>WARUM das Raumteiler Festival!</span></h1>
+
+      <div class="section-area">
+        <div class="wrapper">
           <ul class="warum">
             <li>Um Platz für diejenigen zu schaffen, die nützliche Dinge machen wollen.</li>
             <li>Räume eröffnen, um Ideen und Projekte zu ihrer maximalen Wirkungsform zu bringen.</li>
-            <li>Damit Menschen nicht erst im organisatorischen Sumpf eintauchen müssen, bevor sie Raum haben, um ihre Ideen verwirklichen zu können.</li>
+            <li>Damit Menschen leichter zu Raum kommen, um ihre Ideen verwirklichen zu können.</li>
             <li>Denn nichts ist zu kompliziert, wenn wir zusammenarbeiten - der gemeinsame Prozess ist anders.</li>
           </ul>
-        </p>
-        <p class="txt">
+          <p class="txt">
             Das Raumteiler Festival steht unter dem Motto "was einer alleine nicht schafft, das vermögen viele".
             <br><br>
             Selbständige, GründerInnen, MacherInnen, kurz gesagt: Menschen mit Ideen kommen beim Raumteiler Festival zusammen.
@@ -376,63 +572,61 @@
             Ein Kanal zum Teilen und Verteilen. Du stehst nicht alleine. Freue dich auf neue Kontakte und inspirierende Menschen.
             Wir wünschen uns eine Million verrückte Projekte. Es gibt kein Gewinnen und kein Scheitern, es gibt nur das Tun.
             Mehr von den "Ich hab heut etwas ge- und erschaffen und bin einen neuen Weg gegangen"-Momente. Tage voller Explosionen.
-            So sollte es immer sein. Wir wollen diesen Prozesse Raum und Gemeinschaft geben.
-            <br><br>
-            Es ist nicht so wichtig, wie oder was es am Ende wird, das Wichtige ist nur, dass es wird, ... frei!"
-            Aus dem Brainstorm heraus und dem "ichkönntejamal", den Sturm entfachen!
-            Endlich Tun. Kreative Orgien. Dafür sind wir da. Wir sehen uns!
-        </p>
+            So sollte es immer sein. Wir wollen diesen Prozessen Raum und Gemeinschaft geben.
+          </p>
+        </div>
+      </div>
+
+      <button class="btn-primary -large -active pages" data-nav="page_tickets">Hol dir dein Festival Ticket</button>
+
+    </div>
+
+    <!-- PAGE Partner-->
+
+    <div id="page_partner" class="page">
+
+      <div class="hl-subtext">
+        <h1><span><h1>Sponsoren & KooperationspartnerInnen</h1></span></h1>
+      </div>
+
+      <p class="foerdergeber">
+        Das Raumteilerfestival wird von imGrätzl.at veranstaltet und ist Teil des Smart-City-Demoprojekt Mischung: Nordbahnhof (Lead TU Wien).
+        <br>
+        Dieses Projekt wird aus Mitteln des Klima- und Energiefonds gefördert und im Rahmen der Smart-Cities-Initiative durchgeführt.
+      </p>
+
+      <div class="partner foerderlogos">
+        <%= image_tag('lp/festival/Logo_klimafond.png', class: 'partner-logo') %>
+        <%= image_tag('lp/festival/Logo_TU.png', class: 'partner-logo') %>
+      </div>
+
+      <div class="hl-subtext">
+        <p><strong>In Kooperation mit</strong></p>
+      </div>
+
+      <div class="partner section-area">
+        <%= image_tag('lp/festival/Logo_WKO.jpg', class: 'partner-logo') %>
+        <%= image_tag('lp/festival/Logo_KRW.png', class: 'partner-logo') %>
+        <%= image_tag('lp/festival/Logo_WAW.png', class: 'partner-logo') %>
+        <%= image_tag('lp/festival/Logo_BZ.png', class: 'partner-logo') %>
+      </div>
+
+      <br><br>
+
+      <div class="hl-subtext">
+        <p><strong>ProjektpartnerInnen Mischung: Nordbahnhof</strong></p>
+      </div>
+
+      <div class="partner">
+        <%= image_tag('lp/festival/Logo_TU.png', class: 'partner-logo smaller') %>
+        <%= image_tag('lp/festival/Logo_Wohnbau.png', class: 'partner-logo smaller') %>
+        <%= image_tag('lp/festival/Logo_design_build.jpg', class: 'partner-logo smaller') %>
+        <%= image_tag('lp/festival/Logo_isra.png', class: 'partner-logo smaller') %>
+        <%= image_tag('lp/festival/Logo_egw.png', class: 'partner-logo smaller') %>
+        <%= image_tag('lp/festival/Logo_azw.png', class: 'partner-logo smaller') %>
+        <%= image_tag('lp/festival/Logo_Studio_Vlay.png', class: 'partner-logo smaller') %>
       </div>
     </div>
 
-    <button class="btn-primary -large -active pages" data-nav="page_tickets">Hol dir dein Festival Ticket</button>
 
-  </div>
-
-  <!-- PAGE Partner-->
-
-  <div id="page_partner" class="page">
-
-    <div class="hl-subtext">
-      <h1><span><h1>Sponsoren & KooperationspartnerInnen</h1></span></h1>
-    </div>
-
-    <p class="foerdergeber">
-      Das Raumteilerfestival wird von imGrätzl.at veranstaltet und ist Teil des Smart-City-Demoprojekt Mischung: Nordbahnhof (Lead TU Wien).
-      <br>
-      Dieses Projekt wird aus Mitteln des Klima- und Energiefonds gefördert und im Rahmen der Smart-Cities-Initiative durchgeführt.
-    </p>
-
-    <div class="partner foerderlogos">
-      <%= image_tag('lp/festival/Logo_klimafond.png', class: 'partner-logo') %>
-      <%= image_tag('lp/festival/Logo_TU.png', class: 'partner-logo') %>
-    </div>
-
-    <div class="hl-subtext">
-      <p><strong>In Kooperation mit</strong></p>
-    </div>
-
-    <div class="partner section-area">
-      <%= image_tag('lp/festival/Logo_WKO.png', class: 'partner-logo') %>
-      <%= image_tag('lp/festival/Logo_KRW.png', class: 'partner-logo') %>
-      <%= image_tag('lp/festival/Logo_WAW.png', class: 'partner-logo') %>
-    </div>
-
-    <br><br>
-
-    <div class="hl-subtext">
-      <p><strong>ProjektpartnerInnen Mischung: Nordbahnhof</strong></p>
-    </div>
-
-    <div class="partner">
-      <%= image_tag('lp/festival/Logo_TU.png', class: 'partner-logo smaller') %>
-      <%= image_tag('lp/festival/Logo_design_build.jpg', class: 'partner-logo smaller') %>
-      <%= image_tag('lp/festival/Logo_egw.png', class: 'partner-logo smaller') %>
-      <%= image_tag('lp/festival/Logo_isra.png', class: 'partner-logo smaller') %>
-      <%= image_tag('lp/festival/Logo_Studio_Vlay.png', class: 'partner-logo smaller') %>
-      <%= image_tag('lp/festival/Logo_azw.png', class: 'partner-logo smaller') %>
-    </div>
-  </div>
-
-
-</section>
+  </section>

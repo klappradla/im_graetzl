@@ -24,6 +24,8 @@ class Notification::ImmediateMail
       from_email: FROM_EMAIL,
       from_name: FROM_NAME,
       subject: @notification.mail_subject,
+      google_analytics_domains: ['staging.imgraetzl.at', 'www.imgraetzl.at'],
+      google_analytics_campaign: 'notification-mail',
       global_merge_vars: global_vars,
       merge_vars: [
         rcpt: @user.email,

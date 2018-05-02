@@ -116,7 +116,7 @@
         <% else %>
           <div id="GAinfos">
             <span id="roomContact_url" data-id="<%= room_demand_url(@room_demand) =%>"></span>
-            <span id="roomContact_id" data-id="<%= @room_demand.id =%>"></span>
+            <span id="roomContact_id" data-id="<%= @room_demand.id =%>" data-user="<%= @room_demand.user.id =%>"></span>
             <span id="roomContactClick_id" data-id="<%= current_user.id =%>"></span>
           </div>
         <% end %>

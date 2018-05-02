@@ -47,6 +47,10 @@
     <div class="action-card-container" data-behavior="rooms-action-card-container">
       <%= render 'rooms/action_card', graetzl: @graetzl %>
     </div>
+
+    <!-- Insert Featured Card -->
+    <%= render 'shared/featured_cards/raumteilerfestival' %>
+
     <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'rooms-paginate-link' }, rel: 'nofollow' %>
   </div>
 </section>

@@ -207,8 +207,9 @@
       this.setTimeUnit = function() {
         if (this.unit == 'days') {
           for ( i=this.startDate(); i<=this.endDate(); i.setDate(i.getDate() + 1 )) {
-            var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds - Summer/Winter
-            var priorDate = new Date(i - tzoffset).toISOString().slice(0,10);
+            //var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds - Summer/Winter
+            //var priorDate = new Date(i - tzoffset).toISOString().slice(0,10);
+            var priorDate = convertDateToISOString (i);
             var priorDateFriendly = moment(i).format('ll');
             this.dates.push(priorDate);
             this.datesFriendly.push(priorDateFriendly);
@@ -231,9 +232,9 @@
         }
         // Draw Chart
 
-        console.log(this.period);
-        console.log(this.startDate());
-        console.log(this.endDate());
+        //console.log(this.period);
+        //console.log(this.startDate());
+        //console.log(this.endDate());
 
         chartTopArea = new Chart(topchart, {
           type: 'line',
@@ -269,8 +270,10 @@
       // Get Users and Set Clean User Array
       this.requestUsers = function(){
         return new Promise( function(resolve, reject) {
-          var startDate = this.startDate().toISOString().slice(0, 10);
-          var endDate = this.endDate().toISOString().slice(0, 10);
+          var startDate = convertDateToISOString (this.startDate());
+          var endDate = convertDateToISOString (this.endDate());
+          //console.log(startDate);
+          //console.log(endDate);
           $.ajax( {
             url:'/admin/users.json?' + ajaxStartDate + startDate + ajaxEndDate + endDate,
             method:'GET',
@@ -305,8 +308,10 @@
       // Get Locations and Set Clean Location Array
       this.requestLocations = function(){
         return new Promise( function(resolve, reject) {
-          var startDate = this.startDate().toISOString().slice(0, 10);
-          var endDate = this.endDate().toISOString().slice(0, 10);
+          var startDate = convertDateToISOString (this.startDate());
+          var endDate = convertDateToISOString (this.endDate());
+          //var startDate = this.startDate().toISOString().slice(0, 10);
+          //var endDate = this.endDate().toISOString().slice(0, 10);
           $.ajax( {
             url:'/admin/locations.json?' + ajaxStartDate + startDate + ajaxEndDate + endDate,
             method:'GET',
@@ -343,8 +348,10 @@
       // Get Meetings and Set Clean Meeting Array
       this.requestMeetings = function(){
         return new Promise( function(resolve, reject) {
-          var startDate = this.startDate().toISOString().slice(0, 10);
-          var endDate = this.endDate().toISOString().slice(0, 10);
+          var startDate = convertDateToISOString (this.startDate());
+          var endDate = convertDateToISOString (this.endDate());
+          //var startDate = this.startDate().toISOString().slice(0, 10);
+          //var endDate = this.endDate().toISOString().slice(0, 10);
           $.ajax( {
             url:'/admin/meetings.json?' + ajaxStartDate + startDate + ajaxEndDate + endDate,
             method:'GET',
@@ -379,8 +386,10 @@
       // Get Rooms and Set Clean Rooms Array
       this.requestRooms = function(type){
         return new Promise( function(resolve, reject) {
-          var startDate = this.startDate().toISOString().slice(0, 10);
-          var endDate = this.endDate().toISOString().slice(0, 10);
+          var startDate = convertDateToISOString (this.startDate());
+          var endDate = convertDateToISOString (this.endDate());
+          //var startDate = this.startDate().toISOString().slice(0, 10);
+          //var endDate = this.endDate().toISOString().slice(0, 10);
           $.ajax( {
             url:'/admin/' + type + '.json?' + ajaxStartDate + startDate + ajaxEndDate + endDate,
             method:'GET',
@@ -514,7 +523,7 @@
               url:'/admin/location_posts.json?q%5Bauthor_id_eq%5D=' + this.locations[0].id,
               method:'GET',
               success:function(res) {
-                console.log(res);
+                //console.log(res);
                 for( i=0; i < res.length; i++ ) {
                   this.updates.push({
                     id: res[i].id,
@@ -792,6 +801,12 @@
     /*********************************
         HELPER Functions
     *********************************/
+
+    // Convert Date to ISO String with correct TimeZone
+    var convertDateToISOString = function(date) {
+      var tzoffset = date.getTimezoneOffset() * 60000; //offset in milliseconds - Summer/Winter
+      return new Date(date - tzoffset).toISOString().slice(0,10);
+    }
 
     // Math Round for Percentage
     var round = function (wert, dez) {
@@ -1664,7 +1679,7 @@
 
       var requestLocationUpdates = function() {
         Promise.resolve(user.getLocationUpdates()).then(function(res) {
-          console.log(user.updates);
+          //console.log(user.updates);
           for ( u=0; u<user.updates.length; u++ ) {
             $('<div><a href="' + user.updates[u].update_path_admin + '" target="_blank">' + user.updates[u].title + '</a></div>')
               .appendTo('#u_update');

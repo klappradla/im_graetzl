@@ -11,6 +11,7 @@
       gtag('set', {'user_id': '<%= current_user.id =%>'});
     <% end %>
     gtag('config', 'UA-59844253-2', { 'anonymize_ip': true });
+    gtag('config', 'AW-807401138');
   </script>
   <!-- /GA -->
 
@@ -31,6 +32,22 @@
     src="https://www.facebook.com/tr?id=785505584900772&ev=PageView&noscript=1"
   /></noscript>
   <!-- FB -->
+
+  <script>
+  $(document).ready(function() {
+    if ($("#flash .notice").exists()) {
+      //if ( $("#flash .alert").text().indexOf('Anmeldedaten') > 0 ){
+      if ( $("#flash .notice").text().indexOf('Dein Account ist nun freigeschaltet') > 0 ){
+        // GA
+        gtag('event', 'sign_up', {'event_category': 'Registration'});
+        // G-AW
+        gtag('event', 'conversion', {'send_to': 'AW-807401138/zBwECJ738IABELLt_4AD'});
+        // FB
+        fbq('track', 'CompleteRegistration');
+      }
+    }
+  });
+  </script>
 
 <!-- /Production -->
 <% else %>

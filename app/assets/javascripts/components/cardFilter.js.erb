@@ -34,6 +34,7 @@ APP.components.cardFilter = (function() {
     filterForm.on('ajax:success', function() {
       stopSpinner();
       addActionCard();
+      addFeaturedCard();
       adjustNewCards();
     });
 
@@ -105,6 +106,16 @@ APP.components.cardFilter = (function() {
         cardGrid.children(":eq(1)").after(actionCard);
       } else {
         cardGrid.append(actionCard);
+      }
+    }
+  }
+
+  // TODO: Hack for Adding Feature Card
+  function addFeaturedCard() {
+    if ($('.featuredCard').exists()) {
+      var featuredCard = $('.featuredCard').clone().removeClass('-hidden');
+      if (cardGrid.children(':eq(2)').exists()) {
+        cardGrid.children(':eq(2)').after(featuredCard);
       }
     }
   }

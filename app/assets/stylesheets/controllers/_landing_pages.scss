@@ -112,7 +112,7 @@ section.lp {
       flex-wrap: wrap;
       img.partner-logo {
         width:auto;
-        height:60px;
+        height:70px;
         margin-left:10px;
         margin-right:10px;
         margin-bottom: 20px;
@@ -126,7 +126,7 @@ section.lp {
         }
         &.smaller {
           width:auto;
-          height:40px;
+          height:35px;
           margin-right:15px;
         }
       }
@@ -169,9 +169,40 @@ section.lp {
         background-image: url(image_path('lp/festival/RTF_Icon_Info.png'));
       }
 
+      &.-nbh h2 {
+        //background-image: url(image_path('lp/festival/Logo_NBH.png'));
+        //background-size: auto 70%;
+        //padding-top:10px;
+      }
+
       .card {
         opacity : 0.5;
       }
+
+      &.-nbh, &.-map {
+        width:100%;
+        img {
+          width:100%;
+          height:auto;
+        }
+      }
+
+      &.-nbh {
+        h2 {padding-top: 0px;}
+        img {padding-top: 10px;}
+        .wrp {
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          div, img {
+            width: 100%;
+          }
+          @include respond-to("<=medium") {
+            flex-wrap: wrap;
+          }
+        }
+      }
+
       &.-market {
         .card {
           background-color: rgba(222, 239, 225, 0.7);
@@ -186,7 +217,7 @@ section.lp {
           padding-right:0px;
           padding-top:100px;
           @include respond-to(">=large") {
-            padding-top:50px;
+            padding-top:0px;
           }
           div {
             position: relative;
@@ -243,6 +274,17 @@ section.lp {
       div.location {
         font-size: 2.0rem;
         text-align: right;
+        .fb {
+          display: inline-block;
+          a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            svg.icon-social-facebook {
+              display: inline-block;
+            }
+          }
+        }
       }
       div.logo img {
         width:100%;
@@ -334,7 +376,6 @@ section.lp {
       }
 
       ul.warum {
-        margin-top:-20px;
         padding-bottom: 5px;
         li {
           padding-bottom:20px;
@@ -389,7 +430,17 @@ section.lp {
     }
 
     .page {
-      margin-top:30px;
+      margin-top:40px;
+      &.rooms {
+        margin-top: 70px;
+        .cardBoxCollection {
+          a.btn-primary {
+            background-color: #e2226e;
+            color:white;
+          }
+          .roomtype {color: #e2226e;}
+        }
+      }
     }
 
     p.foerdergeber {
@@ -427,7 +478,15 @@ section.lp {
     }
 
     // Timetable
-    .cd-schedule li.events-group ul {max-height:1000px !important;}
+    .cd-schedule li.events-group ul {max-height:1600px !important;}
+
+    @include respond-to(">=large") {
+      .cd-schedule .events ul li.events-group:nth-child(1) {width:40% !important}
+      .cd-schedule .events ul li.events-group:nth-child(2) {width:40% !important}
+      .cd-schedule .events ul li.events-group:nth-child(3) {width:20% !important}
+    }
+
+
     li[data-content="event-info-1c"] {
       @include respond-to("<=large") {
         width:100% !important;
