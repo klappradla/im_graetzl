@@ -120,10 +120,41 @@ APP.components.cardFilter = (function() {
     }
   }
 
+
+  // Infinite Scrolling - Load More Data if Scrolling to Bottom
+  function initInfiniteScroll() {
+
+    // Click Btn only once - Set to true if clicked.
+    var btn_link_load_clicked = false;
+
+    $(window).scroll(function() {
+      if (cardGrid.exists()) {
+        // Click Btn on bottom Scroll via JS if Btn & more Data exists (is not hidden)
+        if (!$('.link-load').hasClass('hide')) {
+
+          var scrollTop = $(document).scrollTop();
+          var windowHeight = $(window).height();
+          var height = $(document).height() - windowHeight;
+          var scrollPercentage = (scrollTop / height);
+
+          // if the scroll is more than 80% from the top, load more content.
+          if(scrollPercentage > 0.8 && btn_link_load_clicked == false) {
+            $('.link-load').click();
+            console.log('scrolled and clicked');
+            btn_link_load_clicked = true;
+          }
+        }
+      }
+    });
+  } // Infinite Scrolling
+
+
+
   function adjustNewCards() {
     var newCards = cardGrid.find('[data-behavior="masonry-card"]').not('[data-appended]');
     cardGrid.masonry('appended', newCards);
     newCards.attr("data-appended", true);
+    initInfiniteScroll();
   }
 
   return {
