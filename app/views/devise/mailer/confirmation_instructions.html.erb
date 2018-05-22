@@ -1,4 +1,4 @@
-<p>Hallo <%= @resource.first_name %>, 
+<p>Hallo <%= @resource.first_name %>,
 
 <p>willkommen im Grätzl <%= @resource.graetzl.name %>!</p>
 
@@ -7,11 +7,18 @@
   <%= link_to 'Registrierung jetzt abschließen!', confirmation_url(confirmation_token: @token) %>
 </p>
 
+<p>
+  Sobald du registriert bist, kannst du dich einloggen und deine E-Mail Frequenz für Neuigkeiten & Updates aus deinem Stadtteil <%= @resource.graetzl.name %> einstellen.
+  <br>Klicke zuerst obigen Link 'Registrierung jetzt abschließen', danach findest du <a href="/user/einstellungen#tab-2">hier</a> deine Eintellungen.
+
+</p>
+
 <p>Wir freuen uns auf Dich!<p>
 
 <p>
   Liebe Grüße,<br>
   dein Team von imGrätzl.at<br>
   --<br>
-  <%= mail_to 'wir@imGrätzl.at' %>
+  Bei Fragen schreib uns an:
+  <%= mail_to 'wir@imgraetzl.at' %>
 </p>

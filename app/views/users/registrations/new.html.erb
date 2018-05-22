@@ -7,111 +7,122 @@
   </div>
 
   <%= form_for(resource, as: resource_name, url: registration_path, html: { data: { graetzl: resource.graetzl.name, zip: resource.graetzl.district.try(:zip) } }) do |f| %>
-      <%= devise_error_messages! %>
+  <%= devise_error_messages! %>
 
-      <div class="form-register">
+  <div class="form-register">
 
-        <div class="field">
-          <%= f.fields_for :address do |address_fields| %>
-              <%= address_fields.hidden_field :street_name %>
-              <%= address_fields.hidden_field :street_number %>
-              <%= address_fields.hidden_field :zip %>
-              <%= address_fields.hidden_field :city %>
-              <%= address_fields.hidden_field :coordinates %>
-          <% end %>
-        </div>
+    <div class="field">
+      <%= f.fields_for :address do |address_fields| %>
+      <%= address_fields.hidden_field :street_name %>
+      <%= address_fields.hidden_field :street_number %>
+      <%= address_fields.hidden_field :zip %>
+      <%= address_fields.hidden_field :city %>
+      <%= address_fields.hidden_field :coordinates %>
+      <% end %>
+    </div>
 
-        <div class="field">
-          <%= f.hidden_field :graetzl_id %>
-        </div>
+    <div class="field">
+      <%= f.hidden_field :graetzl_id %>
+    </div>
 
-        <div class="user-login">
-          <p class="txt"><span>Ein paar Dinge</span> müssen wir noch wissen ...</p>
+    <div class="user-login">
+      <p class="txt"><span>Ein paar Dinge</span> müssen wir noch wissen ...</p>
 
-          <div class="input-field">
-            <%= f.label :username do %>
-              <%= icon_tag "user-avatar" %>
-              <span>Username</span>
-            <% end %>
-            <%= f.text_field :username, placeholder: "Nickname wählen" %>
-          </div>
+      <div class="input-field">
+        <%= f.label :username do %>
+        <%= icon_tag "user-avatar" %>
+        <span>Username</span>
+        <% end %>
+        <%= f.text_field :username, placeholder: "Nickname wählen" %>
+      </div>
 
-          <div class="input-field">
-            <%= f.label :email do %>
-              <%= icon_tag "at-symbol" %>
-              <span>E-Mail</span>
-            <% end %>
-            <%= f.email_field :email, placeholder: "E-Mail" %>
-          </div>
+      <div class="input-field">
+        <%= f.label :email do %>
+        <%= icon_tag "at-symbol" %>
+        <span>E-Mail</span>
+        <% end %>
+        <%= f.email_field :email, placeholder: "E-Mail" %>
+      </div>
 
-          <div class="input-field">
-            <%= f.label :password do %>
-              <%= icon_tag "lock-1" %>
-              <span>Passwort</span>
-            <% end %>
-            <%= f.password_field :password, autocomplete: "off" %>
-          </div>
+      <div class="input-field">
+        <%= f.label :password do %>
+        <%= icon_tag "lock-1" %>
+        <span>Passwort</span>
+        <% end %>
+        <%= f.password_field :password, autocomplete: "off" %>
+      </div>
 
-        </div>
+    </div>
 
-        <div class="user-personal">
-          <p class="txt">... und um dich besser <span>kennen zu lernen</span>.</p>
+    <div class="user-personal">
+      <p class="txt">... und um dich besser <span>kennen zu lernen</span>.</p>
 
-          <div class="input-field">
-            <%= f.label :first_name do %>
-              <%= icon_tag "user-avatar" %>
-              <span>Vorname</span>
-            <% end %>
-            <%= f.text_field :first_name %>
-          </div>
+      <div class="input-field">
+        <%= f.label :first_name do %>
+        <%= icon_tag "user-avatar" %>
+        <span>Vorname</span>
+        <% end %>
+        <%= f.text_field :first_name %>
+      </div>
 
-          <div class="input-field">
-            <%= f.label :last_name do %>
-              <%= icon_tag "user-avatar" %>
-              <span>Nachname</span>
-            <% end %>
-            <%= f.text_field :last_name %>
-          </div>
+      <div class="input-field">
+        <%= f.label :last_name do %>
+        <%= icon_tag "user-avatar" %>
+        <span>Nachname</span>
+        <% end %>
+        <%= f.text_field :last_name %>
+      </div>
 
-          <div class="upload-oldschool">
-            <%= f.label :avatar do %>
-              <%= icon_tag "photo-camera" %>
-              <span>Profilbild</span>
-            <% end %>
-            <div class="field-wrp">
-              <% if resource.avatar %>
-                  <div class="preview-wrp">
-                    <%= image_tag attachment_url(resource, :avatar, :fill, 100, 100), class: 'img-round' %>
-                    <div class="input-checkbox">
-                      <%= f.check_box :remove_avatar, { class: 'deleteCheckbox' } %>
-                      <%= f.label :remove_avatar, 'Löschen' %>
-                    </div>
-                  </div>
-              <% end %>
-              <%= f.attachment_field :avatar, direct: true, presigned: true %>
+      <div class="upload-oldschool">
+        <%= f.label :avatar do %>
+        <%= icon_tag "photo-camera" %>
+        <span>Profilbild</span>
+        <% end %>
+        <div class="field-wrp">
+          <% if resource.avatar %>
+          <div class="preview-wrp">
+            <%= image_tag attachment_url(resource, :avatar, :fill, 100, 100), class: 'img-round' %>
+            <div class="input-checkbox">
+              <%= f.check_box :remove_avatar, { class: 'deleteCheckbox' } %>
+              <%= f.label :remove_avatar, 'Löschen' %>
             </div>
           </div>
-
-          <div class="input-checkbox">
-            <%= f.check_box :role, {}, :business, nil %>
-            <%= f.label :role, 'Ich bin wirtschaftlich und/oder kreativ tätig' %>
-          </div>
-
-        </div>
-
-        <div class="wrp-checkboxes">
-          <div class="input-checkbox">
-            <%= f.check_box(:newsletter )%>
-            <%= f.label :newsletter, 'Newsletter abonnieren' %>
-          </div>
-          <div class="input-checkbox">
-            <%= f.check_box(:terms_and_conditions )%>
-            <%= f.label :terms_and_conditions, "Ich stimme den #{link_to 'AGBs', info_agb_path, target: '_blank'} zu".html_safe %>
-          </div>
+          <% end %>
+          <%= f.attachment_field :avatar, direct: true, presigned: true %>
         </div>
       </div>
 
-      <%= f.button "Jetzt registrieren!", data: { disable_with: 'speichert...' }, class: 'btn-primary', id: 'btn-register' %>
+      <div class="input-checkbox">
+        <%= f.check_box :role, {}, :business, nil %>
+        <%= f.label :role, 'Ich bin wirtschaftlich und/oder kreativ tätig' %>
+      </div>
+
+    </div>
+
+    <div class="wrp-checkboxes">
+      <div class="input-checkbox">
+        <%= f.check_box(:newsletter )%>
+        <%= f.label :newsletter, 'Newsletter abonnieren' %>
+      </div>
+      <div class="input-checkbox">
+        <%= f.check_box(:terms_and_conditions )%>
+        <%= f.label :terms_and_conditions, "Ich stimme den #{link_to 'AGBs', info_agb_path, target: '_blank'} zu".html_safe %>
+      </div>
+    </div>
+
+    <div class="wrp-checkboxes">
+      <div class="input-checkbox">
+        <p>
+          Als registrierter Grätzl-Nutzer erhältst du Neuigkeiten & Updates aus deinem Stadtteil <%= resource.graetzl.name %>.
+          Bitte stelle die E-Mail Frequenz nach der Registrierung unter deinen Einstellungen ein. Du kannst dort natürlich auch das Grätzl Mail abbestellen.
+          Der allgemeine Newsletter enthält News rund um imGrätzl.at vom imGrätzl Team (ca. alle 4 Wochen.)
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <%= f.button "Jetzt registrieren!", data: { disable_with: 'speichert...' }, class: 'btn-primary', id: 'btn-register' %>
 
   <% end %>
 
