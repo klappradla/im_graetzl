@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180413124237) do
+ActiveRecord::Schema.define(version: 20180430150255) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,45 @@ ActiveRecord::Schema.define(version: 20180413124237) do
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.index ["location_id"], name: "index_billing_addresses_on_location_id", using: :btree
+  end
+
+  create_table "call_fields", force: :cascade do |t|
+    t.integer  "call_id"
+    t.string   "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["call_id"], name: "index_call_fields_on_call_id", using: :btree
+  end
+
+  create_table "call_submission_fields", force: :cascade do |t|
+    t.integer  "call_submission_id"
+    t.integer  "call_field_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["call_field_id"], name: "index_call_submission_fields_on_call_field_id", using: :btree
+    t.index ["call_submission_id"], name: "index_call_submission_fields_on_call_submission_id", using: :btree
+  end
+
+  create_table "call_submissions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "call_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["call_id"], name: "index_call_submissions_on_call_id", using: :btree
+    t.index ["user_id"], name: "index_call_submissions_on_user_id", using: :btree
+  end
+
+  create_table "calls", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "room_offer_id"
+    t.integer  "group_id"
+    t.date     "starts_at"
+    t.date     "ends_at"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["group_id"], name: "index_calls_on_group_id", using: :btree
+    t.index ["room_offer_id"], name: "index_calls_on_room_offer_id", using: :btree
   end
 
   create_table "categories", force: :cascade do |t|
@@ -419,6 +458,7 @@ ActiveRecord::Schema.define(version: 20180413124237) do
     t.string   "phone"
     t.string   "avatar_id"
     t.string   "avatar_content_type"
+    t.integer  "status",                                            default: 0
     t.index ["district_id"], name: "index_room_offers_on_district_id", using: :btree
     t.index ["graetzl_id"], name: "index_room_offers_on_graetzl_id", using: :btree
     t.index ["location_id"], name: "index_room_offers_on_location_id", using: :btree
@@ -469,20 +509,20 @@ ActiveRecord::Schema.define(version: 20180413124237) do
     t.string   "username",                      limit: 255
     t.string   "first_name",                    limit: 255
     t.string   "last_name",                     limit: 255
+    t.boolean  "newsletter",                                default: false, null: false
     t.integer  "graetzl_id"
     t.string   "avatar_id"
+    t.integer  "enabled_website_notifications",             default: 0
     t.integer  "role"
     t.string   "avatar_content_type"
+    t.integer  "immediate_mail_notifications",              default: 0
+    t.integer  "daily_mail_notifications",                  default: 0
+    t.integer  "weekly_mail_notifications",                 default: 0
     t.string   "slug"
     t.string   "cover_photo_id"
     t.string   "cover_photo_content_type"
     t.text     "bio"
     t.string   "website"
-    t.integer  "weekly_mail_notifications",                 default: 0
-    t.integer  "daily_mail_notifications",                  default: 0
-    t.integer  "immediate_mail_notifications",              default: 0
-    t.integer  "enabled_website_notifications",             default: 0
-    t.boolean  "newsletter",                                default: false, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["created_at"], name: "index_users_on_created_at", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -509,6 +549,13 @@ ActiveRecord::Schema.define(version: 20180413124237) do
     t.index ["slug"], name: "index_zuckerls_on_slug", using: :btree
   end
 
+  add_foreign_key "call_fields", "calls", on_delete: :cascade
+  add_foreign_key "call_submission_fields", "call_fields", on_delete: :cascade
+  add_foreign_key "call_submission_fields", "call_submissions", on_delete: :cascade
+  add_foreign_key "call_submissions", "calls", on_delete: :cascade
+  add_foreign_key "call_submissions", "users", on_delete: :nullify
+  add_foreign_key "calls", "groups", on_delete: :nullify
+  add_foreign_key "calls", "room_offers", on_delete: :cascade
   add_foreign_key "discussion_posts", "discussions"
   add_foreign_key "discussion_posts", "users"
   add_foreign_key "discussions", "groups"
