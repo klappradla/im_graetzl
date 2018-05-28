@@ -1,0 +1,47 @@
+<aside class="sideBar">
+
+  <div class="sideBarbox contact">
+    <%= link_to content_tag(:h3, @room_call.graetzl.name, class: 'sideflag -L'), @room_call.graetzl %>
+
+    <div class="iconlist">
+      <% if @room_call.address %>
+        <div class="address icontxt">
+          <%= icon_tag "map-location" %>
+          <%= "#{@room_call.address.street_name} #{@room_call.address.street_number}" %><br>
+          <%= "#{@room_call.address.zip} #{@room_call.address.city}" %><br>
+        </div>
+      <% end %>
+
+      <div class="total-vacancy icontxt">
+        <%= icon_tag "resize-maximize" %>
+        <%= @room_call.total_vacancies %> freie Platze<br>
+      </div>
+
+      <% if user_signed_in? && current_user == @room_call.user %>
+        <div class="btn-group">
+          <%= link_to 'Bearbeiten', edit_room_call_path(@room_call),
+            class: 'btn-secondary -mint -small'  %>
+        </div>
+      <% end %>
+    </div>
+
+    <% if @room_call.address.try(:coordinates) %>
+      <%= link_to google_map_url(@room_call.address), class: 'gmap' do %>
+        <%= image_tag static_map_url(@room_call.address.coordinates, zoom: 16, size: [250,150]) %>
+      <% end %>
+    <% end %>
+
+  </div>
+
+  <% if @room_call.location %>
+    <aside class="location">
+      <%= render @room_call.location %>
+    </aside>
+  <% end %>
+
+  <% if @room_call.email.present? && current_user %>
+    <%= mail_to @room_call.email, "Anbieter kontaktieren", class: 'btn-primary -mint -contact', id: 'room-contact-btn', subject: "Raumteiler Kontakt" %>
+  <% end %>
+
+  <%= link_to "Alle Raumteiler", rooms_wien_path, class: 'btn-primary -mint' %>
+</aside>

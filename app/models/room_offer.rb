@@ -24,7 +24,7 @@ class RoomOffer < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
 
   enum offer_type: { offering_room: 0, seeking_roommate: 1 }
-  enum status: { available: 0, occupied: 1, open_call: 2, closed_call: 3}
+  enum status: { available: 0, occupied: 1 }
   acts_as_taggable_on :keywords
 
   attachment :cover_photo, type: :image

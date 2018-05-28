@@ -1,0 +1,53 @@
+active_admin_form_for [:admin, resource] do |f|
+  semantic_errors
+  inputs do
+    input :user, collection: User.all.sort_by(&:username), include_blank: false, input_html: { :class => 'admin-filter-select'}
+    input :location, collection: Location.all.sort_by(&:name), input_html: { :class => 'admin-filter-select'}
+
+    inputs 'Description' do
+      input :title
+      input :subtitle
+      input :description
+      input :about_us
+      input :about_partner
+      input :total_vacancies
+      input :starts_at, default: Date.current
+      input :ends_at, default: Date.current
+      input :opens_at, default: Date.current
+      input :status
+    end
+
+    inputs "Photos" do
+      input :avatar, as: :file, hint: (image_tag(attachment_url(f.object, :avatar, :fill, 100, 100)) if f.object.avatar)
+      input :remove_avatar, as: :boolean if f.object.avatar
+      input :cover_photo, as: :file, hint: (image_tag(attachment_url(f.object, :cover_photo, :fill, 100, 100)) if f.object.cover_photo)
+      input :remove_cover_photo, as: :boolean if f.object.cover_photo
+    end
+
+    inputs "Contact" do
+      input :first_name
+      input :last_name
+      input :website
+      input :email
+      input :phone
+    end
+
+    has_many :room_call_modules, allow_destroy: true, new_record: 'Module Hinzufügen' do |o|
+      o.input :room_module, collection: RoomModule.all, include_blank: false
+      o.input :quantity
+    end
+
+    has_many :room_call_prices, allow_destroy: true, new_record: 'Price Hinzufügen' do |o|
+      o.input :name
+      o.input :description
+      o.input :keywords
+      o.input :amount
+    end
+
+    has_many :room_call_fields, allow_destroy: true, new_record: 'Field Hinzufügen' do |o|
+      o.input :label
+    end
+  end
+
+  actions
+end

@@ -72,8 +72,17 @@ Rails.application.routes.draw do
   resources :room_offers, path: 'wien/raumteiler/raum', except: [:index] do
     get 'select', on: :collection
   end
-  
-  resources :groups, except: [:index]
+  resources :room_calls, except: [:index] do
+    post 'add_submission', on: :member
+  end
+
+
+  resources :groups, except: [:index] do
+    post 'request_join', on: :member
+    post 'accept_request', on: :member
+    post 'reject_request', on: :member
+  end
+
   resources :discussions, except: [:index]
   resources :discussion_posts, except: [:index]
 

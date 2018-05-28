@@ -1,37 +1,26 @@
 <section class="groupDetail">
   <h3><%= @group.title %> – Discussions</h3>
-
   <p><%= @group.description %></p>
 
-  <div class="discussion-box">
-    <% if current_user %>
-      <%= render 'discussions/form' %>
-    <% end %>
-  </div>
-  
-  <% @discussions.each do |discussion| %>
-    <div class="discussion-box">
-        <%= link_to discussion.discussion_posts.first.user do %>
-          <%= attachment_image_tag discussion.discussion_posts.first.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
-          <span class="username"><%= discussion.discussion_posts.first.user.first_name %> <%= discussion.discussion_posts.first.user.last_name %></span>
-        <% end %>
-        <%= link_to discussion do %>
-          <p>
-            <%= discussion.discussion_posts.first.content %>
-          </p>
-        <% end %> <!-- restarting the link here in case a href in the content interrupts it -->
-        <%= link_to discussion do %>
-          <p>
-            <% if discussion.discussion_posts.count > 1 %>
-              <span class="control">
-                <%= discussion.discussion_posts.count - 1 %> Replies
-              </span>
-            <% end %>
-            <span class="control">
-              Reply
-            </span>
-          </p>
-        <% end %>
+  <aside>
+    <h4>Admin</h4>
+    <div class="group-user group-admin">
+      <%= attachment_image_tag @group.admin, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+      <p><%= @group.admin.first_name %> <%= @group.admin.last_name %></p>
+    </div>
+
+    <h4>Members</h4>
+    <% @group.users.each do |user| %>
+      <div class="group-user group-member">
+        <%= attachment_image_tag user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+        <p><%= user.first_name %> <%= user.last_name %></p>
       </div>
+    <% end %>
+  </aside>
+
+  <% if @group.visible_to?(current_user) %>
+    <%= render 'discussions' %>
+  <% else %>
+    <%= render 'private' %>
   <% end %>
 </section>

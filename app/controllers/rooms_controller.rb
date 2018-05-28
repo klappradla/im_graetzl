@@ -3,15 +3,20 @@ class RoomsController < ApplicationController
   def index
     head :ok and return if browser.bot? && !request.format.js?
 
+    room_calls = room_calls_scope.includes(:user, :graetzl, :district)
+    room_calls = filter_calls(room_calls)
+
     room_offers = room_offers_scope.includes(:user, :graetzl, :district)
     room_offers = filter_offers(room_offers)
-    room_offers = room_offers.by_currentness.page(params[:page]).per(15)
+    room_offers = room_offers.by_currentness.page(params[:page]).per(5)
 
     room_demands = room_demands_scope.includes(:user, :graetzls, :districts, :room_categories)
     room_demands = filter_demands(room_demands)
-    room_demands = room_demands.by_currentness.page(params[:page]).per(15)
+    room_demands = room_demands.by_currentness.page(params[:page]).per(5)
 
-    @rooms = (room_offers + room_demands).sort_by(&:created_at).reverse
+    @rooms = []
+    @rooms += room_calls.sort_by(&:ends_at).reverse if params[:page].blank?
+    @rooms += (room_offers + room_demands).sort_by(&:created_at).reverse
     @next_page = room_offers.next_page.present? || room_demands.next_page.present?
   end
 
@@ -34,16 +39,17 @@ class RoomsController < ApplicationController
     end
   end
 
+  def room_calls_scope
+    RoomCall.all
+  end
+
   def filter_offers(offers)
     room_type = params.dig(:filter, :room_type)
-    if room_type.present?
-      action_type, offer_type = room_type.split("-")
-      if action_type == 'demand'
-        return RoomOffer.none
-      elsif offer_type.present?
-        offers = offers.where(offer_type: offer_type)
-      end
+    if room_type.present? && room_type != 'offer'
+      return RoomOffer.none
     end
+
+    offers = offers.available unless params.dig(:filter, :show_inactive).present?
 
     room_category_ids = params.dig(:filter, :room_category_ids)&.select(&:present?)
     if room_category_ids.present?
@@ -60,13 +66,8 @@ class RoomsController < ApplicationController
 
   def filter_demands(demands)
     room_type = params.dig(:filter, :room_type)
-    if room_type.present?
-      action_type, demand_type = room_type.split("-")
-      if action_type == 'offer'
-        return RoomDemand.none
-      elsif demand_type.present?
-        demands = demands.where(demand_type: demand_type)
-      end
+    if room_type.present? && room_type != 'demand'
+      return RoomDemand.none
     end
 
     room_category_ids = params.dig(:filter, :room_category_ids)&.select(&:present?)
@@ -80,6 +81,17 @@ class RoomsController < ApplicationController
     end
 
     demands
+  end
+
+  def filter_calls(calls)
+    room_type = params.dig(:filter, :room_type)
+    if room_type.present? && room_type != 'call'
+      return RoomCall.none
+    end
+
+    calls = calls.open unless params.dig(:filter, :show_inactive).present?
+
+    calls
   end
 
 end

@@ -1,0 +1,63 @@
+<section class="roomDetail -Call">
+
+  <div class="imgHeader">
+    <%= attachment_image_tag @room_call, :cover_photo, :fill, 980, 420, fallback: 'cover_photo/980x370.png', class: 'titleImg' %>
+    <div class="headContent">
+      <div class="introtxt">
+        <h1><span><%= @room_call.open? ? "Open Call" : "Closed Call" %></span></h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="mainContent">
+    <div class="introtxt">
+      <h3><%= @room_call.title %></h3>
+      <h4><%= @room_call.subtitle %></h4>
+    </div>
+
+    <div class="txt"><%= @room_call.description %></div>
+
+    <div class="entryImgUploads" data-featherlight-gallery data-featherlight-filter="a">
+      <% @room_call.images.each do |image| %>
+        <%= link_to attachment_image_tag(image, :file, :fill, 200, 200), attachment_url(image, :file, :limit, 800, 800) %>
+      <% end %>
+    </div>
+
+    <section>
+      <div class="bigicontext-element">
+        <%= icon_tag "users" %>
+        <div class="txt">Mein idealer Raumpartner</div>
+      </div>
+      <div class="txt"><%= @room_call.about_partner %></div>
+    </section>
+
+    <section class="owner">
+      <div class="bigicontext-element">
+        <% if @room_call.user %>
+          <%= attachment_image_tag(@room_call, :avatar, :fill, 200, 200, class: 'room_call avatar img-round', fallback: 'avatar/user/200x200.png') %>
+        <% else %>
+          <%= icon_tag "user-avatar" %>
+        <% end %>
+        <div class="txt">Über mich</div>
+      </div>
+      <div class="txt"><%= @room_call.about_us %></div>
+    </section>
+
+    <% @room_call.room_call_modules.includes(:room_module).each do |call_module| %>
+      <h4> <%= call_module.room_module.name %> </h4>
+      <p> <%= call_module.quantity %> </p>
+    <% end %>
+
+    <% @room_call.room_call_prices.each do |room_price| %>
+      <h4> <%= room_price.name %> </h4>
+      <p> <%= room_price.description %> </p>
+      <p> <%= room_price.amount %> Euro </p>
+    <% end %>
+
+    <%= render 'room_calls/show/contact' %>
+    <%= render 'room_calls/show/submission_form' %>
+  </div>
+
+  <%= render 'room_calls/show/sidebar' %>
+
+</section>

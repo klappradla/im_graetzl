@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180430150255) do
+ActiveRecord::Schema.define(version: 20180527203951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,45 +80,6 @@ ActiveRecord::Schema.define(version: 20180430150255) do
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.index ["location_id"], name: "index_billing_addresses_on_location_id", using: :btree
-  end
-
-  create_table "call_fields", force: :cascade do |t|
-    t.integer  "call_id"
-    t.string   "label"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["call_id"], name: "index_call_fields_on_call_id", using: :btree
-  end
-
-  create_table "call_submission_fields", force: :cascade do |t|
-    t.integer  "call_submission_id"
-    t.integer  "call_field_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.index ["call_field_id"], name: "index_call_submission_fields_on_call_field_id", using: :btree
-    t.index ["call_submission_id"], name: "index_call_submission_fields_on_call_submission_id", using: :btree
-  end
-
-  create_table "call_submissions", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "call_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["call_id"], name: "index_call_submissions_on_call_id", using: :btree
-    t.index ["user_id"], name: "index_call_submissions_on_user_id", using: :btree
-  end
-
-  create_table "calls", force: :cascade do |t|
-    t.string   "title"
-    t.text     "description"
-    t.integer  "room_offer_id"
-    t.integer  "group_id"
-    t.date     "starts_at"
-    t.date     "ends_at"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["group_id"], name: "index_calls_on_group_id", using: :btree
-    t.index ["room_offer_id"], name: "index_calls_on_room_offer_id", using: :btree
   end
 
   create_table "categories", force: :cascade do |t|
@@ -239,6 +200,16 @@ ActiveRecord::Schema.define(version: 20180430150255) do
     t.string   "slug",        limit: 255
     t.integer  "users_count",                                      default: 0
     t.index ["slug"], name: "index_graetzls_on_slug", using: :btree
+  end
+
+  create_table "group_join_requests", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.boolean  "rejected",   default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["group_id"], name: "index_group_join_requests_on_group_id", using: :btree
+    t.index ["user_id"], name: "index_group_join_requests_on_user_id", using: :btree
   end
 
   create_table "group_users", force: :cascade do |t|
@@ -374,6 +345,87 @@ ActiveRecord::Schema.define(version: 20180430150255) do
     t.index ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
   end
 
+  create_table "room_call_fields", force: :cascade do |t|
+    t.integer  "room_call_id"
+    t.string   "label"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["room_call_id"], name: "index_room_call_fields_on_room_call_id", using: :btree
+  end
+
+  create_table "room_call_modules", force: :cascade do |t|
+    t.integer  "room_call_id"
+    t.integer  "room_module_id"
+    t.integer  "quantity",       default: 1
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["room_call_id"], name: "index_room_call_modules_on_room_call_id", using: :btree
+    t.index ["room_module_id"], name: "index_room_call_modules_on_room_module_id", using: :btree
+  end
+
+  create_table "room_call_prices", force: :cascade do |t|
+    t.integer  "room_call_id"
+    t.string   "name"
+    t.text     "description"
+    t.decimal  "amount",       precision: 10, scale: 2
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.index ["room_call_id"], name: "index_room_call_prices_on_room_call_id", using: :btree
+  end
+
+  create_table "room_call_submission_fields", force: :cascade do |t|
+    t.integer  "room_call_submission_id"
+    t.integer  "room_call_field_id"
+    t.text     "content"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["room_call_field_id"], name: "index_room_call_submission_fields_on_room_call_field_id", using: :btree
+    t.index ["room_call_submission_id"], name: "index_room_call_submission_fields_on_room_call_submission_id", using: :btree
+  end
+
+  create_table "room_call_submissions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "room_call_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["room_call_id"], name: "index_room_call_submissions_on_room_call_id", using: :btree
+    t.index ["user_id"], name: "index_room_call_submissions_on_user_id", using: :btree
+  end
+
+  create_table "room_calls", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "group_id"
+    t.date     "starts_at"
+    t.date     "ends_at"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.string   "subtitle"
+    t.text     "about_us"
+    t.text     "about_partner"
+    t.date     "opens_at"
+    t.string   "slug"
+    t.integer  "total_vacancies",          default: 0
+    t.integer  "graetzl_id"
+    t.integer  "district_id"
+    t.integer  "user_id"
+    t.integer  "location_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "website"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "avatar_id"
+    t.string   "avatar_content_type"
+    t.string   "cover_photo_id"
+    t.string   "cover_photo_content_type"
+    t.index ["district_id"], name: "index_room_calls_on_district_id", using: :btree
+    t.index ["graetzl_id"], name: "index_room_calls_on_graetzl_id", using: :btree
+    t.index ["group_id"], name: "index_room_calls_on_group_id", using: :btree
+    t.index ["location_id"], name: "index_room_calls_on_location_id", using: :btree
+    t.index ["user_id"], name: "index_room_calls_on_user_id", using: :btree
+  end
+
   create_table "room_categories", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -415,6 +467,14 @@ ActiveRecord::Schema.define(version: 20180430150255) do
     t.string   "avatar_content_type"
     t.index ["location_id"], name: "index_room_demands_on_location_id", using: :btree
     t.index ["user_id"], name: "index_room_demands_on_user_id", using: :btree
+  end
+
+  create_table "room_modules", force: :cascade do |t|
+    t.string   "name"
+    t.string   "image_id"
+    t.string   "image_content_type"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "room_offer_categories", force: :cascade do |t|
@@ -549,20 +609,28 @@ ActiveRecord::Schema.define(version: 20180430150255) do
     t.index ["slug"], name: "index_zuckerls_on_slug", using: :btree
   end
 
-  add_foreign_key "call_fields", "calls", on_delete: :cascade
-  add_foreign_key "call_submission_fields", "call_fields", on_delete: :cascade
-  add_foreign_key "call_submission_fields", "call_submissions", on_delete: :cascade
-  add_foreign_key "call_submissions", "calls", on_delete: :cascade
-  add_foreign_key "call_submissions", "users", on_delete: :nullify
-  add_foreign_key "calls", "groups", on_delete: :nullify
-  add_foreign_key "calls", "room_offers", on_delete: :cascade
   add_foreign_key "discussion_posts", "discussions"
   add_foreign_key "discussion_posts", "users"
   add_foreign_key "discussions", "groups"
   add_foreign_key "district_graetzls", "districts", on_delete: :cascade
   add_foreign_key "district_graetzls", "graetzls", on_delete: :cascade
+  add_foreign_key "group_join_requests", "groups", on_delete: :cascade
+  add_foreign_key "group_join_requests", "users", on_delete: :cascade
   add_foreign_key "groups", "room_offers"
   add_foreign_key "groups", "users", column: "admin_id"
+  add_foreign_key "room_call_fields", "room_calls", on_delete: :cascade
+  add_foreign_key "room_call_modules", "room_calls", on_delete: :cascade
+  add_foreign_key "room_call_modules", "room_modules", on_delete: :cascade
+  add_foreign_key "room_call_prices", "room_calls", on_delete: :cascade
+  add_foreign_key "room_call_submission_fields", "room_call_fields", on_delete: :cascade
+  add_foreign_key "room_call_submission_fields", "room_call_submissions", on_delete: :cascade
+  add_foreign_key "room_call_submissions", "room_calls", on_delete: :cascade
+  add_foreign_key "room_call_submissions", "users", on_delete: :nullify
+  add_foreign_key "room_calls", "districts", on_delete: :nullify
+  add_foreign_key "room_calls", "graetzls", on_delete: :nullify
+  add_foreign_key "room_calls", "groups", on_delete: :nullify
+  add_foreign_key "room_calls", "locations", on_delete: :nullify
+  add_foreign_key "room_calls", "users", on_delete: :nullify
   add_foreign_key "room_demand_categories", "room_categories", on_delete: :cascade
   add_foreign_key "room_demand_categories", "room_demands", on_delete: :cascade
   add_foreign_key "room_demand_graetzls", "graetzls", on_delete: :cascade
