@@ -1,0 +1,52 @@
+<section>
+  <div class="bigicontext-element">
+    <%= icon_tag "profile-vcard" %>
+    <div class="txt">Kontakt-Infos</div>
+  </div>
+
+  <% if current_user %>
+    <div class="contact-login-msg -show">
+      <!-- Show Contact Link -->
+      <a href="#" id="show-contact-link">Kontaktinformationen einblenden</a>
+      <!-- /Show Contact Link -->
+
+      <div class="contact-infos" id="contact-infos-block">
+        <% if @room_call.first_name.present? || @room_call.last_name.present? %>
+          <div class="icontxt">
+            <%= icon_tag "user-avatar" %>
+            <div class="txt"><%= "#{@room_call.first_name} #{@room_call.last_name}" %></div>
+          </div>
+        <% end %>
+
+        <% if @room_call.phone.present? %>
+          <div class="icontxt">
+            <%= icon_tag "phone" %>
+            <div class="txt"><%= @room_call.phone %></div>
+          </div>
+        <% end %>
+
+        <% if @room_call.email.present? %>
+          <%= mail_to @room_call.email do %>
+            <div class="icontxt">
+              <%= icon_tag "at-symbol" %>
+              <div class="txt"><%= @room_call.email %></div>
+            </div>
+          <% end %>
+        <% end %>
+
+        <% if @room_call.website.present? %>
+          <%= link_to @room_call.website, class: 'icontxt', target: '_blank' do %>
+            <%= icon_tag "globe" %>
+            <%= @room_call.website.sub(/^https?\:\/\//,'') %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <div class="contact-login-msg">
+        Du musst eingeloggt sein, um die vollständigen Kontaktinformationen zu sehen.<br />
+        <%= link_to 'Zum Login', new_user_session_path %> |
+        <%= link_to 'Zur Registrierung', new_registration_path %>
+    </div>
+  <% end %>
+</section>

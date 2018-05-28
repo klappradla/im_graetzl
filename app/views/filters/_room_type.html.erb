@@ -4,4 +4,10 @@
     <%= label_tag "filter_room_type_#{value}", label %>
   </div>
 <% end %>
+
+<div class="input-checkbox filter-input">
+  <%= check_box_tag :"filter[show_inactive]" %>
+  <%= label_tag :"filter[show_inactive]", "Zeige auch aktuell vermietete / inaktive" %>
+</div>
+
 <%= button_tag "Auswahl übernehmen", type: 'button', class: 'btn-primary filter-button' %>
