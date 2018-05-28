@@ -89,7 +89,7 @@ class RoomsController < ApplicationController
       return RoomCall.none
     end
 
-    calls = calls.open unless params.dig(:filter, :show_inactive).present?
+    calls = calls.open_calls unless params.dig(:filter, :show_inactive).present?
 
     calls
   end

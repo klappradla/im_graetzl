@@ -1,4 +1,5 @@
 class RoomCallsController < ApplicationController
+  before_action :authenticate_user!, except: [:show]
 
   def show
     @room_call = RoomCall.find(params[:id])
@@ -35,7 +36,6 @@ class RoomCallsController < ApplicationController
       render 'edit'
     end
   end
-
 
   def add_submission
     @room_call = RoomCall.find(params[:id])

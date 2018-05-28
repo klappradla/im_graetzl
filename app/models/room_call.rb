@@ -34,7 +34,7 @@ class RoomCall < ApplicationRecord
 
   before_create :set_graetzl_and_district
 
-  scope :open, -> { where("starts_at <= current_date AND ends_at >= current_date") }
+  scope :open_calls, -> { where("starts_at <= current_date AND ends_at >= current_date") }
 
   def open?
     (starts_at..ends_at).cover?(Date.current)
