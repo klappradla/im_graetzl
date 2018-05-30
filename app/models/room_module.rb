@@ -1,4 +1,7 @@
 class RoomModule < ApplicationRecord
-  attachment :image, type: :image
+  validates_presence_of :icon
 
+  def to_s
+    name
+  end
 end

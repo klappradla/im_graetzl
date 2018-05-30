@@ -7,7 +7,7 @@
       <% if @room_offer.address %>
         <div class="address icontxt">
           <%= icon_tag "map-location" %>
-          <%= "#{@room_offer.address.street_name} #{@room_offer.address.street_number}" %><br>
+          <%= @room_offer.address.street %><br>
           <%= "#{@room_offer.address.zip} #{@room_offer.address.city}" %><br>
         </div>
       <% end %>

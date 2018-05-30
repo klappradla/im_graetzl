@@ -12,8 +12,12 @@
     </div>
 
     <% if f.object.new_record? && current_user.admin? %>
-      <h2> Select User </h2>
+      <h2 class="hl-main"><span>User</span> auswählen</h2>
       <div class="input-select">
+        <%= f.label :user_id do %>
+          <%= icon_tag "user-avatar" %>
+          <span>Raumteiler Ersteller</span>
+        <% end %>
         <%= select_tag :user_id, options_from_collection_for_select(User.all, :id, :email, params[:user_id] || current_user.id), id: 'admin-user-select' %>
       </div>
     <% end %>
@@ -58,7 +62,7 @@
 
 
     <h2 class="hl-main"><span>Wie groß</span> sollte der Raum mindestens sein?</h2>
-    <div class="room-size">
+    <div class="room-columns">
       <div class="input-field">
         <%= f.label :needed_area, 'Größe die du benötigst in m2' %>
         <%= f.number_field :needed_area %>
@@ -156,9 +160,9 @@
     <div class="input-select">
       <%= f.label :location_id do %>
         <%= icon_tag "location" %>
-        <span>Location verknüpfen</span>
+        <span>Location</span>
       <% end %>
-      <%= f.collection_select(:location_id, current_user.locations, :id, :name, {include_blank: true}) %>
+      <%= f.collection_select(:location_id, current_user.locations, :id, :name, {:include_blank => 'Location verknüpfen..'}) %>
     </div>
 
     <%= f.button 'Raumteiler erstellen', data: { disable_with: 'speichert...' }, class: 'btn-primary' %>

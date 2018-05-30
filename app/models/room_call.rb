@@ -29,7 +29,7 @@ class RoomCall < ApplicationRecord
   accepts_attachments_for :images, attachment: :file
   accepts_nested_attributes_for :images, allow_destroy: true, reject_if: :all_blank
 
-  validates_presence_of :address, :title, :starts_at, :ends_at, :description, :about_us, :about_partner,
+  validates_presence_of :address, :title, :starts_at, :ends_at, :opens_at, :description, :about_us, :about_partner,
   :cover_photo, :first_name, :last_name, :email, :room_call_fields
 
   before_create :set_graetzl_and_district
@@ -38,6 +38,10 @@ class RoomCall < ApplicationRecord
 
   def open?
     (starts_at..ends_at).cover?(Date.current)
+  end
+
+  def full_address
+    "#{address.street}, #{address.zip} #{address.city}"
   end
 
   private

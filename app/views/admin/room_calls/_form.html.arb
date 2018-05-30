@@ -14,7 +14,6 @@ active_admin_form_for [:admin, resource] do |f|
       input :starts_at, default: Date.current
       input :ends_at, default: Date.current
       input :opens_at, default: Date.current
-      input :status
     end
 
     inputs "Photos" do
@@ -34,14 +33,16 @@ active_admin_form_for [:admin, resource] do |f|
 
     has_many :room_call_modules, allow_destroy: true, new_record: 'Module Hinzufügen' do |o|
       o.input :room_module, collection: RoomModule.all, include_blank: false
+      o.input :description
       o.input :quantity
     end
 
     has_many :room_call_prices, allow_destroy: true, new_record: 'Price Hinzufügen' do |o|
       o.input :name
       o.input :description
-      o.input :keywords
+      o.input :features, hint: "Each feature in new line"
       o.input :amount
+      o.input :room_module_ids, as: :check_boxes, collection: RoomModule.all
     end
 
     has_many :room_call_fields, allow_destroy: true, new_record: 'Field Hinzufügen' do |o|

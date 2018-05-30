@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180527203951) do
+ActiveRecord::Schema.define(version: 20180530090307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -359,8 +359,16 @@ ActiveRecord::Schema.define(version: 20180527203951) do
     t.integer  "quantity",       default: 1
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.text     "description"
     t.index ["room_call_id"], name: "index_room_call_modules_on_room_call_id", using: :btree
     t.index ["room_module_id"], name: "index_room_call_modules_on_room_module_id", using: :btree
+  end
+
+  create_table "room_call_price_modules", force: :cascade do |t|
+    t.integer "room_call_price_id"
+    t.integer "room_module_id"
+    t.index ["room_call_price_id"], name: "index_room_call_price_modules_on_room_call_price_id", using: :btree
+    t.index ["room_module_id"], name: "index_room_call_price_modules_on_room_module_id", using: :btree
   end
 
   create_table "room_call_prices", force: :cascade do |t|
@@ -370,6 +378,7 @@ ActiveRecord::Schema.define(version: 20180527203951) do
     t.decimal  "amount",       precision: 10, scale: 2
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
+    t.text     "features"
     t.index ["room_call_id"], name: "index_room_call_prices_on_room_call_id", using: :btree
   end
 
@@ -471,10 +480,9 @@ ActiveRecord::Schema.define(version: 20180527203951) do
 
   create_table "room_modules", force: :cascade do |t|
     t.string   "name"
-    t.string   "image_id"
-    t.string   "image_content_type"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "icon"
   end
 
   create_table "room_offer_categories", force: :cascade do |t|
@@ -621,6 +629,8 @@ ActiveRecord::Schema.define(version: 20180527203951) do
   add_foreign_key "room_call_fields", "room_calls", on_delete: :cascade
   add_foreign_key "room_call_modules", "room_calls", on_delete: :cascade
   add_foreign_key "room_call_modules", "room_modules", on_delete: :cascade
+  add_foreign_key "room_call_price_modules", "room_call_prices", on_delete: :cascade
+  add_foreign_key "room_call_price_modules", "room_modules", on_delete: :cascade
   add_foreign_key "room_call_prices", "room_calls", on_delete: :cascade
   add_foreign_key "room_call_submission_fields", "room_call_fields", on_delete: :cascade
   add_foreign_key "room_call_submission_fields", "room_call_submissions", on_delete: :cascade

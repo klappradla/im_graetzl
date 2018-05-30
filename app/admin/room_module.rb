@@ -4,5 +4,5 @@ ActiveAdmin.register RoomModule do
   menu parent: 'Raumteiler'
   form partial: 'form'
 
-  permit_params :name, :image
+  permit_params :name, :icon
 end

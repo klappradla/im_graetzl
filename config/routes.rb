@@ -72,7 +72,7 @@ Rails.application.routes.draw do
   resources :room_offers, path: 'wien/raumteiler/raum', except: [:index] do
     get 'select', on: :collection
   end
-  resources :room_calls, except: [:index] do
+  resources :room_calls, path: 'wien/raumteiler/open-calls', except: [:index] do
     post 'add_submission', on: :member
   end
 

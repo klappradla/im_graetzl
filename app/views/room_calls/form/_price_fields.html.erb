@@ -1,25 +1,44 @@
 <div class="nested-fields">
   <div class="input-field">
+    <%= f.label :name do %>
+      <%= icon_tag "record" %>
+      <span>Package Titel</span>
+    <% end %>
+    <%= f.text_field :name, placeholder: "z. B.: Package 1 für Bastler & Kreative" %>
+  </div>
+  
+  <div class="input-field">
+    <%= f.label :description do %>
+      <%= icon_tag "layout-document" %>
+      <span>Beschreibung</span>
+    <% end %>
+    <%= f.text_field :description, placeholder: 'Beschreibe das Package in 1-2 Sätzen ...' %>
+  </div>
+
+  <div class="input-field">
+    <%= f.label :features do %>
+    <span>Leistungen<br/><small>(per Line)</small></span>
+    <% end %>
+    <%= f.text_area :features, placeholder: "Im Package inludierte Leistungen ..." %>
+  </div>
+
+  <div class="room-categories">
+    <%= f.collection_check_boxes :room_module_ids, RoomModule.all, :id, :name do |b| %>
+      <div class="input-checkbox">
+      <%= b.check_box %>
+      <%= b.label %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="input-field">
     <%= f.label :amount do %>
       <%= icon_tag "currency-euro" %>
+      <span>Package Preis</span>
     <% end %>
     <%= f.text_field :amount, placeholder: "Preis in €" %>
   </div>
-  <div class="input-field name">
-    <%= f.label :name, 'Beschreibung' %>
-    <%= f.text_field :name, placeholder: "z. B.: pro Monat für 2 Tage / Woche" %>
-  </div>
-  <div class="input-field">
-    <%= f.label :description, 'Description' %>
-    <%= f.text_field :description %>
-  </div>
-  <div class="input-tags">
-    <%= f.label :keyword_list do %>
-    <%= icon_tag "label-tag" %>
-    <span>Ausstattung<br/><small>(mit Komma getrennt)</small></span>
-    <% end %>
-    <%= f.text_field :keyword_list, value: f.object.keyword_list.join(", ") %>
-  </div>
+
   <%= link_to_remove_association f do %>
     <div class="btn-delete">
       <%= icon_tag "trash-delete-remove" %>

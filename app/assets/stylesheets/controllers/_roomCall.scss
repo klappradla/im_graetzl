@@ -1,0 +1,70 @@
+.room-call-page {
+  h1 {
+    font-size: 65px;
+    line-height: 70px;
+    color: $color-ambient-rosa;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+
+  .subtitle {
+    font-family: $font-secondary;
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .title-heading {
+    margin-bottom: 50px;
+  }
+
+  h2 {
+    font-size: 45px;
+    color: $color-ambient-rosa;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  section {
+    margin-bottom: 50px;
+  }
+
+  .info-section {
+    .title { font-size: 30px; font-weight: bold; }
+    .text { margin-bottom: 40px; }
+
+    .info-box {
+      border: 1px solid $color-ambient-rosa;
+      border-radius: 8px;
+      padding: 30px;
+    }
+    .vacancies {
+      font-size: 30px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    dt { font-weight: bold; }
+    dd { margin-bottom: 20px; }
+  }
+
+  .modules-section {
+    .room-module-icon {
+      @extend .bigicontext-element;
+    }
+    .room-module-title {
+      font-size: 30px;
+      font-weight: bold;
+    }
+  }
+
+  .prices-section {
+    .room-price-title {
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    .room-module-icon {
+      display: inline-flex;
+      @extend .bigicontext-element;
+    }
+  }
+}

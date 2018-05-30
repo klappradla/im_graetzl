@@ -31,7 +31,7 @@ class Notifications::NewLocation < Notification
 
   def printable_address(location)
     if location.address
-      "#{location.address.street_name} #{location.address.street_number}, #{location.address.zip} #{location.address.city}"
+      "#{location.address.street}, #{location.address.zip} #{location.address.city}"
     end
   end
 

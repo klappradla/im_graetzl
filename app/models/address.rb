@@ -31,6 +31,10 @@ class Address < ApplicationRecord
     zip.slice(1..2).sub(%r{^0},"") unless zip.blank?
   end
 
+  def street
+    "#{street_name} #{street_number}"
+  end
+
   private
 
   def get_coordinates

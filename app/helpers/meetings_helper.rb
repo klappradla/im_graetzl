@@ -8,7 +8,7 @@ module MeetingsHelper
   end
 
   def address_value(address)
-    "#{address.try(:street_name)} #{address.try(:street_number)}"
+    address.try(:street)
   end
 
   def localize_time(time, format)
@@ -80,7 +80,7 @@ module MeetingsHelper
           content_tag(:strong, 'Ort steht noch nicht fest...')
         end
         concat tag(:br)
-        concat "#{address.street_name} #{address.street_number}"
+        concat address.street
         concat tag(:br)
         concat "#{address.zip} #{address.city}"
       when location

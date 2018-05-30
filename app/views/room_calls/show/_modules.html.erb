@@ -1,0 +1,12 @@
+<section class="modules-section">
+  <h2>Folgende Module sind ab <%= I18n.localize(@room_call.opens_at, format: '%d. %B') %> Beziehbar</h2>
+  <% @room_call.room_call_modules.includes(:room_module).each do |call_module| %>
+    <div class="room-module-item">
+      <div class="room-module-icon">
+        <%= icon_tag call_module.room_module.icon %>
+      </div>
+      <div class="room-module-title"> <%= call_module.quantity %> <%= call_module.room_module.name %> </div>
+      <div class="room-module-description"> <%= call_module.description %> </div>
+    </div>
+  <% end %>
+</section>

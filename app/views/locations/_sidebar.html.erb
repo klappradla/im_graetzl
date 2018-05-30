@@ -46,7 +46,7 @@
       <% if @location.address %>
         <div class="address icontxt">
           <%= icon_tag "address-directions" %>
-          <%= "#{@location.address.street_name} #{@location.address.street_number}" %><br>
+          <%= @location.address.street %><br>
           <%= "#{@location.address.zip} #{@location.address.city}" %>
         </div>
       <% end %>

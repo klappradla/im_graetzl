@@ -1,0 +1,28 @@
+<section class="info-section">
+  <p class="title"> Andocken, gemeinsam starten & wachsen!</p>
+  <p class="text"><%= @room_call.description %></p>
+  <p class="title"> Die Idee dahinter:</p>
+  <p class="text"><%= @room_call.about_us %></p>
+
+  <div class=info-box>
+    <div class="vacancies"><%= @room_call.total_vacancies %> freie Plätze</div>
+    <dl>
+      <dt>Bewerbungsfrist:</dt>
+      <dd><%= I18n.localize(@room_call.ends_at, format: '%d. %B %Y') %></dd>
+      <dt>Beziehbar ab:</dt>
+      <dd><%= I18n.localize(@room_call.opens_at, format: '%d. %B %Y') %></dd>
+      <dt><%= @room_call.title %></dt>
+      <dd><%= @room_call.full_address %></dd>
+    </dl>
+    <button>
+      <%= icon_tag "file" %>
+      Jetzt Bewerben!
+    </button>
+  </div>
+
+  <% if user_signed_in? && current_user == @room_call.user %>
+    <%= link_to 'Bearbeiten', edit_room_call_path(@room_call) %>
+  <% end %>
+
+
+</section>

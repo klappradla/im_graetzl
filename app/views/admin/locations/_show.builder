@@ -42,7 +42,7 @@ context.instance_eval do
           attributes_table_for location.address do
             row :id
             row :description
-            row(:street){|a| "#{a.street_name}, #{a.street_number}"}
+            row(:street){|a| a.street}
             row(:place){|a| "#{a.zip}, #{a.city}"}
             row :coordinates
           end

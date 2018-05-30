@@ -1,0 +1,29 @@
+<section class="prices-section">
+  <h2>Dein Platz in <%= @room_call.title %></h2>
+  <% @room_call.room_call_prices.includes(:room_modules).each do |room_price| %>
+    <div class="room-price-item">
+      <div class="room-price-title"> <%= room_price.name %> </div>
+      <div class="room-price-description"> <%= room_price.description %> </div>
+      <div class="room-price-modules">
+        Für die folgenden Module:
+        <% room_price.room_modules.each do |room_module| %>
+          <div class="room-module-icon">
+            <%= icon_tag room_module.icon %>
+          </div>
+        <% end %>
+      </div>
+      <ul class="room-price-features">
+        <% room_price.feature_list.each do |feature| %>
+          <li><%= feature %></li>
+        <% end %>
+      </ul>
+      <div class="room-price-amount">
+        Unterm strich alles zuammen:
+        <div class="monthly-amount">
+          <%= room_price.amount %> €
+          <span class="per"> / monat
+        </div>
+      </div>
+    </div>
+  <% end %>
+</section>

@@ -3,34 +3,37 @@
 <div class="form-block">
 
   <% if f.object.new_record? && current_user.admin? %>
-    <h2> Select User </h2>
-    <div class="input-select">
-      <%= select_tag :user_id, options_from_collection_for_select(User.all, :id, :email, params[:user_id] || current_user.id), id: 'admin-user-select' %>
-    </div>
+  <div class="input-select">
+    <%= f.label :user_id do %>
+      <%= icon_tag "user-avatar" %>
+      <span>Call Ersteller</span>
+    <% end %>
+    <%= select_tag :user_id, options_from_collection_for_select(User.all, :id, :email, params[:user_id] || current_user.id), id: 'admin-user-select' %>
+  </div>
   <% end %>
 
-  <h2 class="hl-main"><span>Wo</span> befindet sich dein Raum?</h2>
+  <h2 class="hl-main"><span>Wo</span> befindet sich der Raum?</h2>
   <% if f.object.address.nil? %>
   <%= render 'room_calls/form/address_select', f: f %>
   <% else %>
   <%= render 'room_calls/form/address_fields', f: f %>
   <% end %>
 
-  <h2 class="hl-main"><span>Raumtitel</span> und <span>Beschreibung</span></h2>
+  <h2 class="hl-main"><span>Calltitel</span> und <span>Beschreibung</span></h2>
   <div class="input-field">
     <%= f.label :title do %>
     <%= icon_tag "record" %>
     <span>Kurzer Titel</span>
     <% end %>
-    <%= f.text_field :title, placeholder: 'z.B. Vermiete zur Mitbenutzung ruhigen Praxisraum im 9. Bezirk…' %>
+    <%= f.text_field :title, placeholder: 'z.B. Raumteiler Hub - Dieselgasse 1 ...' %>
   </div>
 
   <div class="input-field">
     <%= f.label :subtitle do %>
     <%= icon_tag "record" %>
-    <span>Subtitle</span>
+    <span>Untertitel</span>
     <% end %>
-    <%= f.text_field :subtitle, placeholder: 'subtitle' %>
+    <%= f.text_field :subtitle, placeholder: 'z.B. Andocken, gemeinsam starten und wachsen ... ' %>
   </div>
 
   <div class="input-field">
@@ -41,205 +44,206 @@
     <%= f.text_area :description, placeholder: 'Detaillierte Beschreibung – Hier kannst du deinen Raum ausführlicher beschreiben …' %>
   </div>
 
-  <div class="input-field">
-    <%= f.label :starts_at do %>
+  <div class="room-columns">
+    <div class="input-field column-left">
+      <%= f.label :starts_at do %>
       <%= icon_tag "calendar-2" %>
-      <span> Starts at </span>
-    <% end %>
-    <%= f.text_field :starts_at,
+      <span> Call Start </span>
+      <% end %>
+      <%= f.text_field :starts_at,
       value: (I18n.localize(f.object.starts_at, format:'%A, %d. %B %Y') if f.object.starts_at),
       data: { value: (I18n.localize(f.object.starts_at, format:'%Y-%m-%d') if f.object.starts_at) },
       class: 'datepicker',
-      placeholder: 'wählen'
-    %>
-  </div>
+        placeholder: 'Datum wählen'
+        %>
+      </div>
 
-  <div class="input-field">
-    <%= f.label :ends_at do %>
-      <%= icon_tag "calendar-2" %>
-      <span> Ends at </span>
-    <% end %>
-    <%= f.text_field :ends_at,
-      value: (I18n.localize(f.object.ends_at, format:'%A, %d. %B %Y') if f.object.ends_at),
-      data: { value: (I18n.localize(f.object.ends_at, format:'%Y-%m-%d') if f.object.ends_at) },
-      class: 'datepicker',
-      placeholder: 'ends at'
-    %>
-  </div>
-
-  <div class="input-field">
-    <%= f.label :opens_at do %>
-      <%= icon_tag "calendar-2" %>
-      <span> Opens at </span>
-    <% end %>
-    <%= f.text_field :opens_at,
-      value: (I18n.localize(f.object.opens_at, format:'%A, %d. %B %Y') if f.object.opens_at),
-      data: { value: (I18n.localize(f.object.opens_at, format:'%Y-%m-%d') if f.object.opens_at) },
-      class: 'datepicker',
-      placeholder: 'opens at'
-    %>
-  </div>
-
-  <h2 class="hl-main">Raum<span>größe</span></h2>
-
-  <div class="room-vacancies">
-    <div class="input-field">
-      <%= f.label :total_vacancies do %>
-        <%= icon_tag "resize-maximize" %>
-        <span>Vacancies</span>
-      <% end %>
-      <%= f.number_field :total_vacancies %>
-    </div>
-  </div>
-
-  <h2 class="hl-main">Folgende module</h2>
-  <div class="room-modules">
-    <%= f.fields_for :room_call_modules do |module_form| %>
-    <%= render 'room_calls/form/module_fields', f: module_form %>
-    <% end %>
-    <div class="room-modules-links">
-      <%= link_to_add_association 'Weitere Module hinzufügen', f, :room_call_modules, partial: 'room_calls/form/module_fields' %>
-    </div>
-  </div>
-
-  <h2 class="hl-main">Meine <span>Preis</span>vorstellungen</h2>
-  <div class="room-prices">
-    <%= f.fields_for :room_call_prices do |price_form| %>
-    <%= render 'room_calls/form/price_fields', f: price_form %>
-    <% end %>
-    <div class="room-prices-links">
-      <%= link_to_add_association 'Weitere Preisangaben hinzufügen', f, :room_call_prices, partial: 'room_calls/form/price_fields' %>
-    </div>
-  </div>
-
-  <h2 class="hl-main">Ein paar Worte <span>über dich</span> / über euch</h2>
-  <div class="input-field">
-    <%= f.label :about_us do %>
-      <%= icon_tag "layout-document" %>
-      <span>Über mich</span>
-    <% end %>
-    <%= f.text_area :about_us, placeholder: 'Ein paar Worte uber dich / euch. In welchem Bereich bist du tätig?' %>
-  </div>
-
-  <h2 class="hl-main">Dein idealer <span>Partner</span></h2>
-  <div class="input-field">
-    <%= f.label :about_partner do %>
-      <%= icon_tag "layout-document" %>
-      <span>Wen suchst du?</span>
-    <% end %>
-    <%= f.text_area :about_partner, placeholder: 'Wer wurde ideal zu dir bzw. zu euch passen? Welche Tätigkeitsbereiche wären ergänzend zu deinen?' %>
-  </div>
-
-  <h2 class="hl-main">Call questions</h2>
-  <div class="room-call-fields">
-    <%= f.fields_for :room_call_fields do |field_form| %>
-    <%= render 'room_calls/form/field_fields', f: field_form %>
-    <% end %>
-    <div class="room-call-fields-links">
-      <%= link_to_add_association 'Weitere Preisangaben hinzufügen', f, :room_call_fields, partial: 'room_calls/form/field_fields' %>
-    </div>
-  </div>
-
-  <h2 class="hl-main"><span>Fotos</span> vom Raum</h2>
-
-  <div class="upload-oldschool">
-    <%= f.label :cover_photo do %>
-      <%= icon_tag "photo-camera" %>
-      <span>Coverfoto</span>
-    <% end %>
-    <div class="field-wrp">
-      <% if f.object.cover_photo %>
-      <div class="preview-wrp">
-        <%= image_tag attachment_url(f.object, :cover_photo, :fill, 159, 60) %>
-        <div class="input-checkbox">
-          <%= f.check_box :remove_cover_photo, { class: 'deleteCheckbox' } %>
-          <%= f.label :remove_cover_photo, 'Löschen' %>
+      <div class="input-field column-right">
+        <%= f.label :ends_at do %>
+        <%= icon_tag "calendar-2" %>
+        <span> Call Ende </span>
+        <% end %>
+        <%= f.text_field :ends_at,
+        value: (I18n.localize(f.object.ends_at, format:'%A, %d. %B %Y') if f.object.ends_at),
+        data: { value: (I18n.localize(f.object.ends_at, format:'%Y-%m-%d') if f.object.ends_at) },
+        class: 'datepicker',
+          placeholder: 'Datum wählen'
+          %>
         </div>
       </div>
-      <% end %>
-      <%= f.attachment_field :cover_photo, direct: true, presigned: true %>
-    </div>
-  </div>
+      <div class="input-field">
+        <%= f.label :opens_at do %>
+        <%= icon_tag "calendar-2" %>
+        <span> Einzugstermin </span>
+        <% end %>
+        <%= f.text_field :opens_at,
+        value: (I18n.localize(f.object.opens_at, format:'%A, %d. %B %Y') if f.object.opens_at),
+        data: { value: (I18n.localize(f.object.opens_at, format:'%Y-%m-%d') if f.object.opens_at) },
+        class: 'datepicker',
+          placeholder: 'Datum wählen'
+          %>
+        </div>
 
-  <div class="upload-oldschool">
-    <%= f.label :images do %>
-      <%= icon_tag "photo-camera" %>
-      <span>Weitere Fotos</span>
-    <% end %>
-    <div class="field-wrp">
-      <%= f.attachment_field :images_files, multiple: true, direct: true, presigned: true %>
-    </div>
-  </div>
+        <h2 class="hl-main">Gesamt verfügbare <span>Plätze</span></h2>
 
-  <h2 class="hl-main"><span>Kontakt</span> & Infos</h2>
-
-  <div class="upload-oldschool">
-    <%= f.label :avatar do %>
-      <%= icon_tag "photo-camera" %>
-      <span>Foto von dir</span>
-    <% end %>
-    <div class="field-wrp">
-      <% if f.object.avatar %>
-          <div class="preview-wrp">
-            <%= image_tag attachment_url(f.object, :avatar, :fill, 100, 100), class: 'img-round' %>
-            <div class="input-checkbox">
-              <%= f.check_box :remove_avatar, { class: 'deleteCheckbox' } %>
-              <%= f.label :remove_avatar, 'Löschen' %>
-            </div>
+        <div class="room-vacancies">
+          <div class="input-field">
+            <%= f.label :total_vacancies do %>
+            <%= icon_tag "users" %>
+            <span>Anzahl Plätze</span>
+            <% end %>
+            <%= f.number_field :total_vacancies %>
           </div>
+        </div>
+
+        <h2 class="hl-main">Verfügbare <span>Module</span></h2>
+        <div class="room-modules">
+          <%= f.fields_for :room_call_modules do |module_form| %>
+          <%= render 'room_calls/form/module_fields', f: module_form %>
+          <% end %>
+          <div class="room-modules-links">
+            <%= link_to_add_association 'Modul hinzufügen', f, :room_call_modules, partial: 'room_calls/form/module_fields' %>
+          </div>
+        </div>
+
+        <h2 class="hl-main"><span>Packages</span> und <span>Preise</span> </h2>
+        <div class="room-prices">
+          <%= f.fields_for :room_call_prices do |price_form| %>
+          <%= render 'room_calls/form/price_fields', f: price_form %>
+          <% end %>
+          <div class="room-prices-links">
+            <%= link_to_add_association 'Package hinzufügen', f, :room_call_prices, partial: 'room_calls/form/price_fields' %>
+          </div>
+        </div>
+
+        <h2 class="hl-main">Ein paar Worte <span>über dich</span> / über euch</h2>
+        <div class="input-field">
+          <%= f.label :about_us do %>
+          <%= icon_tag "layout-document" %>
+          <span>Über mich</span>
+          <% end %>
+          <%= f.text_area :about_us, placeholder: 'Ein paar Worte uber dich / euch.' %>
+        </div>
+
+        <h2 class="hl-main"><span>Wer</span> kann sich bewerben</h2>
+        <div class="input-field">
+          <%= f.label :about_partner do %>
+          <%= icon_tag "layout-document" %>
+          <span>Wen suchst du?</span>
+          <% end %>
+          <%= f.text_area :about_partner, placeholder: 'Beschreibe kurz die Zielgruppe für deinen Call. Aus welchen Tätigkeitsbereichen suchst du Leute?' %>
+        </div>
+
+        <h2 class="hl-main">Bewerbungs <span>Formular</span></h2>
+        <div class="room-call-fields">
+          <%= f.fields_for :room_call_fields do |field_form| %>
+          <%= render 'room_calls/form/field_fields', f: field_form %>
+          <% end %>
+          <div class="room-call-fields-links">
+            <%= link_to_add_association 'Frage hinzufügen', f, :room_call_fields, partial: 'room_calls/form/field_fields' %>
+          </div>
+        </div>
+
+        <h2 class="hl-main"><span>Fotos</span> vom Raum</h2>
+
+        <div class="upload-oldschool">
+          <%= f.label :cover_photo do %>
+          <%= icon_tag "photo-camera" %>
+          <span>Coverfoto</span>
+          <% end %>
+          <div class="field-wrp">
+            <% if f.object.cover_photo %>
+            <div class="preview-wrp">
+              <%= image_tag attachment_url(f.object, :cover_photo, :fill, 159, 60) %>
+              <div class="input-checkbox">
+                <%= f.check_box :remove_cover_photo, { class: 'deleteCheckbox' } %>
+                <%= f.label :remove_cover_photo, 'Löschen' %>
+              </div>
+            </div>
+            <% end %>
+            <%= f.attachment_field :cover_photo, direct: true, presigned: true %>
+          </div>
+        </div>
+
+        <div class="upload-oldschool">
+          <%= f.label :images do %>
+          <%= icon_tag "photo-camera" %>
+          <span>Weitere Fotos</span>
+          <% end %>
+          <div class="field-wrp">
+            <%= f.attachment_field :images_files, multiple: true, direct: true, presigned: true %>
+          </div>
+        </div>
+
+        <h2 class="hl-main"><span>Kontakt</span> & Infos</h2>
+
+        <div class="upload-oldschool">
+          <%= f.label :avatar do %>
+          <%= icon_tag "photo-camera" %>
+          <span>Call Avatar</span>
+          <% end %>
+          <div class="field-wrp">
+            <% if f.object.avatar %>
+            <div class="preview-wrp">
+              <%= image_tag attachment_url(f.object, :avatar, :fill, 100, 100), class: 'img-round' %>
+              <div class="input-checkbox">
+                <%= f.check_box :remove_avatar, { class: 'deleteCheckbox' } %>
+                <%= f.label :remove_avatar, 'Löschen' %>
+              </div>
+            </div>
+            <% end %>
+            <%= f.attachment_field :avatar, direct: true, presigned: true %>
+          </div>
+        </div>
+
+        <div class="input-field">
+          <%= f.label :first_name do %>
+          <%= icon_tag "user-avatar" %>
+          <span>Vorname</span>
+          <% end %>
+          <%= f.text_field :first_name %>
+        </div>
+
+        <div class="input-field">
+          <%= f.label :last_name do %>
+          <%= icon_tag "user-avatar" %>
+          <span>Nachname</span>
+          <% end %>
+          <%= f.text_field :last_name %>
+        </div>
+
+        <div class="input-field">
+          <%= f.label :website do %>
+          <%= icon_tag "globe" %>
+          <span>Website</span>
+          <% end %>
+          <%= f.url_field :website, placeholder: 'http:// oder https://' %><em></em>
+        </div>
+
+        <div class="input-field">
+          <%= f.label :email do %>
+          <%= icon_tag "at-symbol" %>
+          <span>Email</span>
+          <% end %>
+          <%= f.text_field :email %>
+        </div>
+
+        <div class="input-field">
+          <%= f.label :phone do %>
+          <%= icon_tag "phone" %>
+          <span>Telefonnummer</span>
+          <% end %>
+          <%= f.text_field :phone, placeholder: '0664 / ...' %>
+        </div>
+
+        <div class="input-select">
+          <%= f.label :location_id do %>
+          <%= icon_tag "location" %>
+          <span>Location</span>
+          <% end %>
+          <%= f.collection_select(:location_id, current_user.locations, :id, :name, {:include_blank => 'Location verknüpfen..'}) %>
+        </div>
+
+        <%= f.button 'Call erstellen', data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
+      </div>
       <% end %>
-      <%= f.attachment_field :avatar, direct: true, presigned: true %>
-    </div>
-  </div>
-
-  <div class="input-field">
-    <%= f.label :first_name do %>
-      <%= icon_tag "user-avatar" %>
-      <span>Vorname</span>
-    <% end %>
-    <%= f.text_field :first_name %>
-  </div>
-
-  <div class="input-field">
-    <%= f.label :last_name do %>
-      <%= icon_tag "user-avatar" %>
-      <span>Nachname</span>
-    <% end %>
-    <%= f.text_field :last_name %>
-  </div>
-
-  <div class="input-field">
-    <%= f.label :website do %>
-      <%= icon_tag "globe" %>
-      <span>Website</span>
-    <% end %>
-    <%= f.url_field :website, placeholder: 'http:// oder https://' %><em></em>
-  </div>
-
-  <div class="input-field">
-    <%= f.label :email do %>
-      <%= icon_tag "at-symbol" %>
-      <span>Email</span>
-    <% end %>
-    <%= f.text_field :email %>
-  </div>
-
-  <div class="input-field">
-    <%= f.label :phone do %>
-      <%= icon_tag "phone" %>
-      <span>Telefonnummer</span>
-    <% end %>
-    <%= f.text_field :phone %>
-  </div>
-
-  <div class="input-select">
-    <%= f.label :location_id do %>
-      <%= icon_tag "location" %>
-      <span>Location verknüpfen</span>
-    <% end %>
-    <%= f.collection_select(:location_id, current_user.locations, :id, :name, {include_blank: true}) %>
-  </div>
-
-  <%= f.button 'Raumteiler erstellen', data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
-</div>
-<% end %>

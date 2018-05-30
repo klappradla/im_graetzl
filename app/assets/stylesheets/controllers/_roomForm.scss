@@ -25,7 +25,7 @@ section.room-form {
     }
   }
 
-  .room-size {
+  .room-columns {
     overflow: hidden;
     .column-left { float: left; width: 50%; padding-right:10px;}
     .column-right { float: right; width: 50%;}
@@ -47,7 +47,7 @@ section.room-form {
 }
 
 section.room-offer-form {
-  
+
   .room-offer-type-selection {
     text-align: center;
     .input-radio {

@@ -58,7 +58,6 @@ class RoomCallsController < ApplicationController
       :starts_at,
       :ends_at,
       :opens_at,
-      :status,
       :about_us,
       :about_partner,
       :slug,
@@ -73,8 +72,8 @@ class RoomCallsController < ApplicationController
       :avatar, :remove_avatar,
       :cover_photo, :remove_cover_photo,
       room_call_fields_attributes: [:id, :label, :_destroy],
-      room_call_prices_attributes: [:id, :name, :description, :amount, :keyword_list, :_destroy],
-      room_call_modules_attributes: [:id, :room_module_id, :quantity, :_destroy],
+      room_call_prices_attributes: [:id, :name, :description, :features, :amount, :_destroy, room_module_ids: []],
+      room_call_modules_attributes: [:id, :room_module_id, :description, :quantity, :_destroy],
       address_attributes: [:id, :_destroy, :street_name, :street_number, :zip, :city, :coordinates, :description],
       images_files: [],
     )
