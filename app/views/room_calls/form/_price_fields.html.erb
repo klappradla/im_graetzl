@@ -1,4 +1,5 @@
 <div class="nested-fields">
+
   <div class="input-field">
     <%= f.label :name do %>
       <%= icon_tag "record" %>
@@ -6,21 +7,24 @@
     <% end %>
     <%= f.text_field :name, placeholder: "z. B.: Package 1 für Bastler & Kreative" %>
   </div>
-  
+
   <div class="input-field">
     <%= f.label :description do %>
       <%= icon_tag "layout-document" %>
       <span>Beschreibung</span>
     <% end %>
-    <%= f.text_field :description, placeholder: 'Beschreibe das Package in 1-2 Sätzen ...' %>
+    <%= f.text_area :description, placeholder: 'Beschreibe das Package in 1-2 Sätzen ...' %>
   </div>
 
   <div class="input-field">
     <%= f.label :features do %>
-    <span>Leistungen<br/><small>(per Line)</small></span>
+    <%= icon_tag "label-tag" %>
+    <span>Inkl. Leistungen<br/><small>(pro Zeile eingeben)</small></span>
     <% end %>
     <%= f.text_area :features, placeholder: "Im Package inludierte Leistungen ..." %>
   </div>
+
+  <h3 class="subline">Für welches Modul soll dieses Preis-Package gelten?</h3>
 
   <div class="room-categories">
     <%= f.collection_check_boxes :room_module_ids, RoomModule.all, :id, :name do |b| %>
@@ -37,11 +41,12 @@
       <span>Package Preis</span>
     <% end %>
     <%= f.text_field :amount, placeholder: "Preis in €" %>
+
+    <%= link_to_remove_association f do %>
+      <div class="btn-delete">
+        <%= icon_tag "trash-delete-remove" %>
+      </div>
+    <% end %>
   </div>
 
-  <%= link_to_remove_association f do %>
-    <div class="btn-delete">
-      <%= icon_tag "trash-delete-remove" %>
-    </div>
-  <% end %>
 </div>

@@ -39,13 +39,18 @@ class RoomCallsController < ApplicationController
 
   def add_submission
     @room_call = RoomCall.find(params[:id])
-    @room_call_submission = @room_call.call_submissions.build(user: current_user)
+    @room_call_submission = @room_call.room_call_submissions.build(user: current_user)
     params[:answers].each do |field_id, content|
-      @room_call_submission.call_submission_fields.build(call_field_id: field_id, content: content)
+      @room_call_submission.room_call_submission_fields.build(room_call_field_id: field_id, content: content)
     end
 
-    @room_call_submission.save
-    redirect_to @room_call
+    if @room_call_submission.save
+      RoomCallMailer.new.send_submission_email(current_user, @room_call)
+      redirect_to @room_call
+    else
+      flash[:error] = @room_call.errors.full_messages.first
+      redirect_to @room_call
+    end
   end
 
   private

@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   force_ssl if Rails.env.staging? || Rails.env.production?
 
   def after_sign_in_path_for(resource)
-    stored_location_for(resource) || graetzl_path(resource.graetzl)
+    params[:redirect] || graetzl_path(resource.graetzl)
   end
 
   def authenticate_admin_user!

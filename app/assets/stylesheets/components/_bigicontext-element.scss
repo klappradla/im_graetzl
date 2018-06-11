@@ -32,4 +32,25 @@
   .icon-shopping-bag {
     margin-top: -7px;
   }
+
+  &.-large {
+    height: 105px;
+    min-width: 105px;
+    background-size: 105px 105px;
+    [class^=icon-] {
+      width: 65px;
+      height: 65px;
+      margin-left: 20px;
+    }
+  }
+  &.-small {
+    height: 50px;
+    min-width: 50px;
+    background-size: 50px 50px;
+    [class^=icon-] {
+      width: 35px;
+      height: 35px;
+      margin-left: 7px;
+    }
+  }
 }

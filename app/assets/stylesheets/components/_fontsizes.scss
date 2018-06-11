@@ -91,4 +91,14 @@
     }
   }
 
+  @if $size == 'larger' {
+    font-size: 3.8rem;
+    @include respond-to(">=medium") {
+      font-size: 5.5rem;
+    }
+    @include respond-to(">=large") {
+      font-size: 7.0rem;
+    }
+  }
+
 }

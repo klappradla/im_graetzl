@@ -3,14 +3,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /users/registrierung
   def new
-    if params[:graetzl_id].present?
-      build_resource({})
-      self.resource.graetzl = Graetzl.find(params[:graetzl_id])
-      self.resource.address = Address.from_feature(params[:feature])
-      respond_with self.resource
-    else
-      render "address_form"
+    if params[:graetzl_id].blank?
+      render "address_form" and return
     end
+
+    build_resource({})
+    self.resource.graetzl = Graetzl.find(params[:graetzl_id])
+    self.resource.address = Address.from_feature(params[:feature])
+    respond_with self.resource
   end
 
   def set_address
@@ -18,7 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @graetzls = @address ? @address.graetzls : []
 
     if @graetzls.size == 1
-      redirect_to new_registration_url(graetzl_id: @graetzls.first.id, feature: params[:feature])
+      redirect_to new_registration_url(graetzl_id: @graetzls.first.id, feature: params[:feature], redirect: params[:redirect])
     else
       render "graetzls"
     end
@@ -28,6 +28,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   protected
+
+  def after_inactive_sign_up_path_for(resource)
+    params[:redirect] || root_url
+  end
 
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up) do |u|

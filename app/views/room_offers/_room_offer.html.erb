@@ -13,12 +13,12 @@
 
   <div class="cardBoxContent -roomoffer">
 
-    <div class="location-shortfacts roomoffer-shortfacts">
-      <%= link_to room_offer, class: 'locationlogo' do %>
+    <div class="avatar-block -below">
+      <%= link_to room_offer, class: 'avatarImg' do %>
         <%= attachment_image_tag room_offer, :avatar, :fill, 200, 200, fallback: 'avatar/user/200x200.png', class: 'img-square' %>
       <% end %>
       <%= link_to room_offer, class: 'typelink' do %>
-        <div class="locationtxt">
+        <div class="typetxt">
           <div class="roomtype">
             <%= t("activerecord.attributes.room_offer.offer_types.#{room_offer.offer_type}") %>
           </div>
@@ -48,9 +48,11 @@
     <% if local_assigns[:manage_buttons].present? && current_user == room_offer.user %>
       <div class="btn-group">
         <%= link_to 'Bearbeiten', edit_room_offer_path(room_offer), class: 'btn-secondary -mint -small' %>
-        <%= link_to 'Löschen', room_offer_path(room_offer), data: { confirm: 'Bist du dir sicher?' },
-          method: :delete, class: 'btn-secondary -mint -small' %>
+        <%= link_to room_offer.available? ? 'Deaktivieren' : 'Aktivieren', toggle_room_offer_path(room_offer),
+          class: 'btn-secondary -mint -small', method: :post %>
       </div>
+      <%= link_to 'Löschen', room_offer_path(room_offer), class: 'link-subtle', data: { confirm: 'Bist du dir sicher?' },
+        method: :delete %>
     <% end %>
 
   </div>

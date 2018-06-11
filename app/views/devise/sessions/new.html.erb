@@ -5,7 +5,6 @@
 
   <div class="loginForm">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
         <div class="input-field">
           <%= f.label :login do %>
             <%= icon_tag "user-avatar" %>
@@ -29,6 +28,8 @@
                 <%= f.label :remember_me %>
               </div>
           <% end %>
+
+          <%= hidden_field_tag :redirect, params[:redirect] %>
           <%= f.button 'Anmelden', class: 'btn-primary' %>
         </div>
     <% end %>

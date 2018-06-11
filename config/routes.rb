@@ -71,6 +71,7 @@ Rails.application.routes.draw do
   resources :room_demands, path: 'wien/raumteiler/raumsuche', except: [:index]
   resources :room_offers, path: 'wien/raumteiler/raum', except: [:index] do
     get 'select', on: :collection
+    post 'toggle', on: :member
   end
   resources :room_calls, path: 'wien/raumteiler/open-calls', except: [:index] do
     post 'add_submission', on: :member
@@ -78,6 +79,7 @@ Rails.application.routes.draw do
 
 
   resources :groups, except: [:index] do
+    post 'join', on: :member
     post 'request_join', on: :member
     post 'accept_request', on: :member
     post 'reject_request', on: :member

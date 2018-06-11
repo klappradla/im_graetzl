@@ -1,28 +1,33 @@
 <section class="info-section">
-  <p class="title"> Andocken, gemeinsam starten & wachsen!</p>
-  <p class="text"><%= @room_call.description %></p>
-  <p class="title"> Die Idee dahinter:</p>
-  <p class="text"><%= @room_call.about_us %></p>
 
-  <div class=info-box>
-    <div class="vacancies"><%= @room_call.total_vacancies %> freie Plätze</div>
-    <dl>
-      <dt>Bewerbungsfrist:</dt>
-      <dd><%= I18n.localize(@room_call.ends_at, format: '%d. %B %Y') %></dd>
-      <dt>Beziehbar ab:</dt>
-      <dd><%= I18n.localize(@room_call.opens_at, format: '%d. %B %Y') %></dd>
-      <dt><%= @room_call.title %></dt>
-      <dd><%= @room_call.full_address %></dd>
-    </dl>
-    <button>
-      <%= icon_tag "file" %>
-      Jetzt Bewerben!
-    </button>
+  <div class="description">
+
+    <h3><%= @room_call.subtitle %></h3>
+    <p><%= @room_call.description %></p>
+    <h3>Die Idee dahinter:</h3>
+    <p><%= @room_call.about_us %></p>
+
+    <%= image_tag('svg/round-arrow-bottom.svg') %>
+
+
   </div>
 
-  <% if user_signed_in? && current_user == @room_call.user %>
-    <%= link_to 'Bearbeiten', edit_room_call_path(@room_call) %>
-  <% end %>
+  <div class="cardBox">
 
+    <h3><%= @room_call.total_vacancies %> freie Plätze</h3>
+    <strong>Bewerbungsfrist:</strong>
+    <p><%= I18n.localize(@room_call.ends_at, format: '%d. %B %Y') %></p>
+    <strong>Beziehbar ab:</strong>
+    <p><%= I18n.localize(@room_call.opens_at, format: '%d. %B %Y') %></p>
+    <strong>Raumteiler-Hub</strong>
+    <p><%= @room_call.full_address %></p>
+
+    <% if user_signed_in? && current_user == @room_call.user %>
+    <p><%= link_to 'Call bearbeiten', edit_room_call_path(@room_call) %></p>
+    <% end %>
+
+    <%= link_to 'Jetzt bewerben', '#call', class: 'btn-primary' %>
+
+  </div>
 
 </section>

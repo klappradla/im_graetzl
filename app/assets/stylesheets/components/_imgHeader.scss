@@ -58,7 +58,7 @@
     margin-top: -80px;
   }
 
-  &.-cloudy, &.-cloudy2 {
+  &.-cloudy, &.-cloudy2, &.-cloudy3 {
     @include respond-to(">=medium") {
       &:before {
         content: '';
@@ -82,6 +82,15 @@
     &:before {
       @include respond-to(">=medium") {
         background: url(image_path('mask-imgcloudybottom2.png')) no-repeat left bottom;
+      }
+    }
+  }
+  &.-cloudy3 {
+    overflow: initial;
+    &:before {
+      @include respond-to(">=medium") {
+        top:130px;
+        background: url(image_path('mask-imgcloudybottom3.png')) no-repeat left bottom;
       }
     }
   }

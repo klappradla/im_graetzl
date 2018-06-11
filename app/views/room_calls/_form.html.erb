@@ -39,9 +39,17 @@
   <div class="input-field">
     <%= f.label :description do %>
     <%= icon_tag "layout-document" %>
-    <span>Beschreibung</span>
+    <span>Call Beschreibung</span>
     <% end %>
-    <%= f.text_area :description, placeholder: 'Detaillierte Beschreibung – Hier kannst du deinen Raum ausführlicher beschreiben …' %>
+    <%= f.text_area :description, placeholder: 'Detaillierte Beschreibung – Hier kannst du den Call bzw. das Objekt ausführlicher beschreiben …' %>
+  </div>
+
+  <div class="input-field">
+    <%= f.label :about_us do %>
+    <%= icon_tag "layout-document" %>
+    <span>Die Idee dahinter</span>
+    <% end %>
+    <%= f.text_area :about_us, placeholder: 'Ein paar Worte zur Idee hinter dem Call / Bzw. auch ein paar Worte über euch ...' %>
   </div>
 
   <div class="room-columns">
@@ -97,32 +105,25 @@
         </div>
 
         <h2 class="hl-main">Verfügbare <span>Module</span></h2>
+        <p class="subline">Du kannst mehrere Module erstellen.</p>
         <div class="room-modules">
           <%= f.fields_for :room_call_modules do |module_form| %>
           <%= render 'room_calls/form/module_fields', f: module_form %>
           <% end %>
           <div class="room-modules-links">
-            <%= link_to_add_association 'Modul hinzufügen', f, :room_call_modules, partial: 'room_calls/form/module_fields' %>
+            <%= link_to_add_association 'Weiteres Modul hinzufügen', f, :room_call_modules, partial: 'room_calls/form/module_fields' %>
           </div>
         </div>
 
         <h2 class="hl-main"><span>Packages</span> und <span>Preise</span> </h2>
+        <p class="subline">Du kannst mehrere Preis-Packages definieren.</p>
         <div class="room-prices">
           <%= f.fields_for :room_call_prices do |price_form| %>
           <%= render 'room_calls/form/price_fields', f: price_form %>
           <% end %>
           <div class="room-prices-links">
-            <%= link_to_add_association 'Package hinzufügen', f, :room_call_prices, partial: 'room_calls/form/price_fields' %>
+            <%= link_to_add_association 'Weiteres Package hinzufügen', f, :room_call_prices, partial: 'room_calls/form/price_fields' %>
           </div>
-        </div>
-
-        <h2 class="hl-main">Ein paar Worte <span>über dich</span> / über euch</h2>
-        <div class="input-field">
-          <%= f.label :about_us do %>
-          <%= icon_tag "layout-document" %>
-          <span>Über mich</span>
-          <% end %>
-          <%= f.text_area :about_us, placeholder: 'Ein paar Worte uber dich / euch.' %>
         </div>
 
         <h2 class="hl-main"><span>Wer</span> kann sich bewerben</h2>
@@ -135,16 +136,20 @@
         </div>
 
         <h2 class="hl-main">Bewerbungs <span>Formular</span></h2>
+        <p class="subline">
+          Definiere hier deine Fragen an die Bewerber des Calls.<br>
+          (Kontaktdaten wie Name, E-Mail, usw. musst du nicht abfragen, das passiert automatisch.)
+        </p>
         <div class="room-call-fields">
           <%= f.fields_for :room_call_fields do |field_form| %>
           <%= render 'room_calls/form/field_fields', f: field_form %>
           <% end %>
           <div class="room-call-fields-links">
-            <%= link_to_add_association 'Frage hinzufügen', f, :room_call_fields, partial: 'room_calls/form/field_fields' %>
+            <%= link_to_add_association 'Weitere Frage hinzufügen', f, :room_call_fields, partial: 'room_calls/form/field_fields' %>
           </div>
         </div>
 
-        <h2 class="hl-main"><span>Fotos</span> vom Raum</h2>
+        <h2 class="hl-main"><span>Fotos</span> vom Objekt / Raum</h2>
 
         <div class="upload-oldschool">
           <%= f.label :cover_photo do %>

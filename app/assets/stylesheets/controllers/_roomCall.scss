@@ -1,70 +1,339 @@
 .room-call-page {
-  h1 {
-    font-size: 65px;
-    line-height: 70px;
-    color: $color-ambient-rosa;
-    text-align: center;
-    margin-bottom: 5px;
+
+  .imgHeader {
+    background-color: #ebf5f4;
+    background-size: cover !important;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height:50vh;
+    @include respond-to(">=medium") {
+      height:60vh;
+    }
+    @include respond-to(">=large") {
+      height:75vh;
+    }
+    //img {object-fit: cover;}
   }
 
-  .subtitle {
-    font-family: $font-secondary;
-    font-size: 30px;
-    text-align: center;
-  }
-
-  .title-heading {
-    margin-bottom: 50px;
+  .hl-subtext {
+    top:20px;
+    margin-bottom: 60px;
+    @include respond-to(">=medium") {
+      top:-20px;
+      margin-bottom:30px;
+    }
+    h1 {
+      @include font-size-secondaryFont('larger');
+      color: $color-ambient-rosa;
+    }
+    p {
+      @include font-size-secondaryFont('base');
+    }
   }
 
   h2 {
-    font-size: 45px;
+    @include font-size-secondaryFont('medium');
     color: $color-ambient-rosa;
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
+  }
+
+  h3 {
+    @include font-size-primaryFont('larger');
+    margin-bottom: 10px;
   }
 
   section {
-    margin-bottom: 50px;
-  }
+    margin-bottom:80px;
+    @include cf;
 
-  .info-section {
-    .title { font-size: 30px; font-weight: bold; }
-    .text { margin-bottom: 40px; }
+    // ------------------------ Top Info Area Section
+    &.info-section {
 
-    .info-box {
-      border: 1px solid $color-ambient-rosa;
-      border-radius: 8px;
-      padding: 30px;
-    }
-    .vacancies {
-      font-size: 30px;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
-    dt { font-weight: bold; }
-    dd { margin-bottom: 20px; }
-  }
+      .description {
+        p {
+          margin-bottom: 20px;
+          white-space: pre-wrap;
+        }
+        img {
+          display: none;
+        }
+      }
 
-  .modules-section {
-    .room-module-icon {
-      @extend .bigicontext-element;
-    }
-    .room-module-title {
-      font-size: 30px;
-      font-weight: bold;
-    }
-  }
+      @include respond-to(">=medium") {
+        div.description {
+          float:left;
+          width:65%;
+          img {
+            width:100%;
+            display: block;
+          }
+        }
+        div.cardBox {
+          float:right;
+          width:30%;
+        }
+      }
+      .cardBox {
+        padding:0px;
+        border-color: $color-ambient-rosa;
+        h3, strong, p {
+          padding: 0px 20px 20px 20px;
+        }
+        h3 {
+          margin: 20px 0px 0px 0px;
+        }
+      }
+    } // Section
 
-  .prices-section {
-    .room-price-title {
-      font-size: 30px;
-      font-weight: bold;
-    }
+    // ------------------------ Modules Area Section
+    &.modules-section {
 
-    .room-module-icon {
-      display: inline-flex;
-      @extend .bigicontext-element;
-    }
-  }
-}
+      div.room-module-item {
+
+        margin-bottom: 30px;
+        @include cf;
+
+        @include respond-to(">=medium") {
+          width: 50%;
+          float: left;
+          padding-right: 30px;
+        }
+        .bigicontext-element {
+          float: left;
+        }
+        .description {
+          margin-left: 120px;
+        }
+      }
+
+      div.room-module-item:last-child {
+        margin-bottom: 0px;
+      }
+
+    } // Section
+
+    // ------------------------ Prices Area Section
+    &.prices-section {
+
+      .cardBox {
+        padding:0px;
+        margin-bottom:50px;
+      }
+
+      div.cardBox:nth-last-child(n+1) ~ div.cardBox:last-child {
+        margin-bottom:0px;
+      }
+
+      h3 {
+        padding: 20px 20px 10px 20px;
+        line-height: 50px;
+      }
+      h3::after {
+        content: '';
+        margin-top: 10px;
+        display: block;
+        height:10px;
+        width:100%;
+        opacity: 0.6;
+        background-image: url(image_path('svg/underline-mint.svg'));
+        background-repeat: no-repeat;
+        background-position: center left;
+        background-size: contain;
+      }
+
+      span.subtitle {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      .bigicontext-element {
+        margin-bottom: 10px;
+      }
+
+      .room-price-description {
+        display: table;
+
+        @include respond-to(">=medium") {
+          float: left;
+          width: 50%;
+        }
+
+        margin-bottom:20px;
+
+        padding: 0px 20px 0px 20px;
+        p {
+          padding-bottom: 20px;
+        }
+      }
+      .room-price-features {
+
+        clear:both;
+        @include respond-to(">=medium") {
+          clear:none;
+          float: right;
+          width:50%;
+        }
+
+
+        border-left: 1px solid $color-ambient-grey-light;
+        padding: 0px 20px 0px 20px;
+        margin-bottom: 20px;
+
+        li {
+          list-style-type: none;
+          background-image: url(image_path('svg/icon-arrow-right-blinky-mint.svg'));
+          background-size: 30px;
+          background-repeat: no-repeat;
+          background-position: top left;
+          padding-left: 40px;
+          min-height: 35px;
+          padding-top: 4px;
+        }
+
+      }
+      .room-price-amount {
+
+        @include cf;
+        span.txt {
+          display: none;
+          @include respond-to(">=medium") {
+            display: inline;
+          }
+        }
+
+        clear:both;
+        border-top: 1px solid $color-ambient-grey-light;
+        padding: 0px 20px 0px 20px;
+
+
+        @include font-size-secondaryFont('small');
+        line-height: 70px;
+        color: $color-ambient-mint-dark;
+
+        .monthly-amount {
+          @include font-size-secondaryFont('large');
+          line-height: 70px;
+          color: $color-ambient-mint-dark;
+          float:right;
+          span {
+            @include font-size-secondaryFont('small');
+          }
+        }
+      }
+    } // Section
+
+    // ------------------------ Gallery Area Section
+    &.photos-section {
+      .gallery {
+
+        img {
+          display: block;
+          padding-bottom: 10px;
+          width: 100%;
+        }
+
+        column-fill:          balance;
+        -moz-column-fill:     balance;
+        -ms-column-fill:      balance;
+        -o-column-fill:       balance;
+        -webkit-column-fill:  balance;
+        column-gap:           10px;
+        -moz-column-gap:      10px;
+        -ms-column-gap:       10px;
+        -o-column-gap:        10px;
+        -webkit-column-gap:   10px;
+        width: 100%;
+
+        @include respond-to(">=small") {
+          column-count:         2;
+          -moz-column-count:    2;
+          -ms-column-count:     2;
+          -o-column-count:      2;
+          -webkit-column-count: 2;
+
+          a:first-of-type {
+            //flex-grow: 1;
+            height:361px;
+            img {
+              height:361px;
+              object-fit: cover;
+            }
+          }
+        }
+
+        @include respond-to(">=medium") {
+          column-count:         3;
+          -moz-column-count:    3;
+          -ms-column-count:     3;
+          -o-column-count:      3;
+          -webkit-column-count: 3;
+
+          a:nth-child(odd) {
+            //flex-grow: 1;
+            height:361px;
+            img {
+              height:361px;
+              object-fit: cover;
+            }
+          }
+        }
+      }
+
+    } // End Single Section
+
+    // ------------------------ Submission Section
+    &.submission-section {
+
+      .steps {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: flex-start;
+        align-content: center;
+
+        .step {
+          flex-grow: 1;
+          width:24%;
+          text-align: center;
+          .bigicontext-element {
+            display: inline-flex;
+          }
+          h3 {
+            margin:15px 0px 15px 0px;
+          }
+        }
+
+        .line {
+          flex-grow: 10;
+          img {width:100%;}
+          padding-top:30px;
+          width:14%;
+        }
+      }
+
+      .loginpanel {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top:50px;
+        flex-wrap: wrap;
+
+        span {
+          padding: 10px 20px;
+          text-align: center;
+          @include respond-to("<=medium") {
+            width:100%;
+          }
+        }
+
+        .btn-primary {
+          width:270px;
+        }
+      }
+
+    } // End Single Section
+
+  } // END All Sections </section>
+
+} // END Room Call Page

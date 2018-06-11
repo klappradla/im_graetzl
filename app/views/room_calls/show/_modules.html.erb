@@ -1,12 +1,22 @@
 <section class="modules-section">
-  <h2>Folgende Module sind ab <%= I18n.localize(@room_call.opens_at, format: '%d. %B') %> Beziehbar</h2>
+
+  <h2>Folgende Module sind ab <%= I18n.localize(@room_call.opens_at, format: '%d. %B') %> beziehbar</h2>
+
   <% @room_call.room_call_modules.includes(:room_module).each do |call_module| %>
     <div class="room-module-item">
-      <div class="room-module-icon">
+
+      <div class="bigicontext-element -large">
         <%= icon_tag call_module.room_module.icon %>
       </div>
-      <div class="room-module-title"> <%= call_module.quantity %> <%= call_module.room_module.name %> </div>
-      <div class="room-module-description"> <%= call_module.description %> </div>
+      <div class="description">
+        <h3><%= call_module.quantity %> <%= call_module.room_module.name %></h3>
+        <p>
+          Hier kommt der Beschreibungstext vom Modul, Nikola noch sagen wegen DB und Admin.
+        </p>
+      </div>
+
     </div>
+
   <% end %>
+
 </section>

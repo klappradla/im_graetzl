@@ -14,12 +14,12 @@
 
   <div class="cardBoxContent -roomoffer">
 
-    <div class="location-shortfacts roomoffer-shortfacts">
-      <%= link_to room_offer, class: 'locationlogo' do %>
+    <div class="avatar-block -below">
+      <%= link_to room_offer, class: 'avatarImg' do %>
         <%= avatar_for room_offer, 200, 'img-square' %>
       <% end %>
       <%= link_to room_offer, class: 'typelink' do %>
-        <div class="locationtxt">
+        <div class="typetxt">
           <div class="roomtype">
             <%= t("activerecord.attributes.room_offer.offer_types.#{room_offer.offer_type}") %>
           </div>

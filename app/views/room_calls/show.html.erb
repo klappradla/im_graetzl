@@ -1,12 +1,12 @@
 <div class="room-call-page">
 
-  <div class="imgHeader -cloudy2">
-    <%= attachment_image_tag @room_call, :cover_photo, :fill, 980, 420, fallback: 'cover_photo/980x370.png', class: 'titleImg' %>
+  <div class="imgHeader -cloudy3 -fullwidth" style="background-image: url('<%= Refile.attachment_url(@room_call, :cover_photo, :fill, 1280, 500) %>')">
+    <!--<%= attachment_image_tag @room_call, :cover_photo, :fill, 1280, 500, fallback: 'cover_photo/980x370.png', class: 'titleImg -fullwidth' %>-->
   </div>
 
-  <div class="title-heading">
-    <h1><%= @room_call.title %> / <%= @room_call.address.street %> </h1>
-    <div class="subtitle"><%= @room_call.subtitle %></div>
+  <div class="hl-subtext">
+    <h1><%= @room_call.title %></h1>
+    <p>Bewirb dich bis zum <%= I18n.localize(@room_call.ends_at, format: '%d. %B') %> für einen der <%= @room_call.total_vacancies %> freien Plätze.</p>
   </div>
 
   <%= render 'room_calls/show/info' %>
@@ -14,7 +14,11 @@
   <%= render 'room_calls/show/prices' %>
   <%= render 'room_calls/show/photos' %>
   <%= render 'room_calls/show/group' %>
-  <%= render 'room_calls/show/submissions' %>
+  <% if current_user %>
+    <%= render 'room_calls/show/submissions' %>
+  <% else %>
+    <%= render 'room_calls/show/login' %>
+  <% end %>
 
   <!-- Unused:
   @room_call.about_partner

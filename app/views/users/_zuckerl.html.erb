@@ -11,11 +11,11 @@
     </div>
   </div>
   <div class="cardBoxContent">
-    <div class="location-shortfacts">
-      <div class="locationlogo">
+    <div class="avatar-block">
+      <div class="avatarImg">
         <%= link_to([location.graetzl, location]){ avatar_for location } %>
       </div>
-      <div class="locationtxt">
+      <div class="typetxt">
         <%= link_to location.name, [location.graetzl, location], class: 'name' %>
         <div class="category"><%= location.category.name %></div>
         <% if location.address %>

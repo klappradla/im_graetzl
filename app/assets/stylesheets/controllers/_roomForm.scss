@@ -81,3 +81,22 @@ section.room-offer-form {
   }
 
 }
+
+section.room-call-form {
+  label {min-width:185px;}
+  p.subline, h3.subline {
+    margin: 0px 0px 20px 0px;
+    text-align: center;
+  }
+
+  .room-modules, .room-prices, .room-call-fields {
+    .nested-fields {
+      margin-bottom:20px;
+      border-bottom: 1px solid $color-ambient-mint;
+    }
+  }
+
+  .btn-delete {
+    margin: 15px 0px 0px 15px;
+  }
+}

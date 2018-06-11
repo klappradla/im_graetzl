@@ -11,9 +11,9 @@
     </div>
   </div>
   <div class="cardBoxContent">
-    <div class="location-shortfacts">
-      <div class="locationlogo"><%= avatar_for zuckerl.location %></div>
-      <div class="locationtxt">
+    <div class="avatar-block">
+      <div class="avatarImg"><%= avatar_for zuckerl.location %></div>
+      <div class="typetxt">
         <div class="name"><%= zuckerl.location.name %></div>
         <div class="category"><%= zuckerl.location.category.name %></div>
         <% if address = zuckerl.location.address %>

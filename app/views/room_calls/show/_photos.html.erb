@@ -1,6 +1,8 @@
 <section class="photos-section">
   <h2>Eindrücke aus dem <%= @room_call.title %></h2>
-  <% @room_call.images.each do |image| %>
-    <%= link_to attachment_image_tag(image, :file, :fill, 200, 200), attachment_url(image, :file, :limit, 800, 800) %>
-  <% end %>
+  <div class="gallery">
+    <% @room_call.images.each do |image| %>
+      <%= link_to attachment_image_tag(image, :file, :fill, 900, 450), attachment_url(image, :file, :limit, 800, 800) %>
+    <% end %>
+  </div>
 </section>
