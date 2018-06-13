@@ -68,7 +68,9 @@ Rails.application.routes.draw do
     resources :zuckerls, path: 'zuckerl', except: [:index, :show]
   end
 
-  resources :room_demands, path: 'wien/raumteiler/raumsuche', except: [:index]
+  resources :room_demands, path: 'wien/raumteiler/raumsuche', except: [:index] do
+    post 'toggle', on: :member
+  end
   resources :room_offers, path: 'wien/raumteiler/raum', except: [:index] do
     get 'select', on: :collection
     post 'toggle', on: :member
@@ -79,14 +81,13 @@ Rails.application.routes.draw do
 
 
   resources :groups, except: [:index] do
+    resources :discussions, only: [:show, :create, :update, :destroy]
+    resources :discussion_posts, only: [:create, :update, :destroy]
     post 'join', on: :member
     post 'request_join', on: :member
     post 'accept_request', on: :member
     post 'reject_request', on: :member
   end
-
-  resources :discussions, except: [:index]
-  resources :discussion_posts, except: [:index]
 
   get 'wien/raumteiler/raumsuche' => redirect('/wien/raumteiler')
   get 'wien/raumteiler/raum' => redirect('/wien/raumteiler')

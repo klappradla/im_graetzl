@@ -45,7 +45,7 @@ class RoomOffersController < ApplicationController
 
   def toggle
     @room_offer = current_user.room_offers.find(params[:id])
-    @room_offer.available? ? @room_offer.occupied! : @room_offer.available!
+    @room_offer.enabled? ? @room_offer.disabled! : @room_offer.enabled!
     redirect_to rooms_user_path
   end
 

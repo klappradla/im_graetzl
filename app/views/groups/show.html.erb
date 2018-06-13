@@ -1,26 +1,27 @@
-<section class="groupDetail">
-  <h3><%= @group.title %> – Discussions</h3>
-  <p><%= @group.description %></p>
+<div class="group-page">
 
-  <aside>
-    <h4>Admin</h4>
-    <div class="group-user group-admin">
-      <%= attachment_image_tag @group.admin, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
-      <p><%= @group.admin.first_name %> <%= @group.admin.last_name %></p>
-    </div>
+  <%= render 'groups/header' %>
 
-    <h4>Members</h4>
-    <% @group.users.each do |user| %>
-      <div class="group-user group-member">
-        <%= attachment_image_tag user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
-        <p><%= user.first_name %> <%= user.last_name %></p>
-      </div>
+  <div class='tabs-ctrl'>
+    <ul class="tabs-nav">
+      <li><a href="#tab-info">Die Gruppe</a></li>
+      <% if @group.readable_by?(current_user) %>
+        <li><a href="#tab-discussions">Diskussionen</a></li>
+        <!-- <li><a href="#tab-meetings">Treffen</a></li> -->
+      <% end %>
+      <% if @group.admins.include?(current_user) %>
+        <li><a href="#tab-members">Mitglieder</a></li>
+      <% end %>
+    </ul>
+
+    <div id='tab-info'><%= render 'info' %></div>
+    <% if @group.readable_by?(current_user) %>
+      <div id='tab-discussions'><%= render 'discussions' %></div>
+      <!-- <div id='tab-meetings'><%= render 'meetings' %></div> -->
     <% end %>
-  </aside>
+    <% if @group.admins.include?(current_user) %>
+      <div id='tab-members'><%= render 'members' %></div>
+    <% end %>
+  </div>
 
-  <% if @group.visible_to?(current_user) %>
-    <%= render 'discussions' %>
-  <% else %>
-    <%= render 'private' %>
-  <% end %>
-</section>
+</div>

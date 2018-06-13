@@ -1,31 +1,12 @@
-<div class="discussion-box">
-  <% if user_signed_in? %>
-    <%= render 'discussions/form' %>
+<div class="discussion-section">
+
+  <div class="discussion-box">
+    <% if @group.users.include?(current_user) %>
+      <%= render 'groups/discussions/new', group_id: @group.id %>
+    <% end %>
+  </div>
+
+  <% @discussions.each do |discussion| %>
+    <%= render 'groups/discussions/discussion_preview', discussion: discussion %>
   <% end %>
 </div>
-
-<% @discussions.each do |discussion| %>
-  <div class="discussion-box">
-      <%= link_to discussion.discussion_posts.first.user do %>
-        <%= attachment_image_tag discussion.discussion_posts.first.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
-        <span class="username"><%= discussion.discussion_posts.first.user.first_name %> <%= discussion.discussion_posts.first.user.last_name %></span>
-      <% end %>
-      <%= link_to discussion do %>
-        <p>
-          <%= discussion.discussion_posts.first.content %>
-        </p>
-      <% end %> <!-- restarting the link here in case a href in the content interrupts it -->
-      <%= link_to discussion do %>
-        <p>
-          <% if discussion.discussion_posts.count > 1 %>
-            <span class="control">
-              <%= discussion.discussion_posts.count - 1 %> Replies
-            </span>
-          <% end %>
-          <span class="control">
-            Reply
-          </span>
-        </p>
-      <% end %>
-    </div>
-<% end %>

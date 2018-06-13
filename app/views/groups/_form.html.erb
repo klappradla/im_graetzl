@@ -3,6 +3,7 @@
 <div class="form-block">
 
   <%= f.hidden_field :room_offer_id %>
+  <%= f.hidden_field :room_call_id %>
 
   <h2 class="hl-main"><span>Titel</span> und <span>Beschreibung</span></h2>
   <div class="input-field">
@@ -27,6 +28,6 @@
     <%= f.label :private, 'Private' %>
   </div>
 
-  <%= f.button 'Create Group', data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
+  <%= f.button @group.new_record? ? 'Create Group' : 'Update', data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
 </div>
 <% end %>

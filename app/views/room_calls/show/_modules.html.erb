@@ -9,10 +9,8 @@
         <%= icon_tag call_module.room_module.icon %>
       </div>
       <div class="description">
-        <h3><%= call_module.quantity %> <%= call_module.room_module.name %></h3>
-        <p>
-          Hier kommt der Beschreibungstext vom Modul, Nikola noch sagen wegen DB und Admin.
-        </p>
+        <h3><%= call_module.room_module.name %> (<%= call_module.quantity %>)</h3>
+        <p><%= call_module.description %></p>
       </div>
 
     </div>

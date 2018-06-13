@@ -56,7 +56,7 @@
 
 		/* dimensions: cut off images */
 		overflow: auto;
-		padding: 25px 25px 0;
+		padding: 30px 40px 0px 40px;
 		border-bottom: 25px solid transparent;
 
 		/* dimensions: handling large content */
@@ -89,20 +89,22 @@
 		/* position: centering vertical and horizontal */
 		position: absolute;
 		z-index: 9999;
-		top: 0;
-		right: 0;
+		top: 5px;
+		right: 5px;
 
 		/* dimensions: 25px x 25px */
 		line-height: 25px;
+		font-size:22px;
 		width: 25px;
 
 		/* styling */
 		cursor: pointer;
 		text-align: center;
-		font-family: Arial, sans-serif;
-		background: #fff; /* Set the background in case it overlaps the content */
-		background: rgba(255, 255, 255, 0.3);
-		color: #000;
+		//font-family: Arial, sans-serif;
+		//background: #fff; /* Set the background in case it overlaps the content */
+		background-color: #DBEFEC;
+		color: $color-ambient-mint-dark;
+		font-weight:bold;
 		border: none;
 		padding: 0;
 	}

@@ -1,6 +1,0 @@
-<p> Closed group </p>
-<% if current_user && @group.group_join_requests.exists?(user_id: current_user.id) %>
-  <p> Group join request sent. </p>
-<% else %>
-  <p> <%= link_to "Join Group", request_join_group_path(@group), method: :post %>
-<% end%>

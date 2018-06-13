@@ -51,6 +51,10 @@ class User < ApplicationRecord
     end
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   def after_confirmation
     UsersMailer.new.send_welcome_email(self)
     MailchimpSubscribeJob.perform_later(self)

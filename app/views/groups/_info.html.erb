@@ -1,0 +1,36 @@
+<div class="info-section">
+  <% if @group.readable_by?(current_user) %>
+    <%= render @group.parent %>
+
+    <div class="top-posts">
+      <% if @discussions.present? %>
+        <% @discussions.first(3).each do |discussion| %>
+          <%= render 'groups/discussions/discussion_preview', discussion: discussion %>
+        <% end %>
+        <%= link_to "All discussions", "javascript:", class: 'all-discussions-link' %>
+      <% else %>
+        <p> No discussions started yet. </p>
+      <% end %>
+    </div>
+
+    <h3> Group Members </h3>
+    <ul>
+      <% @group.members.each do |user| %>
+        <li>
+          <%= attachment_image_tag user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+          <p><%= user.full_name %></p>
+        </li>
+      <% end %>
+    </ul>
+
+    <h3> Uber die Gruppe </h3>
+    <p><%= @group.description %></p>
+
+  <% else %>
+
+    <h3> Uber die Gruppe </h3>
+    <p><%= @group.description %></p>
+
+    <%= render @group.parent %>
+  <% end %>
+</div>

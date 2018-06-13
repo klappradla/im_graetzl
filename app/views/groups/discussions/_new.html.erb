@@ -1,0 +1,12 @@
+<div class="discussion-create">
+  <%= attachment_image_tag current_user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+  <%= form_for [@group, Discussion.new] do |f| %>
+    <div class="input-field">
+      <%= f.text_field :title, placeholder: 'Discussion Title', required: true %>
+    </div>
+    <div class="input-textarea">
+      <%= text_area_tag :content, nil, cols: 80, rows: 3, placeholder: 'Start a new discussion…', required: true %>
+    </div>
+    <%= f.button 'Create', data: { disable_with: 'sendet...' }, class: 'btn-secondary' %>
+  <% end %>
+</div>

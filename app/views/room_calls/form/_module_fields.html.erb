@@ -8,11 +8,11 @@
   </div>
 
   <div class="input-textarea">
-    <%= f.label :quantity do %>
-      <%= icon_tag "users" %>
-      <span> Description </span>
+    <%= f.label :description do %>
+      <%= icon_tag "layout-document" %>
+      <span>Beschreibung</span>
     <% end %>
-    <%= f.text_area :description, placeholder: "..." %>
+    <%= f.text_area :description, placeholder: "Kurze Beschreibung des Moduls .." %>
   </div>
 
   <div class="input-field">

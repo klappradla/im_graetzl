@@ -39,6 +39,12 @@ class RoomDemandsController < ApplicationController
     end
   end
 
+  def toggle
+    @room_demand = current_user.room_demands.find(params[:id])
+    @room_demand.enabled? ? @room_offer.disabled! : @room_offer.enabled!
+    redirect_to rooms_user_path
+  end
+
   def destroy
     @room_demand = current_user.room_demands.find(params[:id])
     @room_demand.destroy

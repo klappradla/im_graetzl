@@ -39,13 +39,15 @@ class RoomCallsController < ApplicationController
 
   def add_submission
     @room_call = RoomCall.find(params[:id])
-    @room_call_submission = @room_call.room_call_submissions.build(user: current_user)
+    @room_call_submission = @room_call.room_call_submissions.build(room_call_submission_params)
+    @room_call_submission.user = current_user
     params[:answers].each do |field_id, content|
       @room_call_submission.room_call_submission_fields.build(room_call_field_id: field_id, content: content)
     end
 
     if @room_call_submission.save
       RoomCallMailer.new.send_submission_email(current_user, @room_call)
+      flash[:notice] = "Bewerbung received"
       redirect_to @room_call
     else
       flash[:error] = @room_call.errors.full_messages.first
@@ -82,6 +84,10 @@ class RoomCallsController < ApplicationController
       address_attributes: [:id, :_destroy, :street_name, :street_number, :zip, :city, :coordinates, :description],
       images_files: [],
     )
+  end
+
+  def room_call_submission_params
+    params.permit(:first_name, :last_name, :email, :phone, :website)
   end
 
 end

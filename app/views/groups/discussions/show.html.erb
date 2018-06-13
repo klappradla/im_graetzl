@@ -1,0 +1,28 @@
+<div class="group-page discussion-page">
+  <%= render 'groups/header' %>
+
+  <p><%= link_to "Back to all discussions", group_path(@group, anchor: 'tab-discussions') %></p>
+
+  <% @posts.each do |post| %>
+    <div class="discussion-box">
+      <%= attachment_image_tag post.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+      <span class="username"><%= post.user.full_name %></span>
+      <p><%= post.content %></p>
+    </div>
+  <% end %>
+
+  <div class="discussion-box">
+    <% if @group.users.include?(current_user) %>
+      <div class="discussion-create">
+        <%= attachment_image_tag current_user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+        <%= form_for [@group, DiscussionPost.new] do |f| %>
+          <%= hidden_field_tag :discussion_id, @discussion.id %>
+          <div class="input-textarea">
+            <%= f.text_area :content, cols: 80, rows: 3, placeholder: 'Post a reply…' %>
+          </div>
+          <%= f.button 'Post', data: { disable_with: 'sendet...' }, class: 'btn-secondary' %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

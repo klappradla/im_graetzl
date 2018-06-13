@@ -1,0 +1,17 @@
+<% post = discussion.sticky? ? discussion.discussion_posts.first : discussion.discussion_posts.last %>
+<div class="discussion-preview">
+  <div class="discussion-preview-author">
+    <%= attachment_image_tag post.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+    <span class="username"><%= post.user.full_name %></span>
+  </div>
+  <div class="discussion-preview-title">
+    <%= link_to discussion.title, [discussion.group, discussion] %>
+  </div>
+  <div class="discussion-preview-content">
+    <%= post.content %>
+  </div>
+  <div class="discussion-preview-info">
+    <%= discussion.discussion_posts.size - 1 %> replies.
+  </div>
+
+</div>

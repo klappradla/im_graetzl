@@ -16,6 +16,8 @@ class RoomDemand < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
 
   enum demand_type: { seeking_room: 0, seeking_roommate: 1 }
+  enum status: { enabled: 0, disabled: 1 }
+
   acts_as_taggable_on :keywords
 
   attachment :avatar, type: :image
@@ -27,7 +29,7 @@ class RoomDemand < ApplicationRecord
   # validate :has_one_graetzl_at_least # doesn't work for some reason
 
   after_destroy { MailchimpRoomDeleteJob.perform_later(user) }
-  
+
   private
 
   def has_one_category_at_least

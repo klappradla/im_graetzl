@@ -48,7 +48,7 @@
     <% if local_assigns[:manage_buttons].present? && current_user == room_offer.user %>
       <div class="btn-group">
         <%= link_to 'Bearbeiten', edit_room_offer_path(room_offer), class: 'btn-secondary -mint -small' %>
-        <%= link_to room_offer.available? ? 'Deaktivieren' : 'Aktivieren', toggle_room_offer_path(room_offer),
+        <%= link_to room_offer.enabled? ? 'Deaktivieren' : 'Aktivieren', toggle_room_offer_path(room_offer),
           class: 'btn-secondary -mint -small', method: :post %>
       </div>
       <%= link_to 'Löschen', room_offer_path(room_offer), class: 'link-subtle', data: { confirm: 'Bist du dir sicher?' },

@@ -1,10 +1,10 @@
 <% district_ids ||= nil %>
 <% graetzl_ids ||= nil %>
 
-<div class="filter-input district-select-input">
+<div class="input-select filter-input district-select-input">
   <%= select :filter, :district_ids, options_for_select(district_select_options, district_ids), {}, { multiple: true, class: 'district-select' } %>
 </div>
-<div class="graetzl-select-input">
+<div class="input-select graetzl-select-input">
   <%= select :filter, :graetzl_ids, options_for_select(graetzl_select_options, graetzl_ids), {}, { multiple: true, class: 'graetzl-select' } %>
 </div>
 <div class="filter-actions">

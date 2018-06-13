@@ -89,21 +89,23 @@
     // ------------------------ Modules Area Section
     &.modules-section {
 
-      div.room-module-item {
+      display: flex;
+      flex-wrap: wrap;
+      h2 {width:100%; display: block;}
 
+      div.room-module-item {
+        display: flex;
+        width:100%;
         margin-bottom: 30px;
-        @include cf;
 
         @include respond-to(">=medium") {
-          width: 50%;
-          float: left;
-          padding-right: 30px;
+          width:50%;
         }
         .bigicontext-element {
-          float: left;
+          margin-right: 20px;
         }
         .description {
-          margin-left: 120px;
+          p {white-space: pre-wrap;}
         }
       }
 
@@ -154,21 +156,24 @@
 
       .room-price-description {
         display: table;
-
         @include respond-to(">=medium") {
           float: left;
           width: 50%;
         }
-
         margin-bottom:20px;
-
         padding: 0px 20px 0px 20px;
         p {
           padding-bottom: 20px;
+          white-space: pre-wrap;
+        }
+        .modules {
+          display: flex;
+          flex-wrap: wrap;
+          //justify-content: space-between;
+          .bigicontext-element {margin-right:10px;}
         }
       }
       .room-price-features {
-
         clear:both;
         @include respond-to(">=medium") {
           clear:none;
@@ -176,20 +181,20 @@
           width:50%;
         }
 
-
         border-left: 1px solid $color-ambient-grey-light;
         padding: 0px 20px 0px 20px;
         margin-bottom: 20px;
 
         li {
           list-style-type: none;
-          background-image: url(image_path('svg/icon-arrow-right-blinky-mint.svg'));
-          background-size: 30px;
-          background-repeat: no-repeat;
-          background-position: top left;
-          padding-left: 40px;
-          min-height: 35px;
-          padding-top: 4px;
+          display: flex;
+          align-content: center;
+          align-items: center;
+          svg {
+            display: inline-block;
+            fill: $color-ambient-mint;
+            margin:2px 8px 2px 0px;
+          }
         }
 
       }
@@ -286,7 +291,14 @@
     // ------------------------ Submission Section
     &.submission-section {
 
+      .subtitle {
+        text-align: center;
+        margin-top:-20px;
+      }
+      p.description {white-space: pre-wrap;}
+
       .steps {
+        margin-top:50px;
         display: flex;
         justify-content: space-evenly;
         align-items: flex-start;
@@ -302,10 +314,18 @@
           h3 {
             margin:15px 0px 15px 0px;
           }
+          &.-active {
+            .bigicontext-element {
+              background-image: url(image_path('svg/kringel-grey-rosa.svg'));
+              svg {
+                fill: $color-font-primary;
+              }
+            }
+          }
         }
 
         .line {
-          flex-grow: 10;
+          flex-grow: 2;
           img {width:100%;}
           padding-top:30px;
           width:14%;
@@ -316,7 +336,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top:50px;
+        margin-top:70px;
         flex-wrap: wrap;
 
         span {
@@ -330,6 +350,24 @@
         .btn-primary {
           width:270px;
         }
+      }
+
+      .submission_form {
+        margin-top:80px;
+
+        h3 {
+          margin-bottom:10px;
+        }
+        .input-field {
+          margin-bottom:30px;
+        }
+        .btn-primary {
+          margin: auto;
+        }
+        textarea {
+          min-height:110px;
+        }
+
       }
 
     } // End Single Section
