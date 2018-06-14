@@ -3,6 +3,8 @@
 
   <p><%= link_to "Back to all discussions", group_path(@group, anchor: 'tab-discussions') %></p>
 
+  <h2> <%= @discussion.title %> </h2>
+
   <% @posts.each do |post| %>
     <div class="discussion-box">
       <%= attachment_image_tag post.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>

@@ -16,7 +16,9 @@
     <%= link_to "Edit Group", edit_group_path(@group) %>
   <% end %>
 
-  <% if user_signed_in? && !@group.users.include?(current_user) %>
+  <% if !user_signed_in? %>
+    <p> <%= link_to "Login to Join Group", new_user_session_path(redirect: request.original_url) %>
+  <% elsif !@group.users.include?(current_user) %>
     <% if @group.group_join_requests.exists?(user_id: current_user.id) %>
       <p> Group join request sent. </p>
     <% else %>
