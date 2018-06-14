@@ -4,7 +4,7 @@
     <div class="coverImgWrapper">
       <%= link_to cover_photo_for(room_offer), room_offer %>
     </div>
-    
+
     <% if room_offer.graetzl %>
       <div class="categoryicon">
         <%= "#{room_offer.district.zip}, #{room_offer.graetzl.name}" %>
@@ -39,18 +39,6 @@
       <div class="collaboration icontxt">
         <%= icon_tag "urgent-extra-notice-info-announcement" %>
         Interesse an gem. Kooperationen
-      </div>
-    <% end %>
-
-    <% if local_assigns[:appendix].present? %>
-      <%= render 'activities/appendix', appendix: local_assigns[:appendix], parent: room_offer %>
-    <% end %>
-
-    <% if local_assigns[:manage_buttons].present? && current_user == room_offer.user %>
-      <div class="btn-group">
-        <%= link_to 'Bearbeiten', edit_room_offer_path(room_offer), class: 'btn-secondary -mint -small' %>
-        <%= link_to 'Löschen', room_offer_path(room_offer), data: { confirm: 'Bist du dir sicher?' },
-          method: :delete, class: 'btn-secondary -mint -small' %>
       </div>
     <% end %>
 
