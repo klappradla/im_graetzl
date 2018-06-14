@@ -1,3 +1,13 @@
+<% meta(
+    title: @room_call.title[0..45].gsub(/\s\w+\s*$/,'...'),
+    description: ('Open Call: ' +  @room_call.subtitle[0..160].gsub(/\n/, '...')),
+    robots: 'index, follow',
+    og_title: @room_call.title[0..45].gsub(/\s\w+\s*$/,'...'),
+    og_description: ('Open Call: ' +  @room_call.subtitle[0..160].gsub(/\n/, '...')),
+    og_image: attachment_url(@room_call, :cover_photo, host: request.url, fallback: 'meta/og_logo.png')
+  )
+%>
+
 <div class="room-call-page">
 
   <div class="imgHeader -cloudy3 -fullwidth" style="background-image: url('<%= Refile.attachment_url(@room_call, :cover_photo, :fill, 1280, 500) %>')">

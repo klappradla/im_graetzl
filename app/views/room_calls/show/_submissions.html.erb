@@ -38,39 +38,53 @@
           </div>
         <% end %>
 
-        <div class="input-field">
-          <%= label_tag :first_name do %>
-            <%= icon_tag "user-avatar" %> <span>Vorname</span>
-          <% end %>
-          <%= text_field_tag :first_name, current_user.first_name %>
-        </div>
+        <h3>Deine Kontaktdaten:</h3>
 
-        <div class="input-field">
-          <%= label_tag :last_name do %>
-            <%= icon_tag "user-avatar" %> <span>Nachname</span>
-          <% end %>
-          <%= text_field_tag :last_name, current_user.last_name %>
-        </div>
+        <div class="formBlock">
 
-        <div class="input-field">
-          <%= label_tag :email do %>
-            <%= icon_tag "at-symbol" %> <span>Email</span>
-          <% end %>
-          <%= email_field_tag :email, current_user.email %>
-        </div>
+          <div class="formRow -double">
 
-        <div class="input-field">
-          <%= label_tag :phone do %>
-            <%= icon_tag "phone" %> <span>Telefonnummer</span>
-          <% end %>
-          <%= text_field_tag :phone, nil, placeholder: '0664 / ...' %>
-        </div>
+            <div class="input-field">
+              <%= label_tag :first_name do %>
+                <%= icon_tag "user-avatar" %> <span>Vorname</span>
+              <% end %>
+              <%= text_field_tag :first_name, current_user.first_name %>
+            </div>
 
-        <div class="input-field">
-          <%= label_tag :website do %>
-            <%= icon_tag "globe" %> <span>Website</span>
-          <% end %>
-          <%= url_field_tag :website, current_user.website, placeholder: 'http:// oder https://' %><em></em>
+            <div class="input-field">
+              <%= label_tag :last_name do %>
+                <%= icon_tag "user-avatar" %> <span>Nachname</span>
+              <% end %>
+              <%= text_field_tag :last_name, current_user.last_name %>
+            </div>
+
+          </div>
+
+          <div class="input-field">
+            <%= label_tag :email do %>
+              <%= icon_tag "at-symbol" %> <span>Email</span>
+            <% end %>
+            <%= email_field_tag :email, current_user.email %>
+          </div>
+
+          <div class="formRow -double">
+
+            <div class="input-field">
+              <%= label_tag :phone do %>
+                <%= icon_tag "phone" %> <span>Telefonnummer</span>
+              <% end %>
+              <%= text_field_tag :phone, nil, placeholder: '0664 / ...' %>
+            </div>
+
+            <div class="input-field">
+              <%= label_tag :website do %>
+                <%= icon_tag "globe" %> <span>Website</span>
+              <% end %>
+              <%= url_field_tag :website, current_user.website, placeholder: 'http:// oder https://' %><em></em>
+            </div>
+
+          </div>
+
         </div>
 
         <%= submit_tag 'Call abschicken', data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
