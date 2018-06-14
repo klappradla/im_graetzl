@@ -47,7 +47,7 @@ class RoomCallsController < ApplicationController
 
     if @room_call_submission.save
       RoomCallMailer.new.send_submission_email(current_user, @room_call)
-      flash[:notice] = "Bewerbung received"
+      flash[:notice] = "Danke für deine Bewerbung - Wir haben dir soeben ein E-Mail gesendet mit ein paar weiteren Infos .."
       redirect_to @room_call
     else
       flash[:error] = @room_call.errors.full_messages.first
