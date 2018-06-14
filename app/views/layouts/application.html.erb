@@ -9,9 +9,6 @@
   <%= stylesheet_link_tag '//fonts.googleapis.com/css?family=Dosis:400,700' %>
   <!-- css -->
   <%= stylesheet_link_tag 'application', media: 'all' %>
-  <!-- icons -->
-  <!--<%= javascript_include_tag "https://fontastic.s3.amazonaws.com/P7x6EJva372RfDgNFpjLYd/icons.js" %>-->
-  <!--<%= javascript_include_tag "https://file.myfontastic.com/P7x6EJva372RfDgNFpjLYd/icons.js" %>-->
 
   <!-- favicon -->
   <%= favicon_link_tag 'favicon.ico' %>
@@ -21,6 +18,11 @@
 </head>
 
 <body data-controller=<%= controller_name %>>
+
+<div style="display: none">
+  <%= render "icons" %>
+</div>
+
 
 <header>
   <%= render 'nav' %>
