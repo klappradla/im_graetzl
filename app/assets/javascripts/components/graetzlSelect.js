@@ -1,7 +1,6 @@
 APP.components.graetzlSelect = function() {
 
     $('select#district_id').on('change', function() {
-        console.log('DISTRICT SELECT');
         var districtID = $(this).val();
         var url = '/wien/' + districtID + '/graetzls';
         //var graetzlSelect = $('select#graetzl_id');
@@ -12,16 +11,13 @@ APP.components.graetzlSelect = function() {
             dataType: 'json',
             type: 'GET',
             beforeSend: function() {
-                console.log('BEFORE SEND');
                 graetzlSelect.prop('disabled', 'disabled');
             },
             success: function(data, textStatus, jqXHR) {
-                console.log('SUCCESS');
                 graetzlSelect.prop('disabled', false);
                 update_options(graetzlSelect, data);
             },
             error: function(jqXHR, textStatus,errorThrown) {
-                console.log('ERROR');
                 graetzlSelect.prop('disabled', false);
             }
         });

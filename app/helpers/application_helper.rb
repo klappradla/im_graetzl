@@ -52,7 +52,7 @@ module ApplicationHelper
   end
 
   def icon_tag(name)
-    "<svg class='icon-#{name}'><use href='#icon-#{name}'></use></svg>".html_safe
+    "<svg class='icon-#{name}'><use xlink:href='#icon-#{name}'></use></svg>".html_safe
   end
 
 end

@@ -37,12 +37,12 @@ RSpec.describe Notification::ImmediateMail do
       subject(:message) { mailer.send :message }
 
       it 'has basic mandrill keys' do
-        expect(message.keys).to contain_exactly(:to,
-                                              :from_email,
-                                              :from_name,
-                                              :subject,
-                                              :global_merge_vars,
-                                              :merge_vars)
+        expect(message.keys).to include(:to,
+                                        :from_email,
+                                        :from_name,
+                                        :subject,
+                                        :global_merge_vars,
+                                        :merge_vars)
       end
       it 'has keys for immediate mail' do
         expect(message[:merge_vars]).to be_a(Array)
