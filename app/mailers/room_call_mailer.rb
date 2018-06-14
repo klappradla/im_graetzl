@@ -22,4 +22,14 @@ class RoomCallMailer
       ]
     }
   end
+
+  def asset_url(resource, asset_name)
+    host = "https://#{Refile.cdn_host || default_host}"
+    Refile.attachment_url(resource, asset_name, host: host)
+  end
+
+  def default_host
+    Rails.application.config.action_mailer.default_url_options[:host]
+  end
+  
 end
