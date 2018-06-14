@@ -217,7 +217,7 @@ section.lp {
           padding-right:0px;
           padding-top:100px;
           @include respond-to(">=large") {
-            padding-top:0px;
+            padding-top:70px;
           }
           div {
             position: relative;
@@ -478,7 +478,7 @@ section.lp {
     }
 
     // Timetable
-    .cd-schedule li.events-group ul {max-height:1600px !important;}
+    .cd-schedule li.events-group ul {max-height:2000px !important;}
 
     @include respond-to(">=large") {
       .cd-schedule .events ul li.events-group:nth-child(1) {width:40% !important}
