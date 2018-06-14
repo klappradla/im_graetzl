@@ -88,14 +88,30 @@
     }
 
     .filter-actions {
-      .reset-button { float: left; }
-      .filter-button { float: right; }
+      display: flex;
+      //flex-wrap: wrap;
+
+      button {}
+      .reset-button { margin-right:10px; }
+      .filter-button { }
     }
 
     .search-txt { font-size: 1.6rem; }
-    .SumoSelect { width: 400px; }
+    //.SumoSelect { width: 400px; }
     .SumoSelect .select-all { height: 40px; }
     .SumoSelect > .optWrapper > .options li.opt.disabled { display: none; }
+
+    .filter-categories {
+      @include respond-to(">=medium") {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 600px;
+        .input-checkbox {
+          width:50%;
+        }
+      }
+    }
+
   }
 
 }

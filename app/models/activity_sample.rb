@@ -26,17 +26,18 @@ class ActivitySample
   end
 
   def rooms
+    room_call = RoomCall.open_calls.first
     if @graetzl
-      room_offers = @graetzl.room_offers.by_currentness.first(2)
-      room_demands = @graetzl.room_demands.by_currentness.first(2)
+      room_offer = @graetzl.room_offers.enabled.by_currentness.first
+      room_demand = @graetzl.room_demands.enabled.by_currentness.first
     elsif @district
-      room_offers = @district.room_offers.by_currentness.first(2)
-      room_demands = @district.room_demands.by_currentness.first(2)
+      room_offer = @district.room_offers.enabled.by_currentness.first
+      room_demand = @district.room_demands.enabled.by_currentness.first
     else
-      room_offers = RoomOffer.by_currentness.first(2)
-      room_demands = RoomDemand.by_currentness.first(2)
+      room_offer = RoomOffer.enabled.by_currentness.first
+      room_demand = RoomDemand.enabled.by_currentness.first
     end
-    @rooms = (room_offers + room_demands).sort_by(&:created_at).reverse.first(2)
+    [room_call, room_offer, room_demand].compact.first(2)
   end
 
   def zuckerls

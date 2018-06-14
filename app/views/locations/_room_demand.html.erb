@@ -41,22 +41,5 @@
     </div>
     <% end %>
 
-    <% if local_assigns[:appendix].present? %>
-      <%= render 'activities/appendix', appendix: local_assigns[:appendix], parent: room_demand %>
-    <% end %>
-
-    <% if local_assigns[:manage_buttons].present? && current_user == room_demand.user %>
-      <div class="btn-group">
-        <%= link_to 'Bearbeiten', edit_room_demand_path(room_demand), class: 'btn-secondary -mint -small' %>
-        <%= link_to room_demand.enabled? ? 'Deaktivieren' : 'Aktivieren', toggle_room_demand_path(room_demand),
-          class: 'btn-secondary -mint -small', method: :post %>
-      </div>
-
-      <%= link_to 'Löschen', room_demand_path(room_demand),
-        data: { confirm: 'Bist du dir sicher?' },
-        method: :delete,
-        class: 'link-subtle'
-      %>
-    <% end %>
   </div>
 </div>
