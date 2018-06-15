@@ -29,6 +29,8 @@
   <% else %>
     <%= render 'room_calls/show/login' %>
   <% end %>
+  
+  <%= render 'room_calls/show/map', map_data: @map_data %>
 
   <!-- Unused:
   @room_call.about_partner

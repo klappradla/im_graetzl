@@ -14,6 +14,22 @@
   }
 }
 
+@mixin headlineBarbapapaMint() {
+  color: #ffffff;
+  font-family: $font-secondary;
+  background-image: url(image_path('texture-alpha-noise.png')), url(image_path('svg/bg-headline-barpapapa-mint.svg'));
+  background-repeat: repeat, no-repeat;
+  background-size:  100px 100px, auto 100%;
+  background-position: top left;
+  border-radius: 0 12px 12px 0;
+  padding: 5px 18px 8px 17px;
+  display: table;
+  line-height: 1;
+  @include respond-to("retina2x") {
+    background-size:  50px 50px, auto 100%;
+  }
+}
+
 .headlineBarbapapa {
   @include headlineBarbapapa();
 }

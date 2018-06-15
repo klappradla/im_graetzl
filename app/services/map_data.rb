@@ -1,11 +1,13 @@
 class MapData < BaseService
-  def initialize(districts:nil, district:nil, graetzls:nil, graetzl:nil)
+  def initialize(districts:nil, district:nil, graetzls:nil, graetzl:nil, addresses:nil, address:nil)
     districts = [districts, district].flatten.compact
     graetzls = [graetzls, graetzl].flatten.compact
+    addresses = [addresses, address].flatten.compact
 
     # want to end up with two only collections here
     @districts = districts.empty? ? nil : districts
     @graetzls = graetzls.empty? ? nil : graetzls
+    @addresses = addresses.empty? ? nil : addresses
   end
 
   def call
@@ -17,7 +19,7 @@ class MapData < BaseService
   attr_reader :districts, :graetzls
 
   def map_hash
-    [district_data, graetzl_data].inject(:merge)
+    [district_data, graetzl_data, address_data].inject(:merge)
   end
 
   def district_data
@@ -29,6 +31,12 @@ class MapData < BaseService
     return {} unless @graetzls
     { graetzls: encode(@graetzls) }
   end
+  
+  def address_data
+    Rails.logger.info "Person attributes hash: #{@addresses}"
+    return {} unless @addresses
+    { addresses: encode(@addresses) }
+  end
 
   def encode(collection)
     features = collection.map{ |item| feature item }
@@ -37,11 +45,18 @@ class MapData < BaseService
   end
 
   def feature(item)
-    factory.feature(item.area, item.id, properties(item))
+    # graetzls/districts have area, addresses have coordinates
+    geometry = item.try(:area) || item.try(:coordinates)
+    factory.feature(geometry, item.id, properties(item))
   end
 
   def properties(item)
-    { name: item.name, zip: item.try(:zip), targetURL: polymorphic_path(item) }
+    begin
+      targetURL = polymorphic_path(item)
+    rescue
+      targetURL = nil
+    end
+    { name: item.try(:name), zip: item.try(:zip), targetURL: targetURL }
   end
 
   def factory

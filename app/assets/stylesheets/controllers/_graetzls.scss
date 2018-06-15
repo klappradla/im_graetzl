@@ -53,6 +53,9 @@ section.graetzls {
     height: 206px;
     background-size: 233px 206px;
   }
+  &.-location {
+    background-image: url(image_path('illu/illu-wirtschaft2-plain.png'));
+  }
 }
 
 // ---------------------------------------------------------------------- blocks for logged categories

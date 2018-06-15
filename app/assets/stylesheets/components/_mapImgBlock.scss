@@ -173,6 +173,17 @@
 
 }
 
+.mapImgBlock.-location {
+  margin-top: 0;
+  @include respond-to(">=medium") {
+    padding: 0 25px;
+  }
+  .navBlock h1 {
+    @include headlineBarbapapaMint();
+    @include textShadowHard($color-ambient-mint-dark);
+  }
+}
+  
 .leaflet-tile-pane {
   filter: hue-rotate(-1100deg) saturate(50%);
   opacity: 0.8;

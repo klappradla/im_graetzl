@@ -30,12 +30,13 @@ APP.components.graetzlMap = (function() {
         };
 
     function init(callback, options) {
+        var interactive = (options && options.interactive) || false;
         map = L.map('graetzlMapWidget', {
             layers: [mainLayer],
-            dragging: false,
-            touchZoom: false,
-            scrollWheelZoom: false,
-            doubleClickZoom: false,
+            dragging: interactive,
+            touchZoom: interactive,
+            scrollWheelZoom: interactive,
+            doubleClickZoom: interactive,
             boxZoom: false,
             tap: false
         }).setActiveArea('activeArea');
@@ -117,6 +118,40 @@ APP.components.graetzlMap = (function() {
         }
         return this;
     }
+    
+    function showMapAddress(addresses, graetzls, options) { // Array or String
+        var config = $.extend({}, defaults, options);
+        var addressesMap = L.geoJson(addresses, {
+            style: function() {
+                return config.style;
+            },
+            onEachFeature: function (feature, layer) {
+                handlehighlightMapPoly(layer, feature.properties.targetURL);
+                if (config.interactive) {
+                    layer.on('click', function () {
+                        window.location.href = feature.properties.targetURL;
+                    });
+                    layer.on('mouseover', function () {
+                        this.setStyle(styles.over);
+                        highlightMapNav(feature.properties.targetURL);
+                    });
+                    layer.on('mouseout', function () {
+                        graetzlMap.resetStyle(layer);
+                        unhighlightMapNav(feature.properties.targetURL);
+
+                    });
+                }
+            }
+        });
+        var graetzlMap = L.geoJson(graetzls);
+
+        map.addLayer(addressesMap);
+        if(config.zoomAfterRender == true) {
+          var coords = L.latLng(addresses.features[0].geometry.coordinates);
+          map.fitBounds(graetzlMap.getBounds()).panTo(addressesMap.getBounds().getCenter()).zoomIn(1);
+        }
+        return this;
+    }
 
 
     function getMap() {
@@ -145,6 +180,7 @@ APP.components.graetzlMap = (function() {
         init: init,
         showMapGraetzl: showMapGraetzl,
         showMapDistrict: showMapDistrict,
+        showMapAddress: showMapAddress,
         getMap: getMap,
         showSingleGraetzlHeader: showSingleGraetzlHeader
     }
