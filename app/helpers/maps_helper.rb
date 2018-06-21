@@ -14,6 +14,13 @@ module MapsHelper
     "scale=#{options[:scale]}&"\
     "markers=size:#{options[:marker]}|#{coords.y},#{coords.x}"
   end
+  
+  def embedded_map_url(coords, options={})
+    options = embedded_map_defaults.merge(options)
+    "https://www.google.com/maps/embed/v1/place?"\
+    "q=#{coords.y},#{coords.x}&"\
+    "key=#{options[:key]}"
+  end
 
   private
 
@@ -23,6 +30,12 @@ module MapsHelper
       size: [79,100],
       scale: 2,
       marker: 'small',
+      key: ENV['GOOGLE_API_KEY']
+    }
+  end
+  
+  def embedded_map_defaults
+    {
       key: ENV['GOOGLE_API_KEY']
     }
   end

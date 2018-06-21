@@ -5,7 +5,7 @@ APP.controllers.room_calls = (function() {
       initRoomForm();
     }
     if ($(".room-call-page").exists()) {
-      initMap();
+      // initMap();
     }
   }
   
