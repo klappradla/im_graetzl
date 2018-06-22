@@ -2,6 +2,9 @@
   @include respond-to(">=medium") {
     float: right;
     width: calc(100% - 270px);
+    &.-left {
+      float: left;
+    }
   }
 }
 
@@ -9,8 +12,10 @@
   @include respond-to(">=medium") {
     float: left;
     width: 270px;
+    &.-right {
+      float: right;
+    }
   }
-
 }
 
 .sideBarbox {

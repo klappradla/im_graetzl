@@ -6,6 +6,10 @@ class GroupsController < ApplicationController
     if @group.readable_by?(current_user)
       @discussions = @group.discussions.includes(discussion_posts: :user).order("sticky DESC, last_post_at DESC")
     end
+
+    # Just for testing ... TODO
+    @activity_sample = ActivitySample.new
+
   end
 
   def new

@@ -1,0 +1,32 @@
+<div class="btn-ctrl">
+  <% if !user_signed_in? %>
+    <!-- Logged Out Button-->
+    <%= button_to new_user_session_path(redirect: request.original_url), class: 'btn-userCallToAction' do %>
+      <span><%= image_tag 'avatar/user/default.png', class: 'img-round' %> Gruppe beitreten</span>
+    <% end %>
+
+  <% elsif @group.admins.include?(current_user) %>
+    <!-- Edit Button for Admins-->
+    <%= link_to edit_group_path(@group), class: 'btn-userCallToAction -grey' do %>
+      <span><%= avatar_for current_user %> Gruppe bearbeiten</span>
+    <% end %>
+
+  <% elsif !@group.users.include?(current_user) %>
+    <% if @group.group_join_requests.exists?(user_id: current_user.id) %>
+      <!-- Logged In Button - Join Request already sent-->
+      <%= button_to '#', class: 'btn-userCallToAction -disabled' do %>
+        <span><%= avatar_for current_user %> Beitrittsanfrage gestellt ..</span>
+      <% end %>
+    <% else %>
+      <!-- Logged In Button - Join Request Button -->
+      <%= button_to request_join_group_path(@group), method: :post, class: 'btn-userCallToAction' do %>
+        <span><%= avatar_for current_user %> Gruppe beitreten</span>
+      <% end %>
+    <% end%>
+
+  <% elsif @group.users.include?(current_user) %>
+  <!-- Logged In Button - User is Member - Leave Group -->
+  <%= link_to 'Gruppe verlassen', '#', class: 'btn-secondary -grey' %>
+
+  <% end %>
+</div>

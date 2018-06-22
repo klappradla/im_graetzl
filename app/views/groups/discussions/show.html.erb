@@ -1,28 +1,81 @@
 <div class="group-page discussion-page">
+
   <%= render 'groups/header' %>
 
-  <p><%= link_to "Back to all discussions", group_path(@group, anchor: 'tab-discussions') %></p>
+  <%= render 'groups/btn_ctrl' %>
 
-  <h2> <%= @discussion.title %> </h2>
+  <!-- NAVIGATION -->
+  <ul class="tabs-nav">
+    <li><%= link_to "Die Gruppe", group_path(@group, anchor: 'tab-info') %></li>
+    <% if @group.readable_by?(current_user) %>
+      <li class="active"><%= link_to "Diskussionen", group_path(@group, anchor: 'tab-discussions') %></li>
+      <li><a href="#tab-meetings">Treffen</a></li>
+    <% end %>
+    <% if @group.admins.include?(current_user) %>
+      <li><%= link_to "Mitglieder", group_path(@group, anchor: 'tab-members') %></li>
+    <% end %>
+  </ul>
+  <!-- /NAVIGATION -->
+
+  <!--<%= link_to "Zurück zu allen Diskussionen", group_path(@group, anchor: 'tab-discussions'), class: 'btn-secondary -grey -back' %>-->
+
+
+  <div class="discussion-infos">
+    <%= link_to group_path(@group, anchor: 'tab-discussions'), class: 'back-link' do %><%= icon_tag "arrow-left-2" %>Alle Themen<% end %>
+    <span>&nbsp;&middot;&nbsp;</span>
+    <%= @discussion.discussion_posts.size  %> <%= @discussion.discussion_posts.size > 1 ? 'Beiträge' : 'Beitrag'  %> im Thema:
+  </div>
+
+  <h2 class="title"><%= @discussion.title %></h2>
+
 
   <% @posts.each do |post| %>
-    <div class="discussion-box">
-      <%= attachment_image_tag post.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
-      <span class="username"><%= post.user.full_name %></span>
-      <p><%= post.content %></p>
+
+
+    <div class="user-post">
+
+      <div class="user" id="<%= post.id %>">
+        <div class="avatar">
+          <%= attachment_image_tag post.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+        </div>
+        <div class="infos">
+          <div class="name"><%= post.user.full_name %></div>
+          <div class="date">
+            <%= I18n.localize(post.created_at, format:'%a, %d. %B %Y, %H:%M') %>
+          </div>
+        </div>
+        <div class="btn-control">
+          <%= link_to '#', class: 'delete' do %>
+            <%= icon_tag "pencil" %>
+          <% end %>
+          <%= link_to '#', class: 'edit' do %>
+            <%= icon_tag "trash-delete-remove" %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="content">
+        <p><%= post.content %></p>
+      </div>
+
     </div>
+
   <% end %>
+
+
 
   <div class="discussion-box">
     <% if @group.users.include?(current_user) %>
       <div class="discussion-create">
-        <%= attachment_image_tag current_user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
         <%= form_for [@group, DiscussionPost.new] do |f| %>
           <%= hidden_field_tag :discussion_id, @discussion.id %>
           <div class="input-textarea">
-            <%= f.text_area :content, cols: 80, rows: 3, placeholder: 'Post a reply…' %>
+            <%= f.label :content do %>
+            <%= attachment_image_tag current_user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+            <% end %>
+            <%= f.text_area :content, cols: 80, rows: 3, placeholder: 'Schreib hier deinen Beitrag bzw. deine Antwort ..' %>
           </div>
-          <%= f.button 'Post', data: { disable_with: 'sendet...' }, class: 'btn-secondary' %>
+          <%= f.button 'Beitrag absenden', data: { disable_with: 'sendet...' }, class: 'btn-primary' %>
         <% end %>
       </div>
     <% end %>

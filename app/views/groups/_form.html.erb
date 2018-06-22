@@ -5,11 +5,11 @@
   <%= f.hidden_field :room_offer_id %>
   <%= f.hidden_field :room_call_id %>
 
-  <h2 class="hl-main"><span>Titel</span> und <span>Beschreibung</span></h2>
+
   <div class="input-field">
     <%= f.label :title do %>
     <%= icon_tag "record" %>
-    <span>Titel</span>
+    <span>Gruppen Titel</span>
     <% end %>
     <%= f.text_field :title, placeholder: 'z.B. My Cool New Group' %>
   </div>
@@ -17,17 +17,17 @@
   <div class="input-field">
     <%= f.label :description do %>
     <%= icon_tag "layout-document" %>
-    <span>Description</span>
+    <span>Beschreibung</span>
     <% end %>
     <%= f.text_area :description, placeholder: 'z.B. My Group is for people to discus new ideas…' %>
   </div>
 
-  <h2> Group visibility </h2>
   <div class="input-checkbox">
     <%= f.check_box :private %>
-    <%= f.label :private, 'Private' %>
+    <%= f.label :private, 'Private Gruppe (nur Mitglieder können inhalte sehen.)' %>
   </div>
 
-  <%= f.button @group.new_record? ? 'Create Group' : 'Update', data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
+  <%= f.button @group.new_record? ? 'Gruppe erstellen' : 'Update', data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
+
 </div>
 <% end %>

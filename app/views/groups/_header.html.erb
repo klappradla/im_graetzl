@@ -1,28 +1,40 @@
 <div class="group-header">
-  <h1><%= @group.title %></h1>
-  <p>Raumteiler Gruppe fur <%= link_to @group.parent, @group.parent %> </p>
-  <p><%= @group.users.count %> Mitglieder | <%= @group.private? ? "Geschlossene" : "Öffnen" %> Gruppe </p>
-  <p>Organisiert von:</p>
-  <ul>
-    <% @group.admins.each do |user| %>
-      <li>
-        <%= attachment_image_tag user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
-        <p><%= user.full_name %></p>
-      </li>
-    <% end %>
-  </ul>
 
-  <% if @group.admins.include?(current_user) %>
-    <%= link_to "Edit Group", edit_group_path(@group) %>
-  <% end %>
+  <!-- Include Cardbox -->
+  <!--<%= render @group.parent %>-->
 
-  <% if !user_signed_in? %>
-    <p> <%= link_to "Login to Join Group", new_user_session_path(redirect: request.original_url) %>
-  <% elsif !@group.users.include?(current_user) %>
-    <% if @group.group_join_requests.exists?(user_id: current_user.id) %>
-      <p> Group join request sent. </p>
-    <% else %>
-      <p> <%= link_to "Join Group", request_join_group_path(@group), method: :post %>
-    <% end%>
-  <% end %>
+  <div class="coverImg">
+    <%= attachment_image_tag @group.parent, :cover_photo, :fill, 980, 500, fallback: 'cover_photo/980x370.png', class: 'coverImg' %>
+  </div>
+
+  <div class="groupInfos">
+
+    <h1 class="hl-main"><%= @group.title %></h1>
+
+    <p>Raumteiler Gruppe für <%= link_to @group.parent, @group.parent %> </p>
+
+    <p>
+      <%= @group.users.count %> Mitglieder &middot;
+      <%= @group.private? ? "Geschlossene" : "Offene" %> Gruppe
+    </p>
+
+    <div class="users">
+      <% @group.admins.each do |user| %>
+      <div class="user">
+        <div class="avatar">
+          <%= attachment_image_tag user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+        </div>
+        <div class="infos">
+          <div class="title">Organisiert von:</div>
+          <span><%= user.full_name %></span>
+        </div>
+      </div>
+      <% end %>
+    </div>
+
+
+
+
+  </div>
+
 </div>

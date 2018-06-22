@@ -11,6 +11,11 @@ APP.controllers.groups = (function() {
       $(".all-discussions-link").on("click", function() {
         $(".tabs-ctrl").trigger('show', '#tab-discussions');
       });
+
+      // Toggle Button for new Topic
+      $('.btn-new-topic').on( 'click', function() {
+        $('#new-topic').slideToggle();
+      });
     }
 
     return {

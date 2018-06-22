@@ -46,7 +46,7 @@
       <div class="btn-group">
         <%= link_to 'Bearbeiten', edit_room_demand_path(room_demand), class: 'btn-secondary -mint -small' %>
         <%= link_to room_demand.enabled? ? 'Deaktivieren' : 'Aktivieren', toggle_room_demand_path(room_demand),
-          class: 'btn-secondary -mint -small', method: :post %>
+           class: room_demand.enabled? ? 'btn-secondary -mint -small' : 'btn-secondary -small', method: :post %>
       </div>
 
       <%= link_to 'Löschen', room_demand_path(room_demand),

@@ -1,36 +1,63 @@
 <div class="info-section">
-  <% if @group.readable_by?(current_user) %>
-    <%= render @group.parent %>
 
-    <div class="top-posts">
-      <% if @discussions.present? %>
-        <% @discussions.first(3).each do |discussion| %>
-          <%= render 'groups/discussions/discussion_preview', discussion: discussion %>
+  <% if @group.readable_by?(current_user) %>
+
+    <div class="top-area">
+
+      <div class="mainContent -left top-posts">
+
+        <h3>Aktuelle Diskussionen</h3>
+
+        <% if @discussions.present? %>
+        <% @discussions.first(2).each do |discussion| %>
+        <%= render 'groups/discussions/discussion_preview', discussion: discussion %>
         <% end %>
-        <%= link_to "All discussions", "javascript:", class: 'all-discussions-link' %>
-      <% else %>
-        <p> No discussions started yet. </p>
-      <% end %>
+        <%= link_to "Alle Diskussionen anzeigen", "javascript:", class: 'all-discussions-link btn-primary -mint' %>
+        <% else %>
+        <p> Noch keine Diskussionen in der Gruppe.. </p>
+        <% end %>
+      </div>
+
+      <div class="sideBar -right">
+
+        <h3>Nächstes Treffen</h3>
+
+        <!-- TODO Insert next Group Meeting -->
+        <%= render @activity_sample.meetings.first(1) %>
+      </div>
+
     </div>
 
-    <h3> Group Members </h3>
-    <ul>
-      <% @group.members.each do |user| %>
-        <li>
-          <%= attachment_image_tag user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
-          <p><%= user.full_name %></p>
-        </li>
-      <% end %>
-    </ul>
 
-    <h3> Uber die Gruppe </h3>
-    <p><%= @group.description %></p>
-
-  <% else %>
-
-    <h3> Uber die Gruppe </h3>
-    <p><%= @group.description %></p>
-
-    <%= render @group.parent %>
   <% end %>
+
+  <h2><%= @group.users.count %> Mitglieder</h2>
+
+  <div class="users member-section">
+    <% @group.admins.each do |user| %>
+      <div class="user">
+        <div class="avatar">
+          <%= attachment_image_tag user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+        </div>
+        <div class="infos">
+          <div class="title">Organisator:</div>
+          <span><%= user.first_name %><br><%= user.last_name %></span>
+        </div>
+      </div>
+      <% end %>
+      <% @group.members.each do |user| %>
+      <div class="user">
+        <div class="avatar">
+          <%= attachment_image_tag user, :avatar, :fill, 200, 200, fallback: 'avatar/user/200x200.png', class: 'img-round' %>
+        </div>
+        <div class="infos">
+          <span><%= user.first_name %><br><%= user.last_name %></span>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <h2>Über die Gruppe</h2>
+  <p class="about"><%= @group.description %></p>
+
 </div>

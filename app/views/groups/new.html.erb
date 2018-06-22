@@ -1,8 +1,17 @@
-<% title('Create Group') %>
+<% title('Gruppe erstellen') %>
 
 <div class="group-form-page">
-  <div class="wrp">
-    <h1 class="hl-main">Create <span>Group</span><h1>
+
+  <div class="hl-subtext">
+
+      <h1><span>Neue Gruppe</span> erstellen</h1>
+
+      <% if params[:room_offer_id].present? %>
+        <p>Für "<%= RoomOffer.find(params[:room_offer_id]) %>"</p>
+      <% elsif params[:room_call_id].present? %>
+        <p>Für "<%= RoomCall.find(params[:room_call_id]).title %>"</p>
+      <% end %>
+
   </div>
 
   <%= render 'form' %>

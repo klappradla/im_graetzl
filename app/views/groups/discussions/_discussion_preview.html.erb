@@ -1,17 +1,31 @@
 <% post = discussion.sticky? ? discussion.discussion_posts.first : discussion.discussion_posts.last %>
 <div class="discussion-preview">
-  <div class="discussion-preview-author">
-    <%= attachment_image_tag post.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
-    <span class="username"><%= post.user.full_name %></span>
-  </div>
-  <div class="discussion-preview-title">
+
+  <h3>
     <%= link_to discussion.title, [discussion.group, discussion] %>
+  </h3>
+
+  <div class="discussion-infos">
+    <%= discussion.discussion_posts.size  %> <%= discussion.discussion_posts.size > 1 ? 'Beiträge' : 'Beitrag'  %> im Thema &middot; Letzter von:
   </div>
-  <div class="discussion-preview-content">
-    <%= post.content %>
+
+  <div class="user">
+    <div class="avatar">
+      <%= attachment_image_tag post.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+    </div>
+    <div class="infos">
+      <div class="name"><%= post.user.full_name %></div>
+      <div class="date">
+        <%= I18n.localize(post.created_at, format:'%a, %d. %B %Y, %H:%M') %>
+      </div>
+    </div>
   </div>
-  <div class="discussion-preview-info">
-    <%= discussion.discussion_posts.size - 1 %> replies.
+
+  <div class="content">
+    <p><%= post.content.truncate(300, separator: ' ') %></p>
+    <div class="ctrl">
+      <%= link_to 'Beitrag lesen', [discussion.group, discussion], class: 'btn-secondary -mint -small' %>
+    </div>
   </div>
 
 </div>

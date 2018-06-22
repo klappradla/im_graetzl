@@ -1,12 +1,23 @@
-<div class="discussion-create">
-  <%= attachment_image_tag current_user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+<div class="discussion-create cardBox" id="new-topic">
   <%= form_for [@group, Discussion.new] do |f| %>
+
     <div class="input-field">
-      <%= f.text_field :title, placeholder: 'Discussion Title', required: true %>
+      <%= f.label :title do %>
+      <%= icon_tag "record" %>
+      <span>Neues Thema</span>
+      <% end %>
+      <%= f.text_field :title, placeholder: 'Gib deinem Thema einen kurzen Titel ..', required: true %>
     </div>
+
     <div class="input-textarea">
-      <%= text_area_tag :content, nil, cols: 80, rows: 3, placeholder: 'Start a new discussion…', required: true %>
+      <%= f.label :content do %>
+      <%= attachment_image_tag current_user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+      <span>Dein Beitrag</span>
+      <% end %>
+      <%= text_area_tag :content, nil, cols: 80, rows: 3, placeholder: 'Dein erster Beitrag im Thema ..', required: true %>
     </div>
-    <%= f.button 'Create', data: { disable_with: 'sendet...' }, class: 'btn-secondary' %>
+
+    <%= f.button 'Thema erstellen', data: { disable_with: 'sendet...' }, class: 'btn-primary' %>
+
   <% end %>
 </div>
