@@ -45,12 +45,19 @@
           </div>
         </div>
         <div class="btn-control">
-          <%= link_to '#', class: 'delete' do %>
-            <%= icon_tag "pencil" %>
+
+          <% if post.user == current_user %>
+            <%= link_to '#', class: 'edit' do %>
+              <%= icon_tag "pencil" %>
+            <% end %>
           <% end %>
-          <%= link_to '#', class: 'edit' do %>
-            <%= icon_tag "trash-delete-remove" %>
+
+          <% if @group.admins.include?(current_user) || post.user == current_user %>
+            <%= link_to '#', class: 'delete' do %>
+              <%= icon_tag "trash-delete-remove" %>
+            <% end %>
           <% end %>
+
         </div>
       </div>
 

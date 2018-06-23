@@ -8,16 +8,12 @@
   </div>
 
   <div class="groupInfos">
-
     <h1 class="hl-main"><%= @group.title %></h1>
-
     <p>Raumteiler Gruppe für <%= link_to @group.parent, @group.parent %> </p>
-
     <p>
       <%= @group.users.count %> Mitglieder &middot;
       <%= @group.private? ? "Geschlossene" : "Offene" %> Gruppe
     </p>
-
     <div class="users">
       <% @group.admins.each do |user| %>
       <div class="user">
@@ -31,10 +27,6 @@
       </div>
       <% end %>
     </div>
-
-
-
-
   </div>
 
 </div>

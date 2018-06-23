@@ -16,6 +16,12 @@ APP.controllers.groups = (function() {
       $('.btn-new-topic').on( 'click', function() {
         $('#new-topic').slideToggle();
       });
+
+      //$('.introtxt .txt').linkify({ target: "_blank"});
+
+      // JS Action Button Dropdown 
+      $('[data-behavior=createTrigger]').jqDropdown('attach', '[data-behavior=createContainer]');
+
     }
 
     return {

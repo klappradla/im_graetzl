@@ -1,32 +1,73 @@
 <div class="btn-ctrl">
-  <% if !user_signed_in? %>
-    <!-- Logged Out Button-->
-    <%= button_to new_user_session_path(redirect: request.original_url), class: 'btn-userCallToAction' do %>
+
+  <% if !user_signed_in? %> <!-- Logged Out -->
+
+    <%= link_to new_user_session_path(redirect: request.original_url), class: 'btn-userIcons' do %>
       <span><%= image_tag 'avatar/user/default.png', class: 'img-round' %> Gruppe beitreten</span>
     <% end %>
 
-  <% elsif @group.admins.include?(current_user) %>
-    <!-- Edit Button for Admins-->
-    <%= link_to edit_group_path(@group), class: 'btn-userCallToAction -grey' do %>
-      <span><%= avatar_for current_user %> Gruppe bearbeiten</span>
+  <% elsif @group.admins.include?(current_user) %> <!-- Group Admin -->
+
+    <%= link_to 'javascript:', data: { behavior: "createTrigger" }, class: 'btn-userIcons -grey' do %>
+      <span>Du bist Admin <%= icon_tag "arrow-down-2" %></span>
     <% end %>
 
-  <% elsif !@group.users.include?(current_user) %>
+  <% elsif !@group.users.include?(current_user) %> <!-- Join Request pending -->
+
     <% if @group.group_join_requests.exists?(user_id: current_user.id) %>
-      <!-- Logged In Button - Join Request already sent-->
-      <%= button_to '#', class: 'btn-userCallToAction -disabled' do %>
-        <span><%= avatar_for current_user %> Beitrittsanfrage gestellt ..</span>
+
+      <%= link_to 'javascript:', class: 'btn-userIcons -grey -disabled' do %>
+        <span>Beitrittsanfrage gestellt ...</span>
       <% end %>
-    <% else %>
-      <!-- Logged In Button - Join Request Button -->
-      <%= button_to request_join_group_path(@group), method: :post, class: 'btn-userCallToAction' do %>
+
+    <% else %> <!-- Join Request -->
+
+      <%= button_to request_join_group_path(@group), method: :post, class: 'btn-userIcons' do %>
         <span><%= avatar_for current_user %> Gruppe beitreten</span>
       <% end %>
+
     <% end%>
 
-  <% elsif @group.users.include?(current_user) %>
-  <!-- Logged In Button - User is Member - Leave Group -->
-  <%= link_to 'Gruppe verlassen', '#', class: 'btn-secondary -grey' %>
+  <% elsif @group.users.include?(current_user) %> <!-- Group Member -->
+
+    <%= link_to 'javascript:', data: { behavior: "createTrigger" }, class: 'btn-userIcons -grey' do %>
+      <span>Du bist Mitglied <%= icon_tag "arrow-down-2" %></span>
+    <% end %>
 
   <% end %>
+
+  <!-- Dropdown Panel -->
+  <% if @group.admins.include?(current_user) %> <!-- Group Admin -->
+
+    <div class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container createmenu" data-behavior="createContainer">
+      <div class="jq-dropdown-panel">
+        <%= link_to '#' do %>
+          <%= icon_tag "bell" %>
+          <div class="icontxt">Gruppen Benachrichtigungen</div>
+        <% end %>
+        <%= link_to edit_group_path(@group) do %>
+          <%= icon_tag "pencil" %>
+          <div class="icontxt">Gruppe bearbeiten</div>
+        <% end %>
+      </div>
+    </div>
+
+  <% elsif @group.users.include?(current_user) %> <!-- Group Member -->
+
+    <div class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container createmenu" data-behavior="createContainer">
+      <div class="jq-dropdown-panel">
+        <%= link_to '#' do %>
+          <%= icon_tag "bell" %>
+          <div class="icontxt">Gruppen Benachrichtigungen</div>
+        <% end %>
+        <%= link_to '#' , data: {confirm: 'Bist du sicher?'} do %>
+          <%= icon_tag "level-down" %>
+          <div class="icontxt">Gruppe verlassen</div>
+        <% end %>
+      </div>
+    </div>
+
+  <% end %>
+  <!-- /Dropdown Panel -->
+
 </div>

@@ -1,36 +1,63 @@
 .group-page {
 
+  h2 {
+    @include font-size-secondaryFont('base');
+    color: $color-ambient-rosa;
+  }
+
+  // Tabs Navigation
   .tabs-nav {
-    li a {
-      //color: $color-ambient-rosa;
-    }
     li.active a {
       color: $color-ambient-rosa;
     }
   }
 
+  // Button Controls
+  .btn-ctrl {
+    display: table;
+    margin: 0 auto;
+    margin-bottom:20px;
+    @include respond-to(">=medium") {
+      float:right;
+    }
+  }
+
+  // Button Control Dropdown
+  .btn-ctrl .dropdown-container {
+    width: 310px;
+    .icontxt {
+      margin-right:0px;
+    }
+    // Hack for Mobile View
+    @include respond-to("<=medium") {
+      width:98% !important;
+      margin-left:5px !important;
+      margin-right:5px !important;
+      left:0px !important;
+    }
+  }
+
+  // Post Control Icons
   .editControls {display: block;}
 
+  // Groups Startpage 2 Columns Top Area
   .top-area {
     @include cf;
     padding-top:30px;
-
     h3 {
       margin-bottom: 20px;
     }
-
     .mainContent {
       padding-right:20px;
     }
   }
 
-  .btn-ctrl {
-    float:right;
-  }
-  .btn-new-topic, .-back {
+  // New Discussion Topic
+  .btn-new-topic {
     display: table;
     margin: 0 auto;
   }
+
   .back-link {
     display: flex;
     align-items: center;
@@ -39,11 +66,7 @@
     }
   }
 
-  h2 {
-    @include font-size-secondaryFont('base');
-    color: $color-ambient-rosa;
-  }
-
+  // GROUP Header Area
   .group-header {
 
     display: flex;
@@ -53,23 +76,33 @@
     margin-bottom:40px;
 
     div.coverImg {
-      width:48%;
+      width:100%;
       img.coverImg {
-        height:270px;
-        max-width: 100%;
         border-radius: 8px;
         object-fit: cover;
+        max-width: 100%;
+        margin-bottom:20px;
+      }
+      @include respond-to(">=medium") {
+        width:48%;
+        img.coverImg {
+          height:270px;
+          max-width: 100%;
+        }
       }
     }
 
     div.groupInfos {
-      width:48%;
+      width:100%;
       h1 {
         text-align: left;
         margin-bottom:20px;
       }
       .users {
         margin-top:10px;
+      }
+      @include respond-to(">=medium") {
+        width:48%;
       }
     }
 
@@ -90,8 +123,7 @@
       pointer-events: none;
       z-index: 9;
     }
-
-  }
+  } // End GROUP Header Area
 
   // User STYLING
   div.users {
@@ -110,7 +142,6 @@
     div.infos {
       .title {
         font-style: italic;
-        //display: none;
       }
       .date {
         font-style: italic;
@@ -127,7 +158,7 @@
         width:25px;
         height:25px;
       }
-      a.active {
+      a:hover {
         svg {
           color: $color-ambient-rosa;
         }
@@ -166,10 +197,9 @@
 
   } // END PAGE
 
-  // Discussion PAGE
+  // Single Discussion PAGE
   &.discussion-page {
     h2.title {
-      //padding-top:30px;
       padding-bottom: 35px;
       color: $color-ambient-mint-dark;
     }
@@ -177,15 +207,13 @@
       margin-bottom:50px;
     }
     div.discussion-infos {
-      //padding-bottom:20px;
       padding-top:20px;
     }
   } // END PAGE
 
-  // START PAGE - HOME
+  // Discussion Overview Tab
   .discussion-section {
     padding-top:20px;
-
     h3.header {
       padding-top:20px;
       padding-bottom:20px;
@@ -194,19 +222,13 @@
   } // END PAGE
 
   // DISCUSSIONS STYLING
-
   .discussion-preview, &.discussion-page {
-
-    //padding-top:20px;
     margin-bottom:50px;
-
     .user {
       .name {
-        //color: $color-ambient-mint;
         font-weight: bold;
       }
     }
-
     h3 {
       margin-bottom:3px;
     }
@@ -215,8 +237,6 @@
       align-items: center;
       margin-bottom:10px;
       font-style: italic;
-      //color: $color-ambient-grey;
-      //@include font-size-primaryFont('small');
     }
     .content {
 
@@ -224,8 +244,10 @@
         margin-left: 57px;
       }
 
-      p {white-space: pre-wrap;}
       padding-top:5px;
+      p {
+        white-space: pre-wrap;
+      }
       .ctrl {
         margin-top:10px;
         a.btn-secondary {
@@ -245,7 +267,6 @@
   }
 
   .discussion-create {
-    //margin-top:20px;
     .img-round {
       margin-right:10px;
       width:30px;

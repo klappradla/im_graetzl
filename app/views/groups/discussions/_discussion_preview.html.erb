@@ -24,7 +24,7 @@
   <div class="content">
     <p><%= post.content.truncate(300, separator: ' ') %></p>
     <div class="ctrl">
-      <%= link_to 'Beitrag lesen', [discussion.group, discussion], class: 'btn-secondary -mint -small' %>
+      <%= link_to 'Beitrag lesen', [discussion.group, discussion, :anchor => post.id], class: 'btn-secondary -mint -small' %>
     </div>
   </div>
 
