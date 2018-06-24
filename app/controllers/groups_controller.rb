@@ -12,6 +12,11 @@ class GroupsController < ApplicationController
 
   end
 
+  def settings
+    @group = Group.find(params[:id])
+    render 'settings'
+  end
+
   def new
     @group = Group.new(
       room_offer_id: params[:room_offer_id],

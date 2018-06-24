@@ -4,21 +4,7 @@
 
   <%= render 'groups/btn_ctrl' %>
 
-  <!-- NAVIGATION -->
-  <ul class="tabs-nav">
-    <li><%= link_to "Die Gruppe", group_path(@group, anchor: 'tab-info') %></li>
-    <% if @group.readable_by?(current_user) %>
-      <li class="active"><%= link_to "Diskussionen", group_path(@group, anchor: 'tab-discussions') %></li>
-      <li><a href="#tab-meetings">Treffen</a></li>
-    <% end %>
-    <% if @group.admins.include?(current_user) %>
-      <li><%= link_to "Mitglieder", group_path(@group, anchor: 'tab-members') %></li>
-    <% end %>
-  </ul>
-  <!-- /NAVIGATION -->
-
-  <!--<%= link_to "Zurück zu allen Diskussionen", group_path(@group, anchor: 'tab-discussions'), class: 'btn-secondary -grey -back' %>-->
-
+  <%= render 'groups/tab_navigation' %>
 
   <div class="discussion-infos">
     <%= link_to group_path(@group, anchor: 'tab-discussions'), class: 'back-link' do %><%= icon_tag "arrow-left-2" %>Alle Themen<% end %>
@@ -53,7 +39,7 @@
           <% end %>
 
           <% if @group.admins.include?(current_user) || post.user == current_user %>
-            <%= link_to '#', class: 'delete' do %>
+            <%= link_to '#', { method: :destroy, remote: true, data: { confirm: 'Beitrag wirklich löschen?', disable_with: 'wird gelöscht...'}, class: 'delete' } do %>
               <%= icon_tag "trash-delete-remove" %>
             <% end %>
           <% end %>

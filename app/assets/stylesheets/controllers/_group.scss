@@ -3,6 +3,9 @@
   h2 {
     @include font-size-secondaryFont('base');
     color: $color-ambient-rosa;
+    span {
+      color: $color-font-primary;
+    }
   }
 
   // Tabs Navigation
@@ -299,6 +302,17 @@
       }
       label {
         min-width: 50px;
+      }
+    }
+  }
+
+  &.settings-page {
+    .settings-section {
+      padding-top:20px;
+      .settingSlice {
+        strong {
+          color: $color-ambient-mint-dark;
+        }
       }
     }
   }

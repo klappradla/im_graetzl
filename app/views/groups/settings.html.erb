@@ -1,0 +1,118 @@
+<div class="group-page settings-page">
+
+  <%= render 'groups/header' %>
+
+  <%= render 'groups/btn_ctrl' %>
+
+  <%= render 'groups/tab_navigation' %>
+
+  <!-- CONTENT -->
+
+  <div class="settings-section notification-settings">
+    <div class="block-settings">
+
+      <!-- Settings Header-->
+      <div class="settingHead">
+        <div class="col1">
+          <h2>Benachrichtigungen <span>aus der Gruppe</span></h2>
+        </div>
+        <div class="col2">
+          <%= icon_tag "bell" %> Notifications
+        </div>
+        <div class="col3">
+          <%= icon_tag "mail-1" %> Per E-Mail
+        </div>
+      </div>
+      <!-- /Settings Header-->
+
+      <!-- Settings Slide -->
+      <div class="settingSlice">
+
+        <div class="col1">Ein neues <strong>Treffen</strong> wurde in der Gruppe erstellt</div>
+
+        <div class="col2">
+
+          <div class="input-switch">
+            <input id="new-meeting" data-behavior="website-notification-toggle" data-type="Notifications::NewMeeting" type="checkbox" checked="">
+            <label for="new-meeting"></label>
+          </div>
+
+        </div>
+        <div class="col3">
+
+          <div class="input-select">
+            <select id="new-meeting" data-behavior="mail-notification-toggle" data-type="Notifications::NewMeeting">
+              <option value="off">Aus</option>
+              <option value="immediate">Sofort</option>
+              <option value="daily" selected="selected">Täglich</option>
+              <option value="weekly">Wöchentlich</option>
+            </select>
+          </div>
+
+        </div>
+      </div>
+      <!-- /Settings Slide -->
+
+      <!-- Settings Slide -->
+      <div class="settingSlice">
+
+        <div class="col1">Ein neues <strong>Thema</strong> wurde in der Gruppe erstellt</div>
+
+        <div class="col2">
+
+          <div class="input-switch">
+            <input id="new-discussion" data-behavior="website-notification-toggle" data-type="Notifications::NewDiscussion" type="checkbox" checked="">
+            <label for="new-discussion"></label>
+          </div>
+
+        </div>
+        <div class="col3">
+
+          <div class="input-select">
+            <select id="new-discussion" data-behavior="mail-notification-toggle" data-type="Notifications::NewDiscussion">
+              <option value="off">Aus</option>
+              <option value="immediate">Sofort</option>
+              <option value="daily" selected="selected">Täglich</option>
+              <option value="weekly">Wöchentlich</option>
+            </select>
+          </div>
+
+        </div>
+      </div>
+      <!-- /Settings Slide -->
+
+      <!-- Settings Slide -->
+      <div class="settingSlice">
+
+        <div class="col1">Ein neues <strong>Mitglied</strong> ist der Gruppe beigetreten.</div>
+
+        <div class="col2">
+
+          <div class="input-switch">
+            <input id="new-member" data-behavior="website-notification-toggle" data-type="Notifications::NewMember" type="checkbox" checked="">
+            <label for="new-member"></label>
+          </div>
+
+        </div>
+        <div class="col3">
+
+          <div class="input-select">
+            <select id="new-member" data-behavior="mail-notification-toggle" data-type="Notifications::NewMember">
+              <option value="off">Aus</option>
+              <option value="immediate">Sofort</option>
+              <option value="daily" selected="selected">Täglich</option>
+              <option value="weekly">Wöchentlich</option>
+            </select>
+          </div>
+
+        </div>
+      </div>
+      <!-- /Settings Slide -->
+
+
+    </div>
+  </div>
+
+  <!-- /CONTENT -->
+
+</div>
