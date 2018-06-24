@@ -1,0 +1,25 @@
+<div class="cardBox -group" data-behavior="masonry-card">
+
+  <div class="cardBoxHeader">
+    <div class="coverImgWrapper">
+      <%= link_to cover_photo_for(group.parent), group %>
+    </div>
+  </div>
+
+  <div class="cardBoxContent -roomoffer">
+
+    <div class="avatar-block -below">
+      <%= link_to group.parent, class: 'avatarImg' do %>
+        <%= attachment_image_tag group.parent, :avatar, :fill, 200, 200, fallback: 'avatar/user/200x200.png', class: 'img-square' %>
+      <% end %>
+    </div>
+
+    <div class="title">
+      <%= group.title %>
+    </div>
+
+    <div class="txt">
+      <p><%= truncate group.description, length: 100 %></p>
+    </div>
+  </div>
+</div>

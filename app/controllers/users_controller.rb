@@ -36,6 +36,10 @@ class UsersController < ApplicationController
     @locations = current_user.locations.includes(:location_ownerships, :graetzl)
   end
 
+  def groups
+    @groups = current_user.groups.includes(:room_offer, :room_call)
+  end
+
   private
 
   def wrong_graetzl?(user, graetzl)

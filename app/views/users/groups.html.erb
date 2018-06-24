@@ -1,0 +1,17 @@
+<section class="usersetup">
+
+  <% if @groups.empty? %>
+
+    <p> No groups. </p>
+
+  <% else %>
+
+    <h2 class="hl-main">Deine <span>Gruppen</span> verwalten</h2>
+
+    <div class="cardBoxCollection -tripple" data-behavior="groups-card-container">
+      <%= render @groups, manage_buttons: true %>
+    </div>
+
+  <% end %>
+
+</section>

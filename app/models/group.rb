@@ -10,7 +10,7 @@ class Group < ApplicationRecord
   has_many :group_join_requests
 
   def to_s
-    name
+    title
   end
 
   def parent

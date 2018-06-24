@@ -33,9 +33,14 @@ class RoomCall < ApplicationRecord
   :cover_photo, :first_name, :last_name, :email, :room_call_fields
 
   before_create :set_graetzl_and_district
+  after_create :set_group
 
   scope :open_calls, -> { where("starts_at <= current_date AND ends_at >= current_date") }
 
+  def to_s
+    title
+  end
+  
   def open?
     (starts_at..ends_at).cover?(Date.current)
   end
@@ -49,6 +54,11 @@ class RoomCall < ApplicationRecord
   def set_graetzl_and_district
     self.graetzl = address.graetzl if address
     self.district = graetzl.district if graetzl
+  end
+
+  def set_group
+    self.create_group(title: "#{title} Gruppe")
+    self.group.group_users.create(user_id: user_id, role: :admin)
   end
 
 end

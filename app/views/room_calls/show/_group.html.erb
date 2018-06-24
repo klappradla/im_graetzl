@@ -1,2 +1,6 @@
-<!--<section class="group-section">
-</section>-->
+<section class="group-section">
+  <h2><%= @room_call.group.title %></h2>
+  <h3 class="subtitle"><%= @room_call.group.users.size %> interessierte sind schon in der Gruppe</h3>
+  <p><%= @room_call.group.description %></p>
+  <%= link_to "Visit group", @room_call.group %>
+</section>

@@ -23,16 +23,12 @@
   <%= render 'room_calls/show/modules' %>
   <%= render 'room_calls/show/prices' %>
   <%= render 'room_calls/show/photos' %>
-  <%= render 'room_calls/show/group' %>
-  <% if current_user %>
-    <%= render 'room_calls/show/submissions' %>
-  <% else %>
-    <%= render 'room_calls/show/login' %>
-  <% end %>
-  
+  <%= render 'room_calls/show/group' if @room_call.group %>
+  <%= render user_signed_in? ? 'room_calls/show/submissions' : 'room_calls/show/login' %>
+
   <!-- our custom leaflet map (also needs initMap(); in room_calls.js) -->
   <!-- <%= render 'room_calls/show/map', map_data: @map_data %> -->
-  
+
 
   <!-- the interactive map -->
   <% if @room_call.address.try(:coordinates) %>
@@ -40,7 +36,7 @@
       <iframe width="930" height="300" frameborder="0" style="border:0" src='<%= embedded_map_url(@room_call.address.coordinates)%>' allowfullscreen></iframe>
     </div>
   <% end %>
-  
+
   <!-- static image map -->
   <!-- <% if @room_call.address.try(:coordinates) %>
     <%= link_to google_map_url(@room_call.address), class: 'gmap' do %>
