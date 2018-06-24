@@ -2,5 +2,14 @@
   <h2><%= @room_call.group.title %></h2>
   <h3 class="subtitle"><%= @room_call.group.users.size %> interessierte sind schon in der Gruppe</h3>
   <p><%= @room_call.group.description %></p>
+
+  <% @room_call.group.users.first(10).each do |user| %>
+    <div class="group-user">
+      <div class="avatar">
+        <%= attachment_image_tag user, :avatar, :fill, 200, 200, fallback: 'avatar/user/200x200.png', class: 'img-round' %>
+      </div>
+    </div>
+  <% end %>
+
   <%= link_to "Visit group", @room_call.group %>
 </section>
