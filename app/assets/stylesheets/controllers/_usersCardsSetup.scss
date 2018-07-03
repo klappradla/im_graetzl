@@ -143,4 +143,18 @@ section.usersetup {
     }
   }
 
+  // Groups Cardbox Adaption
+  &.-groups {
+    .btn-userIcons {
+      margin-bottom:0px;
+      width:100%;
+      &.-admin {
+        background-color: $color-ambient-mint;
+      }
+    }
+    .jq-dropdown {
+      min-width:325px;
+    }
+  } // Groups Cardbox Adaption
+
 }

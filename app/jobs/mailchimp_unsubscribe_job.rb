@@ -7,9 +7,7 @@ class MailchimpUnsubscribeJob < ApplicationJob
     begin
       g = Gibbon::Request.new
       g.timeout = 30
-      g.lists(list_id).members(member_id).upsert(body: {
-        email_address: user.email, status: "unsubscribed"
-      })
+      g.lists(list_id).members(member_id).delete()
     rescue Gibbon::MailChimpError => mce
       SuckerPunch.logger.error("subscribe failed: due to #{mce.message}")
       raise mce

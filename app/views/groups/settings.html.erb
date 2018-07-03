@@ -2,7 +2,7 @@
 
   <%= render 'groups/header' %>
 
-  <%= render 'groups/btn_ctrl' %>
+  <%= render 'groups/btn_ctrl', group: @group %>
 
   <%= render 'groups/tab_navigation' %>
 
@@ -28,7 +28,7 @@
       <!-- Settings Slide -->
       <div class="settingSlice">
 
-        <div class="col1">Ein neues <strong>Treffen</strong> wurde in der Gruppe erstellt</div>
+        <div class="col1">Ein neues <strong>Treffen</strong> wurde in der Gruppe erstellt.</div>
 
         <div class="col2">
 
@@ -53,33 +53,6 @@
       </div>
       <!-- /Settings Slide -->
 
-      <!-- Settings Slide -->
-      <div class="settingSlice">
-
-        <div class="col1">Ein neues <strong>Thema</strong> wurde in der Gruppe erstellt</div>
-
-        <div class="col2">
-
-          <div class="input-switch">
-            <input id="new-discussion" data-behavior="website-notification-toggle" data-type="Notifications::NewDiscussion" type="checkbox" checked="">
-            <label for="new-discussion"></label>
-          </div>
-
-        </div>
-        <div class="col3">
-
-          <div class="input-select">
-            <select id="new-discussion" data-behavior="mail-notification-toggle" data-type="Notifications::NewDiscussion">
-              <option value="off">Aus</option>
-              <option value="immediate">Sofort</option>
-              <option value="daily" selected="selected">Täglich</option>
-              <option value="weekly">Wöchentlich</option>
-            </select>
-          </div>
-
-        </div>
-      </div>
-      <!-- /Settings Slide -->
 
       <!-- Settings Slide -->
       <div class="settingSlice">
@@ -106,6 +79,82 @@
           </div>
 
         </div>
+      </div>
+      <!-- /Settings Slide -->
+
+
+      <!-- Settings Slide -->
+      <div class="settingSlice">
+
+        <div class="col1">Eine neue <strong>Diskussion</strong> wurde gestartet.</div>
+
+        <div class="col2">
+
+          <div class="input-switch">
+            <input id="new-discussion" data-behavior="website-notification-toggle" data-type="Notifications::NewDiscussion" type="checkbox" checked="">
+            <label for="new-discussion"></label>
+          </div>
+
+        </div>
+        <div class="col3">
+
+          <div class="input-select">
+            <select id="new-discussion" data-behavior="mail-notification-toggle" data-type="Notifications::NewDiscussion">
+              <option value="off">Aus</option>
+              <option value="immediate">Sofort</option>
+              <option value="daily" selected="selected">Täglich</option>
+              <option value="weekly">Wöchentlich</option>
+            </select>
+          </div>
+
+        </div>
+      </div>
+      <!-- /Settings Slide -->
+
+
+      <!-- Settings Slide -->
+      <div class="settingSlice">
+
+        <div class="col1">Es gibt neue <strong>Antworten</strong> in Diskussionen denen ich folge.</div>
+
+        <div class="col2">
+
+          <div class="input-switch">
+            <input id="new-member" data-behavior="website-notification-toggle" data-type="Notifications::NewMember" type="checkbox" checked="">
+            <label for="new-member"></label>
+          </div>
+
+        </div>
+        <div class="col3">
+
+          <div class="input-select">
+            <select id="new-member" data-behavior="mail-notification-toggle" data-type="Notifications::NewMember">
+              <option value="off">Aus</option>
+              <option value="immediate">Sofort</option>
+              <option value="daily" selected="selected">Täglich</option>
+              <option value="weekly">Wöchentlich</option>
+            </select>
+          </div>
+
+        </div>
+      </div>
+      <!-- /Settings Slide -->
+
+      <!-- Settings Slide -->
+      <div class="settingSlice">
+
+        <div class="col1">
+          <div class="input-radio">
+            <input required="required" type="radio" value="all_discussions" checked="checked" name="follow_discussions" id="all_discussions">
+            <label for="all_discussions">Automatisch allen neuen Diskussionen folgen.</label>
+          </div>
+          <div class="input-radio">
+            <input required="required" type="radio" value="my_discussions" name="follow_discussions" id="my_discussions">
+            <label for="my_discussions">Nur Diskussionen folgen wo ich kommentiert habe.</label>
+          </div>
+        </div>
+
+
       </div>
       <!-- /Settings Slide -->
 

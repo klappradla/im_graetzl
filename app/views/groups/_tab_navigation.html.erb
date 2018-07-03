@@ -3,8 +3,6 @@
   <% if @group.readable_by?(current_user) %>
     <li><%= link_to "Diskussionen", group_path(@group, anchor: 'tab-discussions') %></li>
     <li><%= link_to "Treffen", group_path(@group, anchor: 'tab-meetings') %></li>
-  <% end %>
-  <% if @group.admins.include?(current_user) %>
     <li><%= link_to "Mitglieder", group_path(@group, anchor: 'tab-members') %></li>
   <% end %>
 </ul>

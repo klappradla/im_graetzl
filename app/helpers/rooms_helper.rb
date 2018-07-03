@@ -6,6 +6,7 @@ module RoomsHelper
       ['Raumangebote', 'offer'],
       ['Raumsuchende', 'demand'],
       ['Open Calls', 'call'],
+      ['Raumteiler Gruppen', 'with_group']
     ]
   end
 

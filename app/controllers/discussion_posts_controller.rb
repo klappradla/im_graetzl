@@ -13,6 +13,26 @@ class DiscussionPostsController < ApplicationController
     redirect_to [@group, @discussion]
   end
 
+  def update
+    @post = @group.discussion_posts.find(params[:id])
+    if @post && @post.edit_permission?(current_user)
+      @post.update(discussion_post_params)
+      render 'groups/discussion_posts/update'
+    else
+      head :ok
+    end
+  end
+
+  def destroy
+    @post = @group.discussion_posts.find(params[:id])
+    if @post && @post.delete_permission?(current_user)
+      @post.destroy
+      render 'groups/discussion_posts/destroy'
+    else
+      head :ok
+    end
+  end
+
   private
 
   def check_group
@@ -25,7 +45,7 @@ class DiscussionPostsController < ApplicationController
   end
 
   def discussion_post_params
-    params.require(:discussion_post).permit(:discussion_id, :content)
+    params.require(:discussion_post).permit(:content)
   end
 
 end

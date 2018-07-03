@@ -1,4 +1,4 @@
-<section class="usersetup">
+<section class="usersetup -groups">
 
   <% if @groups.empty? %>
 
@@ -9,7 +9,7 @@
     <h2 class="hl-main">Deine <span>Gruppen</span> verwalten</h2>
 
     <div class="cardBoxCollection -tripple" data-behavior="groups-card-container">
-      <%= render @groups, manage_buttons: true %>
+      <%= render @groups.order(created_at: :desc), manage_buttons: true %>
     </div>
 
   <% end %>

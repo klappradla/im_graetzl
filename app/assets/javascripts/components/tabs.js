@@ -2,7 +2,7 @@ APP.components.tabs = (function() {
 
     function initTabs(tabgroup) {
         $(tabgroup).tabslet({
-            animation: true,
+            animation: false,
             deeplinking: true,
             active: getFirstNotEmptyTab(tabgroup)
         });

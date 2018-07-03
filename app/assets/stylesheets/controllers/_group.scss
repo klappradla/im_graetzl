@@ -57,17 +57,37 @@
 
   // New Discussion Topic
   .btn-new-topic {
-    display: table;
-    margin: 0 auto;
+    //display: table;
+    //margin: 0 auto;
+  }
+  .new-topic {
+    text-align: center;
   }
 
-  .back-link {
+  .back-link, .follow {
+    color: $color-ambient-grey;
     display: flex;
     align-items: center;
     svg, img {
       display: inline-block;
+      margin-right:5px;
+      width:20px;
+    }
+    &:hover {
+      color: $color-ambient-rosa;
     }
   }
+  .follow {
+    &.-hide {
+      display: none;
+    }
+    &.-subscribed {
+      svg {
+        color: $color-ambient-mint-dark;
+      }
+    }
+  }
+
 
   // GROUP Header Area
   .group-header {
@@ -132,7 +152,23 @@
   div.users {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: flex-start;
+    .top-ico {
+      display:none;
+      position: absolute;
+      top:10px;
+      right:2px;
+      svg {
+        transform: rotate(90deg);
+        color:$color-ambient-grey;
+        &:hover{
+          color:$color-ambient-rosa;
+        }
+      }
+      &.-active {
+        display:block;
+      }
+    }
   }
   div.user {
     display: flex;
@@ -140,7 +176,7 @@
     align-items: center;
     margin-right: 20px;
     div.avatar {
-      padding-right:7px;
+      padding-right:10px;
     }
     div.infos {
       .title {
@@ -150,21 +186,6 @@
         font-style: italic;
         color: $color-ambient-grey;
         @include font-size-primaryFont('small');
-      }
-    }
-    div.btn-control {
-      display: none;
-      align-items: center;
-      svg {
-        margin-left: 10px;
-        color: $color-ambient-grey;
-        width:25px;
-        height:25px;
-      }
-      a:hover {
-        svg {
-          color: $color-ambient-rosa;
-        }
       }
     }
   } // End User STYLING
@@ -186,19 +207,76 @@
       }
     }
 
-    .member-section {
-      .user {
-        .img-round {
-          width: 100px;
-          height: 100px;
-        }
-        .infos {
-          font-style:italic;
-        }
+  } // END PAGE
+
+  .member-section, .members-section {
+    .user {
+      img.user {
+        margin:5px;
+      }
+      .img-round {
+        width: 100px;
+        height: 100px;
+      }
+      .infos {
+        font-style:italic;
+        @include ellipsis();
       }
     }
+  }
+  // Startpage Auszug
+  .member-section {
+    .user {
+      width:132px;
+      margin-right:0px;
+      margin-bottom:15px;
+      div.avatar {
+        width:100%;
+        text-align:center;
+        padding-right:0px;
+        img {
+          margin:0px;
+        }
+      }
+      div.infos {
+        width:100%;
+        text-align:center;
+      }
+    }
+  }
 
-  } // END PAGE
+  // Members Page
+  .members-section {
+    .users {
+      align-items: stretch;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-left:-10px;
+      margin-right:-10px;
+    }
+    .user {
+      width:31%;
+      margin:10px;
+      @include respond-to("<=large") {
+        width:45%;
+      }
+      @include respond-to("<=medium") {
+        width:95%;
+      }
+      .infos {
+        width: calc(100% - 140px);
+      }
+    }
+    .btns {
+      margin-top:8px;
+      width:100%;
+      display: flex;
+      justify-content: space-between;
+      a {
+        width:47%;
+      }
+    }
+  }
 
   // Single Discussion PAGE
   &.discussion-page {
@@ -310,6 +388,10 @@
     .settings-section {
       padding-top:20px;
       .settingSlice {
+        .col1 {
+          font-weight:bold;
+          label {font-weight: normal;}
+        }
         strong {
           color: $color-ambient-mint-dark;
         }
@@ -331,4 +413,41 @@
   :-moz-placeholder {
     @include groupsPlaceholder;
   }
+}
+
+.discussion-page {
+
+  .user-post {
+    .btn-control { opacity: 0; transition: opacity 0.5s; }
+    .edit-post-form { display: none; }
+    .content { display: block; }
+  }
+
+  .user-post:hover {
+    .btn-control { opacity: 1; }
+  }
+
+  .user-post.editing {
+    .edit-post-form { display: block; }
+    .content { display: none; }
+  }
+
+  .user-post .btn-control {
+    a { display: inline-block; }
+    svg {
+      margin-left: 10px;
+      color: $color-ambient-grey;
+      width: 25px;
+      height: 25px;
+    }
+    a:hover {
+      svg { color: $color-ambient-rosa; }
+    }
+  }
+
+  .user-post .edit-post-form {
+    .actions { margin: 15px 0; }
+    .actions button, .actions input { display: inline-block; margin-right: 15px; }
+  }
+
 }

@@ -95,11 +95,11 @@ class GroupsController < ApplicationController
   end
 
   def destroy
-    @group = Group.find(params[:group_id])
+    @group = Group.find(params[:id])
     redirect_to @group and return unless @group.admins.include?(current_user)
 
     @group.destroy
-    redirect_to home_path
+    redirect_to @home_path, notice: 'Gruppe gelöscht'
   end
 
   private

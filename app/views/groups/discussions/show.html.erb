@@ -2,60 +2,30 @@
 
   <%= render 'groups/header' %>
 
-  <%= render 'groups/btn_ctrl' %>
+  <%= render 'groups/btn_ctrl', group: @group %>
 
   <%= render 'groups/tab_navigation' %>
 
   <div class="discussion-infos">
-    <%= link_to group_path(@group, anchor: 'tab-discussions'), class: 'back-link' do %><%= icon_tag "arrow-left-2" %>Alle Themen<% end %>
-    <span>&nbsp;&middot;&nbsp;</span>
-    <%= @discussion.discussion_posts.size  %> <%= @discussion.discussion_posts.size > 1 ? 'Beiträge' : 'Beitrag'  %> im Thema:
+    <!--<%= link_to group_path(@group, anchor: 'tab-discussions'), class: 'back-link' do %><%= icon_tag "arrow-left-2" %>Alle Diskussionen<% end %>
+    <span>&nbsp;&middot;&nbsp;</span>-->
+    <%= @discussion.discussion_posts.size %> <%= @discussion.discussion_posts.size > 1 ? 'Beiträge' : 'Beitrag' %>
+    <span>&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
+    <%= link_to 'javascript:', class: 'follow -unsubscribed', :data => { :topic => @discussion.id } do %>
+      <%= icon_tag "bell" %>
+      Dieser Diskussion folgen
+    <% end %>
+    <%= link_to 'javascript:', class: 'follow -hide -subscribed', :data => { :topic => @discussion.id } do %>
+      <%= icon_tag "bell" %>
+      Diskussion nicht mehr folgen
+    <% end %>
   </div>
 
   <h2 class="title"><%= @discussion.title %></h2>
 
-
   <% @posts.each do |post| %>
-
-
-    <div class="user-post">
-
-      <div class="user" id="<%= post.id %>">
-        <div class="avatar">
-          <%= attachment_image_tag post.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
-        </div>
-        <div class="infos">
-          <div class="name"><%= post.user.full_name %></div>
-          <div class="date">
-            <%= I18n.localize(post.created_at, format:'%a, %d. %B %Y, %H:%M') %>
-          </div>
-        </div>
-        <div class="btn-control">
-
-          <% if post.user == current_user %>
-            <%= link_to '#', class: 'edit' do %>
-              <%= icon_tag "pencil" %>
-            <% end %>
-          <% end %>
-
-          <% if @group.admins.include?(current_user) || post.user == current_user %>
-            <%= link_to '#', { method: :destroy, remote: true, data: { confirm: 'Beitrag wirklich löschen?', disable_with: 'wird gelöscht...'}, class: 'delete' } do %>
-              <%= icon_tag "trash-delete-remove" %>
-            <% end %>
-          <% end %>
-
-        </div>
-      </div>
-
-      <div class="content">
-        <p><%= post.content %></p>
-      </div>
-
-    </div>
-
+    <%= render 'groups/discussion_posts/post', post: post %>
   <% end %>
-
-
 
   <div class="discussion-box">
     <% if @group.users.include?(current_user) %>

@@ -44,8 +44,8 @@
           <span><%= user.first_name %><br><%= user.last_name %></span>
         </div>
       </div>
-      <% end %>
-      <% @group.members.each do |user| %>
+    <% end %>
+    <% @group.members.each do |user| %>
       <div class="user">
         <div class="avatar">
           <%= attachment_image_tag user, :avatar, :fill, 200, 200, fallback: 'avatar/user/200x200.png', class: 'img-round' %>

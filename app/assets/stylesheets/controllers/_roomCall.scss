@@ -372,8 +372,24 @@
 
     } // End Single Section
 
+    // ------------------------ Submission Section
+    &.group-section {
+      @include respond-to(">=medium") {
+        .cardBox {
+          display: flex;
+          align-items: center;
+          .cardBoxHeader {
+            margin:0px;
+          }
+          .cardBoxContent {
+            margin-left:35px;
+          }
+        }
+      }
+    } // END Group Section
+
   } // END All Sections </section>
-  
+
   .gmap img, .gmap iframe { max-width: 930px; width: 100%; }
 
 } // END Room Call Page

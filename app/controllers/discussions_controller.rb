@@ -4,7 +4,7 @@ class DiscussionsController < ApplicationController
 
   def show
     @discussion = @group.discussions.find(params[:id])
-    @posts = @discussion.discussion_posts.includes(:user).order(created_at: :asc)
+    @posts = @discussion.discussion_posts.includes(:user, :group).order(created_at: :asc)
     render 'groups/discussions/show'
   end
 

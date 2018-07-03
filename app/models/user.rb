@@ -38,7 +38,9 @@ class User < ApplicationRecord
 
   before_validation { self.username.squish! if self.username }
 
-  after_destroy { MailchimpUnsubscribeJob.perform_later(self) }
+  before_destroy { MailchimpUnsubscribeJob.perform_later(self) }
+  after_update { MailchimpSubscribeJob.perform_later(self) }
+
 
   # overwrite devise authentication method to allow username OR email
   def self.find_for_database_authentication(warden_conditions)

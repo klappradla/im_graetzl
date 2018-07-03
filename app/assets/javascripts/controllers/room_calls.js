@@ -4,11 +4,17 @@ APP.controllers.room_calls = (function() {
     if ($("section.room-call-form").exists()) {
       initRoomForm();
     }
-    if ($(".room-call-page").exists()) {
-      // initMap();
-    }
+    if ($("#groups-btn-ctrl").exists()) groupsActionPanel();
   }
-  
+
+  function groupsActionPanel() {
+    // JS Action Button Dropdown for Groups
+    $('[data-behavior=actionTrigger]').on('click', function(){
+      var id = $(this).attr("data-id");
+      $(this).jqDropdown('attach', '[data-behavior=actionContainer-'+id+']');
+    });
+  }
+
   function initMap() {
     var mapdata = $('#graetzlMapWidget').data('mapdata');
     var map =  APP.components.graetzlMap;

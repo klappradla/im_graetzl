@@ -1,5 +1,18 @@
 section.roomDetail {
 
+  .-group {
+    .btn-ctrl {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .users {
+      .img-round {
+        width:75px;
+        height:75px;
+      }
+    }
+  }
+
   &.-Offer {
 
     .headContent {

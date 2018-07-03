@@ -1,13 +1,76 @@
 <div class="members-section">
 
-  <div class="join-requests">
-    <% @group.group_join_requests.pending.includes(:user).each do |join_request| %>
-      <div class="join-request">
-        <%= attachment_image_tag join_request.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
-        <span class="username"><%= join_request.user.full_name %></span>
-        <%= link_to 'Accept', accept_request_group_path(@group, join_request_id: join_request.id), method: :post %>
-        <%= link_to 'Reject', reject_request_group_path(@group, join_request_id: join_request.id), method: :post %>
+  <div class="users">
+
+    <!-- JOIN REQUESTS -->
+    <% if @group.admins.include?(current_user) %>
+      <% @group.group_join_requests.pending.includes(:user).each do |join_request| %>
+      <div class="user cardBox <%= @group.admins.include?(current_user)? '-action' : '' %>">
+
+        <div class="avatar">
+          <%= attachment_image_tag join_request.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+        </div>
+        <div class="infos">
+          <span><%= join_request.user.first_name %> <br> <%= join_request.user.last_name.truncate(18, separator: ' ') %></span>
+          <p class="date">Anfrage am: <br><%= I18n.localize(join_request.created_at, format:'%d. %B %Y') %></p>
+        </div>
+        <div class="btns">
+          <%= link_to accept_request_group_path(@group, join_request_id: join_request.id), method: :post, class: 'btn-userIcons -small -mint' do %>
+            <%= icon_tag "check" %>
+          <% end %>
+          <%= link_to reject_request_group_path(@group, join_request_id: join_request.id), method: :post, class: 'btn-userIcons -small -grey' do %>
+            <%= icon_tag "trash-delete-remove" %>
+          <% end %>
+        </div>
       </div>
+      <% end %>
     <% end %>
+    <!-- /JOIN REQUESTS -->
+
+    <!-- ADMINs -->
+    <% @group.admins.each do |group_user| %>
+    <div class="user cardBox <%= @group.admins.include?(current_user)? '-action' : '' %>">
+      <div class="avatar">
+        <%= attachment_image_tag group_user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+      </div>
+      <div class="infos">
+        <span><%= group_user.first_name %> <br> <%= group_user.last_name %></span>
+        <p class="date">Gruppen-Admin seit: <br> <%= I18n.localize(@group.created_at, format:'%d. %B %Y') %></p>
+      </div>
+    </div>
+    <% end %>
+    <!-- /ADMINs -->
+
+    <!-- MEMBERS -->
+    <% @group.group_users.member.includes(:user).each do |group_user| %>
+    <div class="user cardBox <%= @group.admins.include?(current_user)? '-action' : '' %>">
+      <!-- if Admin include JS Dropdown -->
+      <% if @group.admins.include?(current_user) %>
+        <div class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container createmenu" data-behavior="actionContainer-<%= group_user.user.id %>">
+          <div class="jq-dropdown-panel">
+            <%= link_to '' do %>
+              <%= icon_tag "trash-delete-reomve" %>
+              <div class="icontxt">Aus Gruppe entfernen</div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      <div class="top-ico">
+        <%= link_to '#tab-members', data: { id: group_user.user.id }, class: '-action' do %>
+        <%= icon_tag "dot-3" %>
+        <% end %>
+      </div>
+      <div class="avatar">
+        <%= attachment_image_tag group_user.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+      </div>
+      <div class="infos">
+        <span><%= group_user.user.first_name %> <br> <%= group_user.user.last_name %></span>
+        <p class="date">Beigetreten: <br> <%= I18n.localize(group_user.created_at, format:'%d. %B %Y') %></p>
+      </div>
+    </div>
+
+    <% end %>
+    <!-- /MEMBERS -->
+
   </div>
 </div>

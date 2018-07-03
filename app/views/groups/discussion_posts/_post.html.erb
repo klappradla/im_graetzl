@@ -1,0 +1,44 @@
+<div class="user-post" id="discussion-post-<%= post.id %>">
+  <div class="user">
+    <div class="avatar">
+      <%= attachment_image_tag post.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+    </div>
+    <div class="infos">
+      <div class="name"><%= post.user.full_name %></div>
+      <div class="date">
+        <%= I18n.localize(post.created_at, format:'%a, %d. %B %Y, %H:%M') %>
+      </div>
+    </div>
+
+    <div class="btn-control">
+      <% if post.edit_permission?(current_user) %>
+        <%= link_to 'javascript:', class: 'edit-post-link' do %>
+          <%= icon_tag "pencil" %>
+        <% end %>
+      <% end %>
+
+      <% if post.delete_permission?(current_user) %>
+        <%= link_to [@group, post], method: :delete, remote: true, data: { confirm: 'Beitrag wirklich löschen?', disable_with: 'wird gelöscht...'}, class: 'delete' do %>
+          <%= icon_tag "trash-delete-remove" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="content">
+    <p><%= post.content %></p>
+  </div>
+
+  <% if post.edit_permission?(current_user) %>
+    <%= form_for [@group, post], remote: true, html: { class: 'edit-post-form' } do |f| %>
+      <div class="input-textarea">
+        <%= f.text_area :content, cols: 80, rows: 3 %>
+      </div>
+      <div class="actions">
+        <%= f.submit 'Update', data: { disable_with: 'sendet...' }, class: 'btn-primary' %>
+        <%= f.button 'Cancel', type: 'button', class: 'cancel-edit-link btn-secondary' %>
+      </div>
+    <% end %>
+  <% end %>
+
+</div>

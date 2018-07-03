@@ -1,8 +1,10 @@
 <div class="discussion-section">
   <% if @group.users.include?(current_user) %>
+  <div class="new-topic">
     <%= button_to "javascript:", class: 'btn-userIcons -mint btn-new-topic' do %>
       <span><%= avatar_for current_user %> Neues Thema starten</span>
     <% end %>
+  </div>
   <% end %>
 
   <div class="discussion-box">

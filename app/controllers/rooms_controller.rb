@@ -45,8 +45,12 @@ class RoomsController < ApplicationController
 
   def filter_offers(offers)
     room_type = params.dig(:filter, :room_type)
-    if room_type.present? && room_type != 'offer'
-      return RoomOffer.none
+    if room_type.present?
+      if room_type == 'with_group'
+        offers = offers.where(id: Group.distinct.pluck(:room_offer_id).compact)
+      elsif room_type != 'offer'
+        return RoomOffer.none
+      end
     end
 
     offers = offers.enabled unless params.dig(:filter, :show_inactive).present?
@@ -87,8 +91,12 @@ class RoomsController < ApplicationController
 
   def filter_calls(calls)
     room_type = params.dig(:filter, :room_type)
-    if room_type.present? && room_type != 'call'
-      return RoomCall.none
+    if room_type.present?
+      if room_type == 'with_group'
+        calls = calls.where(id: Group.distinct.pluck(:room_call_id).compact)
+      elsif room_type != 'call'
+        return RoomCall.none
+      end
     end
 
     calls = calls.open_calls unless params.dig(:filter, :show_inactive).present?

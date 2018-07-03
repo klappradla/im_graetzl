@@ -1,4 +1,4 @@
-<section class="group-section">
+<!--<section class="group-section">
   <h2><%= @room_call.group.title %></h2>
   <h3 class="subtitle"><%= @room_call.group.users.size %> interessierte sind schon in der Gruppe</h3>
   <p><%= @room_call.group.description %></p>
@@ -12,4 +12,9 @@
   <% end %>
 
   <%= link_to "Visit group", @room_call.group %>
-</section>
+</section>-->
+
+  <section class="group-section">
+    <h2>Raumteiler-Hubs sind echte Gemeinschaften</h2>
+    <%= render @room_call.group %>
+  </section>

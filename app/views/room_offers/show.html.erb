@@ -64,6 +64,16 @@
       </section>
     <% end %>
 
+    <% if @room_offer.group %>
+      <section>
+        <div class="bigicontext-element">
+          <%= icon_tag "speech-bubble" %>
+          <div class="txt">Raumteiler Gruppe</div>
+        </div>
+        <%= render @room_offer.group %>
+      </section>
+    <% end %>
+
     <section>
       <div class="bigicontext-element">
         <%= icon_tag "users" %>

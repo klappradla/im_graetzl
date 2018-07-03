@@ -40,6 +40,29 @@
       right:0px;
     }
   }
+
+  // Group Cardbox
+  &.-group {
+    a.title {
+      font-weight: bold;
+      padding-bottom:2px;
+    }
+    .users {
+      margin-bottom:10px;
+      display: flex;
+      align-items: flex-end;
+      flex-wrap:wrap;
+      span {
+        @include font-size-primaryFont('small');
+        font-style: italic;
+      }
+      .img-round {
+        margin-right:7px;
+        margin-bottom:7px;
+      }
+    }
+  } // Group Cardbox
+
 }
 
 

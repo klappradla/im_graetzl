@@ -44,9 +44,7 @@
       <p>Gewerbeflächen zum Teilen - Raumhabende und Raumsuchende finden sich</p>
     </div>
     <div class="cardBoxCollection -tripple -morelink">
-      <%= render @activity_sample.rooms.first(1) %>
-      <!-- Insert Featured Card - Remove .first(1) above when removing featurebox-->
-      <%= render 'shared/featured_cards/raumteilerfestival' %>
+      <%= render @activity_sample.rooms %>
       <%= render 'rooms/action_card', view_all: true %>
     </div>
   </div>

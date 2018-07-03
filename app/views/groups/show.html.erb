@@ -2,7 +2,7 @@
 
   <%= render 'groups/header' %>
 
-  <%= render 'groups/btn_ctrl' %>
+  <%= render 'groups/btn_ctrl', group: @group %>
 
   <div class='tabs-ctrl'>
 
@@ -12,8 +12,6 @@
       <% if @group.readable_by?(current_user) %>
         <li><a href="#tab-discussions">Diskussionen</a></li>
         <li><a href="#tab-meetings">Treffen</a></li>
-      <% end %>
-      <% if @group.admins.include?(current_user) %>
         <li><a href="#tab-members">Mitglieder</a></li>
       <% end %>
     </ul>
@@ -21,13 +19,9 @@
 
     <!-- CONTENT -->
     <div id='tab-info'><%= render 'info' %></div>
-
     <% if @group.readable_by?(current_user) %>
       <div id='tab-discussions'><%= render 'discussions' %></div>
-      <!-- <div id='tab-meetings'><%= render 'meetings' %></div> -->
-    <% end %>
-
-    <% if @group.admins.include?(current_user) %>
+      <div id='tab-meetings'><%= render 'meetings' %></div>
       <div id='tab-members'><%= render 'members' %></div>
     <% end %>
     <!-- /CONTENT -->

@@ -157,8 +157,10 @@
 .btn-userIcons {
   @extend .btn-primary;
   //padding: 1.2rem 2.0rem;
+  display: inline-flex;
+  justify-content: center;
   span {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     position: relative;
     z-index: 2;
@@ -198,8 +200,22 @@
     width:20px;
     height:20px;
   }
-  [class^=icon-]:last-child {
-    margin-left: 10px;
+  span {
+    [class^=icon-]:last-child {
+      margin-left: 10px;
+    }
+  }
+  span.ico-left {
+    [class^=icon-] {
+      margin:0px;
+      margin-right:8px;
+    }
+  }
+  span.ico-right {
+    [class^=icon-] {
+      margin:0px;
+      margin-left:8px;
+    }
   }
 }
 
