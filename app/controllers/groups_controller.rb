@@ -51,27 +51,9 @@ class GroupsController < ApplicationController
     end
   end
 
-  def join
-    @group = Group.find(params[:id])
-    if @group.private?
-      flash[:error] = 'This group is private. Please request join.'
-      redirect_to @group and return
-    end
-
-    if !@group.users.include?(current_user)
-      @group.users << current_user
-    end
-
-    redirect_to @group
-  end
-
   def request_join
     @group = Group.find(params[:id])
-    if @group.private?
-      @group.group_join_requests.create(user_id: current_user.id)
-    else
-      @group.users << current_user
-    end
+    @group.group_join_requests.create(user_id: current_user.id, request_message: params[:request_message])
     redirect_to @group
   end
 
@@ -91,6 +73,15 @@ class GroupsController < ApplicationController
 
     @join_request = @group.group_join_requests.find(params[:join_request_id])
     @join_request.update(rejected: true)
+    redirect_to group_url(@group, anchor: "tab-members")
+  end
+
+  def remove_user
+    @group = Group.find(params[:id])
+    redirect_to @group and return unless @group.admins.include?(current_user)
+
+    @group_user = @group.group_users.find_by(user_id: params[:user_id])
+    @group_user.destroy
     redirect_to group_url(@group, anchor: "tab-members")
   end
 

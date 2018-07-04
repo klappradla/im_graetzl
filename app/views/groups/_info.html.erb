@@ -9,12 +9,12 @@
         <h3>Aktuelle Diskussionen</h3>
 
         <% if @discussions.present? %>
-        <% @discussions.first(2).each do |discussion| %>
-        <%= render 'groups/discussions/discussion_preview', discussion: discussion %>
-        <% end %>
-        <%= link_to "Alle Diskussionen anzeigen", "javascript:", class: 'all-discussions-link btn-primary -mint' %>
+          <% @discussions.first(2).each do |discussion| %>
+            <%= render 'groups/discussions/discussion_preview', discussion: discussion %>
+          <% end %>
+          <%= link_to "Alle Diskussionen anzeigen", "javascript:", class: 'all-discussions-link btn-primary -mint' %>
         <% else %>
-        <p> Noch keine Diskussionen in der Gruppe.. </p>
+          <p> Noch keine Diskussionen in der Gruppe.. </p>
         <% end %>
       </div>
 

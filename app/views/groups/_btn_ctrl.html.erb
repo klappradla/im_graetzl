@@ -8,38 +8,11 @@
 
   <% elsif group.admins.include?(current_user) %> <!-- Group Admin -->
 
-    <%= link_to 'javascript:', data: { behavior: "actionTrigger", id: group.id }, class: 'btn-userIcons -grey -admin' do %>
+    <%= link_to 'javascript:', data: { jq_dropdown: "#group-settings-dropdown" }, class: 'btn-userIcons -grey -admin' do %>
       <span>Du bist Admin <%= icon_tag "arrow-down-2" %></span>
     <% end %>
 
-  <% elsif !group.users.include?(current_user) %> <!-- Join Request pending -->
-
-    <% if group.group_join_requests.exists?(user_id: current_user.id) %>
-
-      <%= link_to 'javascript:', class: 'btn-userIcons -grey -disabled' do %>
-        <span>Beitrittsanfrage gestellt ...</span>
-      <% end %>
-
-    <% else %> <!-- Join Request -->
-
-      <%= button_to request_join_group_path(group), method: :post, class: 'btn-userIcons' do %>
-        <span><%= avatar_for current_user %> Gruppe beitreten</span>
-      <% end %>
-
-    <% end%>
-
-  <% elsif group.users.include?(current_user) %> <!-- Group Member -->
-
-    <%= link_to 'javascript:', data: { behavior: "actionTrigger", id: group.id }, class: 'btn-userIcons -grey' do %>
-      <span>Du bist Mitglied <%= icon_tag "arrow-down-2" %></span>
-    <% end %>
-
-  <% end %>
-
-  <!-- Dropdown Panel -->
-  <% if group.admins.include?(current_user) %> <!-- Group Admin -->
-
-    <div class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container createmenu" data-behavior="actionContainer-<%= group.id %>">
+    <div id="group-settings-dropdown" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container createmenu">
       <div class="jq-dropdown-panel">
         <%= link_to settings_group_path(group) do %>
           <%= icon_tag "bell" %>
@@ -56,9 +29,13 @@
       </div>
     </div>
 
-  <% elsif group.users.include?(current_user) %> <!-- Group Member -->
+  <% elsif group.members.include?(current_user) %> <!-- Group Member -->
 
-    <div class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container createmenu" data-behavior="actionContainer-<%= group.id %>">
+    <%= link_to 'javascript:', data: { jq_dropdown: "#group-settings-dropdown" }, class: 'btn-userIcons -grey' do %>
+      <span>Du bist Mitglied <%= icon_tag "arrow-down-2" %></span>
+    <% end %>
+
+    <div id="group-settings-dropdown" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container createmenu">
       <div class="jq-dropdown-panel">
         <%= link_to settings_group_path(group) do %>
           <%= icon_tag "bell" %>
@@ -71,7 +48,26 @@
       </div>
     </div>
 
-  <% end %>
-  <!-- /Dropdown Panel -->
+  <% elsif group.group_join_requests.exists?(user_id: current_user.id) %> <!-- Join Request pending -->
 
+    <%= link_to 'javascript:', class: 'btn-userIcons -grey -disabled' do %>
+      <span>Beitrittsanfrage gestellt ...</span>
+    <% end %>
+
+  <% else %> <!-- Join Request -->
+
+    <%= link_to '#join-request-modal', class: 'join-request-button btn-userIcons' do %>
+      <span><%= avatar_for current_user %> Gruppe beitreten</span>
+    <% end %>
+
+    <div id="join-request-modal" class="join-request-modal">
+      <%= form_tag request_join_group_path(group) do %>
+        <div class="input-textarea">
+          <%= text_area_tag :request_message, nil, cols: 40, rows: 3, placeholder: 'write a short a sentence about you or why you want to join' %>
+        </div>
+        <%= submit_tag "Beitreten", class: 'btn-primary' %>
+      <% end %>
+    </div>
+
+  <% end %>
 </div>

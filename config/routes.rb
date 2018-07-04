@@ -85,10 +85,10 @@ Rails.application.routes.draw do
     resources :discussions, only: [:show, :create, :update, :destroy]
     resources :discussion_posts, only: [:create, :update, :destroy]
     get 'settings', :on => :member
-    post 'join', on: :member
     post 'request_join', on: :member
     post 'accept_request', on: :member
     post 'reject_request', on: :member
+    post 'remove_user', on: :member
   end
 
   get 'wien/raumteiler/raumsuche' => redirect('/wien/raumteiler')

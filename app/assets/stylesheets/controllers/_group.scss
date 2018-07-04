@@ -25,6 +25,11 @@
     }
   }
 
+  .join-request-modal {
+    display: none;
+    .input-textarea { margin-bottom: 10px; }
+  }
+
   // Button Control Dropdown
   .btn-ctrl .dropdown-container {
     width: 310px;
@@ -149,36 +154,35 @@
   } // End GROUP Header Area
 
   // User STYLING
-  div.users {
+  .users {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
-    .top-ico {
-      display:none;
-      position: absolute;
-      top:10px;
-      right:2px;
-      svg {
-        transform: rotate(90deg);
-        color:$color-ambient-grey;
-        &:hover{
-          color:$color-ambient-rosa;
-        }
-      }
-      &.-active {
-        display:block;
-      }
-    }
   }
-  div.user {
+
+  .user {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     margin-right: 20px;
-    div.avatar {
+
+    .group-user-dropdown-link {
+      position: absolute;
+      top: 10px;
+      right: 2px;
+
+      svg { color: $color-ambient-grey; transform: rotate(90deg); }
+      &:hover svg { color: $color-ambient-rosa; }
+    }
+
+    .jq-dropdown-panel {
+      width: 280px;
+    }
+
+    .avatar {
       padding-right:10px;
     }
-    div.infos {
+    .infos {
       .title {
         font-style: italic;
       }

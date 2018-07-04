@@ -1,0 +1,25 @@
+<div class="user cardBox">
+  <% if group_user.member? && @group.admins.include?(current_user)%>
+    <%= link_to 'javascript:', data: { jq_dropdown: "#group-user-dropdown-#{group_user.user.id}" }, class: 'group-user-dropdown-link' do %>
+      <%= icon_tag "dot-3" %>
+    <% end %>
+
+    <div id="group-user-dropdown-<%= group_user.user.id %>" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container">
+      <div class="jq-dropdown-panel">
+        <%= link_to remove_user_group_path(user_id: group_user.user_id), method: :post, data: { confirm: 'Bist du dir sicher?' } do %>
+          <%= icon_tag "trash-delete-remove" %>
+          <div class="icontxt">Aus Gruppe entfernen</div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="avatar">
+    <%= attachment_image_tag group_user.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+  </div>
+
+  <div class="infos">
+    <span><%= group_user.user.first_name %> <br> <%= group_user.user.last_name %></span>
+    <p class="date">Beigetreten: <br> <%= I18n.localize(group_user.created_at, format:'%d. %B %Y') %></p>
+  </div>
+</div>

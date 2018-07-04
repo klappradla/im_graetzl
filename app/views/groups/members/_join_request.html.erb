@@ -1,0 +1,20 @@
+<div class="user cardBox -action">
+  <div class="avatar">
+    <%= attachment_image_tag join_request.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+  </div>
+  <div class="infos">
+    <span><%= join_request.user.first_name %> <br> <%= join_request.user.last_name.truncate(18, separator: ' ') %></span>
+    <p class="date">Anfrage am: <br><%= I18n.localize(join_request.created_at, format:'%d. %B %Y') %></p>
+  </div>
+  <div class="request-message">
+    <%= join_request.request_message %>
+  </div>
+  <div class="btns">
+    <%= link_to accept_request_group_path(@group, join_request_id: join_request.id), method: :post, class: 'btn-userIcons -small -mint' do %>
+      <%= icon_tag "check" %>
+    <% end %>
+    <%= link_to reject_request_group_path(@group, join_request_id: join_request.id), method: :post, class: 'btn-userIcons -small -grey' do %>
+      <%= icon_tag "trash-delete-remove" %>
+    <% end %>
+  </div>
+</div>

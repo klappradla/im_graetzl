@@ -34,7 +34,6 @@ if (jQuery) (function ($) {
     });
 
     function show(event, object) {
-
         var trigger = event ? $(this) : object,
             jqDropdown = $(trigger.attr('data-jq-dropdown')),
             isOpen = trigger.hasClass('jq-dropdown-open');
@@ -62,11 +61,11 @@ if (jQuery) (function ($) {
         position();
 
         // Trigger the show callback
-        jqDropdown
-            .trigger('show', {
-                jqDropdown: jqDropdown,
-                trigger: trigger
-            });
+        // jqDropdown
+        //     .trigger('show', {
+        //         jqDropdown: jqDropdown,
+        //         trigger: trigger
+        //     });
 
     }
 
@@ -87,7 +86,9 @@ if (jQuery) (function ($) {
             }
         }
 
-        // Hide any jq-dropdown that may be showing
+        // Trigger the event early, so that it might be prevented on the visible popups
+        var hideEvent = jQuery.Event("hide");
+
         $(document).find('.jq-dropdown:visible').each(function () {
             var jqDropdown = $(this);
             jqDropdown
@@ -96,9 +97,19 @@ if (jQuery) (function ($) {
                 .trigger('hide', { jqDropdown: jqDropdown });
         });
 
-        // Remove all jq-dropdown-open classes
-        $(document).find('.jq-dropdown-open').removeClass('jq-dropdown-open');
+        if(!hideEvent.isDefaultPrevented()) {
+            // Hide any jq-dropdown that may be showing
+            $(document).find('.jq-dropdown:visible').each(function () {
+                var jqDropdown = $(this);
+                jqDropdown
+                    .hide()
+                    .removeData('jq-dropdown-trigger')
+                    .trigger('hide', { jqDropdown: jqDropdown });
+            });
 
+            // Remove all jq-dropdown-open classes
+            $(document).find('.jq-dropdown-open').removeClass('jq-dropdown-open');
+        }
     }
 
     function position() {
