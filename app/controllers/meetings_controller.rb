@@ -39,6 +39,7 @@ class MeetingsController < ApplicationController
   def update
     @meeting = find_user_meeting
     @meeting.assign_attributes(meeting_params)
+    p "----> ", @meeting
     @meeting.graetzl = @meeting.address.graetzl if @meeting.address.try(:graetzl)
     @meeting.state = :active
 
@@ -89,13 +90,14 @@ class MeetingsController < ApplicationController
   end
 
   def meeting_params
-    result = params.require(:meeting).permit(:graetzl_id, :name, :description, :starts_at_date, :starts_at_time,
+    result = params.require(:meeting).permit(:graetzl_id, :group_id, :name, :description, :starts_at_date, :starts_at_time,
       :ends_at_time, :cover_photo, :remove_cover_photo, :location_id, category_ids: [],
       address_attributes: [:id, :description, :street_name, :street_number, :zip, :city, :coordinates]
     )
 
     feature_address = Address.from_feature(params[:feature]) if params[:feature]
     result[:address_attributes].merge!(feature_address.attributes.symbolize_keys.compact) if feature_address
+    p "---> ", result
     result
   end
 

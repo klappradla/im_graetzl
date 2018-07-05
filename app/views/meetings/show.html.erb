@@ -40,6 +40,16 @@
       <div class="place">
         <%= meeting_place @meeting %>
       </div>
+      <% if @meeting.group.present? %>
+        <div class="place">
+          <div class="iconMapLink">
+            <%= icon_tag 'speech-bubble' %>
+          </div>
+          <div class="address">
+            <span><%= link_to @meeting.group.title, @meeting.group %></span>
+          </div>
+        </div>
+      <% end %>
       <%= meeting_initiator_row @meeting %>
       <div class="txt"><%= @meeting.description %></div>
     </div>

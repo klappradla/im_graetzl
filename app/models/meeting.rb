@@ -35,6 +35,7 @@ class Meeting < ApplicationRecord
   accepts_nested_attributes_for :categorizations, allow_destroy: true
   has_many :categories, through: :categorizations
   has_many :comments, as: :commentable, dependent: :destroy
+  belongs_to :group, optional: true
 
   validates :name, presence: true
   validates :graetzl, presence: true

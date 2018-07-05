@@ -1,21 +1,31 @@
 <% meta(
-    title: @room_call.title[0..45].gsub(/\s\w+\s*$/,'...'),
-    description: ('Open Call: ' +  @room_call.subtitle[0..160].gsub(/\n/, '...')),
-    robots: 'index, follow',
-    og_title: @room_call.title[0..45].gsub(/\s\w+\s*$/,'...'),
-    og_description: ('Open Call: ' +  @room_call.subtitle[0..160].gsub(/\n/, '...')),
-    og_image: attachment_url(@room_call, :cover_photo, host: request.url, fallback: 'meta/og_logo.png')
-  )
+  title: @room_call.title[0..45].gsub(/\s\w+\s*$/,'...'),
+  description: ('Open Call: ' +  @room_call.subtitle[0..160].gsub(/\n/, '...')),
+  robots: 'index, follow',
+  og_title: @room_call.title[0..45].gsub(/\s\w+\s*$/,'...'),
+  og_description: ('Open Call: ' +  @room_call.subtitle[0..160].gsub(/\n/, '...')),
+  og_image: attachment_url(@room_call, :cover_photo, host: request.url, fallback: 'meta/og_logo.png')
+)
 %>
 
 <div class="room-call-page">
 
-  <div class="imgHeader -cloudy3 -fullwidth" style="background-image: url('<%= Refile.attachment_url(@room_call, :cover_photo, :fill, 1280, 500) %>')">
-    <!--<%= attachment_image_tag @room_call, :cover_photo, :fill, 1280, 500, fallback: 'cover_photo/980x370.png', class: 'titleImg -fullwidth' %>-->
+  <div class="imgHeader -fullwidth">
+    <%= attachment_image_tag @room_call, :cover_photo, :fill, 2560, 1000, fallback: 'cover_photo/980x370.png', class: 'titleImg -fullwidth' %>
+  </div>
+
+  <div class="bulge-wrapper">
+    <div class="bulge-container">
+      <div class="bulge -top">
+        <%= image_tag ('bulge-left.png'), class: 'bulge-left' %><%= image_tag ('bulge-middle.png'), class: 'bulge-middle' %><%= image_tag ('bulge-right.png'), class: 'bulge-right' %>
+      </div>
+      <div class="bulge -bottom">
+        <h1><%= @room_call.title %></h1>
+      </div>
+    </div>
   </div>
 
   <div class="hl-subtext">
-    <h1><%= @room_call.title %></h1>
     <p>Bewirb dich bis zum <%= I18n.localize(@room_call.ends_at, format: '%d. %B') %> für einen der <%= @room_call.total_vacancies %> freien Plätze.</p>
   </div>
 
@@ -32,16 +42,16 @@
 
   <!-- the interactive map -->
   <% if @room_call.address.try(:coordinates) %>
-    <div class='gmap'>
-      <iframe width="930" height="300" frameborder="0" style="border:0" src='<%= embedded_map_url(@room_call.address.coordinates)%>' allowfullscreen></iframe>
-    </div>
+  <div class='gmap'>
+    <iframe width="930" height="300" frameborder="0" style="border:0" src='<%= embedded_map_url(@room_call.address.coordinates)%>' allowfullscreen></iframe>
+  </div>
   <% end %>
 
   <!-- static image map -->
   <!-- <% if @room_call.address.try(:coordinates) %>
-    <%= link_to google_map_url(@room_call.address), class: 'gmap' do %>
-      <%= image_tag static_map_url(@room_call.address.coordinates, zoom: 16, size: [900,200]) %>
-    <% end %>
+  <%= link_to google_map_url(@room_call.address), class: 'gmap' do %>
+  <%= image_tag static_map_url(@room_call.address.coordinates, zoom: 16, size: [900,200]) %>
+  <% end %>
   <% end %> -->
 
   <!-- Unused:

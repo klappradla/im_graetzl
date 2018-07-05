@@ -9,6 +9,7 @@
     <%= discussion.discussion_posts.size  %> <%= discussion.discussion_posts.size > 1 ? 'Beiträge' : 'Beitrag'  %> im Thema &middot; Letzter von:
   </div>
 
+  <% if discussion.discussion_posts.size > 0 %>
   <div class="user">
     <div class="avatar">
       <%= attachment_image_tag post.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
@@ -24,8 +25,9 @@
   <div class="content">
     <p><%= post.content.truncate(300, separator: ' ') %></p>
     <div class="ctrl">
-      <%= link_to 'Beitrag lesen', [discussion.group, discussion, :anchor => post.id], class: 'btn-secondary -mint -small' %>
+      <%= link_to 'Beitrag lesen', [discussion.group, discussion, anchor: "discussion-post-#{post.id}"], class: 'btn-secondary -mint -small' %>
     </div>
   </div>
+  <% end %>
 
 </div>

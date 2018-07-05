@@ -22,6 +22,14 @@
       <% end %>
       <%= f.text_area :description, placeholder: 'Beschreibe kurz, um was es bei deinem Treffen geht.' %>
     </div>
+    
+    <div class="input-select">
+      <%= f.label :group_id do %>
+        <%= icon_tag "user-avatar" %>
+        <span>Gruppe verbinden</span>
+      <% end %>
+      <%= f.select :group_id, options_from_collection_for_select(current_user.groups, :id, :title), id: 'meeting-group-select', include_blank: '---' %>
+    </div>
   </div>
 
   <% if @meeting.address.present? %>

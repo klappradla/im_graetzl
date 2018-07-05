@@ -164,7 +164,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin-right: 20px;
+    margin-right: 10px;
 
     .group-user-dropdown-link {
       position: absolute;
@@ -179,9 +179,6 @@
       width: 280px;
     }
 
-    .avatar {
-      padding-right:10px;
-    }
     .infos {
       .title {
         font-style: italic;
@@ -238,8 +235,12 @@
         width:100%;
         text-align:center;
         padding-right:0px;
-        img {
-          margin:0px;
+        display: flex;
+        justify-content: center;
+        img.round {
+          margin: 0 auto;
+          //width:100%;
+          //height:100%;
         }
       }
       div.infos {
@@ -269,6 +270,7 @@
       }
       .infos {
         width: calc(100% - 140px);
+        margin-left:10px;
       }
     }
     .btns {
@@ -326,7 +328,7 @@
     .content {
 
       @include respond-to(">=medium") {
-        margin-left: 57px;
+        margin-left: 60px;
       }
 
       padding-top:5px;

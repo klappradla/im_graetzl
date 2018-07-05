@@ -8,6 +8,7 @@ class Group < ApplicationRecord
   has_many :users, through: :group_users
 
   has_many :group_join_requests
+  has_many :meetings
 
   def to_s
     title

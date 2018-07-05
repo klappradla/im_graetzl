@@ -4,17 +4,14 @@
 
   <% @room_call.room_call_modules.includes(:room_module).each do |call_module| %>
     <div class="room-module-item">
-
       <div class="bigicontext-element -large">
         <%= icon_tag call_module.room_module.icon %>
       </div>
       <div class="description">
-        <h3><%= call_module.room_module.name %> (<%= call_module.quantity %>)</h3>
+        <h3><%= call_module.quantity %> <%= call_module.room_module.name %></h3>
         <p><%= call_module.description %></p>
       </div>
-
     </div>
-
   <% end %>
 
 </section>

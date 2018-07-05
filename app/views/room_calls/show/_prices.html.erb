@@ -6,19 +6,21 @@
 
   <div class="cardBox">
 
-    <h3><%= room_price.name %></h3>
-
     <div class="room-price-description">
-      <p><%= room_price.description %></p>
-      <span class="subtitle">Das Package gilt für die Module:</span>
-      <div class="modules">
+
+      <h3>
+        <%= room_price.name %>
+        <br>
+        <span>Für die Module:</span>
+        <span class="modules">
         <% room_price.room_modules.each do |room_module| %>
-        <div class="bigicontext-element -small">
-          <%= icon_tag room_module.icon %>
-          <!--<span class="txt"><%= room_module.name %></span>-->
-        </div>
+          <%= room_module.name %>,
         <% end %>
-      </div>
+        </span>
+      </h3>
+
+      <p><%= room_price.description %></p>
+
     </div>
 
     <ul class="room-price-features">

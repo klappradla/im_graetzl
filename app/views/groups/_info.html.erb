@@ -22,8 +22,9 @@
 
         <h3>Nächstes Treffen</h3>
 
-        <!-- TODO Insert next Group Meeting -->
-        <%= render @activity_sample.meetings.first(1) %>
+        <% if @next_meeting.present? %>
+          <%= render @next_meeting %>
+        <% end %>
       </div>
 
     </div>
