@@ -1,16 +1,32 @@
 section.roomDetail {
 
-  .-group {
-    .btn-ctrl {
+  .cardBox {
+
+    &.-group {
+
       display: flex;
-      justify-content: flex-end;
-    }
-    .users {
-      .img-round {
-        width:75px;
-        height:75px;
+      align-items: center;
+      .cardBoxHeader {
+        margin:0px;
+        width:40%;
+      }
+      .cardBoxContent {
+        margin-left:25px;
+        width:60%;
+      }
+
+      .btn-ctrl {
+        display: flex;
+        justify-content: flex-end;
+      }
+      .users {
+        .img-round {
+          //width:75px;
+          //height:75px;
+        }
       }
     }
+
   }
 
   &.-Offer {
