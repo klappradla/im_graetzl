@@ -1,0 +1,10 @@
+<div class="members-section">
+  <h3 class="header">Treffen in der Gruppe:</h3>
+
+    
+  <div class="users">
+    <% @meetings.each do |meeting| %>
+      <%= render 'groups/meetings/meeting', meeting: meeting %>
+    <% end %>
+  </div>
+</div>

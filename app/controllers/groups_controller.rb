@@ -3,9 +3,10 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-    @next_meeting = @group.meetings.where("DATE(starts_at_date) >= ?", Date.today).order(:starts_at_date, :starts_at_time).first
     if @group.readable_by?(current_user)
+      @next_meeting = @group.meetings.where("DATE(starts_at_date) >= ?", Date.today).order(:starts_at_date, :starts_at_time).first
       @discussions = @group.discussions.includes(discussion_posts: :user).order("sticky DESC, last_post_at DESC")
+      @meetings = @group.meetings.order("starts_at_date DESC")
     end
 
     # Just for testing ... TODO

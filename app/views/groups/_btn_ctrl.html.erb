@@ -8,11 +8,11 @@
 
   <% elsif group.admins.include?(current_user) %> <!-- Group Admin -->
 
-    <%= link_to 'javascript:', data: { jq_dropdown: "#group-settings-dropdown" }, class: 'btn-userIcons -grey -admin' do %>
+    <%= link_to 'javascript:', data: { jq_dropdown: "#group-settings-dropdown-#{group.id}" }, class: 'btn-userIcons -grey -admin' do %>
       <span>Du bist Admin <%= icon_tag "arrow-down-2" %></span>
     <% end %>
 
-    <div id="group-settings-dropdown" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container createmenu">
+    <div id="group-settings-dropdown-<%= group.id %>" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container createmenu">
       <div class="jq-dropdown-panel">
         <%= link_to settings_group_path(group) do %>
           <%= icon_tag "bell" %>
@@ -31,11 +31,11 @@
 
   <% elsif group.members.include?(current_user) %> <!-- Group Member -->
 
-    <%= link_to 'javascript:', data: { jq_dropdown: "#group-settings-dropdown" }, class: 'btn-userIcons -grey' do %>
+    <%= link_to 'javascript:', data: { jq_dropdown: "#group-settings-dropdown-#{group.id}" }, class: 'btn-userIcons -grey' do %>
       <span>Du bist Mitglied <%= icon_tag "arrow-down-2" %></span>
     <% end %>
 
-    <div id="group-settings-dropdown" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container createmenu">
+    <div id="group-settings-dropdown-<%= group.id %>" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container createmenu">
       <div class="jq-dropdown-panel">
         <%= link_to settings_group_path(group) do %>
           <%= icon_tag "bell" %>

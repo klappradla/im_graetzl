@@ -25,7 +25,7 @@
     
     <div class="input-select">
       <%= f.label :group_id do %>
-        <%= icon_tag "user-avatar" %>
+        <%= icon_tag "speech-bubble" %>
         <span>Gruppe verbinden</span>
       <% end %>
       <%= f.select :group_id, options_from_collection_for_select(current_user.groups, :id, :title), id: 'meeting-group-select', include_blank: '---' %>

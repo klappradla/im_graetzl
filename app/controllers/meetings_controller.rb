@@ -39,7 +39,6 @@ class MeetingsController < ApplicationController
   def update
     @meeting = find_user_meeting
     @meeting.assign_attributes(meeting_params)
-    p "----> ", @meeting
     @meeting.graetzl = @meeting.address.graetzl if @meeting.address.try(:graetzl)
     @meeting.state = :active
 
@@ -97,7 +96,6 @@ class MeetingsController < ApplicationController
 
     feature_address = Address.from_feature(params[:feature]) if params[:feature]
     result[:address_attributes].merge!(feature_address.attributes.symbolize_keys.compact) if feature_address
-    p "---> ", result
     result
   end
 
