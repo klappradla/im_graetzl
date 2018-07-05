@@ -63,14 +63,15 @@
     margin-bottom: 10px;
   }
 
+  // ------------------------ SECTIONS -------------------------- //
   section {
     margin-bottom:40px;
     @include respond-to(">=medium") {
-      margin-bottom:80px;
+      margin-bottom:70px;
     }
-    @include cf;
+    //@include cf;
 
-    // ------------------------ Info Section
+    //  Info Section ------------------------
     &.info-section {
       display: flex;
       flex-wrap: wrap;
@@ -124,12 +125,12 @@
     } // Section
 
 
-    // ------------------------ Modules Section
+    //  Modules Section ------------------------
     &.modules-section {
 
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
+      justify-content: center;
       align-items: flex-start;
 
       h2 {width:100%; display: block;}
@@ -143,7 +144,7 @@
           width:47%;
         }
         .bigicontext-element {
-          margin-right: 20px;
+          margin-right: 15px;
           align-self: center;
 
         }
@@ -158,7 +159,7 @@
 
     } // Section
 
-    // ------------------------ Prices Section
+    //  Prices Section ------------------------
     &.prices-section {
 
       h3 {
@@ -169,86 +170,91 @@
         }
       }
 
-      span.subtitle {
-        font-weight: bold;
-        display: block;
-        margin-bottom: 10px;
-      }
-
-      .cardBox {
+      .paperCard {
         padding:20px;
         margin-bottom:50px;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
+        align-items: flex-end;
       }
-      div.cardBox:nth-last-child(n+1) ~ div.cardBox:last-child {
+      .paperCard:nth-last-child(n+1) ~ .paperCard:last-child {
         margin-bottom:0px;
       }
 
       .room-price-description {
+        padding-right:20px;
+        h3 {color: $color-ambient-mint-dark;}
         @include respond-to(">=medium") {
-          width: 60%;
+          width: 50%;
         }
       }
 
       .room-price-features {
         @include respond-to(">=medium") {
-          width:40%;
+          width:50%;
+          border-left: 1px solid $color-ambient-grey-light;
+          padding-left:20px;
         }
 
-        border-left: 1px solid $color-ambient-grey-light;
-        padding: 0px 20px 0px 20px;
-        margin-bottom: 20px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+
+        .info {
+          width:100%;
+          margin-bottom: 10px;
+          font-style: italic;
+        }
 
         li {
+          width:50%;
           list-style-type: none;
           display: flex;
           align-content: center;
           align-items: center;
           svg {
             display: inline-block;
-            fill: $color-ambient-mint;
+            fill: $color-ambient-grey;
             margin:2px 8px 2px 0px;
           }
         }
 
       }
 
-      /*.room-price-amount:before {
-        margin-top:30px;
+      .room-price-amount:before {
+        margin-top:15px;
+        margin-bottom:15px;
         content: '';
         width: 100%;
         height: 10px;
         bottom: 0;
         left: 0;
-        background-image: radial-gradient(ellipse farthest-side at center bottom, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0) 70%);
+        background-image: radial-gradient(ellipse farthest-side at center bottom, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0) 40%);
         pointer-events: none;
         z-index: 9;
-      }*/
+      }
 
       .room-price-amount {
 
         width:100%;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
 
-
-        span.txt {
+        .info {
+          @include font-size-secondaryFont('small');
+          color: $color-ambient-mint-dark;
           display: none;
           @include respond-to(">=medium") {
-            display: inline;
+            //display: block;
           }
         }
-        //border-top: 1px solid $color-ambient-grey-light;
-
-        @include font-size-secondaryFont('small');
-        line-height: 70px;
-        color: $color-ambient-mint-dark;
 
         .monthly-amount {
           @include font-size-secondaryFont('large');
-          line-height: 70px;
           color: $color-ambient-mint-dark;
           span {
             @include font-size-secondaryFont('small');
@@ -257,7 +263,8 @@
       }
     } // Section
 
-    // ------------------------ Gallery Section
+    //  Gallery Section ------------------------
+
     &.photos-section {
       .gallery {
 
@@ -280,6 +287,14 @@
         width: 100%;
 
         @include respond-to(">=small") {
+          column-count:         1;
+          -moz-column-count:    1;
+          -ms-column-count:     1;
+          -o-column-count:      1;
+          -webkit-column-count: 1;
+        }
+
+        @include respond-to(">=medium") {
           column-count:         2;
           -moz-column-count:    2;
           -ms-column-count:     2;
@@ -288,35 +303,19 @@
 
           a:first-of-type {
             //flex-grow: 1;
-            height:361px;
+            height:480px;
             img {
-              height:361px;
+              height:480px;
               object-fit: cover;
             }
           }
-        }
 
-        @include respond-to(">=medium") {
-          column-count:         3;
-          -moz-column-count:    3;
-          -ms-column-count:     3;
-          -o-column-count:      3;
-          -webkit-column-count: 3;
-
-          a:nth-child(odd) {
-            //flex-grow: 1;
-            height:361px;
-            img {
-              height:361px;
-              object-fit: cover;
-            }
-          }
         }
       }
 
     } // End Single Section
 
-    // ------------------------ Submission Section
+    //  Submission Section ------------------------
     &.submission-section {
 
       .subtitle {
@@ -400,7 +399,7 @@
 
     } // End Single Section
 
-    // ------------------------ Group Section
+    //  Group Section ------------------------
     &.group-section {
       @include respond-to(">=medium") {
         .cardBox {
@@ -416,7 +415,9 @@
       }
     } // END Group Section
 
-  } // END All Sections </section>
+  }
+  // ------------------------ END SECTIONS -------------------------- //
+
 
   .gmap img, .gmap iframe { max-width: 930px; width: 100%; }
 

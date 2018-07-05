@@ -31,9 +31,9 @@
 
   <%= render 'room_calls/show/info' %>
   <%= render 'room_calls/show/modules' %>
-  <%= render 'room_calls/show/prices' %>
   <%= render 'room_calls/show/photos' %>
   <%= render 'room_calls/show/group' if @room_call.group %>
+  <%= render 'room_calls/show/prices' %>
   <%= render user_signed_in? ? 'room_calls/show/submissions' : 'room_calls/show/login' %>
 
   <!-- our custom leaflet map (also needs initMap(); in room_calls.js) -->

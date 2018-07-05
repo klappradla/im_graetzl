@@ -4,9 +4,9 @@
 
   <% @room_call.room_call_prices.includes(:room_modules).each do |room_price| %>
 
-  <div class="cardBox">
+  <div class="paperCard -cord1RT">
 
-    <div class="room-price-description">
+    <div class="room-price-description wrp">
 
       <h3>
         <%= room_price.name %>
@@ -23,8 +23,8 @@
 
     </div>
 
-    <ul class="room-price-features">
-      <span class="subtitle">Im Package enthalten:</span>
+    <ul class="room-price-features wrp">
+      <span class="info">Im Package enthalten:</span>
       <% room_price.feature_list.each do |feature| %>
       <li>
         <%= icon_tag 'check' %>
@@ -33,13 +33,15 @@
       <% end %>
     </ul>
 
-    <div class="room-price-amount">
-      <span class="txt">Unterm Strich alles zusammen:</span>
+    <div class="room-price-amount wrp">
+      <span class="info">Unterm Strich alles zusammen:</span>
       <div class="monthly-amount">
         <%= room_price.amount.to_i %> €
         <span> / Monat</span>
       </div>
     </div>
+
+    <div class="card"></div>
 
   </div>
 
