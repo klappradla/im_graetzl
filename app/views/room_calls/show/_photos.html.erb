@@ -1,5 +1,5 @@
 <section class="photos-section">
-  <div class="gallery">
+  <div class="gallery" data-featherlight-gallery data-featherlight-filter="a">
     <% @room_call.images.each do |image| %>
       <%= link_to attachment_image_tag(image, :file, :fill, 930, 465), attachment_url(image, :file, :limit, 800, 800) %>
     <% end %>
