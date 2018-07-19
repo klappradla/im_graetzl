@@ -1,4 +1,8 @@
+#map { height: 100%; }
 .gmap img, .gmap iframe { max-width: 930px; width: 100%; }
+.infowindow {
+  padding:10px;
+}
 
 .mapImgBlock {
 
@@ -185,7 +189,7 @@
     @include textShadowHard($color-ambient-mint-dark);
   }
 }
-  
+
 .leaflet-tile-pane {
   filter: hue-rotate(-1100deg) saturate(50%);
   opacity: 0.8;

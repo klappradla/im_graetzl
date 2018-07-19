@@ -263,6 +263,15 @@
       }
     } // Section
 
+    //  Map Section ------------------------
+
+    &.map-section {
+      height:400px;
+      &.cardBox {
+        padding:5px;
+      }
+    }
+
     //  Gallery Section ------------------------
 
     &.photos-section {

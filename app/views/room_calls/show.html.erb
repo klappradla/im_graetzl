@@ -35,24 +35,7 @@
   <%= render 'room_calls/show/group' if @room_call.group %>
   <%= render 'room_calls/show/prices' %>
   <%= render user_signed_in? ? 'room_calls/show/submissions' : 'room_calls/show/login' %>
-
-  <!-- our custom leaflet map (also needs initMap(); in room_calls.js) -->
-  <!-- <%= render 'room_calls/show/map', map_data: @map_data %> -->
-
-
-  <!-- the interactive map -->
-  <% if @room_call.address.try(:coordinates) %>
-  <div class='gmap'>
-    <iframe width="930" height="300" frameborder="0" style="border:0" src='<%= embedded_map_url(@room_call.address.coordinates)%>' allowfullscreen></iframe>
-  </div>
-  <% end %>
-
-  <!-- static image map -->
-  <!-- <% if @room_call.address.try(:coordinates) %>
-  <%= link_to google_map_url(@room_call.address), class: 'gmap' do %>
-  <%= image_tag static_map_url(@room_call.address.coordinates, zoom: 16, size: [900,200]) %>
-  <% end %>
-  <% end %> -->
+  <%= render 'room_calls/show/map' %>
 
   <!-- Unused:
   @room_call.about_partner

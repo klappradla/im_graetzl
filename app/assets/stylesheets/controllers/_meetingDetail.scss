@@ -7,6 +7,8 @@ section.meeting {
   }
 }
 
+.map {height:400px;}
+
 .entryDescription {
   margin-bottom: 3rem;
   @include respond-to(">=medium") {
