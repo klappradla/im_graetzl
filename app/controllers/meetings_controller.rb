@@ -106,6 +106,9 @@ class MeetingsController < ApplicationController
     elsif params[:graetzl_id].present?
       graetzl = Graetzl.find(params[:graetzl_id])
       graetzl.build_meeting
+    elsif params[:group_id].present?
+      group = Group.find(params[:group_id])
+      group.build_meeting
     else
       graetzl = current_user.graetzl
       graetzl.build_meeting

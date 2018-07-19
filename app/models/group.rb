@@ -26,6 +26,10 @@ class Group < ApplicationRecord
     group_users.select{|gu| gu.member? }.map(&:user)
   end
 
+  def build_meeting
+    meetings.build(address: Address.new)
+  end
+
   def readable_by?(user)
     if private?
       user && users.include?(user)

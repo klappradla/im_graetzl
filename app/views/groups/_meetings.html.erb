@@ -1,10 +1,26 @@
-<div class="members-section">
-  <h3 class="header">Treffen in der Gruppe:</h3>
+<div class="meetings-section -page">
 
-    
-  <div class="users">
-    <% @meetings.each do |meeting| %>
-      <%= render 'groups/meetings/meeting', meeting: meeting %>
+  <div class="heading">
+
+    <h3 class="header">Die nächsten Gruppentreffen:</h3>
+
+    <% if user_signed_in? %>
+      <%= link_to new_meeting_path(group_id: @group.id), class: 'btn-userIcons' do %>
+      <span class="ico-left">
+        <%= icon_tag('calendar-2') %>
+        Neues Gruppentreffen
+      </span>
+      <% end %>
     <% end %>
+
   </div>
+
+  <div class="cardBoxCollection -tripple">
+
+    <% @meetings.each do |meeting| %>
+      <%= render 'meetings/meeting', meeting: meeting %>
+    <% end %>
+
+  </div>
+
 </div>

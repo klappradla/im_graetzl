@@ -6,7 +6,7 @@ class GroupsController < ApplicationController
     if @group.readable_by?(current_user)
       @next_meeting = @group.meetings.where("DATE(starts_at_date) >= ?", Date.today).order(:starts_at_date, :starts_at_time).first
       @discussions = @group.discussions.includes(discussion_posts: :user).order("sticky DESC, last_post_at DESC")
-      @meetings = @group.meetings.order("starts_at_date DESC")
+      @meetings = @group.meetings.order("starts_at_date ASC")
     end
 
     # Just for testing ... TODO

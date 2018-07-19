@@ -171,8 +171,8 @@
       }
 
       .paperCard {
-        padding:20px;
-        margin-bottom:50px;
+        padding: 30px 10px 20px 30px;
+        margin-bottom:70px;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
@@ -401,24 +401,21 @@
 
     //  Group Section ------------------------
     &.group-section {
-      @include respond-to(">=medium") {
-        .cardBox {
-          display: flex;
-          align-items: center;
-          .cardBoxHeader {
-            margin:0px;
-          }
-          .cardBoxContent {
-            margin-left:25px;
-          }
-          .btn-ctrl {
+      .cardBox {
+        &.-group {
+          @include respond-to(">=medium") {
             display: flex;
-            justify-content: flex-end;
-          }
-          .users {
-            .img-round {
-              //width:75px;
-              //height:75px;
+            align-items: stretch;
+            .cardBoxHeader {
+              margin:0px;
+              width:40%;
+              .coverImgWrapper {
+                height:100%;
+              }
+            }
+            .cardBoxContent {
+              margin-left:25px;
+              width:60%;
             }
           }
         }

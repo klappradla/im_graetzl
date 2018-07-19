@@ -14,6 +14,11 @@
       color: $color-ambient-rosa;
     }
   }
+  .hl-subtext {
+    h1 {
+      margin-bottom: 10px;
+    }
+  }
 
   [class^=meet-] {
     > p:first-child {
@@ -77,4 +82,3 @@
     height: 250px;
   }
 }
-

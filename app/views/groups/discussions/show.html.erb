@@ -6,9 +6,7 @@
 
   <%= render 'groups/tab_navigation' %>
 
-  <div class="discussion-infos">
-    <!--<%= link_to group_path(@group, anchor: 'tab-discussions'), class: 'back-link' do %><%= icon_tag "arrow-left-2" %>Alle Diskussionen<% end %>
-    <span>&nbsp;&middot;&nbsp;</span>-->
+  <div class="discussion-infos -page">
     <%= @discussion.discussion_posts.size %> <%= @discussion.discussion_posts.size > 1 ? 'Beiträge' : 'Beitrag' %>
     <span>&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
     <%= link_to 'javascript:', class: 'follow -unsubscribed', :data => { :topic => @discussion.id } do %>

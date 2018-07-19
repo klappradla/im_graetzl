@@ -5,6 +5,11 @@
     <h1>Ein <span>neues Treffen</span> bei <span><%= @meeting.location.name %></span>!</h1>
   <% elsif @meeting.graetzl %>
     <h1>Ein <span>neues Treffen</span> im <span><%= @meeting.graetzl.name %></span>!</h1>
+  <% elsif @meeting.group %>
+    <div class="hl-subtext">
+      <h1>Ein <span>neues Treffen</span> für die Gruppe</h1>
+      <p><%= @meeting.group.title %></p>
+    </div>
   <% else %>
     <h1>Ein neues Treffen, wie schön!</h1>
   <% end %>

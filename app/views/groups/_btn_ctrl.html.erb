@@ -62,10 +62,11 @@
 
     <div id="join-request-modal" class="join-request-modal">
       <%= form_tag request_join_group_path(group) do %>
+        <h1>Wir freuen uns auf Dich!</h1>
         <div class="input-textarea">
-          <%= text_area_tag :request_message, nil, cols: 40, rows: 3, placeholder: 'write a short a sentence about you or why you want to join' %>
+          <%= text_area_tag :request_message, nil, cols: 40, rows: 3, placeholder: 'Schreib noch einen kurzen Satz über Dich, bzw. warum Du beitreten möchtest ..' %>
         </div>
-        <%= submit_tag "Beitreten", class: 'btn-primary' %>
+        <%= submit_tag "Jetzt beitreten", class: 'btn-primary' %>
       <% end %>
     </div>
 

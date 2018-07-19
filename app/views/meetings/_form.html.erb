@@ -1,6 +1,7 @@
 <%= form_for @meeting do |f| %>
   <%= hidden_field_tag :graetzl_id, params[:graetzl_id] %>
   <%= hidden_field_tag :location_id, params[:location_id] %>
+  <%= hidden_field_tag :group_id, params[:group_id] %>
 
   <%= form_errors_for @meeting %>
 
@@ -22,14 +23,21 @@
       <% end %>
       <%= f.text_area :description, placeholder: 'Beschreibe kurz, um was es bei deinem Treffen geht.' %>
     </div>
-    
-    <div class="input-select">
-      <%= f.label :group_id do %>
-        <%= icon_tag "speech-bubble" %>
-        <span>Gruppe verbinden</span>
-      <% end %>
-      <%= f.select :group_id, options_from_collection_for_select(current_user.groups, :id, :title), id: 'meeting-group-select', include_blank: '---' %>
-    </div>
+
+    <% if !current_user.groups.includes(:room_offer, :room_call).empty? %>
+
+      <div class="input-select">
+        <%= f.label :group_id do %>
+          <%= icon_tag "speech-bubble" %>
+          <span>Gruppe verbinden</span>
+        <% end %>
+        <%= f.select :group_id, options_from_collection_for_select(current_user.groups, :id, :title), id: 'meeting-group-select', include_blank: 'Gruppe auswählen..' %>
+      </div>
+
+    <% end %>
+
+
+
   </div>
 
   <% if @meeting.address.present? %>

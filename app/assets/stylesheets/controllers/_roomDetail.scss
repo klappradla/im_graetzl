@@ -1,32 +1,23 @@
 section.roomDetail {
 
   .cardBox {
-
     &.-group {
-
-      display: flex;
-      align-items: center;
-      .cardBoxHeader {
-        margin:0px;
-        width:40%;
-      }
-      .cardBoxContent {
-        margin-left:25px;
-        width:60%;
-      }
-
-      .btn-ctrl {
+      @include respond-to(">=large") {
         display: flex;
-        justify-content: flex-end;
-      }
-      .users {
-        .img-round {
-          //width:75px;
-          //height:75px;
+        align-items: stretch;
+        .cardBoxHeader {
+          margin:0px;
+          width:40%;
+          .coverImgWrapper {
+            height:100%;
+          }
+        }
+        .cardBoxContent {
+          margin-left:25px;
+          width:60%;
         }
       }
     }
-
   }
 
   &.-Offer {

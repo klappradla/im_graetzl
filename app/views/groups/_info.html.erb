@@ -1,8 +1,8 @@
-<div class="info-section">
+<div class="info-section -page">
 
   <% if @group.readable_by?(current_user) %>
 
-    <div class="top-area">
+    <div class="top-section">
 
       <div class="mainContent -left top-posts">
 
@@ -12,19 +12,28 @@
           <% @discussions.first(2).each do |discussion| %>
             <%= render 'groups/discussions/discussion_preview', discussion: discussion %>
           <% end %>
-          <%= link_to "Alle Diskussionen anzeigen", "javascript:", class: 'all-discussions-link btn-primary -mint' %>
+          <%= link_to "Alle Diskussionen anzeigen", "javascript:", class: 'all-discussions-link btn-secondary -mint' %>
         <% else %>
-          <p> Noch keine Diskussionen in der Gruppe.. </p>
+          <p class="hint">Noch keine Diskussionen in der Gruppe..</p>
         <% end %>
       </div>
 
       <div class="sideBar -right">
 
+        <% if @group.parent.is_a? RoomCall %>
+          <% if @group.parent.open? %>
+            <%= render 'room_calls/room_call', room_call: @group.parent %>
+          <% end %>
+        <% end %>
+
         <h3>Nächstes Treffen</h3>
 
         <% if @next_meeting.present? %>
           <%= render @next_meeting %>
+        <% else %>
+          <p class="hint">Noch kein Treffen geplant ..</p>
         <% end %>
+
       </div>
 
     </div>
@@ -32,9 +41,10 @@
 
   <% end %>
 
-  <h2><%= @group.users.count %> Mitglieder</h2>
+  <h2><%= @group.users.count %> <%= @group.users.count > 1 ? 'Mitglieder' : 'Mitglied' %></h2>
 
   <div class="users member-section">
+
     <% @group.admins.each do |user| %>
       <div class="user">
         <div class="avatar">
@@ -58,7 +68,9 @@
     <% end %>
   </div>
 
-  <h2>Über die Gruppe</h2>
-  <p class="about"><%= @group.description %></p>
+  <div class="about-section">
+    <h2>Über die Gruppe</h2>
+    <p class="about"><%= @group.description %></p>
+  </div>
 
 </div>

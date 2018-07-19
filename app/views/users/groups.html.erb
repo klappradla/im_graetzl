@@ -2,11 +2,11 @@
 
   <% if @groups.empty? %>
 
-    <p> No groups. </p>
+    <p> Du bist noch in keiner Gruppe Mitglied ... </p>
 
   <% else %>
 
-    <h2 class="hl-main">Deine <span>Gruppen</span> verwalten</h2>
+    <h2 class="hl-main">Deine <span>Gruppen</span></h2>
 
     <div class="cardBoxCollection -tripple" data-behavior="groups-card-container">
       <%= render @groups.order(created_at: :desc), manage_buttons: true %>
