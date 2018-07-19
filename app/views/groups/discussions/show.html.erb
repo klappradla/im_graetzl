@@ -17,6 +17,11 @@
       <%= icon_tag "bell" %>
       Diskussion nicht mehr folgen
     <% end %>
+    <% if @discussion.delete_permission?(current_user) %>
+      <%= link_to [@group, @discussion], method: :delete, data: { confirm: 'Thema wirklich löschen?', disable_with: 'wird gelöscht...'}, class: 'delete' do %>
+        <%= icon_tag "trash-delete-remove" %>
+      <% end %>
+    <% end %>
   </div>
 
   <h2 class="title"><%= @discussion.title %></h2>

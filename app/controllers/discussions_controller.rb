@@ -23,6 +23,16 @@ class DiscussionsController < ApplicationController
     redirect_to [@group, @discussion]
   end
 
+  def destroy
+    @discussion = @group.discussions.find(params[:id])
+    if @discussion && @discussion.delete_permission?(current_user)
+      @discussion.destroy
+      redirect_to @group
+    else
+      head :ok
+    end
+  end
+
   private
 
   def check_group

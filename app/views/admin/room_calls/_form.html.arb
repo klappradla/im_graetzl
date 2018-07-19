@@ -21,6 +21,9 @@ active_admin_form_for [:admin, resource] do |f|
       input :remove_avatar, as: :boolean if f.object.avatar
       input :cover_photo, as: :file, hint: (image_tag(attachment_url(f.object, :cover_photo, :fill, 100, 100)) if f.object.cover_photo)
       input :remove_cover_photo, as: :boolean if f.object.cover_photo
+      has_many :images, allow_destroy: true do |i|
+        i.input :file, as: :file, hint: attachment_image_tag(i.object, :file, :limit, 600, 300)
+      end
     end
 
     inputs "Contact" do

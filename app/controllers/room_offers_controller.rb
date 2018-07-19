@@ -75,6 +75,7 @@ class RoomOffersController < ApplicationController
         :remove_avatar,
         :first_name, :last_name, :website, :email, :phone, :location_id,
         images_files: [],
+        images_attributes: [:id, :_destroy],
         address_attributes: [
           :id, :street_name, :street_number, :zip, :city
         ],

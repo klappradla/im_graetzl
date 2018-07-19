@@ -9,4 +9,9 @@ class Discussion < ApplicationRecord
   def open?
     !closed?
   end
+
+  def delete_permission?(by_user)
+    group.admins.include?(by_user)
+  end
+
 end
