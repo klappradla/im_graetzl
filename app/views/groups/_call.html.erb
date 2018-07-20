@@ -1,11 +1,9 @@
-<section class="submissions-section">
+<div class="call-section -page">
 
-  <h2>Call TeilnehmerInnen</h2>
-
-  <% if @room_call.room_call_submissions.present? %>
-    <div class="users">
-    <% @room_call.room_call_submissions.includes(:user).each do |submission| %>
+  <div class="users">
+    <% @group.room_call.room_call_submissions.includes(:user).each do |submission| %>
       <div class="user cardBox">
+
         <div class="avatar">
           <%= attachment_image_tag submission.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
         </div>
@@ -13,16 +11,17 @@
           <span><%= submission.first_name %> <br> <%= submission.last_name %></span>
           <p class="date">Abgesendet: <br> <%= I18n.localize(submission.created_at, format:'%d. %B %Y') %></p>
           <p class="date">
-            <%= link_to submission_room_call_path(@room_call, submission_id: submission.id) do %>
+            <%= link_to submission_room_call_path(@group.room_call, submission_id: submission.id) do %>
             Call Einreichung
             <% end %>
           </p>
         </div>
+
       </div>
     <% end %>
-    </div>
-  <% else %>
-  <!-- if no submissions yet .. -->
-  <% end %>
 
-</section>
+    <% if @group.room_call.room_call_submissions.empty? %>
+      <p> Noch keine ausgefüllten Calls bis jetzt .. </p>
+    <% end %>
+  </div>
+</div>

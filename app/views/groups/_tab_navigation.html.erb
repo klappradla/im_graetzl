@@ -5,4 +5,7 @@
     <li><%= link_to "Treffen", group_path(@group, anchor: 'tab-meetings') %></li>
     <li><%= link_to "Mitglieder", group_path(@group, anchor: 'tab-members') %></li>
   <% end %>
+  <% if @group.room_call_readable_by?(current_user) %>
+    <li><%= link_to "Call", group_path(@group, anchor: 'tab-call') %></li>
+  <% end %>
 </ul>

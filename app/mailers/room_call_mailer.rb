@@ -1,24 +1,41 @@
 class RoomCallMailer
   include MailUtils
 
-  def send_submission_email(user, room_call)
-    MandrillMailer.deliver(template: 'room-call-submission', message: email_settings(user, room_call))
+  def send_submission_email(room_call_submission)
+    MandrillMailer.deliver(template: 'room-call-submission', message: submitter_settings(room_call_submission))
+    MandrillMailer.deliver(template: 'room-call-submission-owner', message: owner_settings(room_call_submission))
   end
 
   private
 
-  def email_settings(user, room_call)
+  def submitter_settings(submission)
     {
-      to: [ { email: user.email } ],
+      to: [ { email: submission.user.email } ],
       bcc: [ { email: "call@imgraetzl.at" }],
-      global_merge_vars: [
-        { name: 'username', content: user.username },
-        { name: 'first_name', content: user.first_name },
-        { name: 'last_name', content: user.last_name },
-        { name: 'room_call_title', content: room_call.title },
-        { name: 'room_call_subtitle', content: room_call.subtitle },
-        { name: 'room_call_url', content: room_call_url(room_call, URL_OPTIONS) },
-        { name: 'room_call_picture_url', content: asset_url(room_call, :cover_photo) }
+      merge_vars: [
+        { name: 'username', content: submission.user.username },
+        { name: 'first_name', content: submission.user.first_name },
+        { name: 'last_name', content: submission.user.last_name },
+        { name: 'room_call_title', content: submission.room_call.title },
+        { name: 'room_call_subtitle', content: submission.room_call.subtitle },
+        { name: 'room_call_url', content: room_call_url(submission.room_call, URL_OPTIONS) },
+        { name: 'room_call_picture_url', content: asset_url(submission.room_call, :cover_photo) }
+      ]
+    }
+  end
+
+  def owner_settings(submission)
+    {
+      to: [ { email: submission.room_call.user.email } ],
+      merge_vars: [
+        { name: 'username', content: submission.user.username },
+        { name: 'first_name', content: submission.user.first_name },
+        { name: 'last_name', content: submission.user.last_name },
+        { name: 'room_call_title', content: submission.room_call.title },
+        { name: 'room_call_subtitle', content: submission.room_call.subtitle },
+        { name: 'room_call_url', content: room_call_url(submission.room_call, URL_OPTIONS) },
+        { name: 'room_call_picture_url', content: asset_url(submission.room_call, :cover_photo) },
+        { name: 'room_call_submission', content: submission_content(submission) },
       ]
     }
   end
@@ -31,5 +48,11 @@ class RoomCallMailer
   def default_host
     Rails.application.config.action_mailer.default_url_options[:host]
   end
-  
+
+  def submission_content(submission)
+    submission.room_call_submission_fields.includes(:room_call_field).map do |sf|
+      { label: sf.room_call_field.label, content: sf.content }
+    end
+  end
+
 end

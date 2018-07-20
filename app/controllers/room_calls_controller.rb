@@ -38,6 +38,11 @@ class RoomCallsController < ApplicationController
     end
   end
 
+  def submission
+    @room_call = current_user.room_calls.find(params[:id])
+    @room_call_submission = @room_call.room_call_submissions.find(params[:submission_id])
+  end
+
   def add_submission
     @room_call = RoomCall.find(params[:id])
     @room_call_submission = @room_call.room_call_submissions.build(room_call_submission_params)
@@ -47,7 +52,10 @@ class RoomCallsController < ApplicationController
     end
 
     if @room_call_submission.save
-      RoomCallMailer.new.send_submission_email(current_user, @room_call)
+      RoomCallMailer.new.send_submission_email(@room_call_submission)
+      if !@room_call.group.users.include?(current_user)
+        @room_call.group.group_join_requests.create(user_id: current_user.id, request_message: "A call submitter wants to join the group.")
+      end
       flash[:notice] = "Danke für deine Bewerbung - Wir haben dir soeben ein E-Mail gesendet mit ein paar weiteren Infos .."
       redirect_to @room_call
     else

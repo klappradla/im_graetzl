@@ -37,4 +37,9 @@ class Group < ApplicationRecord
       true
     end
   end
+
+  def room_call_readable_by?(user)
+    room_call_id? && admins.include?(user)
+  end
+
 end

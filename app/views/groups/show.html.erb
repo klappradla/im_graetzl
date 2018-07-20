@@ -14,6 +14,9 @@
         <li><a href="#tab-meetings">Treffen</a></li>
         <li><a href="#tab-members">Mitglieder</a></li>
       <% end %>
+      <% if @group.room_call_readable_by?(current_user) %>
+        <li><a href="#tab-call">Call</a></li>
+      <% end %>
     </ul>
     <!-- /NAVIGATION -->
 
@@ -24,6 +27,10 @@
       <div id='tab-meetings'><%= render 'meetings' %></div>
       <div id='tab-members'><%= render 'members' %></div>
     <% end %>
+    <% if @group.room_call_readable_by?(current_user) %>
+      <div id='tab-call'><%= render 'call' %></div>
+    <% end %>
+
     <!-- /CONTENT -->
 
   </div>

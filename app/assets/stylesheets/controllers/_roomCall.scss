@@ -408,6 +408,43 @@
 
     } // End Single Section
 
+    //  Submission Section ------------------------
+    &.submissions-section {
+      .users {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+      }
+
+      .user {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-right: 10px;
+        width:31%;
+        margin:10px;
+        img.user {
+          margin:5px;
+        }
+        .img-round {
+          width: 100px;
+          height: 100px;
+        }
+        @include respond-to("<=large") {
+          width:45%;
+        }
+        @include respond-to("<=medium") {
+          width:95%;
+        }
+        .infos {
+          width: calc(100% - 140px);
+          margin-left:10px;
+          font-style:italic;
+          @include ellipsis();
+        }
+      }
+    }
+
     //  Group Section ------------------------
     &.group-section {
       .cardBox {
@@ -433,6 +470,37 @@
 
   }
   // ------------------------ END SECTIONS -------------------------- //
+
+
+
+  // -- CALL SUBMISSION USER PAGE -- //
+  &.-submission {
+    .user {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 20px;
+      img.user {
+        margin:5px;
+        margin-right:15px;
+      }
+      .img-round {
+        width: 100px;
+        height: 100px;
+      }
+      .infos {
+        font-style:italic;
+        @include ellipsis();
+      }
+    }
+    .user-anwsers {
+      margin-bottom:30px;
+      p {
+        white-space:pre-wrap;
+      }
+    }
+  }
+
 
 
 } // END Room Call Page

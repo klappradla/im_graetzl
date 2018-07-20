@@ -34,7 +34,13 @@
   <%= render 'room_calls/show/photos' %>
   <%= render 'room_calls/show/group' if @room_call.group %>
   <%= render 'room_calls/show/prices' %>
-  <%= render user_signed_in? ? 'room_calls/show/submissions' : 'room_calls/show/login' %>
+  <% if !user_signed_in? %>
+    <%= render 'room_calls/show/login' %>
+  <% elsif @room_call.user == current_user %>
+    <%= render 'room_calls/show/submissions' %>
+  <% else %>
+    <%= render 'room_calls/show/add_submission' %>
+  <% end %>
   <%= render 'room_calls/show/map' %>
 
   <!-- Unused:

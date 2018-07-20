@@ -77,6 +77,7 @@ Rails.application.routes.draw do
     post 'toggle', on: :member
   end
   resources :room_calls, path: 'wien/raumteiler/open-calls', except: [:index] do
+    get 'submission', on: :member
     post 'add_submission', on: :member
   end
 

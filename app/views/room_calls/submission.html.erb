@@ -1,0 +1,39 @@
+<div class="room-call-page -submission">
+
+  <div class="imgHeader -fullwidth">
+    <%= attachment_image_tag @room_call, :cover_photo, :fill, 2560, 1000, fallback: 'cover_photo/980x370.png', class: 'titleImg -fullwidth' %>
+  </div>
+
+  <div class="bulge-wrapper">
+    <div class="bulge-container">
+      <div class="bulge -top">
+        <%= image_tag ('bulge-left.png'), class: 'bulge-left' %><%= image_tag ('bulge-middle.png'), class: 'bulge-middle' %><%= image_tag ('bulge-right.png'), class: 'bulge-right' %>
+      </div>
+      <div class="bulge -bottom">
+        <h1><%= @room_call.title %></h1>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="user cardBox">
+    <div class="avatar">
+      <%= attachment_image_tag @room_call_submission.user, :avatar, :fill, 200, 200, fallback: 'avatar/user/200x200.png', class: 'img-round' %>
+    </div>
+    <div class="infos">
+      <span><%= @room_call_submission.first_name %> <%= @room_call_submission.last_name %></span>
+      <p class="date">Abgesendet: <%= I18n.localize(@room_call_submission.created_at, format:'%d. %B %Y') %></p>
+      <p class="date">
+        <%= mail_to @room_call_submission.email %>
+      </p>
+    </div>
+  </div>
+
+  <div class="user-anwsers">
+    <% @room_call_submission.room_call_submission_fields.includes(:room_call_field).each do |sf| %>
+      <h3><%= sf.room_call_field.label %></h3>
+      <p><%= sf.content %></p>
+    <% end %>
+  </div>
+
+</div>

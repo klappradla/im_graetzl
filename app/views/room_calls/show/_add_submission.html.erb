@@ -1,0 +1,95 @@
+<section class="submission-section -loggedin" id="call">
+  <% if @room_call.open? %>
+    <h2>Open Call - Deine Bewerbung</h2>
+    <h3 class="subtitle">Wer kann sich bewerben?</h3>
+    <p class="description"><%= @room_call.about_partner %></p>
+
+    <div class="steps">
+
+      <div class="step -active">
+        <div class="bigicontext-element -large">
+          <%= icon_tag "user-info-profile-details" %>
+        </div>
+        <h3>1. Call ausfüllen</h3>
+        <p>Um dich beim Call zu bewerben fülle einfach das Formular unterhalb vollständig aus. Einreichfirst ist der <%= I18n.localize(@room_call.ends_at, format: '%d. %B') %></p>
+      </div>
+
+      <div class="line">
+        <%= image_tag('svg/round-line-down.svg', class: '-down') %>
+      </div>
+
+      <div class="step">
+        <div class="bigicontext-element -large">
+          <%= icon_tag "speech-bubble" %>
+        </div>
+        <h3>2. Let's talk and meet</h3>
+        <p>Nach Absenden des Calls landest du in der Hub-Gruppe und wir lernen uns alle kennen.</p>
+      </div>
+
+    </div>
+
+    <div class="submission_form">
+      <%= form_tag add_submission_room_call_url(@room_call) do %>
+
+        <% @room_call.room_call_fields.each do |field| %>
+          <h3><%= field.label %></h3>
+          <div class="input-field">
+            <%= text_area_tag :"answers[#{field.id}]", nil, placeholder: 'Deine Antwort...' %>
+          </div>
+        <% end %>
+
+        <h3>Deine Kontaktdaten:</h3>
+
+        <div class="formBlock">
+
+          <div class="formRow -double">
+
+            <div class="input-field">
+              <%= label_tag :first_name do %>
+                <%= icon_tag "user-avatar" %> <span>Vorname</span>
+              <% end %>
+              <%= text_field_tag :first_name, current_user.first_name %>
+            </div>
+
+            <div class="input-field">
+              <%= label_tag :last_name do %>
+                <%= icon_tag "user-avatar" %> <span>Nachname</span>
+              <% end %>
+              <%= text_field_tag :last_name, current_user.last_name %>
+            </div>
+
+          </div>
+
+          <div class="input-field">
+            <%= label_tag :email do %>
+              <%= icon_tag "at-symbol" %> <span>Email</span>
+            <% end %>
+            <%= email_field_tag :email, current_user.email %>
+          </div>
+
+          <div class="formRow -double">
+
+            <div class="input-field">
+              <%= label_tag :phone do %>
+                <%= icon_tag "phone" %> <span>Telefonnummer</span>
+              <% end %>
+              <%= text_field_tag :phone, nil, placeholder: '0664 / ...' %>
+            </div>
+
+            <div class="input-field">
+              <%= label_tag :website do %>
+                <%= icon_tag "globe" %> <span>Website</span>
+              <% end %>
+              <%= url_field_tag :website, current_user.website, placeholder: 'http:// oder https://' %><em></em>
+            </div>
+
+          </div>
+
+        </div>
+
+        <%= submit_tag 'Call abschicken', data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
+      <% end %>
+    </div>
+
+  <% end %>
+</section>
