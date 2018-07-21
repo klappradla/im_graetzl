@@ -1,8 +1,5 @@
 <div class="group-header">
 
-  <!-- Include Cardbox -->
-  <!--<%= render @group.parent %>-->
-
   <div class="coverImg">
     <%= link_to group_path(@group) do %>
       <%= attachment_image_tag @group.parent, :cover_photo, :fill, 980, 500, fallback: 'cover_photo/980x370.png', class: 'coverImg' %>

@@ -22,6 +22,9 @@
 
   .-page {
     padding-top:30px;
+    @include respond-to("<=medium") {
+      padding-top:10px;
+    }
 
     .heading {
       display:flex;
@@ -29,6 +32,11 @@
       @include respond-to("<=medium") {
         justify-content: center;
         flex-wrap: wrap-reverse;
+        h3 {
+          width:100%;
+          text-align: center;
+          margin-top:20px;
+        }
       }
       margin-bottom:20px;
 
@@ -85,16 +93,38 @@
 
   // Groups Startpage 2 Columns Top Area
   .top-section {
+    display: flex;
+    align-items: flex-start;
+    @include respond-to("<=medium") {
+      flex-wrap: wrap;
+    }
+    .main {
+      //min-width: 700px;
+    }
+    .side {
+      @include respond-to("<=medium") {
+        width:100%;
+      }
+    }
+    .side > div {
+      margin-left:30px;
+      margin-bottom:30px;
+      width:270px;
+      @include respond-to("<=medium") {
+        margin-left:0px;
+        width:100%;
+      }
+    }
+
+  }
+  .top-section, .bottom-section {
     @include cf;
     h3 {
       margin-bottom: 20px;
     }
-    .mainContent {
-      padding-right:30px;
-    }
   }
 
-  .back-link, .follow {
+  .back-link {
     color: $color-ambient-grey;
     display: flex;
     align-items: center;
@@ -108,13 +138,15 @@
     }
   }
   .follow {
+    display: flex;
+    align-items: center;
+    -ms-transform: scale(0.5, 0.5); /* IE 9 */
+    -webkit-transform: scale(0.5, 0.5); /* Safari */
+    transform: scale(0.5, 0.5);
+    margin-left:-15px;
+    margin-right:-20px;
     &.-hide {
       display: none;
-    }
-    &.-subscribed {
-      svg {
-        color: $color-ambient-mint-dark;
-      }
     }
   }
 
@@ -219,7 +251,7 @@
   // START PAGE - HOME
   .info-section {
 
-    .top-section, .member-section, .about-section {
+    .member-section, .about-section {
       margin-bottom: 50px;
       @include cf;
     }
@@ -234,12 +266,6 @@
       .btn-primary {
         display: table;
         margin: 0 auto;
-      }
-    }
-
-    .cardBox {
-      &.-call {
-        margin-bottom:30px;
       }
     }
 
@@ -470,7 +496,7 @@
     .content { display: none; }
   }
 
-  .user-post .btn-control {
+  .user-post .btn-control, .discussion-infos .btn-control {
     a { display: inline-block; }
     svg {
       margin-left: 10px;
@@ -480,6 +506,12 @@
     }
     a:hover {
       svg { color: $color-ambient-rosa; }
+    }
+  }
+  .discussion-infos .btn-control {
+    display:flex;
+    svg {
+      margin-left:0px;
     }
   }
 

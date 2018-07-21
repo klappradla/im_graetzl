@@ -1,76 +1,68 @@
 <div class="info-section -page">
 
-  <% if @group.readable_by?(current_user) %>
+  <div class="top-section">
 
-    <div class="top-section">
+    <div class="main -left top-posts">
 
-      <div class="mainContent -left top-posts">
-
-        <h3>Aktuelle Diskussionen</h3>
-
-        <% if @discussions.present? %>
-          <% @discussions.first(2).each do |discussion| %>
-            <%= render 'groups/discussions/discussion_preview', discussion: discussion %>
-          <% end %>
-          <%= link_to "Alle Diskussionen anzeigen", "javascript:", class: 'all-discussions-link btn-secondary -mint' %>
-        <% else %>
-          <p class="hint">Noch keine Diskussionen in der Gruppe..</p>
-        <% end %>
+      <div class="about-section">
+        <h3>Über die Gruppe</h3>
+        <p class="about"><%= @group.description %></p>
       </div>
 
-      <div class="sideBar -right">
+      <h3><%= @group.users.count %> <%= @group.users.count > 1 ? 'Mitglieder' : 'Mitglied' %></h3>
 
-        <% if @group.parent.is_a? RoomCall %>
-          <% if @group.parent.open? %>
-            <%= render 'room_calls/room_call', room_call: @group.parent %>
-          <% end %>
+      <div class="users member-section">
+        <% @group.admins.each do |user| %>
+          <div class="user">
+            <div class="avatar">
+              <%= attachment_image_tag user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+            </div>
+            <div class="infos">
+              <div class="title">Organisator:</div>
+              <span><%= user.first_name %><br><%= user.last_name %></span>
+            </div>
+          </div>
         <% end %>
-
-        <h3>Nächstes Treffen</h3>
-
-        <% if @next_meeting.present? %>
-          <%= render @next_meeting %>
-        <% else %>
-          <p class="hint">Noch kein Treffen geplant ..</p>
+        <% @group.members.each do |user| %>
+          <div class="user">
+            <div class="avatar">
+              <%= attachment_image_tag user, :avatar, :fill, 200, 200, fallback: 'avatar/user/200x200.png', class: 'img-round' %>
+            </div>
+            <div class="infos">
+              <span><%= user.first_name %><br><%= user.last_name %></span>
+            </div>
+          </div>
         <% end %>
-
       </div>
 
     </div>
 
+    <div class="side -right">
+
+      <% if (@group.parent.is_a? RoomCall) && @group.parent.open? %>
+        <%= render 'room_calls/room_call', room_call: @group.parent %>
+      <% elsif @next_meeting.present? %>
+        <%= render @next_meeting %>
+      <% end %>
+
+    </div>
+
+  </div>
+
+  <% if @group.readable_by?(current_user) %>
+
+  <div class="bottom-section">
+    <h3>Aktuelle Diskussionen</h3>
+    <% if @discussions.present? %>
+      <% @discussions.first(2).each do |discussion| %>
+        <%= render 'groups/discussions/discussion_preview', discussion: discussion %>
+      <% end %>
+      <%= link_to "Alle Diskussionen anzeigen", "javascript:", class: 'all-discussions-link btn-secondary -mint' %>
+    <% else %>
+      <p class="hint">Noch keine Diskussionen in der Gruppe..</p>
+    <% end %>
+  </div>
 
   <% end %>
-
-  <h2><%= @group.users.count %> <%= @group.users.count > 1 ? 'Mitglieder' : 'Mitglied' %></h2>
-
-  <div class="users member-section">
-
-    <% @group.admins.each do |user| %>
-      <div class="user">
-        <div class="avatar">
-          <%= attachment_image_tag user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
-        </div>
-        <div class="infos">
-          <div class="title">Organisator:</div>
-          <span><%= user.first_name %><br><%= user.last_name %></span>
-        </div>
-      </div>
-    <% end %>
-    <% @group.members.each do |user| %>
-      <div class="user">
-        <div class="avatar">
-          <%= attachment_image_tag user, :avatar, :fill, 200, 200, fallback: 'avatar/user/200x200.png', class: 'img-round' %>
-        </div>
-        <div class="infos">
-          <span><%= user.first_name %><br><%= user.last_name %></span>
-        </div>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="about-section">
-    <h2>Über die Gruppe</h2>
-    <p class="about"><%= @group.description %></p>
-  </div>
 
 </div>

@@ -329,6 +329,15 @@ input, select, textarea {
       left: 44px;
     }
   }
+  &.-checked {
+    label {
+      border-color: $color-ambient-mint;
+      &:before {
+        background-color: $color-ambient-mint;
+        left: 44px;
+      }
+    }
+  }
 }
 
 

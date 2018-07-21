@@ -8,19 +8,25 @@
 
   <div class="discussion-infos -page">
     <%= @discussion.discussion_posts.size %> <%= @discussion.discussion_posts.size > 1 ? 'Beiträge' : 'Beitrag' %>
-    <span>&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
-    <%= link_to 'javascript:', class: 'follow -unsubscribed', :data => { :topic => @discussion.id } do %>
-      <%= icon_tag "bell" %>
-      Dieser Diskussion folgen
+    <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+    E-Mail Updates:
+    <%= link_to 'javascript:', class: 'follow', :data => { :topic => @discussion.id } do %>
+      <div class="input-switch -checked -small">
+        <label></label>
+      </div>
     <% end %>
-    <%= link_to 'javascript:', class: 'follow -hide -subscribed', :data => { :topic => @discussion.id } do %>
-      <%= icon_tag "bell" %>
-      Diskussion nicht mehr folgen
+    <%= link_to 'javascript:', class: 'follow -hide', :data => { :topic => @discussion.id } do %>
+      <div class="input-switch -small">
+        <label></label>
+      </div>
     <% end %>
     <% if @discussion.delete_permission?(current_user) %>
+    <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+    <div class="btn-control">
       <%= link_to [@group, @discussion], method: :delete, data: { confirm: 'Thema wirklich löschen?', disable_with: 'wird gelöscht...'}, class: 'delete' do %>
         <%= icon_tag "trash-delete-remove" %>
       <% end %>
+    </div>
     <% end %>
   </div>
 
