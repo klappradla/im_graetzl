@@ -1,7 +1,45 @@
 <section class="submission-section -loggedout" id="call">
+
   <h2>Open Call - Deine Bewerbung</h2>
-  <h3 class="subtitle">Wer kann sich bewerben?</h3>
-  <p><%= @room_call.about_partner %></p>
+
+  <div class="info">
+    <div class="left">
+      <h3 class="subtitle">Wer kann sich bewerben?</h3>
+      <p class="description"><%= @room_call.about_partner %></p>
+    </div>
+    <div class="right">
+      <h3 class="subtitle">Call Kontakt</h3>
+      <div class="cardBox contact-infos">
+        <% if @room_call.first_name.present? || @room_call.last_name.present? %>
+          <div class="icontxt">
+            <% if @room_call.user %>
+              <%= attachment_image_tag(@room_call, :avatar, :fill, 200, 200, class: 'room_offer avatar img-round', fallback: 'avatar/user/200x200.png') %>
+            <% else %>
+              <%= icon_tag "user-avatar" %>
+            <% end %>
+            <div class="txt"><%= "#{@room_call.first_name} #{@room_call.last_name}" %></div>
+          </div>
+        <% end %>
+
+        <% if @room_call.email.present? %>
+          <%= mail_to @room_call.email do %>
+            <div class="icontxt">
+              <%= icon_tag "at-symbol" %>
+              <div class="txt"><%= @room_call.email %></div>
+            </div>
+          <% end %>
+        <% end %>
+
+        <% if @room_call.website.present? %>
+          <%= link_to @room_call.website, class: 'icontxt', target: '_blank' do %>
+            <%= icon_tag "globe" %>
+            <%= @room_call.website.sub(/^https?\:\/\//,'') %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
 
   <div class="steps">
 

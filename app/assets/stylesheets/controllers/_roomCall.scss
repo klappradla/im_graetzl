@@ -329,9 +329,43 @@
 
       .subtitle {
         text-align: center;
-        margin-top:-20px;
+        //margin-top:-20px;
       }
       p.description {white-space: pre-wrap;}
+
+      .info {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: stretch;
+        .left {
+          width:60%;
+          @include respond-to("<=large") {
+            width:100%;
+          }
+        }
+        .right {
+          width:35%;
+          @include respond-to("<=large") {
+            width:100%;
+            margin-top: 20px;
+          }
+        }
+        .contact-infos {
+          a {
+            color: $color-ambient-mint;
+            text-decoration: none;
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+          .img-round {
+            width:28px;
+            height:28px;
+            margin-right:12px;
+          }
+        }
+      }
 
       .steps {
         margin-top:50px;

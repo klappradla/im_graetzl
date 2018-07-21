@@ -36,21 +36,12 @@
   <%= render 'room_calls/show/prices' %>
   <% if !user_signed_in? %>
     <%= render 'room_calls/show/login' %>
-  <% elsif @room_call.user == current_user %>
-    <%= render 'room_calls/show/submissions' %>
   <% else %>
     <%= render 'room_calls/show/add_submission' %>
   <% end %>
+  <% if @room_call.user == current_user %>
+    <%= render 'room_calls/show/submissions' %>
+  <% end %>
   <%= render 'room_calls/show/map' %>
-
-  <!-- Unused:
-  @room_call.about_partner
-  @room_call.first_name
-  @room_call.last_name
-  @room_call.phone
-  @room_call.email
-  @room_call.website
-  @room_call.avatar
-  -->
 
 </div>
