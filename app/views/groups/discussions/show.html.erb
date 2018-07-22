@@ -8,12 +8,14 @@
 
   <div class="discussion-infos -page">
     <%= @discussion.discussion_posts.size %> <%= @discussion.discussion_posts.size > 1 ? 'Beiträge' : 'Beitrag' %>
-    <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-    E-Mail Updates:
-    <%= link_to 'javascript:', class: 'follow', :data => { :topic => @discussion.id } do %>
-      <div class="input-switch -checked -small">
-        <label></label>
-      </div>
+    <% if @group.users.include?(current_user) %>
+      <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+      E-Mail Updates:
+      <%= link_to 'javascript:', class: 'follow', :data => { :topic => @discussion.id } do %>
+        <div class="input-switch -checked -small">
+          <label></label>
+        </div>
+      <% end %>
     <% end %>
     <%= link_to 'javascript:', class: 'follow -hide', :data => { :topic => @discussion.id } do %>
       <div class="input-switch -small">
