@@ -43,6 +43,18 @@ class Meeting < ApplicationRecord
 
   after_create :update_location_activity
 
+  def self.visible_to_all
+    where(group_id: nil)
+  end
+
+  def self.visible_to(user)
+    if user && user.group_ids.present?
+      where(group_id: nil).or(where(group_id: user.group_ids))
+    else
+      where(group_id: nil)
+    end
+  end
+
   def self.include_for_box
     includes(:graetzl, :going_tos, :users, location: :users)
   end

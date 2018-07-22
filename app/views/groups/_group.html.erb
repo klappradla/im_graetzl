@@ -31,7 +31,7 @@
       <% group.members.first(8).each do |user| next if user == current_user %>
         <%= attachment_image_tag user, :avatar, :fill, 200, 200, fallback: 'avatar/user/200x200.png', class: 'img-round' %>
       <% end %>
-      <% if group.members.count > 9 %>
+      <% if group.members.size > 9 %>
         <span> + <%= group.members.count - 9 %> weitere </span>
       <% end %>
 

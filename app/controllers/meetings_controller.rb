@@ -5,6 +5,7 @@ class MeetingsController < ApplicationController
     head :ok and return if browser.bot? && !request.format.js?
     @meetings = collection_scope.include_for_box
     @meetings = filter_collection(@meetings)
+    @meetings = @meetings.visible_to(current_user)
     @meetings = @meetings.by_currentness.page(params[:page]).per(params[:per_page] || 15)
   end
 

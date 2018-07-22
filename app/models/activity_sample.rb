@@ -7,11 +7,11 @@ class ActivitySample
 
   def meetings
     if @graetzl
-      @graetzl.meetings.include_for_box.by_currentness.first(2)
+      @graetzl.meetings.visible_to_all.include_for_box.by_currentness.first(2)
     elsif @district
-      @district.meetings.include_for_box.by_currentness.first(2)
+      @district.meetings.visible_to_all.include_for_box.by_currentness.first(2)
     else
-      Meeting.include_for_box.by_currentness.first(2)
+      Meeting.visible_to_all.include_for_box.by_currentness.first(2)
     end
   end
 

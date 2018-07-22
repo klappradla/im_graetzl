@@ -14,7 +14,14 @@
   <%= link_to "Visit group", @room_call.group %>
 </section>-->
 
-  <section class="group-section">
-    <h2>Raumteiler-Hubs sind echte Gemeinschaften</h2>
-    <%= render @room_call.group %>
+<section class="group-section">
+  <h2>Raumteiler-Hubs sind echte Gemeinschaften</h2>
+  <%= render @room_call.group %>
+</section>
+
+<% if @room_call.group.meetings.present? %>
+  <section class="group-meeting-section">
+    <h2>Group meetings</h2>
+    <%= render @room_call.group.meetings %>
   </section>
+<% end %>
