@@ -55,7 +55,14 @@ class GroupsController < ApplicationController
 
   def request_join
     @group = Group.find(params[:id])
-    @group.group_join_requests.create(user_id: current_user.id, request_message: params[:request_message])
+    if !@group.group_join_requests.exists?(user: current_user)
+      join_request = @group.group_join_requests.create(
+        user: current_user,
+        request_message: params[:request_message]
+      )
+      GroupMailer.new.new_join_request(join_request)
+    end
+
     redirect_to @group
   end
 
@@ -66,6 +73,7 @@ class GroupsController < ApplicationController
     @join_request = @group.group_join_requests.find(params[:join_request_id])
     @group.users << @join_request.user
     @join_request.destroy
+    GroupMailer.new.join_request_accepted(@group, @join_request.user)
     redirect_to group_url(@group, anchor: "tab-members")
   end
 
