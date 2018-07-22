@@ -11,7 +11,7 @@ class GroupMailer
         { name: 'username', content: join_request.user.username },
         { name: 'first_name', content: join_request.user.first_name },
         { name: 'last_name', content: join_request.user.last_name },
-        { name: 'e_mail', content: join_request.user.e_mail },
+        { name: 'e_mail', content: join_request.user.email },
         { name: 'user_type', content: join_request.user.business? ? 'business' : 'normal' },
         { name: 'request_message', content: join_request.request_message },
       ]

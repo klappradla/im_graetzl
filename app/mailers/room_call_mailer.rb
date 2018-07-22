@@ -31,7 +31,7 @@ class RoomCallMailer
         { name: 'username', content: submission.user.username },
         { name: 'first_name', content: submission.user.first_name },
         { name: 'last_name', content: submission.user.last_name },
-        { name: 'e_mail', content: submission.user.e_mail },
+        { name: 'e_mail', content: submission.user.email },
         { name: 'room_call_title', content: submission.room_call.title },
         { name: 'room_call_subtitle', content: submission.room_call.subtitle },
         { name: 'room_call_url', content: room_call_url(submission.room_call, URL_OPTIONS) },
