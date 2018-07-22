@@ -7,9 +7,11 @@ class GroupMailer
     MandrillMailer.deliver(template: 'group-join-request-new', message: {
       to: group_admins.map{ |u| { email: u.email } },
       global_merge_vars: [
+        { name: 'owner_first_name', group_admins.map{ |u| { content: u.first_name } } },
         { name: 'username', content: join_request.user.username },
         { name: 'first_name', content: join_request.user.first_name },
         { name: 'last_name', content: join_request.user.last_name },
+        { name: 'e_mail', content: join_request.user.e_mail },
         { name: 'user_type', content: join_request.user.business? ? 'business' : 'normal' },
         { name: 'request_message', content: join_request.request_message },
       ]
