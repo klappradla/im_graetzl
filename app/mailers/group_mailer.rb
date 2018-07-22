@@ -13,6 +13,8 @@ class GroupMailer
         { name: 'e_mail', content: join_request.user.email },
         { name: 'user_type', content: join_request.user.business? ? 'business' : 'normal' },
         { name: 'request_message', content: join_request.request_message },
+        { name: 'group_name', content: join_request.group.title },
+        { name: 'group_url', content: group_url(join_request.group, URL_OPTIONS) },
       ],
       merge_vars: group_admins.map { |user| owner_personal_vars(user) }
     })
@@ -27,11 +29,21 @@ class GroupMailer
         { name: 'last_name', content: user.last_name },
         { name: 'user_type', content: user.business? ? 'business' : 'normal' },
         { name: 'group_name', content: group.title },
+        { name: 'group_url', content: group_url(group, URL_OPTIONS) },
       ]
     })
   end
 
   private
+
+  def asset_url(resource, asset_name)
+    host = "https://#{Refile.cdn_host || default_host}"
+    Refile.attachment_url(resource, asset_name, host: host)
+  end
+
+  def default_host
+    Rails.application.config.action_mailer.default_url_options[:host]
+  end
 
   def owner_personal_vars(user)
     {
