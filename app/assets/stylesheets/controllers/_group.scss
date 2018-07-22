@@ -95,11 +95,12 @@
   .top-section {
     display: flex;
     align-items: flex-start;
+    justify-content: space-between;
     @include respond-to("<=medium") {
       flex-wrap: wrap;
     }
     .main {
-      //min-width: 700px;
+      width:100%;
     }
     .side {
       @include respond-to("<=medium") {

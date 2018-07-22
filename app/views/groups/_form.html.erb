@@ -11,7 +11,7 @@
     <%= icon_tag "record" %>
     <span>Gruppen Titel</span>
     <% end %>
-    <%= f.text_field :title, placeholder: 'z.B. My Cool New Group' %>
+    <%= f.text_field :title, placeholder: 'Gib deiner Gruppe einen kurzen Titel ...' %>
   </div>
 
   <div class="input-field">
@@ -19,12 +19,12 @@
     <%= icon_tag "layout-document" %>
     <span>Beschreibung</span>
     <% end %>
-    <%= f.text_area :description, placeholder: 'z.B. My Group is for people to discus new ideas…' %>
+    <%= f.text_area :description, placeholder: 'Hier kannst du deine Gruppe in wenigen Sätzen ausführlicher beschreiben ..' %>
   </div>
 
   <div class="input-checkbox">
     <%= f.check_box :private %>
-    <%= f.label :private, 'Private Gruppe (nur Mitglieder können inhalte sehen.)' %>
+    <%= f.label :private, 'Private Gruppe (nur Mitglieder können Inhalte sehen.)' %>
   </div>
 
   <%= f.button @group.new_record? ? 'Gruppe erstellen' : 'Speichern', data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
