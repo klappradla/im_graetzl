@@ -47,6 +47,6 @@ class DiscussionsController < ApplicationController
   end
 
   def discussion_params
-    params.require(:discussion).permit(:title, :sticky, :closed)
+    params.require(:discussion).permit(:title, :sticky, :closed, :group_category, :group_category_id)
   end
 end

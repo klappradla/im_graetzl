@@ -1,0 +1,39 @@
+<% title('Diskussionskategorien bearbeiten') %>
+
+<div class="group-form-page">
+  <div class="wrp">
+    <h1 class="hl-main">Diskussionskategorien <span>bearbeiten</span><h1>
+    
+    <% if @group_categories.empty? %>
+      <p>Keine Diskussionkategorien</p>
+    <% else %>
+      <ul>
+        <% @group_categories.each do |group_category| %>
+        <li>
+          <%= group_category.title %>
+        </li>
+        <% end %>
+      </ul>
+    <% end %>
+    
+    <%= form_for @new_category, :url => { action: "create_category" }  do |f| %>
+    <div class="form-block">
+
+      <%= f.hidden_field :group_id %>
+      
+      <div class="input-field">
+        <%= f.label :title do %>
+        <%= icon_tag "record" %>
+        <span>Kategore Titel</span>
+        <% end %>
+        <%= f.text_field :title, placeholder: 'Gib deine neue Kategorie einen Titel ...' %>
+      </div>
+
+      <%= f.button 'Kategorie erstellen', data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
+
+    </div>
+    <% end %>
+    
+    <%= link_to 'Zurück', @group, class: 'btn' %>
+  </div>
+</div>

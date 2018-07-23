@@ -9,6 +9,7 @@ class Group < ApplicationRecord
 
   has_many :group_join_requests
   has_many :meetings
+  has_many :group_categories
 
   def to_s
     title

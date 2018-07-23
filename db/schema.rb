@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180705143001) do
+ActiveRecord::Schema.define(version: 20180723152605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,10 +148,12 @@ ActiveRecord::Schema.define(version: 20180705143001) do
     t.boolean  "closed"
     t.boolean  "sticky"
     t.integer  "group_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.integer  "user_id"
     t.datetime "last_post_at"
+    t.integer  "group_category_id"
+    t.index ["group_category_id"], name: "index_discussions_on_group_category_id", using: :btree
     t.index ["group_id", "sticky", "last_post_at"], name: "index_discussions_on_group_id_and_sticky_and_last_post_at", using: :btree
     t.index ["group_id"], name: "index_discussions_on_group_id", using: :btree
     t.index ["user_id"], name: "index_discussions_on_user_id", using: :btree
@@ -204,6 +206,18 @@ ActiveRecord::Schema.define(version: 20180705143001) do
     t.string   "slug",        limit: 255
     t.integer  "users_count",                                      default: 0
     t.index ["slug"], name: "index_graetzls_on_slug", using: :btree
+  end
+
+  create_table "group_categories", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_group_categories_on_group_id", using: :btree
+  end
+
+  create_table "group_default_categories", force: :cascade do |t|
+    t.string "title"
   end
 
   create_table "group_join_requests", force: :cascade do |t|
@@ -590,20 +604,20 @@ ActiveRecord::Schema.define(version: 20180705143001) do
     t.string   "username",                      limit: 255
     t.string   "first_name",                    limit: 255
     t.string   "last_name",                     limit: 255
-    t.boolean  "newsletter",                                default: false, null: false
     t.integer  "graetzl_id"
     t.string   "avatar_id"
-    t.integer  "enabled_website_notifications",             default: 0
     t.integer  "role"
     t.string   "avatar_content_type"
-    t.integer  "immediate_mail_notifications",              default: 0
-    t.integer  "daily_mail_notifications",                  default: 0
-    t.integer  "weekly_mail_notifications",                 default: 0
     t.string   "slug"
     t.string   "cover_photo_id"
     t.string   "cover_photo_content_type"
     t.text     "bio"
     t.string   "website"
+    t.integer  "weekly_mail_notifications",                 default: 0
+    t.integer  "daily_mail_notifications",                  default: 0
+    t.integer  "immediate_mail_notifications",              default: 0
+    t.integer  "enabled_website_notifications",             default: 0
+    t.boolean  "newsletter",                                default: false, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["created_at"], name: "index_users_on_created_at", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -632,10 +646,12 @@ ActiveRecord::Schema.define(version: 20180705143001) do
 
   add_foreign_key "discussion_posts", "discussions", on_delete: :cascade
   add_foreign_key "discussion_posts", "users"
+  add_foreign_key "discussions", "group_categories", on_delete: :nullify
   add_foreign_key "discussions", "groups", on_delete: :cascade
   add_foreign_key "discussions", "users", on_delete: :nullify
   add_foreign_key "district_graetzls", "districts", on_delete: :cascade
   add_foreign_key "district_graetzls", "graetzls", on_delete: :cascade
+  add_foreign_key "group_categories", "groups"
   add_foreign_key "group_join_requests", "groups", on_delete: :cascade
   add_foreign_key "group_join_requests", "users", on_delete: :cascade
   add_foreign_key "groups", "room_calls", on_delete: :nullify

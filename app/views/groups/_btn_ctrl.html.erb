@@ -22,6 +22,10 @@
           <%= icon_tag "pencil" %>
           <div class="icontxt">Gruppe bearbeiten</div>
         <% end %>
+        <%= link_to categories_group_path(group) do %>
+          <%= icon_tag "pencil" %>
+          <div class="icontxt">Diskussionskategorien</div>
+        <% end %>
         <%= link_to group_path(group), data: { confirm: 'Bist du dir sicher?' }, method: :delete do %>
           <%= icon_tag "trash-delete-remove" %>
           <div class="icontxt">Gruppen löschen</div>
