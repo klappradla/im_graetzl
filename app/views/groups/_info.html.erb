@@ -2,7 +2,7 @@
 
   <div class="top-section">
 
-    <div class="main -left top-posts">
+    <div class="main top-posts">
 
       <div class="about-section">
         <h3>Über die Gruppe</h3>
@@ -37,7 +37,7 @@
 
     </div>
 
-    <div class="side -right">
+    <div class="side">
 
       <% if (@group.parent.is_a? RoomCall) && @group.parent.open? %>
         <%= render 'room_calls/room_call', room_call: @group.parent %>

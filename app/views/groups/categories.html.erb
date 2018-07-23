@@ -1,39 +1,48 @@
-<% title('Diskussionskategorien bearbeiten') %>
+<% title('Kategorien bearbeiten') %>
 
-<div class="group-form-page">
-  <div class="wrp">
-    <h1 class="hl-main">Diskussionskategorien <span>bearbeiten</span><h1>
-    
-    <% if @group_categories.empty? %>
-      <p>Keine Diskussionkategorien</p>
-    <% else %>
-      <ul>
-        <% @group_categories.each do |group_category| %>
-        <li>
-          <%= group_category.title %>
-        </li>
-        <% end %>
-      </ul>
-    <% end %>
-    
+<div class="group-form-page -categories">
+
+  <div class="hl-subtext">
+
+    <h1>Kategorien <span>bearbeiten</span></h1>
+
+    <div class="categories-list">
+      <% if @group_categories.empty? %>
+        <p>Keine Diskussionkategorien</p>
+      <% else %>
+        <ul>
+          <% @group_categories.each do |group_category| %>
+          <li>
+            <%= link_to 'javascript:', class: 'edit-post-link' do %>
+              <%= icon_tag "pencil" %>
+            <% end %>
+            <%= link_to 'javascript:', method: :delete, remote: true, data: { confirm: 'Kategorie wirklich löschen?', disable_with: 'wird gelöscht...'}, class: 'delete' do %>
+              <%= icon_tag "trash-delete-remove" %>
+            <% end %>
+            <%= group_category.title %>
+          </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+
+  </div>
+
+
     <%= form_for @new_category, :url => { action: "create_category" }  do |f| %>
     <div class="form-block">
-
       <%= f.hidden_field :group_id %>
-      
       <div class="input-field">
         <%= f.label :title do %>
-        <%= icon_tag "record" %>
-        <span>Kategore Titel</span>
+          <%= icon_tag "label-tag" %>
+          <span>Kategorie</span>
         <% end %>
-        <%= f.text_field :title, placeholder: 'Gib deine neue Kategorie einen Titel ...' %>
+        <%= f.text_field :title, placeholder: 'Gib deiner Kategorie einen Titel ..' %>
+        <%= f.button 'Kategorie erstellen', data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
       </div>
-
-      <%= f.button 'Kategorie erstellen', data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
-
     </div>
     <% end %>
-    
+
     <%= link_to 'Zurück', @group, class: 'btn' %>
-  </div>
+
 </div>

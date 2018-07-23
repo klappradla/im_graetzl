@@ -2,11 +2,11 @@
 
   <div class="heading">
 
-    <h3 class="header"><%= @discussions.size %> <%= @discussions.size > 1 ? 'Themen' : 'Thema'  %>
+    <h3 class="header"><%= @discussions.size %> <%= @discussions.size == 1 ? 'Thema' : 'Themen'  %>
       <% if params.has_key?(:group_category) %>
         in der Kategorie "<%= @group_category_title %>"
       <% else %>
-        in der Gruppe:
+        in der Gruppe
       <% end %>
     </h3>
 
@@ -22,19 +22,6 @@
     <% end %>
 
   </div>
-  
-  <div class="categories-list">
-    <h3>Diskussionkategorien</h3>
-    <ul>
-      <li><%= link_to "Alle", url_for(anchor: 'tab-discussions') %></li>
-      <% @group.group_categories.each do |group_category| %>
-        <li>
-          <%= link_to group_category.title, url_for(group_category: group_category, anchor: 'tab-discussions') %>
-        </li>
-      <% end %>
-      <li><%= link_to "Nicht kategorisiert", url_for(group_category: '', anchor: 'tab-discussions') %></li>
-    </ul>
-  </div>
 
   <div class="discussion-box">
     <% if @group.users.include?(current_user) %>
@@ -42,8 +29,33 @@
     <% end %>
   </div>
 
-  <% @discussions.each do |discussion| %>
-    <%= render 'groups/discussions/discussion_preview', discussion: discussion %>
-  <% end %>
+  <div class="discussions">
+
+    <div class="main">
+      <% @discussions.each do |discussion| %>
+        <%= render 'groups/discussions/discussion_preview', discussion: discussion %>
+      <% end %>
+    </div>
+
+    <div class="side">
+      <div class="categories-list">
+        <h3>Kategorien</h3>
+        <ul>
+          <li><%= link_to "Alle", url_for(anchor: 'tab-discussions') %></li>
+          <% @group.group_categories.each do |group_category| %>
+            <li>
+              <%= link_to group_category.title, url_for(group_category: group_category, anchor: 'tab-discussions') %>
+            </li>
+          <% end %>
+          <li><%= link_to "Nicht kategorisiert", url_for(group_category: '', anchor: 'tab-discussions') %></li>
+        </ul>
+      </div>
+    </div>
+
+
+
+  </div>
+
+
 
 </div>
