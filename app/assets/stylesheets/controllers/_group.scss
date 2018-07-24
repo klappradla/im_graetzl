@@ -45,8 +45,31 @@
   }
 
   .categories-list {
-    margin-top: 5px;
-    li { list-style: none; margin-top: 5px; }
+    margin-top: 3px;
+    li {
+      list-style: none; margin-top: 10px;
+      display: flex;
+      svg {
+        width:30px; height:30px;
+        margin-right:10px;
+        color:$color-ambient-grey;
+      }
+      a {
+        margin-top:5px;
+        text-decoration: none;
+        width:100%;
+        color:$color-font-primary;
+      }
+    }
+    li.selected {
+      a {
+        font-weight: bold;
+        color:$color-ambient-rosa;
+      }
+      svg {
+        color:$color-ambient-rosa;
+      }
+    }
   }
 
   .-page {

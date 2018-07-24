@@ -41,21 +41,24 @@
       <div class="categories-list">
         <h3>Kategorien</h3>
         <ul>
-          <li><%= link_to "Alle", url_for(anchor: 'tab-discussions') %></li>
+          <li class="<%= (params.has_key?(:group_category)) ? '' : 'selected' %>">
+            <%= icon_tag('record') %>
+            <%= link_to "Alle", url_for(anchor: 'tab-discussions') %>
+          </li>
           <% @group.group_categories.each do |group_category| %>
-            <li>
+            <li class="<%= (params[:group_category].to_s == (group_category.id).to_s) ? 'selected' : '' %>">
+              <%= icon_tag('record') %>
               <%= link_to group_category.title, url_for(group_category: group_category, anchor: 'tab-discussions') %>
             </li>
           <% end %>
-          <li><%= link_to "Nicht kategorisiert", url_for(group_category: '', anchor: 'tab-discussions') %></li>
+          <li class="<%= (params.has_key?(:group_category) && params[:group_category].to_s == "") ? 'selected' : '' %>">
+            <%= icon_tag('record') %>
+            <%= link_to "Nicht kategorisiert", url_for(group_category: '', anchor: 'tab-discussions') %>
+          </li>
         </ul>
       </div>
     </div>
 
-
-
   </div>
-
-
 
 </div>
