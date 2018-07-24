@@ -422,6 +422,19 @@
         }
       }
 
+      .info-msg {
+        @include font-size-primaryFont('large');
+        border: 1px solid $color-ambient-grey-light;
+        border-radius: 8px;
+        padding:20px;
+        font-style: italic;
+        background-color: #FEF6DF;
+        color: #cd891b;
+        a {
+          color: #cd891b;
+        }
+      }
+
       .submission_form {
         margin-top:80px;
 

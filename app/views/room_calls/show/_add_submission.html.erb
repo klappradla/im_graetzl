@@ -49,7 +49,7 @@
         <%= icon_tag "user-info-profile-details" %>
       </div>
       <h3>1. Call ausfüllen</h3>
-      <p>Um dich beim Call zu bewerben fülle einfach das Formular unterhalb vollständig aus. Einreichfirst ist der <%= I18n.localize(@room_call.ends_at, format: '%d. %B') %></p>
+      <p>Um dich beim Call zu bewerben, fülle das Formular unterhalb vollständig aus. Einreichfirst ist der <%= I18n.localize(@room_call.ends_at, format: '%d. %B') %></p>
     </div>
 
     <div class="line">
@@ -60,8 +60,8 @@
       <div class="bigicontext-element -large">
         <%= icon_tag "speech-bubble" %>
       </div>
-      <h3>2. Let's talk and meet</h3>
-      <p>Nach Absenden des Calls landest du in der Hub-Gruppe und wir lernen uns alle kennen.</p>
+      <h3>2. Kennenlernen & Infos in der Raumteiler Gruppe</h3>
+      <p>Wir schalten dich für die Raumteiler Gruppe frei, dort gibt es alle weiteren Infos.</p>
     </div>
 
   </div>
@@ -131,10 +131,15 @@
 
   <% else %>
 
-    <p>
-      <br><br>
-      <strong><em>Die Bewerbungsfrist ist leider schon vorbei ...</em></strong>
-    </p>
+    <br>
+
+    <div class="info-msg">
+      <% if @room_call.starts_at.future? %>
+        Noch ein wenig Geduld. Der Call startet am <%= I18n.localize(@room_call.starts_at, format: '%d. %B %Y') %>.
+      <% elsif @room_call.ends_at.past? %>
+        Die Bewerbungsfrist ist leider schon vorbei. (Lief bis <%= I18n.localize(@room_call.ends_at, format: '%d. %B %Y') %>).
+      <% end %>
+    </div>
 
   <% end %>
 </section>

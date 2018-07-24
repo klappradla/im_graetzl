@@ -39,9 +39,9 @@
   <% else %>
     <%= render 'room_calls/show/add_submission' %>
   <% end %>
-  <% if @room_call.user == current_user %>
-    <%= render 'room_calls/show/submissions' %>
-  <% end %>
+  <!--<% if @room_call.user == current_user %>
+     evtl. show submissions
+  <% end %>-->
   <%= render 'room_calls/show/map' %>
 
 </div>
