@@ -3,17 +3,17 @@
 
     <div class="input-field">
       <%= f.label :title do %>
-      <%= icon_tag "record" %>
+      <%= icon_tag "speech-bubble" %>
       <span>Neues Thema</span>
       <% end %>
       <%= f.text_field :title, placeholder: 'Gib deinem Thema einen kurzen Titel ..', required: true %>
     </div>
-    
-    
+
+
     <div class="input-select">
       <%= f.label :group_category_id do %>
-        <%= icon_tag "speech-bubble" %>
-        <span>Diskussionskategorie</span>
+        <%= icon_tag "record" %>
+        <span>Kategorie</span>
       <% end %>
       <%= f.select :group_category_id, options_from_collection_for_select(@group.group_categories, :id, :title), id: 'group-category-select', include_blank: 'Kategorie auswählen..' %>
     </div>

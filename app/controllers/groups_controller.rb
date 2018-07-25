@@ -5,44 +5,14 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     if @group.readable_by?(current_user)
       @next_meeting = @group.meetings.where("DATE(starts_at_date) >= ?", Date.today).order(:starts_at_date, :starts_at_time).first
-      @discussions = @group.discussions.where(discussion_filtering_params).includes(discussion_posts: :user).order("sticky DESC, last_post_at DESC")
-      p params
-      p !!params[:group_category]
-      p params.has_key?(:group_category)
-      if params.has_key?(:group_category) && params[:group_category]
-        @group_category_title = @group.group_categories.find(params[:group_category]).title
-      else
-        @group_category_title = "Nicht kategorisiert"
-      end
+      @discussions = @group.discussions.includes(discussion_posts: :user).order("sticky DESC, last_post_at DESC")
       @meetings = @group.meetings.order("starts_at_date ASC")
     end
-
-    # Just for testing ... TODO
-    @activity_sample = ActivitySample.new
-
   end
 
   def settings
     @group = Group.find(params[:id])
     render 'settings'
-  end
-  
-  def categories
-    @group = Group.find(params[:id])
-    @group_categories = @group.group_categories
-    @new_category = GroupCategory.new(group_id: params[:id])
-    render 'categories'
-  end
-  
-  def create_category
-    @group = Group.find(params[:id])
-    redirect_to @group and return unless @group.admins.include?(current_user)
-    group_category = GroupCategory.new(group_category_params)
-    if group_category.save
-      redirect_to categories_group_url(@group)
-    else
-      redirect_to categories_group_url(@group), notice: 'Error creating category'
-    end
   end
 
   def new
@@ -50,6 +20,10 @@ class GroupsController < ApplicationController
       room_offer_id: params[:room_offer_id],
       room_call_id: params[:room_call_id]
     )
+    GroupDefaultCategory.all.each do |category|
+      @group.group_categories.build(title: category.title)
+    end
+
   end
 
   def create
@@ -131,28 +105,6 @@ class GroupsController < ApplicationController
 
   private
 
-  def prepare_top_posts(group)
-    top_posts = []
-    sticky_discussion = group.discussions.sticky.last
-    top_posts << sticky_discussion.posts.first if sticky_discussion
-    # top_posts <<
-    top_posts
-  end
-  
-  def group_category_params
-    params
-      .require(:group_category)
-      .permit(:title, :group_id)
-  end
-  
-  def discussion_filtering_params
-    if params[:group_category] == ''
-      params[:group_category] = nil
-    end
-    params
-      .permit(:group_category)
-  end
-
   def group_params
     params
       .require(:group)
@@ -161,7 +113,10 @@ class GroupsController < ApplicationController
         :description,
         :room_offer_id,
         :room_call_id,
-        :private
+        :private,
+        group_categories_attributes: [
+          :id, :title, :_destroy
+        ],
     )
   end
 end

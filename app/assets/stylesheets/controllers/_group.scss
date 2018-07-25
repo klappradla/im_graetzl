@@ -78,7 +78,7 @@
       padding-top:10px;
     }
 
-    .heading {
+    .header {
       display:flex;
       justify-content: space-between;
       @include respond-to("<=medium") {
@@ -152,6 +152,7 @@
     @include respond-to("<=medium") {
       flex-wrap: wrap;
     }
+
     .main {
       width:100%;
     }
@@ -420,6 +421,11 @@
 
   // Discussion Overview Tab
   .discussion-section {
+
+    h3 {
+      margin-bottom: 20px;
+    }
+    
     .discussion-box {
       margin-bottom:20px;
     }
@@ -442,8 +448,8 @@
       margin-bottom:10px;
       font-style: italic;
     }
-    .content {
 
+    .content {
       @include respond-to(">=medium") {
         margin-left: 60px;
       }

@@ -20,7 +20,6 @@ APP.controllers.groups = (function() {
         root: '#groups-btn-ctrl',
         targetAttr: 'href'
       });
-
     }
 
     function initInfo() {
@@ -30,10 +29,15 @@ APP.controllers.groups = (function() {
     }
 
     function initDiscussions() {
-      // Toggle Button for new Topic
-      $('.btn-new-topic').on('click', function() {
+      $('#tab-discussions .btn-new-topic').on('click', function() {
         $('#new-topic').slideToggle();
       });
+
+      $("#tab-discussions .categories-list a").on("click", function() {
+        $(this).parents("li").addClass("selected").siblings("li").removeClass("selected");
+      });
+
+      $("#tab-discussions .autoload-link").click();
     }
 
     return {

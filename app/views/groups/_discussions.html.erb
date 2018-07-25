@@ -1,26 +1,16 @@
 <div class="discussion-section -page">
 
-  <div class="heading">
-
-    <h3 class="header"><%= @discussions.size %> <%= @discussions.size == 1 ? 'Thema' : 'Themen'  %>
-      <% if params.has_key?(:group_category) %>
-        in der Kategorie "<%= @group_category_title %>"
-      <% else %>
-        in der Gruppe
-      <% end %>
-    </h3>
-
+  <div class="header">
     <% if @group.users.include?(current_user) %>
-    <div class="new-topic">
-      <%= button_to "javascript:", class: 'btn-userIcons btn-new-topic' do %>
-        <span class="ico-left">
-          <%= icon_tag('pencil') %>
-          Neues Thema eröffnen
-        </span>
-      <% end %>
-    </div>
+      <div class="new-topic">
+        <%= button_to "javascript:", class: 'btn-userIcons btn-new-topic' do %>
+          <span class="ico-left">
+            <%= icon_tag('pencil') %>
+            Neues Thema eröffnen
+          </span>
+        <% end %>
+      </div>
     <% end %>
-
   </div>
 
   <div class="discussion-box">
@@ -30,33 +20,11 @@
   </div>
 
   <div class="discussions">
-
-    <div class="main">
-      <% @discussions.each do |discussion| %>
-        <%= render 'groups/discussions/discussion_preview', discussion: discussion %>
-      <% end %>
+    <div class="main discussions-container">
     </div>
 
     <div class="side">
-      <div class="categories-list">
-        <h3>Kategorien</h3>
-        <ul>
-          <li class="<%= (params.has_key?(:group_category)) ? '' : 'selected' %>">
-            <%= icon_tag('record') %>
-            <%= link_to "Alle", url_for(anchor: 'tab-discussions') %>
-          </li>
-          <% @group.group_categories.each do |group_category| %>
-            <li class="<%= (params[:group_category].to_s == (group_category.id).to_s) ? 'selected' : '' %>">
-              <%= icon_tag('record') %>
-              <%= link_to group_category.title, url_for(group_category: group_category, anchor: 'tab-discussions') %>
-            </li>
-          <% end %>
-          <li class="<%= (params.has_key?(:group_category) && params[:group_category].to_s == "") ? 'selected' : '' %>">
-            <%= icon_tag('record') %>
-            <%= link_to "Nicht kategorisiert", url_for(group_category: '', anchor: 'tab-discussions') %>
-          </li>
-        </ul>
-      </div>
+      <%= render 'groups/discussions/category_select' %>
     </div>
 
   </div>

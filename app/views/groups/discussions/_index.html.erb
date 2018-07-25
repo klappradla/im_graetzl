@@ -1,0 +1,12 @@
+<h3>
+  <%= @discussions.size %> <%= @discussions.size == 1 ? 'Thema' : 'Themen'  %>
+  <% if @category %>
+    in der Kategorie "<%= @category.title %>"
+  <% else %>
+    in der Gruppe
+  <% end %>
+</h3>
+
+<% @discussions.each do |discussion| %>
+  <%= render 'groups/discussions/discussion_preview', discussion: discussion %>
+<% end %>

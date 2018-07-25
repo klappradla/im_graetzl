@@ -5,7 +5,6 @@
   <%= f.hidden_field :room_offer_id %>
   <%= f.hidden_field :room_call_id %>
 
-
   <div class="input-field">
     <%= f.label :title do %>
     <%= icon_tag "record" %>
@@ -25,6 +24,16 @@
   <div class="input-checkbox">
     <%= f.check_box :private %>
     <%= f.label :private, 'Private Gruppe (nur Mitglieder können Inhalte sehen.)' %>
+  </div>
+
+  <h2 class="hl-main">Categories</h2>
+  <div class="group-prices">
+    <%= f.fields_for :group_categories do |category_form| %>
+      <%= render 'group_category_fields', f: category_form %>
+    <% end %>
+    <div class="group_categories-links">
+      <%= link_to_add_association 'Add new category', f, :group_categories %>
+    </div>
   </div>
 
   <%= f.button @group.new_record? ? 'Gruppe erstellen' : 'Speichern', data: { disable_with: 'speichert...' }, class: 'btn-primary' %>

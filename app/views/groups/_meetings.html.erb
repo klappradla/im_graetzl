@@ -1,8 +1,8 @@
 <div class="meetings-section -page">
 
-  <div class="heading">
+  <div class="header">
 
-    <h3 class="header">Die nächsten Gruppentreffen:</h3>
+    <h3>Die nächsten Gruppentreffen:</h3>
 
     <% if user_signed_in? %>
       <%= link_to new_meeting_path(group_id: @group.id), class: 'btn-userIcons' do %>
