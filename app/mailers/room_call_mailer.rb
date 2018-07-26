@@ -11,11 +11,13 @@ class RoomCallMailer
   def submitter_settings(submission)
     {
       to: [ { email: submission.user.email } ],
-      bcc: [ { email: "call@imgraetzl.at" }],
       global_merge_vars: [
         { name: 'username', content: submission.user.username },
         { name: 'first_name', content: submission.user.first_name },
         { name: 'last_name', content: submission.user.last_name },
+        { name: 'owner_first_name', content: submission.room_call.user.first_name },
+        { name: 'owner_last_name', content: submission.room_call.user.last_name },
+        { name: 'owner_email', content: submission.room_call.user.email },
         { name: 'room_call_title', content: submission.room_call.title },
         { name: 'room_call_subtitle', content: submission.room_call.subtitle },
         { name: 'room_call_url', content: room_call_url(submission.room_call, URL_OPTIONS) },
@@ -27,6 +29,7 @@ class RoomCallMailer
   def owner_settings(submission)
     {
       to: [ { email: submission.room_call.user.email } ],
+      bcc: [ { email: "call@imgraetzl.at" }],
       global_merge_vars: [
         { name: 'username', content: submission.user.username },
         { name: 'first_name', content: submission.user.first_name },
