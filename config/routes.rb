@@ -95,7 +95,7 @@ Rails.application.routes.draw do
   get 'wien/raumteiler/raumsuche' => redirect('/wien/raumteiler')
   get 'wien/raumteiler/raum' => redirect('/wien/raumteiler')
   get 'raumteiler' => redirect('/wien/raumteiler')
-  get 'call' => redirect('/wien/raumteiler/raum/nordbahn-halle-macherinnen-fur-werkhalle-gesucht')
+  get 'dieselgasse' => redirect('/wien/raumteiler/open-calls/raumteiler-hub-dieselgasse')
   get 'raumteilerfestival', to: 'landing_pages#raumteiler_festival_2018'
   get 'raumteilerfestival/info', to: 'landing_pages#raumteiler_festival_2018_infos'
 
