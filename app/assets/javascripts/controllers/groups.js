@@ -6,6 +6,9 @@ APP.controllers.groups = (function() {
         initInfo();
         initDiscussions();
       }
+      if ($(".group-page .categories-list").exists()) {
+        initMobileNav();
+      }
     }
 
     function initHeader() {
@@ -38,6 +41,27 @@ APP.controllers.groups = (function() {
       });
 
       $("#tab-discussions .autoload-link").click();
+    }
+
+    function initMobileNav() {
+      var $dropdown = $(".categories-list-mobile select");
+      $(".categories-list li a").each(function() {
+              var $this = $(this),
+              link = $this.attr('href'),
+              txt = $this.text();
+
+          $dropdown.append(getOption());
+
+          function getOption() {
+              if($this.hasClass('active'))
+                  return '<option selected value="'+ link +'" data-remote="true">'+ txt +'</option>';
+              return '<option value="'+ link +'" data-remote="true">'+ txt +'</option>';
+          }
+      });
+      $dropdown.on('change', function() {
+        var getLink = $('.categories-list li a[href*="'+$dropdown.val()+'"]');
+        getLink.click();
+      });
     }
 
     return {

@@ -13,7 +13,7 @@
     <%= f.text_field :title, placeholder: 'Gib deiner Gruppe einen kurzen Titel ...' %>
   </div>
 
-  <div class="input-field">
+  <div class="input-textarea">
     <%= f.label :description do %>
     <%= icon_tag "layout-document" %>
     <span>Beschreibung</span>
@@ -21,19 +21,17 @@
     <%= f.text_area :description, placeholder: 'Hier kannst du deine Gruppe in wenigen Sätzen ausführlicher beschreiben ..' %>
   </div>
 
-  <div class="input-checkbox">
+  <div class="input-checkbox -permission">
     <%= f.check_box :private %>
-    <%= f.label :private, 'Private Gruppe (nur Mitglieder können Inhalte sehen.)' %>
+    <%= f.label :private, 'Private Gruppe (nur Gruppenmitglieder können Inhalte einsehen)' %>
   </div>
 
-  <h2 class="hl-main">Categories</h2>
+  <h2 class="hl-main">Diskussions <span>Kategorien</span></h2>
   <div class="group-prices">
     <%= f.fields_for :group_categories do |category_form| %>
       <%= render 'group_category_fields', f: category_form %>
     <% end %>
-    <div class="group_categories-links">
-      <%= link_to_add_association 'Add new category', f, :group_categories %>
-    </div>
+    <%= link_to_add_association 'Kategorie hinzufügen', f, :group_categories, class: 'add' %>
   </div>
 
   <%= f.button @group.new_record? ? 'Gruppe erstellen' : 'Speichern', data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
