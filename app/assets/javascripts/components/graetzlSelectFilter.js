@@ -12,7 +12,8 @@ APP.components.graetzlSelectFilter = (function() {
       searchText: 'Suche nach Bezirk.',
       placeholder: 'Bezirk auswählen',
       csvDispCount: 3,
-      captionFormat: '{0} Bezirk ausgewählt',
+      captionFormat: '{0} Bezirke',
+      captionFormatAllSelected: 'Alle {0} Bezirke in Wien',
       okCancelInMulti: true,
       selectAll: true,
       locale: ['OK', 'Cancel', 'Ganz Wien']
@@ -24,10 +25,11 @@ APP.components.graetzlSelectFilter = (function() {
 
     $graetzlSelect.SumoSelect({
       search: true,
-      searchText: 'Suche nach Grätzln.',
+      searchText: 'Suche nach Grätzl.',
       placeholder: 'Grätzln auswählen',
       csvDispCount: 3,
-      captionFormat: '{0} Grätzln ausgewählt',
+      captionFormat: '{0} Grätzln',
+      captionFormatAllSelected: 'Alle {0} Grätzln in Wien',
       okCancelInMulti: true
     });
 

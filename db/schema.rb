@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180723152605) do
+ActiveRecord::Schema.define(version: 20180727160054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -133,6 +133,15 @@ ActiveRecord::Schema.define(version: 20180723152605) do
     t.index ["user_id"], name: "index_curators_on_user_id", using: :btree
   end
 
+  create_table "discussion_followings", force: :cascade do |t|
+    t.integer  "discussion_id"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["discussion_id"], name: "index_discussion_followings_on_discussion_id", using: :btree
+    t.index ["user_id"], name: "index_discussion_followings_on_user_id", using: :btree
+  end
+
   create_table "discussion_posts", force: :cascade do |t|
     t.text     "content"
     t.integer  "discussion_id"
@@ -145,11 +154,11 @@ ActiveRecord::Schema.define(version: 20180723152605) do
 
   create_table "discussions", force: :cascade do |t|
     t.string   "title"
-    t.boolean  "closed"
-    t.boolean  "sticky"
+    t.boolean  "closed",            default: false
+    t.boolean  "sticky",            default: false
     t.integer  "group_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.integer  "user_id"
     t.datetime "last_post_at"
     t.integer  "group_category_id"
@@ -646,6 +655,8 @@ ActiveRecord::Schema.define(version: 20180723152605) do
     t.index ["slug"], name: "index_zuckerls_on_slug", using: :btree
   end
 
+  add_foreign_key "discussion_followings", "discussions", on_delete: :cascade
+  add_foreign_key "discussion_followings", "users", on_delete: :cascade
   add_foreign_key "discussion_posts", "discussions", on_delete: :cascade
   add_foreign_key "discussion_posts", "users"
   add_foreign_key "discussions", "group_categories", on_delete: :nullify

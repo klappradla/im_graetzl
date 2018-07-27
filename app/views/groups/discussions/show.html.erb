@@ -8,6 +8,10 @@
 
   <div class="discussion-infos -page">
     <%= @discussion.discussion_posts.size %> <%= @discussion.discussion_posts.size > 1 ? 'Beiträge' : 'Beitrag' %>
+    <% if @discussion.group_category %>
+      <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+      <%= @discussion.group_category.title %>
+    <% end %>
     <% if @group.users.include?(current_user) %>
       <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
       E-Mail Updates:

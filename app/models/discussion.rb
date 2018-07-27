@@ -11,6 +11,10 @@ class Discussion < ApplicationRecord
     !closed?
   end
 
+  def edit_permission?(by_user)
+    user == by_user
+  end
+
   def delete_permission?(by_user)
     group.admins.include?(by_user)
   end

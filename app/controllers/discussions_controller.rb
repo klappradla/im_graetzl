@@ -27,9 +27,13 @@ class DiscussionsController < ApplicationController
     redirect_to [@group, @discussion]
   end
 
+  def edit
+    @discussion = @group.discussions.find(params[:id])
+  end
+
   def update
     @discussion = @group.discussions.find(params[:id])
-    redirect_to [@group, @discussion] if @discussion.user != current_user
+    redirect_to [@group, @discussion] and return if @discussion.user != current_user
     @discussion.update(discussion_params)
     redirect_to [@group, @discussion]
   end
