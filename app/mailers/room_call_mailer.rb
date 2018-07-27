@@ -29,7 +29,7 @@ class RoomCallMailer
   def owner_settings(submission)
     {
       to: [ { email: submission.room_call.user.email } ],
-      bcc: [ { email: "call@imgraetzl.at" }],
+      bcc_address: "call@imgraetzl.at",
       global_merge_vars: [
         { name: 'username', content: submission.user.username },
         { name: 'first_name', content: submission.user.first_name },

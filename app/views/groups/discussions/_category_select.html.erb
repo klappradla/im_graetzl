@@ -11,10 +11,6 @@
         <%= link_to group_category.title, group_discussions_path(@group, group_category_id: group_category.id), remote: true %>
       </li>
     <% end %>
-    <li>
-      <%= icon_tag('record') %>
-      <%= link_to "Nicht kategorisiert", group_discussions_path(@group, group_category: ''), remote: true %>
-    </li>
   </ul>
 </div>
 

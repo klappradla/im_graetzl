@@ -23,7 +23,6 @@ class GroupsController < ApplicationController
     GroupDefaultCategory.all.each do |category|
       @group.group_categories.build(title: category.title)
     end
-
   end
 
   def create

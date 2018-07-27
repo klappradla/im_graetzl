@@ -5,9 +5,9 @@ class DiscussionsController < ApplicationController
   def index
     @discussions = @group.discussions.order("sticky DESC, last_post_at DESC")
     @discussions = @discussions.includes(discussion_posts: :user)
-    if params.key?(:group_category_id)
+    if params[:group_category_id].present?
       @discussions = @discussions.where(group_category_id: params[:group_category_id])
-      @category = @group.group_categories.find(params[:group_category_id]) if params[:group_category_id].present?
+      @category = @group.group_categories.find(params[:group_category_id])
     end
 
     render 'groups/discussions/index'
