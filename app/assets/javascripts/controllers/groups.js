@@ -1,13 +1,13 @@
 APP.controllers.groups = (function() {
 
     function init() {
+      if ($(".group-page .categories-list").exists()) {
+        initMobileNav();
+      }
       if ($(".group-page").exists()) {
         initHeader();
         initInfo();
         initDiscussions();
-      }
-      if ($(".group-page .categories-list").exists()) {
-        initMobileNav();
       }
     }
 
@@ -44,9 +44,17 @@ APP.controllers.groups = (function() {
         var url_string = window.location.href;
         var url = new URL(url_string);
         var category_id = url.searchParams.get("group_category_id");
+        category_id = "group_category_id=" + category_id;
         // check if link ends with specific group_category_id
-        var findCategoryLink = $('.categories-list li a[href$="group_category_id='+category_id+'"]');
-        findCategoryLink.click();
+        var categoryLink = $('.categories-list li a[href$="'+category_id+'"]');
+        var categoryText = categoryLink.text();
+        categoryLink.click();
+        // set mobile select option
+        $('.categories-list-mobile select option:contains(' + categoryText + ')').each(function(){
+          if ($(this).text() == categoryText) {
+            $(this).prop('selected',true);
+          }
+        });
       } else {
         $("#tab-discussions .autoload-link").click();
       }
