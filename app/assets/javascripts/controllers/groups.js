@@ -40,7 +40,16 @@ APP.controllers.groups = (function() {
         $(this).parents("li").addClass("selected").siblings("li").removeClass("selected");
       });
 
-      $("#tab-discussions .autoload-link").click();
+      if (window.location.href.indexOf('group_category_id') > -1) {
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var category_id = url.searchParams.get("group_category_id");
+        // check if link ends with specific group_category_id
+        var findCategoryLink = $('.categories-list li a[href$="group_category_id='+category_id+'"]');
+        findCategoryLink.click();
+      } else {
+        $("#tab-discussions .autoload-link").click();
+      }
     }
 
     function initMobileNav() {
