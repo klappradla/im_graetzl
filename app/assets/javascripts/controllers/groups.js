@@ -53,6 +53,7 @@ APP.controllers.groups = (function() {
         $('.categories-list-mobile select option:contains(' + categoryText + ')').each(function(){
           if ($(this).text() == categoryText) {
             $(this).prop('selected',true);
+            $(this).attr('selected', 'selected');
           }
         });
       } else {
