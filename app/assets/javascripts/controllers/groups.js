@@ -77,7 +77,7 @@ APP.controllers.groups = (function() {
           }
       });
       $dropdown.on('change', function() {
-        var getLink = $('.categories-list li a[href*="'+$dropdown.val()+'"]');
+        var getLink = $('.categories-list li a[href="'+$dropdown.val()+'"]');
         getLink.click();
       });
     }
