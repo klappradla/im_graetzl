@@ -1,5 +1,6 @@
 class Notifications::MeetingCancelled < Notification
   TRIGGER_KEY = 'meeting.cancel'
+  DEFAULT_INTERVAL = :immediate
   BITMASK = 2**8
 
   def self.receivers(activity)

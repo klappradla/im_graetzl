@@ -109,7 +109,7 @@ RSpec.describe User::Notifiable do
       end
     end
 
-    describe '#notifications_of_the_day' do
+    describe '#pending_daily_notifications' do
       let(:type) { Notifications::NewMeeting }
       let!(:sent_notification) { create(:notification,
         user: user,
@@ -131,22 +131,22 @@ RSpec.describe User::Notifiable do
       end
 
       it 'returns all new notifications (more than 5 minutes old)' do
-        expect(user.notifications_of_the_day.ids).to match_array new_notifications.map(&:id)
+        expect(user.pending_daily_notifications.ids).to match_array new_notifications.map(&:id)
       end
 
       it 'excludes sent notifications' do
-        expect(user.notifications_of_the_day.ids).not_to include sent_notification.id
+        expect(user.pending_daily_notifications.ids).not_to include sent_notification.id
       end
 
       it 'excludes too new notifications' do
         new_notification = new_notifications.last
         new_notification.update(created_at: Time.now)
         new_ids = new_notifications.map(&:id) - [new_notification.id]
-        expect(user.notifications_of_the_day.ids).to match_array(new_ids)
+        expect(user.pending_daily_notifications.ids).to match_array(new_ids)
       end
 
       it 'excludes too old notifications' do
-        expect(user.notifications_of_the_day.ids).not_to include old_notification.id
+        expect(user.pending_daily_notifications.ids).not_to include old_notification.id
       end
     end
   end

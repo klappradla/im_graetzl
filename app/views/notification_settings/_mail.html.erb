@@ -1,8 +1,10 @@
 <div class="input-select">
-  <select id="<%= type.dasherized %>" data-behavior="mail-notification-toggle" data-type="<%= type %>">
-    <%- notification_settings_mail_options(type).each do |option| -%>
-      <%- selected = (option[0] == 'off' ? false : current_user.enabled_mail_notification?(type, option[0].to_sym)) -%>
-      <option value="<%= option[0] -%>" <%- if selected -%> selected="selected" <%-end -%>><%= option[1] -%></option>
-    <%- end -%>
-  </select>
+  <%= select_tag :notification_interval, options_for_select([
+    ['Aus', :off],
+    ['Sofort', :immediate],
+    ['Täglich', :daily],
+    ['Wöchentlich', :weekly]
+  ], current_user.enabled_mail_notification(type)), id: type.dasherized, data: {
+    behavior: "mail-notification-toggle", type: type.name
+  } %>
 </div>

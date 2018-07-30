@@ -14,7 +14,7 @@
     <%= link_to group.title, group, class: 'title' %>
 
     <p class="infos">
-      <%= group.users.count %> <%= group.users.count > 1 ? "Mitglieder" : "Mitglied" %>  &middot;
+      <%= group.users.size %> <%= group.users.size > 1 ? "Mitglieder" : "Mitglied" %>  &middot;
       <%= group.private? ? "Geschlossene" : "Offene" %> Gruppe
     </p>
 
@@ -32,7 +32,7 @@
         <%= attachment_image_tag user, :avatar, :fill, 200, 200, fallback: 'avatar/user/200x200.png', class: 'img-round' %>
       <% end %>
       <% if group.members.size > 9 %>
-        <span> + <%= group.members.count - 9 %> weitere </span>
+        <span> + <%= group.members.size - 9 %> weitere </span>
       <% end %>
 
     </div>

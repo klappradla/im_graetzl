@@ -1,5 +1,6 @@
 class Notifications::AlsoCommentedRoomOffer < Notification
   TRIGGER_KEY = 'room_offer.comment'
+  DEFAULT_INTERVAL = :daily
   BITMASK = 2**6
 
   def self.receivers(activity)

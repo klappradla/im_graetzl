@@ -8,7 +8,7 @@ RSpec.describe Notification::DailyMail do
     let(:user) { build_stubbed :user }
     let(:notifications) { build_stubbed_list :notification, 4, user: user }
 
-    before { allow(user).to receive(:notifications_of_the_day){ notifications } }
+    before { allow(user).to receive(:pending_daily_notifications){ notifications } }
 
     subject { described_class.new user }
 

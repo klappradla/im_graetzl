@@ -31,7 +31,7 @@ class Notification::DailyMail
 
   def initialize(user)
     @user = user
-    @notifications = @user.notifications_of_the_day
+    @notifications = @user.pending_daily_notifications
   end
 
   def deliver

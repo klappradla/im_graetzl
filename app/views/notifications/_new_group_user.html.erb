@@ -1,0 +1,11 @@
+<%- group_user = notification.activity.trackable %>
+
+<%= content_tag(:li, id: dom_id(notification), data: { behavior: 'notification-item' }, class: 'notification-item') do %>
+  <%= link_to group_user.group do %>
+    <%= attachment_image_tag group_user.user, :avatar, :fill, 40, 40, fallback: 'avatar/user/40x40.png', class: 'img-round' %>
+    <div class="msg">
+      <div class="timeago">vor <%= time_ago_in_words(notification.activity.created_at) %></div>
+      <span class="username"><%= group_user.user.username %></span> has joined group <span class="matter"><%= group_user.group.title %></span>
+    </div>
+  <% end %>
+<% end %>

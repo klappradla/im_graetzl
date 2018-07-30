@@ -1,5 +1,6 @@
 class Notifications::NewRoomOffer < Notification
   TRIGGER_KEY = 'room_offer.create'
+  DEFAULT_INTERVAL = :weekly
   BITMASK = 2**12
 
   def self.receivers(activity)

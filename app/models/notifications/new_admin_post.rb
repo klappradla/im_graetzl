@@ -1,5 +1,6 @@
 class Notifications::NewAdminPost < Notification
   TRIGGER_KEY = 'admin_post.create'
+  DEFAULT_INTERVAL = :weekly
   BITMASK = 2**2
 
   def self.receivers(activity)

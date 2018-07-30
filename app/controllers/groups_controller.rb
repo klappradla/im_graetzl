@@ -70,8 +70,12 @@ class GroupsController < ApplicationController
     redirect_to @group and return unless @group.admins.include?(current_user)
 
     @join_request = @group.group_join_requests.find(params[:join_request_id])
-    @group.users << @join_request.user
+
+    group_user = @group.group_users.create(user: @join_request.user)
+    group_user.create_activity(:create, owner: current_user)
+
     @join_request.destroy
+
     GroupMailer.new.join_request_accepted(@group, @join_request.user)
     redirect_to group_url(@group, anchor: "tab-members")
   end

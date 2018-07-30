@@ -1,5 +1,6 @@
 class Notifications::CommentOnLocationPost < Notification
   TRIGGER_KEY = 'location_post.comment'
+  DEFAULT_INTERVAL = :daily
   BITMASK = 2**4
 
   def self.receivers(activity)

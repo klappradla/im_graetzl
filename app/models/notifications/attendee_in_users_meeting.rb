@@ -1,5 +1,6 @@
 class Notifications::AttendeeInUsersMeeting < Notification
   TRIGGER_KEY = 'meeting.go_to'
+  DEFAULT_INTERVAL = :immediate
   BITMASK = 2**9
 
   def self.receivers(activity)

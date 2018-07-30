@@ -1,5 +1,6 @@
 class Notifications::CommentOnRoomDemand < Notification
   TRIGGER_KEY = 'room_demand.comment'
+  DEFAULT_INTERVAL = :daily
   BITMASK = 2**4
 
   def self.receivers(activity)

@@ -15,7 +15,9 @@
 
   <div class="discussion-box">
     <% if @group.users.include?(current_user) %>
-      <%= render 'groups/discussions/new', group_id: @group.id %>
+      <div class="cardBox" id="new-topic">
+        <%= render 'groups/discussions/form', discussion: Discussion.new %>
+      </div>
     <% end %>
   </div>
 

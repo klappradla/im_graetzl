@@ -90,6 +90,10 @@ class Meeting < ApplicationRecord
     end
   end
 
+  def public?
+    group_id.nil?
+  end
+
   private
 
   def starts_at_date_cannot_be_in_the_past

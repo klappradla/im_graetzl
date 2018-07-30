@@ -1,5 +1,4 @@
 APP.components.addressSearchAutocomplete = function() {
-
     var $featureHiddenField = $("#feature");
 
     function updateFeatureHiddenField(obj) {
@@ -36,5 +35,3 @@ APP.components.addressSearchAutocomplete = function() {
     });
 
 };
-
-

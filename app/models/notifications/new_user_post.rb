@@ -1,5 +1,6 @@
 class Notifications::NewUserPost < Notification
   TRIGGER_KEY = 'user_post.create'
+  DEFAULT_INTERVAL = :weekly
   BITMASK = 2**2
 
   def self.receivers(activity)

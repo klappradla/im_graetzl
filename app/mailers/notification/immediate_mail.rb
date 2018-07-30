@@ -26,22 +26,17 @@ class Notification::ImmediateMail
       subject: @notification.mail_subject,
       google_analytics_domains: ['staging.imgraetzl.at', 'www.imgraetzl.at'],
       google_analytics_campaign: 'notification-mail',
-      global_merge_vars: global_vars,
-      merge_vars: [
-        rcpt: @user.email,
-        vars: @notification.basic_mail_vars + [
-          { name: 'notification', content: @notification.mail_vars }
-        ]
-      ]
+      global_merge_vars: message_vars,
     }
   end
 
-  def global_vars
+  def message_vars
     [
       { name: 'username', content: @user.username },
       { name: 'edit_user_url', content: edit_user_url(URL_OPTIONS) },
       { name: 'graetzl_name', content: @user.graetzl.name },
       { name: 'graetzl_url', content: graetzl_url(@user.graetzl, URL_OPTIONS) }
-    ]
+      { name: 'notification', content: @notification.mail_vars }
+    ] + @notification.basic_mail_vars
   end
 end

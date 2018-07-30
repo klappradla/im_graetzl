@@ -1,27 +1,23 @@
-class Notifications::NewMeeting < Notification
+class Notifications::NewGroupMeeting < Notification
   TRIGGER_KEY = 'meeting.create'
-  DEFAULT_INTERVAL = :weekly
-  BITMASK = 2**0
+  DEFAULT_INTERVAL = :daily
+  BITMASK = 2**17
 
   def self.receivers(activity)
-    if activity.trackable.public?
-      User.where(graetzl_id: activity.trackable.graetzl_id)
+    if activity.trackable.group_id?
+      activity.trackable.group.users
     else
       []
     end
   end
 
   def self.description
-    'Ein neues Treffen wurde im Grätzl erstellt'
-  end
-
-  def self.notify_owner?
-    true
+    'Eine neues Treffen wurde in der Gruppe erstellt.'
   end
 
   def mail_vars
     {
-      type: type.demodulize.underscore,
+      group_name: activity.trackable.group.name,
       owner_name: activity.owner.username,
       owner_url: user_url(activity.owner, DEFAULT_URL_OPTIONS),
       owner_avatar_url: Notifications::AvatarService.new(activity.owner).call,
@@ -37,18 +33,7 @@ class Notifications::NewMeeting < Notification
   end
 
   def mail_subject
-    "Neues Treffen im Grätzl #{activity.trackable.graetzl.name}"
-  end
-
-  private
-
-  def set_notify_at
-    reminder_date = activity.trackable.starts_at_date - 7.days
-    if reminder_date.past?
-      self.notify_at = Time.current
-    else
-      self.notify_at = reminder_date
-    end
+    'Eine neues Treffen wurde in der Gruppe erstellt.'
   end
 
 end

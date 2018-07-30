@@ -1,5 +1,6 @@
 class Notifications::NewWallComment < Notification
   TRIGGER_KEY = 'user.comment'
+  DEFAULT_INTERVAL = :immediate
   BITMASK = 2**10
 
   def self.receivers(activity)

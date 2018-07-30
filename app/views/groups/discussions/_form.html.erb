@@ -1,0 +1,36 @@
+<%= form_for [@group, discussion], html: { class: 'discussion-form' } do |f| %>
+
+  <div class="input-field">
+    <%= f.label :title do %>
+    <%= icon_tag "speech-bubble" %>
+    <span>Neues Thema</span>
+    <% end %>
+    <%= f.text_field :title, placeholder: 'Gib deinem Thema einen kurzen Titel ..', required: true %>
+  </div>
+
+  <div class="input-select">
+    <%= f.label :group_category_id do %>
+      <%= icon_tag "record" %>
+      <span>Kategorie</span>
+    <% end %>
+    <%= f.select :group_category_id, options_from_collection_for_select(@group.group_categories, :id, :title), id: 'group-category-select', include_blank: 'Kategorie auswählen..' %>
+  </div>
+
+  <div class="input-textarea">
+    <%= f.label :content do %>
+    <%= attachment_image_tag current_user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+    <span>Dein Beitrag</span>
+    <% end %>
+    <%= text_area_tag :content, nil, cols: 80, rows: 3, placeholder: 'Dein erster Beitrag im Thema ..', required: true %>
+  </div>
+
+  <% if @group.admins.include?(current_user) %>
+    <div class="input-checkbox">
+      <%= f.check_box :sticky %>
+      <%= f.label :sticky, "Make Discussion Sticky" %>
+    </div>
+  <% end %>
+
+  <%= f.button 'Thema erstellen', data: { disable_with: 'sendet...' }, class: 'btn-primary' %>
+
+<% end %>

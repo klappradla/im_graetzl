@@ -2,11 +2,13 @@ class Notification < ApplicationRecord
   include Rails.application.routes.url_helpers
 
   DEFAULT_URL_OPTIONS = Rails.application.config.action_mailer.default_url_options
+  DEFAULT_INTERVAL = :off
 
   belongs_to :user
   belongs_to :activity
 
   before_create :set_bitmask
+  before_create :set_notify_at
 
   def self.receive_new_activity(activity)
     CreateNotificationsJob.perform_later activity
@@ -90,5 +92,9 @@ class Notification < ApplicationRecord
 
   def set_bitmask
     self.bitmask ||= self.class::BITMASK
+  end
+
+  def set_notify_at
+    self.notify_at = Time.current
   end
 end

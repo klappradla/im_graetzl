@@ -1,5 +1,6 @@
 class Notifications::AlsoCommentedMeeting < Notification
   TRIGGER_KEY = 'meeting.comment'
+  DEFAULT_INTERVAL = :daily
   BITMASK = 2**6
 
   def self.receivers(activity)

@@ -1,5 +1,6 @@
 class Notifications::LocationApproved < Notification
   TRIGGER_KEY = 'location.approve'
+  DEFAULT_INTERVAL = :immediate
   BITMASK = 2**11
 
   def self.receivers(activity)

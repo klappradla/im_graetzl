@@ -1,5 +1,6 @@
 class Notifications::NewLocation < Notification
   TRIGGER_KEY = 'location.create'
+  DEFAULT_INTERVAL = :weekly
   BITMASK = 2**5
 
   def self.receivers(activity)

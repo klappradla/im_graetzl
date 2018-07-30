@@ -1,4 +1,6 @@
 class DiscussionPost < ApplicationRecord
+  include Trackable
+
   belongs_to :user
   belongs_to :discussion
   has_one :group, through: :discussion

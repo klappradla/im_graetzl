@@ -1,4 +1,6 @@
 class RoomCall < ApplicationRecord
+  include Trackable
+
   extend FriendlyId
   friendly_id :title
 
@@ -40,7 +42,7 @@ class RoomCall < ApplicationRecord
   def to_s
     title
   end
-  
+
   def open?
     (starts_at..ends_at).cover?(Date.current)
   end

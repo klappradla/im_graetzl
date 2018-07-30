@@ -8,8 +8,12 @@ class DiscussionPostsController < ApplicationController
 
     @post = @discussion.discussion_posts.new(discussion_post_params)
     @post.user = current_user
-    @post.save
-    redirect_to [@group, @discussion]
+    if @post.save
+      @post.create_activity(:create, owner: current_user)
+      redirect_to [@group, @discussion]
+    else
+      redirect_to [@group, @discussion]
+    end
   end
 
   def update

@@ -19,6 +19,7 @@ class RoomCallsController < ApplicationController
     @room_call.user_id = current_user.admin? ? params[:user_id] : current_user.id
     @room_call.address = Address.from_feature(params[:feature]) if params[:feature].present?
     if @room_call.save
+      @room_call.create_activity(:create, owner: @room_call.user)
       redirect_to @room_call
     else
       render 'new'

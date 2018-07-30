@@ -1,4 +1,6 @@
 class GroupUser < ApplicationRecord
+  include Trackable
+
   belongs_to :group
   belongs_to :user
 

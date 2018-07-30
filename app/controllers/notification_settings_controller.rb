@@ -1,36 +1,30 @@
 class NotificationSettingsController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_valid_type
 
   def toggle_website_notification
-    type = params[:type]
-    unless valid_notification_type?(type)
-      render body: "unrecognized type: #{type} in order to toggle website_notification", status: :forbidden
-      return
-    end
-    current_user.toggle_website_notification(type.constantize)
+    notification_type = params[:type].constantize
+    current_user.toggle_website_notification(notification_type)
     render json: :ok
   end
 
   def change_mail_notification
-    type = params[:type]
-    unless valid_notification_type?(type)
-      render body: "unrecognized type: #{type} in order to change mail_notification", status: :forbidden
-      return
-    end
+    notification_type = params[:type].constantize
 
     if params[:interval] == 'off'
-      [:immediate, :daily, :weekly].each do |i|
-        current_user.disable_mail_notification(type.constantize, i)
-      end
+      current_user.disable_all_mail_notifications(notification_type)
     else
-      current_user.enable_mail_notification(type.constantize, params[:interval].to_sym)
+      current_user.enable_mail_notification(notification_type, params[:interval].to_sym)
     end
     render json: :ok
   end
 
   private
 
-  def valid_notification_type?(type)
-    Notification.subclasses.map{|s| s.name}.include?(type)
+  def check_valid_type
+    if !Notification.subclasses.map(&:name).include?(params[:type])
+      render body: "unrecognized type: #{params[:type]}", status: :forbidden
+    end
   end
+
 end
