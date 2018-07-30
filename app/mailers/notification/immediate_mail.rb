@@ -35,8 +35,8 @@ class Notification::ImmediateMail
       { name: 'username', content: @user.username },
       { name: 'edit_user_url', content: edit_user_url(URL_OPTIONS) },
       { name: 'graetzl_name', content: @user.graetzl.name },
-      { name: 'graetzl_url', content: graetzl_url(@user.graetzl, URL_OPTIONS) }
-      { name: 'notification', content: @notification.mail_vars }
+      { name: 'graetzl_url', content: graetzl_url(@user.graetzl, URL_OPTIONS) },
+      { name: 'notification', content: @notification.mail_vars },
     ] + @notification.basic_mail_vars
   end
 end
