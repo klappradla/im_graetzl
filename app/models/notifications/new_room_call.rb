@@ -8,7 +8,7 @@ class Notifications::NewRoomCall < Notification
   end
 
   def self.description
-    'Eine neue Raumtielier Call'
+    'Eine gibt einen neuen Raumteiler Call'
   end
 
   def self.notify_owner?
@@ -29,7 +29,7 @@ class Notifications::NewRoomCall < Notification
   end
 
   def mail_subject
-    "#{activity.owner.username} sucht Räumlichkeiten"
+    "#{activity.owner.username} hat einen neuen Call gestartet."
   end
 
   private

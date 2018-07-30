@@ -5,7 +5,7 @@
     <%= attachment_image_tag notification.activity.owner, :avatar, :fill, 40, 40, fallback: 'avatar/user/40x40.png', class: 'img-round' %>
     <div class="msg">
       <div class="timeago">vor <%= time_ago_in_words(notification.activity.created_at) %></div>
-      <span class="username"><%= notification.activity.owner.username %></span> has added a comment to <span class="matter"><%= post.discussion.title %></span>
+      Neue Antwort von <span class="username"><%= notification.activity.owner.username %></span> bei: <span class="matter"><%= post.discussion.title %></span>
     </div>
   <% end %>
 <% end %>

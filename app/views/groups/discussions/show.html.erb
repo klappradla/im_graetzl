@@ -58,7 +58,7 @@
 
   <div class="discussion-box">
     <% if @group.users.include?(current_user) %>
-      <div class="discussion-create">
+      <div class="discussion-form">
         <%= form_for [@group, DiscussionPost.new] do |f| %>
           <%= hidden_field_tag :discussion_id, @discussion.id %>
           <div class="input-textarea">

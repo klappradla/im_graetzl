@@ -40,25 +40,7 @@ APP.controllers.groups = (function() {
         $(this).parents("li").addClass("selected").siblings("li").removeClass("selected");
       });
 
-      if (window.location.href.indexOf('group_category_id') > -1) {
-        var url_string = window.location.href;
-        var url = new URL(url_string);
-        var category_id = url.searchParams.get("group_category_id");
-        category_id = "group_category_id=" + category_id;
-        // check if link ends with specific group_category_id
-        var categoryLink = $('.categories-list li a[href$="'+category_id+'"]');
-        var categoryText = categoryLink.text();
-        categoryLink.click();
-        // set mobile select option
-        $('.categories-list-mobile select option:contains(' + categoryText + ')').each(function(){
-          if ($(this).text() == categoryText) {
-            $(this).prop('selected',true);
-            $(this).attr('selected', 'selected');
-          }
-        });
-      } else {
-        $("#tab-discussions .autoload-link").click();
-      }
+      $("#tab-discussions .autoload-link").click();
     }
 
     function initMobileNav() {
@@ -71,7 +53,7 @@ APP.controllers.groups = (function() {
           $dropdown.append(getOption());
 
           function getOption() {
-              if($this.hasClass('active'))
+              if($this.hasClass('autoload-link'))
                   return '<option selected value="'+ link +'" data-remote="true">'+ txt +'</option>';
               return '<option value="'+ link +'" data-remote="true">'+ txt +'</option>';
           }

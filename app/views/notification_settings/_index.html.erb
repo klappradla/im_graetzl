@@ -29,7 +29,8 @@
     </div>
   </div>
 
-  <%= render 'notification_settings/slice', type: Notifications::CommentInMeeting %>
+  <!-- Was Same like CommentInUsersMeeting?! toggles both ... -->
+  <!--<%= render 'notification_settings/slice', type: Notifications::CommentInMeeting %>-->
   <%= render 'notification_settings/slice', type: Notifications::MeetingUpdated %>
   <%= render 'notification_settings/slice', type: Notifications::MeetingCancelled %>
 </div>

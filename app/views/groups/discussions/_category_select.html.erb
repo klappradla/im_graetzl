@@ -3,12 +3,14 @@
   <ul>
     <li>
       <%= icon_tag('record') %>
-      <%= link_to "Alle", group_discussions_path(@group), remote: true, class: 'autoload-link' %>
+      <%= link_to "Alle", group_discussions_path(@group), remote: true,
+        class: params[:group_category_id].blank? ? 'autoload-link' : nil %>
     </li>
     <% @group.group_categories.each do |group_category| %>
       <li>
         <%= icon_tag('record') %>
-        <%= link_to group_category.title, group_discussions_path(@group, group_category_id: group_category.id), :data => { :'cat-id' => group_category.id }, remote: true %>
+        <%= link_to group_category.title, group_discussions_path(@group, group_category_id: group_category.id),
+          remote: true, class: params[:group_category_id] == group_category.id.to_s ? 'autoload-link' : nil %>
       </li>
     <% end %>
   </ul>

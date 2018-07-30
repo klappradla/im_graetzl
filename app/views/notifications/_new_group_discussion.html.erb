@@ -5,7 +5,7 @@
     <%= attachment_image_tag notification.activity.owner, :avatar, :fill, 40, 40, fallback: 'avatar/user/40x40.png', class: 'img-round' %>
     <div class="msg">
       <div class="timeago">vor <%= time_ago_in_words(notification.activity.created_at) %></div>
-      <span class="username"><%= notification.activity.owner.username %></span> has started a new discussion <span class="matter"><%= discussion.title %></span>
+      <span class="username"><%= notification.activity.owner.username %></span> hat ein neues Thema in der Gruppe erstellt: <span class="matter"><%= discussion.title %></span>
     </div>
   <% end %>
 <% end %>

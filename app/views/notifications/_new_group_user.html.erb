@@ -5,7 +5,7 @@
     <%= attachment_image_tag group_user.user, :avatar, :fill, 40, 40, fallback: 'avatar/user/40x40.png', class: 'img-round' %>
     <div class="msg">
       <div class="timeago">vor <%= time_ago_in_words(notification.activity.created_at) %></div>
-      <span class="username"><%= group_user.user.username %></span> has joined group <span class="matter"><%= group_user.group.title %></span>
+      <span class="username"><%= group_user.user.username %></span> ist der Gruppe <span class="matter"><%= group_user.group.title %></span> beigetreten.
     </div>
   <% end %>
 <% end %>
