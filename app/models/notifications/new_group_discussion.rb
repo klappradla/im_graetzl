@@ -13,7 +13,7 @@ class Notifications::NewGroupDiscussion < Notification
 
   def mail_vars
     {
-      group_name: activity.trackable.group.name,
+      group_name: activity.trackable.group.title,
       discussion_title: activity.trackable.title,
       discussion_url: group_discussion_path(activity.trackable.group, activity.trackable),
       owner_avatar_url: Notifications::AvatarService.new(activity.trackable.user).call,
