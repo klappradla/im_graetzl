@@ -13,16 +13,18 @@
       <%= icon_tag "record" %>
       <span>Kategorie</span>
     <% end %>
-    <%= f.select :group_category_id, options_from_collection_for_select(@group.group_categories, :id, :title), id: 'group-category-select', include_blank: 'Kategorie auswählen..' %>
+    <%= f.select :group_category_id, @group.group_categories.map{|g| [g.title, g.id]}, id: 'group-category-select', include_blank: 'Kategorie auswählen..' %>
   </div>
 
-  <div class="input-textarea">
-    <%= f.label :content do %>
-    <%= attachment_image_tag current_user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
-    <span>Dein Beitrag</span>
-    <% end %>
-    <%= text_area_tag :content, nil, cols: 80, rows: 3, placeholder: 'Dein erster Beitrag im Thema ..', required: true %>
-  </div>
+  <% if f.object.new_record? %>
+    <div class="input-textarea">
+      <%= f.label :content do %>
+      <%= attachment_image_tag current_user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+      <span>Dein Beitrag</span>
+      <% end %>
+      <%= text_area_tag :content, nil, cols: 80, rows: 3, placeholder: 'Dein erster Beitrag im Thema ..', required: true %>
+    </div>
+  <% end %>
 
   <% if @group.admins.include?(current_user) %>
     <div class="input-checkbox">
