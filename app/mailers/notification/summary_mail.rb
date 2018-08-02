@@ -116,7 +116,7 @@ class Notification::SummaryMail
       subject: mail_title,
       google_analytics_domains: ['staging.imgraetzl.at', 'www.imgraetzl.at'],
       google_analytics_campaign: 'summary-mail',
-      global_merge_vars: message_vars,
+      global_merge_vars: message_vars(notifications),
     })
 
     notifications.update_all(sent: true)
@@ -124,7 +124,7 @@ class Notification::SummaryMail
 
   private
 
-  def message_vars
+  def message_vars(notifications)
     [
       { name: 'username', content: @user.username },
       { name: 'edit_user_url', content: edit_user_url(URL_OPTIONS) },

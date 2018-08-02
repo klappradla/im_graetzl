@@ -17,7 +17,7 @@ class Notifications::NewGroupMeeting < Notification
 
   def mail_vars
     {
-      group_name: activity.trackable.group.name,
+      group_name: activity.trackable.group.title,
       owner_name: activity.owner.username,
       owner_url: user_url(activity.owner, DEFAULT_URL_OPTIONS),
       owner_avatar_url: Notifications::AvatarService.new(activity.owner).call,

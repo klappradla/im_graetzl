@@ -13,7 +13,7 @@ class Notifications::NewGroupPost < Notification
 
   def mail_vars
     {
-      group_name: activity.trackable.group.name,
+      group_name: activity.trackable.group.title,
       discussion_title: activity.trackable.discussion.title,
       discussion_url: group_discussion_path(activity.trackable.group, activity.trackable.discussion),
       comment_content: activity.trackable.content,
