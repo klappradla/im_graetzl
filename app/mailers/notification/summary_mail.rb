@@ -7,7 +7,7 @@ class Notification::SummaryMail
     from_name: "imGrätzl.at | Neuigkeiten",
     blocks: [
       {
-        name: 'Neu auf imGrätzl - Sag Hallo',
+        name: 'Neue Locations in deinem Grätzl',
         types: [Notifications::NewLocation]
       },
       {
@@ -127,6 +127,7 @@ class Notification::SummaryMail
   def message_vars(notifications)
     [
       { name: 'username', content: @user.username },
+      { name: 'firstname', content: @user.first_name },
       { name: 'edit_user_url', content: edit_user_url(URL_OPTIONS) },
       { name: 'graetzl_name', content: @user.graetzl.name },
       { name: 'graetzl_url', content: graetzl_url(@user.graetzl, URL_OPTIONS) },
