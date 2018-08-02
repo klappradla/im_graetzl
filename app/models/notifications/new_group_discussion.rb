@@ -24,7 +24,7 @@ class Notifications::NewGroupDiscussion < Notification
   end
 
   def mail_subject
-    "#{activity.owner.first_name} hat ein neues Thema in der Gruppe #{activity.trackable.group.title} erstellt."
+    "Neues Thema von #{activity.owner.first_name} in der Gruppe #{activity.trackable.group.title}."
   end
 
 end

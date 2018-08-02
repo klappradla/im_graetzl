@@ -23,7 +23,7 @@ class Notifications::NewGroupPost < Notification
   end
 
   def mail_subject
-    "#{activity.owner.first_name} hat im Thema #{activity.trackable.discussion.title} geantwortet."
+    "Neue Antwort von #{activity.owner.first_name} im Thema #{activity.trackable.discussion.title}."
   end
 
 end

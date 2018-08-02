@@ -14,6 +14,7 @@ class Notifications::NewGroupUser < Notification
   def mail_vars
     {
       group_name: activity.trackable.group.title,
+      group_url: group_url (activity.trackable.group, DEFAULT_URL_OPTIONS),
       group_user_first_name: activity.trackable.user.name,
       group_user_last_name: activity.trackable.user.last_name,
       group_user_avatar_url: Notifications::AvatarService.new(activity.trackable.user).call,
@@ -21,7 +22,7 @@ class Notifications::NewGroupUser < Notification
   end
 
   def mail_subject
-    'Ein neues Mitglied ist der Gruppe beigetreten.'
+    "Neues Mitglied in der Gruppe #{activity.trackable.group.title}"
   end
 
 end
