@@ -16,13 +16,14 @@ class Notifications::NewGroupPost < Notification
       group_name: activity.trackable.group.title,
       discussion_title: activity.trackable.discussion.title,
       discussion_url: group_discussion_path(activity.trackable.group, activity.trackable.discussion),
-      comment_content: activity.trackable.content,
+      post_content: activity.trackable.content.truncate(300, separator: ' '),
+      owner_firstname: activity.owner.first_name,
       owner_avatar_url: Notifications::AvatarService.new(activity.trackable.user).call,
     }
   end
 
   def mail_subject
-    'Es gibt neue Antworten in Diskussionen denen ich folge'
+    "#{activity.owner.first_name} hat im Thema #{activity.trackable.discussion.title} geantwortet."
   end
 
 end
