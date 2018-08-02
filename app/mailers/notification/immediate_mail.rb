@@ -33,6 +33,7 @@ class Notification::ImmediateMail
   def message_vars
     [
       { name: 'username', content: @user.username },
+      { name: 'first_name', content: @user.first_name },
       { name: 'edit_user_url', content: edit_user_url(URL_OPTIONS) },
       { name: 'graetzl_name', content: @user.graetzl.name },
       { name: 'graetzl_url', content: graetzl_url(@user.graetzl, URL_OPTIONS) },
