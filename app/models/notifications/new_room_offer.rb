@@ -15,16 +15,16 @@ class Notifications::NewRoomOffer < Notification
     true
   end
 
-  def mail_vars
+  def custom_mail_vars
     {
-      type: type.demodulize.underscore,
       room_title: activity.trackable.slogan,
       room_url: room_offer_url(activity.trackable, DEFAULT_URL_OPTIONS),
       room_type: I18n.t("activerecord.attributes.room_offer.offer_types_active.#{activity.trackable.offer_type}"),
       room_description: activity.trackable.room_description.truncate(255, separator: ' '),
+      cover_photo_url: Notifications::ImageService.new.cover_photo_url(activity.trackable),
       owner_name: activity.owner.username,
       owner_url: user_url(activity.owner, DEFAULT_URL_OPTIONS),
-      owner_avatar_url: Notifications::AvatarService.new(activity.trackable).call,
+      owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.trackable),
     }
   end
 

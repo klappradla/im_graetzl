@@ -69,6 +69,10 @@ class Notification < ApplicationRecord
     "notification-#{type.demodulize.underscore.dasherize}"
   end
 
+  def mail_vars
+    { type: type.demodulize.underscore }.merge(custom_mail_vars)
+  end
+
   def basic_mail_vars
     if activity.trackable.respond_to?(:graetzl)
       [
@@ -80,8 +84,8 @@ class Notification < ApplicationRecord
     end
   end
 
-  def mail_vars
-    raise NotImplementedError, "mail_vars method not implemented for #{self.class}"
+  def custom_mail_vars
+    raise NotImplementedError, "custom_mail_vars method not implemented for #{self.class}"
   end
 
   def mail_subject

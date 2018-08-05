@@ -11,16 +11,14 @@ class Notifications::NewLocation < Notification
     'Es gibt eine neue Location in deinem Grätzl'
   end
 
-  def mail_vars
+  def custom_mail_vars
     {
-      type: type.demodulize.underscore,
       location_name: activity.trackable.name,
       location_url: graetzl_location_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
       location_slogan: activity.trackable.slogan,
       location_category: activity.trackable.category.try(:name),
       location_address: printable_address(activity.trackable),
-      owner_avatar_url: Notifications::AvatarService.new(activity.trackable).call
-
+      owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.trackable),
     }
   end
 

@@ -7,7 +7,7 @@ class Notifications::LocationApproved < Notification
     activity.trackable.users
   end
 
-  def mail_vars
+  def custom_mail_vars
     {
       location_name: activity.trackable.name,
       location_url: graetzl_location_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS)

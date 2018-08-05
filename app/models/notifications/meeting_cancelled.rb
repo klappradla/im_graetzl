@@ -11,11 +11,11 @@ class Notifications::MeetingCancelled < Notification
     'Absage eines Treffens an dem ich teilnehme'
   end
 
-  def mail_vars
+  def custom_mail_vars
     {
       owner_name: activity.owner.username,
       owner_url: user_url(activity.owner, DEFAULT_URL_OPTIONS),
-      owner_avatar_url: Notifications::AvatarService.new(activity.owner).call,
+      owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.owner),
       meeting_name: activity.trackable.name,
       meeting_url: graetzl_meeting_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS)
     }

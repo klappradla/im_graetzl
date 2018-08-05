@@ -86,6 +86,10 @@ class Notification::SummaryMail
           Notifications::AlsoCommentedMeeting, Notifications::AlsoCommentedRoomDemand,
           Notifications::AlsoCommentedRoomOffer, Notifications::AlsoCommentedUserPost]
       },
+      {
+        name: 'Comment on my Wall',
+        types: [Notifications::NewWallComment]
+      },
     ]
   }
 

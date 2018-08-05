@@ -15,13 +15,13 @@ class Notifications::NewWallComment < Notification
     'Die Pinnwand auf meinem Profil hat einen neuen Kommentar'
   end
 
-  def mail_vars
+  def custom_mail_vars
     {
       comment_url: graetzl_user_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS) + "#comment-#{activity.recipient.id}",
       comment_content: activity.recipient.content.truncate(300, separator: ' '),
       owner_name: activity.owner.username,
       owner_url: user_url(activity.owner, DEFAULT_URL_OPTIONS),
-      owner_avatar_url: Notifications::AvatarService.new(activity.owner).call
+      owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.owner)
     }
   end
 
