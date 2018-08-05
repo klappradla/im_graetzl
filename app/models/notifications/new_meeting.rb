@@ -24,7 +24,7 @@ class Notifications::NewMeeting < Notification
       owner_name: activity.owner.username,
       owner_url: user_url(activity.owner, DEFAULT_URL_OPTIONS),
       owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.owner),
-      meeting_name: activity.trackable.name,
+      meeting_name: activity.trackable.name.truncate(70, separator: ' '),
       meeting_url: graetzl_meeting_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
       meeting_starts_at: (activity.trackable.starts_at_date && activity.trackable.starts_at_time) ? "#{I18n.localize(activity.trackable.starts_at_date, format:'%A %d. %B')}, #{I18n.localize(activity.trackable.starts_at_time, format:'%H:%M')} Uhr" : '',
       meeting_starts_at_date: activity.trackable.starts_at_date ? I18n.localize(activity.trackable.starts_at_date, format:'%A %d. %B') : '',
