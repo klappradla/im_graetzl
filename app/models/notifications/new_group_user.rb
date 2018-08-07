@@ -17,6 +17,7 @@ class Notifications::NewGroupUser < Notification
       group_url: group_url(activity.trackable.group, DEFAULT_URL_OPTIONS),
       group_user_first_name: activity.trackable.user.first_name,
       group_user_last_name: activity.trackable.user.last_name,
+      group_user_url: user_url(activity.trackable.user, DEFAULT_URL_OPTIONS),
       group_user_avatar_url: Notifications::ImageService.new.avatar_url(activity.trackable.user),
     }
   end

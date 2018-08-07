@@ -2,7 +2,7 @@
 
   <div class="settingHead">
     <div class="col1">
-      <h2><span>Neuigkeiten</span> aus meinem Grätzl</h2>
+      <h2><span>Neuigkeiten</span> aus deinem Grätzl</h2>
     </div>
     <div class="col2">
       <%= icon_tag "bell" %> Notifications
@@ -11,29 +11,24 @@
       <%= icon_tag "mail-1" %> Per E-Mail
     </div>
   </div>
-
   <%= render 'notification_settings/slice', type: Notifications::NewMeeting %>
-  <%= render 'notification_settings/slice', type: Notifications::NewLocationPost %>
   <%= render 'notification_settings/slice', type: Notifications::NewLocation %>
+  <%= render 'notification_settings/slice', type: Notifications::NewLocationPost %>
   <%= render 'notification_settings/slice', type: Notifications::NewUserPost %>
-  <%= render 'notification_settings/slice', type: Notifications::NewRoomOffer %>
-  <%= render 'notification_settings/slice', type: Notifications::NewRoomDemand %>
-  <%= render 'notification_settings/slice', type: Notifications::NewRoomCall %>
-
 </div>
+
 
 <div class="block-settings">
   <div class="settingHead">
     <div class="col1">
-      <h2>Treffen an denen <span>ich teilnehme</span></h2>
+      <h2><span>Neue Raumteiler</span> in deinem Grätzl</h2>
     </div>
   </div>
-
-  <!-- Was Same like CommentInUsersMeeting?! toggles both ... -->
-  <!--<%= render 'notification_settings/slice', type: Notifications::CommentInMeeting %>-->
-  <%= render 'notification_settings/slice', type: Notifications::MeetingUpdated %>
-  <%= render 'notification_settings/slice', type: Notifications::MeetingCancelled %>
+  <%= render 'notification_settings/slice', type: Notifications::NewRoomOffer %>
+  <%= render 'notification_settings/slice', type: Notifications::NewRoomDemand %>
+  <%= render 'notification_settings/slice', type: Notifications::NewRoomCall %>
 </div>
+
 
 <div class="block-settings">
   <div class="settingHead">
@@ -41,10 +36,21 @@
       <h2>Betrifft <span>mich</span></h2>
     </div>
   </div>
-
-  <%= render 'notification_settings/slice', type: Notifications::AlsoCommentedLocationPost %>
-  <%= render 'notification_settings/slice', type: Notifications::AttendeeInUsersMeeting %>
   <%= render 'notification_settings/slice', type: Notifications::CommentInUsersMeeting %>
+  <%= render 'notification_settings/slice', type: Notifications::AlsoCommentedLocationPost %>
+  <%= render 'notification_settings/slice', type: Notifications::NewWallComment %>
+  <%= render 'notification_settings/slice', type: Notifications::AttendeeInUsersMeeting %>
+  <%= render 'notification_settings/slice', type: Notifications::MeetingUpdated %>
+  <%= render 'notification_settings/slice', type: Notifications::MeetingCancelled %>
+</div>
+
+
+<div class="block-settings">
+  <div class="settingHead">
+    <div class="col1">
+      <h2>Neues aus deinen <span>Gruppen</span></h2>
+    </div>
+  </div>
   <%= render 'notification_settings/slice', type: Notifications::NewGroupDiscussion %>
   <%= render 'notification_settings/slice', type: Notifications::NewGroupUser %>
   <%= render 'notification_settings/slice', type: Notifications::NewGroupMeeting %>

@@ -1,6 +1,6 @@
 class Notifications::NewWallComment < Notification
   TRIGGER_KEY = 'user.comment'
-  DEFAULT_INTERVAL = :immediate
+  DEFAULT_INTERVAL = :daily
   BITMASK = 2**10
 
   def self.receivers(activity)
@@ -12,7 +12,7 @@ class Notifications::NewWallComment < Notification
   end
 
   def self.description
-    'Die Pinnwand auf meinem Profil hat einen neuen Kommentar'
+    'Jemand hat auf meine Pinnwand geschrieben'
   end
 
   def custom_mail_vars

@@ -8,7 +8,7 @@ class Notifications::NewLocationPost < Notification
   end
 
   def self.description
-    'Eine Location aus meinem Grätzl hat eine Neuigkeit erstellt'
+    'Eine Location aus deinem Grätzl hat eine Neuigkeit erstellt'
   end
 
   def self.notify_owner?
