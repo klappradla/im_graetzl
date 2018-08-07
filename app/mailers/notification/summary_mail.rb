@@ -49,31 +49,31 @@ class Notification::SummaryMail
     from_name: "imGrätzl.at | Updates",
     blocks: [
       {
-        name: 'New Topic in Group',
+        name: 'Neues Thema in der Gruppe',
         types: [Notifications::NewGroupDiscussion]
       },
       {
-        name: 'New Group Members',
+        name: 'Neues Mitglied in der Gruppe',
         types: [Notifications::NewGroupUser]
       },
       {
-        name: 'New Group Meeting',
+        name: 'Neues Gruppentreffen',
         types: [Notifications::NewGroupMeeting]
       },
       {
-        name: 'New Anwser in Topic I follow',
+        name: 'Neue Antwort in der Gruppe',
         types: [Notifications::NewGroupPost]
       },
       {
-        name: "New Meeting Atendee",
+        name: "Neuer Teilnehmer bei einem Treffen",
         types: [Notifications::AttendeeInUsersMeeting]
       },
       {
-        name: "New Meeting Updates",
+        name: "Änderungen in einem Treffen",
         types: [Notifications::MeetingCancelled, Notifications::MeetingUpdated]
       },
       {
-        name: "Comment on my content",
+        name: "Neuer Kommentar bei",
         types: [Notifications::CommentInMeeting, Notifications::CommentInUsersMeeting,
           Notifications::CommentOnAdminPost, Notifications::CommentOnLocationPost,
           Notifications::CommentOnRoomDemand, Notifications::CommentOnRoomOffer,
@@ -81,13 +81,13 @@ class Notification::SummaryMail
         ]
       },
       {
-        name: 'Also commented',
+        name: 'Ebenfalls kommentiert',
         types: [Notifications::AlsoCommentedAdminPost, Notifications::AlsoCommentedLocationPost,
           Notifications::AlsoCommentedMeeting, Notifications::AlsoCommentedRoomDemand,
           Notifications::AlsoCommentedRoomOffer, Notifications::AlsoCommentedUserPost]
       },
       {
-        name: 'Comment on my Wall',
+        name: 'Neuer Kommentar auf deiner Pinnwand',
         types: [Notifications::NewWallComment]
       },
     ]

@@ -22,6 +22,8 @@ class Notifications::AlsoCommentedAdminPost < Notification
     {
       post_title: activity.trackable.title,
       post_url: admin_post_url(activity.trackable, DEFAULT_URL_OPTIONS),
+      title: activity.trackable.title,
+      url: admin_post_url(activity.trackable, DEFAULT_URL_OPTIONS),
       comment_url: admin_post_url(activity.trackable, DEFAULT_URL_OPTIONS),
       comment_content: activity.recipient.content.truncate(300, separator: ' '),
       owner_name: activity.owner.username,

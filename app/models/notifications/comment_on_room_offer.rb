@@ -17,6 +17,8 @@ class Notifications::CommentOnRoomOffer < Notification
       room_url: room_offer_url(activity.trackable, DEFAULT_URL_OPTIONS),
       room_type: I18n.t("activerecord.attributes.room_offer.offer_types_active.#{activity.trackable.offer_type}"),
       room_description: activity.trackable.room_description,
+      title: activity.trackable.slogan,
+      url: room_offer_url(activity.trackable, DEFAULT_URL_OPTIONS),
       comment_url: room_offer_url(activity.trackable, DEFAULT_URL_OPTIONS),
       comment_content: activity.recipient.content.truncate(300, separator: ' '),
       owner_name: activity.owner.username,
