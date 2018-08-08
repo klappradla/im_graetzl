@@ -32,16 +32,13 @@
   <%= render 'room_calls/show/info' %>
   <%= render 'room_calls/show/modules' %>
   <%= render 'room_calls/show/photos' %>
-  <%= render 'room_calls/show/group' if @room_call.group %>
   <%= render 'room_calls/show/prices' %>
   <% if !user_signed_in? %>
     <%= render 'room_calls/show/login' %>
   <% else %>
     <%= render 'room_calls/show/add_submission' %>
   <% end %>
-  <!--<% if @room_call.user == current_user %>
-     evtl. show submissions
-  <% end %>-->
+  <%= render 'room_calls/show/group' if @room_call.group %>
   <%= render 'room_calls/show/map' %>
 
 </div>

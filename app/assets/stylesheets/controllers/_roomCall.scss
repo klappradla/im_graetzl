@@ -91,7 +91,17 @@
         img {display: none;}
       }
       .cardBox {
-        //width:100%;
+        a {
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        .img-round {
+          width:28px;
+          height:28px;
+          margin-right:12px;
+        }
       }
 
       @include respond-to(">=medium") {
@@ -218,6 +228,7 @@
             display: inline-block;
             fill: $color-ambient-grey;
             margin:2px 8px 2px 0px;
+            min-width: 28px;
           }
         }
 
@@ -418,7 +429,7 @@
         }
 
         .btn-primary {
-          width:270px;
+          //width:270px;
         }
       }
 

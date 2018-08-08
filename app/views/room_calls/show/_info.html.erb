@@ -6,6 +6,8 @@
     <p><%= @room_call.description %></p>
     <h3>Die Idee dahinter:</h3>
     <p><%= @room_call.about_us %></p>
+    <h3>Wer kann sich bewerben?</h3>
+    <p><%= @room_call.about_partner %></p>
 
     <%= image_tag('svg/round-arrow-bottom.svg') %>
 
@@ -18,8 +20,22 @@
     <p><%= I18n.localize(@room_call.ends_at, format: '%d. %B %Y') %></p>
     <strong>Beziehbar ab:</strong>
     <p><%= I18n.localize(@room_call.opens_at, format: '%d. %B %Y') %></p>
-    <strong>Raumteiler-Hub</strong>
+    <strong>Raumteiler-Hub:</strong>
     <p><%= @room_call.full_address %></p>
+    <strong>Call Kontakt:</strong>
+    <p>
+      <% if @room_call.first_name.present? || @room_call.last_name.present? %>
+        <%= "#{@room_call.first_name} #{@room_call.last_name}" %><br>
+      <% end %>
+      <% if @room_call.email.present? %>
+        <%= mail_to @room_call.email %><br>
+      <% end %>
+      <% if @room_call.website.present? %>
+        <%= link_to @room_call.website, target: '_blank' do %>
+          <%= @room_call.website.sub(/^https?\:\/\//,'') %>
+        <% end %>
+      <% end %>
+    </p>
 
     <% if user_signed_in? && current_user == @room_call.user %>
     <p><%= link_to 'Call bearbeiten', edit_room_call_path(@room_call) %></p>

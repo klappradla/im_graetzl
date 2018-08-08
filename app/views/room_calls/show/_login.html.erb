@@ -2,7 +2,7 @@
 
   <h2>Open Call - Deine Bewerbung</h2>
 
-  <div class="info">
+  <!--<div class="info">
     <div class="left">
       <h3 class="subtitle">Wer kann sich bewerben?</h3>
       <p class="description"><%= @room_call.about_partner %></p>
@@ -38,8 +38,7 @@
         <% end %>
       </div>
     </div>
-
-  </div>
+  </div>-->
 
   <div class="steps">
 
@@ -47,8 +46,8 @@
       <div class="bigicontext-element -large">
         <%= icon_tag "mouse" %>
       </div>
-      <h3>1. Einloggen</h3>
-      <p>Log dich zuerst mit deinem Grätzl Account ein, oder hol dir vorher deinen kostenlosen Account.</p>
+      <h3>1. Kostenlos registrieren</h3>
+      <p>Hole dir zuerst deinen kostenlosen imGrätzl Account und kehre eingeloggt auf diese Seite zurück.</p>
     </div>
 
     <div class="line">
@@ -60,7 +59,7 @@
         <%= icon_tag "user-info-profile-details" %>
       </div>
       <h3>2. Call ausfüllen</h3>
-      <p>Eingeloggt siehst du das Call Formular und du kannst dich bis zum <%= I18n.localize(@room_call.ends_at, format: '%d. %B') %> bewerben.</p>
+      <p>Eingeloggt siehst du an dieser Stelle das Call Formular und du kannst dich bis zum <%= I18n.localize(@room_call.ends_at, format: '%d. %B') %> bewerben.</p>
     </div>
 
     <div class="line">
@@ -78,9 +77,7 @@
   </div>
 
   <div class="loginpanel">
-    <%= link_to 'Mit deinem Account einloggen', new_user_session_path(redirect: request.original_url), class: 'btn-primary -mint' %>
-    <span>oder</span>
-    <%= link_to 'Neuen Account erstellen', new_registration_path(redirect: request.original_url), class: 'btn-primary' %>
+    <%= link_to 'Kostenlos registrieren & weiter zum Call', new_registration_path(redirect: request.original_url), class: 'btn-primary -rose -large -shadow' %>
   </div>
 
 

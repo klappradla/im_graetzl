@@ -2,7 +2,7 @@
 
   <h2>Open Call - Deine Bewerbung</h2>
 
-  <div class="info">
+  <!--<div class="info">
     <div class="left">
       <h3 class="subtitle">Wer kann sich bewerben?</h3>
       <p class="description"><%= @room_call.about_partner %></p>
@@ -38,8 +38,7 @@
         <% end %>
       </div>
     </div>
-
-  </div>
+  </div>-->
 
   <% if @room_call.open? %>
   <div class="steps">
@@ -125,7 +124,7 @@
 
     </div>
 
-    <%= submit_tag 'Call abschicken', data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
+    <%= submit_tag 'Call abschicken', data: { disable_with: 'speichert...' }, class: 'btn-primary -rose -large -shadow' %>
     <% end %>
   </div>
 
