@@ -4,7 +4,7 @@ class Notifications::NewRoomCall < Notification
   BITMASK = 2**14
 
   def self.receivers(activity)
-    User.where(graetzl_id: activity.trackable.graetzl_id) # User.all
+    User.all
   end
 
   def self.description
