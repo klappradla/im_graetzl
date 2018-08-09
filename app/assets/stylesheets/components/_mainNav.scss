@@ -99,7 +99,9 @@
   .registerlink {
     @include respond-to("<410px") {
       flex: 0;
-      margin-left: auto;
+      //margin-left: auto;
+      white-space: nowrap;
+      margin-left: -20px;
     }
   }
 

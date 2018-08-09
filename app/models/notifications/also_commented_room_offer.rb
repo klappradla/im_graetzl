@@ -17,6 +17,7 @@ class Notifications::AlsoCommentedRoomOffer < Notification
       room_url: room_offer_url(activity.trackable, DEFAULT_URL_OPTIONS),
       room_type: I18n.t("activerecord.attributes.room_offer.offer_types_active.#{activity.trackable.offer_type}"),
       room_description: activity.trackable.room_description,
+      name: 'Neuer Kommentar bei Raum:',
       title: activity.trackable.slogan,
       url: room_offer_url(activity.trackable, DEFAULT_URL_OPTIONS),
       comment_url: room_offer_url(activity.trackable, DEFAULT_URL_OPTIONS),
@@ -28,6 +29,6 @@ class Notifications::AlsoCommentedRoomOffer < Notification
   end
 
   def mail_subject
-    'Neue Antwort bei Raumteiler'
+    "#{activity.owner.username} hat einen Raum ebenfalls kommentiert."
   end
 end

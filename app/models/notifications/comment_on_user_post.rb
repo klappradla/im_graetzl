@@ -19,6 +19,7 @@ class Notifications::CommentOnUserPost < Notification
     {
       post_title: activity.trackable.content.truncate(50, separator: ' '),
       post_url: graetzl_user_post_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
+      name: 'Neuer Kommentar bei deinem Beitrag:',
       title: activity.trackable.content.truncate(50, separator: ' '),
       url: graetzl_user_post_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
       comment_url: graetzl_user_post_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
@@ -30,6 +31,6 @@ class Notifications::CommentOnUserPost < Notification
   end
 
   def mail_subject
-    'Neuer Kommentar auf deinen Beitrag'
+    "#{activity.owner.username} hat deinen Beitrag kommentiert."
   end
 end

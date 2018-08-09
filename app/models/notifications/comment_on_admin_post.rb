@@ -26,6 +26,7 @@ class Notifications::CommentOnAdminPost < Notification
     {
       post_title: activity.trackable.content.truncate(50, separator: ' '),
       post_url: admin_post_url(activity.trackable, DEFAULT_URL_OPTIONS),
+      name: 'Neuer Kommentar bei deinem Beitrag:',
       title: activity.trackable.content.truncate(50, separator: ' '),
       url: admin_post_url(activity.trackable, DEFAULT_URL_OPTIONS),
       comment_url: admin_post_url(activity.trackable, DEFAULT_URL_OPTIONS),
@@ -37,6 +38,6 @@ class Notifications::CommentOnAdminPost < Notification
   end
 
   def mail_subject
-    'Neuer Kommentar auf deinen Beitrag'
+    "#{activity.owner.username} hat deinen Beitrag kommentiert."
   end
 end

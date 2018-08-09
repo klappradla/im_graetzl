@@ -15,6 +15,7 @@ class Notifications::AlsoCommentedLocationPost < Notification
     {
       post_title: activity.trackable.title,
       post_url: graetzl_location_url(activity.trackable.graetzl, activity.trackable.author, anchor: ApplicationController.helpers.dom_id(activity.trackable), host: DEFAULT_URL_OPTIONS[:host]),
+      name: 'Neuer Kommentar bei Location-Update:',
       title: activity.trackable.title,
       url: graetzl_location_url(activity.trackable.graetzl, activity.trackable.author, anchor: ApplicationController.helpers.dom_id(activity.trackable), host: DEFAULT_URL_OPTIONS[:host]),
       comment_url: graetzl_location_url(activity.trackable.graetzl, activity.trackable.author, anchor: ApplicationController.helpers.dom_id(activity.trackable), host: DEFAULT_URL_OPTIONS[:host]),
@@ -26,6 +27,6 @@ class Notifications::AlsoCommentedLocationPost < Notification
   end
 
   def mail_subject
-    'Neue Antwort bei Beitrag'
+    "#{activity.owner.username} hat einen Beitrag ebenfalls kommentiert."
   end
 end

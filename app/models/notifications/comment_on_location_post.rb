@@ -19,6 +19,7 @@ class Notifications::CommentOnLocationPost < Notification
     {
       post_title: activity.trackable.title,
       post_url: graetzl_location_url(activity.trackable.author.graetzl, activity.trackable.author, anchor: ApplicationController.helpers.dom_id(activity.trackable), host: DEFAULT_URL_OPTIONS[:host]),
+      name: 'Neuer Kommentar bei deinem Location-Update:',
       title: activity.trackable.title,
       url: graetzl_location_url(activity.trackable.author.graetzl, activity.trackable.author, anchor: ApplicationController.helpers.dom_id(activity.trackable), host: DEFAULT_URL_OPTIONS[:host]),
       comment_url: graetzl_location_url(activity.trackable.author.graetzl, activity.trackable.author, anchor: ApplicationController.helpers.dom_id(activity.trackable), host: DEFAULT_URL_OPTIONS[:host]),
@@ -30,6 +31,6 @@ class Notifications::CommentOnLocationPost < Notification
   end
 
   def mail_subject
-    'Neuer Kommentar auf deinen Beitrag'
+    "#{activity.owner.username} hat dein Location-Update kommentiert."
   end
 end

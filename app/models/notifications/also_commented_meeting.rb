@@ -15,6 +15,7 @@ class Notifications::AlsoCommentedMeeting < Notification
     {
       meeting_name: activity.trackable.name,
       meeting_url: graetzl_meeting_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
+      name: 'Neuer Kommentar bei Treffen:',
       title: activity.trackable.name,
       url: graetzl_meeting_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
       comment_url: graetzl_meeting_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
@@ -26,6 +27,6 @@ class Notifications::AlsoCommentedMeeting < Notification
   end
 
   def mail_subject
-    'Neue Antwort bei einem Treffen'
+    "#{activity.owner.username} hat ein Treffen ebenfalls kommentiert."
   end
 end

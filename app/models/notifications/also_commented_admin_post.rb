@@ -22,6 +22,7 @@ class Notifications::AlsoCommentedAdminPost < Notification
     {
       post_title: activity.trackable.title,
       post_url: admin_post_url(activity.trackable, DEFAULT_URL_OPTIONS),
+      name: 'Neuer Kommentar bei Beitrag:',
       title: activity.trackable.title,
       url: admin_post_url(activity.trackable, DEFAULT_URL_OPTIONS),
       comment_url: admin_post_url(activity.trackable, DEFAULT_URL_OPTIONS),
@@ -33,6 +34,6 @@ class Notifications::AlsoCommentedAdminPost < Notification
   end
 
   def mail_subject
-    'Neue Antwort bei Beitrag'
+    "#{activity.owner.username} hat einen Beitrag ebenfalls kommentiert."
   end
 end

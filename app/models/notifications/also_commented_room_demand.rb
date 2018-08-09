@@ -17,6 +17,7 @@ class Notifications::AlsoCommentedRoomDemand < Notification
       room_url: room_demand_url(activity.trackable, DEFAULT_URL_OPTIONS),
       room_type: I18n.t("activerecord.attributes.room_demand.demand_types_active.#{activity.trackable.demand_type}"),
       room_description: activity.trackable.demand_description,
+      name: 'Neuer Kommentar bei Raumsuche:',
       title: activity.trackable.slogan,
       url: room_demand_url(activity.trackable, DEFAULT_URL_OPTIONS),
       comment_url: room_demand_url(activity.trackable, DEFAULT_URL_OPTIONS),
@@ -28,6 +29,6 @@ class Notifications::AlsoCommentedRoomDemand < Notification
   end
 
   def mail_subject
-    "#{activity.owner.username} hat einen Raumteiler ebenfalls kommentiert."
+    "#{activity.owner.username} hat eine Raumgesuch ebenfalls kommentiert."
   end
 end

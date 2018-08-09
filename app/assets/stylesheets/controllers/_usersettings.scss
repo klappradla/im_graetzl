@@ -85,6 +85,7 @@ div.notification-settings {
     }
     .col3 {
       flex: 0 0 auto;
+      flex-grow:1;
       @include respond-to(">=medium") {
         flex: 0 0 25%;
         .input-select {
@@ -117,7 +118,7 @@ div.notification-settings {
       @include respond-to(">=medium") {
         display: block;
         text-align: center;
-        color: $color-ambient-grey;
+        //color: $color-ambient-grey;
         font-size: 14px;
         font-style: italic;
         [class^=icon-] {
