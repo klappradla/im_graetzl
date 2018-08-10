@@ -29,6 +29,6 @@ class Notifications::AlsoCommentedRoomDemand < Notification
   end
 
   def mail_subject
-    "#{activity.owner.username} hat eine Raumgesuch ebenfalls kommentiert."
+    "#{activity.owner.username} hat ein Raumgesuch ebenfalls kommentiert."
   end
 end
