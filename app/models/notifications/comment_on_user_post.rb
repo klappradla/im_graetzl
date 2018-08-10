@@ -19,7 +19,7 @@ class Notifications::CommentOnUserPost < Notification
     {
       post_title: activity.trackable.content.truncate(50, separator: ' '),
       post_url: graetzl_user_post_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
-      name: 'Neuer Kommentar bei deinem Beitrag:',
+      headline: 'Neuer Kommentar bei deinem Beitrag:',
       title: activity.trackable.content.truncate(50, separator: ' '),
       url: graetzl_user_post_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
       comment_url: graetzl_user_post_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),

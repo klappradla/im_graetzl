@@ -26,7 +26,7 @@ class Notifications::CommentOnAdminPost < Notification
     {
       post_title: activity.trackable.content.truncate(50, separator: ' '),
       post_url: admin_post_url(activity.trackable, DEFAULT_URL_OPTIONS),
-      name: 'Neuer Kommentar bei deinem Beitrag:',
+      headline: 'Neuer Kommentar bei deinem Beitrag:',
       title: activity.trackable.content.truncate(50, separator: ' '),
       url: admin_post_url(activity.trackable, DEFAULT_URL_OPTIONS),
       comment_url: admin_post_url(activity.trackable, DEFAULT_URL_OPTIONS),
