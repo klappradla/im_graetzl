@@ -17,8 +17,9 @@ class Notifications::CommentOnUserPost < Notification
 
   def custom_mail_vars
     {
-      post_title: activity.trackable.content.truncate(50, separator: ' '),
-      post_url: graetzl_user_post_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
+      #post_title: activity.trackable.content.truncate(50, separator: ' '),
+      #post_url: graetzl_user_post_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
+      type: 'commented',
       headline: 'Neuer Kommentar bei deinem Beitrag:',
       title: activity.trackable.content.truncate(50, separator: ' '),
       url: graetzl_user_post_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),

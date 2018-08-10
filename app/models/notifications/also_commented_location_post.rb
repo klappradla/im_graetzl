@@ -13,8 +13,9 @@ class Notifications::AlsoCommentedLocationPost < Notification
 
   def custom_mail_vars
     {
-      post_title: activity.trackable.title,
-      post_url: graetzl_location_url(activity.trackable.graetzl, activity.trackable.author, anchor: ApplicationController.helpers.dom_id(activity.trackable), host: DEFAULT_URL_OPTIONS[:host]),
+      #post_title: activity.trackable.title,
+      #post_url: graetzl_location_url(activity.trackable.graetzl, activity.trackable.author, anchor: ApplicationController.helpers.dom_id(activity.trackable), host: DEFAULT_URL_OPTIONS[:host]),
+      type: 'also_commented',
       headline: 'Neuer Kommentar bei Location-Update:',
       title: activity.trackable.title,
       url: graetzl_location_url(activity.trackable.graetzl, activity.trackable.author, anchor: ApplicationController.helpers.dom_id(activity.trackable), host: DEFAULT_URL_OPTIONS[:host]),

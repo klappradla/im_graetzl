@@ -13,8 +13,9 @@ class Notifications::AlsoCommentedUserPost < Notification
 
   def custom_mail_vars
     {
-      post_title: activity.trackable.title,
-      post_url: graetzl_user_post_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
+      #post_title: activity.trackable.title,
+      #post_url: graetzl_user_post_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
+      type: 'also_commented',
       headline: 'Neuer Kommentar bei Beitrag:',
       title: activity.trackable.title,
       url: graetzl_user_post_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),

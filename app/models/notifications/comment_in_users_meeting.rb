@@ -17,8 +17,9 @@ class Notifications::CommentInUsersMeeting < Notification
 
   def custom_mail_vars
     {
-      meeting_name: activity.trackable.name,
-      meeting_url: graetzl_meeting_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
+      #meeting_name: activity.trackable.name,
+      #meeting_url: graetzl_meeting_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
+      type: 'commented',
       headline: 'Neuer Kommentar bei deinem Treffen:',
       title: activity.trackable.name,
       url: graetzl_meeting_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),

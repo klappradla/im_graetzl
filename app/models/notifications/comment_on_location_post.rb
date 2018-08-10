@@ -17,8 +17,9 @@ class Notifications::CommentOnLocationPost < Notification
 
   def custom_mail_vars
     {
-      post_title: activity.trackable.title,
-      post_url: graetzl_location_url(activity.trackable.author.graetzl, activity.trackable.author, anchor: ApplicationController.helpers.dom_id(activity.trackable), host: DEFAULT_URL_OPTIONS[:host]),
+      #post_title: activity.trackable.title,
+      #post_url: graetzl_location_url(activity.trackable.author.graetzl, activity.trackable.author, anchor: ApplicationController.helpers.dom_id(activity.trackable), host: DEFAULT_URL_OPTIONS[:host]),
+      type: 'commented',
       headline: 'Neuer Kommentar bei deinem Location-Update:',
       title: activity.trackable.title,
       url: graetzl_location_url(activity.trackable.author.graetzl, activity.trackable.author, anchor: ApplicationController.helpers.dom_id(activity.trackable), host: DEFAULT_URL_OPTIONS[:host]),
