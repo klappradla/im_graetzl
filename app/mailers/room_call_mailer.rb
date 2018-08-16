@@ -43,7 +43,7 @@ class RoomCallMailer
         { name: 'room_call_submission', content: submission_content(submission) },
         { name: 'user_avatar_url', content: Notifications::ImageService.new.avatar_url(submission.user) },
         { name: 'group_name', content: submission.room_call.group.title },
-        { name: 'group_url', content: group_url(submission.room_call.group, DEFAULT_URL_OPTIONS, anchor: 'tab-call') },
+        { name: 'group_url', content: group_url(submission.room_call.group, URL_OPTIONS, anchor: 'tab-call') },
       ]
     }
   end
