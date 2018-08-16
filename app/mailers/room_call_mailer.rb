@@ -21,7 +21,7 @@ class RoomCallMailer
         { name: 'room_call_title', content: submission.room_call.title },
         { name: 'room_call_subtitle', content: submission.room_call.subtitle },
         { name: 'room_call_url', content: room_call_url(submission.room_call, URL_OPTIONS) },
-        { name: 'room_call_picture_url', content: Notifications::ImageService.new.cover_photo_url(submission.room_call) },
+        { name: 'room_call_picture_url', content: Notifications::ImageService.new.cover_photo_url(submission.room_call) }
       ]
     }
   end
@@ -43,7 +43,7 @@ class RoomCallMailer
         { name: 'room_call_submission', content: submission_content(submission) },
         { name: 'user_avatar_url', content: Notifications::ImageService.new.avatar_url(submission.user) },
         { name: 'group_name', content: submission.room_call.group.title },
-        { name: 'group_url', content: group_url(submission.room_call.group, URL_OPTIONS, anchor: 'tab-call') },
+        { name: 'group_url', content: group_url(submission.room_call.group, URL_OPTIONS) }
       ]
     }
   end
