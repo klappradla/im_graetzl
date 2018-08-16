@@ -11,10 +11,11 @@ class GroupMailer
         { name: 'first_name', content: join_request.user.first_name },
         { name: 'last_name', content: join_request.user.last_name },
         { name: 'e_mail', content: join_request.user.email },
-        { name: 'user_type', content: join_request.user.business? ? 'business' : 'normal' },
         { name: 'request_message', content: join_request.request_message },
         { name: 'group_name', content: join_request.group.title },
-        { name: 'group_url', content: group_url(join_request.group, URL_OPTIONS) },
+        { name: 'group_url', content: group_url(join_request.group, DEFAULT_URL_OPTIONS, anchor: 'tab-members') },
+        { name: 'user_url', content: user_url(join_request.user, DEFAULT_URL_OPTIONS) },
+        { name: 'user_avatar_url', content: Notifications::ImageService.new.avatar_url(join_request.user) },
       ],
       merge_vars: group_admins.map { |user| owner_personal_vars(user) }
     })
@@ -27,7 +28,6 @@ class GroupMailer
         { name: 'username', content: user.username },
         { name: 'first_name', content: user.first_name },
         { name: 'last_name', content: user.last_name },
-        { name: 'user_type', content: user.business? ? 'business' : 'normal' },
         { name: 'group_name', content: group.title },
         { name: 'group_url', content: group_url(group, URL_OPTIONS) },
       ]
@@ -35,15 +35,6 @@ class GroupMailer
   end
 
   private
-
-  def asset_url(resource, asset_name)
-    host = "https://#{Refile.cdn_host || default_host}"
-    Refile.attachment_url(resource, asset_name, host: host)
-  end
-
-  def default_host
-    Rails.application.config.action_mailer.default_url_options[:host]
-  end
 
   def owner_personal_vars(user)
     {
