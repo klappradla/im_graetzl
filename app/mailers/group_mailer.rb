@@ -13,8 +13,8 @@ class GroupMailer
         { name: 'e_mail', content: join_request.user.email },
         { name: 'request_message', content: join_request.request_message },
         { name: 'group_name', content: join_request.group.title },
-        { name: 'group_url', content: group_url(join_request.group, DEFAULT_URL_OPTIONS, anchor: 'tab-members') },
-        { name: 'user_url', content: user_url(join_request.user, DEFAULT_URL_OPTIONS) },
+        { name: 'group_url', content: group_url(join_request.group, URL_OPTIONS, anchor: 'tab-members') },
+        { name: 'user_url', content: user_url(join_request.user, URL_OPTIONS) },
         { name: 'user_avatar_url', content: Notifications::ImageService.new.avatar_url(join_request.user) },
       ],
       merge_vars: group_admins.map { |user| owner_personal_vars(user) }
