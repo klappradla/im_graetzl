@@ -43,12 +43,13 @@ class Notifications::NewMeeting < Notification
   private
 
   def set_notify_at
-    reminder_date = activity.trackable.starts_at_date - 7.days
-    if reminder_date.past?
+    if activity.trackable.starts_at_date.blank?
       self.notify_at = Time.current
     else
-      self.notify_at = reminder_date
+      self.notify_at = activity.trackable.starts_at_date - 7.days
     end
+
+    self.notify_at = Time.current if self.notify_at.past?
   end
 
 end

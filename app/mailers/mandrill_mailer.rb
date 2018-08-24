@@ -15,10 +15,17 @@ class MandrillMailer < BaseApiMailer
   attr_reader :template, :message
 
   def mandrill_client
-    @mandrill_client ||= Mandrill::API.new MANDRILL_API_KEY
+    @mandrill_client ||= Mandrill::API.new(MANDRILL_API_KEY)
   end
 
   def send_mail
-    mandrill_client.messages.send_template @template, [], @message
+    retries = 2
+    begin
+      mandrill_client.messages.send_template(@template, [], @message)
+    rescue Mandrill::Error
+      retries -= 1
+      retry if retries >= 0
+    end
   end
+
 end

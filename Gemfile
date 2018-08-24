@@ -16,7 +16,6 @@ gem 'rack-rewrite'
 
 gem 'aasm'
 gem 'acts-as-taggable-on'
-gem 'actionview-encoded_mail_to'
 gem 'browser'
 gem 'cocoon'
 gem 'devise'

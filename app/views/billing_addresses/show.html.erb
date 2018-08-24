@@ -13,8 +13,8 @@
             BIC: GIBAATWWXXX<br/></p>
           <p>Bitte gib folgenden <strong>Verwendungszweck</strong> bei deiner Überweisung an:<br/><i class="zuckerlID"><%= @zuckerl.payment_reference %></i></p>
         </div>
-        <p>Nach Zahlungseingang senden wir dir erneut eine Bestätigung (inkl. Rechnung) an folgende E-Mailadresse zu: <%= mail_to current_user.email, nil, encode: 'hex' %></p>
-        <p>Solltest du Fragen zu deiner Buchung haben, sende uns ein E-Mail an <%= mail_to 'wir@imgraetzl.at', nil, encode: 'hex' %></p>
+        <p>Nach Zahlungseingang senden wir dir erneut eine Bestätigung (inkl. Rechnung) an folgende E-Mailadresse zu: <%= mail_to current_user.email, nil %></p>
+        <p>Solltest du Fragen zu deiner Buchung haben, sende uns ein E-Mail an <%= mail_to 'wir@imgraetzl.at', nil %></p>
         <%= link_to 'Fertig', root_path, class: 'btn-primary' %>
       </div>
       <div class="collapsible">

@@ -32,7 +32,7 @@
         <% end %>
       <% end %>
       <% if @location.contact.email.present? %>
-        <%= mail_to @location.contact.email, nil, encode: 'hex', class: 'icontxt' do %>
+        <%= mail_to @location.contact.email, class: 'icontxt' do %>
           <%= icon_tag "at-symbol" %>
           <span><%= @location.contact.email %></span>
         <% end %>
