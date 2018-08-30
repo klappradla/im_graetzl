@@ -6,7 +6,8 @@
     <p><%= @room_call.description %></p>
     <h3>Die Idee dahinter:</h3>
     <p><%= @room_call.about_us %></p>
-    <h3>Wer kann sich bewerben?</h3>
+
+    <h3>Für wen?</h3>
     <p><%= @room_call.about_partner %></p>
 
     <%= image_tag('svg/round-arrow-bottom.svg') %>
@@ -16,7 +17,7 @@
   <div class="cardBox">
 
     <h3><%= @room_call.total_vacancies %> freie Plätze</h3>
-    <strong>Bewerbungsfrist:</strong>
+    <strong>Interesse? Gib Bescheid bis:</strong>
     <p><%= I18n.localize(@room_call.ends_at, format: '%d. %B %Y') %></p>
     <strong>Beziehbar ab:</strong>
     <p><%= I18n.localize(@room_call.opens_at, format: '%d. %B %Y') %></p>
@@ -42,7 +43,7 @@
     <% end %>
 
     <%= link_to '#call', class: 'btn-userIcons' do %>
-      <span><%= icon_tag "user-info-profile-details" %> Jetzt bewerben</span>
+      <span><%= icon_tag "user-info-profile-details" %> Jetzt mitmachen</span>
     <% end %>
 
   </div>

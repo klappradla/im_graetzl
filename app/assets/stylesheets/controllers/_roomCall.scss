@@ -186,7 +186,7 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        align-items: flex-end;
+        align-items: center;
       }
       .paperCard:nth-last-child(n+1) ~ .paperCard:last-child {
         margin-bottom:0px;
@@ -286,51 +286,48 @@
     //  Gallery Section ------------------------
 
     &.photos-section {
+
       .gallery {
-
+        @include cf;
         img {
+          float: left;
           display: block;
-          padding-bottom: 10px;
-          width: 100%;
-        }
+          margin-right: 10px;
+          margin-bottom: 10px;
+          padding: 5px;
+          background-color: #ffffff;
+          background-image: $texture-secondary;
+          box-shadow: $boxShadow-light;
 
-        column-fill:          balance;
-        -moz-column-fill:     balance;
-        -ms-column-fill:      balance;
-        -o-column-fill:       balance;
-        -webkit-column-fill:  balance;
-        column-gap:           10px;
-        -moz-column-gap:      10px;
-        -ms-column-gap:       10px;
-        -o-column-gap:        10px;
-        -webkit-column-gap:   10px;
-        width: 100%;
+          // Image Grid
+          // https://stackoverflow.com/questions/8720931/can-css-detect-the-number-of-children-an-element-has
 
-        @include respond-to(">=small") {
-          column-count:         1;
-          -moz-column-count:    1;
-          -ms-column-count:     1;
-          -o-column-count:      1;
-          -webkit-column-count: 1;
-        }
+          // Standard Grid 33%
+          width: calc(33.33% - 10px);
 
-        @include respond-to(">=medium") {
-          column-count:         2;
-          -moz-column-count:    2;
-          -ms-column-count:     2;
-          -o-column-count:      2;
-          -webkit-column-count: 2;
-
-          a:first-of-type {
-            //flex-grow: 1;
-            height:480px;
-            img {
-              height:480px;
-              object-fit: cover;
-            }
+          @include respond-to("<=medium") {
+            width: calc(50% - 10px);
           }
-
+          @include respond-to("<=small") {
+            width: 100%;
+          }
         }
+
+        /* just one item */
+        a:first-child:nth-last-child(1) {
+          img {
+            width: 100%;
+          }
+        }
+
+        /* just two items */
+        a:first-child:nth-last-child(2),
+        a:first-child:nth-last-child(2) ~ a {
+          img {
+            width: calc(50% - 10px);
+          }
+        }
+
       }
 
     } // End Single Section
