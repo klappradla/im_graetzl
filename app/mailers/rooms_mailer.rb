@@ -2,11 +2,11 @@ class RoomsMailer
   include MailUtils
 
   def send_new_room_offer_email(room_offer)
-    MandrillMailer.deliver(template: 'notification-room-online-stgg', message: room_offer_settings(room_offer))
+    MandrillMailer.deliver(template: 'notification-room-online', message: room_offer_settings(room_offer))
   end
 
   def send_new_room_demand_email(room_demand)
-    MandrillMailer.deliver(template: 'notification-room-online-stgg', message: room_demand_settings(room_demand))
+    MandrillMailer.deliver(template: 'notification-room-online', message: room_demand_settings(room_demand))
   end
 
   private
@@ -22,7 +22,6 @@ class RoomsMailer
         { name: 'room_type', content: I18n.t("activerecord.attributes.room_offer.offer_types.#{room_offer.offer_type}") },
         { name: 'room_description', content: room_offer.room_description },
         { name: 'room_categories', content: room_offer.room_categories.map(&:name).join(", ") },
-        { name: 'room_picture_url', content: asset_url(room_offer, :cover_photo) },
         { name: 'cover_photo_url', content: Notifications::ImageService.new.cover_photo_url(room_offer) },
       ] + user_vars(room_offer.user)
     }
@@ -38,7 +37,6 @@ class RoomsMailer
         { name: 'room_type', content: I18n.t("activerecord.attributes.room_demand.demand_types.#{room_demand.demand_type}") },
         { name: 'room_description', content: room_demand.demand_description },
         { name: 'room_categories', content: room_demand.room_categories.map(&:name).join(", ") },
-        { name: 'room_picture_url', content: asset_url(room_demand, :avatar) },
         { name: 'owner_avatar_url', content: Notifications::ImageService.new.avatar_url(room_demand) },
       ] + user_vars(room_demand.user)
     }
@@ -56,12 +54,4 @@ class RoomsMailer
     ]
   end
 
-  def asset_url(resource, asset_name)
-    host = "https://#{Refile.cdn_host || default_host}"
-    Refile.attachment_url(resource, asset_name, host: host)
-  end
-
-  def default_host
-    Rails.application.config.action_mailer.default_url_options[:host]
-  end
 end
