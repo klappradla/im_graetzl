@@ -64,6 +64,10 @@ class Meeting < ApplicationRecord
     going_tos.find{ |gt| gt.initiator? }.try(:user)
   end
 
+  def public?
+    !private?
+  end
+
   def responsible_user_or_location
     initiator_user = initiator
     if location && location.users.include?(initiator_user)
