@@ -7,7 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       render "address_form" and return
     end
 
-    build_resource({})
+    build_resource(origin: params[:origin])
     self.resource.graetzl = Graetzl.find(params[:graetzl_id])
     self.resource.address = Address.from_feature(params[:feature])
     respond_with self.resource
@@ -18,13 +18,23 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @graetzls = @address ? @address.graetzls : []
 
     if @graetzls.size == 1
-      redirect_to new_registration_url(graetzl_id: @graetzls.first.id, feature: params[:feature], redirect: params[:redirect])
+      redirect_to new_registration_url(
+        graetzl_id: @graetzls.first.id,
+        feature: params[:feature],
+        origin: params[:origin],
+        redirect: params[:redirect],
+      )
     else
       render "graetzls"
     end
   end
 
   def graetzls
+  end
+
+  def create
+    session[:confirmation_redirect] = params[:redirect] if params[:redirect].present?
+    super
   end
 
   protected
@@ -43,6 +53,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         :terms_and_conditions,
         :newsletter,
         :role,
+        :origin,
         :avatar, :remove_avatar,
         :graetzl_id,
         address_attributes: [

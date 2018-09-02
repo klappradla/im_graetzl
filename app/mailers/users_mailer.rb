@@ -15,6 +15,7 @@ class UsersMailer
         { name: 'first_name', content: user.first_name },
         { name: 'last_name', content: user.last_name },
         { name: 'user_type', content: user.business? ? 'business' : 'normal' },
+        { name: 'user_origin', content: user.origin },
         { name: 'graetzl_name', content: user.graetzl.name },
         { name: 'graetzl_url', content: graetzl_url(user.graetzl, URL_OPTIONS) }
       ]

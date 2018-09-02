@@ -4,7 +4,7 @@ class Notifications::NewMeeting < Notification
   BITMASK = 2**0
 
   def self.receivers(activity)
-    if activity.trackable.public?
+    if activity.trackable.group_id.nil?
       User.where(graetzl_id: activity.trackable.graetzl_id)
     else
       []

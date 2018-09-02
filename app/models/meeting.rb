@@ -41,17 +41,18 @@ class Meeting < ApplicationRecord
   validates :graetzl, presence: true
   validate :starts_at_date_cannot_be_in_the_past, on: :create
 
+  before_create :set_privacy
   after_create :update_location_activity
 
   def self.visible_to_all
-    where(group_id: nil)
+    where(private: false)
   end
 
   def self.visible_to(user)
     if user && user.group_ids.present?
-      where(group_id: nil).or(where(group_id: user.group_ids))
+      where(private: false).or(where(group_id: user.group_ids))
     else
-      where(group_id: nil)
+      where(private: false)
     end
   end
 
@@ -90,16 +91,16 @@ class Meeting < ApplicationRecord
     end
   end
 
-  def public?
-    group_id.nil?
-  end
-
   private
 
   def starts_at_date_cannot_be_in_the_past
     if starts_at_date && starts_at_date < Date.today
       errors.add(:starts_at, 'kann nicht in der Vergangenheit liegen')
     end
+  end
+
+  def set_privacy
+    self.private = true if group && group.private?
   end
 
   def update_location_activity

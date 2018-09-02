@@ -20,7 +20,8 @@ class MailchimpSubscribeJob < ApplicationJob
           USERNAME: user.username,
           PROFIL_URL: Rails.application.routes.url_helpers.user_path(user),
           NEWSLETTER: user.newsletter.to_s,
-          SIGNUP: user.created_at
+          SIGNUP: user.created_at,
+          ORIGIN: user.origin,
         }
       })
     rescue Gibbon::MailChimpError => mce

@@ -21,6 +21,9 @@
 
   <%= form_tag new_registration_path, method: :get do %>
     <%= hidden_field_tag :feature, params[:feature] %>
+    <%= hidden_field_tag :origin, params[:origin] %>
+    <%= hidden_field_tag :redirect, params[:redirect] %>
+    
     <% if @graetzls.present? %>
       <div class="wrp-radios">
         <% @graetzls.each do |g| %>
