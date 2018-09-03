@@ -42,14 +42,17 @@ class Notifications::NewMeeting < Notification
 
   private
 
-  def set_notify_at
-    if activity.trackable.starts_at_date.blank?
-      self.notify_at = Time.current
-    else
+  def set_notify_time
+    # Send meeting notifications 7 days before the meeting date, or immediately if the meeting is in
+    # less than 7 days. Also make sure not to send notification after the meeting has happened.
+    if activity.trackable.starts_at_date.present?
       self.notify_at = activity.trackable.starts_at_date - 7.days
+      self.notify_at = Time.current if self.notify_at.past?
+      self.notify_before = activity.trackable.starts_at_date
+    else
+      self.notify_at = Time.current
+      self.notify_before = nil
     end
-
-    self.notify_at = Time.current if self.notify_at.past?
   end
 
 end

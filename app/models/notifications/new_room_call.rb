@@ -35,12 +35,14 @@ class Notifications::NewRoomCall < Notification
 
   private
 
-  def set_notify_at
-    reminder_date = activity.trackable.starts_at - 7.days
-    if reminder_date.past?
-      self.notify_at = Time.current
+  def set_notify_time
+    # Send room call notifications 7 days before the start date, or immediately if it starts in
+    # less than 7 days.
+    if activity.trackable.starts_at.present?
+      self.notify_at = activity.trackable.starts_at - 7.days
+      self.notify_at = Time.current if self.notify_at.past?
     else
-      self.notify_at = reminder_date
+      self.notify_at = Time.current
     end
   end
 end

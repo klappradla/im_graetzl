@@ -72,13 +72,14 @@ module User::Notifiable
 
   def pending_daily_notifications
     notifications.where(["bitmask & ? > 0", daily_mail_notifications]).
-      where("notify_at BETWEEN (NOW() - interval '2 days') AND NOW()").
+      where("notify_at = CURRENT_DATE").
       where(sent: false)
   end
 
   def pending_weekly_notifications
     notifications.where(["bitmask & ? > 0", weekly_mail_notifications]).
-      where("notify_at BETWEEN (NOW() - interval '8 days') AND NOW()").
+      where("notify_at BETWEEN (CURRENT_DATE - interval '7 days') AND CURRENT_DATE").
+      where("notify_before IS NULL OR notify_before >= CURRENT_DATE").
       where(sent: false)
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180902175732) do
+ActiveRecord::Schema.define(version: 20180903182758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -350,7 +350,8 @@ ActiveRecord::Schema.define(version: 20180902175732) do
     t.boolean  "sent",               default: false
     t.boolean  "display_on_website", default: false
     t.string   "type"
-    t.datetime "notify_at"
+    t.date     "notify_at"
+    t.date     "notify_before"
     t.index ["user_id", "notify_at"], name: "index_notifications_on_user_id_and_notify_at", using: :btree
   end
 

@@ -8,7 +8,7 @@ class Notification < ApplicationRecord
   belongs_to :activity
 
   before_create :set_bitmask
-  before_create :set_notify_at
+  before_create :set_notify_time
 
   def self.receive_new_activity(activity)
     CreateNotificationsJob.perform_later activity
@@ -98,7 +98,8 @@ class Notification < ApplicationRecord
     self.bitmask ||= self.class::BITMASK
   end
 
-  def set_notify_at
+  def set_notify_time
     self.notify_at = Time.current
+    self.notify_before = nil
   end
 end
