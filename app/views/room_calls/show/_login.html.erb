@@ -39,7 +39,7 @@
   </div>
 
   <div class="loginpanel">
-    <%= link_to 'Kostenlos registrieren & weiter zum Call', new_registration_path(redirect: request.original_url), class: 'btn-primary -rose -large -shadow' %>
+    <%= link_to 'Kostenlos registrieren & weiter zum Call', new_registration_path(redirect: request.original_url, origin: @room_call.slug), class: 'btn-primary -rose -large -shadow' %>
   </div>
 
 

@@ -3,7 +3,7 @@ de:
     confirmations:
       new:
         resend_confirmation_instructions: Anleitung zur Bestätigung noch mal schicken
-      confirmed: "Vielen Dank. Dein Account ist nun freigeschaltet. Log dich ein und leg gleich los!"
+      confirmed: "Vielen Dank für Deine Registrierung. Du bist jetzt angemeldet."
       confirmed_and_signed_in: "Vielen Dank für Deine Registrierung. Du bist jetzt angemeldet."
       send_instructions: "Du erhältst in wenigen Minuten eine E-Mail, mit der Du Deine Registrierung bestätigen kannst."
       send_paranoid_instructions: "Falls Deine E-Mail-Adresse in unserer Datenbank existiert erhältst Du in wenigen Minuten eine E-Mail mit der Du Deine Registrierung bestätigen kannst."
