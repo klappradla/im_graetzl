@@ -39,7 +39,7 @@
         </div>
       <% end %>
 
-      <% if user_signed_in? && current_user == @room_offer.user && current_user.admin? %>
+      <% if user_signed_in? && current_user == @room_offer.user %>
         <div class="btn-group">
           <%= link_to 'Gruppe erstellen', new_group_path(room_offer_id: @room_offer.id),
             class: 'btn-secondary -mint -small'  %>

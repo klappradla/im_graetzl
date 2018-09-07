@@ -10,6 +10,11 @@ class Notification < ApplicationRecord
   before_create :set_bitmask
   before_create :set_notify_time
 
+  scope :ready_to_be_sent, -> {
+    where("notify_at <= CURRENT_DATE").where("notify_before IS NULL OR notify_before >= CURRENT_DATE").
+    where(sent: false)
+  }
+
   def self.receive_new_activity(activity)
     CreateNotificationsJob.perform_later activity
   end

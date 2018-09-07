@@ -36,7 +36,7 @@
   <script>
   $(document).ready(function() {
     if ($("#flash .notice").exists()) {
-      if ( $("#flash .notice").text().indexOf('Super, du bist nun registriert!') > 0 ){
+      if ( $("#flash .notice").text().indexOf('Super, du bist nun registriert!') >= 0 ){
         // GA
         gtag('event', 'sign_up', {'event_category': 'Registration'});
         // G-AW
