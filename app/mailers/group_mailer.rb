@@ -35,13 +35,13 @@ class GroupMailer
   end
 
   def message_to_users(group, user, users, subject, body, from_email)
-    from_email = from_email.present? ? "#{from_email}@imgraetzl.at" : "no-reply@imgraetzl.at"
     reply_to = from_email.present? ? "#{from_email}@imgraetzl.at" : user.email
+    from_email = from_email.present? ? "#{from_email}@imgraetzl.at" : "no-reply@imgraetzl.at"
 
     MandrillMailer.deliver(template: 'group-user-message', message: {
       to: users.map{ |u| { email: u.email, name: u.full_name } },
       from_email: from_email,
-      from_name: user.full_name,
+      from_name: "#{user.full_name} | imGrätzl.at", 
       headers: { "Reply-To": reply_to },
       subject: subject,
       google_analytics_domains: ['staging.imgraetzl.at', 'www.imgraetzl.at'],
@@ -51,7 +51,9 @@ class GroupMailer
         { name: 'email_body', content: body },
         { name: 'group_name', content: group.title },
         { name: 'group_url', content: group_url(group, URL_OPTIONS) },
-        { name: 'from_email', content: from_email }
+        { name: 'from_name', content: user.full_name },
+        { name: 'from_email', content: from_email },
+        { name: 'user_avatar_url', content: Notifications::ImageService.new.avatar_url(user) }
       ]
     })
   end
