@@ -32,6 +32,11 @@ input, select, textarea {
     border-right: 0;
     min-width: 140px;
   }
+
+  > .label-right {
+    border-left: 0;
+    border-right: solid 1px $color-ambient-mint-light;
+  }
   input, select, textarea {
     &:last-of-type {
       //     border-radius: 0 4px 4px 0;
@@ -69,6 +74,13 @@ input, select, textarea {
     margin-right: 10px;
   }
 }
+
+.label-right {
+  border-bottom: solid 1px $color-ambient-mint-light;
+  border-right: solid 1px $color-ambient-mint-light;
+  border-left: solid 1px $color-ambient-mint-light;
+}
+
 
 %input {
   @extend .input-plain;

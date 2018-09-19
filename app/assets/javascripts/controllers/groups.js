@@ -23,6 +23,19 @@ APP.controllers.groups = (function() {
         root: '#groups-btn-ctrl',
         targetAttr: 'href'
       });
+
+      $('select#mail-user-select').SumoSelect({
+        search: true,
+        searchText: 'Suche nach User.',
+        placeholder: 'User auswählen',
+        csvDispCount: 2,
+        captionFormat: '{0} Gruppenmitglieder',
+        captionFormatAllSelected: 'Alle Gruppenmitglieder',
+        okCancelInMulti: true,
+        selectAll: true,
+        locale: ['OK', 'Cancel', 'Alle auswählen']
+      });
+
     }
 
     function initInfo() {

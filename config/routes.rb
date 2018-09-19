@@ -87,11 +87,12 @@ Rails.application.routes.draw do
       post :toggle_following, on: :member
     end
     resources :discussion_posts, only: [:create, :update, :destroy]
-    get 'settings', on: :member
     post 'request_join', on: :member
     post 'accept_request', on: :member
     post 'reject_request', on: :member
     post 'remove_user', on: :member
+    get 'compose_mail', on: :member
+    post 'send_mail', on: :member
   end
 
   get 'wien/raumteiler/raumsuche' => redirect('/wien/raumteiler')

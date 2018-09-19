@@ -1,0 +1,54 @@
+<div class="group-page mail-page">
+
+  <%= render 'groups/header' %>
+  <%= render 'groups/btn_ctrl', group: @group %>
+  <%= render 'groups/tab_navigation' %>
+
+  <!-- CONTENT -->
+
+  <div class="mail-section -page mailTo">
+
+    <%= form_tag send_mail_group_path(@group) do %>
+      <div class="input-select">
+        <%= label_tag :user_ids do %>
+          <%= icon_tag "user-avatar" %>
+          <span>Empfänger</span>
+        <% end %>
+        <%= select_tag :user_ids, options_from_collection_for_select(@group.members, :id, :full_name_with_email, params[:user_ids]), id: 'mail-user-select', multiple: true %>
+      </div>
+
+      <div class="input-field">
+        <%= label_tag :subject do %>
+        <%= icon_tag "record" %>
+        <span>Betreff</span>
+        <% end %>
+        <%= text_field_tag :subject, params[:subject], placeholder: "Dein Betreff", required: true %>
+      </div>
+
+      <div class="input-textarea">
+        <%= label_tag :body do %>
+        <%= icon_tag "layout-document" %>
+        <span>Inhalt</span>
+        <% end %>
+        <%= text_area_tag :body, params[:body], placeholder: "Deine E-Mail", required: true %>
+      </div>
+
+      <% if current_user.admin? %>
+        <div class="input-field">
+          <%= label_tag :from_email do %>
+            <%= icon_tag "at-symbol" %>
+            <span>Absender</span>
+          <% end %>
+          <%= text_field_tag :from_email, params[:from_email], placeholder: "xyz" %>
+          <%= label_tag :from_email, "@imgraetzl.at", class: 'label-right' %>
+        </div>
+      <% end %>
+
+      <%= submit_tag 'E-Mail absenden', data: { disable_with: 'sendet...' }, class: 'btn-primary' %>
+    <% end %>
+
+  </div>
+
+  <!-- /CONTENT -->
+
+</div>

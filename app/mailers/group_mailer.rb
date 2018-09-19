@@ -34,6 +34,20 @@ class GroupMailer
     })
   end
 
+  def message_to_users(group, users, subject, body, from_email)
+    from_email = from_email.present? ? "#{from_email}@imgraetzl.at" : "xyz@imgraetzl.at"
+    MandrillMailer.deliver(template: 'group-user-message', message: {
+      to: users.map{ |u| { email: u.email } },
+      from_email: from_email,
+      subject: subject,
+      global_merge_vars: [
+        { name: 'email_body', content: body },
+        { name: 'group_name', content: group.title },
+        { name: 'group_url', content: group_url(group, URL_OPTIONS) }
+      ]
+    })
+  end
+
   private
 
   def owner_personal_vars(user)

@@ -14,13 +14,13 @@
 
     <div id="group-settings-dropdown-<%= group.id %>" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container createmenu">
       <div class="jq-dropdown-panel">
-        <!--<%= link_to settings_group_path(group) do %>
-          <%= icon_tag "bell" %>
-          <div class="icontxt">Gruppen Benachrichtigungen</div>
-        <% end %>-->
         <%= link_to edit_group_path(group) do %>
           <%= icon_tag "pencil" %>
           <div class="icontxt">Gruppe bearbeiten</div>
+        <% end %>
+        <%= link_to compose_mail_group_path(group) do %>
+          <%= icon_tag "at-symbol" %>
+          <div class="icontxt">E-Mail an Mitglieder</div>
         <% end %>
         <%= link_to group_path(group), data: { confirm: 'Bist du dir sicher?' }, method: :delete do %>
           <%= icon_tag "trash-delete-remove" %>
@@ -37,10 +37,6 @@
 
     <div id="group-settings-dropdown-<%= group.id %>" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container createmenu">
       <div class="jq-dropdown-panel">
-        <!--<%= link_to settings_group_path(group) do %>
-          <%= icon_tag "bell" %>
-          <div class="icontxt">Gruppen Benachrichtigungen</div>
-        <% end %>-->
         <%= link_to remove_user_group_path(user_id: current_user.id, id: group.id), method: :post, data: { confirm: 'Bist du dir sicher?' } do %>
           <%= icon_tag "level-down" %>
           <div class="icontxt">Gruppe verlassen</div>
