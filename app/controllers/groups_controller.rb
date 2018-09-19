@@ -103,7 +103,7 @@ class GroupsController < ApplicationController
     redirect_to @group and return unless @group.admins.include?(current_user)
 
     GroupMailer.new.message_to_users(
-      @group, User.where(id: params[:user_ids]), params[:subject], params[:body], params[:from_email]
+      @group, current_user, User.where(id: params[:user_ids]), params[:subject], params[:body], params[:from_email]
     )
     redirect_to @group, notice: 'Email sent'
   end
