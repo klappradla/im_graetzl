@@ -35,7 +35,7 @@ class GroupMailer
   end
 
   def message_to_users(group, users, subject, body, from_email)
-    from_email = from_email.present? ? "#{from_email}@imgraetzl.at" : "xyz@imgraetzl.at"
+    from_email = from_email.present? ? "#{from_email}@imgraetzl.at" : "no-reply@imgraetzl.at"
     MandrillMailer.deliver(template: 'group-user-message', message: {
       to: users.map{ |u| { email: u.email } },
       from_email: from_email,
