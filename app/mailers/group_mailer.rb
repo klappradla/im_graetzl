@@ -38,10 +38,6 @@ class GroupMailer
     reply_to = from_email.present? ? "#{from_email}@imgraetzl.at" : user.email
     from_email = from_email.present? ? "#{from_email}@imgraetzl.at" : "no-reply@imgraetzl.at"
 
-    # Convert Linebreaks
-    r = '<br />'
-    body = body.replace('\r\n',r).replace('\n\r',r).replace('\r',r).replace('\n',r)
-
     MandrillMailer.deliver(template: 'group-user-message', message: {
       to: users.map{ |u| { email: u.email, name: u.full_name } },
       from_email: from_email,
