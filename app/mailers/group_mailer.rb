@@ -37,13 +37,17 @@ class GroupMailer
   def message_to_users(group, users, subject, body, from_email)
     from_email = from_email.present? ? "#{from_email}@imgraetzl.at" : "no-reply@imgraetzl.at"
     MandrillMailer.deliver(template: 'group-user-message', message: {
-      to: users.map{ |u| { email: u.email } },
+      to: users.map{ |u| { email: u.email, name: u.full_name } },
       from_email: from_email,
       subject: subject,
+      google_analytics_domains: ['staging.imgraetzl.at', 'www.imgraetzl.at'],
+      google_analytics_campaign: 'group-user-mail',
+      tags: ['group-user-mail'],
       global_merge_vars: [
         { name: 'email_body', content: body },
         { name: 'group_name', content: group.title },
-        { name: 'group_url', content: group_url(group, URL_OPTIONS) }
+        { name: 'group_url', content: group_url(group, URL_OPTIONS) },
+        { name: 'from_email', content: from_email }
       ]
     })
   end
