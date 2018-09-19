@@ -41,7 +41,7 @@ class GroupMailer
     MandrillMailer.deliver(template: 'group-user-message', message: {
       to: users.map{ |u| { email: u.email, name: u.full_name } },
       from_email: from_email,
-      from_name: "#{user.full_name} | imGrätzl.at", 
+      from_name: "#{user.full_name} | imGrätzl.at",
       headers: { "Reply-To": reply_to },
       subject: subject,
       google_analytics_domains: ['staging.imgraetzl.at', 'www.imgraetzl.at'],
@@ -53,6 +53,7 @@ class GroupMailer
         { name: 'group_url', content: group_url(group, URL_OPTIONS) },
         { name: 'from_name', content: user.full_name },
         { name: 'from_email', content: from_email },
+        { name: 'reply_to_email', content: reply_to },
         { name: 'user_avatar_url', content: Notifications::ImageService.new.avatar_url(user) }
       ]
     })
