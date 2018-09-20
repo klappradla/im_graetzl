@@ -14,7 +14,7 @@
           <%= icon_tag "user-avatar" %>
           <span>Empfänger</span>
         <% end %>
-        <%= select_tag :user_ids, options_from_collection_for_select(@group.members, :id, :full_name_with_email, params[:user_ids]), id: 'mail-user-select', multiple: true %>
+        <%= select_tag :user_ids, options_from_collection_for_select(@group.users - [current_user], :id, :full_name_with_email, params[:user_ids]), id: 'mail-user-select', multiple: true %>
       </div>
 
       <div class="input-field">
