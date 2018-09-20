@@ -105,7 +105,7 @@ class GroupsController < ApplicationController
     GroupMailer.new.message_to_users(
       @group, current_user, User.where(id: params[:user_ids]), params[:subject], params[:body], params[:from_email]
     )
-    redirect_to @group, notice: 'Email sent'
+    redirect_to @group, notice: 'Deine E-Mail wurde versendet ..'
   end
 
   def destroy
