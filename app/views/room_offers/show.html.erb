@@ -8,6 +8,30 @@
   )
 %>
 
+<%= structured_data_tag('room_offer', @room_offer) %>
+
+<% content_for :pagemap do %>
+  <!--
+  <PageMap>
+    <DataObject type="document">
+      <Attribute name="type">room_offer</Attribute>
+      <Attribute name="title"><%= t("activerecord.attributes.room_offer.offer_types.#{@room_offer.offer_type}") %></Attribute>
+      <Attribute name="slogan"><%= @room_offer.slogan %></Attribute>
+      <Attribute name="description"><%= @room_offer.room_description[0..250].gsub(/\n/, " ") %></Attribute>
+      <Attribute name="graetzl"><%= @room_offer.graetzl.name %></Attribute>
+      <Attribute name="category"><%= @room_offer.room_categories.join(',') %></Attribute>
+      <Attribute name="address_zip"><%= @room_offer.address.zip if @room_offer.address && @room_offer.address.zip %></Attribute>
+    </DataObject>
+    <DataObject type="image">
+      <Attribute name="src" value="<%= attachment_url(@room_offer, :cover_photo, :fill, 900, 540, host: request.url, fallback: 'meta/og_logo.png') %>" />
+    </DataObject>
+    <DataObject type="thumbnail">
+      <Attribute name="src" value="<%= attachment_url(@room_offer, :avatar, :fill, 400, 400, host: request.url, fallback: 'meta/og_logo.png') %>" />
+    </DataObject>
+  </PageMap>
+  -->
+<% end %>
+
 <section class="roomDetail -Offer">
   <div class="imgHeader">
     <%= attachment_image_tag @room_offer, :cover_photo, :fill, 980, 420, fallback: 'cover_photo/980x370.png', class: 'titleImg' %>

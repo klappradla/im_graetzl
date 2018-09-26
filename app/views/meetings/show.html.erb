@@ -7,7 +7,29 @@
     og_image: attachment_url(@meeting, :cover_photo, host: request.url, fallback: 'meta/og_logo.png')
   )
 %>
+
 <%= structured_data_tag('meeting', @meeting) %>
+
+<% content_for :pagemap do %>
+  <!--
+  <PageMap>
+    <DataObject type="document">
+      <Attribute name="title"><%= @meeting.name %></Attribute>
+      <Attribute name="description"><%= @meeting.description if @meeting.description.present? %></Attribute>
+      <Attribute name="author"><%= @meeting.initiator.full_name if !@meeting.initiator.nil? %></Attribute>
+      <Attribute name="user"><%= @meeting.initiator.username if !@meeting.initiator.nil? %></Attribute>
+      <Attribute name="graetzl"><%= @graetzl.name %></Attribute>
+      <Attribute name="startDate"><%= I18n.localize(@meeting.starts_at_date, format:'%Y-%m-%d') if @meeting.starts_at_date %></Attribute>
+    </DataObject>
+    <DataObject type="image">
+      <Attribute name="src" value="<%= attachment_url(@meeting, :cover_photo, :fill, 900, 540, host: request.url, fallback: 'meta/og_logo.png') %>" />
+    </DataObject>
+    <DataObject type="thumbnail">
+      <Attribute name="src" value="<%= attachment_url(@meeting.initiator, :avatar, :fill, 400, 400, host: request.url, fallback: 'meta/og_logo.png') %>" />
+    </DataObject>
+  </PageMap>
+  -->
+<% end %>
 
 <section class="meeting">
   <div class="imgHeader -cloudy">

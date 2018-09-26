@@ -6,6 +6,8 @@
 <% MetaTagHelper::OG_TAGS.each do |tag| %>
   <%= yield("og_#{tag}".to_sym) %>
 <% end %>
+<%= yield :structured_data_tag %>
+<%= yield :pagemap %>
 <%= tag(:meta, property: 'og:site_name', content: t('.site_name')) %>
 <%= tag(:meta, property: 'og:locale', content: t('.locale')) %>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">

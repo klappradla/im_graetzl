@@ -7,7 +7,30 @@
     og_image: attachment_url(@location, :cover_photo, host: request.url, fallback: 'meta/og_logo.png')
   )
 %>
+
 <%= structured_data_tag('location', @location) %>
+
+<% content_for :pagemap do %>
+  <!--
+  <PageMap>
+    <DataObject type="document">
+      <Attribute name="title"><%= @location.name %></Attribute>
+      <Attribute name="slogan"><%= @location.slogan if @location.slogan.present? %></Attribute>
+      <Attribute name="description"><%= @location.description if @location.description.present? %></Attribute>
+      <Attribute name="graetzl"><%= @graetzl.name %></Attribute>
+      <Attribute name="category"><%= @location.category.name %></Attribute>
+      <Attribute name="address_street"><%= @location.address.street if @location.address && @location.address.street %></Attribute>
+      <Attribute name="address_zip"><%= @location.address.zip if @location.address && @location.address.zip %></Attribute>
+    </DataObject>
+    <DataObject type="image">
+      <Attribute name="src" value="<%= attachment_url(@location, :cover_photo, :fill, 900, 540, host: request.url, fallback: 'meta/og_logo.png') %>" />
+    </DataObject>
+    <DataObject type="thumbnail">
+      <Attribute name="src" value="<%= attachment_url(@location, :avatar, :fill, 400, 400, host: request.url, fallback: 'meta/og_logo.png') %>" />
+    </DataObject>
+  </PageMap>
+  -->
+<% end %>
 
 <section class="location-page">
 
