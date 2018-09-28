@@ -13,16 +13,18 @@
   <PageMap>
     <DataObject type="document">
       <Attribute name="type">room_demand</Attribute>
+      <Attribute name="searchable">true</Attribute>
+      <Attribute name="id"><%= @room_demand.id %></Attribute>
       <Attribute name="title"><%= t("activerecord.attributes.room_demand.demand_types.#{@room_demand.demand_type}") %></Attribute>
       <Attribute name="slogan"><%= @room_demand.slogan %></Attribute>
       <Attribute name="description"><%= @room_demand.demand_description[0..250].gsub(/\n/, " ") %></Attribute>
       <Attribute name="category"><%= @room_demand.room_categories.join(',') %></Attribute>
     </DataObject>
     <DataObject type="image">
-      <Attribute name="src" value="<%= attachment_url(@room_demand, :avatar, :fill, 900, 540, host: request.url, fallback: 'meta/og_logo.png') %>" />
+      <Attribute name="src" value="<%= attachment_url(@room_demand, :avatar, :fill, 900, 540, host: request.url, fallback: 'avatar/room_demand/400x400.png') %>" />
     </DataObject>
     <DataObject type="thumbnail">
-      <Attribute name="src" value="<%= attachment_url(@room_demand, :avatar, :fill, 400, 400, host: request.url, fallback: 'meta/og_logo.png') %>" />
+      <Attribute name="src" value="<%= attachment_url(@room_demand, :avatar, :fill, 400, 400, host: request.url, fallback: 'avatar/room_demand/400x400.png') %>" />
     </DataObject>
   </PageMap>
   -->

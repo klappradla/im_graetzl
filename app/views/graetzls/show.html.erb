@@ -8,6 +8,21 @@
   )
 %>
 
+<% content_for :pagemap do %>
+  <!--
+  <PageMap>
+    <DataObject type="document">
+      <Attribute name="type">graetzl</Attribute>
+      <Attribute name="searchable">true</Attribute>
+      <Attribute name="id"><%= @graetzl.id %></Attribute>
+      <Attribute name="title"><%= @graetzl.name %></Attribute>
+      <Attribute name="numeric"><%= @graetzl.district.numeric %></Attribute>
+      <Attribute name="path"><%= graetzl_path(@graetzl) %></Attribute>
+    </DataObject>
+  </PageMap>
+  -->
+<% end %>
+
 <section class="graetzls">
   <%= cache [@graetzl, 'map'], expires_in: 2.months do %>
     <%= render 'map', map_data: @map_data %>

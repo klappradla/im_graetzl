@@ -7,7 +7,19 @@
   <%= yield("og_#{tag}".to_sym) %>
 <% end %>
 <%= yield :structured_data_tag %>
-<%= yield :pagemap %>
+
+<% pagemap = yield :pagemap %>
+<%= pagemap if !pagemap.nil? %>
+<% if pagemap.nil? || pagemap == '' %>
+  <!--
+  <PageMap>
+    <DataObject type="document">
+      <Attribute name="type"><%= controller_name %></Attribute>
+    </DataObject>
+  </PageMap>
+  -->
+<% end %>
+
 <%= tag(:meta, property: 'og:site_name', content: t('.site_name')) %>
 <%= tag(:meta, property: 'og:locale', content: t('.locale')) %>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">

@@ -14,6 +14,9 @@
   <!--
   <PageMap>
     <DataObject type="document">
+      <Attribute name="type">meeting</Attribute>
+      <Attribute name="searchable">true</Attribute>
+      <Attribute name="id"><%= @meeting.id %></Attribute>
       <Attribute name="title"><%= @meeting.name %></Attribute>
       <Attribute name="description"><%= @meeting.description if @meeting.description.present? %></Attribute>
       <Attribute name="author"><%= @meeting.initiator.full_name if !@meeting.initiator.nil? %></Attribute>
@@ -25,7 +28,7 @@
       <Attribute name="src" value="<%= attachment_url(@meeting, :cover_photo, :fill, 900, 540, host: request.url, fallback: 'meta/og_logo.png') %>" />
     </DataObject>
     <DataObject type="thumbnail">
-      <Attribute name="src" value="<%= attachment_url(@meeting.initiator, :avatar, :fill, 400, 400, host: request.url, fallback: 'meta/og_logo.png') %>" />
+      <Attribute name="src" value="<%= attachment_url(@meeting.initiator, :avatar, :fill, 400, 400, host: request.url, fallback: 'avatar/user/400x400.png') %>" />
     </DataObject>
   </PageMap>
   -->

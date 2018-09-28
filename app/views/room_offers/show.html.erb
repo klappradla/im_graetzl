@@ -15,6 +15,8 @@
   <PageMap>
     <DataObject type="document">
       <Attribute name="type">room_offer</Attribute>
+      <Attribute name="searchable">true</Attribute>
+      <Attribute name="id"><%= @room_offer.id %></Attribute>
       <Attribute name="title"><%= t("activerecord.attributes.room_offer.offer_types.#{@room_offer.offer_type}") %></Attribute>
       <Attribute name="slogan"><%= @room_offer.slogan %></Attribute>
       <Attribute name="description"><%= @room_offer.room_description[0..250].gsub(/\n/, " ") %></Attribute>
@@ -26,7 +28,7 @@
       <Attribute name="src" value="<%= attachment_url(@room_offer, :cover_photo, :fill, 900, 540, host: request.url, fallback: 'meta/og_logo.png') %>" />
     </DataObject>
     <DataObject type="thumbnail">
-      <Attribute name="src" value="<%= attachment_url(@room_offer, :avatar, :fill, 400, 400, host: request.url, fallback: 'meta/og_logo.png') %>" />
+      <Attribute name="src" value="<%= attachment_url(@room_offer, :avatar, :fill, 400, 400, host: request.url, fallback: 'avatar/room_offer/400x400.png') %>" />
     </DataObject>
   </PageMap>
   -->

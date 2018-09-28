@@ -8,6 +8,22 @@
   )
 %>
 
+<% content_for :pagemap do %>
+  <!--
+  <PageMap>
+    <DataObject type="document">
+      <Attribute name="type">district</Attribute>
+      <Attribute name="searchable">true</Attribute>
+      <Attribute name="id"><%= @district.id %></Attribute>
+      <Attribute name="title"><%= @district.name %></Attribute>
+      <Attribute name="numeric"><%= @district.numeric %></Attribute>
+      <Attribute name="zip"><%= @district.zip %></Attribute>
+      <Attribute name="path"><%= district_path(@district) %></Attribute>
+    </DataObject>
+  </PageMap>
+  -->
+<% end %>
+
 <section class="districts">
   <%= cache [@district, 'map'], expires_in: 2.months do %>
     <%= render 'map', map_data: @map_data %>

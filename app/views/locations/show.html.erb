@@ -14,6 +14,9 @@
   <!--
   <PageMap>
     <DataObject type="document">
+      <Attribute name="type">location</Attribute>
+      <Attribute name="searchable">true</Attribute>
+      <Attribute name="id"><%= @location.id %></Attribute>
       <Attribute name="title"><%= @location.name %></Attribute>
       <Attribute name="slogan"><%= @location.slogan if @location.slogan.present? %></Attribute>
       <Attribute name="description"><%= @location.description if @location.description.present? %></Attribute>
@@ -26,7 +29,7 @@
       <Attribute name="src" value="<%= attachment_url(@location, :cover_photo, :fill, 900, 540, host: request.url, fallback: 'meta/og_logo.png') %>" />
     </DataObject>
     <DataObject type="thumbnail">
-      <Attribute name="src" value="<%= attachment_url(@location, :avatar, :fill, 400, 400, host: request.url, fallback: 'meta/og_logo.png') %>" />
+      <Attribute name="src" value="<%= attachment_url(@location, :avatar, :fill, 400, 400, host: request.url, fallback: 'avatar/location/400x400.png') %>" />
     </DataObject>
   </PageMap>
   -->
