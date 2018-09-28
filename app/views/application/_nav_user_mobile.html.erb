@@ -29,6 +29,22 @@
 
 <div class="mobileNotifications nav-notifications" data-mobileNavID="notifications"></div>
 
+<% if current_user.admin? %>
+  <div class="mobileSearch" data-mobileNavID="search">
+    <div class="nav-search">
+      <!-- Search Field-->
+      <%= form_tag search_path, method: :get do |f| %>
+        <%= hidden_field_tag :label, 'all' %>
+        <%= hidden_field_tag :page, 1 %>
+        <div class="input-field search-form">
+          <%= text_field_tag :q, params[:q], placeholder: 'Suchbegriff ...' %>
+        </div>
+      <% end %>
+      <!-- /Search Field-->
+    </div>
+  </div>
+<% end %>
+
 <div class="mobileUserSettings" data-mobileNavID="usersettings">
   <div class="nav-usersettings">
     <%= link_to user_path(current_user) do %>

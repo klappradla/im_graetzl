@@ -44,6 +44,7 @@ APP.components.mainNavigation = (function() {
                     $(".notificationsTrigger").jqDropdown('attach', '.notificationsContainer');
                     $(".usersettingsTrigger").jqDropdown('attach', '.usersettingsContainer');
                     $(".createTrigger").jqDropdown('attach', '.createContainer');
+                    $(".searchTrigger").jqDropdown('attach', '.searchContainer');
                 },
                 match : function() {
                     $dropdownTriggers.jqDropdown('enable');

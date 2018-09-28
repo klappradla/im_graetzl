@@ -170,6 +170,30 @@ input, select, textarea {
     font-style: italic;
   }
 
+  &.select-btn {
+    min-width: fit-content;
+    select {
+      font-size: 1.8rem;
+      font-style: italic;
+      color: #ffffff;
+      background-image: $texture-primary;
+      background-color: $color-ambient-rosa;
+      option {
+        color: $color-ambient-mint-dark;
+      }
+    }
+    &::before {
+      /*  Custom dropdown arrow cover */
+      border-left: 1px dotted #ffffff;
+      background-image: $texture-primary;
+      background-color: $color-ambient-rosa;
+    }
+    &::after {
+      /*  Custom dropdown arrow */
+      @include triangleSingle($direction: "down", $color: #ffffff);
+    }
+  }
+
 }
 
 .input-select .SumoSelect {

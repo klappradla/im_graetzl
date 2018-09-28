@@ -1,0 +1,36 @@
+<% meeting = item.pagemap.document[0] %>
+<% startDate = Date.parse(meeting['startDate']) if !meeting['startDate'].nil? %>
+
+<!-- Meeting Card-->
+<div class="cardBox -meeting <%= '-past' if startDate.try(:past?) %>" data-behavior="masonry-card">
+  <div class="cardBoxHeader">
+    <%= link_to item.link do %>
+      <div class="coverImgWrapper">
+        <%= image_tag(item.pagemap.image[0].src, class: 'attachment meeting cover_photo coverImg') %>
+      </div>
+    <% end %>
+    <% if !meeting['startDate'].nil? %>
+      <div class="calendarSheet">
+        <div class="day"><%= I18n.localize(startDate, format:'%-d') %></div>
+        <div class="month"><%= I18n.localize(startDate, format:'%b') %></div>
+      </div>
+    <% end %>
+    <div class="categoryicon">
+      <%= icon_tag "users" %>
+    </div>
+    <!-- graetzl_flag(meeting.graetzl) -->
+  </div>
+
+  <div class="cardBoxContent">
+    <%= link_to item.link, class: 'initiator' do %>
+      <%= image_tag(item.pagemap.thumbnail[0].src, class: 'attachment user avatar img-round') %>
+      <span><%= meeting['user'] %></span>
+    <% end %>
+    <div class="txt">
+      <h3><%= meeting['title'] %></h3>
+      <p><%= meeting['description'].truncate(120) %></p>
+    </div>
+    <%= link_to 'Zum Treffen', item.link, class: 'btn-primary -mint' %>
+  </div>
+
+</div>

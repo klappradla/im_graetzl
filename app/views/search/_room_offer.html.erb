@@ -1,0 +1,42 @@
+<% room_offer = item.pagemap.document[0] %>
+
+<div class="cardBox -location" data-behavior="masonry-card">
+
+  <div class="cardBoxHeader">
+    <div class="coverImgWrapper">
+      <%= link_to item.link do %>
+        <div class="coverImgWrapper">
+          <%= image_tag(item.pagemap.image[0].src, class: 'attachment room_offer cover_photo coverImg') %>
+        </div>
+      <% end %>
+    </div>
+    <div class="categoryicon">
+      <%= room_offer['address_zip'] %>, <%= room_offer['graetzl'] %>
+    </div>
+  </div>
+
+  <div class="cardBoxContent -roomoffer">
+
+    <div class="avatar-block -below">
+      <%= link_to item.link, class: 'avatarImg' do %>
+        <%= image_tag(item.pagemap.thumbnail[0].src, class: 'attachment room_offer avatar img-square') %>
+      <% end %>
+      <%= link_to item.link, class: 'typelink' do %>
+        <div class="typetxt">
+          <div class="roomtype">
+            <%= room_offer['title'] %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="slogan">
+      <%= room_offer['slogan'] %>
+    </div>
+
+    <div class="txt">
+      <p><%= room_offer['description'].truncate(120) %></p>
+    </div>
+
+  </div>
+</div>

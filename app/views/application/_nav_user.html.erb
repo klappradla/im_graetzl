@@ -20,6 +20,14 @@
     </div>
   </div>
 
+  <% if current_user.admin? %>
+  <div class="searchTrigger dropdownTrigger" data-horizontal-offset="2" data-mobileNavID="search">
+    <div class="wrp">
+      <%= icon_tag "search" %>
+    </div>
+  </div>
+  <% end %>
+
   <!-- dropDowns -->
   <div class="jq-dropdown jq-dropdown-tip jq-dropdown-anchor-right jq-dropdown-relative createContainer dropdown-container">
     <div class="jq-dropdown-panel">
@@ -56,6 +64,22 @@
       <ul class="notifications" data-behavior="notifications"></ul>
     </div>
   </div>
+
+  <% if current_user.admin? %>
+  <div class="searchContainer jq-dropdown jq-dropdown-tip jq-dropdown-anchor-right jq-dropdown-relative dropdown-container">
+    <div class="jq-dropdown-panel nav-search">
+      <!-- Search Field-->
+      <%= form_tag search_path, method: :get do |f| %>
+        <%= hidden_field_tag :label, 'all' %>
+        <%= hidden_field_tag :page, 1 %>
+        <div class="input-field search-form">
+          <%= text_field_tag :q, params[:q], placeholder: 'Suchbegriff ...' %>
+        </div>
+      <% end %>
+      <!-- /Search Field-->
+    </div>
+  </div>
+  <% end %>
 
   <div class="usersettingsContainer jq-dropdown jq-dropdown-tip jq-dropdown-anchor-right jq-dropdown-relative dropdown-container">
     <div class="jq-dropdown-panel nav-usersettings">

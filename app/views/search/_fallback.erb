@@ -1,0 +1,35 @@
+<!-- Fallback Card-->
+<div class="cardBox -location -searchresult" data-behavior="masonry-card">
+  <div class="cardBoxHeader">
+    <%= link_to item.link do %>
+      <div class="coverImgWrapper">
+        <% if item['pagemap'] && item['pagemap']['cse_thumbnail'] && img = item.pagemap.cse_thumbnail.first %>
+          <%= image_tag(img.src, class: 'attachment location cover_photo coverImg') %>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="categoryicon">
+      <%= icon_tag "location" %>
+    </div>
+  </div>
+
+  <div class="cardBoxContent">
+    <div class="avatar-block">
+      <%= link_to item.link, class: 'avatarImg' do %>
+        <%= image_tag('avatar/location/100x100.png', class: 'attachment location avatar img-square') %>
+      <% end %>
+      <div class="typetxt">
+        <%= link_to item.link do %>
+          <div class="name"><%= item.htmlTitle.html_safe %></div>
+        <% end %>
+        <div class="category"></div>
+        <div class="address"></div>
+      </div>
+    </div>
+    <div class="slogan"><%= item.htmlSnippet.html_safe %></div>
+    <div class="txt">
+      <p></p>
+    </div>
+  </div>
+</div>
+<!-- /Fallback Card -->

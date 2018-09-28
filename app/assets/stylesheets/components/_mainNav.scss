@@ -12,7 +12,7 @@
   }
   @include respond-to(">=large") {
     padding-left: 25px;
-    padding-right: 25px;
+    padding-right: 15px;
   }
   .mainNav, .personalNav {
     display: flex;
@@ -51,7 +51,8 @@
   .registerlink,
   .loginlink,
   .notificationsTrigger,
-  .usersettingsTrigger {
+  .usersettingsTrigger,
+  .searchTrigger {
     color: $color-ambient-mint-dark;
     font-family: $font-tertiary;
     font-size: 2.0rem;
@@ -143,6 +144,10 @@
       @include ellipsis;
       max-width: 150px;
     }
+  }
+
+  .searchTrigger {
+    padding-left: 15px;
   }
 
   .notificationsTrigger {

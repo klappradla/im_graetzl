@@ -1,0 +1,39 @@
+<% location = item.pagemap.document[0] %>
+
+<!-- LocationCard-->
+<div class="cardBox -location" data-behavior="masonry-card">
+  <div class="cardBoxHeader">
+    <%= link_to item.link do %>
+      <div class="coverImgWrapper">
+        <%= image_tag(item.pagemap.image[0].src, class: 'attachment location cover_photo coverImg') %>
+      </div>
+    <% end %>
+    <div class="categoryicon">
+      <%= icon_tag "location" %>
+    </div>
+  </div>
+
+  <div class="cardBoxContent">
+    <div class="avatar-block">
+      <%= link_to item.link, class: 'avatarImg' do %>
+        <%= image_tag(item.pagemap.thumbnail[0].src, class: 'attachment location avatar img-square') %>
+      <% end %>
+      <div class="typetxt">
+        <%= link_to item.link do %>
+          <div class="name"><%= location['title'] %></div>
+        <% end %>
+        <div class="category"><%= location['category'] %></div>
+        <div class="address">
+          <%= icon_tag "location" %>
+          <%= location['address_street'] %>
+        </div>
+      </div>
+    </div>
+    <div class="slogan"><%= location['slogan'] if !location['slogan'].nil? %></div>
+    <div class="txt">
+      <p><%= location['description'].truncate(120) if !location['description'].nil? %></p>
+      <!--<p><%= item.htmlSnippet.html_safe %></p>-->
+    </div>
+  </div>
+</div>
+<!-- /LocationCard -->

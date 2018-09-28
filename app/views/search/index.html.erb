@@ -1,0 +1,77 @@
+<% title('Suche') %>
+
+<section class="search-section">
+
+  <!-- Search Field-->
+  <%= form_tag search_path, method: :get do |f| %>
+  <%= hidden_field_tag :page, 1 %>
+    <div class="input-field search-form">
+      <label for="search">
+        <%= icon_tag "search" %>
+        <span>Suche</span>
+      </label>
+      <%= text_field_tag :q, params[:q], placeholder: 'Suchbegriff ...' %>
+      <div class="input-select label-right select-btn">
+        <select name="label" id="label">
+          <option value="all" selected>Suchen nach ...</option>
+          <option value="all" <%= params[:label] == 'all' ? 'selected' : nil %>>Alles</option>
+          <option value="location" <%= params[:label] == 'location' ? 'selected' : nil %>>Locations</option>
+          <option value="meeting" <%= params[:label] == 'meeting' ? 'selected' : nil %>>Treffen</option>
+          <option value="rooms" <%= params[:label] == 'rooms' ? 'selected' : nil %>>Raumteiler</option>
+        </select>
+      </div>
+    </div>
+  <% end %>
+  <!-- /Search Field-->
+
+  <% if @results && !@results.items.empty? %>
+
+    <!-- Search Results-->
+    <div class="cardBoxCollection -tripple">
+      <% @results.items.each do |item| %>
+        <% if item.pagemap.key?('document') && item.pagemap.document[0].type == 'location' %>
+
+          <%= render 'location', item: item %>
+
+        <% elsif item.pagemap.key?('document') && item.pagemap.document[0].type == 'meeting' %>
+
+          <%= render 'meeting', item: item %>
+
+        <% elsif item.pagemap.key?('document') && item.pagemap.document[0].type == 'room_offer' %>
+
+          <%= render 'room_offer', item: item %>
+
+        <% elsif item.pagemap.key?('document') && item.pagemap.document[0].type == 'room_demand' %>
+
+          <%= render 'room_demand', item: item %>
+
+        <% else %>
+
+          <%= render 'fallback', item: item %>
+
+        <% end %>
+      <% end %>
+    </div>
+    <!-- /Search Results-->
+
+    <!-- Pagination-->
+    <div class='pagination'>
+      <% if @results.previous_page %>
+      <%= link_to 'Zurück', search_path(q: params[:q], page: @results.previous_page, label: params[:label]), class: 'btn-primary -grey' %>
+      <% end %>
+      <% @results.pages.times do |i| %>
+      <%= link_to i + 1, search_path(q: params[:q], page: i+1, label: params[:label]), :class => (params[:page].to_i == i+1 ? 'btn-secondary' : 'btn-secondary -grey') %>
+      <% end %>
+      <% if @results.next_page %>
+      <%= link_to 'Weiter', search_path(q: params[:q], page: @results.next_page, label: params[:label]), class: 'btn-primary -grey' %>
+      <% end %>
+    </div>
+    <!-- /Pagination -->
+
+  <% elsif @results %>
+
+    <p>Keine Ergebnisse</p>
+
+  <% end %>
+
+</section>

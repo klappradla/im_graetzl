@@ -73,7 +73,8 @@
   .mobileMainNav,
   .mobileUserSettings,
   .mobileCreateContent,
-  .mobileNotifications {
+  .mobileNotifications,
+  .mobileSearch {
     border-top: 1px solid $color-ambient-mint-light;
     @include respond-to(">=large") {
       display: none !important;

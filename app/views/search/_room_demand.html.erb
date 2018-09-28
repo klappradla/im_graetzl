@@ -1,0 +1,35 @@
+<% room_demand = item.pagemap.document[0] %>
+
+<div class="cardBox -location -roomdemand" data-behavior="masonry-card">
+
+  <div class="cardBoxHeader -roomdemand">
+    <%= link_to item.link do %>
+      <div class="category-tags">
+        <ul class="tag-list -mint">
+          <li><%= room_demand['category'].split(',')[0] %></li>
+        </ul>
+      </div>
+      <div class="coverImgWrapper">
+        <%= image_tag(item.pagemap.image[0].src, class: 'attachment room_demand avatar class coverImg') %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="cardBoxContent -roomdemand">
+
+    <div class="roomtype">
+      <%= link_to item.link, class: 'typelink' do %>
+        <%= room_demand['title'] %>
+      <% end %>
+    </div>
+
+    <div class="slogan">
+      <%= room_demand['slogan'] %>
+    </div>
+
+    <div class="txt">
+      <p><%= room_demand['description'].truncate(120) %></p>
+    </div>
+
+  </div>
+</div>

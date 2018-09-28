@@ -49,6 +49,7 @@ gem 'activeadmin', '~> 1.0.0.pre4'
 gem 'rabl'
 gem 'oj'
 gem 'jquery-ui-rails', '5.0.0'
+gem 'google_custom_search_api'
 
 group :doc do
   gem 'sdoc'
