@@ -7,11 +7,16 @@ SitemapGenerator::Sitemap.adapter = SitemapGenerator::AwsSdkAdapter.new(ENV['UPL
 
 SitemapGenerator::Sitemap.create do
   # Districts
-  add wien_path, changefreq: 'always', priority: 0.7
+  add wien_path, changefreq: 'always', priority: 0.9
+  add locations_wien_path, changefreq: 'always', priority: 0.7
+  add meetings_wien_path, changefreq: 'always', priority: 0.7
+  add rooms_wien_path, changefreq: 'always', priority: 0.9
+  add zuckerls_wien_path, changefreq: 'always', priority: 0.7
   District.find_each do |district|
-    add district_path(district), changefreq: 'always', priority: 0.7
-    add locations_district_path(district) unless district.locations.empty?
-    add meetings_district_path(district) unless district.meetings.empty?
+    add district_path(district), changefreq: 'always', priority: 0.8
+    add locations_district_path(district) unless district.locations.empty?, changefreq: 'always', priority: 0.8
+    add meetings_district_path(district) unless district.meetings.empty?, changefreq: 'always', priority: 0.7
+    add rooms_district_path(district), changefreq: 'always', priority: 0.8
   end
 
   # Graetzls
@@ -23,7 +28,7 @@ SitemapGenerator::Sitemap.create do
     unless locations.empty?
       add locations_graetzl_path(graetzl)
       locations.find_each do |location|
-        add graetzl_location_path(graetzl, location), priority: 0.7
+        add graetzl_location_path(graetzl, location), priority: 0.8
       end
     end
 
@@ -39,11 +44,15 @@ SitemapGenerator::Sitemap.create do
 
   # Raumteiler
   RoomOffer.find_each do |room_offer|
-    add room_offer_path(room_offer), priority: 0.7
+    add room_offer_path(room_offer), priority: 0.8
   end
 
   RoomDemand.find_each do |room_demand|
-    add room_demand_path(room_demand), priority: 0.7
+    add room_demand_path(room_demand), priority: 0.8
+  end
+
+  RoomCall.find_each do |room_call|
+    add room_call_path(room_call), priority: 0.8
   end
 
   # Info Pages
