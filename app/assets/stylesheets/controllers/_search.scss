@@ -18,6 +18,11 @@ section.search-section {
 
   .pagination a {
     margin:5px;
+    @include respond-to("<=large") {
+      &.-page {
+        display: none;
+      }
+    }
   }
 
   .noresult {

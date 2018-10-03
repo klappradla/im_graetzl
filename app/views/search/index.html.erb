@@ -54,7 +54,7 @@
       <%= link_to 'Zurück', search_path(q: params[:q], page: @results.previous_page, label: params[:label]), class: 'btn-secondary -grey' %>
       <% end %>
       <% @results.pages.times do |i| %>
-      <%= link_to i + 1, search_path(q: params[:q], page: i+1, label: params[:label]), :class => (params[:page].to_i == i+1 ? 'btn-primary' : 'btn-secondary -grey') %>
+      <%= link_to i + 1, search_path(q: params[:q], page: i+1, label: params[:label]), :class => (params[:page].to_i == i+1 ? 'btn-primary -page' : 'btn-secondary -grey -page') %>
       <% end %>
       <% if @results.next_page %>
       <%= link_to 'Weiter', search_path(q: params[:q], page: @results.next_page, label: params[:label]), class: 'btn-secondary -grey' %>

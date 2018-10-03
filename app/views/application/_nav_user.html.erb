@@ -20,13 +20,11 @@
     </div>
   </div>
 
-  <% if current_user.admin? %>
   <div class="searchTrigger dropdownTrigger" data-horizontal-offset="2" data-mobileNavID="search">
     <div class="wrp">
       <%= icon_tag "search" %>
     </div>
   </div>
-  <% end %>
 
   <!-- dropDowns -->
   <div class="jq-dropdown jq-dropdown-tip jq-dropdown-anchor-right jq-dropdown-relative createContainer dropdown-container">
@@ -65,7 +63,6 @@
     </div>
   </div>
 
-  <% if current_user.admin? %>
   <div class="searchContainer jq-dropdown jq-dropdown-tip jq-dropdown-anchor-right jq-dropdown-relative dropdown-container">
     <div class="jq-dropdown-panel nav-search">
       <!-- Search Field-->
@@ -79,7 +76,6 @@
       <!-- /Search Field-->
     </div>
   </div>
-  <% end %>
 
   <div class="usersettingsContainer jq-dropdown jq-dropdown-tip jq-dropdown-anchor-right jq-dropdown-relative dropdown-container">
     <div class="jq-dropdown-panel nav-usersettings">
