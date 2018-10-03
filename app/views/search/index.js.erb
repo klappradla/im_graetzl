@@ -1,0 +1,19 @@
+(function() {
+  var $cardContainer = $("[data-behavior='search-card-container']");
+  var $paginateLink = $("[data-behavior='search-paginate-link']");
+
+  console.log('michael');
+
+  <% if params[:page].blank? %>
+    $cardContainer.html("<%= j render 'search/result' %>");
+
+  <% else %>
+    $cardContainer.append("<%= j render 'search/result' %>");
+  <% end %>
+
+  <% if @results.next_page.present? %>
+    $paginateLink.attr('href', "<%= j next_page_url %>").removeClass("hide");
+  <% else %>
+    $paginateLink.addClass("hide");
+  <% end %>
+})();

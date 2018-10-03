@@ -1,0 +1,35 @@
+<% district = item.pagemap.document[0] %>
+
+<div class="cardBox -location -roomdemand" data-behavior="masonry-card">
+
+  <div class="cardBoxHeader -roomdemand">
+    <%= link_to item.link do %>
+      <div class="category-tags">
+        <ul class="tag-list -mint">
+          <li><%= district['numeric'] %>. Bezirk</li>
+        </ul>
+      </div>
+      <div class="coverImgWrapper">
+        <%= image_tag("avatar/district/#{district['numeric']}.png", class: 'attachment room_demand avatar class coverImg') %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="cardBoxContent -roomdemand">
+
+    <!--<div class="roomtype">
+      <%= link_to item.link, class: 'typelink' do %>
+        <%= district['numeric'] %>. Bezirk
+      <% end %>
+    </div>-->
+
+    <div class="slogan">
+      Bezirksübersicht: <%= district['title'] %>
+    </div>
+
+    <!--<div class="txt">
+      <p></p>
+    </div>-->
+
+  </div>
+</div>

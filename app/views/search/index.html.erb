@@ -27,28 +27,22 @@
   <% if @results && !@results.items.empty? %>
 
     <!-- Search Results-->
-    <div class="cardBoxCollection -tripple">
+    <div class="cardBoxCollection -tripple" data-behavior='search-card-container'>
       <% @results.items.each do |item| %>
         <% if item.pagemap.key?('document') && item.pagemap.document[0].type == 'location' %>
-
           <%= render 'location', item: item %>
-
         <% elsif item.pagemap.key?('document') && item.pagemap.document[0].type == 'meeting' %>
-
           <%= render 'meeting', item: item %>
-
         <% elsif item.pagemap.key?('document') && item.pagemap.document[0].type == 'room_offer' %>
-
           <%= render 'room_offer', item: item %>
-
         <% elsif item.pagemap.key?('document') && item.pagemap.document[0].type == 'room_demand' %>
-
           <%= render 'room_demand', item: item %>
-
+        <% elsif item.pagemap.key?('document') && item.pagemap.document[0].type == 'district' %>
+          <%= render 'district', item: item %>
+        <% elsif item.pagemap.key?('document') && item.pagemap.document[0].type == 'graetzl' %>
+          <%= render 'graetzl', item: item %>
         <% else %>
-
           <%= render 'fallback', item: item %>
-
         <% end %>
       <% end %>
     </div>
@@ -57,20 +51,20 @@
     <!-- Pagination-->
     <div class='pagination'>
       <% if @results.previous_page %>
-      <%= link_to 'Zurück', search_path(q: params[:q], page: @results.previous_page, label: params[:label]), class: 'btn-primary -grey' %>
+      <%= link_to 'Zurück', search_path(q: params[:q], page: @results.previous_page, label: params[:label]), class: 'btn-secondary -grey' %>
       <% end %>
       <% @results.pages.times do |i| %>
-      <%= link_to i + 1, search_path(q: params[:q], page: i+1, label: params[:label]), :class => (params[:page].to_i == i+1 ? 'btn-secondary' : 'btn-secondary -grey') %>
+      <%= link_to i + 1, search_path(q: params[:q], page: i+1, label: params[:label]), :class => (params[:page].to_i == i+1 ? 'btn-primary' : 'btn-secondary -grey') %>
       <% end %>
       <% if @results.next_page %>
-      <%= link_to 'Weiter', search_path(q: params[:q], page: @results.next_page, label: params[:label]), class: 'btn-primary -grey' %>
+      <%= link_to 'Weiter', search_path(q: params[:q], page: @results.next_page, label: params[:label]), class: 'btn-secondary -grey' %>
       <% end %>
     </div>
     <!-- /Pagination -->
 
   <% elsif @results %>
 
-    <p>Keine Ergebnisse</p>
+    <p class="noresult">Nichts gefunden ...</p>
 
   <% end %>
 

@@ -56,6 +56,10 @@ APP.components.mainNavigation = (function() {
                 }
             });
 
+        $(".searchTrigger").on("click", function() {
+            setTimeout(function() { $("header .search-form #q").focus(); }, 200);
+        });
+
         $(document).on("closeAllTopnav", function() {
             closeMobileNav();
         });

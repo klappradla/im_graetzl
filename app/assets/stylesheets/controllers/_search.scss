@@ -1,23 +1,14 @@
 section.search-section {
 
   // Search Form -----------------------
-  .search-type-selection {
-    margin:20px 0px;
-    text-align: center;
-    .input-radio {
-      display: inline-block;
-      margin: 0 10px;
-      label {
-        @include font-size-primaryFont('larger');
-        line-height:1.2;
-      }
-    }
-  }
 
   .select-btn {
     min-width: 180px;
+    select option {
+      color: white;
+    }
   }
-  .input-select.select-btn::before{
+  .input-select.select-btn::before {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
   }
@@ -27,6 +18,10 @@ section.search-section {
 
   .pagination a {
     margin:5px;
+  }
+
+  .noresult {
+    font-style: italic;
   }
 
   // Search Results -----------------------
