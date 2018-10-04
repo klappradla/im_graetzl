@@ -11,49 +11,63 @@ SitemapGenerator::Sitemap.create do
   add locations_wien_path, changefreq: 'always', priority: 0.9
   add meetings_wien_path, changefreq: 'always', priority: 0.7
   add rooms_wien_path, changefreq: 'always', priority: 0.9
-  add zuckerls_wien_path, changefreq: 'always', priority: 0.7
+  add zuckerls_wien_path, changefreq: 'monthly', priority: 0.6
   District.find_each do |district|
-    add district_path(district), changefreq: 'always', priority: 0.8
-    add locations_district_path(district) unless district.locations.empty?
-    add meetings_district_path(district) unless district.meetings.empty?
-    add rooms_district_path(district), changefreq: 'always', priority: 0.8
+    add district_path(district), changefreq: 'daily', priority: 0.8
+    add locations_district_path(district), changefreq: 'daily', priority: 0.8
+    add meetings_district_path(district), changefreq: 'daily', priority: 0.7
+    add rooms_district_path(district), changefreq: 'daily', priority: 0.8
   end
 
   # Graetzls
   Graetzl.find_each do |graetzl|
-    add graetzl_path(graetzl), changefreq: 'always', priority: 0.7
+    add graetzl_path(graetzl), changefreq: 'hourly', priority: 0.8
+
+    # Raumteiler
+    add rooms_graetzl_path(graetzl), changefreq: 'hourly', priority: 0.7
 
     # Locations
     locations = graetzl.locations.approved
     unless locations.empty?
-      add locations_graetzl_path(graetzl)
+      add locations_graetzl_path(graetzl), changefreq: 'hourly', priority: 0.7
       locations.find_each do |location|
-        add graetzl_location_path(graetzl, location), priority: 0.8
+        add graetzl_location_path(graetzl, location), changefreq: 'daily', priority: 0.9
       end
     end
 
     # Meetings
     meetings = graetzl.meetings.active
     unless meetings.empty?
-      add meetings_graetzl_path(graetzl)
+      add meetings_graetzl_path(graetzl), changefreq: 'hourly', priority: 0.6
       meetings.find_each do |meeting|
-        add graetzl_meeting_path(graetzl, meeting), priority: 0.6
+        add graetzl_meeting_path(graetzl, meeting), changefreq: 'daily', priority: 0.6
       end
     end
   end
 
   # Raumteiler
   RoomOffer.find_each do |room_offer|
-    add room_offer_path(room_offer), priority: 0.8
+    add room_offer_path(room_offer), changefreq: 'daily', priority: 0.8
   end
 
   RoomDemand.find_each do |room_demand|
-    add room_demand_path(room_demand), priority: 0.8
+    add room_demand_path(room_demand), changefreq: 'daily', priority: 0.8
   end
 
   RoomCall.find_each do |room_call|
-    add room_call_path(room_call), priority: 0.8
+    add room_call_path(room_call), changefreq: 'daily', priority: 0.8
   end
+
+  # Groups
+  Group.find_each do |group|
+    add group_path(group), changefreq: 'daily', priority: 0.5
+  end
+
+  # Info Help Pages
+  add info_path, changefreq: 'monthly', priority: 0.4
+  add info_anbieter_und_locations_path, changefreq: 'monthly', priority: 0.4
+  add info_events_und_workshops_path, changefreq: 'monthly', priority: 0.4
+  add info_raumteiler_path, changefreq: 'monthly', priority: 0.4
 
   # Info Pages
   add info_agb_path, changefreq: 'never', priority: 0.3
