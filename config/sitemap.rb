@@ -8,14 +8,14 @@ SitemapGenerator::Sitemap.adapter = SitemapGenerator::AwsSdkAdapter.new(ENV['UPL
 SitemapGenerator::Sitemap.create do
   # Districts
   add wien_path, changefreq: 'always', priority: 0.9
-  add locations_wien_path, changefreq: 'always', priority: 0.7
+  add locations_wien_path, changefreq: 'always', priority: 0.9
   add meetings_wien_path, changefreq: 'always', priority: 0.7
   add rooms_wien_path, changefreq: 'always', priority: 0.9
   add zuckerls_wien_path, changefreq: 'always', priority: 0.7
   District.find_each do |district|
     add district_path(district), changefreq: 'always', priority: 0.8
-    add locations_district_path(district) unless district.locations.empty?, changefreq: 'always', priority: 0.8
-    add meetings_district_path(district) unless district.meetings.empty?, changefreq: 'always', priority: 0.7
+    add locations_district_path(district) unless district.locations.empty?
+    add meetings_district_path(district) unless district.meetings.empty?
     add rooms_district_path(district), changefreq: 'always', priority: 0.8
   end
 
@@ -37,7 +37,7 @@ SitemapGenerator::Sitemap.create do
     unless meetings.empty?
       add meetings_graetzl_path(graetzl)
       meetings.find_each do |meeting|
-        add graetzl_meeting_path(graetzl, meeting), priority: 0.7
+        add graetzl_meeting_path(graetzl, meeting), priority: 0.6
       end
     end
   end
