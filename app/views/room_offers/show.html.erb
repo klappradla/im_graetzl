@@ -4,7 +4,7 @@
     robots: 'index, follow',
     og_title: t('.title', slogan: @room_offer.slogan[0..80].gsub(/\s\w+\s*$/,'...')),
     og_description: t('.description', type: t("activerecord.attributes.room_offer.offer_types.#{@room_offer.offer_type}"), desc: @room_offer.room_description[0..250].gsub(/\n/, " ")),
-    og_image: attachment_url(@room_offer, :cover_photo, host: request.url, fallback: 'meta/og_logo.png')
+    og_image: attachment_url(@room_offer, :cover_photo, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'meta/og_logo.png')
   )
 %>
 
@@ -25,10 +25,10 @@
       <Attribute name="address_zip"><%= @room_offer.address.zip if @room_offer.address && @room_offer.address.zip %></Attribute>
     </DataObject>
     <DataObject type="image">
-      <Attribute name="src" value="<%= attachment_url(@room_offer, :cover_photo, :fill, 900, 540, host: request.url, fallback: 'meta/og_logo.png') %>" />
+      <Attribute name="src" value="<%= attachment_url(@room_offer, :cover_photo, :fill, 900, 540, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'meta/og_logo.png') %>" />
     </DataObject>
     <DataObject type="thumbnail">
-      <Attribute name="src" value="<%= attachment_url(@room_offer, :avatar, :fill, 400, 400, host: request.url, fallback: 'avatar/room_offer/400x400.png') %>" />
+      <Attribute name="src" value="<%= attachment_url(@room_offer, :avatar, :fill, 400, 400, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'avatar/room_offer/400x400.png') %>" />
     </DataObject>
   </PageMap>
   -->

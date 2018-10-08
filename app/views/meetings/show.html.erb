@@ -4,7 +4,7 @@
     robots: 'index, follow',
     og_title: t('.title', name: @meeting.name),
     og_description: t('.description', desc: @meeting.description[0...154]),
-    og_image: attachment_url(@meeting, :cover_photo, host: request.url, fallback: 'meta/og_logo.png')
+    og_image: attachment_url(@meeting, :cover_photo, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'meta/og_logo.png')
   )
 %>
 
@@ -25,10 +25,10 @@
       <Attribute name="startDate"><%= I18n.localize(@meeting.starts_at_date, format:'%Y-%m-%d') if @meeting.starts_at_date %></Attribute>
     </DataObject>
     <DataObject type="image">
-      <Attribute name="src" value="<%= attachment_url(@meeting, :cover_photo, :fill, 900, 540, host: request.url, fallback: 'meta/og_logo.png') %>" />
+      <Attribute name="src" value="<%= attachment_url(@meeting, :cover_photo, :fill, 900, 540, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'meta/og_logo.png') %>" />
     </DataObject>
     <DataObject type="thumbnail">
-      <Attribute name="src" value="<%= attachment_url(@meeting.initiator, :avatar, :fill, 400, 400, host: request.url, fallback: 'avatar/user/400x400.png') %>" />
+      <Attribute name="src" value="<%= attachment_url(@meeting.initiator, :avatar, :fill, 400, 400, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'avatar/user/400x400.png') %>" />
     </DataObject>
   </PageMap>
   -->

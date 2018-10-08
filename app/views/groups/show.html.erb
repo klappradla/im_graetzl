@@ -1,3 +1,13 @@
+<% meta(
+    title: @group.title,
+    description: (@group.description[0...154] if @group.description?),
+    robots: 'index, follow',
+    og_title: @group.title,
+    og_description: (@group.description[0...154] if @group.description?),
+    og_image: attachment_url(@group.parent, :cover_photo, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'meta/og_logo.png')
+  )
+%>
+
 <div class="group-page">
 
   <%= render 'groups/header' %>
