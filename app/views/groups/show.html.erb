@@ -8,6 +8,37 @@
   )
 %>
 
+<% content_for :pagemap do %>
+  <!--
+  <PageMap>
+    <DataObject type="document">
+      <Attribute name="type">group</Attribute>
+      <Attribute name="searchable">true</Attribute>
+      <Attribute name="id"><%= @group.id %></Attribute>
+      <Attribute name="title"><%= @group.title %></Attribute>
+      <Attribute name="group_visibility"><%= @group.private? ? "Geschlossene" : "Offene" %> Gruppe</Attribute>
+      <Attribute name="description"><%= @group.description[0..250].gsub(/\n/, " ") %></Attribute>
+      <Attribute name="parent"><%= @group.parent %></Attribute>
+      <% if (@group.parent.is_a? RoomCall) %>
+      <Attribute name="parent_path"><%= room_call_path(@group.parent) %></Attribute>
+      <% elsif (@group.parent.is_a? RoomOffer) %>
+      <Attribute name="parent_path"><%= room_offer_path(@group.parent) %></Attribute>
+      <% end %>
+      <Attribute name="users_count"><%= @group.users.count %></Attribute>
+    </DataObject>
+    <% @group.admins.each do |user| %>
+    <DataObject type="organizer">
+      <Attribute name="full_name"><%= user.full_name %></Attribute>
+      <Attribute name="src" value="<%= attachment_url(user, :avatar, :fill, 200, 200, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'avatar/user/100x100.png') %>" />
+    </DataObject>
+    <% end %>
+    <DataObject type="image">
+      <Attribute name="src" value="<%= attachment_url(@group.parent, :cover_photo, :fill, 900, 540, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'cover_photo/980x370.png') %>" />
+    </DataObject>
+  </PageMap>
+  -->
+<% end %>
+
 <div class="group-page">
 
   <%= render 'groups/header' %>

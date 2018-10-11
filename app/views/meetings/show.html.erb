@@ -8,7 +8,7 @@
   )
 %>
 
-<%= structured_data_tag('meeting', @meeting) %>
+<%= structured_data_tag('meeting', @meeting) if @meeting.starts_at_date %>
 
 <% content_for :pagemap do %>
   <!--
