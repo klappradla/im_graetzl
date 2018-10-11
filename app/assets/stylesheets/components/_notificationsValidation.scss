@@ -41,6 +41,10 @@ main [id^=error_] {
 #error_explanation, #flash {
   background-color: #FEF6DF;
   color: #cd891b;
+  p.title {
+    text-align: center;
+    padding-bottom:10px;
+  }
 }
 
 #flash:not(:empty) + main .mapImgBlock,

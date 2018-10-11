@@ -137,7 +137,8 @@ de:
       room_demand:
         slogan: Titel
         room_categories: Raumkategorie
-        graetzl: Graetzl
+        graetzls: Grätzl
+        graetzl: Grätzl
         demand_description: Beschreibung
         personal_description: Über dich
         avatar: Profilbild

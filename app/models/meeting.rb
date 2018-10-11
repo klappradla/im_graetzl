@@ -38,6 +38,8 @@ class Meeting < ApplicationRecord
   belongs_to :group, optional: true
 
   validates :name, presence: true
+  validates :description, presence: true
+  validates :starts_at_date, presence: true
   validates :graetzl, presence: true
   validate :starts_at_date_cannot_be_in_the_past, on: :create
 

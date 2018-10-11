@@ -1,5 +1,8 @@
 <div id="error_explanation">
-  <h2><%= name %> konnte nicht gespeichert werden!<br><%= target.errors.count %> Fehler:</h2>
+  <p class="title">
+    <strong><%= name %> konnte nicht gespeichert werden!</strong>
+    <br><%= target.errors.count %> Fehler:
+  </p>
   <ul>
     <% target.errors.full_messages.each do |message| %>
       <li><%= message %></li>

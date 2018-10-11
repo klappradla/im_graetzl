@@ -16,7 +16,7 @@ APP.components.graetzlSelectFilter = (function() {
       captionFormatAllSelected: 'Alle {0} Bezirke in Wien',
       okCancelInMulti: true,
       selectAll: true,
-      locale: ['OK', 'Cancel', 'Ganz Wien']
+      locale: ['Übernehmen', 'Abbrechen', 'Ganz Wien']
     });
 
     if ($districtSelect.val() && $districtSelect.val().length > 0) {
@@ -30,7 +30,8 @@ APP.components.graetzlSelectFilter = (function() {
       csvDispCount: 3,
       captionFormat: '{0} Grätzln',
       captionFormatAllSelected: 'Alle {0} Grätzln in Wien',
-      okCancelInMulti: true
+      okCancelInMulti: true,
+      locale: ['Übernehmen', 'Abbrechen']
     });
 
     $districtSelect.on('change', function() {

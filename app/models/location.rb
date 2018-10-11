@@ -29,8 +29,11 @@ class Location < ApplicationRecord
   accepts_nested_attributes_for :billing_address, allow_destroy: true, reject_if: :all_blank
 
   validates :name, presence: true
+  validates :slogan, presence: true
+  validates :description, presence: true
   validates :graetzl, presence: true
   validates :category, presence: true
+
 
   before_create { |location| location.last_activity_at = Time.current }
 
