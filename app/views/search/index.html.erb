@@ -41,6 +41,10 @@
           <%= render 'district', item: item %>
         <% elsif item.pagemap.key?('document') && item.pagemap.document[0].type == 'graetzl' %>
           <%= render 'graetzl', item: item %>
+        <% elsif item.pagemap.key?('document') && item.pagemap.document[0].type == 'group' %>
+          <%= render 'group', item: item %>
+        <% elsif item.pagemap.key?('document') && item.pagemap.document[0].type == 'room_call' %>
+          <%= render 'room_call', item: item %>
         <% else %>
           <%= render 'fallback', item: item %>
         <% end %>

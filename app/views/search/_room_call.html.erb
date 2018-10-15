@@ -1,0 +1,44 @@
+<% call = item.pagemap.document[0] %>
+
+<!-- CallCard-->
+<div class="cardBox -call" data-behavior="masonry-card">
+  <div class="cardBoxHeader">
+    <%= link_to item.link do %>
+      <div class="coverImgWrapper">
+        <%= image_tag(item.pagemap.image[0].src, class: 'attachment cover_photo coverImg') %>
+      </div>
+    <% end %>
+    <div class="categoryicon -call -open">
+      <span>Open Call</span>
+    </div>
+  </div>
+
+  <div class="cardBoxContent -call">
+    <div class="avatar-block -below">
+      <%= link_to item.link, class: 'avatarImg' do %>
+        <%= image_tag(item.pagemap.thumbnail[0].src, class: 'attachment location avatar img-square') %>
+      <% end %>
+      <div class="typetxt">
+        <%= link_to item.link do %>
+          <div class="typetxt">
+            <div class="roomtype">
+              <%= call['title'] %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="slogan">
+      <%= call['slogan'] if !call['slogan'].nil? %>
+    </div>
+
+    <div class="txt">
+      <p><%= call['subtitle'] if !call['subtitle'].nil? %></p>
+    </div>
+
+    <%= link_to "Zum Call", item.link, class: 'btn-primary -rosa' %>
+
+  </div>
+</div>
+<!-- /CallCard -->

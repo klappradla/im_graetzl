@@ -1,0 +1,45 @@
+<% group = item.pagemap.document[0] %>
+
+<!-- Group Card -->
+<div class="cardBox -group" data-behavior="masonry-card">
+
+  <div class="cardBoxHeader">
+    <%= link_to item.link do %>
+      <div class="coverImgWrapper">
+        <%= image_tag(item.pagemap.image[0].src, class: 'attachment room_call cover_photo coverImg') %>
+      </div>
+    <% end %>
+    <div class="categoryicon">
+      <%= icon_tag "speech-bubble" %>
+    </div>
+  </div>
+
+  <div class="cardBoxContent -group">
+
+    <%= link_to group['title'], item.link, class: 'title' %>
+
+    <p class="infos">
+      <%= group['users_count'].to_i %> <%= group['users_count'].to_i > 1 ? "Mitglieder" : "Mitglied" %>  &middot;
+      <%= group['group_visibility'] %>
+    </p>
+
+    <div class="users">
+
+      <% item.pagemap.members.each do |user| %>
+        <%= image_tag(user.src, class: 'img-round') %>
+      <% end %>
+
+      <% if group['users_count'].to_i > 10 %>
+        <span> + <%= group['users_count'].to_i - 10 %> weitere </span>
+      <% end %>
+
+    </div>
+
+    <div class="slogan">
+      <%= truncate group['description'], length: 100 %>
+    </div>
+
+    <%= link_to "Zur Gruppe", item.link, class: 'btn-primary -mint' %>
+  </div>
+</div>
+<!-- /Group Card -->
