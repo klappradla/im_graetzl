@@ -13,11 +13,7 @@
   <% end %>
 
   <h2 class="hl-main"><span>Wo</span> befindet sich der Raum?</h2>
-  <% if f.object.address.nil? %>
-  <%= render 'room_calls/form/address_select', f: f %>
-  <% else %>
   <%= render 'room_calls/form/address_fields', f: f %>
-  <% end %>
 
   <h2 class="hl-main"><span>Calltitel</span> und <span>Beschreibung</span></h2>
   <div class="input-field">
@@ -107,6 +103,7 @@
         <h2 class="hl-main">Verfügbare <span>Module</span></h2>
         <p class="subline">Du kannst mehrere Module erstellen.</p>
         <div class="room-modules">
+          <% f.object.room_call_modules.build if f.object.room_call_modules.empty? %>
           <%= f.fields_for :room_call_modules do |module_form| %>
           <%= render 'room_calls/form/module_fields', f: module_form %>
           <% end %>
@@ -118,6 +115,7 @@
         <h2 class="hl-main"><span>Packages</span> und <span>Preise</span> </h2>
         <p class="subline">Du kannst mehrere Preis-Packages definieren.</p>
         <div class="room-prices">
+          <% f.object.room_call_prices.build if f.object.room_call_prices.empty? %>
           <%= f.fields_for :room_call_prices do |price_form| %>
           <%= render 'room_calls/form/price_fields', f: price_form %>
           <% end %>
@@ -141,6 +139,7 @@
           (Kontaktdaten wie Name, E-Mail, usw. musst du nicht abfragen, das passiert automatisch.)
         </p>
         <div class="room-call-fields">
+          <% f.object.room_call_fields.build if f.object.room_call_fields.empty? %>
           <%= f.fields_for :room_call_fields do |field_form| %>
           <%= render 'room_calls/form/field_fields', f: field_form %>
           <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180903182758) do
+ActiveRecord::Schema.define(version: 20181017180239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -255,9 +255,9 @@ ActiveRecord::Schema.define(version: 20180903182758) do
     t.string   "title"
     t.text     "description"
     t.integer  "room_offer_id"
-    t.boolean  "private"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.boolean  "private",       default: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "room_call_id"
     t.index ["room_call_id"], name: "index_groups_on_room_call_id", using: :btree
     t.index ["room_offer_id"], name: "index_groups_on_room_offer_id", using: :btree

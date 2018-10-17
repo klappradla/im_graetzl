@@ -8,9 +8,6 @@ class RoomCallsController < ApplicationController
 
   def new
     @room_call = RoomCall.new
-    @room_call.room_call_prices.build
-    @room_call.room_call_fields.build
-    @room_call.room_call_modules.build
     @room_call.assign_attributes(current_user.slice(:first_name, :last_name, :email, :website))
   end
 

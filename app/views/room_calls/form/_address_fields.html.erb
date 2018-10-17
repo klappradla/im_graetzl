@@ -1,30 +1,42 @@
-<%= f.fields_for :address do |address_fields| %>
-  <div class="input-field">
-    <%= address_fields.label :street_name do %>
-      <span>Straße</span>
+<% if f.object.new_record? %>
+  <div class="input-field" id="addressSearchAutocomplete">
+    <%= label_tag :address do %>
+      <%= icon_tag "map-location" %>
+      <span>Adresse</span>
     <% end %>
-    <%= address_fields.text_field :street_name %>
+    <%= text_field_tag :address, params[:address], required: true, placeholder: "Straße und Hausnummer" %>
+    <%= hidden_field_tag :feature, params[:feature] %>
   </div>
 
-  <div class="input-field">
-    <%= address_fields.label :street_number do %>
-      <span>Hausnummer</span>
-    <% end %>
-    <%= address_fields.text_field :street_number %>
-  </div>
+<% else %>
+  <%= f.fields_for :address do |address_fields| %>
+    <div class="input-field">
+      <%= address_fields.label :street_name do %>
+        <span>Straße</span>
+      <% end %>
+      <%= address_fields.text_field :street_name %>
+    </div>
 
-  <div class="input-field">
-    <%= address_fields.label :zip do %>
-      <span>Postleitzahl</span>
-    <% end %>
-    <%= address_fields.text_field :zip %>
-  </div>
+    <div class="input-field">
+      <%= address_fields.label :street_number do %>
+        <span>Hausnummer</span>
+      <% end %>
+      <%= address_fields.text_field :street_number %>
+    </div>
 
-  <div class="input-field">
-    <%= address_fields.label :city do %>
-      <span>Ort</span>
-    <% end %>
-    <%= address_fields.text_field :city %>
-  </div>
+    <div class="input-field">
+      <%= address_fields.label :zip do %>
+        <span>Postleitzahl</span>
+      <% end %>
+      <%= address_fields.text_field :zip %>
+    </div>
+
+    <div class="input-field">
+      <%= address_fields.label :city do %>
+        <span>Ort</span>
+      <% end %>
+      <%= address_fields.text_field :city %>
+    </div>
+  <% end %>
 
 <% end %>
