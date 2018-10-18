@@ -65,6 +65,7 @@ Rails.application.routes.draw do
   resources :zuckerls, only: [:index]
   resources :rooms, only: [:index]
   resources :posts, only: [:index]
+  resources :groups, only: [:index]
 
   resources :locations do
     concerns :graetzl_before_new
@@ -168,7 +169,9 @@ Rails.application.routes.draw do
     get 'raumteiler', action: 'rooms', as: 'rooms', on: :member
     get 'zuckerl', action: 'zuckerls', as: 'zuckerls', on: :member
     get 'ideen', action: 'posts', as: 'posts', on: :member
+    get 'gruppen', action: 'groups', as: 'groups', on: :member
     resources :meetings, path: 'treffen', only: [:show]
+    resources :groups, path: 'gruppen', only: [:show]
     resources :locations, only: [:show]
     resources :users, only: [:show]
     resources :user_posts, path: 'ideen', only: [:new, :show, :create, :destroy]

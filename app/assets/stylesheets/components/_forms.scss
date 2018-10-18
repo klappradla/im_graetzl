@@ -73,6 +73,9 @@ input, select, textarea {
     margin-left: 10px;
     margin-right: 10px;
   }
+  a {
+    color: currentcolor;
+  }
 }
 
 .label-right {
@@ -120,6 +123,27 @@ input, select, textarea {
   @extend %field;
   input {
     height: $fieldHeight;
+  }
+  /*input.ico-search {
+    background-image: url(image_path('svg/icon-search.svg'));
+    background-repeat: no-repeat;
+    background-size: 40px 40px, 100% 100%;
+    background-position: center right;
+  }*/
+  &.search-filter {
+    justify-content: center;
+    label, input, .SumoSelect p.SelectBox, .input-field > input, input::placeholder {
+      @include font-size-primaryFont('large');
+      color: $color-ambient-mint-dark;
+      font-style: italic;
+    }
+    .SumoSelect p.SelectBox {
+      height: $fieldHeight;
+      line-height: 1.2;
+    }
+    input::placeholder {
+      color: $color-ambient-mint-dark;
+    }
   }
 }
 
@@ -193,6 +217,31 @@ input, select, textarea {
       @include triangleSingle($direction: "down", $color: #ffffff);
     }
   }
+  &.label-select {
+    .SumoSelect {
+      min-width: 250px;
+      .MultiControls p {
+        padding:10px !important;
+      }
+    }
+    .SumoSelect p {
+      background-color: transparent;
+      box-shadow: none;
+      color: $color-ambient-mint-dark;
+      font-style: italic;
+      border: 1px solid $color-ambient-mint-light;
+      padding-right:25px;
+    }
+    &::before {
+      /*  Custom dropdown arrow cover */
+      border-left: 1px dotted $color-ambient-mint-light;
+      background-color: transparent;
+    }
+    &::after {
+      /*  Custom dropdown arrow */
+      @include triangleSingle($direction: "down", $color: $color-ambient-mint);
+    }
+  }
 
 }
 
@@ -215,10 +264,6 @@ input, select, textarea {
 
   &.open > .optWrapper {
     top: 60px;
-  }
-
-  label {
-    //display: none;
   }
 
   p {
@@ -306,10 +351,7 @@ input, select, textarea {
       }
     }
   }
-
 }
-
-
 
 
 .input-radio {

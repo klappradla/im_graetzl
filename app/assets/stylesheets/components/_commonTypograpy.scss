@@ -40,4 +40,7 @@
     font-style: inherit;
     display: inline-table;
   }
+  ~ .card-grid-container {
+    padding-top:10px;
+  }
 }

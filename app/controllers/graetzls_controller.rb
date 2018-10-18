@@ -31,4 +31,9 @@ class GraetzlsController < ApplicationController
     @map_data = MapData.call(graetzl: @graetzl)
   end
 
+  def groups
+    @graetzl = Graetzl.find(params[:id])
+    @map_data = MapData.call(graetzl: @graetzl)
+  end
+
 end

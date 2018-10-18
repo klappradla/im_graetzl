@@ -26,9 +26,8 @@
       <% end %>
       <Attribute name="users_count"><%= @group.users.count %></Attribute>
     </DataObject>
-    <% @group.admins.each do |user| %>
-    <DataObject type="organizer">
-      <Attribute name="full_name"><%= user.full_name %></Attribute>
+    <% @group.users.first(10).each do |user| %>
+    <DataObject type="members">
       <Attribute name="src" value="<%= attachment_url(user, :avatar, :fill, 200, 200, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'avatar/user/100x100.png') %>" />
     </DataObject>
     <% end %>
