@@ -1,0 +1,36 @@
+<div class="cardbox-wrp" data-behavior="masonry-card">
+  <div class="paperCard -cord1RT -illuteaser -groups">
+    <div class="wrp">
+      <div class="user">
+        <% if current_user %>
+          <%= attachment_image_tag current_user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+          <span><%= current_user.username %></span>
+        <% else %>
+          <%= image_tag('avatar/user/default.png', class: 'img-round') %>
+          <span>Dein Name</span>
+        <% end %>
+      </div>
+      <% if local_assigns[:graetzl] %>
+        <h3>Trete jetzt einer Gruppe bei oder gründe eine neue Gruppe.</h3>
+        <%= link_to 'Neue Gruppe gründen', new_group_path(graetzl_id: graetzl), class: 'btn-primary' %>
+      <% elsif local_assigns[:district] %>
+        <h3>Du bist unternehmerisch, sozial oder kreativ im <%= district.numeric %>. Bezirk tätig?</h3>
+        <%= link_to 'Deine Location einrichten', new_group_path, class: 'btn-primary' %>
+      <% else %>
+        <h3>Du bist unternehmerisch, sozial oder kreativ im Grätzl tätig?</h3>
+        <%= link_to 'Deine Location einrichten', new_user_session_path, class: 'btn-primary -rose' %>
+      <% end %>
+    </div>
+    <div class="card"></div>
+  </div>
+
+  <% if local_assigns[:view_all] %>
+    <% if local_assigns[:graetzl] %>
+      <%= link_to 'Alle Gruppen', groups_graetzl_path(graetzl), class: 'link-more' %>
+    <% elsif local_assigns[:district] %>
+      <%= link_to 'Alle Gruppen', groups_district_path(district), class: 'link-more' %>
+    <% else %>
+      <%= link_to 'Alle Gruppen', groups_wien_path, class: 'link-more' %>
+    <% end %>
+  <% end %>
+</div>

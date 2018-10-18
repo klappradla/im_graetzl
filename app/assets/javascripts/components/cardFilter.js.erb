@@ -5,6 +5,72 @@ APP.components.cardFilter = (function() {
   var masonrySetup = false;
 
   function init() {
+
+    // ----------- Search Suggestion Form - MICHAEL
+    suggestionForm = $(".search-suggestion-trigger");
+    suggestionBox = $(".search-suggestion");
+    suggestionLink = $(".search-suggestion a");
+    suggestionLinkActive = $(".search-suggestion .active");
+    suggestionSelect = $("#graetzl-suggestion");
+    suggestionValue = suggestionLinkActive.text();
+
+    suggestionLink.on("click", function() {
+      suggestionLink.removeClass("active");
+      $(this).addClass("active");
+      suggestionLinkActive = $(this);
+      suggestionValue = $(this).text();
+      setValue(suggestionValue);
+      filterForm.submit();
+    });
+    suggestionForm.on("click", function(){
+      $(this).focus().select();
+      $(this).val("");
+      suggestionBox.slideDown("fast");
+    });
+    suggestionForm.keypress(function (e) {
+      if (e.which == 13) {
+        suggestionLink.removeClass("active");
+        suggestionBox.slideUp("fast");
+        suggestionValue = $(this).val();
+        setValue(suggestionValue);
+        filterForm.submit();
+      }
+    });
+    suggestionForm.on("blur", function(){
+      suggestionBox.slideUp("fast");
+      setValue(suggestionValue);
+    });
+
+    $(suggestionSelect).SumoSelect({
+      search: true,
+      searchText: 'Suche..',
+      placeholder: 'Bezirk auswählen..',
+      csvDispCount: 3,
+      captionFormat: 'in {0} Bezirken',
+      captionFormatAllSelected: 'in Ganz Wien',
+      okCancelInMulti: true,
+      selectAll: true,
+      locale: ['Übernehmen', 'Abbrechen', 'Ganz Wien']
+    });
+
+    $("#graetzl-suggestion").on("change", function(){
+      filterForm.submit();
+    });
+
+    $(".label-select .select-all").on("click", function(){
+      if ($(this).hasClass( "selected" )) {
+        $(".label-select .btnOk").click();
+      }
+    });
+
+    var setValue = function(value) {
+      suggestionForm.val(value);
+    }
+
+    $('document').on('ready', setValue(suggestionValue))
+
+    // ----------- Search Suggestion Form - MICHAEL
+
     filterForm = $(".cards-filter");
     cardGrid = $('.card-grid');
 

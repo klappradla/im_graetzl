@@ -53,6 +53,11 @@
     }
   }
 
+  .cards-filter .search-filter {
+    margin-top: -30px;
+    padding-bottom:30px;
+  }
+
   .cards-filter .filter-selection-text {
     text-align: center;
     font-style: italic;
@@ -112,6 +117,53 @@
       }
     }
 
+  }
+
+  .search-suggestion {
+    display: none;
+    margin-top: -10px;
+    margin-bottom: 20px;
+    @include respond-to(">=medium") {
+      margin-left: 30px;
+      margin-right: 30px;
+    }
+
+    .wrapper {
+      @include respond-to(">=medium") {
+        display: flex;
+    }
+    }
+    .col {
+      @include font-size-primaryFont('large');
+      font-style: italic;
+      @include respond-to(">=medium") {
+        border-right: 1px solid $color-ambient-grey-light;
+        margin-right: 20px;
+        padding-right: 40px;
+        padding-left: 20px;
+      }
+      > a {
+        display: block;
+        padding: 5px 0;
+        text-decoration: none;
+        color: $color-ambient-mint-dark;
+        &:hover {
+          color: $color-ambient-rosa;
+        }
+      }
+      > a.active {
+        color: $color-ambient-rosa;
+        font-weight: bold;
+      }
+      &:last-child {
+        border-right: none;
+        margin-right: 0;
+      }
+    }
+
+  }
+  .search-suggestion ~ .card-grid {
+    //margin-top:20px !important;
   }
 
 }

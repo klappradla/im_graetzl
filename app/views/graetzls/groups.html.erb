@@ -1,0 +1,72 @@
+<% meta(
+    title: t('.title', graetzl: @graetzl.name),
+    description: t('.description', graetzl: @graetzl.name, numeric: @graetzl.district.numeric),
+    robots: 'index, follow',
+    og_title: t('.title', graetzl: @graetzl.name),
+    og_description: t('.description', graetzl: @graetzl.name, numeric: @graetzl.district.numeric),
+    og_image: image_url('meta/og_logo.png')
+  )
+%>
+
+<section class="graetzls -groups">
+  <%= cache [@graetzl, 'map'], expires_in: 2.months do %>
+    <%= render 'map', map_data: @map_data %>
+  <% end %>
+  <%= render 'curator' if @graetzl.curator %>
+  <%= render 'menu' %>
+
+  <% if !user_signed_in? %>
+    <div class="hl-subtext">
+      <h1><span>Gruppen</span> - Vernetzung & Austausch im Grätzl</h1>
+      <p><!-- Subtitle --></p>
+    </div>
+  <% end %>
+
+  <div class="card-grid-container">
+    <%= form_tag groups_path, method: :get, remote: true, class: 'cards-filter' do %>
+      <div class="input-field search-filter">
+        <div class="input-field">
+          <%= text_field_tag :q, params[:q], placeholder: 'Suche..', class: 'search-suggestion-trigger' %>
+        </div>
+        <div class="input-select label-select">
+          <%= select_tag :district_id, options_from_collection_for_select(District.order(:zip), :id, :zip_name, @graetzl.district.id), id: 'graetzl-suggestion', multiple: true %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="cardBox search-suggestion">
+      <div class="wrapper">
+        <div class="col">
+          <%= link_to "Alle Gruppen", 'javascript:', data: { search_filter: "all" }, class: 'active' %>
+          <%= link_to "Kooperationen", 'javascript:', data: { search_filter: "cat1" } %>
+          <%= link_to "Tauschgeschäfte", 'javascript:', data: { search_filter: "cat2" } %>
+        </div>
+        <div class="col">
+          <%= link_to "Marketing", 'javascript:', data: { search_filter: "cat3" } %>
+          <%= link_to "Neu auf imGrätzl", 'javascript:', data: { search_filter: "cat4" } %>
+          <%= link_to "Gegenseitige Unterstützung", 'javascript:', data: { search_filter: "cat5" } %>
+        </div>
+        <div class="col">
+          <%= link_to "Raumteiler Gruppen", 'javascript:', data: { search_filter: "cat6" } %>
+          <%= link_to "Raumteiler Hubs", 'javascript:', data: { search_filter: "cat7" } %>
+          <%= link_to "Open Call Gruppen", 'javascript:', data: { search_filter: "cat8" } %>
+        </div>
+      </div>
+    </div>
+
+    <div id="graetzl-suggestion" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-left dropdown-container">
+      <div class="jq-dropdown-panel">
+        Bezirk auswählen ...
+      </div>
+    </div>
+
+    <div class="card-grid" data-behavior="groups-card-container"></div>
+    <div class="action-card-container" data-behavior="groups-action-card-container">
+      <%= render 'groups/action_card', graetzl: @graetzl %>
+    </div>
+
+    <!-- Insert Featured Card -->
+
+    <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'groups-paginate-link' }, rel: 'nofollow' %>
+  </div>
+</section>

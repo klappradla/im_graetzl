@@ -30,14 +30,14 @@
     <div class="txt">Raum<br>teiler</div>
   <% end %>
 
+  <%= active_link_to groups_graetzl_path(@graetzl), class: "iconfilter" do %>
+    <%= icon_tag "speech-bubble" %>
+    <div class="txt">Gruppen</div>
+  <% end %>
+
   <%= active_link_to zuckerls_graetzl_path(@graetzl), class: "iconfilter" do %>
     <%= icon_tag "shopping-bag" %>
     <div class="txt">Zuckerl <br/>& Angebote</div>
-  <% end %>
-
-  <%= active_link_to posts_graetzl_path(@graetzl), class: "iconfilter" do %>
-    <%= icon_tag "head-idea-lightbulb" %>
-    <div class="txt">Ideen <br/>im Grätzl</div>
   <% end %>
 
   <% if user_signed_in? %>
