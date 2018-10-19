@@ -33,6 +33,13 @@
     }
   }
 
+  &.-group-discussion {
+    @include respond-to(">=large") {
+      margin-left:0px;
+      margin-right:-10px;
+    }
+  }
+
   &.-quart {
     > * {
       margin-bottom: 30px;

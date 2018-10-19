@@ -54,9 +54,11 @@
   <div class="bottom-section">
     <h3>Aktuelle Diskussionen</h3>
     <% if @discussions.present? %>
-      <% @discussions.first(2).each do |discussion| %>
-        <%= render 'groups/discussions/discussion_preview', discussion: discussion %>
-      <% end %>
+      <div class="cardBoxCollection -tripple -group-overview">
+        <% @discussions.first(3).each do |discussion| %>
+          <%= render 'groups/discussions/discussion_preview', discussion: discussion %>
+        <% end %>
+      </div>
       <%= link_to "Alle Diskussionen anzeigen", "javascript:", class: 'all-discussions-link btn-secondary -mint' %>
     <% else %>
       <p class="hint">Noch keine Diskussionen in der Gruppe..</p>

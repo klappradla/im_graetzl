@@ -1,33 +1,62 @@
-<% post = discussion.sticky? ? discussion.discussion_posts.first : discussion.discussion_posts.last %>
-<div class="discussion-preview">
+<% post_first = discussion.discussion_posts.first %>
+<% post_last = discussion.discussion_posts.size > 1 ? discussion.discussion_posts.last : nil %>
 
-  <h3>
-    <%= link_to discussion.title, [discussion.group, discussion] %>
-  </h3>
-
-  <div class="discussion-infos">
-    <%= discussion.discussion_posts.size  %> <%= discussion.discussion_posts.size > 1 ? 'Beiträge' : 'Beitrag'  %> im Thema &middot; Letzter von:
-  </div>
-
-  <% if discussion.discussion_posts.size > 0 %>
-  <div class="user">
-    <div class="avatar">
-      <%= attachment_image_tag post.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+<div class="cardBox -discussion" data-behavior="masonry-card">
+  <div class="cardBoxHeader">
+    <%= link_to [discussion.group, discussion] do %>
+      <div class="coverImgWrapper">
+        <%= image_tag 'cover_photo/600x360-speech-bubble.png', class: 'coverImg' %>
+        <!-- Insert Post Image here ... 300, 250, class: 'coverImg' -->
+      </div>
+    <% end %>
+    <div class="categoryicon">
+      <% if discussion.sticky %>
+        <%= icon_tag "pin" %>
+      <% else %>
+        <%= icon_tag "layout-document" %>
+      <% end %>
     </div>
-    <div class="infos">
-      <div class="name"><%= post.user.full_name %></div>
-      <div class="date">
-        <%= I18n.localize(post.created_at, format:'%a, %d. %B %Y, %H:%M') %>
+  </div>
+  <div class="cardBoxContent">
+    <div class="avatar-block">
+      <% if post_first %>
+        <%= link_to [discussion.group, discussion], class: 'avatarImg' do %>
+          <%= attachment_image_tag post_first.user, :avatar, :fill, 200, 200, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+          <% end %>
+      <% end %>
+      <div class="typetxt">
+        <%= link_to [discussion.group, discussion] do %>
+          <div class="name"><%= post_first.user.full_name if post_first %></div>
+        <% end %>
+        <div class="category"><%= discussion.group_category ? discussion.group_category.title : 'Allgemein'.html_safe %></div>
+        <div class="infos">
+          <%= discussion.discussion_posts.size  %> <%= discussion.discussion_posts.size > 1 ? 'Beiträge' : 'Beitrag'  %>
+        </div>
       </div>
     </div>
-  </div>
-
-  <div class="content">
-    <p><%= post.content.truncate(300, separator: ' ') %></p>
-    <div class="ctrl">
-      <%= link_to 'Zum Beitrag', [discussion.group, discussion, anchor: "discussion-post-#{post.id}"], class: 'btn-secondary -mint -small' %>
+    <div class="txt">
+      <h3><%= link_to discussion.title, [discussion.group, discussion, anchor: ""] %></h3>
+      <p>
+        <% if post_first && !post_last %>
+          <%= truncate post_first.content, length: 150 %>
+        <% end %>
+      </p>
     </div>
+    <!-- appendix -->
+    <% if post_last %>
+    <div class="streamElement">
+      <div class="entryInitialContent">
+        <div class="userCreateInfo">
+          <%= attachment_image_tag post_last.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+          <span class="userAndType"><%= link_to post_last.user.full_name, post_last.user %> hat geantwortet</span>
+        </div>
+        <div class="txt">
+          <%= link_to [discussion.group, discussion, anchor: "discussion-post-#{post_last.id}"], class: 'commentslink' do %>
+            <%= truncate post_last.content, length: 150 %></div>
+          <% end %>
+      </div>
+    </div>
+    <% end %>
+    <!-- /appendix -->
   </div>
-  <% end %>
-
 </div>

@@ -63,6 +63,32 @@
     }
   } // Group Cardbox
 
+  // Group Discussion CardBox
+  &.-discussion {
+    .avatarImg {
+      .img-round {
+        width:80px;
+        height:80px;
+        margin-right: 0px;
+      }
+    }
+    .name {
+      font-weight: normal;
+    }
+    .infos {
+      font-style: italic;
+    }
+    .entryInitialContent {
+      margin-bottom: 0px;
+    }
+    .commentslink {
+      text-decoration: none;
+      color: $color-ambient-brown;
+      @include font-size-primaryFont('base');
+      margin-bottom: 0px;
+    }
+  } // Group Cardbox
+
 }
 
 .card-grid .btn-userIcons {
@@ -405,7 +431,7 @@
     @include ellipsis();
     margin-bottom: 12px;
   }
-  .address {
+  .address, .infos {
     @include ellipsis();
     font-size: 13px;
     margin-left: -3px;
