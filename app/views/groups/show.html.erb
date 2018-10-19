@@ -17,7 +17,7 @@
       <Attribute name="id"><%= @group.id %></Attribute>
       <Attribute name="title"><%= @group.title %></Attribute>
       <Attribute name="group_visibility"><%= @group.private? ? "Geschlossene" : "Offene" %> Gruppe</Attribute>
-      <Attribute name="description"><%= @group.description[0..250].gsub(/\n/, " ") %></Attribute>
+      <Attribute name="description"><%= @group.description[0..250].gsub(/\n/, " ") if @group.description? %></Attribute>
       <Attribute name="parent"><%= @group.parent %></Attribute>
       <% if (@group.parent.is_a? RoomCall) %>
       <Attribute name="parent_path"><%= room_call_path(@group.parent) %></Attribute>
