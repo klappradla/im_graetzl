@@ -24,6 +24,9 @@ section.graetzls {
   .hl-subtext {
     position: relative;
     z-index: 2;
+    &.-groups {
+      margin-bottom: 20px;
+    }
   }
 
   .graetzl-ambassador {

@@ -91,7 +91,7 @@
 
 }
 
-.card-grid .btn-userIcons {
+.card-grid .btn-userIcons, .card-slider-container .btn-userIcons {
   display: flex;
 }
 
@@ -561,6 +561,17 @@ main > .sponsorstuwerviertel {
   .cardBox.featuredCard {
     &.-hidden {
       display:block;
+    }
+  }
+}
+
+// Adaptions for CardBoxes in Slider
+.lightSliderWrapper {
+  .cardBox {
+    &.-group {
+      .slogan {
+          display: none;
+      }
     }
   }
 }

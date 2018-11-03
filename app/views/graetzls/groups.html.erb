@@ -15,12 +15,21 @@
   <%= render 'curator' if @graetzl.curator %>
   <%= render 'menu' %>
 
-  <% if !user_signed_in? %>
-    <div class="hl-subtext">
-      <h1><span>Gruppen</span> - Vernetzung & Austausch im Grätzl</h1>
-      <p><!-- Subtitle --></p>
+  <!-- Insert Featured Groups from Greatzl here -->
+  <div class="lightSliderWrapper card-slider-container">
+    <div class="text">
+      Empfohlene & beliebte Gruppen
     </div>
-  <% end %>
+    <div class="cardBoxCollection" id="lightSlider">
+      <%= render Group.first(9) %>
+    </div>
+  </div>
+  <!-- /Insert Featured Groups from Greatzl here -->
+
+  <div class="hl-subtext -groups">
+    <h1>Stöbern in <span>allen Gruppen</span></h1>
+    <p>Nach Gruppe suchen oder in Kategorien stöbern</p>
+  </div>
 
   <div class="card-grid-container">
     <%= form_tag groups_path, method: :get, remote: true, class: 'cards-filter' do %>

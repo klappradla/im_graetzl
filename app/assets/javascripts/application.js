@@ -37,6 +37,7 @@
 //= require linkify.min
 //= require linkify-jquery.min
 //= require jquery.remotipart
+//= require lightslider
 //= require modernizr.custom
 //= require fastclick
 //= require autogrow
