@@ -37,8 +37,12 @@ class RoomCallsController < ApplicationController
   end
 
   def submission
-    @room_call = current_user.room_calls.find(params[:id])
-    @room_call_submission = @room_call.room_call_submissions.find(params[:submission_id])
+    @room_call = RoomCall.find(params[:id])
+    if @room_call.group.admins.include?(current_user)
+      @room_call_submission = @room_call.room_call_submissions.find(params[:submission_id])
+    else
+      redirect_to @room_call
+    end
   end
 
   def add_submission

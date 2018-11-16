@@ -76,6 +76,14 @@ module SchemaOrgHelper
       hash[:geo][:latitude] = location.address.coordinates.y
       hash[:geo][:longitude] = location.address.coordinates.x
     end
+
+    if location.upcoming_meetings.present?
+      next_location_event = location.upcoming_meetings
+      next_location_event = next_location_event.where.not(starts_at_date: nil)
+      next_location_event = next_location_event.sort_by(&:starts_at_date).first
+      hash[:event] = structured_data_meeting(next_location_event) unless next_location_event.nil?
+    end
+
     return hash
   end
 

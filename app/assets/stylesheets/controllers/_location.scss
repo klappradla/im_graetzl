@@ -66,7 +66,7 @@ section.location-page {
 
 
 
-  .introtxt {
+  .mainContent .introtxt {
     margin-bottom: 30px;
 
     h1 {
@@ -78,7 +78,10 @@ section.location-page {
         text-align: left;
       }
     }
-    h3 {
+    h2, h3 {
+      font-family: $font-primary;
+      color: $color-font-primary;
+      font-weight: bold;
       @include font-size-primaryFont('larger');
       margin-bottom: 15px;
     }

@@ -1,8 +1,8 @@
 <% meta(
-    title: t('.title', numeric: @district.numeric),
+    title: t('.title', numeric: @district.numeric, zip: @district.zip),
     description: t('.description', numeric: @district.numeric, name: @district.name),
     robots: 'index, follow',
-    og_title: t('.title', numeric: @district.numeric),
+    og_title: t('.title', numeric: @district.numeric, zip: @district.zip),
     og_description: t('.description', numeric: @district.numeric, name: @district.name),
     og_image: image_url('meta/og_logo.png')
   )

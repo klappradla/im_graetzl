@@ -20,6 +20,19 @@
 
   <div class="infos">
     <span><%= group_user.user.first_name %> <br> <%= group_user.user.last_name %></span>
-    <p class="date">Beigetreten: <br> <%= I18n.localize(group_user.created_at, format:'%d. %B %Y') %></p>
+    <p class="date">
+      <% if group_user.admin? %>
+        <strong>Organisator</strong> <br>
+      <% end %>
+      Beigetreten: <br>
+      <%= I18n.localize(group_user.created_at, format:'%d. %B %Y') %>
+    </p>
+    <p class="date">
+      <% if @group.room_call_readable_by?(current_user) && @group.room_call_submission?(group_user) %>
+        <%= link_to submission_room_call_path(@group.room_call, submission_id: @group.room_call_submission_id(group_user)) do %>
+          Call Einreichung
+        <% end %>
+      <% end %>
+    </p>
   </div>
 </div>

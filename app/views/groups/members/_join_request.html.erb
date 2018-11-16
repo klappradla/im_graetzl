@@ -6,7 +6,11 @@
     <span><%= join_request.user.first_name %> <br> <%= join_request.user.last_name.truncate(18, separator: ' ') %></span>
     <p class="date">Anfrage am: <br><%= I18n.localize(join_request.created_at, format:'%d. %B %Y') %></p>
     <p class="date">
-      <% if join_request.request_message? %>
+      <% if @group.room_call_readable_by?(current_user) && @group.room_call_submission?(join_request) %>
+        <%= link_to submission_room_call_path(@group.room_call, submission_id: @group.room_call_submission_id(join_request)) do %>
+        Call Einreichung
+        <% end %>
+      <% elsif join_request.request_message? %>
         <%= link_to "#request-message-modal-#{join_request.id}", class: 'request-message-opener' do %>
         Beitritts Nachricht
         <% end %>

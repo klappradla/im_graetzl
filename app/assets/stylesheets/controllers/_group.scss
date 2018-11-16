@@ -266,6 +266,9 @@
       .users {
         margin-top:10px;
       }
+      .user {
+        margin-bottom:5px;
+      }
       @include respond-to(">=medium") {
         width:48%;
       }

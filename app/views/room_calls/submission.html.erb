@@ -1,20 +1,16 @@
 <div class="room-call-page -submission">
 
-  <div class="imgHeader -fullwidth">
-    <%= attachment_image_tag @room_call, :cover_photo, :fill, 2560, 1000, fallback: 'cover_photo/980x370.png', class: 'titleImg -fullwidth' %>
-  </div>
-
-  <div class="bulge-wrapper">
-    <div class="bulge-container">
-      <div class="bulge -top">
-        <%= image_tag ('bulge-left.png'), class: 'bulge-left' %><%= image_tag ('bulge-middle.png'), class: 'bulge-middle' %><%= image_tag ('bulge-right.png'), class: 'bulge-right' %>
-      </div>
-      <div class="bulge -bottom">
-        <h1><%= @room_call.title %></h1>
-      </div>
+  <div class="hl-subtext">
+    <h1><em>Call Einreichung</em></h1>
+    <div class="title">
+      <%= @room_call.title %>
+    </div>
+    <div class="nav">
+      <%= link_to "Call", room_call_path(@room_call)%> |
+      <%= link_to "Gruppe", group_path(@room_call.group) %> |
+      <%= link_to "Alle Einreichungen", group_path(@room_call.group, anchor: 'tab-call') %>
     </div>
   </div>
-
 
   <div class="user cardBox">
     <div class="avatar">

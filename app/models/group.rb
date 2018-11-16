@@ -46,4 +46,12 @@ class Group < ApplicationRecord
     room_call_id? && admins.include?(user)
   end
 
+  def room_call_submission?(group_user)
+    room_call_id? && room_call.room_call_submissions.find_by(user_id: group_user.user.id)
+  end
+
+  def room_call_submission_id(group_user)
+    room_call.room_call_submissions.includes(:user).find_by(user_id: group_user.user.id)
+  end
+
 end
