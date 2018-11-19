@@ -53,7 +53,11 @@ class RoomsController < ApplicationController
       end
     end
 
-    offers = offers.enabled unless params.dig(:filter, :show_inactive).present?
+    if params.dig(:filter, :show_occupied).present?
+      offers = offers.where(status: [:enabled, :occupied])
+    else
+      offers = offers.enabled
+    end
 
     room_category_ids = params.dig(:filter, :room_category_ids)&.select(&:present?)
     if room_category_ids.present?
@@ -74,7 +78,7 @@ class RoomsController < ApplicationController
       return RoomDemand.none
     end
 
-    demands = demands.enabled unless params.dig(:filter, :show_inactive).present?
+    demands = demands.enabled
 
     room_category_ids = params.dig(:filter, :room_category_ids)&.select(&:present?)
     if room_category_ids.present?
@@ -99,7 +103,7 @@ class RoomsController < ApplicationController
       end
     end
 
-    calls = calls.open_calls unless params.dig(:filter, :show_inactive).present?
+    calls = calls.open_calls
 
     calls
   end

@@ -43,10 +43,23 @@ class RoomOffersController < ApplicationController
     end
   end
 
-  def toggle
+  def update_status
     @room_offer = current_user.room_offers.find(params[:id])
-    @room_offer.enabled? ? @room_offer.disabled! : @room_offer.enabled!
+    @room_offer.update(status: params[:status])
     redirect_to rooms_user_path
+  end
+
+  def toggle_waitlist
+    @room_offer = RoomOffer.find(params[:id])
+    if @room_offer.waiting_users.include?(current_user)
+      @room_offer.room_offer_waiting_users.where(user_id: current_user.id).delete_all
+      flash[:notice] = 'You have been removed from the waitinglist.'
+    else
+      @room_offer.room_offer_waiting_users.create(user_id: current_user.id)
+      RoomsMailer.new.send_waitinglist_update_email(@room_offer, current_user)
+      flash[:notice] = 'You are on the waitinglist now - The owner is informed and as soon as a seat becomes available he will contact you.'
+    end
+    redirect_to @room_offer
   end
 
   def destroy

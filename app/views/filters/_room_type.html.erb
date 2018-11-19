@@ -6,8 +6,8 @@
 <% end %>
 
 <div class="input-checkbox filter-input">
-  <%= check_box_tag :"filter[show_inactive]" %>
-  <%= label_tag :"filter[show_inactive]", "Zeige auch aktuell vermietete / inaktive" %>
+  <%= check_box_tag :"filter[show_occupied]", "1", true %>
+  <%= label_tag :"filter[show_occupied]", "Zeige auch aktuell vermietete" %>
 </div>
 
 <%= button_tag "Auswahl übernehmen", type: 'button', class: 'btn-primary filter-button' %>

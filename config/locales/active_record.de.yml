@@ -134,6 +134,10 @@ de:
         offer_types_active:
           offering_room: Raum zum Andocken
           seeking_roommate: Raum zur gemeinsamen Neuanmietung
+        statuses:
+          enabled: Aktiv
+          disabled: Inaktiv
+          occupied: Warteliste
       room_demand:
         slogan: Titel
         room_categories: Raumkategorie

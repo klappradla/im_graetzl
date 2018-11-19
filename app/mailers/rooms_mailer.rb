@@ -9,6 +9,10 @@ class RoomsMailer
     MandrillMailer.deliver(template: 'notification-room-online', message: room_demand_settings(room_demand))
   end
 
+  def send_waitinglist_update_email(room_offer, user)
+    MandrillMailer.deliver(template: 'notification-room-online', message: waitinglist_vars(room_offer, user))
+  end
+
   private
 
   def room_offer_settings(room_offer)
@@ -39,6 +43,25 @@ class RoomsMailer
         { name: 'room_categories', content: room_demand.room_categories.map(&:name).join(", ") },
         { name: 'owner_avatar_url', content: Notifications::ImageService.new.avatar_url(room_demand) },
       ] + user_vars(room_demand.user)
+    }
+  end
+
+  def waitinglist_vars(room_offer, user)
+    {
+      to: [ { email: room_offer.user.email } ],
+      global_merge_vars: [
+        { name: 'waitinglist_username', content: user.username },
+        { name: 'waitinglist_first_name', content: user.first_name },
+        { name: 'waitinglist_last_name', content: user.last_name },
+        { name: 'waitinglist_email', content: user.email },
+        { name: 'type', content: 'room_offer' },
+        { name: 'room_title', content: room_offer.slogan },
+        { name: 'room_url', content: room_offer_url(room_offer, URL_OPTIONS) },
+        { name: 'room_type', content: I18n.t("activerecord.attributes.room_offer.offer_types.#{room_offer.offer_type}") },
+        { name: 'room_description', content: room_offer.room_description },
+        { name: 'room_categories', content: room_offer.room_categories.map(&:name).join(", ") },
+        { name: 'cover_photo_url', content: Notifications::ImageService.new.cover_photo_url(room_offer) },
+      ] + user_vars(room_offer.user)
     }
   end
 

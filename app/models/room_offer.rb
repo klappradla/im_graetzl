@@ -20,11 +20,14 @@ class RoomOffer < ApplicationRecord
   accepts_attachments_for :images, attachment: :file
   accepts_nested_attributes_for :images, allow_destroy: true, reject_if: :all_blank
 
+  has_many :room_offer_waiting_users
+  has_many :waiting_users, through: :room_offer_waiting_users, source: :user
+
   has_one :group
   has_many :comments, as: :commentable, dependent: :destroy
 
   enum offer_type: { offering_room: 0, seeking_roommate: 1 }
-  enum status: { enabled: 0, disabled: 1 }
+  enum status: { enabled: 0, disabled: 1, occupied: 2 }
 
   acts_as_taggable_on :keywords
 
