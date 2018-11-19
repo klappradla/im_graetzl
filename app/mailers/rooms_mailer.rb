@@ -10,7 +10,7 @@ class RoomsMailer
   end
 
   def send_waitinglist_update_email(room_offer, user)
-    MandrillMailer.deliver(template: 'notification-room-online', message: waitinglist_vars(room_offer, user))
+    MandrillMailer.deliver(template: 'notification-room-waitinglist', message: waitinglist_vars(room_offer, user))
   end
 
   private
