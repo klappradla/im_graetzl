@@ -3,10 +3,10 @@ module RoomsHelper
   def filter_room_types
     [
       ['Alle Raumteiler', ''],
-      ['Raumangebote', 'offer'],
+      ['Räume', 'offer'],
       ['Raumsuchende', 'demand'],
-      ['Open Calls', 'call'],
-      ['Raumteiler Gruppen', 'with_group']
+      #['Open Calls', 'call'],
+      #['Raumteiler Gruppen', 'with_group']
     ]
   end
 

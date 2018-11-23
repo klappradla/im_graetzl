@@ -42,7 +42,15 @@ class RoomDemandsController < ApplicationController
   def toggle
     @room_demand = current_user.room_demands.find(params[:id])
     @room_demand.enabled? ? @room_demand.disabled! : @room_demand.enabled!
-    redirect_to rooms_user_path
+    flash[:notice] = t("activerecord.attributes.room_demand.status_message.#{@room_demand.status}")
+    redirect_to :back
+  end
+
+  def update_status
+    @room_demand = current_user.room_demands.find(params[:id])
+    @room_demand.update(status: params[:status])
+    flash[:notice] = t("activerecord.attributes.room_demand.status_message.#{@room_demand.status}")
+    redirect_to :back
   end
 
   def destroy

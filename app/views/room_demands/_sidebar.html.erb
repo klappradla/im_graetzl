@@ -33,8 +33,16 @@
           <%= link_to 'Bearbeiten', edit_room_demand_path(@room_demand), class: 'btn-secondary -mint -small' %>
         </div>
         <div class="btn-group">
-          <%= link_to 'Löschen', room_demand_path(@room_demand), data: { confirm: 'Bist du dir sicher?' },
-            method: :delete, class: 'btn-secondary -mint -small' %>
+          <%= link_to "javascript:", data: { jq_dropdown: "#roomdemand-state-update-dropdown" }, class: "btn-secondary -mint -small -state-#{@room_demand.status}" do %>
+            Status: <span><%= t("activerecord.attributes.room_demand.statuses.#{@room_demand.status}") %></span>
+          <% end %>
+        </div>
+        <div id="roomdemand-state-update-dropdown" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container">
+          <div class="jq-dropdown-panel">
+            <%= link_to 'Aktiv', [:update_status, @room_demand, status: "enabled"], method: :patch %>
+            <%= link_to 'Inaktiv', [:update_status, @room_demand, status: "disabled"], method: :patch %>
+            <%= link_to 'Löschen', room_demand_path(@room_demand), data: { confirm: 'Bist du dir sicher?' }, method: :delete %>
+          </div>
         </div>
       <% end %>
     </div>

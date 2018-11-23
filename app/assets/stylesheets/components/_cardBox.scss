@@ -26,6 +26,22 @@
   border-radius: 8px;
   position: relative;
 
+  // CardBox States
+  &.-disabled {
+    //filter: grayscale(50%);
+    //opacity: 0.8;
+  }
+  &.-disabled:hover {
+    //filter: grayscale(0%);
+    //opacity: 1.0;
+  }
+  &.occupied {
+    //filter: grayscale(0%);
+    //opacity: 1.0;
+  }
+
+
+  // Room Demand Cardbox
   &.-roomdemand {
     @supports (object-fit: cover) {
       img.room_demand {
@@ -180,14 +196,17 @@
       font-weight: 600;
     }
 
-    .collaboration {
+    .collaboration, .waiting-list {
       color: $color-ambient-brown;
-      margin: 0px -3px 20px -3px;
+      margin: 0px -3px 1px -3px;
       padding: 5px;
       background-color: $color-ambient-pink;
       &:last-child {
         margin-bottom: 0;
       }
+    }
+    .waiting-list {
+      background-color: $color-ambient-mint-light;
     }
 
     .btn-group {

@@ -74,11 +74,13 @@ Rails.application.routes.draw do
 
   resources :room_demands, path: 'wien/raumteiler/raumsuche', except: [:index] do
     post 'toggle', on: :member
+    patch 'update_status', on: :member
   end
   resources :room_offers, path: 'wien/raumteiler/raum', except: [:index] do
     get 'select', on: :collection
     patch 'update_status', on: :member
     post 'toggle_waitlist', on: :member
+    post 'remove_from_waitlist', on: :member
   end
   resources :room_calls, path: 'wien/raumteiler/open-calls', except: [:index] do
     get 'submission', on: :member

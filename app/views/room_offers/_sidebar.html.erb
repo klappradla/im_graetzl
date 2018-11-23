@@ -52,19 +52,17 @@
             class: 'btn-secondary -mint -small'  %>
         </div>
         <div class="btn-group">
-          <%= link_to t("activerecord.attributes.room_offer.statuses.#{@room_offer.status}"), "javascript:",
-            data: { jq_dropdown: "#room-state-update-dropdown" }, class: 'btn-secondary -mint -small' %>
+          <%= link_to "javascript:", data: { jq_dropdown: "#room-state-update-dropdown" }, class: "btn-secondary -mint -small -state-#{@room_offer.status}" do %>
+            Status: <span><%= t("activerecord.attributes.room_offer.statuses.#{@room_offer.status}") %></span>
+          <% end %>
         </div>
         <div id="room-state-update-dropdown" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container">
           <div class="jq-dropdown-panel">
             <%= link_to 'Aktiv', [:update_status, @room_offer, status: "enabled"], method: :patch %>
             <%= link_to 'Inaktiv', [:update_status, @room_offer, status: "disabled"], method: :patch %>
-            <%= link_to 'Warteliste (derzeit voll)', [:update_status, @room_offer, status: "occupied"], method: :patch %>
+            <%= link_to 'Voll / Warteliste aktivieren', [:update_status, @room_offer, status: "occupied"], method: :patch %>
+            <%= link_to 'Löschen', room_offer_path(@room_offer), data: { confirm: 'Bist du dir sicher?' }, method: :delete %>
           </div>
-        </div>
-        <div class="btn-group">
-          <%= link_to 'Löschen', room_offer_path(@room_offer), data: { confirm: 'Bist du dir sicher?' },
-            method: :delete, class: 'btn-secondary -mint -small' %>
         </div>
       <% end %>
     </div>
@@ -77,32 +75,53 @@
 
   </div>
 
+  <% if @room_offer.occupied? %>
+
+    <div class="sideBarbox waiting-list">
+      <h3 class='sideflag -L'>Warteliste <%= icon_tag "coffee" %></h3>
+
+      <% if @room_offer.waiting_users.present? %>
+      <ul>
+        <% @room_offer.waiting_users.each do |user| %>
+          <li class="waiting-list-user">
+            <%= link_to user do %>
+              <%= attachment_image_tag user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+            <% end %>
+            <% if current_user == user || current_user == @room_offer.user %>
+              <%= link_to [:remove_from_waitlist, @room_offer, user: user], method: :post, class: 'delete' do %>
+                <%= icon_tag "cross" %>
+              <% end %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+      <% else %>
+        <div class="wait-list-wrapper">
+          <p>Noch niemand auf der Warteliste..</p>
+        </div>
+      <% end %>
+
+      <div class="wait-list-wrapper">
+        <% if user_signed_in? && current_user != @room_offer.user %>
+          <% if !@room_offer.waiting_users.include?(current_user) %>
+            <%= link_to [:toggle_waitlist, @room_offer], method: :post, class: 'btn-userIcons -mint' do %>
+              <span><%= avatar_for current_user %> Auf die Warteliste</span>
+            <% end %>
+          <% end %>
+        <% elsif !user_signed_in? %>
+          <%= link_to new_user_session_path(redirect: request.original_url), class: 'btn-userIcons -mint' do %>
+            <span><%= image_tag 'avatar/user/default.png', class: 'img-round' %> Auf die Warteliste</span>
+          <% end %>
+        <% end %>
+      </div>
+
+    </div>
+  <% end %>
+
   <% if @room_offer.location %>
     <aside class="location">
       <%= render @room_offer.location %>
     </aside>
-  <% end %>
-
-  <% if @room_offer.occupied? && @room_offer.waiting_users.present? %>
-    <div class="sideBarbox waiting-list">
-      <h3 class='sideflag -L'>Waiting List</h3>
-      <ul>
-        <% @room_offer.waiting_users.each do |user| %>
-          <li class="waiting-list-user">
-            <%= attachment_image_tag user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
-            <span class="user-name"><%= user.full_name %></span>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <% if @room_offer.occupied? && user_signed_in? && current_user != @room_offer.user %>
-    <% if @room_offer.waiting_users.include?(current_user) %>
-      <%= link_to "Remove me from the waiting list", [:toggle_waitlist, @room_offer], method: :post, class: 'btn-primary -mint -contact' %>
-    <% else %>
-      <%= link_to "Add me to waiting list", [:toggle_waitlist, @room_offer], method: :post, class: 'btn-primary -mint -contact' %>
-    <% end %>
   <% end %>
 
   <% if @room_offer.email.present? && current_user %>
@@ -110,4 +129,5 @@
   <% end %>
 
   <%= link_to "Alle Raumteiler", rooms_wien_path, class: 'btn-primary -mint' %>
+
 </aside>
