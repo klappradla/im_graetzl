@@ -49,7 +49,7 @@ class RoomsMailer
   def waitinglist_vars(room_offer, user)
     {
       to: [ { email: room_offer.user.email } ],
-      subject: "#{user.first_name} #{user.last_name} hat sich auf deine Raum-Warteliste gesetzt.",
+      subject: "#{user.first_name} #{user.last_name} hat sich auf deine Raumteiler Warteliste gesetzt.",
       google_analytics_domains: ['staging.imgraetzl.at', 'www.imgraetzl.at'],
       tags: ['notification-room-waitinglist'],
       global_merge_vars: [
@@ -57,6 +57,7 @@ class RoomsMailer
         { name: 'waitinglist_first_name', content: user.first_name },
         { name: 'waitinglist_last_name', content: user.last_name },
         { name: 'waitinglist_email', content: user.email },
+        { name: 'waitinglist_avatar_url', content: Notifications::ImageService.new.avatar_url(user) },
         { name: 'type', content: 'room_offer' },
         { name: 'room_title', content: room_offer.slogan },
         { name: 'room_url', content: room_offer_url(room_offer, URL_OPTIONS) },
