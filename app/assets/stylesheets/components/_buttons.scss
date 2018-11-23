@@ -258,3 +258,18 @@
   padding: 8px;
   border: 1px solid $color-ambient-grey-light;
 }
+
+.btn-secondary, .btn-primary {
+  &.-state-enabled, &.-state-disabled, &.-state-occupied {
+    white-space: nowrap;
+    overflow: hidden;
+    span {font-weight: bold;}
+  }
+  &.-state-enabled span {
+  }
+  &.-state-disabled span {
+    color:$color-ambient-grey;
+  }
+  &.-state-occupied span {
+  }
+}

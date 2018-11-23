@@ -147,6 +147,60 @@ section.roomDetail {
       }
     }
 
+    .sideBarbox {
+      &.waiting-list {
+        padding-bottom:20px;
+      }
+    }
+
+    .waiting-list {
+      h3 svg {
+        display: inline-block;
+      }
+      ul, .wait-list-wrapper {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+      .btn-userIcons {
+        margin-top:15px;
+        color: white;
+        width:100%;
+        img {
+          border-color: $color-ambient-mint-dark;
+        }
+      }
+      .wait-list-wrapper {
+        p {
+          font-style: italic;
+        }
+      }
+
+      ul {
+        list-style-type: none;
+        li.waiting-list-user {
+          position: relative;
+          display: inline-block;
+          margin-right:5px;
+          margin-top:5px;
+          .delete {
+            position: absolute;
+            top: -9px;
+            right: -9px;
+            svg {
+              background: white;
+              border-radius: 50%;
+              opacity: 0.8;
+            }
+          }
+          .delete:hover {
+            svg {
+              color:$color-ambient-rosa;
+              opacity: 1.0;
+            }
+          }
+        }
+      }
+    }
 
   } // Room-Offer
 
@@ -192,7 +246,6 @@ section.roomDetail {
 
     .sideBarbox {
       margin-bottom: 20px;
-
       .category-tags {
         margin: 20px 0px 20px;
       }
@@ -490,14 +543,16 @@ section.roomDetail {
     display:none;
   }
 
-  .contact {
+  .contact, .waiting-list {
     border: 1px solid $color-ambient-grey-light;
     background-color: #ffffff;
     border-radius: 8px;
+  }
+  .contact {
     a {
-      color: $color-ambient-mint;
+      //color: $color-ambient-mint;
       text-decoration: none;
-      margin-bottom: 10px;
+      //margin-bottom: 10px;
       &:hover {
         text-decoration: underline;
       }
@@ -513,7 +568,6 @@ section.roomDetail {
         width: 100%;
       }
     }
-
     .user-wrp {
       display: flex;
       align-items: center;
@@ -522,7 +576,6 @@ section.roomDetail {
         height: 30px;
         margin-right: 10px;
       }
-
     }
   }
 }

@@ -1,4 +1,4 @@
-<div class="cardBox -location">
+<div class="cardBox -roomoffer">
 
   <div class="cardBoxHeader">
     <div class="coverImgWrapper">
@@ -39,6 +39,13 @@
       <div class="collaboration icontxt">
         <%= icon_tag "urgent-extra-notice-info-announcement" %>
         Interesse an gem. Kooperationen
+      </div>
+    <% end %>
+
+    <% if room_offer.occupied? %>
+      <div class="waiting-list icontxt">
+        <%= icon_tag "coffee" %>
+        Warteliste
       </div>
     <% end %>
 

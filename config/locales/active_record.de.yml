@@ -138,6 +138,10 @@ de:
           enabled: Aktiv
           disabled: Inaktiv
           occupied: Warteliste
+        status_message:
+          enabled: Dein Raumteiler ist aktiv und sichtbar.
+          disabled: Dein Raumteiler ist nun deaktiviert und scheint nicht mehr auf den Raumteilerseiten auf.
+          occupied: Deine Raumteiler hat nun eine Warteliste und ist weiterhin sichtbar! Interessenten können sich in die Liste eintragen und du wirst darüber per E-Mail informiert.
       room_demand:
         slogan: Titel
         room_categories: Raumkategorie
@@ -155,6 +159,12 @@ de:
         demand_types_active:
           seeking_room: Raum zum Andocken
           seeking_roommate: Raum zur gemeinsamen Neuanmietung
+        statuses:
+          enabled: Aktiv
+          disabled: Inaktiv
+        status_message:
+          enabled: Deine Raumsuche ist nun aktiv und sichtbar.
+          disabled: Dein Raumsuche ist nun deaktiviert und scheint nicht mehr auf den Raumteilerseiten auf.
       user:
         avatar: Profilbild
         confirmed_at: Bestätigt am
