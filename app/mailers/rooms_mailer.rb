@@ -58,6 +58,7 @@ class RoomsMailer
         { name: 'waitinglist_last_name', content: user.last_name },
         { name: 'waitinglist_email', content: user.email },
         { name: 'waitinglist_avatar_url', content: Notifications::ImageService.new.avatar_url(user) },
+        { name: 'waitinglist_user_url', content: user_url(user, URL_OPTIONS) },
         { name: 'type', content: 'room_offer' },
         { name: 'room_title', content: room_offer.slogan },
         { name: 'room_url', content: room_offer_url(room_offer, URL_OPTIONS) },
