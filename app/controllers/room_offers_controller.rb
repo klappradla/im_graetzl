@@ -20,8 +20,8 @@ class RoomOffersController < ApplicationController
     @room_offer.user_id = current_user.admin? ? params[:user_id] : current_user.id
     @room_offer.address = Address.from_feature(params[:feature])
     if @room_offer.save
+      MailchimpRoomOfferUpdateJob.perform_later(@room_offer)
       RoomsMailer.new.send_new_room_offer_email(@room_offer)
-      MailchimpRoomOfferOnlineJob.perform_later(@room_offer)
       @room_offer.create_activity(:create, owner: @room_offer.user)
       redirect_to @room_offer
     else
@@ -36,7 +36,7 @@ class RoomOffersController < ApplicationController
   def update
     @room_offer = current_user.room_offers.find(params[:id])
     if @room_offer.update(room_offer_params)
-      MailchimpRoomOfferOnlineJob.perform_later(@room_offer)
+      MailchimpRoomOfferUpdateJob.perform_later(@room_offer)
       redirect_to @room_offer
     else
       render 'edit'
@@ -46,6 +46,7 @@ class RoomOffersController < ApplicationController
   def update_status
     @room_offer = current_user.room_offers.find(params[:id])
     @room_offer.update(status: params[:status])
+    MailchimpRoomOfferUpdateJob.perform_later(@room_offer)
     flash[:notice] = t("activerecord.attributes.room_offer.status_message.#{@room_offer.status}")
     redirect_to :back
   end

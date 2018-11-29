@@ -17,7 +17,7 @@ class RoomDemandsController < ApplicationController
 
     if @room_demand.save
       RoomsMailer.new.send_new_room_demand_email(@room_demand)
-      MailchimpRoomDemandOnlineJob.perform_later(@room_demand)
+      MailchimpRoomDemandUpdateJob.perform_later(@room_demand)
       @room_demand.create_activity(:create, owner: @room_demand.user)
       redirect_to @room_demand
     else
@@ -32,7 +32,7 @@ class RoomDemandsController < ApplicationController
   def update
     @room_demand = current_user.room_demands.find(params[:id])
     if @room_demand.update(room_demand_params)
-      MailchimpRoomDemandOnlineJob.perform_later(@room_demand)
+      MailchimpRoomDemandUpdateJob.perform_later(@room_demand)
       redirect_to @room_demand
     else
       render 'edit'
@@ -42,6 +42,7 @@ class RoomDemandsController < ApplicationController
   def toggle
     @room_demand = current_user.room_demands.find(params[:id])
     @room_demand.enabled? ? @room_demand.disabled! : @room_demand.enabled!
+    MailchimpRoomDemandUpdateJob.perform_later(@room_demand)
     flash[:notice] = t("activerecord.attributes.room_demand.status_message.#{@room_demand.status}")
     redirect_to :back
   end
@@ -49,6 +50,7 @@ class RoomDemandsController < ApplicationController
   def update_status
     @room_demand = current_user.room_demands.find(params[:id])
     @room_demand.update(status: params[:status])
+    MailchimpRoomDemandUpdateJob.perform_later(@room_demand)
     flash[:notice] = t("activerecord.attributes.room_demand.status_message.#{@room_demand.status}")
     redirect_to :back
   end

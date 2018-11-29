@@ -42,7 +42,7 @@ class User < ApplicationRecord
 
   before_validation { self.username.squish! if self.username }
 
-  after_update :update_mailchimp, if: -> { email_changed? || first_name_changed? || last_name_changed? || newsletter_changed? }
+  after_update :update_mailchimp, if: -> { email_changed? || first_name_changed? || last_name_changed? || newsletter_changed? || role_changed? }
   before_destroy :unsubscribe_mailchimp
 
   # overwrite devise authentication method to allow username OR email

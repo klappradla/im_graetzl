@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(user_params)
       bypass_sign_in @user
-      redirect_to [@user.graetzl, @user], notice: 'Profil gespeichert!'
+      redirect_to [@user.graetzl, @user], notice: "Profil gespeichert!"
     else
       render :edit
     end
@@ -47,6 +47,8 @@ class UsersController < ApplicationController
   end
 
   def user_params
+    params[:user][:role] = nil if !params[:user][:role].present?
+    params[:user][:role] = 0 if current_user.admin?
     params[:user].delete(:password) if params[:user][:password].blank?
     params.
       require(:user).

@@ -1,4 +1,4 @@
-class MailchimpRoomOfferOnlineJob < ApplicationJob
+class MailchimpRoomOfferUpdateJob < ApplicationJob
 
   def perform(room)
     list_id = Rails.application.secrets.mailchimp_list_id
@@ -11,6 +11,7 @@ class MailchimpRoomOfferOnlineJob < ApplicationJob
       g.lists(list_id).members(member_id).update(body: {
         merge_fields: {
           ROOM_TYPE: I18n.t("activerecord.attributes.room_offer.offer_types.#{room.offer_type}"),
+          ROOM_STATE: I18n.t("activerecord.attributes.room_offer.statuses.#{room.status}"),
           ROOM_TITLE: room.slogan,
           ROOM_URL: Rails.application.routes.url_helpers.room_offer_path(room),
           ROOM_PLZ: room.district.zip,
