@@ -9,13 +9,15 @@ class MailchimpRoomDeleteJob < ApplicationJob
       g.timeout = 30
       g.lists(list_id).members(member_id).update(body: {
         merge_fields: {
-          ROOM_TYPE: nil,
-          ROOM_TITLE: nil,
-          ROOM_URL: nil,
-          ROOM_PLZ: nil,
-          ROOM_CAT: nil,
-          ROOM_ID: nil,
-          ROOM_DATE: nil
+          ROOM_TYPE: '',
+          ROOM_STATE: '',
+          ROOM_TITLE: '',
+          ROOM_URL: '',
+          ROOM_PLZ: '',
+          ROOM_CAT: '',
+          ROOM_ID: '',
+          ROOM_DATE: '',
+          ROOM_CLICK: ''
         }
       })
     rescue Gibbon::MailChimpError => mce
