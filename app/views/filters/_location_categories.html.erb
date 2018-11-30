@@ -1,0 +1,12 @@
+<div class="filter-categories">
+  <%= collection_check_boxes :filter, :category_ids, Category.all, :id, :name do |b| %>
+    <div class="input-checkbox filter-input">
+      <%= b.check_box("data-label": b.text) %>
+      <%= b.label %>
+    </div>
+  <% end %>
+</div>
+<div class="filter-actions">
+  <%= button_tag "Filter zurücksetzen", class: 'btn-primary -grey reset-button' %>
+  <%= button_tag "Auswahl übernehmen", class: 'btn-primary filter-button' %>
+</div>

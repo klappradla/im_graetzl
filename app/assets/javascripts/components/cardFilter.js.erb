@@ -80,6 +80,11 @@ APP.components.cardFilter = (function() {
       persist: true
     });
 
+    $(".filter-modal").on("click", ".reset-button", function() {
+      $('input:checkbox').prop('checked', false);
+      $(".filter-modal .filter-button").click();
+    });
+
     $(".filter-modal").on("click", ".filter-button", function() {
       var currentModal = $.featherlight.current();
       updateFilterInputs(currentModal.$content);

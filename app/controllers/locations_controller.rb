@@ -74,6 +74,12 @@ class LocationsController < ApplicationController
     if graetzl_ids.present? && graetzl_ids.any?(&:present?)
       locations = locations.where(graetzl_id: graetzl_ids)
     end
+
+    category_ids = params.dig(:filter, :category_ids)&.select(&:present?)
+    if category_ids.present?
+      locations = locations.where(category_id: category_ids)
+    end
+
     locations
   end
 
