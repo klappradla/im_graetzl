@@ -8,8 +8,9 @@ ActiveAdmin.register User do
   scope :admin
 
   filter :graetzl, collection: Graetzl.order(:name), include_blank: true, input_html: { :class => 'admin-filter-select'}
-  filter :id
-  filter :username
+  filter :id, :label => 'User', :as => :select, :collection => proc {(User.all).map{|c| [c.active_admin_name, c.id]}}, include_blank: true, input_html: { :class => 'admin-filter-select'}
+  #filter :id
+  #filter :username
   filter :first_name
   filter :last_name
   filter :email
