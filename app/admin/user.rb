@@ -7,8 +7,8 @@ ActiveAdmin.register User do
   scope :business
   scope :admin
 
+  filter :graetzl, collection: Graetzl.order(:name), include_blank: true, input_html: { :class => 'admin-filter-select'}
   filter :id
-  filter :graetzl
   filter :username
   filter :first_name
   filter :last_name

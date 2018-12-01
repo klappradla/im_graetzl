@@ -8,12 +8,12 @@ ActiveAdmin.register Meeting do
   scope :cancelled
   scope :upcoming
 
-  filter :graetzl
-  filter :users
-  filter :location
+  filter :graetzl, collection: Graetzl.order(:name), include_blank: true, input_html: { :class => 'admin-filter-select'}
+  filter :users, collection: User.order(:username), include_blank: true, input_html: { :class => 'admin-filter-select'}
+  filter :location, collection: Location.order(:name), include_blank: true, input_html: { :class => 'admin-filter-select'}
+  filter :state, as: :select, collection: Meeting.states.keys
   filter :name
   filter :description
-  filter :state, as: :select, collection: Meeting.states.keys
   filter :created_at
   filter :starts_at_date
 

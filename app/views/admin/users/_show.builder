@@ -48,20 +48,38 @@ context.instance_eval do
       end
     end
     column do
+      panel 'Locations' do
+        table_for user.locations do
+          column :id
+          column :name
+          column(:state){|l| status_tag(l.state)}
+          column(''){|l| link_to 'Anzeigen', admin_location_path(l) }
+        end
+      end
+      panel 'Habe Raum' do
+        table_for user.room_offers do
+          column :id
+          column :slogan
+          column(:comment_count) {|r| r.comments.size }
+          column(''){|l| link_to 'Anzeigen', admin_room_offer_path(l) }
+        end
+      end
+
+      panel 'Suche Raum' do
+        table_for user.room_demands do
+          column :id
+          column :slogan
+          column(:comment_count) {|r| r.comments.size }
+          column(''){|l| link_to 'Anzeigen', admin_room_demand_path(l) }
+        end
+      end
+
       panel 'Associations' do
         tabs do
-          tab 'Pinnwand' do
-            table_for user.wall_comments do
-              column :id
-              column :user
-              column :created_at
-            end
-          end
           tab 'Treffen' do
             table_for user.meetings do
               column :id
               column :name
-              column :slug
               column :initiator
               column :created_at
               column(''){|m| link_to 'Anzeigen', admin_meeting_path(m) }
@@ -71,18 +89,16 @@ context.instance_eval do
             table_for user.posts do
               column :id
               column(:content){|p| truncate(p.content, length: 20)}
-              column :slug
               column :graetzl
               column :created_at
               column(''){|p| link_to 'Anzeigen', admin_post_path(p) }
             end
           end
-          tab 'Locations' do
-            table_for user.locations do
+          tab 'Pinnwand' do
+            table_for user.wall_comments do
               column :id
-              column :name
-              column(:state){|l| status_tag(l.state)}
-              column(''){|l| link_to 'Location Anzeigen', admin_location_path(l) }
+              column :user
+              column :created_at
             end
           end
         end

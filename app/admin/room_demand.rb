@@ -6,10 +6,11 @@ ActiveAdmin.register RoomDemand do
 
   scope :all, default: true
 
-  filter :graetzls
-  filter :user
-  filter :districts
-  filter :demand_type
+  filter :graetzls, collection: Graetzl.order(:name), include_blank: true, input_html: { :class => 'admin-filter-select'}
+  filter :districts, collection: District.order(:zip), include_blank: true, input_html: { :class => 'admin-filter-select'}
+  filter :user, collection: User.order(:username), include_blank: true, input_html: { :class => 'admin-filter-select'}
+  filter :location, collection: Location.order(:name), include_blank: true, input_html: { :class => 'admin-filter-select'}
+  filter :room_categories
   filter :wants_collaboration
   filter :created_at
   filter :updated_at
