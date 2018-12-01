@@ -230,4 +230,15 @@ ActiveAdmin.setup do |config|
   # You can enable or disable them for all resources here.
   #
   # config.filters = true
+
+  config.display_name_methods = [ :active_admin_name,
+                                  :display_name,
+                                  :full_name,
+                                  :name,
+                                  :username,
+                                  :login,
+                                  :title,
+                                  :email,
+                                  :to_s ]
+
 end

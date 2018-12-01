@@ -3,7 +3,7 @@ ActiveAdmin.register Group do
   menu parent: 'Gruppe'
   actions :index, :show, :edit, :update, :destroy
 
-  filter :users, collection: User.order(:last_name), include_blank: true, input_html: { :class => 'admin-filter-select'}
+  filter :users, :collection => proc {(User.all).map{|c| [c.active_admin_name, c.id]}}, include_blank: true, input_html: { :class => 'admin-filter-select'}
   filter :title
   filter :private
   filter :created_at

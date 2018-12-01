@@ -55,9 +55,15 @@ a.btn-dark {
 }
 
 // fix SumoSelect
+.active_admin #sidebar .SumoSelect {
+  display: block;
+  width:100%;
+}
+
 .SumoSelect li label {
   width: auto;
   float: inherit;
   font-size: inherit;
   font-weight: inherit;
+  text-transform:none !important;
 }

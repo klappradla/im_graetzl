@@ -8,7 +8,7 @@ ActiveAdmin.register RoomOffer do
 
   filter :graetzl, collection: Graetzl.order(:name), include_blank: true, input_html: { :class => 'admin-filter-select'}
   filter :district, collection: District.order(:zip), include_blank: true, input_html: { :class => 'admin-filter-select'}
-  filter :user, collection: User.order(:username), include_blank: true, input_html: { :class => 'admin-filter-select'}
+  filter :user, :collection => proc {(User.all).map{|c| [c.active_admin_name, c.id]}}, include_blank: true, input_html: { :class => 'admin-filter-select'}
   filter :location, collection: Location.order(:name), include_blank: true, input_html: { :class => 'admin-filter-select'}
   filter :room_categories
   filter :wants_collaboration

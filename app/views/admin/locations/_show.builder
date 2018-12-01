@@ -70,10 +70,8 @@ context.instance_eval do
             table_for location.location_ownerships do
               column(:id){|o| o.user.id}
               column(:username){|o| o.user.username}
-              column(:anfrage){|o| o.id}
               column(:state){|o| status_tag(o.state)}
               column(''){|o| link_to 'User Anzeigen', admin_user_path(o.user) }
-              column(''){|o| link_to 'Anfrage Anzeigen', admin_location_ownership_path(o) }
             end
           end
           tab 'Posts' do
