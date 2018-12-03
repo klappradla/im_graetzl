@@ -4,13 +4,13 @@
     <li>
       <%= icon_tag('record') %>
       <%= link_to "Alle", group_discussions_path(@group), remote: true,
-        class: params[:group_category_id].blank? ? 'autoload-link' : nil %>
+        class: params[:discussion_category_id].blank? ? 'autoload-link' : nil %>
     </li>
-    <% @group.group_categories.each do |group_category| %>
+    <% @group.discussion_categories.each do |discussion_category| %>
       <li>
         <%= icon_tag('record') %>
-        <%= link_to group_category.title, group_discussions_path(@group, group_category_id: group_category.id),
-          remote: true, class: params[:group_category_id] == group_category.id.to_s ? 'autoload-link' : nil %>
+        <%= link_to discussion_category.title, group_discussions_path(@group, discussion_category_id: discussion_category.id),
+          remote: true, class: params[:discussion_category_id] == discussion_category.id.to_s ? 'autoload-link' : nil %>
       </li>
     <% end %>
   </ul>

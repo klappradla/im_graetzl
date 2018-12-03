@@ -1,32 +1,17 @@
 <% meta(
-    title: t('.title', graetzl: @graetzl.name),
-    description: t('.description', graetzl: @graetzl.name, numeric: @graetzl.district.numeric),
+    title: t('.title'),
+    description: t('.description'),
     robots: 'index, follow',
-    og_title: t('.title', graetzl: @graetzl.name),
-    og_description: t('.description', graetzl: @graetzl.name, numeric: @graetzl.district.numeric),
+    og_title: t('.title'),
+    og_description: t('.description'),
     og_image: image_url('meta/og_logo.png')
   )
 %>
 
-<section class="graetzls -groups">
-  <%= cache [@graetzl, 'map'], expires_in: 2.months do %>
-    <%= render 'map', map_data: @map_data %>
-  <% end %>
-  <%= render 'curator' if @graetzl.curator %>
-  <%= render 'menu' %>
+<section class="wien -overview-pages">
+  <%= render 'header' %>
 
-  <% if @featured_groups.present? %>
-    <div class="lightSliderWrapper card-slider-container">
-      <div class="text">
-        Empfohlene & beliebte Gruppen
-      </div>
-      <div class="cardBoxCollection" id="lightSlider">
-        <%= render @featured_groups %>
-      </div>
-    </div>
-  <% end %>
-
-  <div class="hl-subtext -groups">
+  <div class="hl-subtext">
     <h1>Stöbern in <span>allen Gruppen</span></h1>
     <p>Nach Gruppe suchen oder in Kategorien stöbern</p>
   </div>
@@ -39,7 +24,7 @@
           <%= text_field_tag :query, nil, placeholder: 'Suche..', class: 'search-suggestion-trigger' %>
         </div>
         <div class="input-select label-select">
-          <%= select_tag :district_ids, options_from_collection_for_select(District.order(:zip), :id, :zip_name, @graetzl.district.id), id: 'graetzl-suggestion', multiple: true %>
+          <%= select_tag :district_ids, options_from_collection_for_select(District.order(:zip), :id, :zip_name), id: 'graetzl-suggestion', multiple: true %>
         </div>
       </div>
     <% end %>
@@ -68,7 +53,7 @@
 
     <div class="card-grid" data-behavior="groups-card-container"></div>
     <div class="action-card-container" data-behavior="groups-action-card-container">
-      <%= render 'groups/action_card', graetzl: @graetzl %>
+      <%= render 'groups/action_card' %>
     </div>
 
     <!-- Insert Featured Card -->

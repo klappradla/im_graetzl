@@ -1,6 +1,9 @@
 APP.controllers.groups = (function() {
 
     function init() {
+      if ($(".group-form-page").exists()) {
+        initGroupForm();
+      }
       if ($(".group-page .categories-list").exists()) {
         initMobileNav();
       }
@@ -9,6 +12,22 @@ APP.controllers.groups = (function() {
         initInfo();
         initDiscussions();
       }
+    }
+
+    function initGroupForm() {
+      $(".group-categories input").on("change", function() {
+        if ($(".group-categories input:checked").length >= 3) {
+          $(".group-categories input:not(:checked)").each(function() {
+            $(this).prop("disabled", true);
+            $(this).parents(".input-checkbox").addClass("disabled");
+          });
+        } else {
+          $(".group-categories input").prop("disabled", false);
+          $(".group-categories .input-checkbox").removeClass("disabled");
+        }
+      });
+
+      APP.components.graetzlSelectFilter.init($('#district-graetzl-select'));
     }
 
     function initHeader() {

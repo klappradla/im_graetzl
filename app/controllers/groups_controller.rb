@@ -3,9 +3,9 @@ class GroupsController < ApplicationController
 
   def index
     head :ok and return if browser.bot? && !request.format.js?
-    @groups = collection_scope
+    @groups = collection_scope.includes(:group_categories, :users, :room_call, :room_offer)
     @groups = filter_collection(@groups)
-    @groups = @groups.page(params[:page]).per(15)
+    @groups = @groups.by_currentness.page(params[:page]).per(15)
   end
 
   def show
@@ -22,8 +22,8 @@ class GroupsController < ApplicationController
       room_offer_id: params[:room_offer_id],
       room_call_id: params[:room_call_id]
     )
-    GroupDefaultCategory.all.each do |category|
-      @group.group_categories.build(title: category.title)
+    DiscussionDefaultCategory.all.each do |category|
+      @group.discussion_categories.build(title: category.title)
     end
   end
 
@@ -126,10 +126,22 @@ class GroupsController < ApplicationController
   private
 
   def collection_scope
-    Group.all
+    Group.non_private
   end
 
   def filter_collection(groups)
+    district_ids = params[:district_ids]&.select(&:present?)
+    if district_ids.present?
+      graetzl_ids = Graetzl.joins(:districts).where(districts: {id: district_ids}).distinct.pluck(:id)
+      groups = groups.joins(:group_graetzls).where(group_graetzls: {graetzl_id: graetzl_ids}).distinct
+    end
+
+    if params[:group_category_id].present?
+      groups = groups.joins(:group_categories).where(group_categories: {id: params[:group_category_id]}).distinct
+    elsif params[:query].present?
+      groups.joins(:group_categories).where("groups.title = :q OR group_categories.title", q: "%#{params[:query]}%").distinct
+    end
+
     groups
   end
 
@@ -139,10 +151,15 @@ class GroupsController < ApplicationController
       .permit(
         :title,
         :description,
-        :room_offer_id,
-        :room_call_id,
         :private,
-        group_categories_attributes: [
+        :room_offer_id,
+        :room_demand_id,
+        :room_call_id,
+        :location_id,
+        :cover_photo, :remove_cover_photo,
+        graetzl_ids: [],
+        group_category_ids: [],
+        discussion_categories_attributes: [
           :id, :title, :_destroy
         ],
     )

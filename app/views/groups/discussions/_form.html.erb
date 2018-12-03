@@ -9,11 +9,11 @@
   </div>
 
   <div class="input-select">
-    <%= f.label :group_category_id do %>
+    <%= f.label :discussion_category_id do %>
       <%= icon_tag "record" %>
       <span>Kategorie</span>
     <% end %>
-    <%= f.select :group_category_id, @group.group_categories.map{|g| [g.title, g.id]}, id: 'group-category-select', include_blank: 'Kategorie auswählen..' %>
+    <%= f.select :discussion_category_id, @group.discussion_categories.map{|g| [g.title, g.id]}, id: 'discussion-category-select', include_blank: 'Kategorie auswählen..' %>
   </div>
 
   <% if f.object.new_record? %>

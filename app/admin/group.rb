@@ -1,6 +1,7 @@
 ActiveAdmin.register Group do
   include ViewInApp
-  menu parent: 'Gruppe'
+  menu parent: 'Gruppe', priority: 1
+
   actions :index, :show, :edit, :update, :destroy
 
   filter :users, :collection => proc {(User.all).map{|c| [c.active_admin_name, c.id]}}, include_blank: true, input_html: { :class => 'admin-filter-select'}
@@ -12,5 +13,5 @@ ActiveAdmin.register Group do
   show { render 'show', context: self }
   form partial: 'form'
 
-  permit_params group_users_attributes: [:id, :user_id, :role, :_destroy]
+  permit_params :title, :featured, group_users_attributes: [:id, :user_id, :role, :_destroy]
 end

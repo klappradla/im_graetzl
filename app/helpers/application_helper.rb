@@ -41,7 +41,7 @@ module ApplicationHelper
   end
 
   def graetzl_flag(graetzl)
-    content_tag(:div, link_to(graetzl.name, [graetzl]), class: 'sideflag -R')
+    content_tag(:div, link_to(graetzl.name, [graetzl]), class: 'graetzl-sideflag sideflag -R')
   end
 
   def form_errors_for(target, name=nil)

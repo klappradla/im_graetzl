@@ -23,6 +23,9 @@ class WienController < ApplicationController
   def rooms
   end
 
+  def groups
+  end
+
   def zuckerl
   end
 end

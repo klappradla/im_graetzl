@@ -2,13 +2,15 @@
 
   <div class="coverImg">
     <%= link_to group_path(@group) do %>
-      <%= attachment_image_tag @group.parent, :cover_photo, :fill, 980, 500, fallback: 'cover_photo/980x370.png', class: 'coverImg' %>
+      <%= attachment_image_tag @group, :cover_photo, :fill, 980, 500, fallback: 'cover_photo/980x370.png', class: 'coverImg' %>
     <% end %>
   </div>
 
   <div class="groupInfos">
     <h1 class="hl-main"><%= @group.title %></h1>
-    <p>Raumteiler Gruppe für <%= link_to @group.parent, @group.parent %> </p>
+    <% if @group.parent %>
+      <p>Raumteiler Gruppe für <%= link_to @group.parent, @group.parent %> </p>
+    <% end %>
     <p>
       <%= @group.users.count %> Mitglieder &middot;
       <%= @group.private? ? "Geschlossene" : "Offene" %> Gruppe

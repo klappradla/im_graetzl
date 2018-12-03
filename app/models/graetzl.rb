@@ -11,6 +11,8 @@ class Graetzl < ApplicationRecord
   has_many :room_offers
   has_many :room_demand_graetzls
   has_many :room_demands, through: :room_demand_graetzls
+  has_many :group_graetzls
+  has_many :groups, through: :group_graetzls
   has_many :operating_ranges
   has_many :initiatives, through: :operating_ranges, source: :operator, source_type: 'Initiative'
   has_many :admin_posts, through: :operating_ranges, source: :operator, source_type: 'Post'

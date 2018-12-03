@@ -26,6 +26,12 @@ class DistrictsController < ApplicationController
     @map_data = MapData.call district: @district, graetzls: @district.graetzls
   end
 
+  def groups
+    @district = District.find(params[:id])
+    @map_data = MapData.call district: @district, graetzls: @district.graetzls
+    @featured_groups = @district.groups.featured
+  end
+
   def zuckerls
     @district = District.find(params[:id])
     @map_data = MapData.call district: @district, graetzls: @district.graetzls

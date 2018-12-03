@@ -16,9 +16,9 @@
 
     <div class="breadcrumb">
       <%= link_to "Diskussionen", group_path(@group, anchor: 'tab-discussions') %>
-      <% if @discussion.group_category %>
+      <% if @discussion.discussion_category %>
         <span>&nbsp;&nbsp;/&nbsp;&nbsp;</span>
-        <%= link_to @discussion.group_category.title, group_path(@group, group_category_id: @discussion.group_category.id, anchor: 'tab-discussions') %>
+        <%= link_to @discussion.discussion_category.title, group_path(@group, discussion_category_id: @discussion.discussion_category.id, anchor: 'tab-discussions') %>
       <% end %>
       <span>&nbsp;&nbsp;/&nbsp;&nbsp;</span>Thema
     </div>

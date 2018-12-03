@@ -4,8 +4,11 @@ context.instance_eval do
       row :id
       row :title
       row :description
+      row :featured
       row :room_offer
+      row :room_demand
       row :room_call
+      row :location
       row :private
       row :created_at
       row :updated_at

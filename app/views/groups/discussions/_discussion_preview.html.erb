@@ -28,7 +28,7 @@
         <%= link_to [discussion.group, discussion] do %>
           <div class="name"><%= post_first.user.full_name if post_first %></div>
         <% end %>
-        <div class="category"><%= discussion.group_category ? discussion.group_category.title : 'Allgemein'.html_safe %></div>
+        <div class="category"><%= discussion.discussion_category ? discussion.discussion_category.title : 'Allgemein'.html_safe %></div>
         <div class="infos">
           <%= discussion.discussion_posts.size  %> <%= discussion.discussion_posts.size > 1 ? 'Beiträge' : 'Beitrag'  %>
         </div>

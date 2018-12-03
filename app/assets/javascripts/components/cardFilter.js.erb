@@ -10,16 +10,21 @@ APP.components.cardFilter = (function() {
     suggestionForm = $(".search-suggestion-trigger");
     suggestionBox = $(".search-suggestion");
     suggestionLink = $(".search-suggestion a");
-    suggestionLinkActive = $(".search-suggestion .active");
     suggestionSelect = $("#graetzl-suggestion");
-    suggestionValue = suggestionLinkActive.text();
+    suggestionValue = $(".search-suggestion .active").text();
 
     suggestionLink.on("click", function() {
       suggestionLink.removeClass("active");
       $(this).addClass("active");
-      suggestionLinkActive = $(this);
-      suggestionValue = $(this).text();
-      setValue(suggestionValue);
+      var categoryId = $(this).data("category-id");
+      filterForm.find("[name=group_category_id]").val(categoryId);
+      if (categoryId) {
+        suggestionValue = $(this).text();
+        setValue(suggestionValue);
+      } else {
+        suggestionValue = null;
+        setValue(suggestionValue);
+      }
       filterForm.submit();
     });
     suggestionForm.on("click", function(){
@@ -28,6 +33,7 @@ APP.components.cardFilter = (function() {
       suggestionBox.slideDown("fast");
     });
     suggestionForm.keypress(function (e) {
+      filterForm.find("[name=group_category_id]").val(null);
       if (e.which == 13) {
         suggestionLink.removeClass("active");
         suggestionBox.slideUp("fast");
@@ -66,8 +72,6 @@ APP.components.cardFilter = (function() {
     var setValue = function(value) {
       suggestionForm.val(value);
     }
-
-    $('document').on('ready', setValue(suggestionValue))
 
     // ----------- Search Suggestion Form - MICHAEL
 

@@ -1,4 +1,4 @@
-ActiveAdmin.register GroupDefaultCategory do
+ActiveAdmin.register DiscussionDefaultCategory do
   menu parent: 'Gruppe'
 
   permit_params :title

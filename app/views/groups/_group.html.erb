@@ -7,7 +7,9 @@
     <div class="categoryicon">
       <%= icon_tag "speech-bubble" %>
     </div>
-    <!--<div class="sideflag -R"><a href="/">Add Category here</a></div>-->
+    <% if group.group_categories.first %>
+      <div class="sideflag -R"> <%= group.group_categories.first.try(:title) %> </div>
+    <% end %>
   </div>
 
   <div class="cardBoxContent -group">

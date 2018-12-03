@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   end
 
   def groups
-    @groups = current_user.groups.includes(:room_offer, :room_call)
+    @groups = current_user.groups.includes(:room_offer, :room_call, :discussion_categories)
   end
 
   private

@@ -1,6 +1,9 @@
 class Group < ApplicationRecord
   belongs_to :room_call, optional: true
   belongs_to :room_offer, optional: true
+  belongs_to :room_demand, optional: true
+  belongs_to :location, optional: true
+
   has_many :discussions
   has_many :discussion_posts, through: :discussions
 
@@ -11,8 +14,20 @@ class Group < ApplicationRecord
   has_many :group_join_requests
   has_many :meetings
 
-  has_many :group_categories
-  accepts_nested_attributes_for :group_categories, allow_destroy: true, reject_if: :all_blank
+  has_many :group_graetzls
+  has_many :graetzls, through: :group_graetzls
+  has_many :districts, -> { distinct }, through: :graetzls
+
+  has_and_belongs_to_many :group_categories
+
+  has_many :discussion_categories
+  accepts_nested_attributes_for :discussion_categories, allow_destroy: true, reject_if: :all_blank
+
+  attachment :cover_photo, type: :image
+
+  scope :by_currentness, -> { order(created_at: :desc) }
+  scope :non_private, -> { where(private: false) }
+  scope :featured, -> { where(featured: true) }
 
   def to_s
     title

@@ -1,18 +1,18 @@
 <% meta(
-    title: t('.title', graetzl: @graetzl.name),
-    description: t('.description', graetzl: @graetzl.name, numeric: @graetzl.district.numeric),
+    title: t('.title', numeric: @district.numeric),
+    description: t('.description', numeric: @district.numeric, name: @district.name),
     robots: 'index, follow',
-    og_title: t('.title', graetzl: @graetzl.name),
-    og_description: t('.description', graetzl: @graetzl.name, numeric: @graetzl.district.numeric),
+    og_title: t('.title', numeric: @district.numeric),
+    og_description: t('.description', numeric: @district.numeric, name: @district.name),
     og_image: image_url('meta/og_logo.png')
   )
 %>
 
-<section class="graetzls -groups">
-  <%= cache [@graetzl, 'map'], expires_in: 2.months do %>
-    <%= render 'map', map_data: @map_data %>
+<section class="districts -groups">
+  <%= cache [@district, 'locationsmap'], expires_in: 2.months do %>
+    <%= render 'districts/map', map_data: @map_data %>
   <% end %>
-  <%= render 'curator' if @graetzl.curator %>
+
   <%= render 'menu' %>
 
   <% if @featured_groups.present? %>
@@ -39,7 +39,7 @@
           <%= text_field_tag :query, nil, placeholder: 'Suche..', class: 'search-suggestion-trigger' %>
         </div>
         <div class="input-select label-select">
-          <%= select_tag :district_ids, options_from_collection_for_select(District.order(:zip), :id, :zip_name, @graetzl.district.id), id: 'graetzl-suggestion', multiple: true %>
+          <%= select_tag :district_ids, options_from_collection_for_select(District.order(:zip), :id, :zip_name, @district.id), id: 'graetzl-suggestion', multiple: true %>
         </div>
       </div>
     <% end %>

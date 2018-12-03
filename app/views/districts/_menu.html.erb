@@ -30,6 +30,11 @@
     <div class="txt">Raum<br>teiler</div>
   <% end %>
 
+  <%= active_link_to groups_district_path(@district), class: "iconfilter" do %>
+    <%= icon_tag "speech-bubble" %>
+    <div class="txt">Gruppen</div>
+  <% end %>
+
   <%= active_link_to zuckerls_district_path(@district), class: "iconfilter" do %>
     <%= icon_tag "shopping-bag" %>
     <div class="txt">Zuckerl <br/>& Angebote</div>

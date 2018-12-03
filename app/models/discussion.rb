@@ -3,7 +3,7 @@ class Discussion < ApplicationRecord
 
   belongs_to :group
   belongs_to :user
-  belongs_to :group_category, optional: true
+  belongs_to :discussion_category, optional: true
 
   has_many :discussion_posts
   has_many :discussion_followings
@@ -29,7 +29,7 @@ class Discussion < ApplicationRecord
   def followed_by?(by_user)
     discussion_followings.where(user: by_user).exists?
   end
-  
+
   private
 
   def set_discussion_last_post

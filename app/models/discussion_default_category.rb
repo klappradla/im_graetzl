@@ -1,0 +1,2 @@
+class DiscussionDefaultCategory < ApplicationRecord
+end

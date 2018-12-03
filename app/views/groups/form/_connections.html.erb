@@ -1,0 +1,46 @@
+<% if current_user.room_offers.present? || current_user.room_demands.present? ||
+  current_user.room_calls.present? || current_user.locations.present? %>
+
+  <h2 class="hl-main">Group <span>connections</span></h2>
+
+  <% if current_user.room_offers.present? %>
+    <div class="input-select">
+      <%= f.label :room_offer_id do %>
+        <%= icon_tag "location" %>
+        <span>Room Offer</span>
+      <% end %>
+      <%= f.collection_select(:room_offer_id, current_user.room_offers, :id, :slogan, {:include_blank => 'Room offer verknüpfen..'}) %>
+    </div>
+  <% end %>
+
+  <% if current_user.room_demands.present? %>
+    <div class="input-select">
+      <%= f.label :room_demand_id do %>
+        <%= icon_tag "location" %>
+        <span>Room Demand</span>
+      <% end %>
+      <%= f.collection_select(:room_demand_id, current_user.room_demands, :id, :slogan, {:include_blank => 'Room demand verknüpfen..'}) %>
+    </div>
+  <% end %>
+
+  <% if current_user.room_calls.present? %>
+    <div class="input-select">
+      <%= f.label :room_call_id do %>
+        <%= icon_tag "location" %>
+        <span>Room Call</span>
+      <% end %>
+      <%= f.collection_select(:room_call_id, current_user.room_calls, :id, :title, {:include_blank => 'Room call verknüpfen..'}) %>
+    </div>
+  <% end %>
+
+  <% if current_user.locations.present? %>
+    <div class="input-select">
+      <%= f.label :location_id do %>
+        <%= icon_tag "location" %>
+        <span>Location</span>
+      <% end %>
+      <%= f.collection_select(:location_id, current_user.locations, :id, :name, {:include_blank => 'Location verknüpfen..'}) %>
+    </div>
+  <% end %>
+
+<% end %>

@@ -304,6 +304,12 @@ input, select, textarea {
       transition: 0.5s;
     }
   }
+  &.disabled, &.readonly {
+    > label {
+      color: $color-ambient-grey;
+      border-color: $color-ambient-grey-light;
+    }
+  }
 }
 
 .input-checkbox {
