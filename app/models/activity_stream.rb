@@ -1,30 +1,23 @@
 class ActivityStream
-  STREAM_ACTIVITY_KEYS = [
-    'meeting.comment', 'meeting.create', 'meeting.go_to',
-    'user_post.comment', 'user_post.create',
-    'admin_post.comment', 'admin_post.create',
-    'location.create', 'location_post.comment', 'location_post.create',
-    'room_offer.create', 'room_offer.comment',
-    'room_demand.create', 'room_demand.comment'
-  ]
 
   def initialize(graetzl)
     @graetzl = graetzl
   end
 
   def fetch
-    activity_ids = Activity.where(key: STREAM_ACTIVITY_KEYS).
-      select('DISTINCT ON(trackable_id, trackable_type) id').
-      where("(trackable_id IN (?) AND trackable_type = 'Meeting') OR
-             (trackable_id IN (?) AND trackable_type = 'Location') OR
-             (trackable_id IN (?) AND trackable_type LIKE '%Post') OR
-             (trackable_id IN (?) AND trackable_type = 'Post') OR
-             (trackable_id IN (?) AND trackable_type = 'RoomOffer') OR
-             (trackable_id IN (?) AND trackable_type = 'RoomDemand')",
-             @graetzl.meeting_ids, @graetzl.location_ids, @graetzl.post_ids, @graetzl.admin_post_ids,
-             @graetzl.room_offer_ids, @graetzl.room_demand_ids
-      ).order(:trackable_id, :trackable_type, id: :desc)
+    activities = [
+      Activity.where(trackable_id: @graetzl.meeting_ids, key: ['meeting.comment', 'meeting.create', 'meeting.go_to']),
+      Activity.where(trackable_id: @graetzl.location_ids, key: ['location.create']),
+      Activity.where(trackable_id: @graetzl.post_ids, key: ['user_post.comment', 'user_post.create', 'admin_post.comment', 'admin_post.create', 'location_post.comment', 'location_post.create']),
+      Activity.where(trackable_id: @graetzl.admin_post_ids, key: ['admin_post.comment', 'admin_post.create']),
+      Activity.where(trackable_id: @graetzl.room_offer_ids, key: ['room_offer.create', 'room_offer.comment']),
+      Activity.where(trackable_id: @graetzl.room_demand_ids, key: ['room_demand.create']),
+      Activity.where(trackable_id: @graetzl.room_call_ids, key: ['room_call.create']),
+      Activity.where(trackable_id: @graetzl.groups.non_private.pluck(:id), key: ['group.create']),
+    ].reduce(:or)
 
+    activity_ids = activities.select('DISTINCT ON(trackable_id, trackable_type) id')
+    activity_ids = activity_ids.order(:trackable_id, :trackable_type, id: :desc)
     Activity.includes(:owner, :trackable).where(id: activity_ids).order(id: :desc)
   end
 

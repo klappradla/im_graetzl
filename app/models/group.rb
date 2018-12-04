@@ -1,4 +1,6 @@
 class Group < ApplicationRecord
+  include Trackable
+
   belongs_to :room_call, optional: true
   belongs_to :room_offer, optional: true
   belongs_to :room_demand, optional: true
