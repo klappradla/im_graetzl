@@ -27,6 +27,10 @@ APP.controllers.wien = (function() {
           APP.components.cardFilter.init();
         }
 
+        if ($("#card-slider").exists()) {
+          APP.components.cardSlider.init($("#card-slider"));
+        }
+
         initMobileNav();
     }
 

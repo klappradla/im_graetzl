@@ -25,6 +25,7 @@ APP.components.cardFilter = (function() {
         suggestionValue = null;
         setValue(suggestionValue);
       }
+      suggestionBox.slideUp("fast");
       filterForm.submit();
     });
     suggestionForm.on("click", function(){
@@ -41,10 +42,6 @@ APP.components.cardFilter = (function() {
         setValue(suggestionValue);
         filterForm.submit();
       }
-    });
-    suggestionForm.on("blur", function(){
-      suggestionBox.slideUp("fast");
-      setValue(suggestionValue);
     });
 
     $(suggestionSelect).SumoSelect({

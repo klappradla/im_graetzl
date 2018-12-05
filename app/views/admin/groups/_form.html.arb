@@ -2,8 +2,28 @@ active_admin_form_for [:admin, resource] do |f|
   semantic_errors
   inputs "Group" do
     input :title
+    input :description
     input :featured
+    input :private
+    input :room_offer, input_html: { class: 'admin-filter-select'}
+    input :room_demand, input_html: { class: 'admin-filter-select'}
+    input :room_call, input_html: { class: 'admin-filter-select'}
+    input :location, input_html: { class: 'admin-filter-select'}
   end
+
+  inputs "Categories" do
+    input :group_categories, as: :check_boxes
+  end
+
+  inputs "Photos" do
+    input :cover_photo, as: :file, hint: (image_tag(attachment_url(f.object, :cover_photo, :fill, 100, 100)) if f.object.cover_photo)
+    input :remove_cover_photo, as: :boolean if f.object.cover_photo
+  end
+
+  inputs "Graetzls" do
+    input :graetzls, as: :select, input_html: { class: 'admin-filter-select'}
+  end
+
   inputs "Users" do
     has_many :group_users, allow_destroy: true, new_record: 'Add User' do |gu|
       gu.input :user, collection: User.admin_select_collection, include_blank: "Select User", input_html: { class: 'admin-filter-select'}

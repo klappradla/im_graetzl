@@ -24,6 +24,8 @@ class WienController < ApplicationController
   end
 
   def groups
+    @featured_groups = Group.featured
+    @category = GroupCategory.find_by(id: params[:category])
   end
 
   def zuckerl

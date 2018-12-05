@@ -20,7 +20,8 @@ class GroupsController < ApplicationController
   def new
     @group = Group.new(
       room_offer_id: params[:room_offer_id],
-      room_call_id: params[:room_call_id]
+      room_call_id: params[:room_call_id],
+      graetzl_ids: Array(params[:graetzl_id]),
     )
     DiscussionDefaultCategory.all.each do |category|
       @group.discussion_categories.build(title: category.title)
@@ -140,7 +141,7 @@ class GroupsController < ApplicationController
     if params[:group_category_id].present?
       groups = groups.joins(:group_categories).where(group_categories: {id: params[:group_category_id]}).distinct
     elsif params[:query].present?
-      groups.joins(:group_categories).where("groups.title = :q OR group_categories.title", q: "%#{params[:query]}%").distinct
+      groups = groups.joins(:group_categories).where("groups.title ILIKE :q OR group_categories.title ILIKE :q", q: "%#{params[:query]}%").distinct
     end
 
     groups

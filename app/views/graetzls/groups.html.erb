@@ -20,7 +20,7 @@
       <div class="text">
         Empfohlene & beliebte Gruppen
       </div>
-      <div class="cardBoxCollection" id="lightSlider">
+      <div class="cardBoxCollection" id="card-slider">
         <%= render @featured_groups %>
       </div>
     </div>
@@ -33,7 +33,7 @@
 
   <div class="card-grid-container">
     <%= form_tag groups_path, method: :get, remote: true, class: 'cards-filter' do %>
-      <%= hidden_field_tag :group_category_id %>
+      <%= hidden_field_tag :group_category_id, @category.try(:id) %>
       <div class="input-field search-filter">
         <div class="input-field">
           <%= text_field_tag :query, nil, placeholder: 'Suche..', class: 'search-suggestion-trigger' %>
@@ -44,21 +44,7 @@
       </div>
     <% end %>
 
-    <div class="cardBox search-suggestion">
-      <div class="wrapper">
-        <% ([:all] + GroupCategory.all).in_groups_of(3, false).each do |categories| %>
-          <div class="col">
-            <% categories.each do |category| %>
-              <% if category == :all %>
-                <%= link_to "Alle Gruppen", 'javascript:', class: 'active' %>
-              <% else %>
-                <%= link_to category.title, 'javascript:', data: { category_id: category.id } %>
-              <% end %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    </div>
+    <%= render 'filters/group_categories', selected_category: @category %>
 
     <div id="graetzl-suggestion" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-left dropdown-container">
       <div class="jq-dropdown-panel">

@@ -30,6 +30,7 @@ class DistrictsController < ApplicationController
     @district = District.find(params[:id])
     @map_data = MapData.call district: @district, graetzls: @district.graetzls
     @featured_groups = @district.groups.featured
+    @category = GroupCategory.find_by(id: params[:category])
   end
 
   def zuckerls

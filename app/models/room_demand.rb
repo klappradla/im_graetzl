@@ -30,6 +30,10 @@ class RoomDemand < ApplicationRecord
 
   after_destroy { MailchimpRoomDeleteJob.perform_later(user) }
 
+  def to_s
+    slogan
+  end
+
   private
 
   def has_one_category_at_least
