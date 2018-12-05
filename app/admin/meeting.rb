@@ -8,9 +8,9 @@ ActiveAdmin.register Meeting do
   scope :cancelled
   scope :upcoming
 
-  filter :graetzl, collection: Graetzl.order(:name), include_blank: true, input_html: { :class => 'admin-filter-select'}
-  filter :users, :collection => proc {(User.all).map{|c| [c.active_admin_name, c.id]}}, include_blank: true, input_html: { :class => 'admin-filter-select'}
-  filter :location, collection: Location.order(:name), include_blank: true, input_html: { :class => 'admin-filter-select'}
+  filter :graetzl, collection: proc { Graetzl.order(:name).pluck(:name, :id) }, include_blank: true, input_html: { class: 'admin-filter-select'}
+  filter :users, collection: proc { User.admin_select_collection }, include_blank: true, input_html: { class: 'admin-filter-select'}
+  filter :location, collection: proc { Location.order(:name).pluck(:name, :id) }, include_blank: true, input_html: { class: 'admin-filter-select'}
   filter :state, as: :select, collection: Meeting.states.keys
   filter :name
   filter :description

@@ -231,8 +231,7 @@ ActiveAdmin.setup do |config|
   #
   # config.filters = true
 
-  config.display_name_methods = [ :active_admin_name,
-                                  :display_name,
+  config.display_name_methods = [ :display_name,
                                   :full_name,
                                   :name,
                                   :username,

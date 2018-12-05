@@ -35,7 +35,7 @@ active_admin_form_for [:admin, resource] do |f|
                   allow_destroy: true,
                   heading: false,
                   new_record: 'User Hinzufügen' do |o|
-          o.input :user, include_blank: false
+          o.input :user, collection: User.admin_select_collection, include_blank: "Select User", input_html: { class: 'admin-filter-select'}
           o.input :role, as: :select, collection: GoingTo.roles.keys, include_blank: false
         end
       end

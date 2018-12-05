@@ -58,16 +58,18 @@ class User < ApplicationRecord
     end
   end
 
+  def self.admin_select_collection
+    User.all.pluck(:id, :first_name, :last_name, :username).map do |id, first_name, last_name, username|
+      ["#{first_name} #{last_name} (#{username})", id]
+    end
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end
 
   def full_name_with_email
     "#{full_name} (#{email})"
-  end
-
-  def active_admin_name
-    "#{full_name} (#{username})"
   end
 
   def after_confirmation

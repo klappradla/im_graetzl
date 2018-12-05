@@ -7,9 +7,8 @@ ActiveAdmin.register Location do
   scope :pending
   scope :approved
 
-  filter :graetzl, collection: Graetzl.order(:name), include_blank: true, input_html: { :class => 'admin-filter-select'}
-  #filter :users, collection: User.order(:username), include_blank: true, input_html: { :class => 'admin-filter-select'}
-  filter :users, :collection => proc {(User.all).map{|c| [c.active_admin_name, c.id]}}, include_blank: true, input_html: { :class => 'admin-filter-select'}
+  filter :graetzl, collection: proc { Graetzl.order(:name).pluck(:name, :id) }, include_blank: true, input_html: { class: 'admin-filter-select'}
+  filter :users, collection: proc { User.admin_select_collection }, include_blank: true, input_html: { class: 'admin-filter-select'}
   filter :category
   filter :state, as: :select, collection: Location.states.keys
   filter :name
@@ -18,7 +17,7 @@ ActiveAdmin.register Location do
   filter :allow_meetings
   filter :created_at
   filter :updated_at
-  
+
   index { render 'index', context: self }
   show { render 'show', context: self }
   form partial: 'form'

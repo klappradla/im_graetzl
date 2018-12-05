@@ -6,7 +6,7 @@ active_admin_form_for [:admin, resource] do |f|
   end
   inputs "Users" do
     has_many :group_users, allow_destroy: true, new_record: 'Add User' do |gu|
-      gu.input :user, include_blank: "Select User"
+      gu.input :user, collection: User.admin_select_collection, include_blank: "Select User", input_html: { class: 'admin-filter-select'}
       gu.input :role, include_blank: false
     end
   end

@@ -6,7 +6,7 @@ ActiveAdmin.register LocationOwnership do
 
   form do
     inputs '' do
-      input :user
+      input :user, collection: User.admin_select_collection, include_blank: "Select User", input_html: { class: 'admin-filter-select'}
       input :location
       input :state
     end
