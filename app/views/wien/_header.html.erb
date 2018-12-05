@@ -18,7 +18,6 @@
         <%= icon_tag "map-location" %>
         <div class="txt">Wien <br/>Übersicht</div>
       <% end %>
-
       <%= active_link_to locations_wien_path, class: "iconfilter" do %>
         <%= icon_tag "location" %>
         <div class="txt">Anbieter <br/>& Locations</div>
@@ -35,7 +34,7 @@
         <%= icon_tag "speech-bubble" %>
         <div class="txt">Gruppen</div>
       <% end %>
-      <%= active_link_to zuckerls_wien_path, class: "iconfilter" do %>
+      <%= active_link_to zuckerls_wien_path, class: "iconfilter hide" do %>
         <%= icon_tag "shopping-bag" %>
         <div class="txt">Zuckerl <br/>& Angebote</div>
       <% end %>

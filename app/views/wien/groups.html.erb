@@ -11,19 +11,22 @@
 <section class="wien -overview-pages">
   <%= render 'header' %>
 
-  <% if @featured_groups.present? %>
-    <div class="hl-subtext">
-      <h1>Empfohlene & beliebte Gruppen</h1>
-    </div>
+  <div class="hl-subtext">
+    <h1><em>Gruppen - Kooperationen & Vernetzung</em></h1>
+  </div>
 
+  <% if @featured_groups.present? %>
     <div class="lightSliderWrapper card-slider-container">
+      <div class="text">
+        Empfohlene & beliebte Gruppen
+      </div>
       <div class="cardBoxCollection" id="card-slider">
         <%= render @featured_groups %>
       </div>
     </div>
   <% end %>
 
-  <div class="hl-subtext">
+  <div class="hl-subtext -groups">
     <h1>Stöbern in <span>allen Gruppen</span></h1>
     <p>Nach Gruppe suchen oder in Kategorien stöbern</p>
   </div>
@@ -36,7 +39,7 @@
           <%= text_field_tag :query, nil, placeholder: 'Suche..', class: 'search-suggestion-trigger' %>
         </div>
         <div class="input-select label-select">
-          <%= select_tag :district_ids, options_from_collection_for_select(District.order(:zip), :id, :zip_name), id: 'graetzl-suggestion', multiple: true %>
+          <%= select_tag :district_ids, options_from_collection_for_select(District.order(:zip), :id, :zip_name, District.ids), id: 'graetzl-suggestion', multiple: true %>
         </div>
       </div>
     <% end %>

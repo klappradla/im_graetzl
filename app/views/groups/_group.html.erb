@@ -8,7 +8,7 @@
       <%= icon_tag "speech-bubble" %>
     </div>
     <% if group.group_categories.first %>
-      <div class="sideflag -R"> <%= group.group_categories.first.try(:title) %> </div>
+      <div class="sideflag -category -R"> <%= group.group_categories.first.try(:title) %> </div>
     <% end %>
   </div>
 

@@ -24,6 +24,9 @@
       <%= link_to rooms_district_path(district) do %>
         <%= icon_tag "raumteiler" %> Raumteiler (<%= district.numeric %>. Bez.)
       <% end %>
+      <%= link_to groups_district_path(district) do %>
+        <%= icon_tag "speech-bubble" %> Gruppen (<%= district.numeric %>. Bez.)
+      <% end %>
       <%= link_to zuckerls_district_path(district) do %>
         <%= icon_tag "shopping-bag" %> Zuckerl & Angebote (<%= district.numeric %>. Bez.)
       <% end %>
@@ -32,7 +35,7 @@
         <%= icon_tag "lightbulb" %> Mehr Infos
       <% end %>
 
-      <%= link_to "http://blog.imgraetzl.at/", class: 'discover', target: '_blank' do %>
+      <%= link_to "https://blog.imgraetzl.at/", class: 'discover', target: '_blank' do %>
         <%= icon_tag "coffee" %> Blog
       <% end %>
     </div>

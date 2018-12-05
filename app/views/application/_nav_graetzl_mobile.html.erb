@@ -15,6 +15,10 @@
     <%= icon_tag "raumteiler" %>
     Raumteiler
   <% end %>
+  <%= link_to groups_graetzl_path(graetzl) do %>
+    <%= icon_tag "speech-bubble" %>
+    Gruppen
+  <% end %>
   <%= link_to zuckerls_graetzl_path(graetzl) do %>
     <%= icon_tag "shopping-bag" %>
     Zuckerl & Angebote
@@ -32,7 +36,7 @@
     <%= icon_tag "lightbulb" %> Mehr Infos
   <% end %>
 
-  <%= link_to "http://blog.imgraetzl.at/", class: 'bloglink', target: '_blank' do %>
+  <%= link_to "https://blog.imgraetzl.at/", class: 'bloglink', target: '_blank' do %>
     <%= icon_tag "coffee" %>
     Blog
   <% end %>

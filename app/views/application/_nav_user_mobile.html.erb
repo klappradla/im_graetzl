@@ -8,6 +8,10 @@
       <%= icon_tag "raumteiler" %>
       <div class="icontxt">Neuer Raumteiler</div>
     <% end %>
+    <%= link_to new_group_path(graetzl_id: current_user.graetzl_id) do %>
+      <%= icon_tag "speech-bubble" %>
+      <div class="icontxt">Neue Gruppe gründen</div>
+    <% end %>
     <%= link_to new_graetzl_user_post_path(current_user.graetzl) do %>
       <%= icon_tag "head-idea-lightbulb" %>
       <div class="icontxt">Neue Idee im Grätzl</div>

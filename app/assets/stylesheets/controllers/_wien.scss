@@ -23,6 +23,9 @@ section.wien {
 
   .sideflag {
     display: none;
+    &.-category {
+      display: block;
+    }
   }
 
   #graetzlMapWidget {

@@ -12,13 +12,13 @@
       </div>
       <% if local_assigns[:graetzl] %>
         <h3>Trete jetzt einer Gruppe bei oder gründe eine neue Gruppe.</h3>
-        <%= link_to 'Neue Gruppe gründen', new_group_path(graetzl_id: graetzl), class: 'btn-primary' %>
+        <%= link_to 'Neue Gruppe gründen', new_group_path(graetzl_id: graetzl.id), class: 'btn-primary' %>
       <% elsif local_assigns[:district] %>
-        <h3>Du bist unternehmerisch, sozial oder kreativ im <%= district.numeric %>. Bezirk tätig?</h3>
-        <%= link_to 'Deine Location einrichten', new_group_path, class: 'btn-primary' %>
+        <h3>Trete jetzt einer Gruppe im <%= district.numeric %>. Bezirk bei oder gründe eine neue Gruppe.</h3>
+        <%= link_to 'Neue Gruppe gründen', new_group_path, class: 'btn-primary' %>
       <% else %>
-        <h3>Du bist unternehmerisch, sozial oder kreativ im Grätzl tätig?</h3>
-        <%= link_to 'Deine Location einrichten', new_user_session_path, class: 'btn-primary -rose' %>
+        <h3>Trete jetzt einer Gruppe bei oder gründe eine neue Gruppe.</h3>
+        <%= link_to 'Neue Gruppe gründen', new_group_path, class: 'btn-primary' %>
       <% end %>
     </div>
     <div class="card"></div>

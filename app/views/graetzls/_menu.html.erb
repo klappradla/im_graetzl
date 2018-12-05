@@ -44,13 +44,6 @@
     <%= link_to '#', class: 'iconfilter createentry', data: { behavior: 'createTrigger' } do %>
       <%= icon_tag "pencil" %>
     <% end %>
-  <% else %>
-    <!--
-    <%= link_to new_user_session_path, class: 'iconfilter loginlink' do %>
-      <%= icon_tag "login-signin" %>
-      <div class="txt">Registrieren<br/>& Login</div>
-    <% end %>
-    -->
   <% end %>
 </div>
 
@@ -66,6 +59,11 @@
       <%= link_to select_room_offers_path do %>
         <%= icon_tag "raumteiler" %>
         <div class="icontxt">Neuer Raumteiler</div>
+      <% end %>
+
+      <%= link_to new_group_path(graetzl_id: @graetzl.id) do %>
+        <%= icon_tag "speech-bubble" %>
+        <div class="icontxt">Neue Gruppe gründen</div>
       <% end %>
 
       <%= link_to new_graetzl_user_post_path(@graetzl) do %>
