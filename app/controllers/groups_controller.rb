@@ -19,7 +19,9 @@ class GroupsController < ApplicationController
 
   def new
     @group = Group.new(
+      location_id: params[:location_id],
       room_offer_id: params[:room_offer_id],
+      room_demand_id: params[:room_demand_id],
       room_call_id: params[:room_call_id],
       graetzl_ids: Array(params[:graetzl_id]),
     )

@@ -50,6 +50,9 @@ de:
       room_demand:
         one: Suche Raum
         other: Suche Raum
+      group:
+        one: Gruppe
+        other: Gruppen
     attributes:
       address:
         street_name: Straße
@@ -194,3 +197,9 @@ de:
         image: Bild
         paid_at: Bezahlt am
         payment_reference: Zahlungsreferenz
+      group:
+        group_category_ids: Kategorie
+        title: Titel
+        description: Beschreibung
+        cover_photo: Headerbild
+        graetzl_ids: Grätzl

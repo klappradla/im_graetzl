@@ -1,4 +1,36 @@
-.group-form-page {
+section.group-form-page {
+
+  max-width: 775px;
+  margin: 0 auto;
+  label {min-width:175px;}
+  textarea {min-height:150px;}
+
+  h2 {
+    @include font-size-secondaryFont;
+    margin: 40px 0 15px;
+    text-align: center;
+  }
+  div.hl-subtext {
+    p {
+      @include font-size-primaryFont('large');
+    }
+  }
+
+  .group-categories {
+    overflow: hidden;
+    margin: 2rem 0 2rem;
+    .input-checkbox {
+      float: left;
+      width: 100%;
+      @include respond-to(">=small") {
+        width: 50%;
+      }
+      @include respond-to(">=medium") {
+        width: 33%;
+      }
+    }
+  }
+
   .remove_fields {
     margin-left: 10px;
     margin-top:15px;

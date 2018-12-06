@@ -2,6 +2,22 @@
 <%= form_errors_for @group %>
 <div class="form-block">
 
+  <div class="hl-subtext -groups">
+    <h2>Für welche <span>Kategorie?</span></h2>
+    <p>Wähle eine passende Kategorie für deine Gruppe. (maximal 3)</p>
+  </div>
+
+  <div class="group-categories">
+    <%= f.collection_check_boxes :group_category_ids, GroupCategory.all, :id, :title do |b| %>
+    <div class="input-checkbox">
+      <%= b.check_box %>
+      <%= b.label %>
+    </div>
+    <% end %>
+  </div>
+
+  <h2 class="hl-main"><span>Titel</span> und <span>Beschreibung</span></h2>
+
   <div class="input-field">
     <%= f.label :title do %>
     <%= icon_tag "record" %>
@@ -18,15 +34,10 @@
     <%= f.text_area :description, placeholder: 'Hier kannst du deine Gruppe in wenigen Sätzen ausführlicher beschreiben ..' %>
   </div>
 
-  <div class="input-checkbox -permission">
-    <%= f.check_box :private %>
-    <%= f.label :private, 'Private Gruppe (nur Gruppenmitglieder können Inhalte einsehen)' %>
-  </div>
-
   <div class="upload-oldschool">
     <%= f.label :cover_photo do %>
       <%= icon_tag "photo-camera" %>
-      <span>Coverfoto</span>
+      <span>Headerbild</span>
     <% end %>
     <div class="field-wrp">
       <% if f.object.cover_photo %>
@@ -42,20 +53,15 @@
     </div>
   </div>
 
-  <h2 class="hl-main">Gruppen <span>Kategorien</span></h2>
-  <p>Select up to 3 categories</p>
-  <div class="group-categories">
-    <%= f.collection_check_boxes :group_category_ids, GroupCategory.all, :id, :title do |b| %>
-    <div class="input-checkbox">
-      <%= b.check_box %>
-      <%= b.label %>
-    </div>
-    <% end %>
+  <div class="input-checkbox -permission">
+    <%= f.check_box :private %>
+    <%= f.label :private, 'Private Gruppe (nur Gruppenmitglieder können Inhalte einsehen)' %>
   </div>
 
-  <%= render "groups/form/connections", f: f %>
-
-  <h2 class="hl-main">Diskussions <span>Kategorien</span></h2>
+  <div class="hl-subtext -groups">
+    <h2>Diskussions <span>Kategorien</span></h2>
+    <p>Erstelle Unterthemen für deine Gruppe, du kannst diese auch später noch ändern.</p>
+  </div>
   <div class="group-prices">
     <%= f.fields_for :discussion_categories do |category_form| %>
       <%= render 'groups/form/discussion_category_fields', f: category_form %>
@@ -63,7 +69,7 @@
     <%= link_to_add_association 'Kategorie hinzufügen', f, :discussion_categories, class: 'add', partial: 'groups/form/discussion_category_fields' %>
   </div>
 
-  <h2 class="hl-main">Graetzls</h2>
+  <h2 class="hl-main"><span>Wo</span> soll deine Gruppe sichtbar sein?</h2>
   <div id="district-graetzl-select">
     <div class="input-select">
       <%= f.select :district_ids, district_select_options, {}, { multiple: true, class: 'district-select' } %>
@@ -72,6 +78,8 @@
       <%= f.select :graetzl_ids, graetzl_select_options, {}, { multiple: true, class: 'graetzl-select' } %>
     </div>
   </div>
+
+  <%= render "groups/form/connections", f: f %>
 
   <%= f.button @group.new_record? ? 'Gruppe erstellen' : 'Speichern', data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
 
