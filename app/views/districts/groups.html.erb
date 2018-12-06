@@ -15,12 +15,11 @@
 
   <%= render 'menu' %>
 
-  <h1 class="hl-main">Gruppen <span>im <%= @district.numeric %>. Bezirk</span></h1>
-
   <% if @featured_groups.present? && @category.nil? %>
     <div class="lightSliderWrapper card-slider-container">
+      <h1 class="hl-main"><span>Gruppen</span> - Austausch & Vernetzung</h1>
       <div class="text">
-        Empfohlene & beliebte Gruppen
+        Empfohlene & beliebte Gruppen im <%= @district.numeric %>. Bezirk
       </div>
       <div class="cardBoxCollection" id="card-slider">
         <%= render @featured_groups %>
@@ -28,12 +27,13 @@
     </div>
   <% end %>
 
-  <div class="hl-subtext -groups">
-    <h1>Stöbern in <span>allen Gruppen</span></h1>
-    <p>Nach Gruppe suchen oder in Kategorien stöbern</p>
-  </div>
-
   <div class="card-grid-container">
+
+    <div class="hl-subtext -groups">
+      <h1>Stöbern in <span>allen Gruppen</span></h1>
+      <p>Nach Gruppe suchen oder in Kategorien stöbern</p>
+    </div>
+
     <%= form_tag groups_path, method: :get, remote: true, class: 'cards-filter' do %>
       <%= hidden_field_tag :group_category_id, @category.try(:id) %>
       <div class="input-field search-filter">
