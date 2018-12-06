@@ -15,7 +15,7 @@
   <%= render 'curator' if @graetzl.curator %>
   <%= render 'menu' %>
 
-  <% if @featured_groups.present? %>
+  <% if @featured_groups.present? && @category.nil? %>
     <div class="lightSliderWrapper card-slider-container">
       <div class="text">
         Empfohlene & beliebte Gruppen

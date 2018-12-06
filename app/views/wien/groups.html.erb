@@ -15,7 +15,7 @@
     <h1><em>Gruppen - Kooperationen & Vernetzung</em></h1>
   </div>
 
-  <% if @featured_groups.present? %>
+  <% if @featured_groups.present? && @category.nil? %>
     <div class="lightSliderWrapper card-slider-container">
       <div class="text">
         Empfohlene & beliebte Gruppen

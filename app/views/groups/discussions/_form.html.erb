@@ -17,13 +17,25 @@
   </div>
 
   <% if f.object.new_record? %>
-    <div class="input-textarea">
-      <%= f.label :content do %>
-      <%= attachment_image_tag current_user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
-      <span>Dein Beitrag</span>
-      <% end %>
-      <%= text_area_tag :content, nil, cols: 80, rows: 3, placeholder: 'Dein erster Beitrag im Thema ..', required: true %>
-    </div>
+    <%= f.fields_for :initial_post, DiscussionPost.new do |pf| %>
+      <div class="input-textarea">
+        <%= pf.label :content do %>
+          <%= attachment_image_tag current_user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+          <span>Dein Beitrag</span>
+        <% end %>
+        <%= pf.text_area :content, cols: 80, rows: 3, placeholder: 'Dein erster Beitrag im Thema ..', required: true %>
+      </div>
+
+      <div class="upload-oldschool">
+        <%= pf.label :images do %>
+          <%= icon_tag "photo-camera" %>
+          <span>Bild hochladen</span>
+        <% end %>
+        <div class="field-wrp">
+          <%= pf.attachment_field :images_files, multiple: true, direct: true, presigned: true %>
+        </div>
+      </div>
+    <% end %>
   <% end %>
 
   <% if @group.admins.include?(current_user) %>

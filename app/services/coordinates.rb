@@ -33,8 +33,8 @@ class Coordinates < BaseService
 
   def parse(response)
     json = JSON.parse response.body
-    if features = json['features']
-      geometry = best_match(features)['geometry']
+    if json['features']
+      geometry = best_match(json['features'])['geometry']
       RGeo::GeoJSON.decode geometry, json_parser: :json
     else
       nil

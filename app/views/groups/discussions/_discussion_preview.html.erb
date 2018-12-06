@@ -5,8 +5,7 @@
   <div class="cardBoxHeader">
     <%= link_to [discussion.group, discussion] do %>
       <div class="coverImgWrapper">
-        <%= image_tag 'cover_photo/600x360-speech-bubble.png', class: 'coverImg' %>
-        <!-- Insert Post Image here ... 300, 250, class: 'coverImg' -->
+        <%= link_to attachment_image_tag(post_first.images.first, :file, :fill, 300, 180, class: 'coverImg', fallback: 'cover_photo/600x360-speech-bubble.png') %>
       </div>
     <% end %>
     <div class="categoryicon">

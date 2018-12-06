@@ -12,7 +12,6 @@ module RoomsHelper
 
   def compact_room_demand_graetzl_list(room_demand)
     districts = room_demand.districts.includes(:graetzls)
-    graetzls = room_demand.graetzls.includes(:districts)
     graetzl_ids = room_demand.graetzls.map{|g| [g.id, g]}.to_h
 
     whole_districts = []

@@ -75,6 +75,15 @@
             <% end %>
             <%= f.text_area :content, cols: 80, rows: 3, placeholder: 'Schreib hier deinen Beitrag bzw. deine Antwort ..' %>
           </div>
+          <div class="upload-oldschool">
+            <%= f.label :images do %>
+              <%= icon_tag "photo-camera" %>
+              <span>Bild hochladen</span>
+            <% end %>
+            <div class="field-wrp">
+              <%= f.attachment_field :images_files, multiple: true, direct: true, presigned: true %>
+            </div>
+          </div>
           <%= f.button 'Beitrag absenden', data: { disable_with: 'sendet...' }, class: 'btn-primary' %>
         <% end %>
       </div>

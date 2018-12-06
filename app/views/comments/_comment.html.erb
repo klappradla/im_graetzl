@@ -18,7 +18,7 @@
       </span>
     </div>
     <div class="txt"><%= comment.content %></div>
-    <% unless comment.images.empty? %>
+    <% if comment.images.present? %>
       <div class="entryImgUploads" data-featherlight-gallery data-featherlight-filter="a">
         <% comment.images.each do |image| %>
           <%= link_to attachment_image_tag(image, :file, :fill, 200, 200), attachment_url(image, :file, :limit, 800, 800) %>
