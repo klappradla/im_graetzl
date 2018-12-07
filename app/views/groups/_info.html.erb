@@ -12,6 +12,7 @@
       <h3><%= @group.users.count %> <%= @group.users.count > 1 ? 'Mitglieder' : 'Mitglied' %></h3>
 
       <div class="users member-section">
+
         <% @group.admins.each do |user| %>
           <div class="user">
             <div class="avatar">
@@ -23,7 +24,19 @@
             </div>
           </div>
         <% end %>
-        <% @group.members.each do |user| %>
+
+        <% if @group.users.include?(current_user) && !@group.admins.include?(current_user) %>
+        <div class="user">
+          <div class="avatar">
+            <%= attachment_image_tag current_user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+          </div>
+          <div class="infos">
+            <span><%= current_user.first_name %><br><%= current_user.last_name %></span>
+          </div>
+        </div>
+        <% end %>
+
+        <% @group.members.first(10 - @group.admins_and_current_user_count(current_user)).each do |user| next if user == current_user %>
           <div class="user">
             <div class="avatar">
               <%= attachment_image_tag user, :avatar, :fill, 200, 200, fallback: 'avatar/user/200x200.png', class: 'img-round' %>
@@ -32,6 +45,9 @@
               <span><%= user.first_name %><br><%= user.last_name %></span>
             </div>
           </div>
+        <% end %>
+        <% if @group.users.size > 10 %>
+          <span> + <%= @group.users.size - 10 %> weitere </span>
         <% end %>
       </div>
 

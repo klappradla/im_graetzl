@@ -53,6 +53,16 @@ class Group < ApplicationRecord
     group_users.select{|gu| gu.member? }.map(&:user)
   end
 
+  def admins_and_current_user_count(current_user)
+    if admins.include?(current_user)
+      admins.size
+    elsif users.include?(current_user)
+      admins.size + 1
+    else
+      admins.size
+    end
+  end
+
   def build_meeting
     meetings.build(address: Address.new)
   end

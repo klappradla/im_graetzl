@@ -266,6 +266,14 @@ section.group-form-page {
   // GROUP Header Area
   .group-header {
 
+    .sideflag {
+      position: absolute;
+      bottom:35px;
+      right:-12px;
+      text-align: right;
+      line-height: 1.1;
+    }
+
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -273,12 +281,13 @@ section.group-form-page {
     margin-bottom:40px;
 
     div.coverImg {
+      position:relative;
       width:100%;
       img.coverImg {
         border-radius: 8px;
         object-fit: cover;
         max-width: 100%;
-        margin-bottom:20px;
+        //margin-bottom:20px;
       }
       @include respond-to(">=medium") {
         width:48%;
@@ -291,6 +300,7 @@ section.group-form-page {
 
     div.groupInfos {
       width:100%;
+      margin-top:20px;
       h1 {
         text-align: left;
         margin-bottom:20px;
@@ -303,6 +313,7 @@ section.group-form-page {
       }
       @include respond-to(">=medium") {
         width:48%;
+        margin-top:0px;
       }
     }
 
@@ -570,7 +581,7 @@ section.group-form-page {
     textarea {
       min-height:150px;
     }
-    .input-field, .input-textarea, .input-select {
+    .input-field, .input-textarea, .input-select, .upload-oldschool {
       margin-bottom: 15px;
     }
     .btn-primary {
@@ -583,14 +594,24 @@ section.group-form-page {
   }
 
   &.discussion-page {
+
+    .entryImgUploads {
+      img {
+        max-width: 150px;
+        @include respond-to(">=large") {
+          max-width: 205px;
+        }
+      }
+    }
+
     .discussion-form {
       .img-round {
-        margin-right:0px;
-        width:50px;
-        height:50px;
+        margin-right:10px;
+        width:30px;
+        height:30px;
       }
       label {
-        min-width: 50px;
+        min-width: 160px;
       }
     }
   }

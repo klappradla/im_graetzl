@@ -12,7 +12,7 @@
   <%= render 'groups/btn_ctrl', group: @group %>
   <%= render 'groups/tab_navigation' %>
 
-  <div class="discussion-infos -page">
+  <div class="discussion-infos -page" id="topic">
 
     <div class="breadcrumb">
       <%= link_to "Diskussionen", group_path(@group, anchor: 'tab-discussions') %>
@@ -39,11 +39,11 @@
             <%= icon_tag "trash-delete-remove" %>
           <% end %>
         </div>
+        <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
       <% end %>
 
       <% if @group.users.include?(current_user) %>
         <% following = @discussion.followed_by?(current_user) %>
-        <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
         E-Mail Updates:
         <%= link_to toggle_following_group_discussion_path(@group, @discussion), remote: true, method: 'post', class: ["follow", following ? '' : '-hide'] do %>
           <div class="input-switch -small -checked"><label></label></div>
@@ -72,13 +72,14 @@
           <div class="input-textarea">
             <%= f.label :content do %>
             <%= attachment_image_tag current_user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+            <span>Deine Antwort</span>
             <% end %>
             <%= f.text_area :content, cols: 80, rows: 3, placeholder: 'Schreib hier deinen Beitrag bzw. deine Antwort ..' %>
           </div>
           <div class="upload-oldschool">
             <%= f.label :images do %>
               <%= icon_tag "photo-camera" %>
-              <span>Bild hochladen</span>
+              <span>Bilder</span>
             <% end %>
             <div class="field-wrp">
               <%= f.attachment_field :images_files, multiple: true, direct: true, presigned: true %>

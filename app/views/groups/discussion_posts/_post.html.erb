@@ -26,16 +26,18 @@
   </div>
 
   <div class="content">
-    <p><%= post.content %></p>
-  </div>
 
-  <% if post.images.present? %>
-    <div class="entryImgUploads" data-featherlight-gallery data-featherlight-filter="a">
-      <% post.images.each do |image| %>
-        <%= link_to attachment_image_tag(image, :file, :fill, 200, 200), attachment_url(image, :file, :limit, 800, 800) %>
-      <% end %>
-    </div>
-  <% end %>
+    <p><%= post.content %></p>
+
+    <% if post.images.present? %>
+      <div class="entryImgUploads" data-featherlight-gallery data-featherlight-filter="a">
+        <% post.images.each do |image| %>
+          <%= link_to attachment_image_tag(image, :file, :fill, 200, 200), attachment_url(image, :file, :limit, 800, 800) %>
+        <% end %>
+      </div>
+    <% end %>
+    
+  </div>
 
   <% if post.edit_permission?(current_user) %>
     <%= form_for [@group, post], remote: true, html: { class: 'edit-post-form' } do |f| %>
@@ -45,7 +47,7 @@
       <div class="upload-oldschool">
         <%= f.label :images do %>
           <%= icon_tag "photo-camera" %>
-          <span>Bild hochladen</span>
+          <span>Bilder</span>
         <% end %>
         <div class="field-wrp">
           <%= f.attachment_field :images_files, multiple: true, direct: true, presigned: true %>

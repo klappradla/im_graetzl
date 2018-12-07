@@ -4,6 +4,13 @@
     <%= link_to group_path(@group) do %>
       <%= attachment_image_tag @group, :cover_photo, :fill, 980, 500, fallback: 'cover_photo/980x370.png', class: 'coverImg' %>
     <% end %>
+    <% if @group.group_categories %>
+      <div class="sideflag -category -R">
+        <% @group.group_categories.each do |category| %>
+          <%= link_to category.title, groups_wien_path(:category => category.id), :rel => 'nofollow' %><br>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 
   <div class="groupInfos">
@@ -14,7 +21,7 @@
       <p>Gruppe für <%= link_to @group.parent, graetzl_location_path(@group.parent.graetzl, @group.parent) %> </p>
     <% end %>
     <p>
-      <%= @group.users.count %> Mitglieder &middot;
+      <%= @group.users.size %> <%= @group.users.size > 1 ? "Mitglieder" : "Mitglied" %> &middot;
       <%= @group.private? ? "Geschlossene" : "Offene" %> Gruppe
     </p>
     <div class="users">

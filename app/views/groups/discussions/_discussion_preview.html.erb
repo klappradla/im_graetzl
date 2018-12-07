@@ -3,11 +3,9 @@
 
 <div class="cardBox -discussion" data-behavior="masonry-card">
   <div class="cardBoxHeader">
-    <%= link_to [discussion.group, discussion] do %>
-      <div class="coverImgWrapper">
-        <%= link_to attachment_image_tag(post_first.images.first, :file, :fill, 300, 180, class: 'coverImg', fallback: 'cover_photo/600x360-speech-bubble.png') %>
-      </div>
-    <% end %>
+    <div class="coverImgWrapper">
+      <%= link_to attachment_image_tag(post_first.images.first, :file, :fill, 300, 180, class: 'coverImg', fallback: 'cover_photo/600x360-speech-bubble.png'), [discussion.group, discussion, anchor: "topic"] %>
+    </div>
     <div class="categoryicon">
       <% if discussion.sticky %>
         <%= icon_tag "pin" %>
@@ -19,14 +17,12 @@
   <div class="cardBoxContent">
     <div class="avatar-block">
       <% if post_first %>
-        <%= link_to [discussion.group, discussion], class: 'avatarImg' do %>
+        <%= link_to post_first.user, class: 'avatarImg' do %>
           <%= attachment_image_tag post_first.user, :avatar, :fill, 200, 200, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
-          <% end %>
+        <% end %>
       <% end %>
       <div class="typetxt">
-        <%= link_to [discussion.group, discussion] do %>
-          <div class="name"><%= post_first.user.full_name if post_first %></div>
-        <% end %>
+        <div class="name"><%= link_to post_first.user.full_name, post_first.user if post_first %></div>
         <div class="category"><%= discussion.discussion_category ? discussion.discussion_category.title : 'Allgemein'.html_safe %></div>
         <div class="infos">
           <%= discussion.discussion_posts.size  %> <%= discussion.discussion_posts.size > 1 ? 'Beiträge' : 'Beitrag'  %>
@@ -34,7 +30,7 @@
       </div>
     </div>
     <div class="txt">
-      <h3><%= link_to discussion.title, [discussion.group, discussion, anchor: ""] %></h3>
+      <h3><%= link_to discussion.title, [discussion.group, discussion, anchor: "topic"] %></h3>
       <p>
         <% if post_first && !post_last %>
           <%= truncate post_first.content, length: 150 %>
