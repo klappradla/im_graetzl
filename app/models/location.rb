@@ -56,6 +56,10 @@ class Location < ApplicationRecord
     end
   end
 
+  def to_s
+    name
+  end
+
   def reject
     (pending? && destroy) || nil
   end

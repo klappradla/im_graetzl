@@ -8,8 +8,10 @@
 
   <div class="groupInfos">
     <h1 class="hl-main"><%= @group.title %></h1>
-    <% if @group.parent %>
-      <p>Raumteiler Gruppe für <%= link_to @group.parent, @group.parent %> </p>
+    <% if @group.parent && !(@group.parent.is_a? Location) %>
+      <p>Gruppe für <%= link_to @group.parent, @group.parent %> </p>
+    <% elsif @group.parent && (@group.parent.is_a? Location) %>
+      <p>Gruppe für <%= link_to @group.parent, graetzl_location_path(@group.parent.graetzl, @group.parent) %> </p>
     <% end %>
     <p>
       <%= @group.users.count %> Mitglieder &middot;

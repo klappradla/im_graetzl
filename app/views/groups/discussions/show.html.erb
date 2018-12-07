@@ -2,7 +2,7 @@
     title: 'Thema: ' + @discussion.title,
     robots: 'index, follow',
     og_title: 'Thema: ' + @discussion.title,
-    og_image: attachment_url(@group.parent, :cover_photo, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'meta/og_logo.png')
+    og_image: attachment_url(@group, :cover_photo, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'meta/og_logo.png')
   )
 %>
 

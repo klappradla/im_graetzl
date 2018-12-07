@@ -42,7 +42,7 @@ class Group < ApplicationRecord
   end
 
   def parent
-    room_call || room_offer
+    room_call || room_offer || room_demand || location
   end
 
   def admins
