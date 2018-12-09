@@ -2,7 +2,7 @@ class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :commentable, polymorphic: true
   has_many :images, as: :imageable, dependent: :destroy
-  accepts_attachments_for :images, attachment: :file
+  accepts_attachments_for :images, attachment: :file, append: true
 
   validates :content, presence: true
 

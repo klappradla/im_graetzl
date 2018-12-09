@@ -7,7 +7,7 @@ class Post < ApplicationRecord
   belongs_to :author, polymorphic: true
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :images, as: :imageable, dependent: :destroy
-  accepts_attachments_for :images, attachment: :file
+  accepts_attachments_for :images, attachment: :file, append: true
   accepts_nested_attributes_for :images, allow_destroy: true, reject_if: :all_blank
 
   validates :title, presence: true

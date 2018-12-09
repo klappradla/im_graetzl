@@ -16,10 +16,6 @@ class RoomOffer < ApplicationRecord
   has_many :room_offer_prices
   accepts_nested_attributes_for :room_offer_prices, allow_destroy: true, reject_if: :all_blank
 
-  has_many :images, as: :imageable, dependent: :destroy
-  accepts_attachments_for :images, attachment: :file
-  accepts_nested_attributes_for :images, allow_destroy: true, reject_if: :all_blank
-
   has_many :room_offer_waiting_users
   has_many :waiting_users, through: :room_offer_waiting_users, source: :user
 
@@ -33,8 +29,9 @@ class RoomOffer < ApplicationRecord
 
   attachment :cover_photo, type: :image
   attachment :avatar, type: :image
+
   has_many :images, as: :imageable, dependent: :destroy
-  accepts_attachments_for :images, attachment: :file
+  accepts_attachments_for :images, attachment: :file, append: true
   accepts_nested_attributes_for :images, allow_destroy: true, reject_if: :all_blank
 
   validates_presence_of :address, :slogan, :room_description, :owner_description, :tenant_description, :cover_photo, :first_name, :last_name, :email

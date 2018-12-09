@@ -14,7 +14,7 @@ class RoomCall < ApplicationRecord
 
   has_many :room_call_modules
   has_many :room_modules, through: :room_call_modules
-  accepts_nested_attributes_for :room_call_modules, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :room_call_modules, allow_destroy: true, reject_if: proc { |attrs| attrs['room_module_id'].blank? }
 
   has_many :room_call_prices
   accepts_nested_attributes_for :room_call_prices, allow_destroy: true, reject_if: :all_blank
@@ -26,7 +26,7 @@ class RoomCall < ApplicationRecord
   attachment :cover_photo, type: :image
   attachment :avatar, type: :image
   has_many :images, as: :imageable, dependent: :destroy
-  accepts_attachments_for :images, attachment: :file
+  accepts_attachments_for :images, attachment: :file, append: true
   accepts_nested_attributes_for :images, allow_destroy: true, reject_if: :all_blank
 
   has_one :group
@@ -59,7 +59,13 @@ class RoomCall < ApplicationRecord
   end
 
   def set_group
-    self.create_group(title: "#{title} Gruppe")
+    self.create_group(
+      title: "#{title} Gruppe",
+      description: description,
+      graetzls: [graetzl],
+      cover_photo_id: cover_photo_id,
+      cover_photo_content_type: cover_photo_content_type,
+    )
     self.group.group_users.create(user_id: user_id, role: :admin)
   end
 

@@ -4,7 +4,7 @@
       <%= icon_tag "pie-chart" %>
       <span> Modul wählen</span>
     <% end %>
-    <%= f.collection_select :room_module_id, RoomModule.all, :id, :name, include_blank: 'Modul Kategorie wählen ..' %>
+    <%= f.collection_select :room_module_id, RoomModule.all, :id, :name, include_blank: false %>
   </div>
 
   <div class="input-textarea">

@@ -6,7 +6,6 @@ class Group < ApplicationRecord
   belongs_to :room_demand, optional: true
   belongs_to :location, optional: true
 
-  validates :group_category_ids, presence: true
   validates :title, presence: true
   validates :description, presence: true
   validates :cover_photo, presence: true

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181203173023) do
+ActiveRecord::Schema.define(version: 20181209175850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -276,15 +276,15 @@ ActiveRecord::Schema.define(version: 20181203173023) do
     t.string   "title"
     t.text     "description"
     t.integer  "room_offer_id"
-    t.boolean  "private",          default: false
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.boolean  "private",                  default: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.integer  "room_call_id"
     t.integer  "room_demand_id"
     t.integer  "location_id"
     t.string   "cover_photo_id"
-    t.string   "cover_photo_type"
-    t.boolean  "featured",         default: false
+    t.string   "cover_photo_content_type"
+    t.boolean  "featured",                 default: false
     t.index ["location_id"], name: "index_groups_on_location_id", using: :btree
     t.index ["room_call_id"], name: "index_groups_on_room_call_id", using: :btree
     t.index ["room_demand_id"], name: "index_groups_on_room_demand_id", using: :btree
@@ -654,20 +654,20 @@ ActiveRecord::Schema.define(version: 20181203173023) do
     t.string   "username",                      limit: 255
     t.string   "first_name",                    limit: 255
     t.string   "last_name",                     limit: 255
+    t.boolean  "newsletter",                                default: false, null: false
     t.integer  "graetzl_id"
     t.string   "avatar_id"
+    t.integer  "enabled_website_notifications",             default: 0
     t.integer  "role"
     t.string   "avatar_content_type"
+    t.integer  "immediate_mail_notifications",              default: 0
+    t.integer  "daily_mail_notifications",                  default: 0
+    t.integer  "weekly_mail_notifications",                 default: 0
     t.string   "slug"
     t.string   "cover_photo_id"
     t.string   "cover_photo_content_type"
     t.text     "bio"
     t.string   "website"
-    t.integer  "weekly_mail_notifications",                 default: 0
-    t.integer  "daily_mail_notifications",                  default: 0
-    t.integer  "immediate_mail_notifications",              default: 0
-    t.integer  "enabled_website_notifications",             default: 0
-    t.boolean  "newsletter",                                default: false, null: false
     t.string   "origin"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["created_at"], name: "index_users_on_created_at", using: :btree
@@ -702,7 +702,6 @@ ActiveRecord::Schema.define(version: 20181203173023) do
   add_foreign_key "discussion_posts", "users"
   add_foreign_key "discussions", "discussion_categories", on_delete: :nullify
   add_foreign_key "discussions", "groups", on_delete: :cascade
-  add_foreign_key "discussions", "users", on_delete: :nullify
   add_foreign_key "district_graetzls", "districts", on_delete: :cascade
   add_foreign_key "district_graetzls", "graetzls", on_delete: :cascade
   add_foreign_key "group_graetzls", "graetzls", on_delete: :cascade
