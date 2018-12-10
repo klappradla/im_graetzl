@@ -13,11 +13,11 @@ class Notifications::NewGroupPost < Notification
 
   def custom_mail_vars
     {
-      group_name: activity.trackable.group.title,
+      group_name: group.title,
       discussion_title: activity.trackable.discussion.title,
-      discussion_url: group_discussion_url(activity.trackable.group, activity.trackable.discussion),
+      discussion_url: group_discussion_url(group, activity.trackable.discussion),
       post_content: activity.trackable.content.truncate(300, separator: ' '),
-      post_url: group_discussion_url(activity.trackable.group, activity.trackable.discussion, anchor: "discussion-post-#{activity.trackable.id}"),
+      post_url: group_discussion_url(group, activity.trackable.discussion, anchor: "discussion-post-#{activity.trackable.id}"),
       owner_firstname: activity.owner.first_name,
       owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.trackable.user),
     }
@@ -25,6 +25,10 @@ class Notifications::NewGroupPost < Notification
 
   def mail_subject
     "Neue Antwort von #{activity.owner.first_name} im Thema #{activity.trackable.discussion.title}."
+  end
+
+  def group
+    activity.trackable.group
   end
 
 end

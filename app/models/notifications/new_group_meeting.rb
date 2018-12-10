@@ -17,7 +17,7 @@ class Notifications::NewGroupMeeting < Notification
 
   def custom_mail_vars
     {
-      group_name: activity.trackable.group.title,
+      group_name: group.title,
       owner_name: activity.owner.username,
       owner_firstname: activity.owner.first_name,
       owner_url: user_url(activity.owner, DEFAULT_URL_OPTIONS),
@@ -31,7 +31,11 @@ class Notifications::NewGroupMeeting < Notification
   end
 
   def mail_subject
-    "Neues Gruppentreffen von #{activity.owner.first_name} in der Gruppe #{activity.trackable.group.title}"
+    "Neues Gruppentreffen von #{activity.owner.first_name} in der Gruppe #{group.title}"
+  end
+
+  def group
+    activity.trackable.group
   end
 
   private

@@ -13,9 +13,9 @@ class Notifications::NewGroupDiscussion < Notification
 
   def custom_mail_vars
     {
-      group_name: activity.trackable.group.title,
+      group_name: group.title,
       discussion_title: activity.trackable.title,
-      discussion_url: group_discussion_url(activity.trackable.group, activity.trackable, DEFAULT_URL_OPTIONS),
+      discussion_url: group_discussion_url(group, activity.trackable, DEFAULT_URL_OPTIONS),
       discussion_category: activity.trackable.discussion_category.try(:title),
       post_content: activity.trackable.discussion_posts.first.content.truncate(300, separator: ' '),
       owner_firstname: activity.owner.first_name,
@@ -24,7 +24,11 @@ class Notifications::NewGroupDiscussion < Notification
   end
 
   def mail_subject
-    "Neues Thema von #{activity.owner.first_name} in der Gruppe #{activity.trackable.group.title}."
+    "Neues Thema von #{activity.owner.first_name} in der Gruppe #{group.title}."
+  end
+
+  def group
+    activity.trackable.group
   end
 
 end

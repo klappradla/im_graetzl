@@ -22,6 +22,10 @@ class Notification::SummaryMail
         name: 'Neue Ideen im Grätzl',
         types: [Notifications::NewUserPost, Notifications::NewAdminPost]
       },
+      {
+        name: 'Neue Gruppen im Grätzl',
+        types: [Notifications::NewGroup]
+      },
     ]
   }
 
@@ -49,20 +53,10 @@ class Notification::SummaryMail
     from_name: "imGrätzl.at | Updates",
     blocks: [
       {
-        name: 'Neues Thema in der Gruppe',
-        types: [Notifications::NewGroupDiscussion]
-      },
-      {
-        name: 'Neues Mitglied in der Gruppe',
-        types: [Notifications::NewGroupUser]
-      },
-      {
-        name: 'Neues Gruppentreffen',
-        types: [Notifications::NewGroupMeeting]
-      },
-      {
-        name: 'Neue Antwort in der Gruppe',
-        types: [Notifications::NewGroupPost]
+        name: 'Neue in der Gruppe',
+        types: [Notifications::NewGroupDiscussion, Notifications::NewGroupUser,
+          Notifications::NewGroupMeeting, Notifications::NewGroupPost],
+        group: true,
       },
       {
         name: "Neuer Teilnehmer bei einem Treffen",
@@ -145,15 +139,24 @@ class Notification::SummaryMail
     block_mail_vars = []
     SUMMARY_TYPES[@type][:blocks].each do |block|
       block_notifications = notifications.select{|n| n.type.in?(block[:types].map(&:to_s))}
-      if block_notifications.present?
-        block_mail_vars << {
-          name: block[:name],
-          size: block_notifications.length,
-          notifications: block_notifications.map(&:mail_vars)
-        }
+      next if block_notifications.blank?
+      if block[:group]
+        block_notifications.group_by(&:group).each do |group, group_notifications|
+          block_mail_vars << generate_block("#{block[:name]} #{group.title}", group_notifications)
+        end
+      else
+        block_mail_vars << generate_block(block[:name], block_notifications)
       end
     end
     block_mail_vars
+  end
+
+  def generate_block(name, notifications)
+    {
+      name: name,
+      size: notifications.length,
+      notifications: notifications.map(&:mail_vars)
+    }
   end
 
   def mail_title
