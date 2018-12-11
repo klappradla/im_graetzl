@@ -8,7 +8,7 @@ class Notifications::NewGroup < Notification
   end
 
   def self.description
-    'Ein neues Gruppen wurde im Grätzl erstellt'
+    'Eine neue Gruppe wurde im Grätzl erstellt'
   end
 
   def custom_mail_vars
@@ -21,7 +21,7 @@ class Notifications::NewGroup < Notification
   end
 
   def mail_subject
-    "Neue Gruppen von #{activity.owner.full_name}."
+    "Neue Gruppe von #{activity.owner.full_name}."
   end
 
 end
