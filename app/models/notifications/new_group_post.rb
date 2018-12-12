@@ -31,4 +31,8 @@ class Notifications::NewGroupPost < Notification
     activity.trackable.group
   end
 
+  def group_discussion_id
+    activity.trackable.discussion_id
+  end
+
 end

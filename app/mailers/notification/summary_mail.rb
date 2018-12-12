@@ -54,8 +54,6 @@ class Notification::SummaryMail
     blocks: [
       {
         name: 'Neue in der Gruppe',
-        types: [Notifications::NewGroupDiscussion, Notifications::NewGroupUser,
-          Notifications::NewGroupMeeting, Notifications::NewGroupPost],
         group: true,
       },
       {
@@ -136,27 +134,46 @@ class Notification::SummaryMail
   end
 
   def notification_block_vars(notifications)
-    block_mail_vars = []
+    block_vars = []
     SUMMARY_TYPES[@type][:blocks].each do |block|
-      block_notifications = notifications.select{|n| n.type.in?(block[:types].map(&:to_s))}
-      next if block_notifications.blank?
       if block[:group]
-        block_notifications.group_by(&:group).each do |group, group_notifications|
-          block_mail_vars << generate_block("#{block[:name]} #{group.title}", group_notifications)
-        end
+        block_vars += generate_group_block(block, notifications)
       else
-        block_mail_vars << generate_block(block[:name], block_notifications)
+        block_vars += generate_basic_block(block, notifications)
       end
     end
-    block_mail_vars
+    block_vars
   end
 
-  def generate_block(name, notifications)
-    {
-      name: name,
+  def generate_basic_block(block, notifications)
+    notifications = notifications.select{|n| n.type.in?(block[:types].map(&:to_s))}
+    return [] if notifications.blank?
+    [{
+      name: block[:name],
       size: notifications.length,
       notifications: notifications.map(&:mail_vars)
-    }
+    }]
+  end
+
+  GROUP_NOTIFICATIONS = [
+    Notifications::NewGroupDiscussion,
+    Notifications::NewGroupUser,
+    Notifications::NewGroupMeeting,
+    Notifications::NewGroupPost,
+  ].map(&:to_s)
+
+  def generate_group_block(block, notifications)
+    notifications = notifications.select{|n| n.type.in?(GROUP_NOTIFICATIONS)}
+    return [] if notifications.blank?
+    notifications.group_by(&:group).map do |group, group_notifications|
+      # Sort by: type, discussion, date
+      group_notifications.sort_by!{|gn| [GROUP_NOTIFICATIONS.index(gn.type), gn.try(:group_discussion_id), gn.created_at]}
+      {
+        name: "#{block[:name]} #{group.title}",
+        size: group_notifications.length,
+        notifications: group_notifications.map(&:mail_vars)
+      }
+    end
   end
 
   def mail_title
