@@ -53,7 +53,7 @@ class Notification::SummaryMail
     from_name: "imGrätzl.at | Updates",
     blocks: [
       {
-        name: 'Neue in der Gruppe',
+        name: 'Gruppe: ',
         types: [
           Notifications::NewGroupDiscussion,
           Notifications::NewGroupUser,
@@ -169,7 +169,7 @@ class Notification::SummaryMail
       # Sort by: type, discussion, date
       group_notifications.sort_by!{|gn| [block[:types].index(gn.type), gn.try(:group_discussion_id), gn.created_at]}
       {
-        name: "#{block[:name]} #{group.title}",
+        name: "#{block[:name]} „#{group.title}“",
         size: group_notifications.length,
         notifications: group_notifications.map(&:mail_vars)
       }
