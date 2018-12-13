@@ -12,6 +12,12 @@ APP.components.cardFilter = (function() {
     suggestionLink = $(".search-suggestion a");
     suggestionSelect = $("#graetzl-suggestion");
     suggestionValue = $(".search-suggestion .active").text();
+    suggestionTitle = $(".category_title");
+
+    // Check if Category Param exists in URL
+    if (window.location.href.indexOf("category=") > -1) {
+      suggestionTitle.text(suggestionValue);
+    }
 
     suggestionLink.on("click", function() {
       suggestionLink.removeClass("active");
@@ -20,9 +26,11 @@ APP.components.cardFilter = (function() {
       filterForm.find("[name=group_category_id]").val(categoryId);
       if (categoryId) {
         suggestionValue = $(this).text();
+        suggestionTitle.text($(this).text());
         setValue(suggestionValue);
       } else {
         suggestionValue = null;
+        suggestionTitle.text("allen");
         setValue(suggestionValue);
       }
       suggestionBox.slideUp("fast");
@@ -39,6 +47,7 @@ APP.components.cardFilter = (function() {
         suggestionLink.removeClass("active");
         suggestionBox.slideUp("fast");
         suggestionValue = $(this).val();
+        suggestionTitle.text($(this).val());
         setValue(suggestionValue);
         filterForm.submit();
       }
