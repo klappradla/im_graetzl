@@ -66,8 +66,8 @@ section.usersetup {
 
   .introcontainer.-location {
     .paperCard .wrp {
-      background-image: url(image_path('illu/illu-locationpin.jpg'));
-      padding-top: 180px;
+      //background-image: url(image_path('illu/illu-locationpin.jpg'));
+      //padding-top: 180px;
     }
   }
   .introcontainer.-zuckerl {
@@ -156,5 +156,9 @@ section.usersetup {
       min-width:325px;
     }
   } // Groups Cardbox Adaption
+
+  .link-more {
+    display:table;
+  }
 
 }

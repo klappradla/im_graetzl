@@ -2,14 +2,41 @@
 
   <% if @groups.empty? %>
 
-    <p> Du bist noch in keiner Gruppe Mitglied ... </p>
+  <div class="introcontainer -groups">
+    <div class="introtxt">
+      <h1>Trete jetzt einer <span>Gruppe</span> bei</h1>
+      <p>
+        Durchstöbere die Gruppen auf imGrätzl und trete jetzt einer Gruppe bei.
+        <br>
+        <strong>Hier gehts zu allen <%= link_to "Gruppen in #{current_user.graetzl.name}", groups_graetzl_path(current_user.graetzl) %></strong>.
+        <br><br>
+        Oder stöbere in den Kategorien und finde eine passende Gruppe für dich:
+      </p>
 
+      <ul>
+      <% GroupCategory.all.each do |category| %>
+        <li>
+          <%= link_to category.title, groups_wien_path(:category => category.id) %>
+        </li>
+      <% end %>
+      </ul>
+
+      <br><br>
+      <%= link_to 'Weiter zu allen Gruppen in ganz Wien', groups_wien_path, class: 'btn-primary -mint' %>
+
+    </div>
+    <%= render 'groups/action_card', user: @user %>
+  </div>
   <% else %>
 
-    <h2 class="hl-main">Deine <span>Gruppen</span></h2>
+    <div class="hl-subtext -groups">
+      <h1>Deine <span>Gruppen</span></h1>
+      <p>Gruppen in welchen du Miglied bist. Stöbern in <%= link_to 'allen Gruppen', groups_wien_path %>.</p>
+    </div>
 
     <div class="cardBoxCollection -tripple" data-behavior="groups-card-container">
       <%= render @groups.order(created_at: :desc), manage_buttons: true %>
+      <%= render 'groups/action_card', user: @user, view_all: true %>
     </div>
 
   <% end %>

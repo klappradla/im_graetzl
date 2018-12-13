@@ -5,7 +5,7 @@
     <div class="cardBoxCollection -tripple">
       <%= render partial: 'users/location', collection: @locations %>
     </div>
-    <%= link_to 'Location hinzufügen', new_location_path, class: 'btn-secondary -grey -small addlocation' %>
+    <%= link_to 'Weitere Location hinzufügen', new_location_path, class: 'btn-secondary -grey -small addlocation' %>
   <% else %>
     <div class="introcontainer -location">
       <div class="introtxt">
@@ -27,12 +27,7 @@
           </div>
         </div>
       </div>
-      <div class="paperCard -illuteaser -cord1RT">
-        <div class="wrp">
-          <h3>Werde sichtbar in deinem Grätzl und richte dir jetzt deine Location-Seite ein.</h3>
-        </div>
-        <div class="card"></div>
-      </div>
+      <%= render 'locations/action_card', user: @user %>
     </div>
   <% end %>
 </section>
