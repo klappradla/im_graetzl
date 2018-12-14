@@ -155,10 +155,11 @@ class Notification::SummaryMail
   def generate_basic_block(block, notifications)
     notifications = notifications.select{|n| n.type.in?(block[:types])}
     return [] if notifications.blank?
+    notification_vars = notifications.map(&:mail_vars)
     [{
       name: block[:name],
       size: notifications.length,
-      notifications: notifications.map(&:mail_vars)
+      notifications: notification_vars
     }]
   end
 
@@ -166,12 +167,19 @@ class Notification::SummaryMail
     notifications = notifications.select{|n| n.type.in?(block[:types])}
     return [] if notifications.blank?
     notifications.group_by(&:group).map do |group, group_notifications|
-      # Sort by: type, discussion, date
-      group_notifications.sort_by!{|gn| [block[:types].index(gn.type), gn.try(:group_discussion_id), gn.created_at]}
+      post_notifications, other_notifications = group_notifications.partition{|n| n.type == "Notifications::NewGroupPost"}
+      # Sort by type
+      notification_vars = other_notifications.sort_by{|n| block[:types].index(n.type) }.map(&:mail_vars)
+      # Group discussion posts by discussion
+      post_notifications.group_by(&:group_discussion_id).values.each do |discussion_notifications|
+        discussion_vars = discussion_notifications.map(&:mail_vars)
+        discussion_vars[0][:first_in_discussion] = true
+        notification_vars += discussion_vars
+      end
       {
         name: "#{block[:name]} „#{group.title}“",
         size: group_notifications.length,
-        notifications: group_notifications.map(&:mail_vars)
+        notifications: notification_vars,
       }
     end
   end
