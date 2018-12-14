@@ -172,8 +172,8 @@ class Notification::SummaryMail
       notification_vars = other_notifications.sort_by{|n| block[:types].index(n.type) }.map(&:mail_vars)
       # Group discussion posts by discussion
       post_notifications.group_by(&:group_discussion_id).values.each do |discussion_notifications|
-        discussion_vars = discussion_notifications.map(&:mail_vars)
-        discussion_vars[0][:first_in_discussion] = 'true'
+        discussion_vars = discussion_notifications.sort_by(&:created_at).map(&:mail_vars)
+        discussion_vars.each_with_index{|d, i| d[:first_in_discussion] = i.zero? ? 'true' : 'false'}
         notification_vars += discussion_vars
       end
       {
