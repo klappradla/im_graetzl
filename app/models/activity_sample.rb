@@ -15,6 +15,16 @@ class ActivitySample
     end
   end
 
+  def groups
+    if @graetzl
+      @graetzl.groups.featured.first(2)
+    elsif @district
+      @district.groups.featured.first(2)
+    else
+      Group.featured.first(2)
+    end
+  end
+
   def locations
     if @graetzl
       @graetzl.locations.approved.include_for_box.order("last_activity_at DESC").first(2)
