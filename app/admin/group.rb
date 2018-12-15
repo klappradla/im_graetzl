@@ -4,7 +4,11 @@ ActiveAdmin.register Group do
 
   actions :index, :show, :edit, :update, :destroy
 
+  scope :all, default: true
+  scope :featured
+
   filter :users, collection: proc {User.admin_select_collection}, include_blank: true, input_html: {class: 'admin-filter-select'}
+  filter :group_categories
   filter :title
   filter :private
   filter :created_at

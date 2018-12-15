@@ -16,6 +16,7 @@ APP.components.cardFilter = (function() {
 
     $('.close-ico').on('click', function(event){
       event.preventDefault();
+      suggestionForm.val(suggestionValue);
       suggestionBox.slideUp("fast");
     });
 

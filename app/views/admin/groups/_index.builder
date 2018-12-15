@@ -3,11 +3,10 @@ context.instance_eval do
   id_column
   column :title
   column :private
+  column :featured
   column :created_at
   column :admins do |l|
-    l.admins.map do |user|
-      link_to user.username, admin_user_path(user)
-    end
+    safe_join(l.admins.map { |user| link_to(user.username, admin_user_path(user)) }, ', ')
   end
   actions
 end
