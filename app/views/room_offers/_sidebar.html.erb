@@ -88,7 +88,7 @@
               <%= attachment_image_tag user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
             <% end %>
             <% if current_user == user || current_user == @room_offer.user %>
-              <%= link_to [:remove_from_waitlist, @room_offer, user: user], method: :post, class: 'delete' do %>
+              <%= link_to [:remove_from_waitlist, @room_offer, user: user], method: :post, class: 'close-ico' do %>
                 <%= icon_tag "cross" %>
               <% end %>
             <% end %>

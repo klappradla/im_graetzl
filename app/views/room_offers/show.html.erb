@@ -4,7 +4,7 @@
     robots: 'index, follow',
     og_title: t('.title', slogan: @room_offer.slogan[0..80].gsub(/\s\w+\s*$/,'...')),
     og_description: t('.description', type: t("activerecord.attributes.room_offer.offer_types.#{@room_offer.offer_type}"), desc: @room_offer.room_description[0..250].gsub(/\n/, " ")),
-    og_image: attachment_url(@room_offer, :cover_photo, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'meta/og_logo.png')
+    og_image: attachment_url(@room_offer, :cover_photo, :fill, 1200, 630, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'meta/og_logo.png')
   )
 %>
 

@@ -49,6 +49,16 @@
     </div>
   </div>
 
+  <div class="block-groups">
+    <div class="hl-subtext">
+      <h1>Entdecke — <span>Gruppen</span> im Grätzl</h1>
+      <p>Vernetze dich mit anderen, tausch dich aus und kooperiere!</p>
+    </div>
+    <div class="cardBoxCollection -tripple -morelink">
+      <%= render @activity_sample.groups %>
+      <%= render 'groups/action_card', view_all: true %>
+    </div>
+  </div>
 
   <div class="block-meetings">
     <div class="hl-subtext">

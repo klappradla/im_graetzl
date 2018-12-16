@@ -273,3 +273,23 @@
   &.-state-occupied span {
   }
 }
+.close-ico {
+  border:none;
+  background: none;
+  position: absolute;
+  top: -9px;
+  right: -9px;
+  svg {
+    color:$color-ambient-mint;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+  }
+}
+.close-ico:hover {
+  svg {
+    color:$color-ambient-rosa;
+    opacity: 1.0;
+    cursor: pointer;
+  }
+}

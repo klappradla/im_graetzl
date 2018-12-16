@@ -182,22 +182,6 @@ section.roomDetail {
           display: inline-block;
           margin-right:5px;
           margin-top:5px;
-          .delete {
-            position: absolute;
-            top: -9px;
-            right: -9px;
-            svg {
-              background: white;
-              border-radius: 50%;
-              opacity: 0.8;
-            }
-          }
-          .delete:hover {
-            svg {
-              color:$color-ambient-rosa;
-              opacity: 1.0;
-            }
-          }
         }
       }
     }

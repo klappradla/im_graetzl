@@ -4,7 +4,7 @@
     robots: 'index, follow',
     og_title: t('.title', name: @meeting.name),
     og_description: t('.description', desc: @meeting.description[0...154]),
-    og_image: attachment_url(@meeting, :cover_photo, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'meta/og_logo.png')
+    og_image: attachment_url(@meeting, :cover_photo, :fill, 1200, 630, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'meta/og_logo.png')
   )
 %>
 

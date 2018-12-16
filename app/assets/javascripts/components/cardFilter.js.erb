@@ -14,6 +14,12 @@ APP.components.cardFilter = (function() {
     suggestionValue = $(".search-suggestion .active").text();
     suggestionTitle = $(".category_title");
 
+    $('.close-ico').on('click', function(event){
+      event.preventDefault();
+      suggestionForm.val(suggestionValue);
+      suggestionBox.slideUp("fast");
+    });
+
     // Check if Category Param exists in URL
     if (window.location.href.indexOf("category=") > -1) {
       suggestionTitle.text(suggestionValue);
