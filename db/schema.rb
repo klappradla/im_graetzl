@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181209175850) do
+ActiveRecord::Schema.define(version: 20181216214723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -654,20 +654,20 @@ ActiveRecord::Schema.define(version: 20181209175850) do
     t.string   "username",                      limit: 255
     t.string   "first_name",                    limit: 255
     t.string   "last_name",                     limit: 255
+    t.boolean  "newsletter",                                default: false, null: false
     t.integer  "graetzl_id"
     t.string   "avatar_id"
+    t.integer  "enabled_website_notifications",             default: 0
     t.integer  "role"
     t.string   "avatar_content_type"
+    t.integer  "immediate_mail_notifications",              default: 0
+    t.integer  "daily_mail_notifications",                  default: 0
+    t.integer  "weekly_mail_notifications",                 default: 0
     t.string   "slug"
     t.string   "cover_photo_id"
     t.string   "cover_photo_content_type"
     t.text     "bio"
     t.string   "website"
-    t.integer  "weekly_mail_notifications",                 default: 0
-    t.integer  "daily_mail_notifications",                  default: 0
-    t.integer  "immediate_mail_notifications",              default: 0
-    t.integer  "enabled_website_notifications",             default: 0
-    t.boolean  "newsletter",                                default: false, null: false
     t.string   "origin"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["created_at"], name: "index_users_on_created_at", using: :btree
@@ -702,13 +702,14 @@ ActiveRecord::Schema.define(version: 20181209175850) do
   add_foreign_key "discussion_posts", "users"
   add_foreign_key "discussions", "discussion_categories", on_delete: :nullify
   add_foreign_key "discussions", "groups", on_delete: :cascade
-  add_foreign_key "discussions", "users", on_delete: :nullify
   add_foreign_key "district_graetzls", "districts", on_delete: :cascade
   add_foreign_key "district_graetzls", "graetzls", on_delete: :cascade
   add_foreign_key "group_graetzls", "graetzls", on_delete: :cascade
   add_foreign_key "group_graetzls", "groups", on_delete: :cascade
   add_foreign_key "group_join_requests", "groups", on_delete: :cascade
   add_foreign_key "group_join_requests", "users", on_delete: :cascade
+  add_foreign_key "group_users", "groups", on_delete: :cascade
+  add_foreign_key "group_users", "users", on_delete: :cascade
   add_foreign_key "groups", "locations", on_delete: :nullify
   add_foreign_key "groups", "room_calls", on_delete: :nullify
   add_foreign_key "groups", "room_demands", on_delete: :nullify
