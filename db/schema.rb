@@ -90,6 +90,13 @@ ActiveRecord::Schema.define(version: 20181216214723) do
     t.string   "icon"
   end
 
+  create_table "categories_meetings", id: false, force: :cascade do |t|
+    t.integer "category_id"
+    t.integer "meeting_id"
+    t.index ["category_id"], name: "index_categories_meetings_on_category_id", using: :btree
+    t.index ["meeting_id"], name: "index_categories_meetings_on_meeting_id", using: :btree
+  end
+
   create_table "categorizations", force: :cascade do |t|
     t.integer  "category_id"
     t.integer  "categorizable_id"

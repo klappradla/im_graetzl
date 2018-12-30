@@ -1,0 +1,35 @@
+<div class="cardBox featuredCard -hidden -meeting <%= meeting_past_flag(meeting) %>" data-behavior="masonry-card">
+
+  <div class="cardBoxHeader">
+    <%= link_to [meeting.graetzl, meeting] do %>
+      <div class="coverImgWrapper">
+        <%= cover_photo_for meeting %>
+      </div>
+    <% end %>
+    <% if meeting.starts_at_date %>
+      <div class="calendarSheet">
+        <div class="day"><%= meeting.starts_at_date.day %></div>
+        <div class="month"><%= I18n.localize(meeting.starts_at_date, format:'%b') %></div>
+      </div>
+    <% end %>
+    <div class="categoryicon">
+      <%= icon_tag "users" %>
+      <div class="count"><%= meeting.users.size %></div>
+    </div>
+    <%= graetzl_flag(meeting.graetzl) %>
+  </div>
+
+  <div class="cardBoxContent">
+    <%= meeting_initiator meeting %>
+    <div class="txt">
+      <h3><%= link_to meeting.name, [meeting.graetzl, meeting] %></h3>
+      <p><%= truncate(meeting.description, length: 100) %></p>
+    </div>
+    <%= link_to meeting_link_text(meeting), [meeting.graetzl, meeting], class: 'btn-primary -mint' %>
+
+    <% if local_assigns[:appendix].present? %>
+      <%= render 'activities/appendix', appendix: local_assigns[:appendix], parent: meeting %>
+    <% end %>
+  </div>
+
+</div>
