@@ -12,6 +12,13 @@ section.help {
     span {
       color: $color-font-primary;
     }
+    em {
+      @include headlineBarbapapaMint;
+      display: inline-block;
+      font-style: normal;
+      padding-right:10px;
+      margin-right:10px;
+    }
   }
 
   h3 {

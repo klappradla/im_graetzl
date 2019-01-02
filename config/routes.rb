@@ -134,6 +134,7 @@ Rails.application.routes.draw do
   get 'lp/raumteiler-guide-danke', to: 'static_pages#lp_raumteilerguide_success'
   get 'info', to: 'static_pages#help'
   get 'info/raumteiler', to: 'static_pages#raumteiler'
+  get 'info/gruppen', to: 'static_pages#groups'
   get 'info/anbieter-und-locations', to: 'static_pages#location'
   get 'info/events-und-workshops', to: 'static_pages#meetings'
   get 'info/agb', to: 'static_pages#agb'
