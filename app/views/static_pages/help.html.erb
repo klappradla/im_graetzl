@@ -6,24 +6,26 @@
 %>
 
 <section class="help -about">
-
-  <div class="hl-subtext">
-    <h1><em>imGrätzl.at</em> – coop & share Services</h1>
-    <p>Für MacherInnen, Selbstständige, lokale Unternehmen, Kulturschaffende, Vereine und GründerInnen.</p>
+  <div class="imgHeader -fullwidth">
+    <%= image_tag('info/imGraetzl-Features-Header4.png', class: 'titleImg -fullwidth') %>
   </div>
 
-  <%= render 'help_menu' %>
+  <!--<div class="hl-subtext">
+    <h1><em>imGrätzl.at</em> – coop & share Services</h1>
+    <p>
+      imGrätzl.at ist eine Plattform für Selbständige, MacherInnen, lokale Unternehmen, Vereine und Kulturschaffende und bietet seinen NutzerInnen eine ganze Palette an Services an.
+    </p>
+  </div>-->
 
-  <div class="paperCard -cord1RT container">
+  <div class="paperCard -cord1RT container -header">
     <div class="wrp">
       <p>
-        imGrätzl.at ist eine Plattform für Selbständige, MacherInnen, lokale Unternehmen,
-        Vereine und Kulturschaffende und bietet seinen NutzerInnen eine ganze Palette an Services an.
+        imGrätzl.at ist eine Plattform für Selbständige, MacherInnen, lokale Unternehmen, Vereine und Kulturschaffende und bietet seinen NutzerInnen eine ganze Palette an Services an.
       </p>
       <p>
-        <strong>Neben Services, die Kosten senken und Ressourcen erhöhen, werden die NutzerInnen mit
+        Neben Services, die Kosten senken und Ressourcen erhöhen, werden die NutzerInnen mit
         Gleichgesinnten verbunden: Teilen, sharen, tauschen - neue Formen der Zusammenarbeit
-        und Gemeinschaft stehen dabei im Mittelpunkt!</strong>
+        und Gemeinschaft stehen dabei im Mittelpunkt!
       </p>
       <p>
         imGrätzl.at entfaltet seine Stärke im Wir - Ganz lokal in Wien, analog und digital.
@@ -46,7 +48,7 @@
       </p>
     </div>
     <div class="img">
-      <%= link_to(image_tag('info/imGraetzl-Features-Unterstuetzer.png'), info_gruppen_path) %>
+      <%= link_to(image_tag('info/imGraetzl-Features-Unterstuetzerteam.png'), info_gruppen_path, class: '-illu') %>
     </div>
   </article>
 
@@ -63,7 +65,7 @@
       </p>
     </div>
     <div class="img">
-      <%= link_to(image_tag('info/imGraetzl-Features-Unterstuetzer.png'), info_gruppen_path) %>
+      <%= link_to(image_tag('info/imGraetzl-Features-Kooperationen.png'), info_gruppen_path, class: '-illu') %>
     </div>
   </article>
 
@@ -80,7 +82,7 @@
       </p>
     </div>
     <div class="img">
-      <%= link_to(image_tag('info/imGraetzl-Features-Unterstuetzer.png'), info_gruppen_path) %>
+      <%= link_to(image_tag('info/imGraetzl-Features-Gegengeschaefte.png'), info_gruppen_path, class: '-illu') %>
     </div>
   </article>
 
@@ -98,7 +100,7 @@
       </p>
     </div>
     <div class="img">
-      <%= link_to(image_tag('info/imGraetzl-Features-Unterstuetzer.png'), info_gruppen_path) %>
+      <%= link_to(image_tag('info/imGraetzl-Features-Zusammenarbeit.png'), info_gruppen_path, class: '-illu') %>
     </div>
   </article>
 
@@ -171,5 +173,7 @@
       <%= link_to(image_tag('info/imGraetzl-Features-Graetzlzuckerl.png'), info_infos_zum_graetzlzuckerl_path) %>
     </div>
   </article>
+
+  <%= render 'help_menu' %>
 
 </section>
