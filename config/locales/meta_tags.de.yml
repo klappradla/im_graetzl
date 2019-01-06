@@ -51,6 +51,9 @@ de:
     rooms:
       title: 'Raumteiler in Wien - Gewerbeflächen teilen - Kosten teilen'
       description: 'Wir möchten Selbständige, Kreative, Vereine und kleine Unternehmen mit dem „Raumteiler“ dabei unterstützen ihre Kosten für Gewerbeflächen zu senken bzw. zu teilen.'
+    groups:
+      title: 'Gruppen in Wien'
+      description: 'Durchstöbere jetzt die Gruppen in Wien. Neben Gruppen für ganz Wien gibt es auch Gruppen nur für deinen Bezirk. Egal ob Kooperationen im Bezirk, Gegengeschäfte oder Gruppen für Aufträge & Zusammenarbeit. Schau mal rein ...'
     zuckerls:
       title: 'Jeden Monat neu - Zuckerl & Angebote in Wien'
       description: 'Gutscheine, Angebote & Rabattaktionen von Selbständigen, kleinen Unternehmen, Lokalen & Geschäften in Wien.'
@@ -68,6 +71,9 @@ de:
     rooms:
       title: 'Räume zum Teilen im %{numeric}. Bezirk | Raumteiler %{zip}'
       description: 'Neue Räume und Raumsuchende aus dem %{numeric}. Bezrk. Selbständige, Kreative und lokale Unternehmen teilen sich Gewerbeflächen um Kosten zu sparen. Jetzt neue Raumteiler finden ...'
+    groups:
+      title: 'Gruppen im %{numeric}. Bezirk'
+      description: 'Durchstöbere jetzt die Gruppen in Wien. Neben Gruppen für ganz Wien gibt es auch Gruppen nur für deinen Bezirk. Egal ob Kooperationen im Bezirk, Gegengeschäfte oder Gruppen für Aufträge & Zusammenarbeit. Schau mal rein ...'
     zuckerls:
       title: 'Jeden Monat neu - Zuckerl & Angebote im %{numeric}. Bezirk'
       description: 'Gutscheine, Angebote & Rabattaktionen von Selbständigen, kleinen Unternehmen, Lokalen & Geschäften aus dem %{numeric}. Bezirk %{name}.'
@@ -88,6 +94,9 @@ de:
     rooms:
       title: '%{graetzl} Raumteiler | Neue Räume & Raumsuchende'
       description: 'Selbständige, Kreative und lokale Unternehmen teilen sich Gewerbeflächen um Kosten zu sparen. Jetzt neue Raumteiler aus dem Grätzl %{graetzl} finden ...'
+    groups:
+      title: '%{graetzl} Gruppen'
+      description: 'Durchstöbere jetzt die Gruppen im Grätzl %{graetzl}. Neben Gruppen für ganz Wien gibt es auch Gruppen nur für deinen Bezirk. Egal ob Kooperationen im Bezirk, Gegengeschäfte oder Gruppen für Aufträge & Zusammenarbeit. Schau mal rein ...'
     zuckerls:
       title: '%{graetzl}: Zuckerl & Angebote - Jeden Monat neu'
       description: 'Gutscheine, Angebote & Rabattaktionen von Selbständigen, kleinen Unternehmen, Lokalen & Geschäften aus dem Grätzl %{graetzl} im %{numeric}. Bezirk.'

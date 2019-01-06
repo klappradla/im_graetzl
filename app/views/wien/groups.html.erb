@@ -1,8 +1,8 @@
 <% meta(
-    title: t('.title'),
+    title: (@category ? @category.title : 'Alle') + ' Gruppen in Wien',
     description: t('.description'),
     robots: 'index, follow',
-    og_title: t('.title'),
+    og_title: (@category ? @category.title : 'Alle') + ' Gruppen in Wien',
     og_description: t('.description'),
     og_image: image_url('meta/og_logo.png')
   )
