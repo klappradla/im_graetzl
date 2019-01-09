@@ -147,6 +147,9 @@ section.group-form-page {
       .header {
         justify-content: center;
       }
+      h3.title span {
+        font-weight: normal;
+      }
       @include respond-to("<=medium") {
         .header {
           justify-content: center;
@@ -225,9 +228,9 @@ section.group-form-page {
       }
     }
     .side > div {
-      margin-left:50px;
+      margin-left:40px;
       margin-bottom:30px;
-      width:250px;
+      width:260px;
       @include respond-to("<=medium") {
         margin-left:0px;
         width:100%;

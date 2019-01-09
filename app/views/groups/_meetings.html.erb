@@ -2,7 +2,7 @@
 
   <div class="header">
 
-    <% if user_signed_in? %>
+    <% if @group.users.include?(current_user) %>
       <%= link_to new_meeting_path(group_id: @group.id), class: 'btn-userIcons' do %>
       <span class="ico-left">
         <%= icon_tag('calendar-2') %>
