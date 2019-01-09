@@ -8,7 +8,7 @@ class Notifications::NewGroupPost < Notification
   end
 
   def self.description
-    'Es gibt neue Antworten in Diskussionen denen ich folge'
+    'Es gibt neue Antworten in Themen denen ich folge'
   end
 
   def custom_mail_vars

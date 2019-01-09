@@ -1,10 +1,10 @@
 <h3 class="title">
-  <%= @discussions.size %> <%= @discussions.size == 1 ? 'Thema' : 'Themen'  %>
   <% if @category %>
-    in der Kategorie "<%= @category.title %>"
+    <%= @category.title %>
   <% else %>
-    in der Gruppe
+    Alle Themen
   <% end %>
+  <span>(<%= @discussions.size %><%= @discussions.size == 1 ? '' : ''  %>)</span>
 </h3>
 
 <div class="cardBoxCollection -double -group-discussion">

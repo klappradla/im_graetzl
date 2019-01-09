@@ -2,8 +2,6 @@
 
   <div class="header">
 
-    <h3>Die nächsten Gruppentreffen:</h3>
-
     <% if user_signed_in? %>
       <%= link_to new_meeting_path(group_id: @group.id), class: 'btn-userIcons' do %>
       <span class="ico-left">

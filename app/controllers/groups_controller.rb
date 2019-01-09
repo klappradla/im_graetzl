@@ -130,7 +130,8 @@ class GroupsController < ApplicationController
   private
 
   def collection_scope
-    Group.non_private
+    #Group.non_private
+    Group
   end
 
   def filter_collection(groups)
