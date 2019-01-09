@@ -132,7 +132,7 @@ section.group-form-page {
       margin-bottom:20px;
 
       .btn-userIcons {
-        width:250px;
+        //width:250px;
         svg {color: white;}
       }
     }
@@ -145,7 +145,7 @@ section.group-form-page {
 
     &.discussion-section {
       .header {
-        justify-content: flex-end;
+        justify-content: center;
       }
       @include respond-to("<=medium") {
         .header {
@@ -156,8 +156,8 @@ section.group-form-page {
         }
       }
       @include respond-to(">=medium") {
-        .discussions-container {
-          margin-top: -68px;
+        .discussions {
+          //margin-top: -20px;
         }
       }
     }
@@ -303,7 +303,7 @@ section.group-form-page {
       @include respond-to(">=medium") {
         width:48%;
         img.coverImg {
-          height:250px;
+          height:270px;
           max-width: 100%;
         }
       }
@@ -602,9 +602,6 @@ section.group-form-page {
   #new-topic {
     padding-bottom:20px;
     display: none;
-    @include respond-to(">=medium") {
-      margin-bottom: 100px;
-    }
   }
 
   &.discussion-page {
