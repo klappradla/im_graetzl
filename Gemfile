@@ -50,6 +50,7 @@ gem 'rabl'
 gem 'oj'
 gem 'jquery-ui-rails', '5.0.0'
 gem 'google_custom_search_api'
+gem 'bb-ruby'
 
 group :doc do
   gem 'sdoc'

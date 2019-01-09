@@ -102,6 +102,7 @@ GEM
     aws-sdk-resources (2.7.11)
       aws-sdk-core (= 2.7.11)
     aws-sigv4 (1.0.0)
+    bb-ruby (1.4.0)
     bcrypt (3.1.11)
     bourbon (4.3.2)
       sass (~> 3.4)
@@ -418,6 +419,7 @@ DEPENDENCIES
   acts-as-taggable-on
   autoprefixer-rails
   aws-sdk (~> 2.7)
+  bb-ruby
   browser
   byebug
   capybara
@@ -476,4 +478,4 @@ RUBY VERSION
    ruby 2.3.4p301
 
 BUNDLED WITH
-   1.16.1
+   1.16.4
