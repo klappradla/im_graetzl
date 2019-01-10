@@ -43,7 +43,7 @@
     </div>
 
     <div class="slogan">
-      <%= truncate group.description, length: 100 %>
+      <%= truncate group.description.bbcode_to_html.html_safe, length: 100, :escape => false %>
     </div>
 
     <%= link_to "Zur Gruppe", group, class: 'btn-userIcons -mint' %>
