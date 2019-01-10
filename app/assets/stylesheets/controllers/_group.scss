@@ -428,6 +428,19 @@ section.group-form-page {
   // Startpage Auszug
   .member-section {
     .user {
+      &.-more {
+        .avatar {
+          margin:5px;
+          svg {
+            @include img-round;
+            margin: 0 auto;
+            align-self: center;
+            width:100px;
+            height:100px;
+            padding: 30px;
+          }
+        }
+      }
       width:132px;
       margin-right:0px;
       margin-bottom:15px;

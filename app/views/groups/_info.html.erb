@@ -36,7 +36,7 @@
         </div>
         <% end %>
 
-        <% @group.members.first(10 - @group.admins_and_current_user_count(current_user)).each do |user| next if user == current_user %>
+        <% @group.members.first(20 - @group.admins_and_current_user_count(current_user)).each do |user| next if user == current_user %>
           <div class="user">
             <div class="avatar">
               <%= attachment_image_tag user, :avatar, :fill, 200, 200, fallback: 'avatar/user/200x200.png', class: 'img-round' %>
@@ -46,8 +46,15 @@
             </div>
           </div>
         <% end %>
-        <% if @group.users.size > 10 %>
-          <span> + <%= @group.users.size - 10 %> weitere </span>
+        <% if @group.users.size > 20 %>
+          <div class="user -more">
+            <div class="avatar">
+              <%= icon_tag "user-avatar" %>
+            </div>
+            <div class="infos">
+              <span>+ <%= @group.users.size - 20 %> weitere</span>
+            </div>
+          </div>
         <% end %>
       </div>
 
