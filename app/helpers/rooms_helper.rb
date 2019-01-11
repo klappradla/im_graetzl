@@ -28,7 +28,7 @@ module RoomsHelper
     result = []
     result += whole_districts.map(&:zip_name)
     result += graetzl_ids.map{|_, g| "#{g.district.zip} - #{g.name}"}
-    result
+    result.sort
   end
 
 end

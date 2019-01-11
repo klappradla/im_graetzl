@@ -72,4 +72,17 @@
 
   </div>
 
+  <div class="district-section">
+    <h3>Bezirke / Grätzln</h3>
+    <div class="category-tags">
+      <% if @group.graetzls.present? %>
+        <ul class="tag-list">
+          <% compact_room_demand_graetzl_list(@group).each do |item| %>
+            <li><%= item %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+
 </div>

@@ -319,6 +319,19 @@ section.group-form-page {
         text-align: left;
         margin-bottom:20px;
       }
+      .facts, .parent {
+        display: flex;
+        align-items: center;
+        svg {
+          width:25px;
+          min-width: 25px;
+          margin-right: 4px;
+        }
+        .separator {padding-left:7px; padding-right: 7px;}
+      }
+      .parent {
+        margin-top:5px; margin-bottom:5px;
+      }
       .users {
         margin-top:10px;
       }
@@ -394,6 +407,12 @@ section.group-form-page {
     .member-section, .about-section {
       margin-bottom: 50px;
       @include cf;
+    }
+
+    .district-section {
+      h3 {
+        margin-bottom:20px;
+      }
     }
 
     h2 {

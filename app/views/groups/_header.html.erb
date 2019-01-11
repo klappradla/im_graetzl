@@ -15,14 +15,17 @@
 
   <div class="groupInfos">
     <h1 class="hl-main"><%= @group.title %></h1>
-    <% if @group.parent && !(@group.parent.is_a? Location) %>
-      <p>Gruppe für <%= link_to @group.parent, @group.parent %> </p>
-    <% elsif @group.parent && (@group.parent.is_a? Location) %>
-      <p>Gruppe für <%= link_to @group.parent, graetzl_location_path(@group.parent.graetzl, @group.parent) %> </p>
+
+    <% if @group.parent && (@group.parent.is_a? Location) %>
+      <div class="parent"><%= icon_tag('location') %><div>Gruppe für <%= link_to @group.parent, graetzl_location_path(@group.parent.graetzl, @group.parent) %></div></div>
+    <% elsif @group.parent %>
+      <div class="parent"><%= icon_tag('raumteiler') %><div>Gruppe für <%= link_to @group.parent, @group.parent %></div></div>
     <% end %>
-    <p>
-      <%= @group.users.size %> <%= @group.users.size > 1 ? "Mitglieder" : "Mitglied" %> &middot;
-      <%= @group.private? ? "Geschlossene" : "Offene" %> Gruppe
+
+    <p class="facts">
+      <%= icon_tag('users') %><%= @group.users.size %> <%= @group.users.size > 1 ? "Mitglieder" : "Mitglied" %>
+      <span class="separator">&middot;</span>
+      <%= icon_tag('lock-1') if @group.private? %><%= @group.private? ? "Geschlossene" : "Offene" %> Gruppe
     </p>
     <div class="users">
       <% @group.admins.each do |user| %>
