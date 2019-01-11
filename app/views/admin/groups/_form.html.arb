@@ -4,6 +4,7 @@ active_admin_form_for [:admin, resource] do |f|
     input :title
     input :description
     input :featured
+    input :hidden
     input :private
     input :room_offer, input_html: { class: 'admin-filter-select'}
     input :room_demand, input_html: { class: 'admin-filter-select'}

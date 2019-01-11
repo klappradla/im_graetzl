@@ -34,6 +34,7 @@ class Group < ApplicationRecord
 
   scope :by_currentness, -> { order(created_at: :desc) }
   scope :non_private, -> { where(private: false) }
+  scope :non_hidden, -> { where(hidden: false) }
   scope :featured, -> { where(featured: true) }
 
   def to_s

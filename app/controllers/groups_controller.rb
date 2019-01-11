@@ -131,6 +131,7 @@ class GroupsController < ApplicationController
 
   def collection_scope
     #Group.non_private
+    #Group.non_hidden
     Group
   end
 
@@ -145,6 +146,8 @@ class GroupsController < ApplicationController
       groups = groups.joins(:group_categories).where(group_categories: {id: params[:group_category_id]}).distinct
     elsif params[:query].present?
       groups = groups.joins(:group_categories).where("groups.title ILIKE :q OR group_categories.title ILIKE :q", q: "%#{params[:query]}%").distinct
+    else
+      groups = groups.non_hidden
     end
 
     groups

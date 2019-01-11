@@ -5,6 +5,7 @@ context.instance_eval do
       row :title
       row :description
       row :featured
+      row :hidden
       row :room_offer
       row :room_demand
       row :room_call
