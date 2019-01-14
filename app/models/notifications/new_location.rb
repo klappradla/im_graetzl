@@ -16,7 +16,7 @@ class Notifications::NewLocation < Notification
       location_name: activity.trackable.name,
       location_url: graetzl_location_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
       location_slogan: activity.trackable.slogan,
-      location_category: activity.trackable.category.try(:name),
+      location_category: activity.trackable.location_category.try(:name),
       location_address: printable_address(activity.trackable),
       owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.trackable),
     }

@@ -20,7 +20,7 @@ class Location < ApplicationRecord
   accepts_nested_attributes_for :location_ownerships, allow_destroy: true
   has_many :users, through: :location_ownerships
   has_many :room_offers
-  belongs_to :category
+  belongs_to :location_category
   has_many :meetings
   has_many :upcoming_meetings, -> { upcoming }, class_name: "Meeting"
   has_many :zuckerls, dependent: :destroy
@@ -31,14 +31,12 @@ class Location < ApplicationRecord
   validates :name, presence: true
   validates :slogan, presence: true
   validates :description, presence: true
-  validates :graetzl, presence: true
-  validates :category, presence: true
 
 
   before_create { |location| location.last_activity_at = Time.current }
 
   def self.include_for_box
-    includes(:graetzl, :posts, :live_zuckerls, :upcoming_meetings, :address, :category)
+    includes(:graetzl, :posts, :live_zuckerls, :upcoming_meetings, :address, :location_category)
   end
 
   def self.meeting_permissions_for_select

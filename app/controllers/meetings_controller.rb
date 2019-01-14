@@ -91,7 +91,7 @@ class MeetingsController < ApplicationController
 
   def meeting_params
     result = params.require(:meeting).permit(:graetzl_id, :group_id, :name, :description, :starts_at_date, :starts_at_time,
-      :ends_at_time, :cover_photo, :remove_cover_photo, :location_id, category_ids: [],
+      :ends_at_time, :cover_photo, :remove_cover_photo, :location_id,
       address_attributes: [:id, :description, :street_name, :street_number, :zip, :city, :coordinates]
     )
 

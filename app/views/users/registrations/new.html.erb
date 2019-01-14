@@ -91,12 +91,39 @@
           <%= f.attachment_field :avatar, direct: true, presigned: true %>
         </div>
       </div>
+    </div>
 
-      <div class="input-checkbox">
-        <%= f.check_box :role, {}, :business, nil %>
-        <%= f.label :role, 'Ich bin wirtschaftlich und/oder kreativ tätig' %>
+    <div class="wrp-radios">
+      <div class="input-radio">
+        <%= f.radio_button :business, false %>
+        <%= f.label "business_false", "I'm a Resident" %>
+      </div>
+      <div class="input-radio">
+        <%= f.radio_button :business, true %>
+        <%= f.label "business_true", "I'm a Business User" %>
+      </div>
+    </div>
+
+    <div class="user-business">
+      <p class="txt">What describes you best</p>
+      <div class="wrp-radios">
+        <% LocationCategory.all.each do |category| %>
+          <div class="input-radio">
+            <%= f.radio_button :location_category_id, category.id %>
+            <%= f.label "location_category_id_#{category.id}", category.name %>
+          </div>
+        <% end %>
       </div>
 
+      <p class="txt">What are you interested in</p>
+      <div class="business-interests">
+        <%= f.collection_check_boxes :business_interest_ids, BusinessInterest.all, :id, :title do |b| %>
+        <div class="input-checkbox">
+          <%= b.check_box %>
+          <%= b.label %>
+        </div>
+        <% end %>
+      </div>
     </div>
 
     <div class="wrp-checkboxes">

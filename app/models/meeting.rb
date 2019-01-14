@@ -31,9 +31,6 @@ class Meeting < ApplicationRecord
   has_many :going_tos, dependent: :destroy
   accepts_nested_attributes_for :going_tos, allow_destroy: true
   has_many :users, through: :going_tos
-  has_many :categorizations, as: :categorizable
-  accepts_nested_attributes_for :categorizations, allow_destroy: true
-  has_many :categories, through: :categorizations
   has_many :comments, as: :commentable, dependent: :destroy
   belongs_to :group, optional: true
 

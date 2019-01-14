@@ -1,7 +1,7 @@
 ActiveAdmin.register User do
   include ViewInApp
   menu priority: 3
-  includes :graetzl
+  includes :graetzl, :location_category, :business_interests
 
   scope :all, default: true
   scope :business
@@ -9,6 +9,8 @@ ActiveAdmin.register User do
 
   filter :graetzl, collection: proc { Graetzl.order(:name).pluck(:name, :id) }, include_blank: true, input_html: { class: 'admin-filter-select' }
   filter :id, label: 'User', as: :select, collection: proc { User.admin_select_collection }, include_blank: true, input_html: { class: 'admin-filter-select'}
+  filter :location_category, collection: proc { LocationCategory.pluck(:name) }, include_blank: true
+  filter :business_interests, collection: proc { BusinessInterest.pluck(:title) }, include_blank: true
   #filter :id
   #filter :username
   filter :first_name
@@ -33,6 +35,7 @@ ActiveAdmin.register User do
     :avatar, :remove_avatar,
     :cover_photo, :remove_cover_photo,
     :role,
+    :business,
     address_attributes: [
       :id,
       :street_name,
@@ -65,9 +68,11 @@ ActiveAdmin.register User do
       column :created_at
       column :confirmed_at
       column :role
+      column :business
       column :slug
       column :website
       column :newsletter
+      column(:location_category) {|user| user.location_category }
       column(:bezirk_1) { |user| user.graetzl.districts.first.try(:zip) }
       column(:bezirk_2) { |user| user.graetzl.districts.second.try(:zip) }
       column(:location_1) { |user| user.primary_location.try(:name) }
@@ -84,7 +89,7 @@ ActiveAdmin.register User do
         Rails.application.routes.url_helpers.graetzl_path(user.primary_location.graetzl) if user.primary_location
       }
       column(:location_1_category) { |user|
-        user.primary_location.category.name if user.primary_location
+        user.primary_location.location_category.name if user.primary_location
       }
       column(:meetings_initiated) { |user| user.going_tos.initiator.count }
       column(:location_posts) { |user| user.location_posts.count }

@@ -325,7 +325,7 @@
                   created_at: response[i].created_at,
                   graetzl_id: response[i].graetzl_id,
                   graetzl_name: '',
-                  category_id: response[i].category_id,
+                  category_id: response[i].location_category_id,
                   state: response[i].state,
                   user_ids: response[i].user_ids,
                   location_path: response[i].slug,
@@ -486,7 +486,7 @@
                   state: res[i].state,
                   graetzl_id: res[i].graetzl_id,
                   graetzl_name: '',
-                  category_id: res[i].category_id,
+                  category_id: res[i].location_category_id,
                   created_at: new Date(res[i].created_at),
                   location_path: '',
                   location_path_admin: host_admin + 'locations/' + res[i].slug

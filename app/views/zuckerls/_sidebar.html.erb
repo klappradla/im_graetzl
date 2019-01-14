@@ -15,7 +15,7 @@
       <div class="avatarImg"><%= avatar_for zuckerl.location %></div>
       <div class="typetxt">
         <div class="name"><%= zuckerl.location.name %></div>
-        <div class="category"><%= zuckerl.location.category.name %></div>
+        <div class="category"><%= zuckerl.location.location_category.name %></div>
         <% if address = zuckerl.location.address %>
           <div class="address">
             <%= icon_tag "location" %>

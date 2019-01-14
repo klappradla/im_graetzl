@@ -1,5 +1,5 @@
 <div class="filter-categories">
-  <%= collection_check_boxes :filter, :category_ids, Category.all, :id, :name do |b| %>
+  <%= collection_check_boxes :filter, :location_category_ids, LocationCategory.all, :id, :name do |b| %>
     <div class="input-checkbox filter-input">
       <%= b.check_box("data-label": b.text) %>
       <%= b.label %>

@@ -21,7 +21,7 @@
       <Attribute name="slogan"><%= @location.slogan if @location.slogan.present? %></Attribute>
       <Attribute name="description"><%= @location.description if @location.description.present? %></Attribute>
       <Attribute name="graetzl"><%= @graetzl.name %></Attribute>
-      <Attribute name="category"><%= @location.category.name %></Attribute>
+      <Attribute name="category"><%= @location.location_category.name %></Attribute>
       <Attribute name="address_street"><%= @location.address.street if @location.address && @location.address.street %></Attribute>
       <Attribute name="address_zip"><%= @location.address.zip if @location.address && @location.address.zip %></Attribute>
     </DataObject>
@@ -68,8 +68,8 @@
     </div>
     <div class="category-tags">
       <div class="bigicontext-element">
-        <%= category_icon @location.category %>
-        <div class="txt"><%= @location.category.name %></div>
+        <%= location_category_icon @location.location_category %>
+        <div class="txt"><%= @location.location_category.name %></div>
       </div>
       <% if @location.products.present? %>
         <ul class="tag-list">

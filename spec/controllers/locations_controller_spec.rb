@@ -362,7 +362,7 @@ RSpec.describe LocationsController, type: :controller do
               city: address.city)
           end
           it 'updates category' do
-            expect(location.category).to eq category
+            expect(location.location_category).to eq category
           end
         end
         describe 'remove address' do

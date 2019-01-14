@@ -16,7 +16,7 @@
       <% end %>
       <div class="typetxt">
         <%= link_to location.name, [location.graetzl, location], class: 'name' %>
-        <div class="category"><%= location.category.name %></div>
+        <div class="category"><%= location.location_category.name %></div>
         <% if location.address %>
           <div class="address">
             <%= icon_tag "location" %>

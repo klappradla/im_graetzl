@@ -15,7 +15,7 @@
       <div class="avatarImg"><%= avatar_for location %></div>
       <div class="typetxt">
         <div class="name"><%= location.name %></div>
-        <div class="category"><%= location.category.name %></div>
+        <div class="category"><%= location.location_category.name %></div>
         <% if address = location.address %>
           <div class="address">
             <%= icon_tag "location" %>

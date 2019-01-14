@@ -47,8 +47,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params[:user][:role] = nil if !params[:user][:role].present?
-    params[:user][:role] = 0 if current_user.admin?
     params[:user].delete(:password) if params[:user][:password].blank?
     params.
       require(:user).
@@ -59,8 +57,11 @@ class UsersController < ApplicationController
         :website,
         :bio,
         :newsletter,
-        :role,
+        :business,
         :avatar, :remove_avatar,
-        :cover_photo, :remove_cover_photo)
+        :cover_photo, :remove_cover_photo,
+        :location_category_id,
+        business_interest_ids: [],
+    )
   end
 end

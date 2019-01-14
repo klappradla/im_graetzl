@@ -1,4 +1,4 @@
-ActiveAdmin.register Category do
+ActiveAdmin.register LocationCategory do
   menu parent: :locations
   config.filters = false
 

@@ -9,7 +9,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   attachment :avatar, type: :image
   attachment :cover_photo, type: :image
-  enum role: { admin: 0, business: 1 }
+  enum role: { admin: 0 }
 
   belongs_to :graetzl, counter_cache: true
   has_one :curator, dependent: :destroy
@@ -24,6 +24,9 @@ class User < ApplicationRecord
   has_many :room_calls
   has_many :room_offers
   has_many :room_demands
+
+  has_and_belongs_to_many :business_interests
+  belongs_to :location_category, optional: true
 
   has_many :group_users
   has_many :groups, through: :group_users
@@ -42,8 +45,10 @@ class User < ApplicationRecord
 
   before_validation { self.username.squish! if self.username }
 
-  after_update :update_mailchimp, if: -> { email_changed? || first_name_changed? || last_name_changed? || newsletter_changed? || role_changed? }
+  after_update :update_mailchimp, if: -> { email_changed? || first_name_changed? || last_name_changed? || newsletter_changed? }
   before_destroy :unsubscribe_mailchimp
+
+  scope :business, -> { where(business: true) }
 
   # overwrite devise authentication method to allow username OR email
   def self.find_for_database_authentication(warden_conditions)

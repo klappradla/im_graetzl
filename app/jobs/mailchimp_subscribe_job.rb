@@ -13,7 +13,7 @@ class MailchimpSubscribeJob < ApplicationJob
           USERID: user.id,
           FNAME: user.first_name,
           LNAME: user.last_name,
-          USERROLE: user.role || '',
+          USERROLE: user.role || (user.business? ? 'business' : ''),
           GRAETZL: user.graetzl.name,
           GR_URL: Rails.application.routes.url_helpers.graetzl_path(user.graetzl),
           PLZ: user.graetzl.districts.first.try(:zip),
