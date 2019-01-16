@@ -101,4 +101,14 @@
     }
   }
 
+  @if $size == 'largest' {
+    font-size: 4.5rem;
+    @include respond-to(">=medium") {
+      font-size: 6.5rem;
+    }
+    @include respond-to(">=large") {
+      font-size: 8.0rem;
+    }
+  }
+
 }
