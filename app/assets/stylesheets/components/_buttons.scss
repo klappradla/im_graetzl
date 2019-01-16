@@ -13,7 +13,9 @@
   font-size: 1.8rem;
   display: block;
   text-align: center;
-
+  &.-flex {
+    display: inline-flex;
+  }
   &:hover {
     opacity: 0.9;
   }

@@ -54,7 +54,6 @@ section.help {
     @include font-size-secondaryFont('medium');
     color: $color-ambient-rosa;
     margin-bottom: 10px;
-    //font-size: 28px;
     //@include respond-to(">=medium") {
       //font-size: 34px;
     //}
@@ -74,6 +73,26 @@ section.help {
     @include font-size-primaryFont('larger');
     padding: 0px 0px 15px;
   }
+
+  .headline {
+    display: flex;
+    align-items: center;
+    margin-bottom:10px;
+    h3 {
+      padding: 0px 0px 0px;
+    }
+    .bigicontext-element {
+      margin-right:10px;
+    }
+    &.-R {
+      flex-direction: row-reverse;
+      justify-content: space-between;
+      .bigicontext-element {
+        margin-right:0px;
+      }
+    }
+  }
+
   .hl-subtext p {
     padding-bottom:0px;
   }
@@ -99,19 +118,49 @@ section.help {
 
   &.-about {
     article {
-      display:table;
-      clear:both;
-      margin-bottom: 50px;
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap-reverse;
+      margin-bottom: 30px;
+      @include respond-to(">=medium") {
+        margin-bottom: 70px;
+      }
       div.img {
-        float:none;
-        @include respond-to(">=medium") {
-          float: right;
-          width:40%;
-          padding-left: 50px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+        justify-content: center;
+        text-align: center;
+        &.-mentoring {
+          .img-round {
+            width:25%;
+            height:25%;
+            @include respond-to(">=medium") {
+              width:50%;
+              height:50%;
+            }
+          }
+          .img-round + .img-round {
+            margin-right: -12.5%;
+            @include respond-to(">=medium") {
+              margin-right: -25%;
+            }
+          }
         }
         img {
-          max-width:100%;
+          max-width:50%;
           height:auto;
+        }
+        margin-bottom:20px;
+        @include respond-to(">=medium") {
+          margin-bottom:0px;
+          width:35%;
+          padding-left: 50px;
+          img {
+            max-width:100%;
+            height:auto;
+          }
         }
       }
       a.-illu img {
@@ -127,7 +176,7 @@ section.help {
         }
       }
       .link {
-        text-align: right;
+        
       }
     }
     div.txt {
