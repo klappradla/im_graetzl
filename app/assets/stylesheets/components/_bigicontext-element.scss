@@ -35,7 +35,8 @@
 
   &.-badge {
     @include font-size-secondaryFont('base');
-    text-shadow: 2px 2px $color-ambient-mint-dark;
+    color: $color-ambient-mint;
+    text-shadow: 1px 1px $color-ambient-mint-dark;
     display: inline-flex;
     justify-content: center;
   }

@@ -5,7 +5,7 @@
   )
 %>
 
-<section class="help -about">
+<section class="help -startpage">
 
   <div class="imgHeader -fullwidth">
     <div class="wrp">
@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <div class="paperCard -cord1RT container -header">
+  <div class="paperCard -cord1RT -header">
     <div class="wrp">
       <p>
         <strong>
@@ -53,10 +53,11 @@
         <%= link_to 'Alle Infos und Anmeldung', info_gruppen_path, :class => 'btn-primary -mint -large' %>
       </p>
     </div>
-    <div class="img -mentoring">
-      <img class="img-round" src="/attachments/ada481de1ef3d7a474199463d2027bbea85f156c/store/fill/200/200/6137e637e40d44e4a3956797a64561a5198d3aa0a1b0f93b6247e80a81f3/avatar.gif" alt="Avatar">
-      <img class="img-round" src="/attachments/ada481de1ef3d7a474199463d2027bbea85f156c/store/fill/200/200/6137e637e40d44e4a3956797a64561a5198d3aa0a1b0f93b6247e80a81f3/avatar.gif" alt="Avatar">
-      <img class="img-round" src="/attachments/ada481de1ef3d7a474199463d2027bbea85f156c/store/fill/200/200/6137e637e40d44e4a3956797a64561a5198d3aa0a1b0f93b6247e80a81f3/avatar.gif" alt="Avatar">
+    <div class="aside -mentoring">
+      <%= image_tag('info/mentorin-4.jpg', class: 'img-round') %>
+      <%= image_tag('info/mentorin-1.jpg', class: 'img-round') %>
+      <%= image_tag('info/mentorin-3.jpg', class: 'img-round') %>
+      <%= image_tag('info/mentorin-2.jpg', class: 'img-round -big') %>
     </div>
   </article>
 
@@ -64,7 +65,6 @@
   <article class="container">
     <div class="txt">
       <div class="headline">
-        <span class="bigicontext-element -badge">Neu</span>
         <div>
           <h2>Kooperationen im Bezirk</h2>
           <h3>z.B. im Marketing und Vertrieb</h3>
@@ -77,19 +77,18 @@
         HändlerInnen und ProduzentInnen im Bezirk.
       </p>
       <p class="link">
-        <%= link_to 'Zu den Bezirksgruppen', info_gruppen_path, :class => 'btn-secondary -mint -large' %>
+        <%= link_to 'Zu den Bezirksgruppen', info_gruppen_path, :class => 'btn-primary -mint -flex' %>
       </p>
     </div>
-    <div class="img">
-      <%= link_to(image_tag('info/imGraetzl-Features-Kooperationen.png'), info_gruppen_path, class: '-illu') %>
+    <div class="aside -img">
+      <%= link_to(image_tag('info/imGraetzl-Features-Kooperationen2.png'), info_gruppen_path, class: '-illu -feature') %>
     </div>
   </article>
 
 
-  <article class="container">
+  <article class="container -groups">
     <div class="txt">
       <div class="headline">
-        <span class="bigicontext-element -badge">Neu</span>
         <div>
           <h2>Tauschglück – Gegengeschäfte</h2>
           <h3>z.B. „Brauche Flyerdesign – biete Yogakurs an“</h3>
@@ -102,19 +101,18 @@
         bei dem nicht ein einziger Cent fließt.
       </p>
       <p class="link">
-        <%= link_to 'Zur Gruppe', info_gruppen_path, :class => 'btn-secondary -mint -large' %>
+        <%= link_to 'Zur Gruppe', info_gruppen_path, :class => 'btn-primary -mint -flex' %>
       </p>
     </div>
-    <div class="img">
-      <%= link_to(image_tag('info/imGraetzl-Features-Gegengeschaefte.png'), info_gruppen_path, class: '-illu') %>
+    <div class="aside">
+      <%= !Group.where(id: 1).empty? ? (render Group.where(id: 1)) : '' %>
     </div>
   </article>
 
 
-  <article class="container">
+  <article class="container -groups">
     <div class="txt">
       <div class="headline">
-        <span class="bigicontext-element -badge">Neu</span>
         <div>
           <h2>Aufträge & Zusammenarbeit</h2>
           <h3>Auftrag zu vergeben & ProjektpartnerInnen gesucht</h3>
@@ -127,11 +125,11 @@
         suchen oder Projekte zu vergeben haben.
       </p>
       <p class="link">
-        <%= link_to 'Zur Gruppe', info_gruppen_path, :class => 'btn-secondary -mint -large' %>
+        <%= link_to 'Zur Gruppe', info_gruppen_path, :class => 'btn-primary -mint -flex' %>
       </p>
     </div>
-    <div class="img">
-      <%= link_to(image_tag('info/imGraetzl-Features-Zusammenarbeit.png'), info_gruppen_path, class: '-illu') %>
+    <div class="aside">
+      <%= !Group.where(id: 15).empty? ? (render Group.where(id: 15)) : '' %>
     </div>
   </article>
 
@@ -148,11 +146,12 @@
         über eine Schnittstelle auf digitalen schwarzen Brettern angezeigt.
       </p>
       <p class="link">
-        <%= link_to 'Mehr Infos', info_anbieter_und_locations_path, :class => 'btn-secondary -mint -flex -small' %>
+        <%= link_to 'Mehr Infos', info_anbieter_und_locations_path, :class => 'btn-primary -grey -flex' %>
+        <%= link_to 'Zu den Locations', locations_wien_path, :class => 'btn-primary -mint -flex' %>
       </p>
     </div>
-    <div class="img">
-      <%= link_to(image_tag('info/imGraetzl-Features-Locationpage.png'), info_anbieter_und_locations_path) %>
+    <div class="aside -img">
+      <%= link_to(image_tag('info/imGraetzl-Features-Locationpage.png'), info_anbieter_und_locations_path, class: '-feature') %>
     </div>
   </article>
 
@@ -169,11 +168,12 @@
         Raumsuchende in Gruppen, um Leerstand neu zu aktivieren.
       </p>
       <p class="link">
-        <%= link_to 'Mehr Infos', info_raumteiler_path, :class => 'btn-secondary -mint -flex -small' %>
+        <%= link_to 'Mehr Infos', info_raumteiler_path, :class => 'btn-primary -grey -flex' %>
+        <%= link_to 'Zu den Raumteilern', rooms_wien_path, :class => 'btn-primary -mint -flex' %>
       </p>
     </div>
-    <div class="img">
-      <%= link_to(image_tag('info/imGraetzl-Features-Raumteiler.png'), info_raumteiler_path) %>
+    <div class="aside -img">
+      <%= link_to(image_tag('info/imGraetzl-Features-Raumteiler.png'), info_raumteiler_path, class: '-feature') %>
     </div>
   </article>
 
@@ -188,11 +188,12 @@
         Du möchtest als BewohnerIn etwas in deinem Grätzl bekannt geben? - auch das geht!
       </p>
       <p class="link">
-        <%= link_to 'Mehr Infos', info_events_und_workshops_path, :class => 'btn-secondary -mint -flex -small' %>
+        <%= link_to 'Mehr Infos', info_events_und_workshops_path, :class => 'btn-primary -grey -flex' %>
+        <%= link_to 'Zu den Events', meetings_wien_path, :class => 'btn-primary -mint -flex' %>
       </p>
     </div>
-    <div class="img">
-      <%= link_to(image_tag('info/imGraetzl-Features-Events-Workshops.png'), info_events_und_workshops_path) %>
+    <div class="aside -img">
+      <%= link_to(image_tag('info/imGraetzl-Features-Events-Workshops.png'), info_events_und_workshops_path, class: '-feature') %>
     </div>
   </article>
 
@@ -209,10 +210,11 @@
         deinem Grätzl erscheinen? Auch das geht, für 120 € (excl. Ust).
       </p>
       <p class="link">
-        <%= link_to 'Mehr Infos', info_infos_zum_graetzlzuckerl_path, :class => 'btn-secondary -mint -flex -small' %>
+        <%= link_to 'Mehr Infos', info_infos_zum_graetzlzuckerl_path, :class => 'btn-primary -grey -flex' %>
+        <%= link_to 'Zu den Grätzlzuckerln', zuckerls_wien_path, :class => 'btn-primary -mint -flex' %>
       </p>
     </div>
-    <div class="img">
+    <div class="aside -img">
       <%= link_to(image_tag('info/imGraetzl-Features-Graetzlzuckerl.png'), info_infos_zum_graetzlzuckerl_path) %>
     </div>
   </article>
