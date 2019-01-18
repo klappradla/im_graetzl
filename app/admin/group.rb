@@ -4,10 +4,14 @@ ActiveAdmin.register Group do
 
   actions :index, :show, :edit, :update, :destroy
 
+  includes :graetzls, group_users: :user
+
   scope :all, default: true
   scope :featured
 
   filter :users, collection: proc {User.admin_select_collection}, include_blank: true, input_html: {class: 'admin-filter-select'}
+  filter :graetzls, collection: proc { Graetzl.order(:name).pluck(:name, :id) }, include_blank: true, input_html: { class: 'admin-filter-select'}
+  filter :districts, collection: proc { District.order(:name).pluck(:name, :id) }, include_blank: true, input_html: { class: 'admin-filter-select'}
   filter :group_categories
   filter :title
   filter :private

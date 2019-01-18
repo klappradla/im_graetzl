@@ -6,8 +6,12 @@ context.instance_eval do
   column :featured
   column :hidden
   column :created_at
-  column :admins do |l|
-    safe_join(l.admins.map { |user| link_to(user.username, admin_user_path(user)) }, ', ')
+  column :graetzls do |group|
+    group.graetzls.size
+  end
+
+  column :admins do |g|
+    safe_join(g.admins.map { |user| link_to(user.username, admin_user_path(user)) }, ', ')
   end
   actions
 end

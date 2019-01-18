@@ -16,6 +16,12 @@ context.instance_eval do
     end
   end
 
+  panel "Graetzls" do
+    table_for group.graetzls do
+      column :name
+    end
+  end
+
   panel "Users" do
     table_for group.group_users do
       column :user
