@@ -95,6 +95,13 @@ ActiveRecord::Schema.define(version: 20190111160355) do
     t.index ["user_id"], name: "index_business_interests_users_on_user_id", using: :btree
   end
 
+  create_table "categories_meetings", id: false, force: :cascade do |t|
+    t.integer "category_id"
+    t.integer "meeting_id"
+    t.index ["category_id"], name: "index_categories_meetings_on_category_id", using: :btree
+    t.index ["meeting_id"], name: "index_categories_meetings_on_meeting_id", using: :btree
+  end
+
   create_table "comments", force: :cascade do |t|
     t.text     "content"
     t.integer  "user_id"
@@ -674,6 +681,7 @@ ActiveRecord::Schema.define(version: 20190111160355) do
     t.string   "website"
     t.string   "origin"
     t.integer  "location_category_id"
+    t.boolean  "business",                                  default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["created_at"], name: "index_users_on_created_at", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree

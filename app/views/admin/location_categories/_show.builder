@@ -13,7 +13,7 @@ context.instance_eval do
       panel 'Associations' do
         tabs do
           tab 'Locations' do
-            table_for category.locations do
+            table_for location_category.locations do
               column :id
               column :name
               column(:state){|l| status_tag(l.state)}

@@ -25,7 +25,7 @@ class LocationsController < ApplicationController
       render :graetzl_form
     else
       @graetzl = Graetzl.find(params[:graetzl_id])
-      @location = @graetzl.locations.build
+      @location = @graetzl.locations.build(location_category_id: current_user.location_category_id)
       @location.build_contact
     end
   end
@@ -109,7 +109,7 @@ class LocationsController < ApplicationController
         :description,
         :avatar, :remove_avatar,
         :cover_photo, :remove_cover_photo,
-        :category_id,
+        :location_category_id,
         :meeting_permission,
         :product_list,
         contact_attributes: [

@@ -1,7 +1,7 @@
 ActiveAdmin.register Location do
   include ViewInApp
   menu priority: 4
-  includes :graetzl, :category, :users
+  includes :graetzl, :location_category, :users
 
   scope :all, default: true
   scope :pending
@@ -9,7 +9,7 @@ ActiveAdmin.register Location do
 
   filter :graetzl, collection: proc { Graetzl.order(:name).pluck(:name, :id) }, include_blank: true, input_html: { class: 'admin-filter-select'}
   filter :users, collection: proc { User.admin_select_collection }, include_blank: true, input_html: { class: 'admin-filter-select'}
-  filter :category
+  filter :location_category
   filter :state, as: :select, collection: Location.states.keys
   filter :name
   filter :slogan
@@ -74,7 +74,7 @@ ActiveAdmin.register Location do
     :allow_meetings,
     :avatar, :remove_avatar,
     :cover_photo, :remove_cover_photo,
-    :category_id,
+    :location_category_id,
     :meeting_permission,
     :product_list,
     contact_attributes: [

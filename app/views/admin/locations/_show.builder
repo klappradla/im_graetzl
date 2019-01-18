@@ -5,7 +5,7 @@ context.instance_eval do
         attributes_table_for location do
           row :id
           row :name
-          row :category
+          row :location_category
           row :products do |l|
             l.products.each do |p|
               a p.name, href: admin_tag_path(p)

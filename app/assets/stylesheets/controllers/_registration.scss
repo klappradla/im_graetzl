@@ -126,8 +126,22 @@ section.register-personalInfo {
   .user-business {
     margin-bottom: 3.0rem;
     padding-bottom: 1.0rem;
-    border-bottom: 1px solid $color-ambient-mint-light;    
+    border-bottom: 1px solid $color-ambient-mint-light;
   }
+
+  .user-type-selection {
+    margin-top:20px;
+    text-align: center;
+    .input-radio {
+      display: inline-block;
+      margin: 0 10px;
+      label {
+        //@include font-size-primaryFont('larger');
+        //padding-bottom:5px;
+      }
+    }
+  }
+
 }
 
 

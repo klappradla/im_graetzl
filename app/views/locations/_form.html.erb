@@ -30,12 +30,12 @@
     </div>
 
     <div class="input-select">
-      <%= f.label :category_id do %>
+      <%= f.label :location_category_id do %>
         <%= icon_tag "record" %>
-        <span><%= Location.human_attribute_name(:category) %></span>
+        <span><%= Location.human_attribute_name(:location_category) %></span>
       <% end %>
-      <%= f.collection_select :category_id,
-                              Category.business.all, :id, :name,
+      <%= f.collection_select :location_category_id,
+                              LocationCategory.business.all, :id, :name,
                               { prompt: 'Wähle aus um welche Art von Location es sich handelt...' } %>
     </div>
 

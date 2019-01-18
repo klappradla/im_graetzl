@@ -41,7 +41,7 @@ class Zuckerl < ApplicationRecord
   end
 
   def self.include_for_box
-    includes(location: [:graetzl, :category, :address])
+    includes(location: [:graetzl, :location_category, :address])
   end
 
   def payment_reference
