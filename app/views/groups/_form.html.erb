@@ -62,7 +62,7 @@
     <h2>Diskussions <span>Kategorien</span></h2>
     <p>Erstelle Unterthemen für deine Gruppe, du kannst diese auch später noch ändern.</p>
   </div>
-  <div class="group-prices">
+  <div class="group-categories">
     <%= f.fields_for :discussion_categories do |category_form| %>
       <%= render 'groups/form/discussion_category_fields', f: category_form %>
     <% end %>
@@ -76,6 +76,17 @@
     </div>
     <div class="input-select">
       <%= f.select :graetzl_ids, graetzl_select_options, {}, { multiple: true, class: 'graetzl-select' } %>
+    </div>
+  </div>
+
+  <h2 class="hl-main">Group join questions</h2>
+  <div class="group-join-questions">
+    <% f.object.group_join_questions.build if f.object.group_join_questions.empty? %>
+    <%= f.fields_for :group_join_questions do |field_form| %>
+    <%= render 'groups/form/join_question_fields', f: field_form %>
+    <% end %>
+    <div class="group-join-questions-links">
+      <%= link_to_add_association 'Weitere Frage hinzufügen', f, :group_join_questions, partial: 'groups/form/join_question_fields' %>
     </div>
   </div>
 

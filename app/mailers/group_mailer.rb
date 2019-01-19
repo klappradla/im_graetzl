@@ -12,6 +12,7 @@ class GroupMailer
         { name: 'last_name', content: join_request.user.last_name },
         { name: 'e_mail', content: join_request.user.email },
         { name: 'request_message', content: join_request.request_message },
+        { name: 'request_answers', content: join_request.join_answers.join("\n\n") },
         { name: 'group_name', content: join_request.group.title },
         { name: 'group_url', content: group_url(join_request.group, URL_OPTIONS) },
         { name: 'user_url', content: user_url(join_request.user, URL_OPTIONS) },
@@ -38,7 +39,7 @@ class GroupMailer
     reply_to = from_email.present? ? "#{from_email}@imgraetzl.at" : user.email
     from_email = from_email.present? ? "#{from_email}@imgraetzl.at" : "no-reply@imgraetzl.at"
     html_body = body.gsub("\r\n", "<br/>")
-    
+
     MandrillMailer.deliver(template: 'group-user-message', message: {
       to: users.map{ |u| { email: u.email, name: u.full_name } },
       from_email: from_email,

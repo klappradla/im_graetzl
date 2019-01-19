@@ -10,7 +10,7 @@
         <%= link_to submission_room_call_path(@group.room_call, submission_id: @group.room_call_submission_id(join_request)) do %>
         Call Einreichung
         <% end %>
-      <% elsif join_request.request_message? %>
+      <% elsif join_request.join_answers.present? || join_request.request_message? %>
         <%= link_to "#request-message-modal-#{join_request.id}", class: 'request-message-opener' do %>
         Beitritts Nachricht
         <% end %>
@@ -23,7 +23,14 @@
         <%= attachment_image_tag join_request.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
       </div>
       <div>
-        <%= join_request.request_message %>
+        <% if join_request.join_answers.present? %>
+          <% join_request.join_answers.each_slice(2) do |question, answer| %>
+            <h3><%= question %></h3>
+            <p> <%= answer %> </p>
+          <% end %>
+        <% else %>
+          <%= join_request.request_message %>
+        <% end %>
       </div>
     </div>
   </div>

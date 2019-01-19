@@ -63,7 +63,8 @@ class GroupsController < ApplicationController
     if !@group.group_join_requests.exists?(user: current_user)
       join_request = @group.group_join_requests.create(
         user: current_user,
-        request_message: params[:request_message]
+        join_answers: @group.group_join_questions.map(&:question).zip(params[:join_answers]).flatten,
+        request_message: params[:request_message],
       )
       GroupMailer.new.new_join_request(join_request)
     end
@@ -167,6 +168,7 @@ class GroupsController < ApplicationController
         :cover_photo, :remove_cover_photo,
         graetzl_ids: [],
         group_category_ids: [],
+        group_join_questions_attributes: [:id, :question, :_destroy],
         discussion_categories_attributes: [
           :id, :title, :_destroy
         ],
