@@ -27,7 +27,7 @@
 
   <div class="content">
 
-    <p><%= post.content %></p>
+    <div class="bbcode"><%= post.content.bbcode_to_html.html_safe %></div>
 
     <% if post.images.present? %>
       <div class="entryImgUploads" data-featherlight-gallery data-featherlight-filter="a">
