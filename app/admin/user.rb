@@ -77,7 +77,7 @@ ActiveAdmin.register User do
       column(:bezirk_2) { |user| user.graetzl.districts.second.try(:zip) }
       column(:location_1) { |user| user.primary_location.try(:name) }
       column(:location_1_url) { |user|
-        Rails.application.routes.url_helpers.location_path(user.primary_location) if user.primary_location
+        Rails.application.routes.url_helpers.graetzl_location_path(user.primary_location.graetzl, user.primary_location) if user.primary_location
       }
       column(:location_1_bezirk) { |user|
         user.primary_location.graetzl.districts.first.try(:zip) if user.primary_location
