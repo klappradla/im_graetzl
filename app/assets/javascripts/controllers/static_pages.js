@@ -4,11 +4,16 @@ APP.controllers.static_pages = (function() {
       if($("#help_nav").exists()) initHelpScroller();
       if($("section.help").exists()) initMobileNav();
       if($("section.homeOut").exists()) initMobileNav();
+      if($(".-mentoring-page").exists()) initMentoring();
       if($("section.-raumteilerguide").exists()) initGuideLP();
       if($("#guide-download").exists()) initGuideDownload();
     }
 
 // ---------------------------------------------------------------------- Public
+
+function initMentoring() {
+  $(".-login").featherlight({});
+}
 
 function initGuideDownload() {
 

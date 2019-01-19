@@ -1,0 +1,197 @@
+<% meta(
+    title: t('.title'),
+    description: t('.description'),
+    robots: 'index, follow'
+  )
+%>
+
+<section class="help -mentoring-page">
+
+  <div class="imgHeader -fullwidth">
+    <div class="wrp">
+      <h1>imGrätzl - Mentoring Programm</h1>
+      <h2>Komm in dein Unterstützer Team</h2>
+    </div>
+  </div>
+
+  <div class="paperCard -cord1RT -header -top">
+    <div class="wrp">
+      <a href="#teilnahme" class="badge -mint -arrow">
+        Jetzt durchstarten!
+      </a>
+      <p>
+        <strong>
+          Das imGrätzl Mentoring-Programm für Selbständige und MacherInnen startet.
+        </strong>
+      </p>
+      <p>
+        Die imGrätzl.at Unterstützer-Teams werden ins Leben gerufen, um Selbständige, GründerInnen
+        und MacherInnen darin zu bestärken ihre Ideen auf den Boden zu bringen und sie gleichzeitig
+        in ein lokales Netzwerk aus Gleichgesinnten einzubinden.
+      </p>
+      <p>
+        Die TeilnehmerInnen werden in einem Team verbunden, das sie 5 Monate bei der Umsetzung ihrer Ideen
+        begleitet, fördert und trägt. Es geht um gegenseitige Motivation, Wertschätzung und darum die
+        Begeisterung für den Weg immer wieder aufs Neue anzufachen und Hürden gemeinsam aus dem Weg
+        zu räumen. MentorInnen aus den unterschiedlichsten Bereichen steuern ihre jahrelange Erfahrung,
+        Expertise und Kontakte bei.
+      </p>
+    </div>
+    <div class="card"></div>
+  </div>
+
+  <div class="hl-subtext">
+    <h1><em>Eure MentorInnen</em></h1>
+    <p>Sie begleiten euch mit ihrer Erfahrung und Expertise und öffnen Netzwerke für euch.</p>
+  </div>
+
+  <!-- MENTORINNEN CARDBOXES-->
+  <div class="cardBoxCollection -tripple">
+
+    <div class="single-mentor">
+      <%= image_tag('info/mentorin-sabina-haas.jpg', class: 'img-round') %>
+      <h2>Sabina Haas</h2>
+      <p class="title">Possibilistin und Karriere Coach</p>
+    </div>
+
+    <div class="single-mentor">
+      <%= image_tag('info/mentorin-sibylle-exel-rauth.jpg', class: 'img-round') %>
+      <h2>Sibylle Exel-Rauth</h2>
+      <p class="title">GrafikerIn Mit Sinn für Haptik & Print</p>
+    </div>
+
+    <div class="paperCard -cord1RT">
+      <div class="wrp">
+        <p class="title">
+          <strong>
+            Es ist uns gelungen einen Kreis an inspirierenden Menschen zu gewinnen,
+            mit denen wir selber immer schon einmal zusammenarbeiten wollten.
+          </strong>
+        </p>
+        <p>
+          Die ExpertInnen unterstützen euch in den Bereichen Kommunikation, Marketing,
+          Unternehmensaufbau, Fokussierung und Coaching, Förderungen, Entwicklung von
+          Geschäftsmodellen, Events, Buchhaltung, digitale Tools.
+        </p>
+      </div>
+      <div class="card"></div>
+    </div>
+
+    <div class="single-mentor">
+      <%= image_tag('info/mentorin-karin-kiendler.jpg', class: 'img-round') %>
+      <h2>Karin Kiendler</h2>
+      <p class="title">Spezialistin Förderungen und Rechtsberatung</p>
+    </div>
+
+    <div class="single-mentor">
+      <%= image_tag('info/mentorin-georg-dinhobl.jpg', class: 'img-round') %>
+      <h2>Georg Dinhobl</h2>
+      <p class="title">Rechnen/Buchen/Bunter Hund</p>
+    </div>
+
+    <div class="single-mentor">
+      <%= image_tag('info/mentorin-katharina-sabetzer.jpg', class: 'img-round') %>
+      <h2>Katharina Sabetzer</h2>
+      <p class="title">Kommunikationskonzepte, Social Media, Textierungen</p>
+    </div>
+
+    <div class="single-mentor">
+      <%= image_tag('info/mentorin-christoph-schwarz.jpg', class: 'img-round') %>
+      <h2>Christoph Schwarz</h2>
+      <p class="title">Geschäftsmodelle & Unternehmensaufbau</p>
+    </div>
+
+    <div class="single-mentor">
+      <%= image_tag('info/mentorin-leonhard-kern.jpg', class: 'img-round') %>
+      <h2>Leonhard Kern</h2>
+      <p class="title">Den Kunden im Fokus</p>
+    </div>
+
+  </div>
+  <!-- END MENTORINNEN CARDBOXES-->
+
+  <!-- TEILNEHMEN -->
+  <div class="hl-subtext" id="teilnahme">
+    <h1><em>So kannst du teilnehmen</em></h1>
+    <p>
+      Wir benötigen eine kurze Beschreibung deiner Idee/ Ziels, oder welche nächste Stufe du
+      beim Aufbau deines Unternehmens erreichen möchtest. Und wo du gerade stehst z.B. in der
+      Konzeption, bereits in Umsetzung etc.
+    </p>
+  </div>
+
+  <div class="anmeldung cardBox <%= '-login' if !current_user %>"  <%= 'data-featherlight=#login-panel-modal' if !current_user %>>
+    <%= form_tag request_join_group_path(Group.first) do %>
+      <div class="input-textarea">
+        <%= text_area_tag :request_message, nil, cols: 40, rows: 3, placeholder: 'Beschreibung deiner Idee, Vorhaben/Ziel. Stand der Umsetzung' %>
+      </div>
+      <%= submit_tag "Anmeldung abschicken", class: 'btn-primary -mint -large' %>
+    <% end %>
+  </div>
+  <!-- END TEILNEHMEN -->
+
+  <!----------- LOGIN PANEL MODAL ----------->
+  <%= render 'shared/login_panel', origin: 'mentoring' %>
+  <!----------- LOGIN PANEL MODAL ----------->
+
+
+
+  <!-- DER ABLAUF -->
+  <div class="hl-subtext">
+    <h1><em>Der Ablauf</em></h1>
+    <p>
+      Was dich im Unterstützer-Team erwartet.
+    </p>
+  </div>
+
+  <div class="paperCard -cord1RT -top">
+    <div class="wrp">
+      <p>
+        <strong>
+          Das imGrätzl Team stellt das Unterstützer-Team zusammen und organisiert es,
+          die MentorInnen sind sorgfältig ausgewählt und ExpertInnen auf ihrem Fachgebiet.
+        </strong>
+      </p>
+      <p>
+        Der Austausch mit dem Unterstützer-Team erfolgt hauptsächlich online, es stehen
+        aber auch ganz reale Treffen auf dem Programm. Die persönliche Betreuung in Kleingruppen
+        und Unterstützung bei der Umsetzung bringen handfeste Ergebnisse. Deshalb sollten
+        Interessierte unbedingt ein konkretes Ziel, Projekt, oder Idee in ihr Unterstützungs-Team
+        mitbringen.
+      </p>
+    </div>
+    <div class="card"></div>
+  </div>
+
+  <div class="ablauf">
+    <ul>
+      <li>
+        <strong>Bewerbung bis 01.02.2019, das Programm startet am 01.03.2019</strong>
+      </li>
+      <li>
+        <strong>Kick-off Treffen</strong> mit allen TeilnehmerInnen und den MentorInnen – Entspanntes Kennenlernen in rotierenden Kleingruppen und Vorstellung des Programms.
+      </li>
+      <li>
+        <strong>Das Herzstück:</strong> Das Prinzip ist ganz einfach! Am Anfang der Woche veröffentlichen alle TeilnehmerInnen stichpunktartig 3 Teilziele für die aktuelle Woche. Die Teilziele zahlen dabei auf das große Ziel ein. Am Ende der Woche berichten alle, welche Teilziele erreicht wurden und welche Hürden aufgetreten sind. Die anderen TeilnehmerInnen und MentorInnen stehen mit Rat und Tat, aber auch Kontakten zur Seite und zeigen auf, wie die individuellen Hürden genommen werden können. Die TeilnehmerInnen geben Feedback, welchen Rat sie umsetzen werden. Daraus entwickelt sich eine Dynamik des Tuns und der gleichzeitigen Reflektion.
+      </li>
+      <li>
+        <strong>Alle drei Wochen</strong> gibt es einen Live-Video-Chat zu unterschiedlichen Themenfeldern, in denen individuelle Fragen von den MentorInnen beantworten werden.
+      </li>
+      <li>
+        <strong>Alle sechs Wochen</strong> können die TeilnehmerInnen bei einem realen Treffen den persönlichen Kontakt vertiefen.
+      </li>
+      <li>
+        <strong>Extra:</strong> Auf Wunsch wird ein Arbeitsplatz für 80 €/Monat zur Verfügung gestellt (Atelier, Praxis oder Büro). Damit soll das Unterstützer Team auch ganz analog die Möglichkeit bekommen gemeinsam durchzustarten.
+      </li>
+      <li>
+        <strong>Das Programm dauert 5 Monate.</strong> Das erste Team startet am 1. März.
+      </li>
+      <li>
+        <strong>Kosten:</strong> Es wird um eine Spende von 50€ gebeten, die dem Projekt <%= link_to 'Nut & Feder', 'https://nutundfeder.at', target: '_blank' %> zugutekommt.
+      </li>
+    </ul>
+  </div>
+
+  <!-- END DER ABLAUF -->
+
+</section>

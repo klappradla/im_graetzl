@@ -1,16 +1,21 @@
 section.help {
 
   .paperCard {
+    .wrp {
+      padding:30px 15px 5px 30px;
+      p {
+        padding-bottom:25px;
+      }
+    }
     &.-header {
       margin-top: -8px;
       margin-bottom:50px;
     }
-    margin-bottom:40px;
-    .wrp {
-      padding:35px 50px 15px 50px;
-      @include font-size-primaryFont('large');
-      p {
-        padding-bottom:25px;
+    &.-top {
+      margin-bottom:40px;
+      .wrp {
+        padding:35px 50px 15px 50px;
+        @include font-size-primaryFont('large');
       }
     }
   }
@@ -51,14 +56,14 @@ section.help {
   .imgHeader::after {
     content: "";
     background-image: url(image_path('info/balloon_header.jpg'));
-    opacity: 0.6;
+    opacity: 0.7;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     position: absolute;
     z-index: -1;
-    background-position: center bottom;
+    background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
   }
@@ -272,4 +277,67 @@ section.help {
       display:flex;
     }
   }
+
+  // ----- HELP MENTORING PAGE ------ //
+  &.-mentoring-page {
+
+    .imgHeader::after {
+      background-image: url(image_path('info/schiffchen_header.jpg'));
+      opacity: 0.7;
+    }
+
+    .badge {
+      float:right;
+      @include font-size-secondaryFont('small');
+    }
+
+    p.title {
+      @include font-size-primaryFont('large');
+    }
+
+    // Single Mentor Card
+    .single-mentor {
+      margin-bottom:50px;
+      h2, h3, p.title {
+        display: block;
+        text-align: center;
+      }
+      .img-round {
+        display: block;
+        margin: auto;
+        margin-bottom:5px;
+        width:80%;
+        height: 80%;
+        @include respond-to("<=medium") {
+          width:60%;
+          height: 60%;
+        }
+      }
+    }
+
+    .ablauf ul {
+      margin-left:20px;
+      li {
+        margin-bottom:15px;
+      }
+    }
+
+    .anmeldung {
+      margin-bottom:50px;
+      textarea {
+        margin-bottom:15px;
+        min-height: 200px;
+      }
+      .btn-primary {
+        width: 100%;
+        display: block;
+        margin: auto;
+      }
+      &.-disabled {
+        //opacity: 0.5;
+      }
+    }
+
+  }
+
 }

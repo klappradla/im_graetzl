@@ -609,3 +609,50 @@ input[type=url]:invalid + em::after {
   margin-left: 10px;
 	content: "http:// oder https:// ..";
 }
+
+// ---------------------------------------------------------------------- Login Panel Modal
+
+.login-panel-modal {
+  display: none;
+  .hl-subtext {
+    margin-bottom: 30px;
+    h1 {
+      @include font-size-secondaryFont('medium');
+    }
+    p {
+      @include font-size-primaryFont('base');
+    }
+  }
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    .login {
+      .input-field {
+        margin-bottom:10px;
+      }
+      .sharedLinks {
+        margin-top:25px;
+        margin-bottom:25px;
+        padding-top:15px;
+        border-top: solid 1px $color-ambient-mint-light;
+        a {
+          color: $color-ambient-grey;
+        }
+      }
+    }
+    .register {
+      margin-left:20px;
+      .paperCard {
+        .wrp {
+          padding: 160px 25px 20px 25px;
+          background-position: center top 5px;
+          background-size: auto 170px;
+        }
+      }
+    }
+    .btn-primary {
+      width:100%;
+    }
+  }
+}

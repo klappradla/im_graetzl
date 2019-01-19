@@ -46,6 +46,13 @@
     background-image:$texture-primary, url(image_path('svg/bg-badge-barpapapa-mint.svg'));
   }
 
+  &.-mint {
+      background-image:$texture-primary, url(image_path('svg/bg-badge-barpapapa-mint.svg'));
+    &:hover, &:active {
+      background-image:$texture-primary, url(image_path('svg/bg-badge-barpapapa-rosa.svg'));
+    }
+  }
+
   &.-arrow {
     &::before {
       content: '';

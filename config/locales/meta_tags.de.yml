@@ -37,6 +37,9 @@ de:
     code-of-conduct:
       title: 'Code of Conduct'
       description: 'imGrätzl Verhaltenskodex: Das imGrätzl Team sieht es als Aufgabe, eine freundliche, sichere und einladende Umgebung zu schaffen, unabhängig von Geschlecht, sexueller Orientierung, Befähigung, Herkunft, Religion (oder deren Nichtvorhandensein) sowie gesellschaftlichem und wirtschaftlichem Status.'
+    mentoring:
+      title: 'imGrätzl Mentoring Programm - Komm in dein Unterstützer Team'
+      description: 'Die imGrätzl.at Unterstützer-Teams werden ins Leben gerufen, um Selbständige, GründerInnen und MacherInnen darin zu bestärken ihre Ideen auf den Boden zu bringen und sie gleichzeitig in ein lokales Netzwerk aus Gleichgesinnten einzubinden.'
 
   wien:
     show:

@@ -1,0 +1,40 @@
+<!----------- LOGIN PANEL MODAL ----------->
+<div id="login-panel-modal" class="login-panel-modal">
+  <div class="hl-subtext">
+    <h1><em>Login</em></h1>
+    <p>
+      Bitte melde dich zuerst mit deinem Grätzl Account an.
+      <% if local_assigns[:message] %>
+        <br><%= local_assigns[:message] %>
+      <% end %>
+    </p>
+  </div>
+  <div class="container">
+    <div class="login">
+      <%= form_for(:user, :url => session_path(:user, :redirect => request.original_url)) do |f| %>
+        <div class="input-field">
+          <%= f.text_field :login, autofocus: true, placeholder: "Username oder E-Mail" %>
+        </div>
+        <div class="input-field">
+          <%= f.password_field :password, autocomplete: "off", placeholder: "Passwort" %>
+        </div>
+        <div class="wrp">
+          <%= f.button 'Einloggen', class: 'btn-primary -mint' %>
+        </div>
+      <% end %>
+      <div class="sharedLinks">
+        <%= link_to 'Passwort vergessen?', new_password_path %>
+      </div>
+    </div>
+    <div class="register">
+      <div class="paperCard -cord1RT -illuteaser -location">
+        <div class="wrp">
+          <h3>Noch nicht bei<br>imGrätzl registriert?</h3>
+          <%= link_to 'Hier kostenlos registrieren', new_registration_path(redirect: request.original_url, origin: (local_assigns[:origin] if local_assigns[:origin])), class: 'btn-primary' %>
+        </div>
+        <div class="card"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!----------- LOGIN PANEL MODAL ----------->
