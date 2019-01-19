@@ -13,6 +13,14 @@ APP.controllers.static_pages = (function() {
 
 function initMentoring() {
   $(".-login").featherlight({});
+
+  // Change Wording of Notice Message for Mentoring Registrations
+  if ($("#flash .notice").exists()) {
+    if ( $("#flash .notice").text().indexOf('Vielen Dank für Deine Registrierung.') >= 0 ){
+      // Modifiy Message for Mentoring
+      $("#flash .notice").html('Vielen Dank für Deine Registrierung. Du bist nun angemeldet und kannst das <a href="#teilnahme">Teilnahme Formular</a> (unterhalb) ausfüllen.');
+    }
+  }
 }
 
 function initGuideDownload() {
