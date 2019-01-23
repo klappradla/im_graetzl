@@ -55,8 +55,8 @@ section.help {
   }
   .imgHeader::after {
     content: "";
-    background-image: url(image_path('info/balloon_header.jpg'));
-    opacity: 0.7;
+    background-image: url(image_path('info/header-balloon.jpg'));
+    //opacity: 0.7;
     top: 0;
     left: 0;
     bottom: 0;
@@ -110,6 +110,25 @@ section.help {
 
   // ----- HELP STARTPAGE ------ //
   &.-startpage {
+
+    .imgHeader {
+      .wrp {
+        height:100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+      }
+      .coop-share-logo {
+        height:70%;
+        margin-top:10px;
+        @include respond-to(">=medium") {
+          height:65%;
+          margin-top:35px;
+        }
+      }
+    }
+
 
     // -- GRID -- //
     div.txt {
