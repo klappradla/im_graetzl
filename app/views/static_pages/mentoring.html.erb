@@ -188,8 +188,8 @@
 
 
 
-    <% if !Group.where(id: 3).empty? %>
-      <% group = Group.find_by_id(3) %>
+    <% if !Group.where(id: 1).empty? %>
+      <% group = Group.find_by_id(1) %>
       <%= form_tag request_join_group_path(group) do %>
         <% if group.group_join_questions.present? %>
 

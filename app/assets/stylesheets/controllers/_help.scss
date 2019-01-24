@@ -12,7 +12,7 @@ section.help {
       margin-bottom:50px;
     }
     &.-top {
-      margin-bottom:40px;
+      margin-bottom:50px;
       .wrp {
         padding:35px 50px 15px 50px;
         @include font-size-primaryFont('large');
@@ -134,7 +134,7 @@ section.help {
     div.txt {
       width:100%;
       @include respond-to(">=medium") {
-        width: 65%;
+        width: 60%;
         &.-half {
           width: 55%;
         }
@@ -143,10 +143,18 @@ section.help {
     div.aside {
       width:50%;
       @include respond-to(">=medium") {
-        padding-left: 50px;
+        //padding-left: 50px;
         width:35%;
         &.-half {
           width: 45%;
+        }
+      }
+    }
+    .-groups {
+      @include respond-to("<medium") {
+        div.aside {
+          //display: none;
+          width:100%;
         }
       }
     }
@@ -157,9 +165,32 @@ section.help {
       align-items: center;
       justify-content: center;
       flex-wrap: wrap-reverse;
+
+      @include respond-to("<medium") {
+        position: relative;
+        padding-bottom:30px;
+        &::after {
+          content:'';
+          width: 100%;
+          height: 1px;
+          position: absolute;
+          bottom: 0;
+          background-image: url(image_path('svg/underline-mint.svg'));
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+          pointer-events: none;
+          z-index: -1;
+        }
+      }
+
       margin-bottom: 30px;
       @include respond-to(">=medium") {
         margin-bottom: 70px;
+        justify-content: space-between;
+      }
+      &.-reverse {
+        flex-direction: row-reverse;
       }
       div.txt {
         p {
@@ -176,17 +207,28 @@ section.help {
           margin-bottom:0px;
         }
         &.-mentoring {
+          position: relative;
           .img-round {
             width:50%;
             height:50%;
-            &.-big {
-              width:60%;
-              margin-top:-15%;
-              margin-right:0 !important;
-            }
           }
           .img-round + .img-round {
             margin-right: -25%;
+          }
+          @include respond-to(">=medium") {
+            &::after {
+              content:'';
+              width: 50%;
+              height: 200%;
+              position: absolute;
+              right: 0;
+              top: -50%;
+              background-image: url(image_path('bg-punkte-rectangle.png'));
+              background-repeat: no-repeat;
+              background-position: right center;
+              pointer-events: none;
+              z-index: -1;
+            }
           }
         }
         &.-img {
@@ -195,6 +237,12 @@ section.help {
             max-width:100%;
             height:auto;
           }
+        }
+        &.-bgpoints {
+          background-image: url(image_path('bg-punkte-ellipse.png'));
+          background-repeat: no-repeat;
+          background-size: 75%;
+          background-position: right bottom;
         }
 
         .cardBox {
