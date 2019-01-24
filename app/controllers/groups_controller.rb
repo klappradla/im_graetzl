@@ -67,6 +67,7 @@ class GroupsController < ApplicationController
         request_message: params[:request_message],
       )
       GroupMailer.new.new_join_request(join_request)
+      flash[:notice] = 'Deine Beitrittsanfrage wurde abgeschickt!'
     end
 
     redirect_to @group

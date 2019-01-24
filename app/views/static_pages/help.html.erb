@@ -23,9 +23,9 @@
         </strong>
       </p>
       <p>
-        Neben Services, die Kosten senken und Ressourcen erhöhen, werden die NutzerInnen mit
-        Gleichgesinnten verbunden: Teilen, sharen, tauschen - neue Formen der Zusammenarbeit
-        und Gemeinschaft stehen dabei im Mittelpunkt!
+        Neben Services, die Kosten senken und Ressourcen erhöhen, werden die NutzerInnen
+        mit Gleichgesinnten verbunden: Kooperieren, sharen, tauschen - neue Formen der
+        Zusammenarbeit und Gemeinschaft stehen dabei im Mittelpunkt!
       </p>
       <p>
         imGrätzl.at entfaltet seine Stärke im Wir - Ganz lokal in Wien, analog und digital.
@@ -46,12 +46,12 @@
       </div>
       <p>
         MacherInnen werden in einem Team aus Gleichgesinnten auf imGrätzl.at verbunden,
-        das sie bei der Umsetzung ihrer Ideen und Aufbau ihrer Unternehmen begleitet,
-        fördert und trägt. MentorInnen aus den unterschiedlichsten Bereichen steuern ihre
-        jahrelange Erfahrung, Expertise und Kontakte bei.
+        das sie bei der Umsetzung ihrer Ideen oder Aufbau ihrer Unternehmen begleitet,
+        fördert und trägt. MentorInnen aus den unterschiedlichsten Bereichen steuern
+        ihre jahrelange Erfahrung, Expertise und Kontakte bei.
       </p>
       <p class="link">
-        <%= link_to 'Alle Infos und Anmeldung', mentoring_path, :class => 'btn-primary -mint -large' %>
+        <%= link_to 'Alle Infos und Anmeldung', unterstuetzer_team_path, :class => 'btn-primary -mint -large' %>
       </p>
     </div>
     <div class="aside -mentoring">
@@ -130,6 +130,26 @@
     </div>
     <div class="aside">
       <%= !Group.where(id: 15).empty? ? (render Group.where(id: 15)) : '' %>
+    </div>
+  </article>
+
+
+  <article class="container">
+    <div class="txt">
+      <h2>Gruppen für alle!</h2>
+      <h3>Eröffne deine eigene Gruppe</h3>
+      <p>
+        Du möchtest eine eigene Gruppe rund um ein Thema aufbauen, das dich interessiert,
+        du möchtest rund um dein Thema Treffen initiieren und in Kontakt mit Gleichgesinnten kommen?
+        Oder dock dich ganz einfach an eine bestehende Gruppe an.
+      </p>
+      <p class="link">
+        <%= link_to 'Mehr Infos', info_gruppen_path, :class => 'btn-primary -grey -flex' %>
+        <%= link_to 'Zu den Gruppen', groups_wien_path, :class => 'btn-primary -mint -flex' %>
+      </p>
+    </div>
+    <div class="aside -img">
+      <%= link_to(image_tag('info/imGraetzl-Features-Unterstuetzerteam.png'), info_gruppen_path, class: '-feature') %>
     </div>
   </article>
 

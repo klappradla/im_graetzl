@@ -122,8 +122,9 @@ section.homeOut {
     height: 90px;
     background-size: 90px 90px;
     display: inline-flex;
+    align-items: center;
+    text-decoration: none;
     left: 50%;
-    width: 230px;
     transform: translate(-50%, 0);
     margin-top: 200px;
     margin-bottom: 40px;
@@ -139,59 +140,46 @@ section.homeOut {
       position: absolute;
       top: 300px;
       left: auto;
-      right: 160px;
+      right: 140px;
       margin-bottom: 0;
     }
-    [class^=icon-] {
-      fill: $color-ambient-rosa;
-      position: relative;
-      z-index: 2;
-      width: 60px;
-      height: 60px;
-      margin-left: 15px;
+    .coop-share-logo {
+      width: 125px;
+      height: 125px;
+      background-size: 125px 125px;
+      display: block;
+      background-image: url(image_path('svg/coopshare-logo-white.svg'));
+      background-repeat: no-repeat;
     }
     .txt {
-      color: $color-ambient-rosa;
+      @include headlineBarbapapaMint();
       font-size: 30px;
-      line-height: 1;
-      margin-left: 26px;
+      margin-left: 10px;
+      margin-top:-10px;
     }
-    &::after {
+    &::before {
       content: '';
-      width: 75px;
-      height: 75px;
-      top: 8px;
-      left: 7px;
+      width: 40px;
+      height: 40px;
+      background-size: 40px 40px;
+      background-image: url(image_path('svg/icon-arrow-right-blinky-rosa'));
+      background-repeat: no-repeat;
       position: absolute;
-      border-radius: 50%;
-      z-index: 1;
-      background-image: url(image_path('texture-alpha-noise.png'));
-      background-color: white;
+      bottom: -15px;
+      left: 115px;
+      transform: rotate(-45deg);
     }
     &:hover {
       .txt {
-        color: $color-ambient-mint;
+        @include headlineBarbapapa();
       }
-      &::after {
-        background-color: $color-ambient-mint;
-      }
-      [class^=icon-] {
-        fill: white;
-      }
-    }
-
-    @include respond-to(">=medium") {
       &::before {
-        content: '';
-        width: 80px;
-        height: 80px;
-        background-size: 80px 80px;
-        background-image: url(image_path('svg/arrow-dashed-bend2.svg'));
-        background-repeat: no-repeat;
-        position: absolute;
-        bottom: -70px;
-        left: 51px;
-        transform: rotate(-65deg);
+        bottom: -10px;
+        left: 120px;
+      }
+      .coop-share-logo {
+        transform: rotate(-5deg);
+        opacity: 0.9;
       }
     }
   }

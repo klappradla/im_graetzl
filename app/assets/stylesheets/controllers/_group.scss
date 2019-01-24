@@ -178,19 +178,42 @@ section.group-form-page {
 
   .join-request-modal {
     display: none;
+    max-width:600px;
+    h1 {
+      @include headlineBarbapapa();
+      margin: auto;
+      margin-bottom:15px;
+    }
+    h3 {
+      @include font-size-primaryFont('large');
+    }
     .input-textarea {
       margin-top: 10px;
-      margin-bottom: 15px;
+      margin-bottom: 25px;
     }
   }
 
   .request-message-modal {
     display: none;
-    width:400px;
+    max-width:600px;
     .wrapper {
       display: flex;
+      margin-bottom:15px;
+      padding-bottom:15px;
+      border-bottom: solid 1px $color-ambient-mint-light;
+      align-items: center;
+      justify-content: center;
     }
-    p { margin-bottom: 15px; }
+    .anwsers {
+      h3 {
+        @include font-size-primaryFont('large');
+        margin-bottom:5px;
+      }
+      p {
+        margin-bottom: 20px;
+        white-space: pre-wrap;
+      }
+    }
   }
 
   // Button Control Dropdown

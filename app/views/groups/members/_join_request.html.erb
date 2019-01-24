@@ -22,16 +22,20 @@
       <div class="avatar">
         <%= attachment_image_tag join_request.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
       </div>
-      <div>
-        <% if join_request.join_answers.present? %>
-          <% join_request.join_answers.each_slice(2) do |question, answer| %>
-            <h3><%= question %></h3>
-            <p> <%= answer %> </p>
-          <% end %>
-        <% else %>
-          <%= join_request.request_message %>
-        <% end %>
+      <div class="user">
+        <%= join_request.user.first_name %><br>
+        <%= join_request.user.last_name %>
       </div>
+    </div>
+    <div class="anwsers">
+      <% if join_request.join_answers.present? %>
+        <% join_request.join_answers.each_slice(2) do |question, answer| %>
+          <h3><%= question %></h3>
+          <p><%= answer %></p>
+        <% end %>
+      <% else %>
+        <p><%= join_request.request_message %></p>
+      <% end %>
     </div>
   </div>
   <div class="btns">

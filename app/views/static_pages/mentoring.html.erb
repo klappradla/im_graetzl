@@ -84,9 +84,9 @@
     </div>
 
     <div class="single-mentor">
-      <%= image_tag('info/mentorin-georg-dinhobl.jpg', class: 'img-round') %>
-      <h2>Georg Dinhobl</h2>
-      <p class="title">Rechnen/Buchen/Bunter Hund</p>
+      <%= image_tag('info/mentorin-harald-neger.jpg', class: 'img-round') %>
+      <h2>Harald Neger</h2>
+      <p class="title">Gastro- und Eventmarketing</p>
     </div>
 
     <div class="single-mentor">
@@ -115,31 +115,6 @@
 
   </div>
   <!-- END MENTORINNEN CARDBOXES-->
-
-  <!-- TEILNEHMEN -->
-  <div class="hl-subtext" id="teilnahme">
-    <h1><em>So kannst du teilnehmen</em></h1>
-    <p>
-      Wir benötigen eine kurze Beschreibung deiner Idee/ Ziels, oder welche nächste Stufe du
-      beim Aufbau deines Unternehmens erreichen möchtest. Und wo du gerade stehst z.B. in der
-      Konzeption, bereits in Umsetzung etc.
-    </p>
-  </div>
-
-  <div class="anmeldung cardBox <%= '-login' if !current_user %>"  <%= 'data-featherlight=#login-panel-modal' if !current_user %>>
-    <%= form_tag request_join_group_path(Group.first) do %>
-      <div class="input-textarea">
-        <%= text_area_tag :request_message, nil, cols: 40, rows: 3, placeholder: 'Beschreibung deiner Idee, Vorhaben/Ziel. Stand der Umsetzung' %>
-      </div>
-      <%= submit_tag "Anmeldung abschicken", class: 'btn-primary -mint -large' %>
-    <% end %>
-  </div>
-  <!-- END TEILNEHMEN -->
-
-  <!----------- LOGIN PANEL MODAL ----------->
-  <%= render 'shared/login_panel', origin: 'mentoring' %>
-  <!----------- LOGIN PANEL MODAL ----------->
-
 
 
   <!-- DER ABLAUF -->
@@ -172,32 +147,83 @@
   <div class="ablauf">
     <ul>
       <li>
-        <strong>Bewerbung bis 01.02.2019, das Programm startet am 01.03.2019</strong>
+        <strong>Bewerbung bis 18.02.2019, das Programm startet am 05.03.2019</strong>
       </li>
       <li>
-        <strong>Kick-off Treffen</strong> mit allen TeilnehmerInnen und den MentorInnen – Entspanntes Kennenlernen in rotierenden Kleingruppen und Vorstellung des Programms.
+        <strong>Kick-off Treffen</strong> mit allen TeilnehmerInnen und den MentorInnen.
       </li>
       <li>
-        <strong>Das Herzstück:</strong> Das Prinzip ist ganz einfach! Am Anfang der Woche veröffentlichen alle TeilnehmerInnen stichpunktartig 3 Teilziele für die aktuelle Woche. Die Teilziele zahlen dabei auf das große Ziel ein. Am Ende der Woche berichten alle, welche Teilziele erreicht wurden und welche Hürden aufgetreten sind. Die anderen TeilnehmerInnen und MentorInnen stehen mit Rat und Tat, aber auch Kontakten zur Seite und zeigen auf, wie die individuellen Hürden genommen werden können. Die TeilnehmerInnen geben Feedback, welchen Rat sie umsetzen werden. Daraus entwickelt sich eine Dynamik des Tuns und der gleichzeitigen Reflektion.
+        <strong>Das Herzstück:</strong> Das Prinzip ist ganz einfach! Am Anfang der Woche veröffentlichen alle TeilnehmerInnen stichpunktartig drei Teilziele für die aktuelle Woche. Die Teilziele zahlen dabei auf das große Ziel ein. Am Ende der Woche berichten alle, welche Teilziele erreicht wurden und welche Hürden aufgetreten sind. Die anderen TeilnehmerInnen und MentorInnen stehen mit Rat und Tat, aber auch Kontakten zur Seite und zeigen auf, wie die individuellen Hürden genommen werden können. Die TeilnehmerInnen geben Feedback, welchen Rat sie umsetzen werden. Daraus entwickelt sich eine Dynamik des Tuns und der gleichzeitigen Reflexion. Schritt-für-Schritt und ganz entspannt geht es voran.
       </li>
       <li>
         <strong>Alle drei Wochen</strong> gibt es einen Live-Video-Chat zu unterschiedlichen Themenfeldern, in denen individuelle Fragen von den MentorInnen beantworten werden.
       </li>
       <li>
-        <strong>Alle sechs Wochen</strong> können die TeilnehmerInnen bei einem realen Treffen den persönlichen Kontakt vertiefen.
+        <strong>Alle fünf Wochen</strong> können die TeilnehmerInnen bei einem realen Treffen den persönlichen Kontakt vertiefen.
       </li>
       <li>
         <strong>Extra:</strong> Auf Wunsch wird ein Arbeitsplatz für 80 €/Monat zur Verfügung gestellt (Atelier, Praxis oder Büro). Damit soll das Unterstützer Team auch ganz analog die Möglichkeit bekommen gemeinsam durchzustarten.
       </li>
       <li>
-        <strong>Das Programm dauert 5 Monate.</strong> Das erste Team startet am 1. März.
+        <strong>Das Programm dauert bis Juli, also 5 Monate. Im Herbst gibt es noch einmal ein Get-Togehter!</strong>
       </li>
       <li>
-        <strong>Kosten:</strong> Es wird um eine Spende von 50€ gebeten, die dem Projekt <%= link_to 'Nut & Feder', 'https://nutundfeder.at', target: '_blank' %> zugutekommt.
+        <strong>Kosten:</strong> Das Programm hat einen Wert von mehreren tausend Euro. Mit der Unterstützung der MentorInnen wurde diese Hürde aus dem Weg geräumt. Gebeten wird um eine Spende von 100€, die Einnahmen kommen den Projekten <%= link_to 'Nut & Feder', 'https://nutundfeder.at', target: '_blank' %> und <%= link_to 'Sindbad', 'http://www.sindbad.co.at', target: '_blank' %> zugute.
       </li>
     </ul>
   </div>
-
   <!-- END DER ABLAUF -->
+
+
+  <!-- TEILNEHMEN -->
+  <div class="hl-subtext" id="teilnahme">
+    <h1><em>So kannst du teilnehmen</em></h1>
+    <p>
+      Bei der Zusammenstellung der Unterstützer-Teams geht es in erster Linie darum, dass sich die TeilnehmerInnen gut ergänzen, deshalb haben wir ein paar Fragen vorbereitet:
+    </p>
+  </div>
+
+  <div class="anmeldung cardBox <%= '-login' if !current_user %>"  <%= 'data-featherlight=#login-panel-modal' if !current_user %>>
+
+
+
+
+    <% if !Group.where(id: 3).empty? %>
+      <% group = Group.find_by_id(3) %>
+      <%= form_tag request_join_group_path(group) do %>
+        <% if group.group_join_questions.present? %>
+
+          <% group.group_join_questions.each do |join_question| %>
+            <h4><%= join_question.question %></h4>
+            <div class="input-textarea">
+              <%= text_area_tag :"join_answers[]", nil, cols: 40, rows: 3, placeholder: 'Deine Antwort ..', required: true %>
+            </div>
+          <% end %>
+
+        <% else %>
+
+          <div class="input-textarea">
+            <%= text_area_tag :request_message, nil, cols: 40, rows: 3, placeholder: 'Schreib noch einen kurzen Satz über Dich, bzw. warum Du beitreten möchtest ..', required: true %>
+          </div>
+
+        <% end %>
+        <%= submit_tag "Anmeldung abschicken", class: 'btn-primary -large' %>
+      <% end %>
+    <% else %>
+      Keine Gruppe verknüpft ...
+    <% end %>
+  </div>
+  <!-- END TEILNEHMEN -->
+
+  <!----------- LOGIN PANEL MODAL ----------->
+  <%= render 'shared/login_panel',redirect: request.original_url ,origin: 'mentoring' %>
+  <!----------- LOGIN PANEL MODAL ----------->
+
+  <div class="footer">
+    <p>
+      Die coop & share Services inkl. der Unterstützer-Teams auf imGrätzl.at sind Teil des F&E Projektes Mischung: Nordbahnhof (Lead TU Wien).
+      Dieses Projekt wird aus Mitteln des Klima- und Energiefonds gefördert und im Rahmen der Smart-Cities-Initiative durchgeführt.
+    </p>
+  </div>
 
 </section>

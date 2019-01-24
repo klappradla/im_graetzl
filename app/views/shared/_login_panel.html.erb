@@ -30,7 +30,7 @@
       <div class="paperCard -cord1RT -illuteaser -location">
         <div class="wrp">
           <h3>Noch nicht bei<br>imGrätzl registriert?</h3>
-          <%= link_to 'Hier kostenlos registrieren', new_registration_path(redirect: request.original_url, origin: (local_assigns[:origin] if local_assigns[:origin])), class: 'btn-primary' %>
+          <%= link_to 'Hier kostenlos registrieren', new_registration_path(redirect: (local_assigns[:redirect] if local_assigns[:redirect]), origin: (local_assigns[:origin] if local_assigns[:origin])), class: 'btn-primary' %>
         </div>
         <div class="card"></div>
       </div>

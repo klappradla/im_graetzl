@@ -301,8 +301,8 @@ section.help {
   &.-mentoring-page {
 
     .imgHeader::after {
-      background-image: url(image_path('info/schiffchen_header.jpg'));
-      opacity: 0.7;
+      background-image: url(image_path('info/header-menschenstrom.png'));
+      //opacity: 0.7;
     }
 
     .badge {
@@ -336,16 +336,21 @@ section.help {
 
     .ablauf ul {
       margin-left:20px;
+      margin-bottom:60px;
       li {
         margin-bottom:15px;
       }
     }
 
     .anmeldung {
-      margin-bottom:50px;
+      margin-bottom:70px;
+      h4 {
+        @include font-size-primaryFont('large');
+      }
       textarea {
-        margin-bottom:15px;
-        min-height: 200px;
+        margin-bottom:30px;
+        margin-top:10px;
+        min-height: 120px;
       }
       .btn-primary {
         width: 100%;

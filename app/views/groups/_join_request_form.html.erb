@@ -4,12 +4,12 @@
     <% group.group_join_questions.each do |join_question| %>
       <h3><%= join_question.question %></h3>
       <div class="input-textarea">
-        <%= text_area_tag :"join_answers[]", nil, cols: 40, rows: 3 %>
+        <%= text_area_tag :"join_answers[]", nil, cols: 40, rows: 3, required: true %>
       </div>
     <% end %>
   <% else %>
     <div class="input-textarea">
-      <%= text_area_tag :request_message, nil, cols: 40, rows: 3, placeholder: 'Schreib noch einen kurzen Satz über Dich, bzw. warum Du beitreten möchtest ..' %>
+      <%= text_area_tag :request_message, nil, cols: 40, rows: 3, placeholder: 'Schreib noch einen kurzen Satz über Dich, bzw. warum Du beitreten möchtest ..', required: true %>
     </div>
   <% end %>
   <%= submit_tag "Jetzt beitreten", class: 'btn-primary' %>

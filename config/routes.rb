@@ -132,7 +132,7 @@ Rails.application.routes.draw do
 
   get 'lp/raumteiler-guide', to: 'static_pages#lp_raumteilerguide'
   get 'lp/raumteiler-guide-danke', to: 'static_pages#lp_raumteilerguide_success'
-  get 'mentoring', to: 'static_pages#mentoring'
+  get 'unterstuetzer-team', to: 'static_pages#mentoring'
   get 'info', to: 'static_pages#help'
   get 'info/raumteiler', to: 'static_pages#raumteiler'
   get 'info/gruppen', to: 'static_pages#groups'
