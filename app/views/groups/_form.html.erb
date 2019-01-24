@@ -79,7 +79,10 @@
     </div>
   </div>
 
-  <h2 class="hl-main">Group join questions</h2>
+  <div class="hl-subtext -groups">
+    <h2><span>Fragen</span> an neue Mitglieder</h2>
+    <p>Möchtest du neuen Mitgliedern beim Gruppenbeitritt gezielte Fragen stellen?</p>
+  </div>
   <div class="group-join-questions">
     <% f.object.group_join_questions.build if f.object.group_join_questions.empty? %>
     <%= f.fields_for :group_join_questions do |field_form| %>

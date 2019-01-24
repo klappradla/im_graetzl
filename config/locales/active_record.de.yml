@@ -94,7 +94,7 @@ de:
         image: Bild
       location:
         avatar: Profilbild
-        category: Kategorie
+        location_category: Kategorie
         cover_photo: Headerbild
         description: Beschreibung
         product_list: Produktgruppen
