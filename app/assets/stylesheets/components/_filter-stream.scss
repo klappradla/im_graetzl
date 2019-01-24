@@ -16,6 +16,17 @@
       color: $color-ambient-rosa;
       background-image: url(image_path('svg/kringel-grey-rosa.svg'));
     }
+    &.-coopshare {
+      background: none;
+      [class^=icon-] {
+        margin-left:0px;
+        width: 75px;
+        height: 75px;
+      }
+      .txt {
+        margin-left:5px;
+      }
+    }
   }
 
   .iconfilter:not(.createentry):not(.loginlink)  {
