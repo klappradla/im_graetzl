@@ -100,9 +100,6 @@
         und das eigene Unternehmen aufzubauen. Ein gutes Geschäft für alle Beteiligten,
         bei dem nicht ein einziger Cent fließt.
       </p>
-      <p class="link">
-        <%= link_to 'Zur Gruppe', info_gruppen_path, :class => 'btn-primary -mint -flex' %>
-      </p>
     </div>
     <div class="aside">
       <%= !Group.where(id: 1).empty? ? (render Group.where(id: 1)) : '' %>
@@ -123,9 +120,6 @@
         großen Auftrag, kennt jemand wen? Diese Gruppe ist die Anlaufstelle für alle,
         die gerade Raum für neue Aufträge haben und für all diejenigen, die ProjektpartnerInnen
         suchen oder Projekte zu vergeben haben.
-      </p>
-      <p class="link">
-        <%= link_to 'Zur Gruppe', info_gruppen_path, :class => 'btn-primary -mint -flex' %>
       </p>
     </div>
     <div class="aside">

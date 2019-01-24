@@ -155,6 +155,7 @@ section.help {
         div.aside {
           //display: none;
           width:100%;
+          margin-bottom:0px;
         }
       }
     }
@@ -165,6 +166,9 @@ section.help {
       align-items: center;
       justify-content: center;
       flex-wrap: wrap-reverse;
+      &.-groups {
+        flex-wrap: wrap;
+      }
 
       @include respond-to("<medium") {
         position: relative;
@@ -251,8 +255,8 @@ section.help {
               display: none;
             }
             .btn-userIcons {
-              //display: flex;
-              display: none;
+              display: flex;
+              //display: none;
             }
           }
         }
