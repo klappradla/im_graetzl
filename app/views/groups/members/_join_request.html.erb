@@ -10,33 +10,11 @@
         <%= link_to submission_room_call_path(@group.room_call, submission_id: @group.room_call_submission_id(join_request)) do %>
         Call Einreichung
         <% end %>
-      <% elsif join_request.join_answers.present? || join_request.request_message? %>
-        <%= link_to "#request-message-modal-#{join_request.id}", class: 'request-message-opener' do %>
-        Beitritts Nachricht
-        <% end %>
+      <% elsif join_request.has_content? %>
+        <%= link_to "Beitritts Nachricht", "#request-message-modal-#{join_request.id}", class: 'request-message-opener' %>
+        <%= render 'groups/members/join_request_modal', join_request: join_request %>
       <% end %>
     </p>
-  </div>
-  <div class="request-message-modal" id="request-message-modal-<%= join_request.id %>">
-    <div class="wrapper">
-      <div class="avatar">
-        <%= attachment_image_tag join_request.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
-      </div>
-      <div class="user">
-        <%= join_request.user.first_name %><br>
-        <%= join_request.user.last_name %>
-      </div>
-    </div>
-    <div class="anwsers">
-      <% if join_request.join_answers.present? %>
-        <% join_request.join_answers.each_slice(2) do |question, answer| %>
-          <h3><%= question %></h3>
-          <p><%= answer %></p>
-        <% end %>
-      <% else %>
-        <p><%= join_request.request_message %></p>
-      <% end %>
-    </div>
   </div>
   <div class="btns">
     <%= link_to accept_request_group_path(@group, join_request_id: join_request.id), method: :post, class: 'btn-userIcons -small -mint' do %>

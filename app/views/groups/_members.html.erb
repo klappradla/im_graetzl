@@ -10,7 +10,7 @@
     <!-- /JOIN REQUESTS -->
 
     <!-- Users -->
-    <% @group.group_users.includes(:user).order("role DESC").each do |group_user| %>
+    <% @group.group_users.includes(user: :group_join_requests).order("role DESC").each do |group_user| %>
       <%= render 'groups/members/group_user', group_user: group_user %>
     <% end %>
     <!-- /Users -->

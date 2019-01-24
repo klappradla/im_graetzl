@@ -1,5 +1,5 @@
 <div class="user cardBox">
-  <% if group_user.member? && @group.admins.include?(current_user)%>
+  <% if group_user.member? && @group.admins.include?(current_user) %>
     <%= link_to 'javascript:', data: { jq_dropdown: "#group-user-dropdown-#{group_user.user.id}" }, class: 'group-user-dropdown-link' do %>
       <%= icon_tag "dot-3" %>
     <% end %>
@@ -32,7 +32,11 @@
         <%= link_to submission_room_call_path(@group.room_call, submission_id: @group.room_call_submission_id(group_user)) do %>
           Call Einreichung
         <% end %>
+      <% elsif @group.admins.include?(current_user) && group_user.join_request.try(:has_content?) %>
+        <%= link_to "Beitritts Nachricht", "#request-message-modal-#{group_user.join_request.id}", class: 'request-message-opener' %>
+        <%= render 'groups/members/join_request_modal', join_request: group_user.join_request %>
       <% end %>
     </p>
   </div>
+
 </div>

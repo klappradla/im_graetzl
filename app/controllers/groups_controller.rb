@@ -60,16 +60,22 @@ class GroupsController < ApplicationController
 
   def request_join
     @group = Group.find(params[:id])
-    if !@group.group_join_requests.exists?(user: current_user)
+    redirect_to @group and return if @group.group_join_requests.exists?(user: current_user)
+
+    if params[:join_answers].present?
+      questions_and_answers = @group.group_join_questions.map(&:question).zip(params[:join_answers]).flatten
       join_request = @group.group_join_requests.create(
         user: current_user,
-        join_answers: @group.group_join_questions.map(&:question).zip(params[:join_answers]).flatten,
+        join_answers: questions_and_answers,
+      )
+    else
+      join_request = @group.group_join_requests.create(
+        user: current_user,
         request_message: params[:request_message],
       )
-      GroupMailer.new.new_join_request(join_request)
-      flash[:notice] = 'Deine Beitrittsanfrage wurde abgeschickt!'
     end
-
+    GroupMailer.new.new_join_request(join_request)
+    flash[:notice] = 'Deine Beitrittsanfrage wurde abgeschickt!'
     redirect_to @group
   end
 
@@ -79,10 +85,12 @@ class GroupsController < ApplicationController
 
     @join_request = @group.group_join_requests.find(params[:join_request_id])
 
-    group_user = @group.group_users.create(user: @join_request.user)
-    group_user.create_activity(:create, owner: current_user)
+    if !@group.users.include?(@join_request.user)
+      group_user = @group.group_users.create(user: @join_request.user)
+      group_user.create_activity(:create, owner: current_user)
+    end
 
-    @join_request.destroy
+    @join_request.accepted!
 
     GroupMailer.new.join_request_accepted(@group, @join_request.user)
     redirect_to group_url(@group, anchor: "tab-members")
@@ -93,7 +101,8 @@ class GroupsController < ApplicationController
     redirect_to @group and return unless @group.admins.include?(current_user)
 
     @join_request = @group.group_join_requests.find(params[:join_request_id])
-    @join_request.update(rejected: true)
+    @join_request.rejected!
+
     redirect_to group_url(@group, anchor: "tab-members")
   end
 
@@ -103,6 +112,8 @@ class GroupsController < ApplicationController
     redirect_to @group and return unless (@group.admins.include?(current_user) || current_user.id == @group_user.user_id)
 
     @group_user.destroy
+    @group.group_join_requests.where(user_id: @group_user.user_id).delete_all
+
     redirect_to group_url(@group, anchor: "tab-members")
   end
 
@@ -134,7 +145,7 @@ class GroupsController < ApplicationController
   def collection_scope
     #Group.non_private
     #Group.non_hidden
-    Group
+    Group.all
   end
 
   def filter_collection(groups)

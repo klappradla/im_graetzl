@@ -2,5 +2,10 @@ class GroupJoinRequest < ApplicationRecord
   belongs_to :group
   belongs_to :user
 
-  scope :pending, -> { where(rejected: false) }
+  enum status: { pending: 0, accepted: 1, rejected: 2 }
+
+  def has_content?
+    join_answers.present? || request_message?
+  end
+
 end

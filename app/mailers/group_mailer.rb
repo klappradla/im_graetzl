@@ -12,7 +12,7 @@ class GroupMailer
         { name: 'last_name', content: join_request.user.last_name },
         { name: 'e_mail', content: join_request.user.email },
         { name: 'request_message', content: join_request.request_message },
-        { name: 'request_answers', content: join_request.join_answers.join("\n\n") },
+        { name: 'request_answers', content: join_answers_content(join_request.join_answers) },
         { name: 'group_name', content: join_request.group.title },
         { name: 'group_url', content: group_url(join_request.group, URL_OPTIONS) },
         { name: 'user_url', content: user_url(join_request.user, URL_OPTIONS) },
@@ -62,6 +62,12 @@ class GroupMailer
   end
 
   private
+
+  def join_answers_content(join_answers)
+    Array(join_answers).each_slice(2).map do |question, answer|
+      { question: question, answer: answer }
+    end
+  end
 
   def owner_personal_vars(user)
     {
