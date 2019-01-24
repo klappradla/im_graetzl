@@ -32,9 +32,13 @@
   margin: 0 auto;
   display: block;
 }
-.ico-coopshare-bg {
-  fill:#fff;
+
+.csbg {
+  fill:#e0eceb;
 }
-.ico-coopshare-color {
-  fill:#87b9b9;
+.cstxt {
+  //fill:#68a8a7;
+}
+.csout {
+  fill:$color-ambient-grey;
 }
