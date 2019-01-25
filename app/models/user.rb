@@ -44,7 +44,7 @@ class User < ApplicationRecord
   validates :terms_and_conditions, acceptance: true
   validates :website, url: true, allow_blank: true
 
-  validates :location_category_id, presence: true, on: :create, if: :business?
+  validates :location_category, presence: true, on: :create, if: :business?
   validates :business_interests, presence: true, on: :create, if: :business?
 
   before_validation { self.username.squish! if self.username }
