@@ -16,7 +16,15 @@ context.instance_eval do
           row :rented_area
           row :wants_collaboration
           row :keyword_list
-          row :room_categories
+
+          row :room_categories do |g|
+            safe_join(
+              g.room_categories.map do |category|
+                content_tag(:span, link_to(category.name, admin_room_category_path(category)))
+              end
+            )
+          end
+
           row :cover_photo do |r|
             r.cover_photo ? attachment_image_tag(r, :cover_photo, :fill, 200, 70) : nil
           end

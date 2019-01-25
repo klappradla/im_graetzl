@@ -9,10 +9,8 @@ ActiveAdmin.register User do
 
   filter :graetzl, collection: proc { Graetzl.order(:name).pluck(:name, :id) }, include_blank: true, input_html: { class: 'admin-filter-select' }
   filter :id, label: 'User', as: :select, collection: proc { User.admin_select_collection }, include_blank: true, input_html: { class: 'admin-filter-select'}
-  filter :location_category, collection: proc { LocationCategory.pluck(:name) }, include_blank: true
-  filter :business_interests, collection: proc { BusinessInterest.pluck(:title) }, include_blank: true
-  #filter :id
-  #filter :username
+  filter :location_category, collection: proc { LocationCategory.pluck(:name, :id) }, include_blank: true
+  filter :business_interests, collection: proc { BusinessInterest.pluck(:title, :id) }, include_blank: true
   filter :first_name
   filter :last_name
   filter :email
@@ -36,6 +34,8 @@ ActiveAdmin.register User do
     :cover_photo, :remove_cover_photo,
     :role,
     :business,
+    :location_category,
+    :business_interests,
     address_attributes: [
       :id,
       :street_name,

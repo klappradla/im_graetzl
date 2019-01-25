@@ -10,7 +10,18 @@ context.instance_eval do
           row :first_name
           row :last_name
           row :email
+          row :business
+          row(:newsletter){|u| status_tag(u.newsletter)}
           row(:role){|u| status_tag(u.role)}
+
+          row :business_interests do |g|
+            safe_join(
+              g.business_interests.map do |interest|
+                content_tag(:li, link_to(interest.title, admin_business_interest_path(interest)))
+              end
+            )
+          end
+
           row :bio
           row :website
           row :cover_photo do |u|
@@ -23,7 +34,6 @@ context.instance_eval do
           row :confirmed_at
           row :updated_at
           row :last_sign_in_at
-          row(:newsletter){|u| status_tag(u.newsletter)}
         end
       end
       if user.address
@@ -56,7 +66,7 @@ context.instance_eval do
           column(''){|l| link_to 'Anzeigen', admin_location_path(l) }
         end
       end
-      panel 'Habe Raum' do
+      panel 'Raumteiler | Habe Raum' do
         table_for user.room_offers do
           column :id
           column :slogan
@@ -65,12 +75,20 @@ context.instance_eval do
         end
       end
 
-      panel 'Suche Raum' do
+      panel 'Raumteiler | Suche Raum' do
         table_for user.room_demands do
           column :id
           column :slogan
           column(:comment_count) {|r| r.comments.size }
           column(''){|l| link_to 'Anzeigen', admin_room_demand_path(l) }
+        end
+      end
+
+      panel 'Gruppen Mitglied' do
+        table_for user.groups do
+          column :id
+          column :title
+          column(''){|l| link_to 'Anzeigen', admin_group_path(l) }
         end
       end
 

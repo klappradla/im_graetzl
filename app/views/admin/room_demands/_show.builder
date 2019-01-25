@@ -13,7 +13,15 @@ context.instance_eval do
           row :demand_description
           row :personal_description
           row :wants_collaboration
-          row :room_categories
+
+          row :room_categories do |g|
+            safe_join(
+              g.room_categories.map do |category|
+                content_tag(:li, link_to(category.name, admin_room_category_path(category)))
+              end
+            )
+          end
+
           row :avatar do |r|
             r.avatar ? attachment_image_tag(r, :avatar, :fill, 200, 200) : nil
           end

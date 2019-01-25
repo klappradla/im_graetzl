@@ -12,17 +12,29 @@ de:
         cancel: Als gelöscht markieren
     models:
       address: Adresse
+      business_interest:
+        one: Business Interesse
+        other: Business Interessen
       billing_address: Rechnungsadresse
-      category:
-        one: Location Kategorie
-        other: Location Kategorien
+      location_category:
+        one: Kategorie
+        other: Kategorien
       contact: Kontakt
       curator:
         one: Grätzlbotschafter
         other: Grätzlbotschafter
+      discussion_default_category:
+        one: Diskussions Kategorie
+        other: Diskussions Kategorien
       graetzl:
         one: Grätzl
         other: Grätzl
+      group:
+        one: Gruppe
+        other: Gruppen
+      group_category:
+        one: Gruppen Kategorie
+        other: Gruppen Kategorien
       image:
         one: Bild
         other: Bilder
@@ -43,16 +55,30 @@ de:
         other: Location Updates
       zuckerl:
         one: Zuckerl
-        other: Zuckerl
+        other: Zuckerln
       room_offer:
-        one: Habe Raum
-        other: Habe Raum
+        one: Raumteiler | Habe Raum
+        other: Raumteiler | Habe Raum
       room_demand:
-        one: Suche Raum
-        other: Suche Raum
-      group:
-        one: Gruppe
-        other: Gruppen
+        one: Raumteiler | Suche Raum
+        other: Raumteiler | Suche Raum
+      room_category:
+        one: Raumteiler | Kategorie
+        other: Raumteiler | Kategorien
+      room_suggested_tag:
+        one: Raumteiler | Tag
+        other: Raumteiler | Tags
+      room_call:
+        one: Call
+        other: Calls
+      room_module:
+        one: Call Modul
+        other: Call Module
+      room_call_submission:
+        one: Call Einreichung
+        other: Call Einreichungen
+
+
     attributes:
       address:
         street_name: Straße
@@ -185,7 +211,7 @@ de:
         remember_me: Angemeldet bleiben
         location_category: Kategorie
         business_interests: Interessen
-        role: Rolle
+        role: Admin
       zuckerl:
         active_admin_requested_event: Status ändern
         aasm_state: Status
