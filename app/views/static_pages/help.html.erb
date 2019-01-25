@@ -63,7 +63,7 @@
   </article>
 
 
-  <article class="container -reverse">
+  <article class="container">
     <div class="txt">
       <div class="headline">
         <div>
@@ -78,7 +78,7 @@
         HändlerInnen und ProduzentInnen im Bezirk.
       </p>
       <p class="link">
-        <%= link_to 'Zu den Bezirksgruppen', info_gruppen_path, :class => 'btn-primary -mint -flex' %>
+        <%= link_to 'Zu den Bezirksgruppen', groups_wien_path(:category => 1), :class => 'btn-primary -mint -flex' %>
       </p>
     </div>
     <div class="aside -img -bgpoints">
@@ -103,12 +103,12 @@
       </p>
     </div>
     <div class="aside">
-      <%= !Group.where(id: 1).empty? ? (render Group.where(id: 1)) : '' %>
+      <%= !Group.where(id: 4).empty? ? (render Group.where(id: 4)) : '' %>
     </div>
   </article>
 
 
-  <article class="container -groups -reverse">
+  <article class="container -groups">
     <div class="txt">
       <div class="headline">
         <div>
@@ -124,7 +124,7 @@
       </p>
     </div>
     <div class="aside">
-      <%= !Group.where(id: 15).empty? ? (render Group.where(id: 15)) : '' %>
+      <%= !Group.where(id: 6).empty? ? (render Group.where(id: 6)) : '' %>
     </div>
   </article>
 
@@ -149,7 +149,7 @@
   </article>
 
 
-  <article class="container -reverse">
+  <article class="container">
     <div class="txt">
       <h2>Location Seite</h2>
       <h3>Für mehr Sichtbarkeit in deinem Stadtteil!</h3>
@@ -193,7 +193,7 @@
   </article>
 
 
-  <article class="container -reverse">
+  <article class="container">
     <div class="txt">
       <h2>Events, Workshops & Termine</h2>
       <h3>Wir machen deine Neuigkeiten im Stadtteil bekannt!</h3>
