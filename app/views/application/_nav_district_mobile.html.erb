@@ -16,7 +16,7 @@
     Raumteiler (<%= district.numeric %>. Bez.)
   <% end %>
   <%= link_to groups_district_path(district) do %>
-    <%= icon_tag "speech-bubble" %> Gruppen (<%= district.numeric %>. Bez.)
+    <%= icon_tag "coop-share" %> Gruppen (<%= district.numeric %>. Bez.)
   <% end %>
   <%= link_to zuckerls_district_path(district) do %>
     <%= icon_tag "shopping-bag" %>
@@ -28,7 +28,7 @@
   <% end %>
 
   <%= link_to info_path do %>
-    <%= icon_tag "lightbulb" %> Mehr Infos
+    <%= icon_tag "lightbulb" %> Alle Services
   <% end %>
 
   <%= link_to "https://blog.imgraetzl.at/", class: 'bloglink', target: '_blank' do %>
