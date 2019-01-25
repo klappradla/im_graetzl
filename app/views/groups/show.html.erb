@@ -18,18 +18,6 @@
       <Attribute name="title"><%= @group.title %></Attribute>
       <Attribute name="group_visibility"><%= @group.private? ? "Geschlossene" : "Offene" %> Gruppe</Attribute>
       <Attribute name="description"><%= @group.description[0..250].gsub(/\n/, " ") if @group.description? %></Attribute>
-      <% if @group.parent %>
-      <Attribute name="parent"><%= @group.parent %></Attribute>
-      <% end %>
-      <% if (@group.parent.is_a? RoomCall) %>
-      <Attribute name="parent_path"><%= room_call_path(@group.parent) %></Attribute>
-      <% elsif (@group.parent.is_a? RoomOffer) %>
-      <Attribute name="parent_path"><%= room_offer_path(@group.parent) %></Attribute>
-      <% elsif (@group.parent.is_a? RoomDemand) %>
-      <Attribute name="parent_path"><%= room_demand_path(@group.parent) %></Attribute>
-      <% elsif (@group.parent.is_a? Location) %>
-      <Attribute name="parent_path"><%= location_path(@group.parent) %></Attribute>
-      <% end %>
       <Attribute name="users_count"><%= @group.users.count %></Attribute>
     </DataObject>
     <% @group.users.first(10).each do |user| %>

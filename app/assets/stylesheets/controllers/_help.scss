@@ -373,6 +373,15 @@ section.help {
         display: block;
         text-align: center;
       }
+      a {
+        text-decoration: none;
+      }
+      a:hover {
+        img {
+          transition: transform .3s; /* Animation */
+          transform: scale(1.05);
+        }
+      }
       .img-round {
         display: block;
         margin: auto;
