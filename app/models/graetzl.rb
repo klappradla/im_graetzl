@@ -27,7 +27,7 @@ class Graetzl < ApplicationRecord
 
   def zuckerls
     related_graetzl_ids = districts.map(&:graetzl_ids).flatten
-    Zuckerl.live.includes(location: [:address, :category]).
+    Zuckerl.live.includes(location: [:address, :location_category]).
       joins(:graetzl).where(graetzls: { id: related_graetzl_ids})
   end
 
