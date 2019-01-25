@@ -114,10 +114,9 @@ section.register-personalInfo, section.register-locationInfo  {
 
 
 section.register-personalInfo {
+
   .user-personal {
     margin-bottom: 3.0rem;
-    padding-bottom: 1.0rem;
-    border-bottom: 1px solid $color-ambient-mint-light;
     .input-checkbox {
       margin-left: 13px;
     }
@@ -127,16 +126,20 @@ section.register-personalInfo {
     margin-bottom: 3.0rem;
     padding-bottom: 1.0rem;
     border-bottom: 1px solid $color-ambient-mint-light;
+    .-themen {
+      margin-top:40px;
+    }
   }
 
   .user-type-selection {
-    margin-top:20px;
-    text-align: center;
+    margin-bottom: 3.0rem;
+    padding-bottom: 1.0rem;
+    border-bottom: 1px solid $color-ambient-mint-light;
     .input-radio {
-      display: inline-block;
-      margin: 0 10px;
+      //display: inline-block;
+      //margin: 0 10px;
       label {
-        //@include font-size-primaryFont('larger');
+        @include font-size-primaryFont('large');
         //padding-bottom:5px;
       }
     }
@@ -158,7 +161,7 @@ section.register-personalInfo {
   }
 
   .wrp-checkboxes {
-    padding-left: 13px;
+    //padding-left: 13px;
     .input-checkbox {
       display: inline-block;
       &:first-child {

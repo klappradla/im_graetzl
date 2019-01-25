@@ -62,7 +62,7 @@
         <%= icon_tag "user-avatar" %>
         <span>Vorname</span>
         <% end %>
-        <%= f.text_field :first_name %>
+        <%= f.text_field :first_name, placeholder: "Vorname" %>
       </div>
 
       <div class="input-field">
@@ -70,7 +70,7 @@
         <%= icon_tag "user-avatar" %>
         <span>Nachname</span>
         <% end %>
-        <%= f.text_field :last_name %>
+        <%= f.text_field :last_name, placeholder: "Nachname" %>
       </div>
 
       <div class="upload-oldschool">
@@ -91,19 +91,18 @@
           <%= f.attachment_field :avatar, direct: true, presigned: true %>
         </div>
       </div>
+    </div>
 
-      <div class="wrp-radios user-type-selection">
-        <p class="txt"><span>Registrieren als</span> ...</p>
-        <div class="input-radio">
-          <%= f.radio_button :business, false %>
-          <%= f.label "business_false", "Bewohner" %>
-        </div>
-        <div class="input-radio">
-          <%= f.radio_button :business, true %>
-          <%= f.label "business_true", "Wirtschaftstreibender" %>
-        </div>
+    <div class="wrp-radios user-type-selection">
+      <p class="txt">Ich möchte mich <span>registrieren als</span>...</p>
+      <div class="input-radio">
+        <%= f.radio_button :business, false %>
+        <%= f.label "business_false", "Privatperson" %>
       </div>
-
+      <div class="input-radio">
+        <%= f.radio_button :business, true %>
+        <%= f.label "business_true", "Selbstständig, GründerIn, Kulturschaffende, Unternehmen, Verein, Institution" %>
+      </div>
     </div>
 
     <div class="user-business">
@@ -113,7 +112,7 @@
         <%= f.collection_select :location_category_id, LocationCategory.all, :id, :name, { prompt: false } %>
       </div>
 
-      <p class="txt">An <span>welchen Themen</span> bist du interessiert?</p>
+      <p class="txt -themen">An <span>welchen Themen</span> bist du interessiert?</p>
       <div class="business-interests">
         <%= f.collection_check_boxes :business_interest_ids, BusinessInterest.all, :id, :title do |b| %>
         <div class="input-checkbox">

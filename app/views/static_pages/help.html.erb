@@ -1,7 +1,10 @@
 <% meta(
     title: t('.title'),
     description: t('.description'),
-    robots: 'index, follow'
+    robots: 'index, follow',
+    og_title: t('.title'),
+    og_description: t('.description'),
+    og_image: image_url('meta/coop-and-share.jpg')
   )
 %>
 
@@ -10,8 +13,6 @@
   <div class="imgHeader -fullwidth">
     <div class="wrp">
       <%= image_tag('svg/coopshare-logo-black.svg', class: 'coop-share-logo') %>
-      <!--<h1>imGrätzl - Coop & Share</h1>-->
-      <!--<h2>Alle Services im Überblick</h2>-->
     </div>
   </div>
 
