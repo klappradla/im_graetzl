@@ -22,6 +22,7 @@ class MailchimpSubscribeJob < ApplicationJob
           NEWSLETTER: user.newsletter.to_s,
           SIGNUP: user.created_at,
           ORIGIN: user.origin,
+          L_CATEGORY: user.location_category.try(:name)
         }
       })
     rescue Gibbon::MailChimpError => mce

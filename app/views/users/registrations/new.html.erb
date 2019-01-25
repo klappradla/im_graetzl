@@ -109,7 +109,7 @@
       <p class="txt">In <span>welche Kategorie</span> würdest du dich einordnen?</p>
 
       <div class="input-select">
-        <%= f.collection_select :location_category_id, LocationCategory.all, :id, :name, { prompt: false } %>
+        <%= f.collection_select :location_category_id, LocationCategory.all, :id, :name, { prompt: 'Kategrie auswählen..' } %>
       </div>
 
       <p class="txt -themen">An <span>welchen Themen</span> bist du interessiert?</p>
