@@ -13,7 +13,7 @@ context.instance_eval do
           row :business
           row(:newsletter){|u| status_tag(u.newsletter)}
           row(:role){|u| status_tag(u.role)}
-
+          row :location_category
           row :business_interests do |g|
             safe_join(
               g.business_interests.map do |interest|
