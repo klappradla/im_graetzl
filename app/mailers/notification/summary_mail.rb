@@ -23,7 +23,7 @@ class Notification::SummaryMail
         types: [Notifications::NewUserPost, Notifications::NewAdminPost].map(&:to_s)
       },
       {
-        name: 'Neue Gruppen im Grätzl',
+        name: 'Neue Gruppen',
         types: [Notifications::NewGroup].map(&:to_s)
       },
     ]
