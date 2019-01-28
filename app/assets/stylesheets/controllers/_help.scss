@@ -144,10 +144,15 @@ section.help {
       width:50%;
       @include respond-to(">=medium") {
         //padding-left: 50px;
-        width:35%;
+        width:38%;
         &.-half {
           width: 45%;
         }
+      }
+    }
+    .-groups, .-mentoring {
+      div.aside {
+        width: 35%;
       }
     }
     .-groups {

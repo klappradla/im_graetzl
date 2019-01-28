@@ -1,5 +1,5 @@
-<% post_first = discussion.discussion_posts.first %>
-<% post_last = discussion.discussion_posts.size > 1 ? discussion.discussion_posts.last : nil %>
+<% post_first = discussion.discussion_posts.order("id ASC").first %>
+<% post_last = (discussion.discussion_posts.size > 1 ? discussion.discussion_posts.order("id ASC").last : nil) %>
 
 <div class="cardBox -discussion" data-behavior="masonry-card">
   <div class="cardBoxHeader">
