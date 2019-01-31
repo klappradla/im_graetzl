@@ -22,7 +22,7 @@ class MailchimpSubscribeJob < ApplicationJob
           NEWSLETTER: user.newsletter.to_s,
           SIGNUP: user.created_at,
           ORIGIN: user.origin,
-          L_CATEGORY: user.location_category.try(:name)
+          L_CATEGORY: user_location_category(user)
         }
       })
     rescue Gibbon::MailChimpError => mce
@@ -37,4 +37,9 @@ class MailchimpSubscribeJob < ApplicationJob
   def mailchimp_member_id(user)
     Digest::MD5.hexdigest(user.email.downcase)
   end
+
+  def user_location_category(user)
+    user.location_category.try(:name) ? user.location_category.try(:name) : ''
+  end
+
 end

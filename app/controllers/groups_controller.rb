@@ -35,7 +35,7 @@ class GroupsController < ApplicationController
     @group.group_users.build(user_id: current_user.id, role: :admin)
 
     if @group.save
-      #@group.create_activity(:create, owner: current_user)
+      @group.create_activity(:create, owner: current_user)
       redirect_to @group
     else
       render 'new'
