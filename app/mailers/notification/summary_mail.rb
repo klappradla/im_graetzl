@@ -62,7 +62,7 @@ class Notification::SummaryMail
           blocks: [
             {
               name: 'group_users',
-              content: [Notifications::NewGroupUser]
+              content: [Notifications::NewGroupUser].map(&:to_s)
             }
           ]
         ].map(&:to_s),
