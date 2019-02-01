@@ -56,9 +56,9 @@ class Notification::SummaryMail
         name: 'Gruppe: ',
         types: [
           Notifications::NewGroupDiscussion,
-          Notifications::NewGroupPost,
           Notifications::NewGroupMeeting,
-          Notifications::NewGroupUser
+          Notifications::NewGroupPost,
+          Notifications::NewGroupUser,
         ].map(&:to_s),
         group: true,
       },
