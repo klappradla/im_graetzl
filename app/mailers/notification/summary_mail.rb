@@ -174,7 +174,6 @@ class Notification::SummaryMail
       post_notifications.group_by(&:group_discussion_id).values.each do |discussion_notifications|
         discussion_vars = discussion_notifications.sort_by(&:created_at).map(&:mail_vars)
         discussion_vars.each_with_index{|d, i| d[:first_in_discussion] = i.zero? ? 'true' : 'false'}
-        discussion_vars.each_with_index{|d, i| d[:last_in_discussion] = (i == i.length) ? 'true' : 'false'}
         notification_vars += discussion_vars
       end
       {
