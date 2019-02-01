@@ -63,18 +63,18 @@ ActiveAdmin.register User do
       column :last_name
       column(:graetzl) { |user| user.graetzl.name }
       column(:graetzl_url) { |user| Rails.application.routes.url_helpers.graetzl_path(user.graetzl) }
-      column(:post_count) { |user| user.posts.count }
-      column :last_sign_in_at
+      #column :last_sign_in_at
       column :created_at
-      column :confirmed_at
+      #column :confirmed_at
       column :role
-      column :business
-      column :slug
-      column :website
+      #column :business
+      column(:business) {|user| user.business? ? 'business' : '' }
+      #column :slug
+      #column :website
       column :newsletter
-      column(:location_category) {|user| user.location_category }
+      column(:location_category) {|user| user.location_category.try(:name) }
       column(:bezirk_1) { |user| user.graetzl.districts.first.try(:zip) }
-      column(:bezirk_2) { |user| user.graetzl.districts.second.try(:zip) }
+      #column(:bezirk_2) { |user| user.graetzl.districts.second.try(:zip) }
       column(:location_1) { |user| user.primary_location.try(:name) }
       column(:location_1_url) { |user|
         Rails.application.routes.url_helpers.graetzl_location_path(user.primary_location.graetzl, user.primary_location) if user.primary_location
@@ -93,5 +93,6 @@ ActiveAdmin.register User do
       }
       column(:meetings_initiated) { |user| user.going_tos.initiator.count }
       column(:location_posts) { |user| user.location_posts.count }
+      column(:post_count) { |user| user.posts.count }
     end
 end
