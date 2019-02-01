@@ -58,11 +58,7 @@ class Notification::SummaryMail
           Notifications::NewGroupDiscussion,
           Notifications::NewGroupPost,
           Notifications::NewGroupMeeting,
-          #Notifications::NewGroupUser
-          {
-            name: 'group_users',
-            content: [Notifications::NewGroupUser].map(&:to_s)
-          }
+          Notifications::NewGroupUser
         ].map(&:to_s),
         group: true,
       },
