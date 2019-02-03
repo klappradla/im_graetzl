@@ -48,8 +48,8 @@
       <%= render 'rooms/action_card', graetzl: @graetzl %>
     </div>
 
-    <!-- Insert Raumteiler Speeddating Featured Card -->
-    <%= !Meeting.where(id: 4494).empty? ? (render 'shared/featured_cards/raumteiler_speeddating', meeting: Meeting.find(4494)) : '' %>
+    <!-- Insert Raumteiler Group Featured Card -->
+    <%= !Group.where(id: 15).empty? ? (render 'groups/group', group: Group.find(15), featured_card: 'featuredCard -hidden') : '' %>
 
     <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'rooms-paginate-link' }, rel: 'nofollow' %>
   </div>

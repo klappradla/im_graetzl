@@ -600,6 +600,13 @@ main > .sponsorstuwerviertel {
       .slogan {
           display: none;
       }
+      .users {
+        img {
+          @include respond-to("<=medium") {
+            margin-right:5px;
+          }
+        }
+      }
     }
   }
 }
