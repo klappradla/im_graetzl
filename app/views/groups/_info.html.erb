@@ -9,57 +9,63 @@
         <div class="bbcode"><%= @group.description.bbcode_to_html.html_safe %></div>
       </div>
 
-      <h3><%= @group.users.count %> <%= @group.users.count > 1 ? 'Mitglieder' : 'Mitglied' %></h3>
-
-      <div class="users member-section">
-
-        <% @group.admins.each do |user| %>
-          <div class="user">
-            <div class="avatar">
-              <%= attachment_image_tag user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
-            </div>
-            <div class="infos">
-              <div class="title">Organisator:</div>
-              <span><%= user.first_name %><br><%= user.last_name %></span>
-            </div>
-          </div>
-        <% end %>
-
-        <% @group.members.first(20 - @group.admins.size).each do |user| %>
-          <div class="user">
-            <div class="avatar">
-              <%= attachment_image_tag user, :avatar, :fill, 200, 200, fallback: 'avatar/user/200x200.png', class: 'img-round' %>
-            </div>
-            <div class="infos">
-              <span><%= user.first_name %><br><%= user.last_name %></span>
-            </div>
-          </div>
-        <% end %>
-        <% if @group.users.size > 20 %>
-          <div class="user -more">
-            <div class="avatar">
-              <%= icon_tag "user-avatar" %>
-            </div>
-            <div class="infos">
-              <span>+ <%= @group.users.size - 20 %> weitere</span>
-            </div>
-          </div>
-        <% end %>
-      </div>
-
     </div>
 
     <div class="side">
-
-      <% if (@group.parent.is_a? RoomCall) && @group.parent.open? %>
-        <%= render 'room_calls/room_call', room_call: @group.parent %>
-      <% elsif @next_meeting.present? %>
+      <% if @next_meeting.present? %>
         <%= render @next_meeting %>
       <% end %>
-
     </div>
 
   </div>
+
+
+
+  <div class="group-member-section">
+    <h3><%= @group.users.count %> <%= @group.users.count > 1 ? 'Mitglieder' : 'Mitglied' %></h3>
+
+    <div class="users member-section">
+
+      <% @group.admins.each do |user| %>
+        <div class="user">
+          <div class="avatar">
+            <%= link_to user_path(user) do %>
+              <%= attachment_image_tag user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+            <% end %>
+          </div>
+          <div class="infos">
+            <div class="title">Organisator:</div>
+            <span><%= user.first_name %><br><%= user.last_name %></span>
+          </div>
+        </div>
+      <% end %>
+
+      <% @group.members.first(20 - @group.admins.size).each do |user| %>
+        <div class="user">
+          <div class="avatar">
+            <%= link_to user_path(user) do %>
+              <%= attachment_image_tag user, :avatar, :fill, 200, 200, fallback: 'avatar/user/200x200.png', class: 'img-round' %>
+            <% end %>
+          </div>
+          <div class="infos">
+            <span><%= user.first_name %><br><%= user.last_name %></span>
+          </div>
+        </div>
+      <% end %>
+      <% if @group.users.size > 20 %>
+        <div class="user -more">
+          <div class="avatar">
+            <%= icon_tag "user-avatar" %>
+          </div>
+          <div class="infos">
+            <span>+ <%= @group.users.size - 20 %> weitere</span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+
 
   <div class="district-section">
     <h3>Bezirke / Grätzln</h3>

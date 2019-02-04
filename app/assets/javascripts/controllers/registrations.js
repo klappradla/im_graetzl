@@ -18,7 +18,7 @@ APP.controllers.registrations = (function() {
       }).change();
 
       $(".business-interests input").on("change", function() {
-        if ($(".business-interests input:checked").length >= 5) {
+        if ($(".business-interests input:checked").length >= 6) {
           $(".business-interests input:not(:checked)").each(function() {
             $(this).prop("disabled", true);
             $(this).parents(".input-checkbox").addClass("disabled");

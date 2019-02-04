@@ -267,7 +267,7 @@ section.group-form-page {
     }
   }
 
-  .top-section, .bottom-section {
+  .top-section, .bottom-section, .group-member-section {
     @include cf;
     h3 {
       margin-bottom: 20px;
@@ -465,6 +465,9 @@ section.group-form-page {
         font-style:italic;
         @include ellipsis();
       }
+      .avatar a {
+        color:$color-ambient-mint;
+      }
     }
   }
 
@@ -485,6 +488,9 @@ section.group-form-page {
         }
       }
       width:132px;
+      @include respond-to("<=medium") {
+        width:112px;
+      }
       margin-right:0px;
       margin-bottom:15px;
       div.avatar {

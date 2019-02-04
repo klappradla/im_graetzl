@@ -15,7 +15,9 @@
   <% end %>
 
   <div class="avatar">
-    <%= attachment_image_tag group_user.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+    <%= link_to user_path(group_user.user) do %>
+      <%= attachment_image_tag group_user.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+    <% end %>
   </div>
 
   <div class="infos">
