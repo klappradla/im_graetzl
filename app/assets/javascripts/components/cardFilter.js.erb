@@ -122,7 +122,7 @@ APP.components.cardFilter = (function() {
     });
 
     filterForm.on('ajax:success', function() {
-      stopSpinner();
+      //stopSpinner();
       addActionCard();
       addFeaturedCard();
       adjustNewCards();
@@ -180,13 +180,8 @@ APP.components.cardFilter = (function() {
   }
 
   function showSpinner() {
-    var spinnerSrc = "<%= asset_path('svg/loading.svg') %>";
-    var spinner = $('<img class="loading-spinner" src="' + spinnerSrc + '">');
+    var spinner = $('footer .loading-spinner').clone().removeClass('-hidden');
     cardGrid.append(spinner);
-  }
-
-  function stopSpinner() {
-    cardGrid.find(".stopSpinner").remove();
   }
 
   function addActionCard() {

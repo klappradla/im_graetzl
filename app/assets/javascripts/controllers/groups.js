@@ -16,15 +16,6 @@ APP.controllers.groups = (function() {
 
     function initGroupForm() {
 
-      // IMPROVE THIS! - Find Checkbox for Param via Wording and Check ..
-      //if (window.location.href.indexOf("room_offer_id") > -1) {
-        //var chckbox_id = $('.group-categories label[for]').filter(function(){
-          // return $(this).text() === 'Raumteiler';
-        //}).attr('for');
-        //$('#'+chckbox_id).prop('checked',!$('#'+chckbox_id).prop('checked')); //this is checbox id
-      //}
-      // END
-
       $(".group-categories input").on("change", function() {
         if ($(".group-categories input:checked").length >= 3) {
           $(".group-categories input:not(:checked)").each(function() {
@@ -83,6 +74,24 @@ APP.controllers.groups = (function() {
       });
 
       $("#tab-discussions .autoload-link").click();
+
+      // Remove Content before loading new content
+      $("#tab-discussions .categories-list a").on('ajax:beforeSend', function() {
+        $(".discussions-container").html("");
+        showSpinner();
+      });
+
+      // Fade in new content (may try other effects - scale?!... try to make spinner global)
+      // Spinner posotionieren noch ... über css
+      $("#tab-discussions .categories-list a").on('ajax:success', function() {
+        $(".discussions-container").hide().fadeIn(100);
+      });
+
+    }
+
+    function showSpinner() {
+      var spinner = $('footer .loading-spinner').clone().removeClass('-hidden');
+      $(".discussions-container").append(spinner);
     }
 
     function initMobileNav() {
