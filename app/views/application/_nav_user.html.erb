@@ -198,10 +198,14 @@
           <% end %>
           <% current_user.meetings.upcoming.first(8).each do |meeting| %>
             <%= link_to [meeting.graetzl, meeting] do %>
-              <div class="calendarSheet">
-                <div class="day"><%= meeting.starts_at_date.day %></div>
-                <div class="month"><%= I18n.localize(meeting.starts_at_date, format:'%b') %></div>
-              </div>
+              <% if meeting.starts_at_date %>
+                <div class="calendarSheet">
+                  <div class="day"><%= meeting.starts_at_date.day %></div>
+                  <div class="month"><%= I18n.localize(meeting.starts_at_date, format:'%b') %></div>
+                </div>
+              <% else %>
+                <%= icon_tag "calendar-2" %>
+              <% end %>
               <span><%= meeting.name %></span>
             <% end %>
           <% end %>
