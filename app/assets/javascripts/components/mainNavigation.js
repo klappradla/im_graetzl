@@ -63,6 +63,23 @@ APP.components.mainNavigation = (function() {
         $(document).on("closeAllTopnav", function() {
             closeMobileNav();
         });
+
+
+        // Personal Slide in Menue
+        var personalNavWidth = $('section.personal').width();
+        $('section.second').css('left', personalNavWidth);
+
+        $('.main a.-trigger').on('click', function(){
+          var personalNavType = 'section.' + $(this).data("type");
+          $( personalNavType ).animate({ "left": "0px" }, 250 );
+        });
+        // Close
+        $('.second a.-trigger').on('click', function(){
+          var personalNavType = 'section.' + $(this).data("type");
+          $( personalNavType ).animate({ "left": personalNavWidth }, 200 );
+        });
+        // End
+
     }
 
     function createMobileNav() {

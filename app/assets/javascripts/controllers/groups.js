@@ -81,8 +81,7 @@ APP.controllers.groups = (function() {
         showSpinner();
       });
 
-      // Fade in new content (may try other effects - scale?!... try to make spinner global)
-      // Spinner posotionieren noch ... über css
+      // Fade in new content
       $("#tab-discussions .categories-list a").on('ajax:success', function() {
         $(".discussions-container").hide().fadeIn(100);
       });

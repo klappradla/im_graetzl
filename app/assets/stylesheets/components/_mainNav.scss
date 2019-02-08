@@ -270,3 +270,73 @@
   font-size: 1.0rem;
   padding: 1px 3px;
 }
+
+.usersettingsContainer .nav-usersettings {
+
+  display: flex;
+
+  section.personal {
+    position: relative;
+    width:300px;
+    overflow: hidden;
+    a {
+      padding-right:5px;
+      span {
+        @include ellipsis();
+      }
+    }
+    section.main, section.second {
+      display: flex;
+      flex-wrap: wrap;
+      background-color: white;
+      top:0px;
+      width:100%;
+      align-items: flex-start;
+      align-content: flex-start;
+      a {
+        width: 100%;
+      }
+      .img-square {
+        margin-left:0px;
+        margin-right:16px;
+      }
+      .calendarSheet {
+        transform: scale(0.7);
+        margin:-10px;
+        margin-right:10px;
+      }
+      .badgeNumber {
+        right: 12px;
+      }
+    }
+    section.second {
+      height: 100%;
+      position: absolute;
+      section.content {
+        height: calc(100% - 61px);
+        overflow-y: auto;
+      }
+      .info {
+        padding:15px;
+        font-style: italic;
+        color: $color-ambient-grey;
+      }
+    }
+
+    section.main {
+      left:0;
+      z-index: 1;
+      .-more {
+        position: absolute;
+        right: -15px;
+        svg {
+          fill: $color-ambient-grey-light;
+        }
+      }
+    }
+    section.second {
+      z-index: 2;
+    }
+  }
+
+}
