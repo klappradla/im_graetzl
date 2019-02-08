@@ -171,6 +171,11 @@
           <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-groups'} do %>
             <%= icon_tag "arrow-left-2" %> Zurück
           <% end %>
+          <% if current_user.groups.empty? %>
+            <div class="info">
+              Du bist in noch keiner Gruppe Mitglied ..
+            </div>
+          <% end %>
           <section class="content">
             <% current_user.groups.size >= 8 ? maxgroups = 7 : maxgroups = 8 %>
             <% current_user.groups.first(maxgroups).each do |group| %>

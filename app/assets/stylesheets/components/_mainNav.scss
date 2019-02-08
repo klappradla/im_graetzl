@@ -280,7 +280,7 @@
     width:300px;
     overflow: hidden;
     a {
-      padding-right:5px;
+      padding-right:10px;
       span {
         @include ellipsis();
       }
@@ -313,6 +313,7 @@
       height: 100%;
       position: absolute;
       section.content {
+        width:100%;
         height: calc(100% - 61px);
         overflow-y: auto;
       }
