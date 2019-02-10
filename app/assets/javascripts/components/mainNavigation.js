@@ -66,17 +66,20 @@ APP.components.mainNavigation = (function() {
 
 
         // Personal Slide in Menue
-        var personalNavWidth = $('section.personal').width();
-        $('section.second').css('left', personalNavWidth);
+        var personalNavWidth = $('.usersettingsContainer section.personal').width();
+        $('.usersettingsContainer section.second').css('left', personalNavWidth);
+        $('.mobileUserSettings section.second').css('left', '100%');
 
         $('.main a.-trigger').on('click', function(){
           var personalNavType = 'section.' + $(this).data("type");
-          $( personalNavType ).animate({ "left": "0px" }, 250 );
+          $('.usersettingsContainer ' + personalNavType ).animate({ "left": "0px" }, 250 );
+          $('.mobileUserSettings ' + personalNavType ).animate({ "left": "0px" }, 250 );
         });
         // Close
         $('.second a.-trigger').on('click', function(){
           var personalNavType = 'section.' + $(this).data("type");
-          $( personalNavType ).animate({ "left": personalNavWidth }, 200 );
+          $('.usersettingsContainer ' + personalNavType ).animate({ "left": personalNavWidth }, 200 );
+          $('.mobileUserSettings ' + personalNavType ).animate({ "left": '100%' }, 200 );
         });
         // End
 

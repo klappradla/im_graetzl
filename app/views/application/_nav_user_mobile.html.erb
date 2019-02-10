@@ -49,31 +49,8 @@
 
 <div class="mobileUserSettings" data-mobileNavID="usersettings">
   <div class="nav-usersettings">
-    <%= link_to user_path(current_user) do %>
-      <%= icon_tag "user-avatar" %> Profil
-    <% end %>
-    <%= link_to locations_user_path do %>
-      <%= icon_tag "location" %> Locations
-    <% end %>
-    <%= link_to zuckerls_user_path do %>
-      <%= icon_tag "shopping-bag" %> Grätzlzuckerl
-    <% end %>
-    <%= link_to rooms_user_path do %>
-      <%= icon_tag "raumteiler" %> Raumteiler
-    <% end %>
-    <%= link_to groups_user_path do %>
-      <%= icon_tag "coop-share" %> Gruppen
-    <% end %>
-    <%= link_to edit_user_path do %>
-      <%= icon_tag "gears" %> Einstellungen
-    <% end %>
-    <% if current_user.admin? %>
-      <%= link_to admin_root_path do %>
-        <%= icon_tag "magic-wand" %> Admin
-      <% end %>
-    <% end %>
-    <%= link_to destroy_user_session_path, method: :delete do %>
-      <%= icon_tag "power" %> Abmelden
-    <% end %>
+
+    <%= render 'nav_user_innerContent' %>
+
   </div>
 </div>
