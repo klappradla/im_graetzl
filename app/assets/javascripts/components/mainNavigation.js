@@ -70,16 +70,30 @@ APP.components.mainNavigation = (function() {
         $('.usersettingsContainer section.second').css('left', personalNavWidth);
         $('.mobileUserSettings section.second').css('left', '100%');
 
-        $('.main a.-trigger').on('click', function(){
+        //Desktop
+        $('.usersettingsContainer .main a.-trigger').on('click', function(){
           var personalNavType = 'section.' + $(this).data("type");
           $('.usersettingsContainer ' + personalNavType ).animate({ "left": "0px" }, 250 );
-          $('.mobileUserSettings ' + personalNavType ).animate({ "left": "0px" }, 250 );
         });
-        // Close
-        $('.second a.-trigger').on('click', function(){
+        //Mobile
+        $('.mobileUserSettings .main a.-trigger').on('click', function(){
+          var personalNavType = 'section.' + $(this).data("type");
+          var personalNavTypeHeight = $('.mobileUserSettings ' + personalNavType).height();
+          $('.mobileUserSettings ' + personalNavType ).animate({ "left": "0px" }, 250 );
+          $('.mobileUserSettings section.personal').animate({ "height": personalNavTypeHeight }, 250 );
+        });
+
+        // Close Desktop
+        $('.usersettingsContainer .second a.-trigger').on('click', function(){
           var personalNavType = 'section.' + $(this).data("type");
           $('.usersettingsContainer ' + personalNavType ).animate({ "left": personalNavWidth }, 200 );
+        });
+        // Close Mobile
+        $('.mobileUserSettings .second a.-trigger').on('click', function(){
+          var personalNavType = 'section.' + $(this).data("type");
           $('.mobileUserSettings ' + personalNavType ).animate({ "left": '100%' }, 200 );
+          var personalNavTypeHeight = $('.mobileUserSettings section.main').height();
+          $('.mobileUserSettings section.personal').animate({ "height": personalNavTypeHeight }, 250 );
         });
         // End
 
