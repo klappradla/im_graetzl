@@ -92,7 +92,7 @@
     <% end %>
     <section class="content">
       <% current_user.groups.size >= 8 ? maxgroups = 7 : maxgroups = 8 %>
-      <% current_user.groups.first(maxgroups).each do |group| %>
+      <% current_user.groups.last(maxgroups).reverse.each do |group| %>
         <%= link_to group do %>
           <%= icon_tag "coop-share" %>
           <span><%= group.title %></span>
