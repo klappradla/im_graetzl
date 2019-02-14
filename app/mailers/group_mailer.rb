@@ -1,6 +1,24 @@
 class GroupMailer
   include MailUtils
 
+  def group_online(group, user)
+    MandrillMailer.deliver(template: 'notification-group-online', message: {
+      to: [ { email: user.email } ],
+      tags: ['notification-group-online'],
+      global_merge_vars: [
+        { name: 'username', content: user.username },
+        { name: 'first_name', content: user.first_name },
+        { name: 'last_name', content: user.last_name },
+        { name: 'owner_name', content: user.full_name },
+        { name: 'group_name', content: group.title },
+        { name: 'group_description', content: group.description.truncate(255, separator: ' ') },
+        { name: 'cover_photo_url', content: Notifications::ImageService.new.cover_photo_url(group) },
+        { name: 'owner_avatar_url', content: Notifications::ImageService.new.avatar_url(user) },
+        { name: 'group_url', content: group_url(group, URL_OPTIONS) }
+      ]
+    })
+  end
+
   def new_join_request(join_request)
     group_admins = join_request.group.admins
 
@@ -25,6 +43,7 @@ class GroupMailer
   def join_request_accepted(group, user)
     MandrillMailer.deliver(template: 'group-join-request-accepted', message: {
       to: [ { email: user.email } ],
+      tags: ['group-new-member'],
       global_merge_vars: [
         { name: 'username', content: user.username },
         { name: 'first_name', content: user.first_name },

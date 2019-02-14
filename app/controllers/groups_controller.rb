@@ -36,6 +36,7 @@ class GroupsController < ApplicationController
 
     if @group.save
       @group.create_activity(:create, owner: current_user)
+      GroupMailer.new.group_online(@group, current_user)
       redirect_to @group
     else
       render 'new'
