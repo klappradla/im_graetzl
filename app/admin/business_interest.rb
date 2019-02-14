@@ -3,6 +3,5 @@ ActiveAdmin.register BusinessInterest do
 
   form partial: 'form'
 
-  permit_params :title
-  permit_params :mailchimp_id
+  permit_params :title, :mailchimp_id
 end
