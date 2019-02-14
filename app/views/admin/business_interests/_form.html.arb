@@ -1,0 +1,8 @@
+active_admin_form_for [:admin, resource] do |f|
+  inputs do
+    semantic_errors
+    input :title
+    input :mailchimp_id
+  end
+  actions
+end

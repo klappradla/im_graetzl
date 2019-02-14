@@ -23,7 +23,8 @@ class MailchimpSubscribeJob < ApplicationJob
           SIGNUP: user.created_at,
           ORIGIN: user.origin,
           L_CATEGORY: user_location_category(user)
-        }
+        },
+        interests: business_user_interests(user)
       })
     rescue Gibbon::MailChimpError => mce
       SuckerPunch.logger.error("subscribe failed: due to #{mce.message}")
@@ -36,6 +37,21 @@ class MailchimpSubscribeJob < ApplicationJob
 
   def mailchimp_member_id(user)
     Digest::MD5.hexdigest(user.email.downcase)
+  end
+
+  def business_user_interests(user)
+    mailchimp_interests = {}
+    user.try(:business_interests).each do |interest|
+      mailchimp_interests[interest.mailchimp_id] = true if interest.mailchimp_id.present?
+    end
+    return mailchimp_interests
+    #BusinessInterest.find_each do |interest|
+    #  if user.business_interests.include?(interest)
+    #    mailchimp_interests[interest.mailchimp_id] = true if interest.mailchimp_id.present?
+    #  else
+    #    mailchimp_interests[interest.mailchimp_id] = false if interest.mailchimp_id.present?
+    #  end
+    #end
   end
 
   def user_location_category(user)
