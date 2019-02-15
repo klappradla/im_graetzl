@@ -16,6 +16,7 @@ class DiscussionPost < ApplicationRecord
   end
 
   def delete_permission?(by_user)
+    return false if initial_post?
     user == by_user || group.admins.include?(by_user)
   end
 
