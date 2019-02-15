@@ -22,7 +22,7 @@ class DiscussionsController < ApplicationController
   def create
     @discussion = @group.discussions.build(discussion_params)
     @discussion.user = current_user
-    @discussion.discussion_posts.build(discussion_post_params.merge(user: current_user))
+    @discussion.discussion_posts.build(discussion_post_params.merge(initial_post: true, user: current_user))
     if @discussion.save
       @discussion.discussion_followings.create(user: current_user)
       @discussion.create_activity(:create, owner: current_user)
