@@ -80,6 +80,7 @@ ActiveAdmin.register Meeting do
     :starts_at_date, :starts_at_time,
     :ends_at_time,
     :location_id,
+    :group_id,
     :approved_for_api,
     address_attributes: [
       :id,

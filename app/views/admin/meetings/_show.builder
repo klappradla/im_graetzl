@@ -10,6 +10,7 @@ context.instance_eval do
           row :created_at
           row :graetzl
           row :location
+          row :group
           row :initiator
           row :description
           row :cover_photo do |m|
