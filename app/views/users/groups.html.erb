@@ -4,26 +4,19 @@
 
   <div class="introcontainer -groups">
     <div class="introtxt">
-      <h1>Trete jetzt einer <span>Gruppe</span> bei</h1>
+      <h1>Trete jetzt einer <span>Gruppe</span> bei.</h1>
       <p>
-        Durchstöbere die Gruppen auf imGrätzl und trete jetzt einer Gruppe bei.
+        Durchstöbere die Gruppen auf imGrätzl und trete einer passenden Gruppe bei.
         <br>
-        <strong>Hier gehts zu allen <%= link_to "Gruppen in #{current_user.graetzl.name}", groups_graetzl_path(current_user.graetzl) %></strong>.
-        <br><br>
-        Oder stöbere in den Kategorien und finde eine passende Gruppe für dich:
+        Hier gehts zu allen <%= link_to "Gruppen in deinem Grätzl", groups_graetzl_path(current_user.graetzl) %> <%= current_user.graetzl.name %>.
       </p>
-
-      <ul>
-      <% GroupCategory.all.each do |category| %>
-        <li>
-          <%= link_to category.title, groups_wien_path(:category => category.id) %>
-        </li>
-      <% end %>
-      </ul>
-
-      <br><br>
-      <%= link_to 'Weiter zu allen Gruppen in ganz Wien', groups_wien_path, class: 'btn-primary -mint' %>
-
+      <p>
+        Du kannst natürlich auch in den Gruppen in ganz Wien stöbern, oder eine neue Gruppe gründen.
+      </p>
+      <p class="btns">
+        <%= link_to 'Weitere Infos', info_gruppen_path, class: 'btn-primary -grey' %>
+        <%= link_to 'Zu allen Gruppen in ganz Wien', groups_wien_path, class: 'btn-primary -mint' %>
+      </p>
     </div>
     <%= render 'groups/action_card', user: @user %>
   </div>

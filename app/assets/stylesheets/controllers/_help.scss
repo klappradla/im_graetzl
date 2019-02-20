@@ -362,6 +362,17 @@ section.help {
       //opacity: 0.7;
     }
 
+    .anmeldung-badge {
+      display: none;
+      @include respond-to(">=medium") {
+        display: block;
+        width:22%;
+        position: absolute;
+        bottom: 20px;
+        left: 10px;
+      }
+    }
+
     .badge {
       float:right;
       @include font-size-secondaryFont('small');

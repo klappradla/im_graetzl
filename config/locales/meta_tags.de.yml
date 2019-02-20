@@ -28,11 +28,14 @@ de:
     meetings:
       title: 'Events & Workshops – Hilfe, Tipps & Tricks.'
       description: 'Fragen & Antworten zum Veröffentlichen von Events & Workhops.'
+    groups:
+      title: 'Gruppen – Hilfe, Tipps & Tricks.'
+      description: 'Fragen & Antworten zu den Gruppen.'
     lp_raumteilerguide:
-      title: 'Der Raumteiler Guide 2018 - Jetzt kostenlos downloaden'
-      description: 'Hol dir jetzt den kostenlosen 60 seitigen Raumteiler Guide 2018. Deine Schritt-für-Schritt Anleitung zum Räume teilen.'
+      title: 'Der Raumteiler Guide 2019 - Jetzt kostenlos downloaden'
+      description: 'Hol dir jetzt den kostenlosen 60 seitigen Raumteiler Guide 2019. Deine Schritt-für-Schritt Anleitung zum Räume teilen.'
     lp_raumteilerguide_success:
-      title: 'Der Raumteiler Guide 2018 - Dein persönlicher Download-Link'
+      title: 'Der Raumteiler Guide 2019 - Dein persönlicher Download-Link'
       description: 'Dein persönlicher Download-Link'
     code-of-conduct:
       title: 'Code of Conduct'

@@ -15,7 +15,11 @@
   <div class="paperCard -cord1RT container -top" id="zero">
     <div class="wrp">
       <p>
-        Mehr Infos in Kürze ..
+        <strong>Die Gruppen sind neu auf imGrätzl, wobei können sie dich unterstützen?</strong>
+      </p>
+      <p>
+        Angenommen du organisierst regelmäßig z.B. Workshops, Kurse, Treffen oder Ähnliches
+        Und: Du möchtest am liebsten einen Kreis an Interessierten um dein Thema bilden, damit du nicht immer wieder von Neuem anfangen musst mit dem Trommeln. Dann ist eine eigene Gruppe das Richtige für dich.
       </p>
     </div>
     <div class="card"></div>
@@ -25,29 +29,71 @@
 
   <aside>
     <div id="help_nav">
-      <a href="#finden" class="btn-primary -mint" id="nav-one">Gruppe finden</a>
+      <a href="#stoebern" class="btn-primary -mint" id="nav-one">Stöbern in Gruppen</a>
       <a href="#erstellen" class="btn-primary -mint" id="nav-two">Neue Gruppe gründen</a>
+      <a href="#mails" class="btn-primary -mint" id="nav-three">E-Mail Benachrichtigungen</a>
+      <a href="#follow" class="btn-primary -mint" id="nav-four">Themen folgen</a>
     </div>
   </aside>
 
   <div class="mainContent">
 
     <article class="container" id="one">
-      <h2 id="finden">Stöbern in den Gruppen</h2>
-      <h3>So findest du die passende Gruppe</h3>
+      <h2 id="stoebern">Gruppe finden & stöbern</h2>
+      <h3>Du suchst eine bestimmte Gruppe?</h3>
       <p>
-        Mehr Infos in Kürze ..
+        Auf der Übersichtsseite für <%= link_to 'alle Gruppen in Wien', groups_wien_path %> kannst du dir zunächst alle Gruppen ansehen die es schon gibt.
+        <br>
+        Wenn du in das Suchfeld klickst, dann erscheinen dir zusätzlich alle Kategorien zu denen es schon Gruppen gibt und du kannst natürlich auch nach einer Gruppe suchen.<br>
+        Hast du eine Gruppe gefunden die dich interessiert, so klicke in der Gruppe auf <strong>"Gruppe beitreten"</strong>.
       </p>
     </article>
 
     <article class="container" id="two">
       <h2 id="erstellen">Gründe eine neue Gruppe</h2>
 
-      <h3>Keine passende Gruppe dabei – Starte jetzt eine neue Gruppe!</h3>
+      <h3>So gehst du vor:</h3>
+        <ul>
+          <li>Eröffne eine <%= link_to 'neue Gruppe', new_group_path %>, fülle das Formular aus. Beschreib das Thema der Gruppe ausführlicher und stelle dich selber vor. Dann kann es los gehen - Formular abschicken - die Gruppe ist eröffnet.</li>
+          <li>Stelle dann den nächsten Termin in die Gruppe rein. Das kann ein Workshop Termin, ein erstes Kennenlern-Treffen, eine Unternehmung, oder ein Vortrag sein.</li>
+          <li>Gruppen funktionieren übrigens besser, wenn es auch regelmäßig reale Treffen gibt.</li>
+        </ul>
+      <br>
       <p>
-        Mehr Infos in Kürze ..
+        <strong>Tipp: </strong>Lade Interessierte im ersten Schritt persönlich in die Gruppe ein. Denn sobald die ersten Gruppenmitglieder sich in der Gruppe eingefunden haben und es Treffen und Aktivitäten in der Gruppe gibt, zieht das weitere Interessierte an. Sobald du deine Gruppe zum Laufen gebracht hast, wirst du erleben, wie sie von selber wächst und wächst und wächst.
       </p>
      </article>
+
+     <article class="container" id="three">
+       <h2 id="mails">E-Mail Benachrichtigungen in der Gruppe</h2>
+
+       <h3>Wann und worüber wirst du benachrichtigt?</h3>
+       <p>
+         Die Grundeinstellungen für Benachrichtigungen aus deiner Gruppe findest du bei deinen <%= link_to 'Mail Einstellungen', edit_user_path(:anchor => 'tab-2') %>.
+       </p>
+      <p>
+        Hier kannst du einstellen, wofür und wie oft du Mails erhalten möchtest. Also z.b.:
+        <ol>
+          <li>Eine neue Diskussion wurde gestartet.</li>
+          <li>Ein neues Mitglied ist der Gruppe beigetreten.</li>
+          <li>Eine neues Treffen wurde in der Gruppe erstellt.</li>
+          <li>Es gibt neue Antworten in Themen denen ich folge.</li>
+        </ol>
+      </p>
+    </article>
+
+    <article class="container" id="four">
+      <h2 id="follow">Themen in einer Gruppe folgen</h2>
+      <h3>Wie kannst du bestimmten Themen folgen?</h3>
+      <p>
+        Sobald du ein Thema eröffnest oder Beiträge in anderen Themen schreibst, folgst du diesen automatisch und wirst über neue Antworten im Thema per Mail benachrichtigt. (Sofern du dies möchtest.)
+      </p>
+      <h3>Du kannst aber auch Themen folgen, ohne darin aktiv zu sein.</h3>
+      <p>
+        Möchtest du z.b. in einem Thema mitlesen und informiert werden über neue Beiträge, dann aktiviere direkt im Thema rechts oben den Regler <strong>"E-Mail Updates"</strong>.<br>
+        Genauso gehts natürlich umgekehrt. Hast du in einem Thema etwas geschrieben, möchtest aber keine Mails mehr aus diesem Thema erhalten, dann kannst du dies speziell für dieses Thema abstellen.
+      </p>
+   </article>
 
   </div>
 

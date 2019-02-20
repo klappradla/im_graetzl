@@ -32,6 +32,13 @@ section.usersetup {
         display: table;
         margin: 0 auto;
       }
+      p.btns {
+        justify-content: center;
+        display: flex;
+        a.btn-primary {
+          margin:0px 10px 0px 10px;
+        }
+      }
     }
 
     .paperCard {
