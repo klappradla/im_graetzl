@@ -35,6 +35,9 @@ de:
       group_category:
         one: Gruppen Kategorie
         other: Gruppen Kategorien
+      group_join_request:
+        one: Gruppen Beitrittsanfrage
+        other: Gruppen Beitrittsanfragen
       image:
         one: Bild
         other: Bilder

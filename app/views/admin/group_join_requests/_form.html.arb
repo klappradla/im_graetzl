@@ -1,0 +1,13 @@
+active_admin_form_for [:admin, resource] do |f|
+  columns do
+    column do
+      f.semantic_errors *f.object.errors.keys
+      inputs 'Basic Info' do
+        li f.object.user.full_name
+        input :status
+        input :group, collection: Group.order(:title), include_blank: true, input_html: { :class => 'admin-filter-select'}
+      end
+      actions
+    end
+  end
+end

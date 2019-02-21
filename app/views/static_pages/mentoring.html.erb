@@ -231,8 +231,8 @@
 
 
 
-    <% if !Group.where(id: 7).empty? %>
-      <% group = Group.find_by_id(7) %>
+    <% if !Group.where(id: 28).empty? %>
+      <% group = Group.find_by_id(28) %>
       <%= form_tag request_join_group_path(group) do %>
         <% if group.group_join_questions.present? %>
 
@@ -261,12 +261,5 @@
   <!----------- LOGIN PANEL MODAL ----------->
   <%= render 'shared/login_panel',redirect: request.original_url ,origin: 'mentoring' %>
   <!----------- LOGIN PANEL MODAL ----------->
-
-  <div class="footer">
-    <p>
-      Die coop & share Services inkl. der Unterstützer-Teams auf imGrätzl.at sind Teil des F&E Projektes Mischung: Nordbahnhof (Lead TU Wien).
-      Dieses Projekt wird aus Mitteln des Klima- und Energiefonds gefördert und im Rahmen der Smart-Cities-Initiative durchgeführt.
-    </p>
-  </div>
 
 </section>
