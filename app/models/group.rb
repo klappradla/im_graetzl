@@ -21,7 +21,8 @@ class Group < ApplicationRecord
   has_many :group_join_questions
   accepts_nested_attributes_for :group_join_questions, allow_destroy: true, reject_if: :all_blank
   has_many :group_join_requests
-  has_many :meetings
+
+  has_many :meetings, dependent: :destroy
 
   has_many :group_graetzls
   has_many :graetzls, through: :group_graetzls

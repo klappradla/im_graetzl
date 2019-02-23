@@ -95,9 +95,6 @@ module User::Notifiable
   end
 
   def destroy_activity_and_notifications
-    activity = Activity.where(owner: self)
-    notifications = Notification.where(activity: activity)
-    notifications.destroy_all
-    activity.destroy_all
+    Activity.where(owner: self).destroy_all
   end
 end

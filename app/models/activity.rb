@@ -8,8 +8,6 @@ class Activity < ApplicationRecord
     Notification.receive_new_activity(activity)
   end
 
-  before_destroy :destroy_notifications, prepend: true
-
   def appendix
     if key == 'location.create'
       { message: { title: "Neu auf imGrätzl", content: "Sag gleich Hallo!"}}
@@ -22,9 +20,4 @@ class Activity < ApplicationRecord
     end
   end
 
-  private
-
-  def destroy_notifications
-    Notification.where(activity: self).destroy_all
-  end
 end

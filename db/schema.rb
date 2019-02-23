@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190215102415) do
+ActiveRecord::Schema.define(version: 20190223103242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,13 +94,6 @@ ActiveRecord::Schema.define(version: 20190215102415) do
     t.integer "user_id"
     t.index ["business_interest_id"], name: "index_business_interests_users_on_business_interest_id", using: :btree
     t.index ["user_id"], name: "index_business_interests_users_on_user_id", using: :btree
-  end
-
-  create_table "categories_meetings", id: false, force: :cascade do |t|
-    t.integer "category_id"
-    t.integer "meeting_id"
-    t.index ["category_id"], name: "index_categories_meetings_on_category_id", using: :btree
-    t.index ["meeting_id"], name: "index_categories_meetings_on_meeting_id", using: :btree
   end
 
   create_table "comments", force: :cascade do |t|
@@ -744,6 +737,7 @@ ActiveRecord::Schema.define(version: 20190215102415) do
   add_foreign_key "groups", "room_demands", on_delete: :nullify
   add_foreign_key "groups", "room_offers", on_delete: :nullify
   add_foreign_key "meetings", "groups", on_delete: :nullify
+  add_foreign_key "notifications", "activities", on_delete: :cascade
   add_foreign_key "room_call_fields", "room_calls", on_delete: :cascade
   add_foreign_key "room_call_modules", "room_calls", on_delete: :cascade
   add_foreign_key "room_call_modules", "room_modules", on_delete: :cascade
