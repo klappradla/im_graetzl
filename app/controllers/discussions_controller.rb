@@ -3,6 +3,7 @@ class DiscussionsController < ApplicationController
   before_action :check_group
 
   def index
+    head :ok and return if browser.bot? && !request.format.js?
     @discussions = @group.discussions.order("sticky DESC, last_post_at DESC")
     @discussions = @discussions.includes(discussion_posts: [:user, :images])
     if params[:discussion_category_id].present?
