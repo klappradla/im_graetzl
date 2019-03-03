@@ -1,6 +1,6 @@
 class Notifications::MeetingUpdated < Notification
   TRIGGER_KEY = 'meeting.update'
-  DEFAULT_INTERVAL = :immediate
+  DEFAULT_INTERVAL = :daily
   BITMASK = 2**3
 
   def self.receivers(activity)
