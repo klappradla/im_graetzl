@@ -172,8 +172,16 @@ class Notification::SummaryMail
       post_notifications, other_notifications = group_notifications.partition{|n| n.type == "Notifications::NewGroupPost"}
       comment_notifications, other_notifications = other_notifications.partition{|n| n.type == "Notifications::CommentOnDiscussionPost"}
       also_commented_notifications, other_notifications = other_notifications.partition{|n| n.type == "Notifications::AlsoCommentedDiscussionPost"}
+      members_notifications, other_notifications = other_notifications.partition{|n| n.type == "Notifications::NewGroupUser"}
       # Sort by type
       notification_vars = other_notifications.sort_by{|n| block[:types].index(n.type) }.map(&:mail_vars)
+      # Group discussion posts by discussion
+      members_notifications.values.each do |member|
+        member_vars = member.sort_by(&:created_at).map(&:mail_vars)
+        member_vars.each_with_index{|d, i| d[:first_in_group] = i.zero? ? 'true' : 'false'}
+        member_vars.reverse.each_with_index{|d, i| d[:last_in_group] = i.zero? ? 'true' : 'false'}
+        notification_vars += member_vars
+      end
       # Group discussion posts by discussion
       post_notifications.group_by(&:group_discussion_id).values.each do |discussion_notifications|
         discussion_vars = discussion_notifications.sort_by(&:created_at).map(&:mail_vars)
@@ -181,12 +189,14 @@ class Notification::SummaryMail
         discussion_vars.reverse.each_with_index{|d, i| d[:last_in_discussion] = i.zero? ? 'true' : 'false'}
         notification_vars += discussion_vars
       end
+      # Group comments by discussion post
       comment_notifications.group_by(&:group_discussion_post_id).values.each do |comment_notifications|
         comment_vars = comment_notifications.sort_by(&:created_at).map(&:mail_vars)
         comment_vars.each_with_index{|d, i| d[:first_in_post] = i.zero? ? 'true' : 'false'}
         comment_vars.reverse.each_with_index{|d, i| d[:last_in_post] = i.zero? ? 'true' : 'false'}
         notification_vars += comment_vars
       end
+      # Group also commented by discussion post
       also_commented_notifications.group_by(&:group_discussion_post_id).values.each do |comment_notifications|
         also_commented_vars = comment_notifications.sort_by(&:created_at).map(&:mail_vars)
         also_commented_vars.each_with_index{|d, i| d[:first_in_post] = i.zero? ? 'true' : 'false'}
