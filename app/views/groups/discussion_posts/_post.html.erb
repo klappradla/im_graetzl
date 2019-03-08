@@ -37,7 +37,20 @@
       </div>
     <% end %>
 
+    <div class="post-comments">
+      <%= link_to 'Ältere Kommentare zeigen', 'javascript:', class: 'show-all-comments-link' if post.comments.count > 3 %>
+      <% post.comments.each_with_index do |comment, i| %>
+        <div class="comment-container" >
+          <%= render 'groups/discussion_posts/comment', comment: comment %>
+        </div>
+      <% end %>
+    </div>
+
+    <%= render 'groups/discussion_posts/comment_form', discussion_post: post %>
+
   </div>
+
+
 
   <% if post.edit_permission?(current_user) %>
     <%= form_for [@group, post], remote: true, html: { class: 'edit-post-form' } do |f| %>

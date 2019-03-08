@@ -9,9 +9,16 @@ APP.controllers.discussions = (function() {
   function initControls() {
     $(".discussion-page").on('click', '.edit-post-link', function() {
       $(this).parents(".user-post").addClass("editing");
+      $(".edit-post-form textarea").autogrow({ onInitialize: true });
     }).on('click', '.cancel-edit-link', function() {
       $(this).parents(".user-post").removeClass("editing");
     });
+
+    $('.show-all-comments-link').on("click", function() {
+      $(this).parents(".post-comments").find(".comment-container").show();
+      $(this).hide();
+    });
+
   }
 
   function initFollowing() {

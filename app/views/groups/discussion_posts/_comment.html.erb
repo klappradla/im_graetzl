@@ -1,0 +1,31 @@
+<div id="<%= dom_id(comment) %>" class="comment">
+  <div class="entryUserComment">
+    <% if comment.edit_permission?(current_user) %>
+      <div class="editControls">
+        <%= link_to comment, { method: :delete, remote: true, data: { confirm: 'Kommentar wirklich löschen?', disable_with: 'lädt...' } } do %>
+          <div class="btn-delete">
+            <%= icon_tag "trash-delete-remove" %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <a name="comment-<%= comment.id -%>"></a>
+    <div class="userCreateInfo">
+      <%= attachment_image_tag comment.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+      <div class="infos">
+        <div class="name"><%= link_to comment.user.full_name, [comment.user.graetzl, comment.user] %></div>
+        <div class="date">
+          <%= I18n.localize(comment.created_at, format:'%a, %d. %B %Y, %H:%M') %>
+        </div>
+      </div>
+    </div>
+    <div class="txt"><%= comment.content %></div>
+    <% if comment.images.present? %>
+      <div class="entryImgUploads" data-featherlight-gallery data-featherlight-filter="a">
+        <% comment.images.each do |image| %>
+          <%= link_to attachment_image_tag(image, :file, :fill, 200, 200), attachment_url(image, :file, :limit, 800, 800) %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

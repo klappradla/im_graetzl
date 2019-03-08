@@ -18,7 +18,7 @@
             var min, clone;
             elem = $(elem);
             //if the element is "invisible", we get an incorrect height value
-            //to get correct value, clone and append to the body. 
+            //to get correct value, clone and append to the body.
             if (elem.is(':visible') || parseInt(elem.css('height'), 10) > 0) {
                 min = parseInt(elem.css('height'), 10) || elem.innerHeight();
             } else {
@@ -36,11 +36,11 @@
                 clone.remove();
             }
             if (opts.fixMinHeight) {
-                elem.data('autogrow-start-height', min); //set min height                                
+                elem.data('autogrow-start-height', min); //set min height
             }
             elem.css('height', min);
 
-            if (opts.onInitialize && elem.length) {
+            if (opts.onInitialize && elem.length > 0) {
                 resize.call(elem[0]);
             }
         });
@@ -84,7 +84,7 @@
                         newHeight = clone[0].scrollHeight - 1;
                         clone.innerHeight(newHeight);
                     } while (newHeight === clone[0].scrollHeight);
-                    newHeight++; //adding one back eliminates a wiggle on deletion 
+                    newHeight++; //adding one back eliminates a wiggle on deletion
                     clone.remove();
                     box.focus(); // Fix issue with Chrome losing focus from the textarea.
 

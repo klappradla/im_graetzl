@@ -1,5 +1,5 @@
 class DiscussionPostsController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, except: [:show, :comments]
   before_action :check_group
 
   def create
@@ -14,6 +14,18 @@ class DiscussionPostsController < ApplicationController
       redirect_to [@group, @discussion]
     else
       redirect_to [@group, @discussion]
+    end
+  end
+
+  def comment
+    @post = @group.discussion_posts.find(params[:discussion_post_id])
+    @comment = @post.comments.new comment_params
+    #@comment.save
+    if @comment.save
+      @post.create_activity :comment, owner: current_user, recipient: @comment
+    end
+    respond_to do |format|
+      format.js { render :file => "groups/discussion_posts/comment.js.erb" }
     end
   end
 
@@ -54,6 +66,12 @@ class DiscussionPostsController < ApplicationController
       images_files: [],
       images_attributes: [:id, :_destroy],
     )
+  end
+
+  def comment_params
+    params.require(:comment).permit(
+      :content,
+      images_files: []).merge(user_id: current_user.id)
   end
 
 end

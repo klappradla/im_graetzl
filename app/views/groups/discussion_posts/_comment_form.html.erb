@@ -1,0 +1,14 @@
+<%= form_for [@group, discussion_post, Comment.new],
+  html: { class: 'entryCommentForm', remote: true, data: { behavior: "comment-form-#{discussion_post.id}" } } do |f| %>
+  <label>
+    <%= attachment_image_tag current_user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+    <%= f.text_area :content, placeholder: ' Kommentieren' %>
+  </label>
+  <div class="hideBlock">
+    <div class="upload-streamImgs">
+      <%= icon_tag "photo-camera" %>
+      <%= f.attachment_field :images_files, multiple: true, direct: true, presigned: true %>
+    </div>
+    <%= f.button 'Antwort senden', data: { disable_with: 'sendet...' } %>
+  </div>
+<% end %>

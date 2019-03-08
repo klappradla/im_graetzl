@@ -59,6 +59,8 @@ class Notification::SummaryMail
           Notifications::NewGroupDiscussion,
           Notifications::NewGroupPost,
           Notifications::NewGroupUser,
+          Notifications::CommentOnDiscussionPost,
+          Notifications::AlsoCommentedDiscussionPost,
         ].map(&:to_s),
         group: true,
       },

@@ -13,6 +13,10 @@ FactoryGirl.define do
       graetzl
     end
 
+    factory :discussion_post, class: 'DiscussionPost' do
+      association :author, factory: :group
+    end
+
     factory :admin_post, class: 'AdminPost' do
       association :author, factory: [:user, :admin]
     end

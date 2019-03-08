@@ -92,7 +92,9 @@ Rails.application.routes.draw do
     resources :discussions, only: [:index, :show, :create, :edit, :update, :destroy] do
       post :toggle_following, on: :member
     end
-    resources :discussion_posts, only: [:create, :update, :destroy]
+    resources :discussion_posts, only: [:create, :update, :destroy] do
+      post :comments, action: :comment
+    end
     post 'request_join', on: :member
     post 'accept_request', on: :member
     post 'reject_request', on: :member
