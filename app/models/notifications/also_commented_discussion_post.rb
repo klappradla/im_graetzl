@@ -16,11 +16,11 @@ class Notifications::AlsoCommentedDiscussionPost < Notification
       group_name: group.title,
       discussion_title: activity.trackable.discussion.title,
       discussion_url: group_discussion_url(group, activity.trackable.discussion),
-      comment_content: activity.trackable.content.truncate(300, separator: ' '),
+      comment_content: activity.trackable.comments.find_by_id(activity.recipient_id).content.truncate(300, separator: ' '),
       comment_url: group_discussion_url(group, activity.trackable.discussion, anchor: "discussion-post-#{activity.trackable.id}"),
       post_url: group_discussion_url(group, activity.trackable.discussion, anchor: "discussion-post-#{activity.trackable.id}"),
       owner_firstname: activity.owner.first_name,
-      owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.trackable.user),
+      owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.owner),
     }
   end
 

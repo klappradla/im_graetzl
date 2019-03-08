@@ -20,7 +20,7 @@ class Notifications::CommentOnDiscussionPost < Notification
       comment_url: group_discussion_url(group, activity.trackable.discussion, anchor: "discussion-post-#{activity.trackable.id}"),
       post_url: group_discussion_url(group, activity.trackable.discussion, anchor: "discussion-post-#{activity.trackable.id}"),
       owner_firstname: activity.owner.first_name,
-      owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.trackable.user),
+      owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.owner),
     }
   end
 
