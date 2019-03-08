@@ -180,7 +180,7 @@ class Notification::SummaryMail
       members_notifications.map(&:mail_vars).each do |members|
         members.each_with_index{|d, i| d[:first_in_discussion] = i.zero? ? 'true' : 'false'}
         members.reverse.each_with_index{|d, i| d[:last_in_discussion] = i.zero? ? 'true' : 'false'}
-        notification_vars += members
+        notification_vars += members.map(&:mail_vars)
       end
 
       # Group discussion posts by discussion
