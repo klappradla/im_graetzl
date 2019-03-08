@@ -39,7 +39,7 @@
 
     <div class="post-comments">
       <%= link_to 'Ältere Kommentare zeigen', 'javascript:', class: 'show-all-comments-link' if post.comments.count > 3 %>
-      <% post.comments.each_with_index do |comment, i| %>
+      <% post.comments.order("id ASC").each do |comment| %>
         <div class="comment-container" >
           <%= render 'groups/discussion_posts/comment', comment: comment %>
         </div>
