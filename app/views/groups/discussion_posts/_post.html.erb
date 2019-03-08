@@ -46,8 +46,9 @@
       <% end %>
     </div>
 
-    <%= render 'groups/discussion_posts/comment_form', discussion_post: post %>
-
+    <% if @group.users.include?(current_user) %>
+      <%= render 'groups/discussion_posts/comment_form', discussion_post: post %>
+    <% end %>
   </div>
 
 
