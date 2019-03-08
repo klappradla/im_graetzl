@@ -13,6 +13,7 @@ class Notifications::AlsoCommentedDiscussionPost < Notification
 
   def custom_mail_vars
     {
+      type: 'also_commented',
       group_name: group.title,
       discussion_title: activity.trackable.discussion.title,
       discussion_url: group_discussion_url(group, activity.trackable.discussion),
