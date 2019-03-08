@@ -177,9 +177,10 @@ class Notification::SummaryMail
       notification_vars = other_notifications.sort_by{|n| block[:types].index(n.type) }.map(&:mail_vars)
       # Group discussion posts by discussion
       members_notifications.each do |members|
-        members.each_with_index{|d, i| d[:first_in_group] = i.zero? ? 'true' : 'false'}
-        members.reverse.each_with_index{|d, i| d[:last_in_group] = i.zero? ? 'true' : 'false'}
-        notification_vars += members
+        member_vars = members.map(&:mail_vars)
+        member_vars.each_with_index{|d, i| d[:first_in_group] = i.zero? ? 'true' : 'false'}
+        member_vars.reverse.each_with_index{|d, i| d[:last_in_group] = i.zero? ? 'true' : 'false'}
+        notification_vars += member_vars
       end
       # Group discussion posts by discussion
       post_notifications.group_by(&:group_discussion_id).values.each do |discussion_notifications|
