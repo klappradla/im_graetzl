@@ -178,7 +178,7 @@ class Notification::SummaryMail
 
       # Mark members in group
       members_notifications.each do |members|
-        members_vars = members.map(&:mail_vars)
+        members_vars = members.sort_by{|n| block[:types].index(n.type) }.map(&:mail_vars)
         members_vars.each_with_index{|d, i| d[:first_in_discussion] = i.zero? ? 'true' : 'false'}
         members_vars.reverse.each_with_index{|d, i| d[:last_in_discussion] = i.zero? ? 'true' : 'false'}
         notification_vars += members_vars
