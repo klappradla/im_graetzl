@@ -13,7 +13,7 @@ class Notifications::CommentOnDiscussionPost < Notification
 
   def custom_mail_vars
     {
-      type: 'commented',
+      type: 'commented_discussion_post',
       headline: group.title,
       title: activity.trackable.discussion.title,
       url: group_discussion_url(group, activity.trackable.discussion),
@@ -34,8 +34,8 @@ class Notifications::CommentOnDiscussionPost < Notification
     activity.trackable.group
   end
 
-  def group_discussion_id
-    activity.trackable.discussion_id
+  def group_discussion_post_id
+    activity.trackable.id
   end
 
 end

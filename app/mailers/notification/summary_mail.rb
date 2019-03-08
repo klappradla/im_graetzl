@@ -170,6 +170,7 @@ class Notification::SummaryMail
     return [] if notifications.blank?
     notifications.group_by(&:group).map do |group, group_notifications|
       post_notifications, other_notifications = group_notifications.partition{|n| n.type == "Notifications::NewGroupPost"}
+      comment_notifications, other_notifications = group_notifications.partition{|n| n.type == "Notifications::CommentOnDiscussionPost"}
       # Sort by type
       notification_vars = other_notifications.sort_by{|n| block[:types].index(n.type) }.map(&:mail_vars)
       # Group discussion posts by discussion
@@ -178,6 +179,12 @@ class Notification::SummaryMail
         discussion_vars.each_with_index{|d, i| d[:first_in_discussion] = i.zero? ? 'true' : 'false'}
         discussion_vars.reverse.each_with_index{|d, i| d[:last_in_discussion] = i.zero? ? 'true' : 'false'}
         notification_vars += discussion_vars
+      end
+      comment_notifications.group_by(&:group_discussion_post_id).values.each do |comment_notifications|
+        comment_vars = comment_notifications.sort_by(&:created_at).map(&:mail_vars)
+        comment_vars.each_with_index{|d, i| d[:first_in_post] = i.zero? ? 'true' : 'false'}
+        comment_vars.reverse.each_with_index{|d, i| d[:last_in_post] = i.zero? ? 'true' : 'false'}
+        notification_vars += comment_vars
       end
       {
         name: "#{block[:name]} „#{group.title}“",
