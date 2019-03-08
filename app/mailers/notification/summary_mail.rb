@@ -170,8 +170,8 @@ class Notification::SummaryMail
     return [] if notifications.blank?
     notifications.group_by(&:group).map do |group, group_notifications|
       post_notifications, other_notifications = group_notifications.partition{|n| n.type == "Notifications::NewGroupPost"}
-      comment_notifications, other_notifications = group_notifications.partition{|n| n.type == "Notifications::CommentOnDiscussionPost"}
-      also_commented_notifications, other_notifications = group_notifications.partition{|n| n.type == "Notifications::AlsoCommentedDiscussionPost"}
+      comment_notifications, other_notifications = other_notifications.partition{|n| n.type == "Notifications::CommentOnDiscussionPost"}
+      also_commented_notifications, other_notifications = other_notifications.partition{|n| n.type == "Notifications::AlsoCommentedDiscussionPost"}
       # Sort by type
       notification_vars = other_notifications.sort_by{|n| block[:types].index(n.type) }.map(&:mail_vars)
       # Group discussion posts by discussion
