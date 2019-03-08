@@ -14,13 +14,14 @@ class Notifications::AlsoCommentedDiscussionPost < Notification
   def custom_mail_vars
     {
       type: 'also_commented',
-      group_name: group.title,
-      discussion_title: activity.trackable.discussion.title,
-      discussion_url: group_discussion_url(group, activity.trackable.discussion),
+      headline: group.title,
+      title: activity.trackable.discussion.title,
+      url: group_discussion_url(group, activity.trackable.discussion),
       comment_content: activity.trackable.comments.find_by_id(activity.recipient_id).content.truncate(300, separator: ' '),
       comment_url: group_discussion_url(group, activity.trackable.discussion, anchor: "discussion-post-#{activity.trackable.id}"),
       post_url: group_discussion_url(group, activity.trackable.discussion, anchor: "discussion-post-#{activity.trackable.id}"),
-      owner_firstname: activity.owner.first_name,
+      owner_name: activity.owner.first_name,
+      owner_url: user_url(activity.owner, DEFAULT_URL_OPTIONS),
       owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.owner),
     }
   end
