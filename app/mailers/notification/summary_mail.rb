@@ -175,12 +175,12 @@ class Notification::SummaryMail
       members_notifications, other_notifications = other_notifications.partition{|n| n.type == "Notifications::NewGroupUser"}
       # Sort by type
       notification_vars = other_notifications.sort_by{|n| block[:types].index(n.type) }.map(&:mail_vars)
-      # Group discussion posts by discussion
-      members_notifications.values.each do |members|
-        members.first[:first_in_group] = 'true'
-        members.last[:last_in_group] = 'true'
-        notification_vars += members
-      end
+
+      # Mark members in group
+      members_notifications.first[:first_in_group] = 'true'
+      members_notifications.last[:last_in_group] = 'true'
+      notification_vars += members_notifications
+
       # Group discussion posts by discussion
       post_notifications.group_by(&:group_discussion_id).values.each do |discussion_notifications|
         discussion_vars = discussion_notifications.sort_by(&:created_at).map(&:mail_vars)
