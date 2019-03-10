@@ -19,6 +19,14 @@ APP.controllers.discussions = (function() {
       $(this).hide();
     });
 
+    // Get Target for Mandrill Linking
+    var target = getUrlVars()["target"];
+    if (typeof target !== 'undefined') {
+      $('html, body').animate({
+        scrollTop: $(`#${target}`).offset().top
+      }, 500);
+    }
+    
   }
 
   function initFollowing() {
@@ -26,6 +34,14 @@ APP.controllers.discussions = (function() {
       $('.follow').toggleClass('-hide');
       //console.log($(this).attr("data-topic"));
     })
+  }
+
+  function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
   }
 
   return {

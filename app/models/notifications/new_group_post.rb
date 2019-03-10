@@ -17,7 +17,7 @@ class Notifications::NewGroupPost < Notification
       discussion_title: activity.trackable.discussion.title,
       discussion_url: group_discussion_url(group, activity.trackable.discussion),
       post_content: activity.trackable.content.truncate(300, separator: ' '),
-      post_url: group_discussion_url(group, activity.trackable.discussion, anchor: "discussion-post-#{activity.trackable.id}"),
+      post_url: group_discussion_url(group, activity.trackable.discussion, :target => "discussion-post-#{activity.trackable.id}"),
       owner_firstname: activity.owner.first_name,
       owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.trackable.user),
     }
