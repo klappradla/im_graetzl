@@ -23,10 +23,10 @@ APP.controllers.discussions = (function() {
     var target = getUrlVars()["target"];
     if (typeof target !== 'undefined') {
       $('html, body').animate({
-        scrollTop: $(`#${target}`).offset().top
+        scrollTop: $('#'+target).offset().top
       }, 500);
     }
-    
+
   }
 
   function initFollowing() {
