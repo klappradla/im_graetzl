@@ -157,7 +157,16 @@ class Notification::SummaryMail
   def generate_basic_block(block, notifications)
     notifications = notifications.select{|n| n.type.in?(block[:types])}
     return [] if notifications.blank?
-    notification_vars = notifications.map(&:mail_vars)
+    
+    meeting_attendee_notifications, other_notifications = notifications.partition{|n| n.type == "Notifications::AttendeeInUsersMeeting"}
+    notification_vars = other_notifications.map(&:mail_vars)
+    # Group meeting attendees by meeting
+    meeting_attendee_notifications.group_by(&:meeting_id).values.each do |meeting_notifications|
+      meeting_vars = meeting_notifications.map(&:mail_vars)
+      meeting_vars.each_with_index{|d, i| d[:first_in_meeting] = i.zero? ? 'true' : 'false'}
+      meeting_vars.reverse.each_with_index{|d, i| d[:last_in_meeting] = i.zero? ? 'true' : 'false'}
+      notification_vars += meeting_vars
+    end
     [{
       name: block[:name],
       size: notifications.length,
