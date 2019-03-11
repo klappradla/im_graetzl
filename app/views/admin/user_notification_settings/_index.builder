@@ -18,8 +18,8 @@ context.instance_eval do
   }
   column("Betrifft Mich") { |u|
     [
-      "Commented Meeting: #{u.enabled_mail_notification(Notifications::CommentInUsersMeeting)}",
-      "Commented Post: #{u.enabled_mail_notification(Notifications::AlsoCommentedLocationPost)}",
+      "Commented Content: #{u.enabled_mail_notification(Notifications::CommentInUsersMeeting)}",
+      "Also Commented Content: #{u.enabled_mail_notification(Notifications::AlsoCommentedLocationPost)}",
       "Commented Wall: #{u.enabled_mail_notification(Notifications::NewWallComment)}",
       "Meeting Attended: #{u.enabled_mail_notification(Notifications::AttendeeInUsersMeeting)}",
       "Meeting Updated: #{u.enabled_mail_notification(Notifications::MeetingUpdated)}",
