@@ -27,7 +27,7 @@ class DiscussionsController < ApplicationController
     if @discussion.save
       @discussion.discussion_followings.create(user: current_user)
       @discussion.create_activity(:create, owner: current_user)
-      redirect_to [@group, @discussion]
+      redirect_to [@group, @discussion, anchor: "topic"]
     else
       redirect_to [@group, @discussion]
     end

@@ -74,7 +74,7 @@
             <%= attachment_image_tag current_user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
             <span>Deine Antwort</span>
             <% end %>
-            <%= f.text_area :content, cols: 80, rows: 3, placeholder: 'Schreib hier deinen Beitrag bzw. deine Antwort ..' %>
+            <%= f.text_area :content, cols: 80, rows: 3, placeholder: 'Schreib hier deinen Beitrag bzw. deine Antwort ..', required: true %>
           </div>
           <div class="upload-oldschool">
             <%= f.label :images do %>

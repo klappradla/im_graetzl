@@ -11,7 +11,7 @@ class DiscussionPostsController < ApplicationController
     if @post.save
       @discussion.discussion_followings.find_or_create_by(user: current_user)
       @post.create_activity(:create, owner: current_user)
-      redirect_to [@group, @discussion]
+      redirect_to [@group, @discussion, anchor: "discussion-post-#{@post.id}" ]
     else
       redirect_to [@group, @discussion]
     end
