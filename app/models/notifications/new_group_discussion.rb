@@ -15,7 +15,7 @@ class Notifications::NewGroupDiscussion < Notification
     {
       group_name: group.title,
       discussion_title: activity.trackable.title,
-      discussion_url: group_discussion_url(group, activity.trackable, :target => "topic", DEFAULT_URL_OPTIONS),
+      discussion_url: group_discussion_url(group, activity.trackable, :target => "topic"),
       discussion_category: activity.trackable.discussion_category.try(:title),
       post_content: activity.trackable.discussion_posts.first.content.truncate(300, separator: ' '),
       owner_firstname: activity.owner.first_name,
