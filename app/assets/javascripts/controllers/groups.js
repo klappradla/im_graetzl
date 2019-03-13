@@ -65,6 +65,9 @@ APP.controllers.groups = (function() {
     }
 
     function initDiscussions() {
+
+      showSpinner();
+
       $('#tab-discussions .btn-new-topic').on('click', function() {
         $('#new-topic').slideToggle();
       });
