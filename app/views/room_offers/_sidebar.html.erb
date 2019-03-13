@@ -39,6 +39,11 @@
         </div>
       <% end %>
 
+      <div class="created icontxt">
+        <%= icon_tag "pencil" %>
+        Erstellt / Aktualisiert:<br><%= I18n.localize(@room_offer.updated_at, format:'%d. %b %Y') %>
+      </div>
+
       <% if user_signed_in? && current_user == @room_offer.user %>
         <div class="btn-group">
           <%= link_to 'Gruppe erstellen', new_group_path(room_offer_id: @room_offer.id, graetzl_id: @room_offer.graetzl_id),

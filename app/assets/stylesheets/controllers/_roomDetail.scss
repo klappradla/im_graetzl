@@ -231,7 +231,7 @@ section.roomDetail {
     .sideBarbox {
       margin-bottom: 20px;
       .category-tags {
-        margin: 20px 0px 20px;
+        margin: 0px 0px 20px;
       }
     }
 
@@ -378,6 +378,9 @@ section.roomDetail {
       a.updateteaser, a.event-teaser-box {
         display: none;
       }
+    }
+    .created {
+      //@include font-size-primaryFont('small');
     }
 
   }

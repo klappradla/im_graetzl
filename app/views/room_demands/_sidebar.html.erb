@@ -4,6 +4,17 @@
     <div class='sideflag -L'>Was mir wichtig ist …</div>
 
     <div class="iconlist">
+
+      <% if @room_demand.keyword_list.present? %>
+        <div class="category-tags">
+          <ul class="tag-list">
+            <% @room_demand.keyword_list.each do |keyword| %>
+              <li><%= keyword %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
       <% if @room_demand.needed_area.present? %>
         <div class="rented-area icontxt">
           <%= icon_tag "resize-maximize" %>
@@ -18,14 +29,9 @@
         </div>
       <% end %>
 
-      <div class="category-tags">
-        <% if @room_demand.keyword_list.present? %>
-          <ul class="tag-list">
-            <% @room_demand.keyword_list.each do |keyword| %>
-              <li><%= keyword %></li>
-            <% end %>
-          </ul>
-        <% end %>
+      <div class="created icontxt">
+        <%= icon_tag "pencil" %>
+        Erstellt / Aktualisiert:<br><%= I18n.localize(@room_demand.updated_at, format:'%d. %b %Y') %>
       </div>
 
       <% if user_signed_in? && current_user == @room_demand.user %>

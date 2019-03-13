@@ -72,10 +72,10 @@ class DiscussionsController < ApplicationController
   def check_group
     @group = Group.find(params[:group_id])
     if @group.nil?
-      flash[:error] = "Group not found"
+      flash[:error] = "Gruppe nicht gefunden."
       redirect_to root_url
     elsif !@group.readable_by?(current_user)
-      flash[:error] = "No access"
+      flash[:error] = "Nur für eingeloggte Gruppenmitglieder - Falls du Gruppenmitglied bist, logge dich bitte vorher ein."
       redirect_to @group
     end
   end
