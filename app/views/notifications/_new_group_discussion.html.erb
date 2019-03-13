@@ -1,7 +1,7 @@
 <%- discussion = notification.activity.trackable %>
 
 <%= content_tag(:li, id: dom_id(notification), data: { behavior: 'notification-item' }, class: 'notification-item') do %>
-  <%= link_to [discussion.group, discussion] do %>
+  <%= link_to [discussion.group, discussion, :target => "topic"] do %>
     <%= attachment_image_tag notification.activity.owner, :avatar, :fill, 40, 40, fallback: 'avatar/user/40x40.png', class: 'img-round' %>
     <div class="msg">
       <div class="timeago">vor <%= time_ago_in_words(notification.activity.created_at) %></div>

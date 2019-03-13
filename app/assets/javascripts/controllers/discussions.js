@@ -20,13 +20,19 @@ APP.controllers.discussions = (function() {
     });
 
     // Get Target for Mandrill Linking
+    $(window).on("load", function() {
+      setTimeout(scrollToTarget, 250)
+    });
+    
+  }
+
+  function scrollToTarget() {
     var target = getUrlVars()["target"];
     if (typeof target !== 'undefined') {
       $('html, body').animate({
         scrollTop: $('#'+target).offset().top
-      }, 500);
+      }, 600);
     }
-
   }
 
   function initFollowing() {
