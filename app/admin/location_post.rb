@@ -2,7 +2,7 @@ ActiveAdmin.register LocationPost do
   menu parent: 'Locations'
   actions :all, except: [:new, :create]
 
-  filter :author, as: :select, collection: -> { Location.all }
+  filter :author_id, as: :select, collection: -> { Location.all }
   filter :title
   filter :content
   filter :created_at

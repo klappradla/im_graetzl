@@ -7,7 +7,7 @@ ActiveAdmin.register AdminPost do
     admin_post.create_activity :create, owner: current_user
   end
 
-  filter :author, as: :select, collection: -> { User.admin }
+  filter :author_id, as: :select, collection: -> { User.admin }
   filter :title
   filter :content
   filter :created_at
