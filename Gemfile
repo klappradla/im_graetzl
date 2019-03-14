@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.5.3'
 
-gem 'rails', '~> 5.2'
+gem 'rails', '~> 5.2', '>= 5.2.2.1'
 gem 'puma'
 gem 'pg'
 gem 'activerecord-postgis-adapter', '~> 5.0'
