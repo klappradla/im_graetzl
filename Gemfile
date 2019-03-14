@@ -48,7 +48,7 @@ gem 'autoprefixer-rails'
 gem 'activeadmin'
 gem 'rabl'
 gem 'oj'
-gem 'jquery-ui-rails', '5.0.0'
+gem 'jquery-ui-rails', '6.0.0'
 gem 'bb-ruby'
 
 group :development do

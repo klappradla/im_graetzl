@@ -44,7 +44,7 @@ class RoomDemandsController < ApplicationController
     @room_demand.enabled? ? @room_demand.disabled! : @room_demand.enabled!
     MailchimpRoomDemandUpdateJob.perform_later(@room_demand)
     flash[:notice] = t("activerecord.attributes.room_demand.status_message.#{@room_demand.status}")
-    redirect_to :back
+    redirect_back(fallback_location: rooms_user_path)
   end
 
   def update_status
@@ -52,7 +52,7 @@ class RoomDemandsController < ApplicationController
     @room_demand.update(status: params[:status])
     MailchimpRoomDemandUpdateJob.perform_later(@room_demand)
     flash[:notice] = t("activerecord.attributes.room_demand.status_message.#{@room_demand.status}")
-    redirect_to :back
+    redirect_back(fallback_location: rooms_user_path)
   end
 
   def destroy

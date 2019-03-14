@@ -48,7 +48,7 @@ class RoomOffersController < ApplicationController
     @room_offer.update(status: params[:status])
     MailchimpRoomOfferUpdateJob.perform_later(@room_offer)
     flash[:notice] = t("activerecord.attributes.room_offer.status_message.#{@room_offer.status}")
-    redirect_to :back
+    redirect_back(fallback_location: rooms_user_path)
   end
 
   def toggle_waitlist

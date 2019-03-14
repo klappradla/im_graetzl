@@ -49,7 +49,6 @@ APP.components.googleMap = (function() {
           },
           {
               "featureType": "poi",
-              "elementType": "label",
               "stylers": [
                   {
                       "visibility": "off"

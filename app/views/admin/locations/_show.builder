@@ -6,11 +6,8 @@ context.instance_eval do
           row :id
           row :name
           row :location_category
-          row :products do |l|
-            l.products.each do |p|
-              a p.name, href: admin_tag_path(p)
-              text_node ', '.html_safe
-            end
+          row :products do |location|
+            safe_join(location.products.map { |p| link_to(p.name, admin_tag_path(p)) }, ', ')
           end
           row(:state){|l| status_tag(l.state)}
           row :slug

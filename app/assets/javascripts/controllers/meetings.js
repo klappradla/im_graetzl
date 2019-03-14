@@ -49,12 +49,6 @@ APP.controllers.meetings = (function() {
         $('div#meeting-location-field').toggle();
       });
 
-      // preselect group from param-id
-      var group_id = $('#group_id').val();
-      var exists = 0 != $('#meeting_group_id option[value='+group_id+']').length;
-      if (exists == true) {
-        $('#meeting_group_id').val(group_id).change();
-      }
     }
 
     return {
