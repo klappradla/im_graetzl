@@ -1,5 +1,5 @@
 APP.components.notificatonCenter = (function() {
-    var DROPDOWN_OPEN = '.jq-dropdown-open, .is-open',
+    var DROPDOWN_OPEN = '.jq-dropdown-open',
         $notificationsContainer,
         $notificationsTrigger;
 
@@ -28,6 +28,7 @@ APP.components.notificatonCenter = (function() {
 
     function handleClick() {
         if (!notificationCenterOpen()) {
+            showNotificationSpinner();
             pollServer(markAsSeen)
         }
     }
@@ -38,6 +39,7 @@ APP.components.notificatonCenter = (function() {
             dataType: "script",
             type: "GET",
             success: function() {
+                removeNotificationSpinner();
                 onSuccessCallback();
             }
         });
@@ -61,7 +63,16 @@ APP.components.notificatonCenter = (function() {
     }
 
     function notificationCenterOpen() {
-        return $notificationsTrigger.is(DROPDOWN_OPEN);
+      return $notificationsTrigger.hasClass(DROPDOWN_OPEN) ? true : false;
+    }
+
+    function showNotificationSpinner() {
+      var spinner = $('footer .loading-spinner').clone().removeClass('-hidden');
+      $('.nav-notifications').append(spinner);
+    }
+
+    function removeNotificationSpinner() {
+      $('.nav-notifications .loading-spinner').remove();
     }
 
     return {
