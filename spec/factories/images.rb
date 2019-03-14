@@ -1,6 +1,6 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :image do
     file_id { Faker::Internet.password(20) }
-    imageable nil
+    imageable { nil }
   end
 end

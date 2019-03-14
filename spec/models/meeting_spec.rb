@@ -102,10 +102,6 @@ RSpec.describe Meeting, type: :model do
         expect{meeting.destroy}.to change{Comment.count}.by -3
       end
     end
-
-    it 'has categories' do
-      expect(meeting).to respond_to(:categories)
-    end
   end
 
   describe 'scopes' do
@@ -113,12 +109,11 @@ RSpec.describe Meeting, type: :model do
       let!(:m_yesterday) { create :meeting, :skip_validate, starts_at_date: Date.yesterday }
       let!(:m_tomorrow) { create :meeting, starts_at_date: Date.tomorrow+1.day }
       let!(:m_today) { create :meeting, starts_at_date: Date.tomorrow }
-      let!(:m_nil) { create :meeting, starts_at_date: nil }
 
       subject(:by_currentness) { Meeting.by_currentness }
 
-      it 'returns upcoming asc, past desc, nil' do
-        expect(by_currentness).to eq [m_today, m_tomorrow, m_yesterday, m_nil]
+      it 'returns upcoming asc, past desc' do
+        expect(by_currentness).to eq [m_today, m_tomorrow, m_yesterday]
       end
     end
 
@@ -126,14 +121,13 @@ RSpec.describe Meeting, type: :model do
       let!(:m_today) { create :meeting, starts_at_date: Date.today }
       let!(:m_tomorrow) { create :meeting, starts_at_date: Date.tomorrow }
       let!(:m_after_tomorrow) { create :meeting, starts_at_date: Date.tomorrow+1 }
-      let!(:m_nil) { create :meeting, starts_at_date: nil }
       let!(:m_yesterday) { create :meeting, :skip_validate, starts_at_date: Date.yesterday }
       let!(:m_cancelled) { create :meeting, :cancelled, starts_at_date: Date.today }
 
       subject(:meetings) { Meeting.upcoming }
 
-      it 'retrieves nearest first, nil last' do
-        expect(meetings.to_a).to eq [m_today, m_tomorrow, m_after_tomorrow, m_nil]
+      it 'retrieves nearest first' do
+        expect(meetings.to_a).to eq [m_today, m_tomorrow, m_after_tomorrow]
       end
 
       it 'excludes past' do

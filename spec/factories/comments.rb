@@ -1,7 +1,7 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :comment do
     content { Faker::Lorem.paragraph }
     user
-    commentable nil
+    commentable {nil}
   end
 end

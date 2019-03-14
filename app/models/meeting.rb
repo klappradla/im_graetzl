@@ -4,9 +4,8 @@ class Meeting < ApplicationRecord
 
   scope :by_currentness, -> {
     active.
-    order('CASE WHEN starts_at_date >= current_date THEN 0 WHEN starts_at_date IS NOT NULL THEN 1 ELSE 2 END').
-    order('(CASE WHEN starts_at_date >= current_date THEN starts_at_date END) ASC,
-            (CASE WHEN starts_at_date < current_date THEN starts_at_date END) DESC')
+    order(Arel.sql('CASE WHEN starts_at_date >= current_date THEN 0 WHEN starts_at_date IS NOT NULL THEN 1 ELSE 2 END')).
+    order(Arel.sql('(CASE WHEN starts_at_date >= current_date THEN starts_at_date END) ASC, (CASE WHEN starts_at_date < current_date THEN starts_at_date END) DESC'))
   }
   scope :upcoming, -> { active.
     where("starts_at_date > ?", Date.yesterday).

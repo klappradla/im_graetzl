@@ -3,7 +3,7 @@
   <h2>Passwort vergessen?</h2>
 
   <%= form_for(resource, as: resource_name, url: password_path, html: { method: :post }) do |f| %>
-      <%= devise_error_messages! %>
+      <%= render 'devise/shared/error_messages' %>
 
       <div class="input-field">
         <%= f.label :email do %>

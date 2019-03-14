@@ -79,7 +79,7 @@ RSpec.describe User, type: :model do
       end
 
       context 'when business' do
-        before { user.role = :business }
+        before { user.business = true }
 
         it 'responds #business? true' do
           expect(user.business?).to eq(true)

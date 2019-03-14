@@ -119,15 +119,15 @@ RSpec.describe User::Notifiable do
         user: user,
         bitmask: type::BITMASK,
         sent: false) }
-      let(:old_notification) { create(:notification,
+      let(:future_notification) { create(:notification,
         user: user,
         bitmask: type::BITMASK,
         sent: false) }
 
       before do
         user.enable_mail_notification type, :daily
-        new_notifications.each{|n| n.update(created_at: (Time.now - 6.minutes)) }
-        old_notification.update(created_at: Time.now - 3.days)
+        new_notifications.each{|n| n.update(notify_at: (Time.now - 6.minutes)) }
+        future_notification.update(notify_at: Time.now + 3.days)
       end
 
       it 'returns all new notifications (more than 5 minutes old)' do
@@ -138,15 +138,8 @@ RSpec.describe User::Notifiable do
         expect(user.pending_daily_notifications.ids).not_to include sent_notification.id
       end
 
-      it 'excludes too new notifications' do
-        new_notification = new_notifications.last
-        new_notification.update(created_at: Time.now)
-        new_ids = new_notifications.map(&:id) - [new_notification.id]
-        expect(user.pending_daily_notifications.ids).to match_array(new_ids)
-      end
-
-      it 'excludes too old notifications' do
-        expect(user.pending_daily_notifications.ids).not_to include old_notification.id
+      it 'excludes future notifications' do
+        expect(user.pending_daily_notifications.ids).not_to include future_notification.id
       end
     end
   end

@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
-ruby '2.3.4'
+ruby '2.5.3'
 
-gem 'rails', '~> 5.0'
+gem 'rails', '~> 5.2'
 gem 'puma'
 gem 'pg'
-gem 'activerecord-postgis-adapter', '~> 4.0'
+gem 'activerecord-postgis-adapter', '~> 5.0'
 gem 'rgeo'
 gem 'rgeo-geojson'
 gem 'sucker_punch'
@@ -25,6 +25,7 @@ gem 'jbuilder'
 gem 'kaminari'
 gem 'remotipart'
 gem 'sitemap_generator'
+gem 'google_custom_search_api'
 
 gem 'mandrill-api', '~> 1.0.53', require: "mandrill"
 gem 'gibbon', '~> 3.0', '>= 3.0.2'
@@ -34,27 +35,21 @@ gem 'scout_apm'
 
 gem 'refile', github: 'refile/refile', require: 'refile/rails'
 gem 'refile-mini_magick', github: 'refile/refile-mini_magick'
-gem 'sinatra', github: 'sinatra/sinatra', ref: "88a1ba7bfb2262b68391d2490dbb440184b9f838"
+gem 'sinatra', github: 'sinatra/sinatra'
 gem 'refile-s3'
-gem 'aws-sdk', '~> 2.7'
 
 gem 'sass-rails'
 gem 'uglifier'
-gem 'therubyracer',  platforms: :ruby
+gem 'mini_racer', platforms: :ruby
 gem 'jquery-rails'
 gem 'underscore-rails'
 gem 'autoprefixer-rails'
 
-gem 'activeadmin', '~> 1.0.0.pre4'
+gem 'activeadmin'
 gem 'rabl'
 gem 'oj'
 gem 'jquery-ui-rails', '5.0.0'
-gem 'google_custom_search_api'
 gem 'bb-ruby'
-
-group :doc do
-  gem 'sdoc'
-end
 
 group :development do
   gem 'spring'
@@ -66,14 +61,10 @@ group :development, :test do
   # Helpers don't work if required, https://github.com/rspec/rspec-rails/issues/1525
   gem 'rails-controller-testing', require: false
   gem 'rspec-rails'
-  gem 'factory_girl_rails'
-  gem 'byebug'
+  gem 'factory_bot_rails'
   gem 'dotenv-rails'
   gem 'guard-livereload'
   gem 'foreman', require: false
-end
-
-group :development, :test, :staging do
   gem 'faker'
 end
 
@@ -84,4 +75,5 @@ group :test do
   gem 'webmock'
 end
 
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

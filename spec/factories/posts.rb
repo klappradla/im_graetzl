@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :post do
     title { Faker::Hipster.sentence(3) }
     content { Faker::Hipster.paragraph }

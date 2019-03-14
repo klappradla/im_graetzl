@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :operating_range do
     graetzl
     association :operator

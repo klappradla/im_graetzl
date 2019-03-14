@@ -7,7 +7,7 @@
   </div>
 
   <%= form_for(resource, as: resource_name, url: registration_path, html: { data: { graetzl: resource.graetzl.name, zip: resource.graetzl.district.try(:zip) } }) do |f| %>
-  <%= devise_error_messages! %>
+  <%= render 'devise/shared/error_messages' %>
 
   <div class="form-register">
 

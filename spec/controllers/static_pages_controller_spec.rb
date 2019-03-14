@@ -39,7 +39,6 @@ RSpec.describe StaticPagesController, type: :controller do
         context 'with meetings' do
           let(:past_meeting) { build(:meeting, starts_at_date: Date.yesterday) }
           let!(:upcoming_meeting) { create(:meeting, starts_at_date: Date.tomorrow) }
-          let!(:nil_meeting) { create(:meeting, starts_at_date: nil) }
           before do
             past_meeting.save(validate: false)
             get :home
@@ -47,10 +46,6 @@ RSpec.describe StaticPagesController, type: :controller do
 
           it 'contains 2 upcoming meetings' do
             expect(activity_sample.meetings).to contain_exactly(upcoming_meeting, past_meeting)
-          end
-
-          it 'excludes past meetings' do
-            expect(activity_sample.meetings).not_to include(nil_meeting)
           end
         end
       end

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :zuckerl do
     location
     title { Faker::Lorem.characters(80) }

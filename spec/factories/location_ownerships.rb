@@ -1,6 +1,6 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :location_ownership do
     user
-    location    
+    location
   end
 end

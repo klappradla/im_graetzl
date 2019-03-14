@@ -8,7 +8,7 @@
 <section class="justEntry">
   <div class="userCreateInfo">
     <%= link_to [@post.author.graetzl, @post.author] do %>
-      <%= attachment_image_tag @post.author, :avatar, :fill, 80, 80, fallback: 'avatar/user/80/80.png', class: 'img-round' %>
+      <%= attachment_image_tag @post.author, :avatar, :fill, 80, 80, fallback: 'avatar/user/80x80.png', class: 'img-round' %>
     <% end %>
     <span class="userAndType">
       Beitrag von <%= link_to @post.author.username, [@post.author.graetzl, @post.author] %></a>

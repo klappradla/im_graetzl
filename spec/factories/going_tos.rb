@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :going_to do
     user
     meeting

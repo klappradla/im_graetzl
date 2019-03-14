@@ -1,5 +1,5 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :initiative do
-    
+
   end
 end

@@ -4,7 +4,7 @@ class ZuckerlsController < ApplicationController
   def index
     head :ok and return if browser.bot? && !request.format.js?
     @zuckerls = collection_scope
-    @zuckerls = @zuckerls.page(params[:page]).per(15).order("RANDOM()")
+    @zuckerls = @zuckerls.page(params[:page]).per(15).order(Arel.sql("RANDOM()"))
   end
 
   def new

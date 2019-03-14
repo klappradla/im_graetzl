@@ -1,6 +1,6 @@
 require 'faker'
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :user do
     sequence(:username) { |n| "user_#{n}" }
     first_name { Faker::Name.first_name }
@@ -8,10 +8,10 @@ FactoryGirl.define do
     email { Faker::Internet.email }
     password { Faker::Internet.password(8) }
     graetzl
-    confirmed_at Date.today
+    confirmed_at {Date.today}
 
     trait :admin do
-      role User.roles[:admin]
+      role {User.roles[:admin]}
     end
 
     factory :user_with_enabled_website_notifications do

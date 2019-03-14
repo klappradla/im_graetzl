@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :contact do
     website { Faker::Internet.url }
     phone { Faker::PhoneNumber.phone_number }

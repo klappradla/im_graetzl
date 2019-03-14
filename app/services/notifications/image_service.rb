@@ -13,7 +13,7 @@ class Notifications::ImageService
     if owner.cover_photo
       Refile.attachment_url(owner, :cover_photo, :fill, 600, 300, host: host)
     else
-      path = "cover_photo/#{ActiveModel::Naming.singular(owner)}/600x300.png"
+      path = "cover_photo/600x300.png"
       ApplicationController.helpers.image_url(path, host: host)
     end
   end

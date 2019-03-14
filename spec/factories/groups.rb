@@ -1,6 +1,6 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :group do
-    title "MyString"
-    description "MyText"
+    title { "MyString" }
+    description { "MyText" }
   end
 end

@@ -1,9 +1,11 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :meeting do
     name { Faker::Lorem.sentence }
     description { Faker::Lorem.paragraph }
+    starts_at_date { Date.tomorrow }
     address
     graetzl
+
 
     trait :active do
       state { Meeting.states[:active] }

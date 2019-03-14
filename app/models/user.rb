@@ -34,7 +34,7 @@ class User < ApplicationRecord
   has_many :discussions
   has_many :discussion_followings
 
-  has_many :wall_comments, as: :commentable, class_name: Comment, dependent: :destroy
+  has_many :wall_comments, as: :commentable, class_name: "Comment", dependent: :destroy
   accepts_nested_attributes_for :address
 
   validates :graetzl, presence: true

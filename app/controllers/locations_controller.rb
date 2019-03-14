@@ -31,7 +31,8 @@ class LocationsController < ApplicationController
   end
 
   def create
-    @location = Location.new create_location_params
+    @location = Location.new(location_params)
+    @location.user_ids = [current_user.id]
     if @location.save
       redirect_enqueued
     else
@@ -127,7 +128,4 @@ class LocationsController < ApplicationController
           :_destroy])
   end
 
-  def create_location_params
-    location_params.merge(user_ids: [current_user.id])
-  end
 end

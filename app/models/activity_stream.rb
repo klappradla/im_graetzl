@@ -23,7 +23,7 @@ class ActivityStream
 
   def insert_zuckerls(activity_items)
     zuckerls_sample_size = activity_items.size * 0.2
-    zuckerls = @graetzl.zuckerls.limit(zuckerls_sample_size).order("RANDOM()").to_a
+    zuckerls = @graetzl.zuckerls.limit(zuckerls_sample_size).order(Arel.sql("RANDOM()")).to_a
     zuckerl_items = Array.new(activity_items.size){|i| zuckerls[i] || nil}.shuffle
     activity_items.zip(zuckerl_items).flatten.compact
   end

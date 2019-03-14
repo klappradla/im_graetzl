@@ -41,13 +41,11 @@ RSpec.describe Notification::ImmediateMail do
                                         :from_email,
                                         :from_name,
                                         :subject,
-                                        :global_merge_vars,
-                                        :merge_vars)
+                                        :global_merge_vars)
       end
       it 'has keys for immediate mail' do
-        expect(message[:merge_vars]).to be_a(Array)
-        expect(message[:merge_vars][0]).to be_a(Hash)
-        expect(message[:merge_vars][0][:vars]).not_to be_empty
+        expect(message[:global_merge_vars]).to be_a(Array)
+        expect(message[:global_merge_vars][0]).to be_a(Hash)
       end
     end
   end

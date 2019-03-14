@@ -23,8 +23,8 @@ RSpec.describe Location, type: :model do
       expect(build(:location, graetzl: nil)).not_to be_valid
     end
 
-    it 'is invalid without category' do
-      expect(build(:location, category: nil)).not_to be_valid
+    it 'is invalid without location_category' do
+      expect(build(:location, location_category: nil)).not_to be_valid
     end
   end
 
@@ -67,8 +67,8 @@ RSpec.describe Location, type: :model do
       expect(location).to respond_to(:graetzl)
     end
 
-    it 'has category' do
-      expect(location).to respond_to(:category)
+    it 'has location_category' do
+      expect(location).to respond_to(:location_category)
     end
 
     it 'has meetings' do

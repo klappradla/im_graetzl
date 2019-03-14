@@ -132,7 +132,7 @@ RSpec.describe Users::RegistrationsController, type: :controller do
     end
 
     context 'with role business' do
-      before { params.deep_merge!({ user: { role: :business } }) }
+      before { params.deep_merge!({ user: { business: true } }) }
 
       describe 'new user' do
         subject(:new_user) { User.last }
