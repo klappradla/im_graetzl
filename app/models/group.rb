@@ -11,7 +11,7 @@ class Group < ApplicationRecord
   validates :cover_photo, presence: true
   validates :graetzl_ids, presence: true
 
-  has_many :discussions
+  has_many :discussions, dependent: :destroy
   has_many :discussion_posts, through: :discussions
 
   has_many :group_users

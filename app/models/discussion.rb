@@ -5,7 +5,7 @@ class Discussion < ApplicationRecord
   belongs_to :user
   belongs_to :discussion_category, optional: true
 
-  has_many :discussion_posts
+  has_many :discussion_posts, dependent: :destroy
   has_many :discussion_followings
   has_many :following_users, through: :discussion_followings, source: :user
 
