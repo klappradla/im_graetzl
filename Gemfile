@@ -50,6 +50,7 @@ gem 'rabl'
 gem 'oj'
 gem 'jquery-ui-rails', '6.0.0'
 gem 'bb-ruby'
+gem 'stripe'
 
 group :development do
   gem 'spring'

@@ -1,0 +1,11 @@
+<p>
+  <strong><%= number_with_precision(@amount / 100, :precision => 2, :delimiter => ',') %> €</strong><br>
+  <strong><%= @description %></strong><br>
+  Von: <strong><%= @email %></strong>
+</p>
+<p>
+  <a href="<%= @url %>">In Stripe ansehen</a>
+</p>
+
+<strong><em>Nachricht:</em></strong><br>
+<p><%= @message %></p>

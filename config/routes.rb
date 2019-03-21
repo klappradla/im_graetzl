@@ -172,6 +172,15 @@ Rails.application.routes.draw do
     resources :meetings, only: [:index]
   end
 
+  resources :payment do
+    collection do
+      get :raumteiler, :charge, :subscription, :mentoring
+    end
+    collection do
+      post :raumteiler_create, :charge_create, :subscription_create, :mentoring_create
+    end
+  end
+
   resources :graetzls, path: '', only: [:show] do
     get 'treffen', action: 'meetings', as: 'meetings', on: :member
     get 'locations', on: :member

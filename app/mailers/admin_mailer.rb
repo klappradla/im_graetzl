@@ -7,4 +7,14 @@ class AdminMailer < ApplicationMailer
     @location = @zuckerl.location
     mail(subject: "[ImGrätzl] Buchung Grätzlzuckerl von #{@location.name}")
   end
+
+  def new_payment(amount, email, description, url, message)
+    @amount = amount
+    @email = email
+    @description = description
+    @url = url
+    @message = message
+    mail(subject: "[ImGrätzl] Neue Zahlung von #{email}")
+  end
+
 end

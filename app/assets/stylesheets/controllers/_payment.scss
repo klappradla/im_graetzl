@@ -1,0 +1,74 @@
+section.payment-form, section.payment-confirmation {
+  max-width: 700px;
+  margin: 0 auto;
+
+  .hl-subtext::after {
+    content: "";
+    background-image: url(image_path('illu/illu-raumteiler-people.png'));
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+    background-position: right center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .paperCard .wrp, .cardBox {
+    padding:25px;
+  }
+
+}
+
+section.payment-form {
+
+  .hl-subtext {
+    padding-right: 70px;
+  }
+
+  .input-field, .input-select, .input-button {
+    margin-bottom:20px;
+  }
+
+  textarea {
+    min-height: 150px;
+  }
+
+  label {
+    min-width: 205px;
+  }
+
+  button {
+    width:100%;
+  }
+
+  .triggerBillingInformation {
+    display: block;
+    margin-bottom: 20px;
+    color: $color-ambient-mint-dark;
+    font-style: italic;
+    font-weight: bold;
+  }
+
+  .billing-information {
+    display: none;
+  }
+
+  // ----------- Form Specific -----------
+
+  &.-subscription {
+    .input-button {
+      padding-bottom: 30px;
+      border-bottom: 1px solid #DBEFEC;
+    }
+  }
+
+}
+
+section.payment-confirmation {
+  p.txt {
+    padding-bottom: 20px;
+  }
+}

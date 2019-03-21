@@ -1,0 +1,74 @@
+<% title('Zahlung') %>
+
+<%= form_tag subscription_create_payment_index_path, id: 'stripeForm' do %>
+  <%= hidden_field_tag :publishable_key, Rails.configuration.stripe[:publishable_key] %>
+  <%= hidden_field_tag :stripeToken %>
+
+  <%= hidden_field_tag :stripeDescription, 'Deine Unterstützung' %>
+  <%= hidden_field_tag :stripePlan, 'plan_EcPqKaYViIkWOr' %>
+
+  <!--<%= hidden_field_tag :stripeBillingCycleAnchor, '2019-05-01' %>-->
+  <!--<%= hidden_field_tag :stripeTrialEnd, '2019-05-01' %>-->
+  <!--<%= hidden_field_tag :stripeCancelAtPeriodEnd, true %>-->
+
+  <section class="payment-form -subscription">
+
+    <div class="hl-subtext">
+      <h1><span>WoW</span> - Du möchtest <span>imGrätzl unterstützen</span></h1>
+      <p>Wähle selbst deinen monatlichen Wunschbetrag.</p>
+    </div>
+
+    <div class="input-select">
+      <%= label_tag(:amount) do %>
+        <%= icon_tag "currency-euro" %>
+        <span>Monatlicher Betrag</span>
+      <% end %>
+      <%= select_tag :stripePlan, options_for_select([
+        ["3 €", "plan_EcNxWzjJPeRoOc"],
+        ["6 €", "plan_EcPpmWFv0JZeC8"],
+        ["9 €", "plan_EcPpeCJQKptdNm"],
+        ["12 €", "plan_EcPppVIlzzCIRW"],
+        ["15 €", "plan_EcPqKaYViIkWOr"],
+      ]), { prompt: 'Auswählen ..' } %>
+    </div>
+
+    <div class="input-field">
+      <%= label_tag(:amount) do %>
+        <%= icon_tag "open-book" %>
+        <span>Deine Nachricht</span>
+      <% end %>
+      <%= text_area_tag :message, nil, placeholder: "Wir freuen uns über ein kurzes Feedback von dir.." %>
+    </div>
+
+    <div class="input-field">
+      <%= label_tag(:stripeEmail) do %>
+        <%= icon_tag "at-symbol" %>
+        <span>E-Mail Adresse</span>
+      <% end %>
+      <%= email_field_tag :stripeEmail, (current_user ? current_user.email : nil), placeholder: 'E-Mail Adresse' %>
+    </div>
+
+    <div class="input-button">
+      <% if !current_user %>
+        <!--<%= button_tag 'Weiter zur Zahlung', class: 'btn-primary -mint -login' %>-->
+        <%= button_tag 'Weiter zur Zahlung', class: 'btn-primary -mint stripe-submit-subscription' %>
+      <% else %>
+        <%= button_tag 'Weiter zur Zahlung', class: 'btn-primary -mint stripe-submit-subscription' %>
+      <% end %>
+    </div>
+
+    <div class="txt -footer">
+      Du kannst deine monatliche Unterstützung jederzeit beenden.<br>
+      Hast du Fragen? Schreib uns an <a href="mailto:wir@imgaretzl.at">wir@imgaretzl.at</a>.
+    </div>
+
+  </section>
+
+<% end %>
+
+<!-- STRIPE JS -->
+<script src="https://checkout.stripe.com/checkout.js"></script>
+
+<!----------- LOGIN PANEL MODAL ----------->
+<%= render 'shared/login_panel',redirect: request.original_url ,origin: 'mentoring' %>
+<!----------- LOGIN PANEL MODAL ----------->

@@ -1,0 +1,27 @@
+<% title('Zahlung') %>
+
+<%= form_tag charge_create_payment_index_path, id: 'stripeForm' do %>
+
+  <%= hidden_field_tag :publishable_key, Rails.configuration.stripe[:publishable_key] %>
+  <%= hidden_field_tag :stripeToken %>
+  <%= hidden_field_tag :stripeEmail, current_user ? current_user.email : '' %>
+  <%= hidden_field_tag :stripeDescription, 'Charge Description' %>
+
+  <section class="payment-form">
+
+    <div class="input-field">
+      <%= label_tag(:amount) do %>
+        <%= icon_tag "currency-euro" %>
+        <!--<span>Dein Betrag</span>-->
+      <% end %>
+      <%= text_field_tag :amount, nil, placeholder: "Dein Betrag (z.b. 5,00 €)", id: 'amount' %>
+    </div>
+    <%= button_tag 'Weiter zur Zahlung', class: 'btn-primary -mint stripe-submit' %>
+
+  </section>
+
+
+<% end %>
+
+<!-- STRIPE JS -->
+<script src="https://checkout.stripe.com/checkout.js"></script>

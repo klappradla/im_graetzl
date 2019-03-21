@@ -116,7 +116,6 @@ To shut down the VM, run:
 $ vagrant halt   # $ vagrant up will continue at the state you left the VM
 ```
 
-
 ## Deployment
 
 The app is hosted on [Amazon Elastic Beanstalk](http://aws.amazon.com/elasticbeanstalk/) (single instance type running Ruby 2.3, Puma, Nginx). Config in .ebextensions folder. Files are executed in alphabetical order:

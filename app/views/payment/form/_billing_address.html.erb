@@ -1,0 +1,39 @@
+<div class="input-field">
+  <%= label_tag(:stripeCompany) do %>
+    <%= icon_tag "user-avatar" %>
+    <span>Firma</span>
+  <% end %>
+  <%= text_field_tag :stripeCompany, nil, placeholder: 'Firma (optional)' %>
+</div>
+
+<div class="input-field">
+  <%= label_tag(:stripeName) do %>
+    <%= icon_tag "user-avatar" %>
+    <span>Name</span>
+  <% end %>
+  <%= text_field_tag :stripeName, current_user ? current_user.full_name : nil, placeholder: 'Vor- & Nachname' %>
+</div>
+
+<div class="input-field">
+  <%= label_tag(:stripeAddress) do %>
+    <%= icon_tag "map-location" %>
+    <span>Strasse & Nr.</span>
+  <% end %>
+  <%= text_field_tag :stripeAddress, current_user ? current_user.address.street_name : nil, placeholder: 'Strasse & Nr.' %>
+</div>
+
+<div class="input-field">
+  <%= label_tag(:stripePostalCode) do %>
+    <%= icon_tag "map-location" %>
+    <span>Postleitzahl</span>
+  <% end %>
+  <%= text_field_tag :stripePostalCode, current_user ? current_user.address.zip : nil, placeholder: 'PLZ' %>
+</div>
+
+<div class="input-field">
+  <%= label_tag(:stripeCity) do %>
+    <%= icon_tag "map-location" %>
+    <span>Ort/Stadt</span>
+  <% end %>
+  <%= text_field_tag :stripeCity, current_user ? current_user.address.city : nil, placeholder: 'Stadt' %>
+</div>
