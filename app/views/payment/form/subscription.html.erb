@@ -3,7 +3,7 @@
 <%= form_tag subscription_create_payment_index_path, id: 'stripeForm' do %>
   <%= hidden_field_tag :publishable_key, Rails.configuration.stripe[:publishable_key] %>
   <%= hidden_field_tag :stripeToken %>
-
+  <%= hidden_field_tag :stripeIcon, image_url('stripe_logo.png') %>
   <%= hidden_field_tag :stripeDescription, 'Deine Unterstützung' %>
   <%= hidden_field_tag :stripePlan, 'plan_EcPqKaYViIkWOr' %>
 
@@ -14,7 +14,7 @@
   <section class="payment-form -subscription">
 
     <div class="hl-subtext">
-      <h1><span>WoW</span> - Du möchtest <span>imGrätzl unterstützen</span></h1>
+      <h1>Du möchtest <span>imGrätzl unterstützen?</span></h1>
       <p>Wähle selbst deinen monatlichen Wunschbetrag.</p>
     </div>
 
@@ -40,13 +40,24 @@
       <%= text_area_tag :message, nil, placeholder: "Wir freuen uns über ein kurzes Feedback von dir.." %>
     </div>
 
-    <div class="input-field">
-      <%= label_tag(:stripeEmail) do %>
-        <%= icon_tag "at-symbol" %>
-        <span>E-Mail Adresse</span>
-      <% end %>
-      <%= email_field_tag :stripeEmail, (current_user ? current_user.email : nil), placeholder: 'E-Mail Adresse' %>
+    <% if current_user %>
+      <%= hidden_field_tag :stripeEmail, current_user.email %>
+    <% else %>
+      <div class="input-field">
+        <%= label_tag(:stripeEmail) do %>
+          <%= icon_tag "at-symbol" %>
+          <span>E-Mail Adresse</span>
+        <% end %>
+        <%= email_field_tag :stripeEmail, nil, placeholder: 'E-Mail Adresse' %>
+      </div>
+    <% end %>
+
+    <%= link_to 'Rechnungsanschrift hinzufügen?', 'javascript:', class: 'triggerBillingInformation' %>
+
+    <div class="billing-information">
+      <%= render 'payment/form/billing_address' %>
     </div>
+
 
     <div class="input-button">
       <% if !current_user %>
@@ -58,8 +69,15 @@
     </div>
 
     <div class="txt -footer">
-      Du kannst deine monatliche Unterstützung jederzeit beenden.<br>
-      Hast du Fragen? Schreib uns an <a href="mailto:wir@imgaretzl.at">wir@imgaretzl.at</a>.
+      <p>
+        Die Abwicklung der Zahlung wird über den sicheren Zahlungsanbeiter
+        <%= link_to 'Stripe', 'https://stripe.com/at', target: '_blank' %> durchgeführt.<br>
+        imGrätzl hat zu keiner Zeit Zugriff auf deine Kreditkarteninformationen.
+      </p>
+      <p>
+        Du kannst deine monatliche Unterstützung jederzeit mit sofortiger Wirkung beenden.<br>
+        Hast du Fragen? Schreib uns an <a href="mailto:wir@imgraetzl.at">wir@imgraetzl.at</a>.
+      </p>
     </div>
 
   </section>

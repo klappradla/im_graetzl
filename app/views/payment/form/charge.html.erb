@@ -4,19 +4,51 @@
 
   <%= hidden_field_tag :publishable_key, Rails.configuration.stripe[:publishable_key] %>
   <%= hidden_field_tag :stripeToken %>
-  <%= hidden_field_tag :stripeEmail, current_user ? current_user.email : '' %>
+  <%= hidden_field_tag :stripeIcon, image_url('stripe_logo.png') %>
   <%= hidden_field_tag :stripeDescription, 'Charge Description' %>
 
   <section class="payment-form">
 
+    <div class="hl-subtext">
+      <h1>Unterstützer Spende</h1>
+      <p>...</p>
+    </div>
+
     <div class="input-field">
       <%= label_tag(:amount) do %>
         <%= icon_tag "currency-euro" %>
-        <!--<span>Dein Betrag</span>-->
+        <span>Wähle deinen Betrag</span>
       <% end %>
-      <%= text_field_tag :amount, nil, placeholder: "Dein Betrag (z.b. 5,00 €)", id: 'amount' %>
+      <%= text_field_tag :amount, nil, placeholder: "z.b. 25,00 €", id: 'amount', required: true %>
     </div>
+
+    <div class="input-field">
+      <%= label_tag(:amount) do %>
+        <%= icon_tag "open-book" %>
+        <span>Deine Nachricht</span>
+      <% end %>
+      <%= text_area_tag :message, nil, placeholder: "Wir freuen uns über ein kurzes Feedback von dir.." %>
+    </div>
+
+    <% if current_user %>
+      <%= hidden_field_tag :stripeEmail, current_user.email %>
+    <% else %>
+      <div class="input-field">
+        <%= label_tag(:stripeEmail) do %>
+          <%= icon_tag "at-symbol" %>
+          <span>E-Mail Adresse</span>
+        <% end %>
+        <%= email_field_tag :stripeEmail, nil, placeholder: 'E-Mail Adresse' %>
+      </div>
+    <% end %>
+
     <%= button_tag 'Weiter zur Zahlung', class: 'btn-primary -mint stripe-submit' %>
+
+    <div class="txt -footer">
+      Die Abwicklung der Zahlung wird über den sicheren Zahlungsanbeiter
+      <%= link_to 'Stripe', 'https://stripe.com/at', target: '_blank' %> durchgeführt.<br>
+      imGrätzl hat zu keiner Zeit Zugriff auf deine Kreditkarteninformationen.
+    </div>
 
   </section>
 

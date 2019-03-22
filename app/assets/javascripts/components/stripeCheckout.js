@@ -24,6 +24,7 @@ APP.components.stripeCheckout = (function() {
       name: 'imGrätzl.at',
       description: $('#stripeForm #stripeDescription').val(),
       email: $('#stripeForm #stripeEmail').val(),
+      image: $('#stripeForm #stripeIcon').val(),
       //billingAddress: $('#stripeForm #stripeBillingAddress').val(),
       token: function(response) {
         // Get Stripe response infos and pass to hidden form fields

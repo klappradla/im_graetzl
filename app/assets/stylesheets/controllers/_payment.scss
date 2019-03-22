@@ -2,30 +2,46 @@ section.payment-form, section.payment-confirmation {
   max-width: 700px;
   margin: 0 auto;
 
-  .hl-subtext::after {
-    content: "";
-    background-image: url(image_path('illu/illu-raumteiler-people.png'));
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;
-    background-position: right center;
-    background-size: contain;
-    background-repeat: no-repeat;
+  @include respond-to(">medium") {
+    .hl-subtext::after {
+      content: "";
+      background-image: url(image_path('illu/illu-raumteiler-people.png'));
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      position: absolute;
+      z-index: -1;
+      background-position: right center;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
   }
 
   .paperCard .wrp, .cardBox {
     padding:25px;
   }
 
+  .txt {
+    &.-footer {
+      margin-top:30px;
+      padding-top: 20px;
+      border-top: 1px solid $color-ambient-mint-light;
+      color: $color-ambient-grey;
+      p {
+        padding-bottom:15px;
+      }
+    }
+  }
+
 }
 
 section.payment-form {
 
-  .hl-subtext {
-    padding-right: 70px;
+  @include respond-to(">medium") {
+    .hl-subtext {
+      padding-right: 70px;
+    }
   }
 
   .input-field, .input-select, .input-button {
@@ -56,14 +72,6 @@ section.payment-form {
     display: none;
   }
 
-  // ----------- Form Specific -----------
-
-  &.-subscription {
-    .input-button {
-      padding-bottom: 30px;
-      border-bottom: 1px solid #DBEFEC;
-    }
-  }
 
 }
 

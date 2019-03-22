@@ -4,14 +4,14 @@
 
   <%= hidden_field_tag :publishable_key, Rails.configuration.stripe[:publishable_key] %>
   <%= hidden_field_tag :stripeToken %>
+  <%= hidden_field_tag :stripeIcon, image_url('stripe_logo.png') %>
   <%= hidden_field_tag :stripeDescription, 'Raumteiler Unterstützung' %>
-  <!--<%= hidden_field_tag :stripeBillingAddress, false %>-->
 
   <section class="payment-form -raumteiler">
 
     <div class="hl-subtext">
       <h1><span>Raumpartnerschaft</span> gefunden?</h1>
-      <p>Sollte dir der Raumteiler geholfen haben, 
+      <p>Sollte dir der Raumteiler geholfen haben,
         so kannst du uns jetzt mit einem Betrag deiner Wahl unterstützen.</p>
     </div>
 
@@ -51,9 +51,14 @@
     </div>
 
     <div class="input-button">
-      <%= button_tag 'Weiter zur Zahlung', class: 'btn-primary -mint stripe-submit' %>
+      <%= button_tag 'Weiter zur Zahlung', class: 'btn-primary -mint -large stripe-submit' %>
     </div>
 
+    <div class="txt -footer">
+      Die Abwicklung der Zahlung wird über den sicheren Zahlungsanbeiter
+      <%= link_to 'Stripe', 'https://stripe.com/at', target: '_blank' %> durchgeführt.<br>
+      imGrätzl hat zu keiner Zeit Zugriff auf deine Kreditkarteninformationen.
+    </div>
 
   </section>
 

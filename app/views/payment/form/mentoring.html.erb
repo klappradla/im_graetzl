@@ -1,27 +1,61 @@
-<% title('Zahlung') %>
+<% title('Mentoring - zahlung') %>
 
-<%= form_tag mentoring_create_payment_index_path, id: 'stripeForm' do %>
+  <%= form_tag mentoring_create_payment_index_path, id: 'stripeForm' do %>
 
-  <%= hidden_field_tag :publishable_key, Rails.configuration.stripe[:publishable_key] %>
-  <%= hidden_field_tag :stripeToken %>
-  <%= hidden_field_tag :stripeEmail, current_user ? current_user.email : '' %>
-  <%= hidden_field_tag :stripeDescription, 'Unterstützer Team' %>
-  <%= hidden_field_tag :amount, 300 %>
+    <%= hidden_field_tag :publishable_key, Rails.configuration.stripe[:publishable_key] %>
+    <%= hidden_field_tag :stripeToken %>
+    <%= hidden_field_tag :stripeIcon, image_url('stripe_logo.png') %>
+    <%= hidden_field_tag :stripeDescription, 'Unterstützer Team' %>
+    <%= hidden_field_tag :amount, 300 %>
 
-  <section class="payment-form">
+    <section class="payment-form -raumteiler">
 
-    <div class="hl-subtext">
-      <h1><span>Unterstützer Team</span> Zahlung</h1>
-      <p>4 Monate / Start 01.05.2019</p>
-    </div>
+      <div class="hl-subtext">
+        <h1><span>Unterstützer Team</span> Zahlung</h1>
+        <p><strong>300,00 €</strong> (inkl. 20% Ust.)</p>
+      </div>
 
-    300,00 €
-    <%= button_tag 'Weiter zur Zahlung', class: 'btn-primary -mint stripe-submit' %>
+      <div class="input-field">
+        <%= label_tag(:amount) do %>
+          <%= icon_tag "open-book" %>
+          <span>Deine Nachricht</span>
+        <% end %>
+        <%= text_area_tag :message, nil, placeholder: "Falls du uns nochein paar Zeilen mitteilen möchtest .." %>
+      </div>
 
-  </section>
+      <% if current_user %>
+        <%= hidden_field_tag :stripeEmail, current_user.email %>
+      <% else %>
+        <div class="input-field">
+          <%= label_tag(:stripeEmail) do %>
+            <%= icon_tag "at-symbol" %>
+            <span>E-Mail Adresse</span>
+          <% end %>
+          <%= email_field_tag :stripeEmail, nil, placeholder: 'E-Mail Adresse' %>
+        </div>
+      <% end %>
 
 
-<% end %>
+      <%= link_to 'Rechnungsanschrift hinzufügen?', 'javascript:', class: 'triggerBillingInformation' %>
 
-<!-- STRIPE JS -->
-<script src="https://checkout.stripe.com/checkout.js"></script>
+      <div class="billing-information">
+        <%= render 'payment/form/billing_address' %>
+      </div>
+
+      <div class="input-button">
+        <%= button_tag 'Weiter zur Zahlung', class: 'btn-primary -mint stripe-submit' %>
+      </div>
+
+      <div class="txt -footer">
+        Die Abwicklung der Zahlung wird über den sicheren Zahlungsanbeiter
+        <%= link_to 'Stripe', 'https://stripe.com/at', target: '_blank' %> durchgeführt.<br>
+        imGrätzl hat zu keiner Zeit Zugriff auf deine Kreditkarteninformationen.
+      </div>
+
+    </section>
+
+
+  <% end %>
+
+  <!-- STRIPE JS -->
+  <script src="https://checkout.stripe.com/checkout.js"></script>
