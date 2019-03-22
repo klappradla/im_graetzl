@@ -5,6 +5,14 @@ APP.components.stripeCheckout = (function() {
     if($('#stripePlan').exists()) initPlan();
   }
 
+  function cleanUpAmount(amount) {
+    amount = amount.replace(/,/g, '.');
+    amount = amount.replace(/\$/g, '').replace(/\,/g, '');
+    amount = parseFloat(amount);
+    amount = Math.floor(amount); // Abrunden auf ganze Zahl
+    return amount;
+  }
+
   function initPlan() {
     $('select#stripePlan').on('change', function() {
       var stripePlan = $(this).find(":selected").text();
@@ -15,6 +23,14 @@ APP.components.stripeCheckout = (function() {
   }
 
   function initStripe() {
+
+    // onFocusOut -> Abrunden auf ganzen Betrag, wenn Zahl.
+    $('#amount').focusout(function(){
+      var amount = cleanUpAmount(this.value);
+      if (!isNaN(amount)) {
+        $(this).val(cleanUpAmount(this.value));
+      }
+    });
 
     var handler = StripeCheckout.configure({
       key: $('#stripeForm #publishable_key').val(),
@@ -40,9 +56,7 @@ APP.components.stripeCheckout = (function() {
 
       var email = $('#stripeForm #stripeEmail').val();
       var amount = $('#stripeForm #amount').val();
-      amount = amount.replace(/,/g, '.');
-      amount = amount.replace(/\$/g, '').replace(/\,/g, '');
-      amount = parseFloat(amount);
+      amount = cleanUpAmount(amount); // Abrunden auf ganzen Betrag
 
       if (isNaN(amount)) {
         $('#flash').html('<p>Bitte gib einen gültigen Betrag (€) ein.</p>').show();
