@@ -88,12 +88,16 @@ class GroupsController < ApplicationController
 
     if !@group.users.include?(@join_request.user)
       group_user = @group.group_users.create(user: @join_request.user)
-      group_user.create_activity(:create, owner: current_user)
+
+      if @group.save
+        group_user.create_activity(:create, owner: current_user)
+        GroupMailer.new.join_request_accepted(@group, @join_request.user)
+      end
+
     end
 
     @join_request.accepted!
 
-    GroupMailer.new.join_request_accepted(@group, @join_request.user)
     redirect_to group_url(@group, anchor: "tab-members")
   end
 
