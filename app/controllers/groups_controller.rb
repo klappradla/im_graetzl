@@ -173,6 +173,7 @@ class GroupsController < ApplicationController
       .permit(
         :title,
         :description,
+        :welcome_message,
         :private,
         :room_offer_id,
         :room_demand_id,

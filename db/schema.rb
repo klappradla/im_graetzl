@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_24_103910) do
+ActiveRecord::Schema.define(version: 2019_03_28_085829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -300,6 +300,7 @@ ActiveRecord::Schema.define(version: 2019_02_24_103910) do
     t.string "cover_photo_content_type"
     t.boolean "featured", default: false
     t.boolean "hidden", default: false
+    t.text "welcome_message"
     t.index ["location_id"], name: "index_groups_on_location_id"
     t.index ["room_call_id"], name: "index_groups_on_room_call_id"
     t.index ["room_demand_id"], name: "index_groups_on_room_demand_id"

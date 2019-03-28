@@ -50,6 +50,7 @@ class GroupMailer
         { name: 'last_name', content: user.last_name },
         { name: 'group_name', content: group.title },
         { name: 'group_description', content: group.description.truncate(255, separator: ' ') },
+        { name: 'group_welcome_message', content: group.welcome_message },
         { name: 'cover_photo_url', content: Notifications::ImageService.new.cover_photo_url(group) },
         { name: 'group_url', content: group_url(group, URL_OPTIONS) }
       ]

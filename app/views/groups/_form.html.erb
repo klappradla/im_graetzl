@@ -93,6 +93,18 @@
     </div>
   </div>
 
+  <div class="hl-subtext -groups">
+    <h2><span>Welcome-Mail</span> an neue Mitglieder</h2>
+    <p>Sende neuen Mitgliedern automatisch eine kurze Begrüßung bzw. erste Infos zur Gruppe zu.</p>
+  </div>
+  <div class="input-textarea">
+    <%= f.label :welcome_message do %>
+    <%= icon_tag "layout-document" %>
+    <span>Welcome-Mail</span>
+    <% end %>
+    <%= f.text_area :welcome_message, placeholder: 'Hallo, herzlich willkommen in der Gruppe ..' %>
+  </div>
+
   <%= render "groups/form/connections", f: f %>
 
   <%= f.button @group.new_record? ? 'Gruppe erstellen' : 'Speichern', data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
