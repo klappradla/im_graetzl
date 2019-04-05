@@ -3,18 +3,20 @@ section.payment-form, section.payment-confirmation {
   margin: 0 auto;
 
   @include respond-to(">medium") {
-    .hl-subtext::after {
-      content: "";
-      background-image: url(image_path('illu/illu-raumteiler-people.png'));
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      position: absolute;
-      z-index: -1;
-      background-position: right center;
-      background-size: contain;
-      background-repeat: no-repeat;
+    .hl-subtext {
+      &.-main::after {
+        content: "";
+        background-image: url(image_path('illu/illu-raumteiler-people.png'));
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        z-index: -1;
+        background-position: right center;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
     }
   }
 
@@ -40,7 +42,9 @@ section.payment-form {
 
   @include respond-to(">medium") {
     .hl-subtext {
-      padding-right: 70px;
+      &.-main {
+        padding-right: 70px;
+      }
     }
   }
 
@@ -70,6 +74,90 @@ section.payment-form {
 
   .billing-information {
     display: none;
+  }
+
+
+  .StripeElement {
+    height: 60px;
+    width:100%;
+    padding: 2.0rem 1.4rem;
+    margin:0;
+    line-height: 1.2;
+    font-size: 1.6rem;
+
+    color: #615454;
+    background-color: #DBEFEC;
+    //border: 1px solid transparent;
+    //border-radius: 4px;
+
+    box-shadow: inset 2px 2px 2px 0 rgba(0, 0, 0, 0.05);
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
+  }
+
+  .StripeElement--focus {
+    outline:none;
+    border:1px solid #4D90FE;
+    -webkit-box-shadow: 0px 0px 5px  #4D90FE;
+    box-shadow: 0px 0px 5px  #4D90FE;
+    border-radius: 1px;
+  }
+
+  .StripeElement--invalid {
+    border-color: #fa755a;
+  }
+
+  .StripeElement--webkit-autofill {
+    background-color: #fefde5 !important;
+  }
+
+  .payment-selection {
+    display: flex;
+    justify-content: center;
+    label {
+      min-width: 0px;
+    }
+    .input-radio {
+      margin-right:30px;
+    }
+    .input-radio:last-child {
+      margin-right:0px;
+    }
+  }
+
+  .payment-method {
+    display: none;
+    .-info {
+      margin-bottom:20px;
+      font-style: italic;
+    }
+    .-amount {
+      display: none;
+    }
+  }
+
+  #bank-name {
+    display: none;
+  }
+  #sepa-error-message, #sofort-error-message {
+    display: none;
+    &.visible {
+      @include font-size-primaryFont('large');
+      border: 1px solid $color-ambient-grey-light;
+      border-radius: 8px;
+      padding:20px;
+      font-style: italic;
+      background-color: #FEF6DF;
+      color: #cd891b;
+      margin-bottom:20px;
+      display: block;
+    }
+  }
+
+  .hl-subtext {
+    &.-payment {
+      margin-bottom: 20px;
+    }
   }
 
 

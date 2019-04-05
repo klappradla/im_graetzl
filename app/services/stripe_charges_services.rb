@@ -6,9 +6,19 @@ class StripeChargesServices
   DEFAULT_FOOTER = 'Lieben Dank für deine Unterstützung - Dein Team von imGrätzl.at'
 
   def initialize(params, user)
-    @user = user ? user : User.find_by_email(params[:stripeEmail])    # current_user if logged in
-    @stripe_token = params[:stripeToken]
+    @user = user ? user : User.find_by_email(params[:stripeEmail]) # current_user if logged in
+    @payment_method = params[:payment_method]
+
+    if !params[:stripeToken].empty?
+      @stripe_source = params[:stripeToken]
+    elsif !params[:stripeSource].empty?
+      @stripe_source = params[:stripeSource]
+    else
+      @stripe_source = params[:source]
+    end
+
     @stripe_email = params[:stripeEmail]
+    @name = params[:stripeName]
     @amount = params[:amount].to_i * 100
     @amount_netto = (@amount / DEFAULT_TAX_COMMA).round
     @description = params[:stripeDescription]
@@ -20,7 +30,7 @@ class StripeChargesServices
     @billing_address = params[:stripebillingAddress] if params[:stripebillingAddress].present?
 
     @company = !params[:stripeCompany].nil? ? params[:stripeCompany] : nil
-    @name = !params[:stripeName].nil? ? params[:stripeName] : nil
+    @address_name = !params[:stripeAddressName].nil? ? params[:stripeAddressName] : nil
     @address = !params[:stripeAddress].nil? ? params[:stripeAddress] : nil
     @plz = !params[:stripePostalCode].nil? ? params[:stripePostalCode] : nil
     @city = !params[:stripeCity].nil? ? params[:stripeCity] : nil
@@ -43,7 +53,8 @@ class StripeChargesServices
   private
 
   attr_accessor :user,
-                :stripe_token,
+                :payment_method,
+                :stripe_source,
                 :stripe_email,
                 :amount,
                 :amount_netto,
@@ -56,20 +67,24 @@ class StripeChargesServices
                 :billing_address,
                 :company,
                 :name,
+                :address_name,
                 :address,
                 :plz,
                 :city
 
   def find_customer
-  if user && user.stripe_customer_id
-    retrieve_customer(user.stripe_customer_id)
-  else
-    create_customer
-  end
+    if user && user.stripe_customer_id
+      retrieve_and_update_customer(user.stripe_customer_id)
+    else
+      create_customer
+    end
   end
 
-  def retrieve_customer(stripe_token)
-    @customer = Stripe::Customer.retrieve(stripe_token)
+  def retrieve_and_update_customer(customer_id)
+    @customer = Stripe::Customer.update(
+      customer_id,
+      {source: stripe_source}
+    )
     @customer
   end
 
@@ -78,7 +93,7 @@ class StripeChargesServices
       # Create Stripe Customer with User Infos
       @customer = Stripe::Customer.create(
         email: stripe_email,
-        source: stripe_token,
+        source: stripe_source,
         metadata: {
           user_id: user.id,
           user_role: user.business? ? 'business' : ''
@@ -91,7 +106,7 @@ class StripeChargesServices
       # Create Anonym Stripe Customer
       @customer = Stripe::Customer.create(
         email: stripe_email,
-        source: stripe_token,
+        source: stripe_source,
         description: name,
         shipping: insert_shipping
       )
@@ -124,9 +139,10 @@ class StripeChargesServices
       customer: customer.id,
       tax_percent: DEFAULT_TAX,
       auto_advance: true,
+      #default_source: stripe_source,
       footer: DEFAULT_FOOTER
     )
-    #puts invoice # Todo: save charge infos in DB
+    puts invoice # Todo: save charge infos in DB
     send_payment_confirmation("#{STRIPE_DASHBOARD}/invoices/#{invoice.id}")
   end
 
@@ -149,7 +165,7 @@ class StripeChargesServices
   # Create Address Hash for Stripe Customer
   def insert_shipping
     hash = {
-      name: name,
+      name: address_name,
       address: {
         line1: company,
         line2: address,

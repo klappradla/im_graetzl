@@ -1,5 +1,5 @@
 class PaymentController < ApplicationController
-  before_action :authenticate_user!, except: [ :raumteiler, :raumteiler_create ]
+  before_action :authenticate_user!, except: [ :raumteiler, :raumteiler_create, :processing ]
 
   rescue_from Stripe::CardError, with: :catch_stripe_card_error
   rescue_from Stripe::InvalidRequestError, with: :catch_stripe_invalid_request
@@ -19,6 +19,16 @@ class PaymentController < ApplicationController
 
   def mentoring
     render :template => '/payment/form/mentoring'
+  end
+
+  def processing
+    StripeChargesServices.new(payment_params, current_user).init_invoice
+    amount = payment_params[:amount].to_i
+    description = payment_params[:stripeDescription]
+    @payment_confirmation_info = "#{amount},00 € - Deine #{description}"
+    @email = payment_params[:stripeEmail]
+    MailchimpPaymentJob.perform_later(@email, '5f02f45ea9') # Insert Mailchimp List ID
+    render :template => '/payment/confirmation'
   end
 
   def raumteiler_create
@@ -61,9 +71,13 @@ class PaymentController < ApplicationController
 
   def payment_params
     params.permit(
-      :stripeToken,
-      :stripeEmail,
       :amount,
+      :payment_method,
+      :stripeToken,
+      :stripeSource,
+      :source,
+      :stripeName,
+      :stripeEmail,
       :stripeDescription,
       :stripePlan,
       :stripeBillingCycleAnchor,
@@ -72,7 +86,7 @@ class PaymentController < ApplicationController
       :stripebillingAddress,
       :message,
       :stripeCompany,
-      :stripeName,
+      :stripeAddressName,
       :stripeAddress,
       :stripePostalCode,
       :stripeCity

@@ -7,11 +7,11 @@
 </div>
 
 <div class="input-field">
-  <%= label_tag(:stripeName) do %>
+  <%= label_tag(:stripeAddressName) do %>
     <%= icon_tag "user-avatar" %>
     <span>Name</span>
   <% end %>
-  <%= text_field_tag :stripeName, current_user ? current_user.full_name : nil, placeholder: 'Vor- & Nachname' %>
+  <%= text_field_tag :stripeAddressName, current_user ? current_user.full_name : nil, placeholder: 'Vor- & Nachname' %>
 </div>
 
 <div class="input-field">
