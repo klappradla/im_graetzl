@@ -1,5 +1,5 @@
 <div class="mapImgBlock -hasillu">
-  <div id="graetzlMapWidget" data-mapdata="<%= map_data %>"></div>
+  <div id="graetzlMapWidget" data-mapdata="<%= MapData.new.for_graetzl(@graetzl).to_json %>"></div>
   <div class="activeArea"></div>
   <div class="illuDistrict"></div>
   <div class="mapInfoText"></div>
@@ -7,7 +7,7 @@
   <div class="navBlock">
     <h1><%= @graetzl.name %></h1>
     <div class="links">
-      <% @graetzl.districts.each do |district| %>
+      <% Graetzl.memoized(@graetzl.id).districts.each do |district| %>
         <%= link_to district, class: 'toOverview' do %>
           <%= icon_tag "arrow-left-2" %> <%= district.name %>
         <% end %>

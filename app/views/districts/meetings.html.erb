@@ -9,9 +9,7 @@
 %>
 
 <section class="districts">
-  <%= cache [@district, 'meetingsmap'], expires_in: 2.months do %>
-    <%= render 'districts/map', map_data: @map_data %>
-  <% end %>
+  <%= render 'map' %>
   <%= render 'menu' %>
 
   <h1 class="hl-main">Events, Workshops & Veranstaltungen <span>im <%= @district.numeric %>. Bezirk</span></h1>

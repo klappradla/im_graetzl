@@ -12,6 +12,12 @@ class District < ApplicationRecord
   has_many :room_demands, -> { distinct }, through: :graetzls
   has_many :groups, -> { distinct }, through: :graetzls
 
+  MEMOIZED = includes(:graetzls).map{|d| [d.id, d] }.to_h.freeze
+
+  def self.memoized(id)
+    MEMOIZED[id]
+  end
+
   def long_name
     "#{name}-#{zip}"
   end

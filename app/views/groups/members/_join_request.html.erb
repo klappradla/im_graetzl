@@ -5,16 +5,20 @@
   <div class="infos">
     <span><%= join_request.user.first_name %> <br> <%= join_request.user.last_name.truncate(18, separator: ' ') %></span>
     <p class="date">Anfrage am: <br><%= I18n.localize(join_request.created_at, format:'%d. %B %Y') %></p>
-    <p class="date">
-      <% if @group.room_call_readable_by?(current_user) && @group.room_call_submission?(join_request) %>
-        <%= link_to submission_room_call_path(@group.room_call, submission_id: @group.room_call_submission_id(join_request)) do %>
-        Call Einreichung
-        <% end %>
-      <% elsif join_request.has_content? %>
+
+    <% if join_request.has_content? %>
+      <p class="date">
         <%= link_to "Beitritts Nachricht", "#request-message-modal-#{join_request.id}", class: 'request-message-opener' %>
         <%= render 'groups/members/join_request_modal', join_request: join_request %>
-      <% end %>
-    </p>
+      </p>
+    <% end %>
+
+    <% room_call_submission = @group.user_room_call_submission(group_user.user_id) %>
+    <% if room_call_submission %>
+      <p class="date">
+        <%= link_to "Call Einreichung", submission_room_call_path(@group.room_call, submission_id: room_call_submission.id) %>
+      </p>
+    <% end %>
   </div>
   <div class="btns">
     <%= link_to accept_request_group_path(@group, join_request_id: join_request.id), method: :post, class: 'btn-userIcons -small -mint' do %>

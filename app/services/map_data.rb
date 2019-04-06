@@ -1,65 +1,34 @@
 class MapData < BaseService
-  def initialize(districts:nil, district:nil, graetzls:nil, graetzl:nil, addresses:nil, address:nil)
-    districts = [districts, district].flatten.compact
-    graetzls = [graetzls, graetzl].flatten.compact
-    addresses = [addresses, address].flatten.compact
 
-    # want to end up with two only collections here
-    @districts = districts.empty? ? nil : districts
-    @graetzls = graetzls.empty? ? nil : graetzls
-    @addresses = addresses.empty? ? nil : addresses
+  RGEO_FACTORY = RGeo::GeoJSON::EntityFactory.new
+
+  def for_graetzl(graetzl)
+    { graetzls: graetzl_features(graetzl) }
   end
 
-  def call
-    map_hash.to_json
+  def for_district(district)
+    graetzls = District.memoized(district.id).graetzls
+    { districts: district_feature(district), graetzls: graetzl_features(graetzls) }
+  end
+
+  def for_wien(districts)
+    { districts: district_feature(districts) }
   end
 
   private
 
-  attr_reader :districts, :graetzls
-
-  def map_hash
-    [district_data, graetzl_data, address_data].inject(:merge)
+  def graetzl_features(graetzls)
+    features = Array(graetzls).map { |g|
+      RGEO_FACTORY.feature(g.area, g.id, {name: g.name, targetURL: graetzl_path(g)})
+    }
+    RGeo::GeoJSON.encode RGEO_FACTORY.feature_collection(features)
   end
 
-  def district_data
-    return {} unless @districts
-    { districts: encode(@districts) }
+  def district_feature(districts)
+    features = Array(districts).map { |d|
+      RGEO_FACTORY.feature(d.area, d.id, { name: d.name, zip: d.zip, targetURL: district_path(d) })
+    }
+    RGeo::GeoJSON.encode RGEO_FACTORY.feature_collection(features)
   end
 
-  def graetzl_data
-    return {} unless @graetzls
-    { graetzls: encode(@graetzls) }
-  end
-  
-  def address_data
-    Rails.logger.info "Person attributes hash: #{@addresses}"
-    return {} unless @addresses
-    { addresses: encode(@addresses) }
-  end
-
-  def encode(collection)
-    features = collection.map{ |item| feature item }
-    feature_collection = factory.feature_collection features
-    RGeo::GeoJSON.encode feature_collection
-  end
-
-  def feature(item)
-    # graetzls/districts have area, addresses have coordinates
-    geometry = item.try(:area) || item.try(:coordinates)
-    factory.feature(geometry, item.id, properties(item))
-  end
-
-  def properties(item)
-    begin
-      targetURL = polymorphic_path(item)
-    rescue
-      targetURL = nil
-    end
-    { name: item.try(:name), zip: item.try(:zip), targetURL: targetURL }
-  end
-
-  def factory
-    @factory ||= RGeo::GeoJSON::EntityFactory.new
-  end
 end

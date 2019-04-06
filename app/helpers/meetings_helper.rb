@@ -23,27 +23,6 @@ module MeetingsHelper
     meeting_map(meeting) + meeting_address(meeting)
   end
 
-  def meeting_initiator(meeting)
-    initiator = meeting.responsible_user_or_location
-    if initiator
-      link_to [initiator.graetzl, initiator], class: 'initiator' do
-        concat avatar_for(initiator)
-        concat content_tag(:span, initiator.try(:username) || initiator.name)
-      end
-    end
-  end
-
-  def meeting_initiator_row(meeting)
-    initiator = meeting.responsible_user_or_location
-    if initiator
-      content_tag(:div, class: 'userPortraitName') do
-        concat avatar_for(initiator, 100)
-        concat "Erstellt von "
-        concat link_to(initiator.try(:username) || initiator.name, [initiator.graetzl, initiator])
-      end
-    end
-  end
-
   def meeting_name(meeting)
     meeting.active? ? content_tag(:h1, meeting.name) : content_tag(:h2, 'ABGESAGT')
   end

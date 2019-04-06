@@ -19,8 +19,8 @@
       <Attribute name="id"><%= @meeting.id %></Attribute>
       <Attribute name="title"><%= @meeting.name %></Attribute>
       <Attribute name="description"><%= @meeting.description if @meeting.description.present? %></Attribute>
-      <Attribute name="author"><%= @meeting.initiator.full_name if !@meeting.initiator.nil? %></Attribute>
-      <Attribute name="user"><%= @meeting.initiator.username if !@meeting.initiator.nil? %></Attribute>
+      <Attribute name="author"><%= @meeting.user.full_name if @meeting.user %></Attribute>
+      <Attribute name="user"><%= @meeting.user.username if @meeting.user %></Attribute>
       <Attribute name="graetzl"><%= @graetzl.name %></Attribute>
       <Attribute name="startDate"><%= I18n.localize(@meeting.starts_at_date, format:'%Y-%m-%d') if @meeting.starts_at_date %></Attribute>
     </DataObject>
@@ -28,7 +28,7 @@
       <Attribute name="src" value="<%= attachment_url(@meeting, :cover_photo, :fill, 900, 540, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'meta/og_logo.png') %>" />
     </DataObject>
     <DataObject type="thumbnail">
-      <Attribute name="src" value="<%= attachment_url(@meeting.initiator, :avatar, :fill, 400, 400, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'avatar/user/400x400.png') %>" />
+      <Attribute name="src" value="<%= attachment_url(@meeting.user, :avatar, :fill, 400, 400, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'avatar/user/400x400.png') %>" />
     </DataObject>
   </PageMap>
   -->
@@ -66,6 +66,7 @@
       <div class="place">
         <%= meeting_place @meeting %>
       </div>
+
       <% if @meeting.group.present? %>
         <div class="place">
           <div class="iconMapLink">
@@ -76,11 +77,22 @@
           </div>
         </div>
       <% end %>
-      <%= meeting_initiator_row @meeting %>
-      <div class="txt"><%= @meeting.description %></div>
+
+      <div class="userPortraitName">
+        <% if @meeting.location && @meeting.location.users.include?(@meeting.user) %>
+          <%= avatar_for(@meeting.location, 100) %> Erstellt von
+          <%= link_to @meeting.location.name, [Graetzl.memoized(@meeting.location.graetzl_id), @meeting.location] %>
+        <% elsif @meeting.user %>
+          <%= avatar_for(@meeting.user, 100) %> Erstellt von
+          <%= link_to @meeting.user.username, @meeting.user %>
+        <% end %>
+      </div>
+      <div class="txt">
+        <%= @meeting.description %>
+      </div>
     </div>
 
-    <%= render 'going_tos/participation', meeting: @meeting %>
+    <%= render 'meetings/participation', meeting: @meeting %>
 
     <div class="stream">
       <%= render 'comments/form', commentable: @meeting %>
@@ -91,7 +103,7 @@
     <div class="entryParticipate">
       <%= button_to 'Treffen reaktivieren', edit_meeting_path(@meeting),
                     method: :get,
-                    class: 'btn-destroy' if user_signed_in? && (current_user == @meeting.initiator) %>
+                    class: 'btn-destroy' if user_signed_in? && (current_user == @meeting.user) %>
     </div>
   <% end %>
 

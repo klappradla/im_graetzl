@@ -13,12 +13,12 @@ class DiscussionPost < ApplicationRecord
   after_create :set_discussion_last_post
 
   def edit_permission?(by_user)
-    user == by_user
+    by_user && user_id == by_user.id
   end
 
   def delete_permission?(by_user)
     return false if initial_post?
-    user == by_user || group.admins.include?(by_user)
+    user_id == by_user.id || group.admins.include?(by_user)
   end
 
   private

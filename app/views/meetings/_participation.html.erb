@@ -1,0 +1,28 @@
+<div class="entryParticipate" data-behavior="participants-container">
+  <% if !user_signed_in? %>
+    <%= button_to new_user_session_path, method: :get, class: 'btn-userCallToAction' do %>
+      <span><%= image_tag 'avatar/user/default.png', class: 'img-round' %> Am Treffen teilnehmen</span>
+    <% end %>
+  <% elsif current_user == meeting.user %>
+    <%= button_to edit_meeting_path(meeting), method: :get, class: 'btn-userCallToAction' do %>
+      <span><%= avatar_for current_user %> Treffen bearbeiten</span>
+    <% end %>
+  <% elsif meeting.attending?(current_user) %>
+    <%= button_to [:unattend, meeting], method: :post, remote: true, class: 'btn-userCallToAction' do %>
+      <span><%= avatar_for current_user %> Nicht mehr teilnehmen</span>
+    <% end %>
+  <% else %>
+    <%= button_to [:attend, meeting], remote: true, class: 'btn-userCallToAction' do %>
+      <span><%= avatar_for current_user %> Am Treffen teilnehmen</span>
+    <% end %>
+  <% end %>
+
+  <div class="participants">
+    <p class="userCount"><span><%= meeting.going_tos.size %></span> Teilnehmer</p>
+    <div class="portraitCollection">
+      <% meeting.users.each do |user| %>
+        <%= link_to avatar_for(user), user %>
+      <% end %>
+    </div>
+  </div>
+</div>

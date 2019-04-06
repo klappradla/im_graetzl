@@ -1,7 +1,9 @@
 <% location = zuckerl.location %>
+<% graetzl = Graetzl.memoized(location.graetzl_id) %>
+
 <div class="cardBox -zuckerl" data-behavior="masonry-card">
   <div class="cardBoxHeader">
-    <%= link_to [location.graetzl, location, anchor: dom_id(zuckerl)] do %>
+    <%= link_to [graetzl, location, anchor: dom_id(zuckerl)] do %>
       <div class="coverImgWrapper">
         <%= attachment_image_tag(zuckerl, :image, :fill, 300, 180, class: 'coverImg') %>
       </div>
@@ -9,15 +11,15 @@
     <div class="categoryicon">
       <%= icon_tag "shopping-bag" %>
     </div>
-    <%= graetzl_flag(location.graetzl) %>
+    <%= graetzl_flag(graetzl) %>
   </div>
   <div class="cardBoxContent">
     <div class="avatar-block">
-      <%= link_to [location.graetzl, location], class: 'avatarImg' do %>
+      <%= link_to [graetzl, location], class: 'avatarImg' do %>
         <%= avatar_for location %>
       <% end %>
       <div class="typetxt">
-        <%= link_to [location.graetzl, location] do %>
+        <%= link_to [graetzl, location] do %>
           <div class="name"><%= location.name %></div>
         <% end %>
         <div class="category"><%= location.location_category.name %></div>
@@ -29,7 +31,7 @@
         <% end %>
       </div>
     </div>
-    <%= link_to [location.graetzl, location, anchor: dom_id(zuckerl)], class: 'zuckerlteasertxt' do %>
+    <%= link_to [graetzl, location, anchor: dom_id(zuckerl)], class: 'zuckerlteasertxt' do %>
       <div class="hl">
         <%= icon_tag "shopping-bag" %>
         Grätzlzuckerl im <%= I18n.localize Time.now, format: '%B' %>

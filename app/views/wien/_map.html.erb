@@ -1,0 +1,15 @@
+<div class="mapImgBlock">
+  <div id="graetzlMapWidget" data-mapdata="<%= MapData.new.for_wien(@districts).to_json %>"></div>
+  <div class="activeArea"></div>
+  <div class="navBlock">
+    <h1>Wien</h1>
+    <div class="links">
+      <% @districts.each do |district| %>
+        <%= link_to "#{district.zip} - #{district.name}", district %>
+      <% end %>
+    </div>
+    <select class="mobileSelectMenu">
+      <option disabled>Bezirk wählen</option>
+    </select>
+  </div>
+</div>

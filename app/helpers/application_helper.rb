@@ -40,10 +40,6 @@ module ApplicationHelper
     link_to(name, url, html_options)
   end
 
-  def graetzl_flag(graetzl)
-    content_tag(:div, link_to(graetzl.name, [graetzl]), class: 'graetzl-sideflag sideflag -R')
-  end
-
   def form_errors_for(target, name=nil)
     if target.errors.any?
       name ||= target.model_name.human

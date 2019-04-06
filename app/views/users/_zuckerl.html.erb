@@ -1,7 +1,9 @@
 <% location = zuckerl.location %>
+<% graetzl = Graetzl.memoized(location.graetzl_id) %>
+
 <div class="cardBox -zuckerl">
   <div class="cardBoxHeader">
-    <%= link_to [location.graetzl, location] do %>
+    <%= link_to [graetzl, location] do %>
       <div class="coverImgWrapper">
         <%= attachment_image_tag(zuckerl, :image, :fill, 300, 180, class: 'coverImg') %>
       </div>
@@ -13,10 +15,10 @@
   <div class="cardBoxContent">
     <div class="avatar-block">
       <div class="avatarImg">
-        <%= link_to([location.graetzl, location]){ avatar_for location } %>
+        <%= link_to([graetzl, location]){ avatar_for location } %>
       </div>
       <div class="typetxt">
-        <%= link_to location.name, [location.graetzl, location], class: 'name' %>
+        <%= link_to location.name, [graetzl, location], class: 'name' %>
         <div class="category"><%= location.location_category.name %></div>
         <% if location.address %>
           <div class="address">

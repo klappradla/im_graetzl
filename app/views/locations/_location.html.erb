@@ -1,6 +1,8 @@
+<% graetzl = Graetzl.memoized(location.graetzl_id) %>
+
 <div class="cardBox -location" data-behavior="masonry-card">
   <div class="cardBoxHeader">
-    <%= link_to [location.graetzl, location] do %>
+    <%= link_to [graetzl, location] do %>
       <div class="coverImgWrapper">
         <%= cover_photo_for location %>
       </div>
@@ -8,16 +10,16 @@
     <div class="categoryicon">
       <%= icon_tag "location" %>
     </div>
-    <%= graetzl_flag(location.graetzl) %>
+    <%= graetzl_flag(graetzl) %>
   </div>
 
   <div class="cardBoxContent">
     <div class="avatar-block">
-      <%= link_to [location.graetzl, location], class: 'avatarImg' do %>
+      <%= link_to [graetzl, location], class: 'avatarImg' do %>
         <%= avatar_for location %>
       <% end %>
       <div class="typetxt">
-        <%= link_to [location.graetzl, location] do %>
+        <%= link_to [graetzl, location] do %>
           <div class="name"><%= location.name %></div>
         <% end %>
         <div class="category"><%= location.location_category.name %></div>
@@ -35,7 +37,7 @@
     </div>
 
     <% if location_post = location.posts.sort_by(&:created_at).last %>
-      <%= link_to [location.graetzl, location, anchor: dom_id(location_post)], class: 'updateteaser' do %>
+      <%= link_to [graetzl, location, anchor: dom_id(location_post)], class: 'updateteaser' do %>
         <div class="hl">
           Letztes Update:
         </div>
@@ -46,7 +48,7 @@
     <% end %>
 
     <% if zuckerl = location.live_zuckerls.last %>
-      <%= link_to [location.graetzl, location, anchor: dom_id(zuckerl)], class: 'zuckerlteasertxt' do %>
+      <%= link_to [graetzl, location, anchor: dom_id(zuckerl)], class: 'zuckerlteasertxt' do %>
         <div class="hl">
           <%= icon_tag "shopping-bag" %>
           Grätzlzuckerl im <%= I18n.localize Time.now, format: '%B' %>
@@ -56,7 +58,7 @@
     <% end %>
 
     <% if meeting = location.upcoming_meetings.last %>
-      <%= link_to [meeting.graetzl, meeting], class: 'event-teaser-box' do %>
+      <%= link_to [graetzl, meeting], class: 'event-teaser-box' do %>
         <% if meeting.starts_at_date %>
           <div class="date">
             <%= icon_tag "calendar-2" %>

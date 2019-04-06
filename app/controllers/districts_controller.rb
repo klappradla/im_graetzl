@@ -1,41 +1,35 @@
 class DistrictsController < ApplicationController
+  before_action :load_district
 
   def show
-    @district = District.find(params[:id])
-    @map_data = MapData.call district: @district, graetzls: @district.graetzls
     @activity_sample = ActivitySample.new(district: @district)
   end
 
   def graetzls
-    @district = District.find(params[:id])
-    render json: @district.graetzls.to_json(only: [:id, :name])
+    render json: District.memoized(@district.id).graetzls.to_json(only: [:id, :name])
   end
 
   def meetings
-    @district = District.find(params[:id])
-    @map_data = MapData.call district: @district, graetzls: @district.graetzls
   end
 
   def locations
-    @district = District.find(params[:id])
-    @map_data = MapData.call district: @district, graetzls: @district.graetzls
   end
 
   def rooms
-    @district = District.find(params[:id])
-    @map_data = MapData.call district: @district, graetzls: @district.graetzls
   end
 
   def groups
-    @district = District.find(params[:id])
-    @map_data = MapData.call district: @district, graetzls: @district.graetzls
-    @featured_groups = @district.groups.featured
+    @featured_groups = @district.groups.include_for_box
     @category = GroupCategory.find_by(id: params[:category])
   end
 
   def zuckerls
+  end
+
+  private
+
+  def load_district
     @district = District.find(params[:id])
-    @map_data = MapData.call district: @district, graetzls: @district.graetzls
   end
 
 end

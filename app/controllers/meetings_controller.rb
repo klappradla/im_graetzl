@@ -11,7 +11,7 @@ class MeetingsController < ApplicationController
 
   def show
     @graetzl = Graetzl.find(params[:graetzl_id])
-    @meeting = @graetzl.meetings.includes(going_tos: :user).find(params[:id])
+    @meeting = @graetzl.meetings.find(params[:id])
     @comments = @meeting.comments.includes(:user, :images).order(created_at: :desc)
   end
 
@@ -23,6 +23,7 @@ class MeetingsController < ApplicationController
     @meeting = initialize_meeting
     @meeting.assign_attributes(meeting_params)
     @meeting.graetzl = @meeting.address.try(:graetzl) || @meeting.graetzl
+    @meeting.user = current_user
     @meeting.going_tos.new(user_id: current_user.id, role: :initiator)
 
     if @meeting.save
@@ -56,6 +57,17 @@ class MeetingsController < ApplicationController
     end
   end
 
+  def attend
+    @meeting = Meeting.find(params[:id])
+    @meeting.users << current_user
+    @meeting.create_activity(:go_to, owner: current_user)
+  end
+
+  def unattend
+    @meeting = Meeting.find(params[:id])
+    @meeting.going_tos.find_by(user_id: current_user.id).destroy
+  end
+
   def destroy
     @meeting = find_user_meeting
     @meeting.create_activity(:cancel, owner: current_user) if @meeting.cancelled!
@@ -72,10 +84,10 @@ class MeetingsController < ApplicationController
       Meeting.where(graetzl_id: district.graetzl_ids)
     elsif params[:initiated_user_id].present?
       user = User.find(params[:initiated_user_id])
-      user.meetings.initiated
+      user.initiated_meetings
     elsif params[:attended_user_id].present?
       user = User.find(params[:attended_user_id])
-      user.meetings.attended
+      user.attended_meetings
     else
       Meeting.all
     end
@@ -117,6 +129,6 @@ class MeetingsController < ApplicationController
   end
 
   def find_user_meeting
-    current_user.meetings.initiated.find params[:id]
+    current_user.initiated_meetings.find(params[:id])
   end
 end

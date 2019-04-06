@@ -1,41 +1,36 @@
 class Meeting < ApplicationRecord
   include Trackable
   extend FriendlyId
+  friendly_id :name
+
+  belongs_to :graetzl
+  has_many :districts, through: :graetzl
+
+  belongs_to :location, optional: true
+  belongs_to :user, optional: true
+  belongs_to :group, optional: true
+
+  has_one :address, as: :addressable, dependent: :destroy
+  accepts_nested_attributes_for :address
+
+  has_many :going_tos, dependent: :destroy
+  accepts_nested_attributes_for :going_tos, allow_destroy: true
+  has_many :users, through: :going_tos
+
+  has_many :comments, as: :commentable, dependent: :destroy
+
+  attachment :cover_photo, type: :image
+  enum state: { active: 0, cancelled: 1 }
 
   scope :by_currentness, -> {
     active.
     order(Arel.sql('CASE WHEN starts_at_date >= current_date THEN 0 WHEN starts_at_date IS NOT NULL THEN 1 ELSE 2 END')).
     order(Arel.sql('(CASE WHEN starts_at_date >= current_date THEN starts_at_date END) ASC, (CASE WHEN starts_at_date < current_date THEN starts_at_date END) DESC'))
   }
+
   scope :upcoming, -> { active.
     where("starts_at_date > ?", Date.yesterday).
     order(:starts_at_date) }
-  #scope :upcoming, -> { active.
-  #  where("(starts_at_date > ?) OR (starts_at_date IS NULL)", Date.yesterday).
-  #  order(:starts_at_date) }
-
-  # scopes primarily used for users
-  scope :initiated, -> { includes(:going_tos, :graetzl)
-                        .where('going_tos.role = ?', GoingTo::roles[:initiator]).references(:going_tos)
-                        .order(starts_at_date: :desc) }
-  scope :attended, -> { includes(:going_tos, :graetzl)
-                        .where('going_tos.role = ?', GoingTo::roles[:attendee]).references(:going_tos)
-                        .order(starts_at_date: :desc) }
-
-  friendly_id :name
-  attachment :cover_photo, type: :image
-  enum state: { active: 0, cancelled: 1 }
-
-  belongs_to :graetzl
-  has_many :districts, through: :graetzl
-  belongs_to :location, optional: true
-  has_one :address, as: :addressable, dependent: :destroy
-  accepts_nested_attributes_for :address
-  has_many :going_tos, dependent: :destroy
-  accepts_nested_attributes_for :going_tos, allow_destroy: true
-  has_many :users, through: :going_tos
-  has_many :comments, as: :commentable, dependent: :destroy
-  belongs_to :group, optional: true
 
   validates :name, presence: true
   validates :description, presence: true
@@ -59,28 +54,19 @@ class Meeting < ApplicationRecord
   end
 
   def self.include_for_box
-    includes(:graetzl, :going_tos, :users, location: :users)
-  end
-
-  def initiator
-    going_tos.find{ |gt| gt.initiator? }.try(:user)
+    includes(:going_tos, :user, location: :users)
   end
 
   def public?
     !private?
   end
 
-  def responsible_user_or_location
-    initiator_user = initiator
-    if location && location.users.include?(initiator_user)
-      location
-    else
-      initiator_user
-    end
-  end
-
   def display_address
     address || location.try(:address)
+  end
+
+  def attending?(user)
+    user && going_tos.any?{|gt| gt.user_id == user.id}
   end
 
   def approve_for_api

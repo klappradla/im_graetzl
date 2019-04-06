@@ -1,7 +1,8 @@
-<%- meeting = notification.activity.trackable %>
+<% meeting = notification.activity.trackable %>
+<% graetzl = Graetzl.memoized(meeting.graetzl_id) %>
 
 <%= content_tag(:li, id: dom_id(notification), data: { behavior: 'notification-item' }, class: 'notification-item') do %>
-  <%= link_to [meeting.graetzl, meeting] do %>
+  <%= link_to [graetzl, meeting] do %>
     <%= attachment_image_tag notification.activity.owner, :avatar, :fill, 40, 40, fallback: 'avatar/user/40x40.png', class: 'img-round' %>
     <div class="msg">
       <div class="timeago">vor <%= time_ago_in_words(notification.activity.created_at) %></div>

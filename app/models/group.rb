@@ -14,13 +14,13 @@ class Group < ApplicationRecord
   has_many :discussions, dependent: :destroy
   has_many :discussion_posts, through: :discussions
 
-  has_many :group_users
+  has_many :group_users, -> { includes(:user) }
   has_many :users, through: :group_users
   accepts_nested_attributes_for :group_users, allow_destroy: true, reject_if: :all_blank
 
   has_many :group_join_questions
   accepts_nested_attributes_for :group_join_questions, allow_destroy: true, reject_if: :all_blank
-  has_many :group_join_requests
+  has_many :group_join_requests, -> { includes(:user) }
 
   has_many :meetings, dependent: :destroy
 
@@ -39,6 +39,10 @@ class Group < ApplicationRecord
   scope :non_private, -> { where(private: false) }
   scope :non_hidden, -> { where(hidden: false) }
   scope :featured, -> { where(featured: true) }
+
+  def self.include_for_box
+    includes(:group_users, :group_categories)
+  end
 
   def to_s
     title
@@ -60,24 +64,33 @@ class Group < ApplicationRecord
     meetings.build(address: Address.new)
   end
 
+  def next_meeting
+    meetings.select{|m| m.starts_at_date >= Date.today}.min_by(&:starts_at_date)
+  end
+
   def readable_by?(user)
     if private?
-      user && users.include?(user)
+      user && group_users.any?{|gu| gu.user == user}
     else
       true
     end
+  end
+
+  def postable_by?(user)
+    user && group_users.any?{|gu| gu.user == user}
   end
 
   def room_call_readable_by?(user)
     room_call_id? && admins.include?(user)
   end
 
-  def room_call_submission?(group_user)
-    room_call_id? && room_call.room_call_submissions.find_by(user_id: group_user.user.id)
+  def user_join_request(group_user)
+    group_join_requests.find{|jr| jr.user_id == group_user.user_id }
   end
 
-  def room_call_submission_id(group_user)
-    room_call.room_call_submissions.includes(:user).find_by(user_id: group_user.user.id)
+  def user_room_call_submission(user_id)
+    return if !room_call
+    room_call.room_call_submissions.find{|jr| jr.user_id == user_id }
   end
 
 end

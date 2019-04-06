@@ -1,7 +1,9 @@
+<% graetzl = Graetzl.memoized(user_post.graetzl_id) %>
+
 <div class="cardBox" data-behavior="masonry-card">
   <div class="cardBoxHeader">
     <% if image = user_post.images.first %>
-      <%= link_to [user_post.graetzl, user_post] do %>
+      <%= link_to [graetzl, user_post] do %>
         <div class="coverImgWrapper">
           <%= attachment_image_tag image, :file, :fill, 300, 250, class: 'coverImg' %>
         </div>
@@ -12,12 +14,12 @@
     </div>
   </div>
   <div class="cardBoxContent">
-    <%= link_to [user_post.author.graetzl, user_post.author], class: 'initiator' do %>
+    <%= link_to user_post.author, class: 'initiator' do %>
       <%= attachment_image_tag user_post.author, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
       <span><%= user_post.author.username %></span>
     <% end %>
     <div class="txt">
-      <h3><%= link_to user_post.title, [user_post.graetzl, user_post] %></h3>
+      <h3><%= link_to user_post.title, [graetzl, user_post] %></h3>
       <p><%= truncate user_post.content, length: 100 %></p>
     </div>
 

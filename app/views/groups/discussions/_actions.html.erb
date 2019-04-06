@@ -1,0 +1,32 @@
+<div class="actions">
+
+  <% if @discussion.edit_permission?(current_user) %>
+    <div class="btn-control">
+      <%= link_to [:edit, @group, @discussion], class: 'edit-post-link' do %>
+        <%= icon_tag "pencil" %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @discussion.delete_permission?(current_user) %>
+    <div class="btn-control">
+      <%= link_to [@group, @discussion], method: :delete, data: { confirm: 'Thema wirklich löschen?', disable_with: 'wird gelöscht...'}, class: 'delete' do %>
+        <%= icon_tag "trash-delete-remove" %>
+      <% end %>
+    </div>
+    <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+  <% end %>
+
+  <% if @group.postable_by?(current_user) %>
+    <% following = @discussion.followed_by?(current_user) %>
+    E-Mail Updates:
+    <%= link_to toggle_following_group_discussion_path(@group, @discussion), remote: true, method: 'post', class: ["follow", following ? '' : '-hide'] do %>
+      <div class="input-switch -small -checked"><label></label></div>
+    <% end %>
+
+    <%= link_to toggle_following_group_discussion_path(@group, @discussion), remote: true, method: 'post', class: ["follow", following ? '-hide' : ''] do %>
+      <div class="input-switch -small"><label></label></div>
+    <% end %>
+  <% end %>
+
+</div>

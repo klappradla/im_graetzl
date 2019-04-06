@@ -1,7 +1,9 @@
 <% location = location_post.author %>
+<% graetzl = Graetzl.memoized(location.graetzl_id) %>
+
 <div class="cardBox" data-behavior="masonry-card">
   <div class="cardBoxHeader">
-    <%= link_to [location.graetzl, location, anchor: dom_id(location_post)] do %>
+    <%= link_to [graetzl, location, anchor: dom_id(location_post)] do %>
       <% if image = location_post.images.first %>
         <div class="coverImgWrapper">
           <%= attachment_image_tag image, :file, :fill, 300, 250, class: 'coverImg' %>
@@ -16,11 +18,11 @@
   </div>
   <div class="cardBoxContent">
     <div class="avatar-block">
-      <%= link_to [location.graetzl, location], class: 'avatarImg' do %>
+      <%= link_to [graetzl, location], class: 'avatarImg' do %>
         <%= avatar_for location %>
       <% end %>
       <div class="typetxt">
-        <%= link_to [location.graetzl, location] do %>
+        <%= link_to [graetzl, location] do %>
           <div class="name"><%= location.name %></div>
         <% end %>
         <div class="category"><%= location.location_category.name %></div>
@@ -33,7 +35,7 @@
       </div>
     </div>
     <div class="txt">
-      <h3><%= link_to location_post.title, [location.graetzl, location, anchor: dom_id(location_post)] %></h3>
+      <h3><%= link_to location_post.title, [graetzl, location, anchor: dom_id(location_post)] %></h3>
       <p><%= truncate location_post.content, length: 100 %></p>
     </div>
 

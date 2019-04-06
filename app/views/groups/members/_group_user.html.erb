@@ -29,16 +29,23 @@
       Beigetreten: <br>
       <%= I18n.localize(group_user.created_at, format:'%d. %B %Y') %>
     </p>
-    <p class="date">
-      <% if @group.room_call_readable_by?(current_user) && @group.room_call_submission?(group_user) %>
-        <%= link_to submission_room_call_path(@group.room_call, submission_id: @group.room_call_submission_id(group_user)) do %>
-          Call Einreichung
-        <% end %>
-      <% elsif @group.admins.include?(current_user) && group_user.join_request.try(:has_content?) %>
-        <%= link_to "Beitritts Nachricht", "#request-message-modal-#{group_user.join_request.id}", class: 'request-message-opener' %>
-        <%= render 'groups/members/join_request_modal', join_request: group_user.join_request %>
+
+    <% if local_assigns[:show_join_request] %>
+      <% join_request = @group.user_join_request(group_user) %>
+      <% if join_request && join_request.has_content? %>
+        <p class="date">
+          <%= link_to "Beitritts Nachricht", "#request-message-modal-#{join_request.id}", class: 'request-message-opener' %>
+          <%= render 'groups/members/join_request_modal', join_request: join_request %>
+        </p>
       <% end %>
-    </p>
+
+      <% room_call_submission = @group.user_room_call_submission(group_user.user_id) %>
+      <% if room_call_submission %>
+        <p class="date">
+          <%= link_to "Call Einreichung", submission_room_call_path(@group.room_call, submission_id: room_call_submission.id) %>
+        </p>
+      <% end %>
+    <% end %>
   </div>
 
 </div>

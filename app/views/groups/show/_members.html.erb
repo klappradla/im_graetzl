@@ -1,0 +1,23 @@
+<div class="members-section -page">
+
+  <div class="users">
+    <% if @group.admins.include?(current_user) %>
+
+      <% @group.group_join_requests.select(&:pending?).each do |join_request| %>
+        <%= render 'groups/members/join_request', join_request: join_request %>
+      <% end %>
+
+      <% @group.group_users.sort_by(&:role).each do |group_user| %>
+        <%= render 'groups/members/group_user', group_user: group_user, show_join_request: true %>
+      <% end %>
+
+    <% else %>
+
+      <% @group.group_users.sort_by(&:role).each do |group_user| %>
+        <%= render 'groups/members/group_user', group_user: group_user %>
+      <% end %>
+
+    <% end %>
+  </div>
+
+</div>

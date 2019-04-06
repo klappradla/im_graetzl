@@ -1,0 +1,20 @@
+<% content_for :pagemap do %>
+  <!--
+  <PageMap>
+    <DataObject type="document">
+      <Attribute name="type">room_call</Attribute>
+      <Attribute name="searchable">true</Attribute>
+      <Attribute name="id"><%= @room_call.id %></Attribute>
+      <Attribute name="title"><%= @room_call.title %></Attribute>
+      <Attribute name="slogan">Sichere dir bis zum <%= I18n.localize(@room_call.ends_at, format: '%d. %B') %> einen der <%= @room_call.total_vacancies %> freien Plätze.</Attribute>
+      <Attribute name="subtitle"><%= @room_call.subtitle %></Attribute>
+    </DataObject>
+    <DataObject type="image">
+      <Attribute name="src" value="<%= attachment_url(@room_call, :cover_photo, :fill, 900, 540, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'meta/og_logo.png') %>" />
+    </DataObject>
+    <DataObject type="thumbnail">
+      <Attribute name="src" value="<%= attachment_url(@room_call, :avatar, :fill, 400, 400, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'avatar/room_offer/400x400.png') %>" />
+    </DataObject>
+  </PageMap>
+  -->
+<% end %>

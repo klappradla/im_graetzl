@@ -1,0 +1,23 @@
+<% content_for :pagemap do %>
+  <!--
+  <PageMap>
+    <DataObject type="document">
+      <Attribute name="type">room_offer</Attribute>
+      <Attribute name="searchable">true</Attribute>
+      <Attribute name="id"><%= @room_offer.id %></Attribute>
+      <Attribute name="title"><%= t("activerecord.attributes.room_offer.offer_types.#{@room_offer.offer_type}") %></Attribute>
+      <Attribute name="slogan"><%= @room_offer.slogan %></Attribute>
+      <Attribute name="description"><%= @room_offer.room_description[0..250].gsub(/\n/, " ") %></Attribute>
+      <Attribute name="graetzl"><%= @room_offer.graetzl.name %></Attribute>
+      <Attribute name="category"><%= @room_offer.room_categories.join(',') %></Attribute>
+      <Attribute name="address_zip"><%= @room_offer.address.zip if @room_offer.address && @room_offer.address.zip %></Attribute>
+    </DataObject>
+    <DataObject type="image">
+      <Attribute name="src" value="<%= attachment_url(@room_offer, :cover_photo, :fill, 900, 540, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'meta/og_logo.png') %>" />
+    </DataObject>
+    <DataObject type="thumbnail">
+      <Attribute name="src" value="<%= attachment_url(@room_offer, :avatar, :fill, 400, 400, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'avatar/room_offer/400x400.png') %>" />
+    </DataObject>
+  </PageMap>
+  -->
+<% end %>

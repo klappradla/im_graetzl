@@ -95,10 +95,10 @@ context.instance_eval do
       panel 'Associations' do
         tabs do
           tab 'Treffen' do
-            table_for user.meetings do
+            table_for user.attended_meetings do
               column :id
               column :name
-              column :initiator
+              column :user
               column :created_at
               column(''){|m| link_to 'Anzeigen', admin_meeting_path(m) }
             end

@@ -72,7 +72,7 @@
       <% end %>
 
       <% current_user.locations.approved.each do |location| %>
-        <%= link_to graetzl_location_path(location.graetzl, location, anchor: 'location-post-form') do %>
+        <%= link_to graetzl_location_path(Graetzl.memoized(location.graetzl_id), location, anchor: 'location-post-form') do %>
           <%= icon_tag "location" %>
           <div class="icontxt">Neuigkeit meiner Location</div>
           <%= attachment_image_tag location, :avatar, :fill, 35, 35, fallback: 'avatar/location/35x35.png', class: 'img-square' %>

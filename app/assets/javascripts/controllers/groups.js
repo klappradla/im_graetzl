@@ -65,9 +65,6 @@ APP.controllers.groups = (function() {
     }
 
     function initDiscussions() {
-
-      showSpinner();
-
       $('#tab-discussions .btn-new-topic').on('click', function() {
         $('#new-topic').slideToggle();
       });
@@ -76,12 +73,10 @@ APP.controllers.groups = (function() {
         $(this).parents("li").addClass("selected").siblings("li").removeClass("selected");
       });
 
-      $("#tab-discussions .autoload-link").click();
-
-      // Remove Content before loading new content
       $("#tab-discussions .categories-list a").on('ajax:beforeSend', function() {
-        $(".discussions-container").html("");
         showSpinner();
+      }).on('ajax:complete', function() {
+        hideSpinner();
       });
 
       // Fade in new content
@@ -89,11 +84,16 @@ APP.controllers.groups = (function() {
         $(".discussions-container").hide().fadeIn(100);
       });
 
+      $("#tab-discussions .autoload-link").click();
     }
 
     function showSpinner() {
       var spinner = $('footer .loading-spinner').clone().removeClass('-hidden');
       $(".discussions-container").append(spinner);
+    }
+
+    function hideSpinner() {
+      $(".discussions-container .loading-spinner").remove();
     }
 
     function initMobileNav() {

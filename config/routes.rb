@@ -62,7 +62,10 @@ Rails.application.routes.draw do
   end
 
   resources :activities, only: [:index]
-  resources :meetings, path: 'treffen', except: [:show]
+  resources :meetings, path: 'treffen', except: [:show] do
+    post :attend, on: :member
+    post :unattend, on: :member
+  end
   resources :zuckerls, only: [:index]
   resources :rooms, only: [:index]
   resources :posts, only: [:index]
@@ -154,8 +157,6 @@ Rails.application.routes.draw do
   resources :notifications, only: [:index] do
     post :mark_as_seen, on: :collection
   end
-
-  resources :going_tos, only: [:create, :destroy]
 
   resources :zuckerls, path: 'zuckerl', only: [:new] do
     resource :billing_address, only: [:show, :create, :update]

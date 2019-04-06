@@ -1,12 +1,14 @@
+<% graetzl = Graetzl.memoized(room_offer.graetzl_id) %>
+
 <div class="cardBox -roomoffer -<%= room_offer.status %>" data-behavior="masonry-card">
 
   <div class="cardBoxHeader">
     <div class="coverImgWrapper">
       <%= link_to cover_photo_for(room_offer), room_offer %>
     </div>
-    <% if room_offer.graetzl %>
+    <% if graetzl %>
       <div class="categoryicon">
-        <%= "#{room_offer.district.zip}, #{room_offer.graetzl.name}" %>
+        <%= "#{graetzl.district.zip}, #{graetzl.name}" %>
       </div>
     <% end %>
   </div>

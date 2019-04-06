@@ -3,18 +3,14 @@ class GroupsController < ApplicationController
 
   def index
     head :ok and return if browser.bot? && !request.format.js?
-    @groups = collection_scope.includes(:group_categories, :users, :room_call, :room_offer)
+    @groups = collection_scope.include_for_box
     @groups = filter_collection(@groups)
     @groups = @groups.by_currentness.page(params[:page]).per(15)
   end
 
   def show
     @group = Group.find(params[:id])
-    if @group.readable_by?(current_user)
-      @next_meeting = @group.meetings.where("DATE(starts_at_date) >= ?", Date.today).order(:starts_at_date, :starts_at_time).first
-      @discussions = @group.discussions.includes(discussion_posts: [:user, :images]).order("sticky DESC, last_post_at DESC")
-      @meetings = @group.meetings.order("starts_at_date DESC")
-    end
+    @group.group_users.to_a # Preload users
   end
 
   def new

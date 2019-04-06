@@ -3,7 +3,6 @@ class RoomCallsController < ApplicationController
 
   def show
     @room_call = RoomCall.find(params[:id])
-    @map_data = MapData.call(address: @room_call.address, graetzl: @room_call.address.graetzl)
   end
 
   def new

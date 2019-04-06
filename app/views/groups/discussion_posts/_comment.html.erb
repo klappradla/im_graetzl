@@ -13,7 +13,7 @@
     <div class="userCreateInfo">
       <%= attachment_image_tag comment.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
       <div class="infos">
-        <div class="name"><%= link_to comment.user.full_name, [comment.user.graetzl, comment.user] %></div>
+        <div class="name"><%= link_to comment.user.full_name, comment.user %></div>
         <div class="date">
           <%= I18n.localize(comment.created_at, format:'%a, %d. %B %Y, %H:%M') %>
         </div>

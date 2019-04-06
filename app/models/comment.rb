@@ -8,8 +8,8 @@ class Comment < ApplicationRecord
 
   before_destroy :destroy_activity_and_notifications, prepend: true
 
-  def edit_permission?(user)
-    user && (user.admin? || (self.user == user) || (commentable == user))
+  def edit_permission?(by_user)
+    by_user && (by_user.admin? || user_id == by_user.id || commentable == by_user)
   end
 
   private

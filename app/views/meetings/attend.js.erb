@@ -2,7 +2,7 @@
   var $container = $("[data-behavior='participants-container']");
 
   function updateComponent() {
-    $container.replaceWith("<%= j render 'going_tos/participation', meeting: @meeting %>");
+    $container.replaceWith("<%= j render 'meetings/participation', meeting: @meeting %>");
   }
 
   updateComponent();
