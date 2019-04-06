@@ -20,14 +20,16 @@ class Graetzl < ApplicationRecord
   has_many :district_graetzls
   has_many :districts, through: :district_graetzls
 
-  MEMOIZED = includes(:districts).map{|g| [g.id, g] }.to_h.freeze
+  def self.all_memoized
+    @@memoized ||= includes(:districts).map{|g| [g.id, g] }.to_h.freeze
+  end
 
   def self.memoized(id)
-    MEMOIZED[id]
+    all_memoized[id]
   end
 
   def district
-    MEMOIZED[id].districts.first
+    self.class.memoized(id).districts.first
   end
 
   def zuckerls

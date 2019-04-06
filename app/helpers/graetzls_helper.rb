@@ -1,15 +1,15 @@
 module GraetzlsHelper
 
   def district_url_options
-    District::MEMOIZED.values.sort_by(&:zip).map { |d| [d.zip_name, district_path(d)] }
+    District.sorted_by_zip.map { |d| [d.zip_name, district_path(d)] }
   end
 
   def district_select_options
-    District::MEMOIZED.values.sort_by(&:zip).map { |d| [d.zip_name, d.id, 'data-label' => d.zip] }
+    District.sorted_by_zip.map { |d| [d.zip_name, d.id, 'data-label' => d.zip] }
   end
 
   def graetzl_select_options
-    District::MEMOIZED.values.sort_by(&:zip).map do |district|
+    District.sorted_by_zip.map do |district|
       district.graetzls.map{|g| ["#{district.zip} - #{g.name}", g.id, 'data-district-id' => district.id] }
     end.flatten(1)
   end
@@ -18,7 +18,7 @@ module GraetzlsHelper
     graetzl_ids = graetzls.map(&:id)
 
     results = []
-    District::MEMOIZED.values.sort_by(&:zip).each do |district|
+    District.sorted_by_zip.each do |district|
       if (district.graetzl_ids - graetzl_ids).empty?
         results << district.zip_name
         graetzl_ids -= district.graetzl_ids
@@ -26,7 +26,7 @@ module GraetzlsHelper
     end
 
     graetzl_ids.each do |graetzl_id|
-      graetzl = Graetzl::MEMOIZED[graetzl_id]
+      graetzl = Graetzl.memoized(graetzl_id)
       results << "#{graetzl.district.zip} - #{graetzl.name}"
     end
 
