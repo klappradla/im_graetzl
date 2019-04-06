@@ -28,7 +28,7 @@ APP.components.stripeCheckout = (function() {
     $('#amount').focusout(function(){
       var amount = cleanUpAmount(this.value);
       if (!isNaN(amount)) {
-        $(this).val(cleanUpAmount(this.value));
+        $(this).val(cleanUpAmount(this.value) + ',00'); // Display correct Amount
       }
     });
 

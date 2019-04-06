@@ -23,13 +23,23 @@
         <%= icon_tag "currency-euro" %>
         <span>Monatlicher Betrag</span>
       <% end %>
+      <% if Rails.env.production? %>
+        <%= select_tag :stripePlan, options_for_select([
+          ["3 €", "plan_EmWt1P4gTM80lM"],
+          ["6 €", "plan_EmWtdStPF8A0WR"],
+          ["9 €", "plan_EmWucBFEZ7njha"],
+          ["12 €", "plan_EmWvW63t1ZkKBE"],
+          ["15 €", "plan_EmWw1phfK0mjTo"],
+        ]), { prompt: 'Auswählen ..' } %>
+      <% else %>
       <%= select_tag :stripePlan, options_for_select([
-        ["3 €", "plan_EcNxWzjJPeRoOc"],
-        ["6 €", "plan_EcPpmWFv0JZeC8"],
-        ["9 €", "plan_EcPpeCJQKptdNm"],
-        ["12 €", "plan_EcPppVIlzzCIRW"],
-        ["15 €", "plan_EcPqKaYViIkWOr"],
+        ["3 €", "plan_EmWmbjpJHZdTe6"],
+        ["6 €", "plan_EmWpKyqvZZyiRR"],
+        ["9 €", "plan_EmWoPUrhsjXnOy"],
+        ["12 €", "plan_EmWotli6teM3gS"],
+        ["15 €", "plan_EmWpKyqvZZyiRR"],
       ]), { prompt: 'Auswählen ..' } %>
+      <% end %>
     </div>
 
     <div class="input-field">
@@ -60,12 +70,7 @@
 
 
     <div class="input-button">
-      <% if !current_user %>
-        <!--<%= button_tag 'Weiter zur Zahlung', class: 'btn-primary -mint -login' %>-->
-        <%= button_tag 'Weiter zur Zahlung', class: 'btn-primary -mint stripe-submit-subscription' %>
-      <% else %>
-        <%= button_tag 'Weiter zur Zahlung', class: 'btn-primary -mint stripe-submit-subscription' %>
-      <% end %>
+      <%= button_tag 'Weiter zur Zahlung mit Kreditkarte', class: 'btn-primary -mint -large stripe-submit-subscription' %>
     </div>
 
     <div class="txt -footer">

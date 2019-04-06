@@ -14,7 +14,11 @@ class AdminMailer < ApplicationMailer
     @description = description
     @url = url
     @message = message
-    mail(subject: "[ImGrätzl] Neue Zahlung von #{email}")
+    if Rails.env.production?
+      mail(subject: "Zahlung #{description} von #{email}")
+    else
+      mail(subject: "[TEST] Zahlung #{description} von #{email}")
+    end
   end
 
 end

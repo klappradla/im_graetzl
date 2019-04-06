@@ -11,8 +11,7 @@
 
     <div class="hl-subtext">
       <h1><span>Raumpartnerschaft</span> gefunden?</h1>
-      <p>Sollte dir der Raumteiler geholfen haben,
-        so kannst du uns jetzt mit einem Betrag deiner Wahl unterstützen.</p>
+      <p>Unterstütze den Raumteiler mit einem Betrag deiner Wahl. Du&nbsp;bestimmst, wie viel dir ein Service wie der Raumteiler wert ist.</p>
     </div>
 
     <div class="input-field">
@@ -41,8 +40,22 @@
         <% end %>
         <%= email_field_tag :stripeEmail, nil, placeholder: 'E-Mail Adresse' %>
       </div>
+      <script>
+        function getUrlVars() {
+          var vars = {};
+          var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+              vars[key] = value;
+          });
+          return vars;
+        }
+        $(document).ready(function() {
+          var mail = getUrlVars()["mail"];
+          if (typeof mail !== 'undefined') {
+            $('#stripeForm #stripeEmail').val(mail);
+          }
+        });
+      </script>
     <% end %>
-
 
     <%= link_to 'Rechnungsanschrift hinzufügen?', 'javascript:', class: 'triggerBillingInformation' %>
 
@@ -51,7 +64,7 @@
     </div>
 
     <div class="input-button">
-      <%= button_tag 'Weiter zur Zahlung', class: 'btn-primary -mint -large stripe-submit' %>
+      <%= button_tag 'Weiter zur Zahlung mit Kreditkarte', class: 'btn-primary -mint -large stripe-submit' %>
     </div>
 
     <div class="txt -footer">

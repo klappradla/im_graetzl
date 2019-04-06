@@ -1,3 +1,3 @@
 class ApplicationJob < ActiveJob::Base
-  include Rollbar::ActiveJob
+  # include Rollbar::ActiveJob
 end
