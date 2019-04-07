@@ -4,6 +4,7 @@ ruby '2.6.1'
 
 gem 'rails', '~> 5.2', '>= 5.2.2.1'
 gem 'puma'
+gem 'puma_worker_killer'
 gem 'pg'
 gem 'activerecord-postgis-adapter', '~> 5.0'
 gem 'rgeo'

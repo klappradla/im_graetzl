@@ -6,22 +6,14 @@
 
       <h1><span>Neue Gruppe</span> erstellen</h1>
 
-      <% if current_user.locations.present? && current_user.locations.where(:id => params[:location_id]).exists? %>
-
-        <p>Für deine Location "<%= Location.find(params[:location_id]).name %>"</p>
-
-      <% elsif current_user.room_offers.present? && current_user.room_offers.where(:id => params[:room_offer_id]).exists? %>
-
-        <p>Für deinen Raumteiler "<%= RoomOffer.find(params[:room_offer_id]) %>"</p>
-
-      <% elsif current_user.room_demands.present? && current_user.room_demands.where(:id => params[:room_demand_id]).exists? %>
-
-        <p>Für deinen Raumteiler "<%= RoomDemand.find(params[:room_demand_id]) %>"</p>
-
-      <% elsif current_user.room_calls.present? && current_user.room_calls.where(:id => params[:room_call_id]).exists? %>
-
-        <p>Für deinen Open Call "<%= RoomCall.find(params[:room_call_id]).title %>"</p>
-
+      <% if @group.location %>
+        <p>Für deine Location "<%= @group.location.name %>"</p>
+      <% elsif @group.room_offer %>
+        <p>Für deinen Raumteiler "<%= @group.room_offer %>"</p>
+      <% elsif @group.room_demand %>
+        <p>Für deinen Raumteiler "<%= @group.room_demand %>"</p>
+      <% elsif @group.room_call %>
+        <p>Für deinen Open Call "<%= @group.room_call.title %>"</p>
       <% end %>
 
   </div>
