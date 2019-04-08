@@ -13,7 +13,7 @@
       </p>
     <% end %>
 
-    <% room_call_submission = @group.user_room_call_submission(group_user.user_id) %>
+    <% room_call_submission = @group.user_room_call_submission(join_request.user_id) %>
     <% if room_call_submission %>
       <p class="date">
         <%= link_to "Call Einreichung", submission_room_call_path(@group.room_call, submission_id: room_call_submission.id) %>
