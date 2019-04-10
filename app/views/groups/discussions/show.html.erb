@@ -28,7 +28,7 @@
 
   <h2 class="title"><%= @discussion.title %></h2>
 
-  <% @posts.each do |post| %>
+  <% @posts.sort_by(&:created_at).each do |post| %>
     <%= render 'groups/discussion_posts/post', post: post %>
   <% end %>
 
