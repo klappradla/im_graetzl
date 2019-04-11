@@ -1,0 +1,13 @@
+<% title('Einen Moment Bitte ..') %>
+<script src="https://js.stripe.com/v3/"></script>
+<%= form_tag @stripeFormAction, id: 'stripeForm' do %>
+<%= hidden_field_tag :publishable_key, Rails.configuration.stripe[:publishable_key] %>
+
+<section class="payment-processing">
+
+  <div class="-processing" id="message">
+    In Bearbeitung - Einen Moment Bitte ..
+  </div>
+
+</section>
+<% end %>

@@ -5,16 +5,27 @@ APP.components.stripePayment = (function() {
     if($('#stripeForm #payment_method_card').exists()) initStripeCheckout();
     if($('#stripeForm #payment_method_sofort').exists()) initStripeSofort();
     if($('#stripeForm #payment_method_sepa').exists()) initStripeSepa();
+    if($('.payment-processing').exists()) initStripePaymentPolling();
   }
 
   function urldecode(str) {
     return decodeURIComponent((str+'').replace(/\+/g, '%20'));
   }
 
+  function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+  }
+
   var amount;
   var name;
   var email;
   var message;
+  var form;
+  var host = window.location.protocol +'//'+ window.location.host;
   var stripeCompany;
   var stripeAddressName;
   var stripeAddress;
@@ -104,18 +115,20 @@ APP.components.stripePayment = (function() {
       name = encodeURI($('#stripeForm #stripeName').val());
       message = encodeURI($('#stripeForm #message').val());
       description = encodeURI($('#stripeForm #stripeDescription').val());
+      form = $('#stripeForm').attr('action');
 
       var sourceData = {
         type: 'sofort',
         amount: Math.round(stripeAmount),
         currency: 'eur',
         redirect: {
-          return_url: 'http://localhost:3000/payment/processing?' +
+          return_url: host + '/payment/processing?' +
           'amount=' + amount +
           '&stripeEmail=' + email +
           '&stripeName=' + name +
           '&stripeDescription=' + description +
           '&message=' + message +
+          '&stripeForm=' + form +
           '&stripeToken=&stripeSource=',
         },
         sofort: {
@@ -301,6 +314,41 @@ APP.components.stripePayment = (function() {
       stripeCheckoutHandler.close();
     });
 
+  }
+
+  function initStripePaymentPolling() {
+    var stripe = Stripe($('#publishable_key').val());
+    var client_secret = getUrlVars()["client_secret"];
+    var source = getUrlVars()["source"];
+
+    // After some amount of time, we should stop trying to resolve the order synchronously:
+    var MAX_POLL_COUNT = 10;
+    var pollCount = 0;
+
+    function pollForSourceStatus() {
+
+      stripe.retrieveSource({id: source, client_secret: client_secret}).then(function(result) {
+        var source = result.source;
+
+        console.log(result);
+        console.log(source);
+        console.log(source.status);
+
+        if (source.status === 'chargeable') {
+          // Make a request to your server to charge the Source.
+          // Depending on the Charge status, show your customer the relevant message.
+          $("#stripeForm").submit();
+        } else if (source.status === 'pending' && pollCount < MAX_POLL_COUNT) {
+          // Try again in a second, if the Source is still `pending`:
+          pollCount += 1;
+          setTimeout(pollForSourceStatus, 1000);
+        } else {
+          // Depending on the Source status, show your customer the relevant message.
+          $("#stripeForm #message").text('Zahlung failed');
+        }
+      });
+    }
+    pollForSourceStatus();
   }
 
   return {

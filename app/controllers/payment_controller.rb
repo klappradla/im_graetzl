@@ -22,13 +22,10 @@ class PaymentController < ApplicationController
   end
 
   def processing
-    StripeChargesServices.new(payment_params, current_user).init_invoice
-    amount = payment_params[:amount].to_i
-    description = payment_params[:stripeDescription]
-    @payment_confirmation_info = "#{amount},00 € - Deine #{description}"
-    @email = payment_params[:stripeEmail]
-    MailchimpPaymentJob.perform_later(@email, '5f02f45ea9') # Insert Mailchimp List ID
-    render :template => '/payment/confirmation'
+    stripeForm = payment_params[:stripeForm]
+    stripeParams = request.fullpath.split("?")[1]
+    @stripeFormAction = "#{stripeForm}?#{stripeParams}"
+    render :template => '/payment/processing'
   end
 
   def raumteiler_create
@@ -73,6 +70,7 @@ class PaymentController < ApplicationController
     params.permit(
       :amount,
       :payment_method,
+      :stripeForm,
       :stripeToken,
       :stripeSource,
       :source,

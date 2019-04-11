@@ -1,4 +1,4 @@
-section.payment-form, section.payment-confirmation {
+section.payment-form, section.payment-confirmation, section.payment-processing {
   max-width: 700px;
   margin: 0 auto;
 
@@ -36,6 +36,12 @@ section.payment-form, section.payment-confirmation {
     }
   }
 
+}
+
+section.payment-processing {
+  .-processing {
+    font-style: italic;
+  }
 }
 
 section.payment-form {
