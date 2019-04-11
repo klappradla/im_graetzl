@@ -162,13 +162,11 @@
         <div class="txt">Wunschgrätzln</div>
       </div>
       <div class="category-tags">
-        <% if @room_demand.graetzls.present? %>
-          <ul class="tag-list">
-            <% compact_room_demand_graetzl_list(@room_demand).each do |item| %>
-              <li><%= item %></li>
-            <% end %>
-          </ul>
-        <% end %>
+        <ul class="tag-list">
+          <% compact_graetzl_list(@room_demand.graetzls).each do |item| %>
+            <li><%= item %></li>
+          <% end %>
+        </ul>
       </div>
     </section>
 

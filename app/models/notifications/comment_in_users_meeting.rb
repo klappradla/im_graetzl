@@ -4,11 +4,11 @@ class Notifications::CommentInUsersMeeting < Notification
   BITMASK = 2**4
 
   def self.receivers(activity)
-    User.where(id: activity.trackable.initiator.id)
+    User.where(id: activity.trackable.user_id)
   end
 
   def self.condition(activity)
-    activity.trackable.initiator.present? && activity.trackable.initiator.id != activity.owner_id
+    activity.trackable.user.present? && activity.trackable.user_id != activity.owner_id
   end
 
   def self.description

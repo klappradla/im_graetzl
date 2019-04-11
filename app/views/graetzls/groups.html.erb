@@ -9,9 +9,7 @@
 %>
 
 <section class="graetzls -groups">
-  <%= cache [@graetzl, 'map'], expires_in: 2.months do %>
-    <%= render 'map', map_data: @map_data %>
-  <% end %>
+  <%= render 'map' %>
   <%= render 'curator' if @graetzl.curator %>
   <%= render 'menu' %>
 
@@ -47,7 +45,7 @@
           <%= text_field_tag :query, @category ? @category.title : nil, placeholder: 'Suche..', class: 'search-suggestion-trigger' %>
         </div>
         <div class="input-select label-select">
-          <%= select_tag :district_ids, options_from_collection_for_select(District.order(:zip), :id, :zip_name, @graetzl.district.id), id: 'graetzl-suggestion', multiple: true %>
+          <%= select_tag :district_ids, options_for_select(district_select_options, @graetzl.district.id), id: 'graetzl-suggestion', multiple: true %>
         </div>
       </div>
     <% end %>

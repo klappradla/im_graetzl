@@ -11,7 +11,7 @@ context.instance_eval do
           row :graetzl
           row :location
           row :group
-          row :initiator
+          row :user
           row :description
           row :cover_photo do |m|
             m.cover_photo ? attachment_image_tag(m, :cover_photo, :fill, 200, 70) : nil

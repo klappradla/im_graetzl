@@ -1,7 +1,7 @@
 <div id="location-post-form" class="entryCreate" data-behavior="stream-form">
   <%= avatar_for location %>
   <%= form_for(location.posts.new, html: { class: 'textEditor' }, remote: true) do |f| %>
-    <%= f.hidden_field :graetzl_id, value: location.graetzl.id %>
+    <%= f.hidden_field :graetzl_id, value: location.graetzl_id %>
     <%= f.hidden_field :author_id %>
     <%= f.hidden_field :author_type %>
     <%= f.text_field :title, placeholder: 'Neuigkeit (Titel)', class: 'input-plain postTitle' %>

@@ -8,29 +8,7 @@
   )
 %>
 
-<% content_for :pagemap do %>
-  <!--
-  <PageMap>
-    <DataObject type="document">
-      <Attribute name="type">group</Attribute>
-      <Attribute name="searchable">true</Attribute>
-      <Attribute name="id"><%= @group.id %></Attribute>
-      <Attribute name="title"><%= @group.title %></Attribute>
-      <Attribute name="group_visibility"><%= @group.private? ? "Geschlossene" : "Offene" %> Gruppe</Attribute>
-      <Attribute name="description"><%= @group.description[0..250].gsub(/\n/, " ") if @group.description? %></Attribute>
-      <Attribute name="users_count"><%= @group.users.count %></Attribute>
-    </DataObject>
-    <% @group.users.first(10).each do |user| %>
-    <DataObject type="members">
-      <Attribute name="src" value="<%= attachment_url(user, :avatar, :fill, 200, 200, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'avatar/user/100x100.png') %>" />
-    </DataObject>
-    <% end %>
-    <DataObject type="image">
-      <Attribute name="src" value="<%= attachment_url(@group, :cover_photo, :fill, 900, 540, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'cover_photo/980x370.png') %>" />
-    </DataObject>
-  </PageMap>
-  -->
-<% end %>
+<%= render 'groups/show/pagemap' %>
 
 <div class="group-page">
 
@@ -54,16 +32,15 @@
     <!-- /NAVIGATION -->
 
     <!-- CONTENT -->
-    <div id='tab-info'><%= render 'info' %></div>
+    <div id='tab-info'><%= render 'groups/show/info' %></div>
     <% if @group.readable_by?(current_user) %>
-      <div id='tab-discussions'><%= render 'discussions' %></div>
-      <div id='tab-meetings'><%= render 'meetings' %></div>
-      <div id='tab-members'><%= render 'members' %></div>
+      <div id='tab-discussions'><%= render 'groups/show/discussions' %></div>
+      <div id='tab-meetings'><%= render 'groups/show/meetings' %></div>
+      <div id='tab-members'><%= render 'groups/show/members' %></div>
     <% end %>
     <% if @group.room_call_readable_by?(current_user) %>
-      <div id='tab-call'><%= render 'call' %></div>
+      <div id='tab-call'><%= render 'groups/show/call' %></div>
     <% end %>
-
     <!-- /CONTENT -->
 
   </div>

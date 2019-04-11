@@ -9,7 +9,7 @@
     </div>
     <% if group.group_categories.first %>
       <div class="sideflag -category -R">
-        <%= safe_join(group.group_categories.map { |category| link_to(category.title, groups_wien_path(:category => category.id), :rel => 'nofollow') }, ', ') %>
+        <%= safe_join(group.group_categories.map { |category| link_to(category.title, groups_wien_path(category: category.id), :rel => 'nofollow') }, ', ') %>
       </div>
     <% end %>
   </div>
@@ -19,7 +19,7 @@
     <%= link_to group.title, group, class: 'title' %>
 
     <p class="infos">
-      <%= group.users.size %> <%= group.users.size > 1 ? "Mitglieder" : "Mitglied" %>  &middot;
+      <%= group.group_users.size %> <%= group.group_users.size > 1 ? "Mitglieder" : "Mitglied" %>  &middot;
       <%= group.private? ? "Geschlossene" : "Offene" %> Gruppe
     </p>
 
@@ -30,8 +30,8 @@
       <% group.members.last(10 - group.admins.size).each do |user| %>
         <%= attachment_image_tag user, :avatar, :fill, 200, 200, fallback: 'avatar/user/200x200.png', class: 'img-round' %>
       <% end %>
-      <% if group.users.size > 10 %>
-        <span> + <%= group.users.size - 10 %> weitere </span>
+      <% if group.group_users.size > 10 %>
+        <span> + <%= group.group_users.size - 10 %> weitere </span>
       <% end %>
     </div>
 

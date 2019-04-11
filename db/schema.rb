@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_28_085829) do
+ActiveRecord::Schema.define(version: 2019_04_01_082231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -385,11 +385,13 @@ ActiveRecord::Schema.define(version: 2019_03_28_085829) do
     t.boolean "approved_for_api", default: false
     t.integer "group_id"
     t.boolean "private", default: false
+    t.integer "user_id"
     t.index ["created_at"], name: "index_meetings_on_created_at"
     t.index ["graetzl_id"], name: "index_meetings_on_graetzl_id"
     t.index ["group_id"], name: "index_meetings_on_group_id"
     t.index ["location_id"], name: "index_meetings_on_location_id"
     t.index ["slug"], name: "index_meetings_on_slug"
+    t.index ["user_id"], name: "index_meetings_on_user_id"
   end
 
   create_table "notifications", id: :serial, force: :cascade do |t|
@@ -746,6 +748,7 @@ ActiveRecord::Schema.define(version: 2019_03_28_085829) do
   add_foreign_key "groups", "room_demands", on_delete: :nullify
   add_foreign_key "groups", "room_offers", on_delete: :nullify
   add_foreign_key "meetings", "groups", on_delete: :nullify
+  add_foreign_key "meetings", "users", on_delete: :nullify
   add_foreign_key "notifications", "activities", on_delete: :cascade
   add_foreign_key "room_call_fields", "room_calls", on_delete: :cascade
   add_foreign_key "room_call_modules", "room_calls", on_delete: :cascade

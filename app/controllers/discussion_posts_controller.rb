@@ -20,7 +20,6 @@ class DiscussionPostsController < ApplicationController
   def comment
     @post = @group.discussion_posts.find(params[:discussion_post_id])
     @comment = @post.comments.new comment_params
-    #@comment.save
     if @comment.save
       @post.create_activity :comment, owner: current_user, recipient: @comment
     end

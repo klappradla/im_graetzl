@@ -1,6 +1,6 @@
 <div class="discussion-section -page">
 
-  <% if @group.users.include?(current_user) %>
+  <% if @group.postable_by?(current_user) %>
     <div class="header">
       <div class="new-topic">
         <%= button_to "javascript:", class: 'btn-userIcons btn-new-topic' do %>
@@ -21,6 +21,9 @@
   <div class="discussions">
 
     <div class="main discussions-container">
+      <h3 class="title"></h3>
+      <div class="cardBoxCollection -double -group-discussion" data-behavior="discussions-card-container"></div>
+      <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'discussions-paginate-link' }, rel: 'nofollow' %>
     </div>
 
     <div class="side">

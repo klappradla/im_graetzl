@@ -4,7 +4,7 @@ context.instance_eval do
   column :name
   column(:state){ |m| status_tag(m.state) }
   column :graetzl
-  column :initiator
+  column :user
   column :approved_for_api
   actions
 end

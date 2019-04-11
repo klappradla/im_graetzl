@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   end
 
   def locations
-    @locations = current_user.locations.includes(:location_ownerships, :graetzl)
+    @locations = current_user.locations.includes(:location_ownerships)
   end
 
   def groups

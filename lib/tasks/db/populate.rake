@@ -92,6 +92,7 @@ namespace :db do
       users.each do |u|
         meeting = u.graetzl.meetings.create(
           name: Faker::Lorem.sentence(3),
+          user: u,
           description: Faker::Lorem.paragraph(6),
           starts_at_date: Faker::Date.forward(20),
           address_attributes: {
@@ -101,7 +102,6 @@ namespace :db do
             description: Faker::Lorem.sentence(2),
             coordinates: 'POINT (16.353172456228375 48.194235057984216)'
           })
-        meeting.going_tos.create(user: u, role: 'initiator')
         meeting.create_activity :create, owner: u
       end
     end

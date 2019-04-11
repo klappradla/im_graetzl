@@ -17,11 +17,11 @@ class ActivitySample
 
   def groups
     if @graetzl
-      @graetzl.groups.featured.first(2)
+      @graetzl.groups.featured.include_for_box.first(2)
     elsif @district
-      @district.groups.featured.first(2)
+      @district.groups.featured.include_for_box.first(2)
     else
-      Group.featured.first(2)
+      Group.featured.include_for_box.first(2)
     end
   end
 

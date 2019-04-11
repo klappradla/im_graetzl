@@ -1,7 +1,9 @@
+<% graetzl = Graetzl.memoized(meeting.graetzl_id) %>
+
 <div class="cardBox -meeting <%= meeting_past_flag(meeting) %>" data-behavior="masonry-card">
 
   <div class="cardBoxHeader">
-    <%= link_to [meeting.graetzl, meeting] do %>
+    <%= link_to [graetzl, meeting] do %>
       <div class="coverImgWrapper">
         <%= cover_photo_for meeting %>
       </div>
@@ -14,18 +16,29 @@
     <% end %>
     <div class="categoryicon">
       <%= icon_tag "users" %>
-      <div class="count"><%= meeting.users.size %></div>
+      <div class="count"><%= meeting.going_tos.size %></div>
     </div>
-    <%= graetzl_flag(meeting.graetzl) %>
+    <%= graetzl_flag(graetzl) %>
   </div>
 
   <div class="cardBoxContent">
-    <%= meeting_initiator meeting %>
+    <% if meeting.location && meeting.location.users.include?(meeting.user) %>
+      <%= link_to [Graetzl.memoized(meeting.location.graetzl_id), meeting.location], class: 'initiator' do %>
+        <%= avatar_for(meeting.location) %>
+        <span><%= meeting.location.name %></span>
+      <% end %>
+    <% elsif meeting.user %>
+      <%= link_to meeting.user, class: 'initiator' do %>
+        <%= avatar_for(meeting.user) %>
+        <span><%= meeting.user.username %></span>
+      <% end %>
+    <% end %>
+
     <div class="txt">
-      <h3><%= link_to meeting.name, [meeting.graetzl, meeting] %></h3>
+      <h3><%= link_to meeting.name, [graetzl, meeting] %></h3>
       <p><%= truncate(meeting.description, length: 100) %></p>
     </div>
-    <%= link_to meeting_link_text(meeting), [meeting.graetzl, meeting], class: 'btn-primary -mint' %>
+    <%= link_to meeting_link_text(meeting), [graetzl, meeting], class: 'btn-primary -mint' %>
 
     <% if local_assigns[:appendix].present? %>
       <%= render 'activities/appendix', appendix: local_assigns[:appendix], parent: meeting %>

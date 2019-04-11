@@ -91,7 +91,7 @@ ActiveAdmin.register User do
       column(:location_1_category) { |user|
         user.primary_location.location_category.name if user.primary_location
       }
-      column(:meetings_initiated) { |user| user.going_tos.initiator.count }
+      column(:meetings_initiated) { |user| user.initiated_meetings.count }
       column(:location_posts) { |user| user.location_posts.count }
       column(:post_count) { |user| user.posts.count }
     end

@@ -19,8 +19,8 @@
     <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-meetings'} do %>
       <div class="iconWithBadge">
         <%= icon_tag "calendar-2" %>
-        <% if current_user.meetings.upcoming.size > 0 %>
-          <span class="badgeNumber"><%= current_user.meetings.upcoming.size %></span>
+        <% if current_user.attended_meetings.upcoming.size > 0 %>
+          <span class="badgeNumber"><%= current_user.attended_meetings.upcoming.size %></span>
         <% end %>
       </div>
       Events & Workshops
@@ -116,12 +116,12 @@
     <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-meetings'} do %>
       <%= icon_tag "arrow-left-2" %> Zurück
     <% end %>
-    <% if current_user.meetings.upcoming.empty? %>
+    <% if current_user.attended_meetings.upcoming.empty? %>
       <div class="info">
         Es gibt aktuell kein Treffen an dem du teilnimmst ..
       </div>
     <% end %>
-    <% current_user.meetings.upcoming.first(8).each do |meeting| %>
+    <% current_user.attended_meetings.upcoming.first(8).each do |meeting| %>
       <%= link_to [meeting.graetzl, meeting] do %>
         <% if meeting.starts_at_date %>
           <div class="calendarSheet">

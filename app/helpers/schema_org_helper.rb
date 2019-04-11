@@ -34,8 +34,8 @@ module SchemaOrgHelper
       end
     end
 
-    if !meeting.initiator.nil? # Creator of Meeting
-      hash[:organizer] = structured_data_person(meeting.initiator)
+    if meeting.user # Creator of Meeting
+      hash[:organizer] = structured_data_person(meeting.user)
     end
 
     return hash

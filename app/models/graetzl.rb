@@ -1,6 +1,5 @@
 class Graetzl < ApplicationRecord
   extend FriendlyId
-
   friendly_id :name
 
   has_one :curator, dependent: :destroy
@@ -21,14 +20,21 @@ class Graetzl < ApplicationRecord
   has_many :district_graetzls
   has_many :districts, through: :district_graetzls
 
+  def self.all_memoized
+    @@memoized ||= includes(:districts).map{|g| [g.id, g] }.to_h.freeze
+  end
+
+  def self.memoized(id)
+    all_memoized[id]
+  end
+
   def district
-    districts.first
+    self.class.memoized(id).districts.first
   end
 
   def zuckerls
-    related_graetzl_ids = districts.map(&:graetzl_ids).flatten
-    Zuckerl.live.includes(location: [:address, :location_category]).
-      joins(:graetzl).where(graetzls: { id: related_graetzl_ids})
+    related_graetzl_ids = District.memoized(district.id).graetzl_ids
+    Zuckerl.live.joins(:graetzl).where(graetzls: { id: related_graetzl_ids})
   end
 
   def build_meeting

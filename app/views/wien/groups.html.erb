@@ -39,7 +39,7 @@
           <%= text_field_tag :query, @category ? @category.title : nil, placeholder: 'Suche..', class: 'search-suggestion-trigger' %>
         </div>
         <div class="input-select label-select">
-          <%= select_tag :district_ids, options_from_collection_for_select(District.order(:zip), :id, :zip_name, District.ids), id: 'graetzl-suggestion', multiple: true %>
+          <%= select_tag :district_ids, options_for_select(district_select_options, District.all_memoized.keys), id: 'graetzl-suggestion', multiple: true %>
         </div>
       </div>
     <% end %>

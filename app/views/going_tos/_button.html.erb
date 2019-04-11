@@ -1,9 +1,0 @@
-<% if going_to %>
-  <% if going_to.initiator? %>
-    <%= render 'going_tos/buttons/edit', meeting: going_to.meeting %>
-  <% else %>
-    <%= render 'going_tos/buttons/destroy', going_to: going_to %>
-  <% end %>
-<% else %>
-  <%= render 'going_tos/buttons/create', meeting: meeting %>
-<% end %>

@@ -1,0 +1,27 @@
+<%= form_for [@group, post], remote: true, html: { class: 'edit-post-form' } do |f| %>
+  <div class="input-textarea">
+    <%= f.text_area :content, cols: 80, rows: 3 %>
+  </div>
+  <div class="upload-oldschool">
+    <%= f.label :images do %>
+      <%= icon_tag "photo-camera" %>
+      <span>Bilder</span>
+    <% end %>
+    <div class="field-wrp">
+      <%= f.fields_for :images do |ff| %>
+        <div class="preview-wrp">
+          <%= image_tag attachment_url(ff.object, :file, :fill, 159, 60) %>
+          <div class="input-checkbox">
+            <%= ff.check_box :_destroy, { class: 'deleteCheckbox' } %>
+            <%= ff.label :_destroy, 'Löschen' %>
+          </div>
+        </div>
+      <% end %>
+      <%= f.attachment_field :images_files, multiple: true, direct: true, presigned: true %>
+    </div>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Speichern', data: { disable_with: 'sendet...' }, class: 'btn-primary -mint' %>
+    <%= f.button 'Abbrechen', type: 'button', class: 'cancel-edit-link btn-secondary -mint' %>
+  </div>
+<% end %>

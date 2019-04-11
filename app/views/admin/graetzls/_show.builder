@@ -38,7 +38,7 @@ context.instance_eval do
               column :id
               column :name
               column :slug
-              column :initiator
+              column :user
               column :created_at
               column(''){|m| link_to 'Anzeigen', admin_meeting_path(m) }
             end

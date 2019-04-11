@@ -2,7 +2,6 @@ ActiveAdmin.register GroupJoinRequest do
   menu parent: 'Gruppe', priority: 4
   includes :user
 
-
   scope :all, default: true
   scope :pending
   scope :accepted

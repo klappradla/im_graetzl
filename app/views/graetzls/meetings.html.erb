@@ -9,9 +9,7 @@
 %>
 
 <section class="graetzls">
-  <%= cache [@graetzl, 'map'], expires_in: 2.months do %>
-    <%= render 'map', map_data: @map_data %>
-  <% end %>
+  <%= render 'map' %>
   <%= render 'curator' if @graetzl.curator %>
   <%= render 'menu' %>
 

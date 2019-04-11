@@ -1,1 +1,17 @@
-$(".discussions-container").html("<%= j render 'groups/discussions/index' %>");
+(function() {
+  var $cardContainer = $("[data-behavior='discussions-card-container']");
+  var $paginateLink = $("[data-behavior='discussions-paginate-link']");
+
+  $(".discussions-container h3.title").html("<%= j @title %>");
+  <% if params[:page].blank? %>
+    $cardContainer.html("<%= j render @discussions %>")
+  <% else %>
+    $cardContainer.append("<%= j render @discussions %>");
+  <% end %>
+
+  <% if @discussions.next_page.present? %>
+    $paginateLink.attr('href', "<%= j next_page_url %>").removeClass("hide");
+  <% else %>
+    $paginateLink.addClass("hide");
+  <% end %>
+})();

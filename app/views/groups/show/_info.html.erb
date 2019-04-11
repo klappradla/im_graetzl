@@ -12,17 +12,15 @@
     </div>
 
     <div class="side">
-      <% if @next_meeting.present? %>
-        <%= render @next_meeting %>
+      <% if @group.readable_by?(current_user) && @group.next_meeting.present? %>
+        <%= render @group.next_meeting %>
       <% end %>
     </div>
 
   </div>
 
-
-
   <div class="group-member-section">
-    <h3><%= @group.users.count %> <%= @group.users.count > 1 ? 'Mitglieder' : 'Mitglied' %></h3>
+    <h3><%= @group.group_users.size %> <%= @group.group_users.size > 1 ? 'Mitglieder' : 'Mitglied' %></h3>
 
     <div class="users member-section">
 
@@ -52,31 +50,27 @@
           </div>
         </div>
       <% end %>
-      <% if @group.users.size > 20 %>
+      <% if @group.group_users.size > 20 %>
         <div class="user -more">
           <div class="avatar">
             <%= icon_tag "user-avatar" %>
           </div>
           <div class="infos">
-            <span>+ <%= @group.users.size - 20 %> weitere</span>
+            <span>+ <%= @group.group_users.size - 20 %> weitere</span>
           </div>
         </div>
       <% end %>
     </div>
   </div>
 
-
-
   <div class="district-section">
     <h3>Bezirke / Grätzln</h3>
     <div class="category-tags">
-      <% if @group.graetzls.present? %>
-        <ul class="tag-list">
-          <% compact_room_demand_graetzl_list(@group).each do |item| %>
-            <li><%= item %></li>
-          <% end %>
-        </ul>
-      <% end %>
+      <ul class="tag-list">
+        <% compact_graetzl_list(@group.graetzls).each do |item| %>
+          <li><%= item %></li>
+        <% end %>
+      </ul>
     </div>
   </div>
 

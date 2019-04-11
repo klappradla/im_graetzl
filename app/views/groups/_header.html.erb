@@ -7,7 +7,7 @@
     <% if @group.group_categories %>
       <div class="sideflag -category -R">
         <% @group.group_categories.each do |category| %>
-          <%= link_to category.title, groups_wien_path(:category => category.id), :rel => 'nofollow' %><br>
+          <%= link_to category.title, groups_wien_path(category: category.id), rel: 'nofollow' %><br>
         <% end %>
       </div>
     <% end %>
@@ -16,14 +16,14 @@
   <div class="groupInfos">
     <h1 class="hl-main"><%= @group.title %></h1>
 
-    <% if @group.parent && (@group.parent.is_a? Location) %>
-      <div class="parent"><%= icon_tag('location') %><div>Gruppe für <%= link_to @group.parent, graetzl_location_path(@group.parent.graetzl, @group.parent) %></div></div>
+    <% if @group.location %>
+      <div class="parent"><%= icon_tag('location') %><div>Gruppe für <%= link_to @group.location, [Graetzl.memoized(@group.location.graetzl_id), @group.location] %></div></div>
     <% elsif @group.parent %>
       <div class="parent"><%= icon_tag('raumteiler') %><div>Gruppe für <%= link_to @group.parent, @group.parent %></div></div>
     <% end %>
 
     <p class="facts">
-      <%= icon_tag('users') %><%= @group.users.size %> <%= @group.users.size > 1 ? "Mitglieder" : "Mitglied" %>
+      <%= icon_tag('users') %><%= @group.group_users.size %> <%= @group.group_users.size > 1 ? "Mitglieder" : "Mitglied" %>
       <span class="separator">&middot;</span>
       <%= icon_tag('lock-1') if @group.private? %><%= @group.private? ? "Geschlossene" : "Offene" %> Gruppe
     </p>

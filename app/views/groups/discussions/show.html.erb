@@ -2,7 +2,7 @@
     title: 'Thema: ' + @discussion.title,
     robots: 'index, follow',
     og_title: 'Thema: ' + @discussion.title,
-    og_image: attachment_url(@group, :cover_photo, :fill, 1200, 630, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'meta/og_logo.png')
+    og_image: attachment_url(@group, :cover_photo, :fill, 1200, 630, host: url_for(only_path: false, overwrite_params: nil), fallback: 'meta/og_logo.png')
   )
 %>
 
@@ -23,71 +23,16 @@
       <span>&nbsp;&nbsp;/&nbsp;&nbsp;</span>Thema
     </div>
 
-    <div class="actions">
-
-      <% if @discussion.edit_permission?(current_user) %>
-        <div class="btn-control">
-          <%= link_to [:edit, @group, @discussion], class: 'edit-post-link' do %>
-            <%= icon_tag "pencil" %>
-          <% end %>
-        </div>
-      <% end %>
-
-      <% if @discussion.delete_permission?(current_user) %>
-        <div class="btn-control">
-          <%= link_to [@group, @discussion], method: :delete, data: { confirm: 'Thema wirklich löschen?', disable_with: 'wird gelöscht...'}, class: 'delete' do %>
-            <%= icon_tag "trash-delete-remove" %>
-          <% end %>
-        </div>
-        <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-      <% end %>
-
-      <% if @group.users.include?(current_user) %>
-        <% following = @discussion.followed_by?(current_user) %>
-        E-Mail Updates:
-        <%= link_to toggle_following_group_discussion_path(@group, @discussion), remote: true, method: 'post', class: ["follow", following ? '' : '-hide'] do %>
-          <div class="input-switch -small -checked"><label></label></div>
-        <% end %>
-
-        <%= link_to toggle_following_group_discussion_path(@group, @discussion), remote: true, method: 'post', class: ["follow", following ? '-hide' : ''] do %>
-          <div class="input-switch -small"><label></label></div>
-        <% end %>
-      <% end %>
-
-    </div>
-
+    <%= render 'groups/discussions/actions' %>
   </div>
 
   <h2 class="title"><%= @discussion.title %></h2>
 
-  <% @posts.each do |post| %>
+  <% @posts.sort_by(&:created_at).each do |post| %>
     <%= render 'groups/discussion_posts/post', post: post %>
   <% end %>
 
-  <div class="discussion-box">
-    <% if @group.users.include?(current_user) %>
-      <div class="discussion-form">
-        <%= form_for [@group, DiscussionPost.new] do |f| %>
-          <%= hidden_field_tag :discussion_id, @discussion.id %>
-          <div class="input-textarea">
-            <%= f.label :content do %>
-            <%= attachment_image_tag current_user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
-            <span>Deine Antwort</span>
-            <% end %>
-            <%= f.text_area :content, cols: 80, rows: 3, placeholder: 'Schreib hier deinen Beitrag bzw. deine Antwort ..', required: true %>
-          </div>
-          <div class="upload-oldschool">
-            <%= f.label :images do %>
-              <%= icon_tag "photo-camera" %>
-              <span>Bilder</span>
-            <% end %>
-            <div class="field-wrp">
-              <%= f.attachment_field :images_files, multiple: true, direct: true, presigned: true %>
-            </div>
-          </div>
-          <%= f.button 'Beitrag absenden', data: { disable_with: 'sendet...' }, class: 'btn-primary' %>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
+  <% if @group.postable_by?(current_user) %>
+    <%= render 'groups/discussions/reply_form' %>
+  <% end %>
 </div>

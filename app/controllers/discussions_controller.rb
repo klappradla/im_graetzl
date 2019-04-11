@@ -5,18 +5,23 @@ class DiscussionsController < ApplicationController
   def index
     head :ok and return if browser.bot? && !request.format.js?
     @discussions = @group.discussions.order("sticky DESC, last_post_at DESC")
-    @discussions = @discussions.includes(discussion_posts: [:user, :images])
+    @discussions = @discussions.includes(:user, :discussion_category, first_post: [:images], discussion_posts: [:user])
     if params[:discussion_category_id].present?
       @discussions = @discussions.where(discussion_category_id: params[:discussion_category_id])
       @category = @group.discussion_categories.find(params[:discussion_category_id])
     end
+
+    @discussions = @discussions.page(params[:page]).per(params[:per_page] || 15)
+
+    @title = @category ? @category.title : 'Alle Themen'
+    @title = "#{@title} <span>(#{@discussions.total_count})</span>".html_safe
 
     render 'groups/discussions/index'
   end
 
   def show
     @discussion = @group.discussions.find(params[:id])
-    @posts = @discussion.discussion_posts.includes(:user, :group, :comments).order(created_at: :asc)
+    @posts = @discussion.discussion_posts.includes(:group, :images, :user,  comments: [:images, :user])
     render 'groups/discussions/show'
   end
 

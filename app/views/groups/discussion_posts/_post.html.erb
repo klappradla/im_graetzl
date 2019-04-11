@@ -38,49 +38,21 @@
     <% end %>
 
     <div class="post-comments">
-      <%= link_to 'Ältere Kommentare zeigen', 'javascript:', class: 'show-all-comments-link' if post.comments.count > 3 %>
-      <% post.comments.order("id ASC").each do |comment| %>
+      <%= link_to 'Ältere Kommentare zeigen', 'javascript:', class: 'show-all-comments-link' if post.comments.size > 3 %>
+      <% post.comments.sort_by(&:created_at).each do |comment| %>
         <div class="comment-container" >
           <%= render 'groups/discussion_posts/comment', comment: comment %>
         </div>
       <% end %>
     </div>
 
-    <% if @group.users.include?(current_user) %>
+    <% if @group.postable_by?(current_user) %>
       <%= render 'groups/discussion_posts/comment_form', discussion_post: post %>
     <% end %>
   </div>
 
-
-
   <% if post.edit_permission?(current_user) %>
-    <%= form_for [@group, post], remote: true, html: { class: 'edit-post-form' } do |f| %>
-      <div class="input-textarea">
-        <%= f.text_area :content, cols: 80, rows: 3 %>
-      </div>
-      <div class="upload-oldschool">
-        <%= f.label :images do %>
-          <%= icon_tag "photo-camera" %>
-          <span>Bilder</span>
-        <% end %>
-        <div class="field-wrp">
-          <%= f.fields_for :images do |ff| %>
-            <div class="preview-wrp">
-              <%= image_tag attachment_url(ff.object, :file, :fill, 159, 60) %>
-              <div class="input-checkbox">
-                <%= ff.check_box :_destroy, { class: 'deleteCheckbox' } %>
-                <%= ff.label :_destroy, 'Löschen' %>
-              </div>
-            </div>
-          <% end %>
-          <%= f.attachment_field :images_files, multiple: true, direct: true, presigned: true %>
-        </div>
-      </div>
-      <div class="actions">
-        <%= f.submit 'Speichern', data: { disable_with: 'sendet...' }, class: 'btn-primary -mint' %>
-        <%= f.button 'Abbrechen', type: 'button', class: 'cancel-edit-link btn-secondary -mint' %>
-      </div>
-    <% end %>
+    <%= render 'groups/discussion_posts/edit_form', post: post %>
   <% end %>
 
 </div>

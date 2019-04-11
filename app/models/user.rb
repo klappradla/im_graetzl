@@ -14,8 +14,11 @@ class User < ApplicationRecord
   belongs_to :graetzl, counter_cache: true
   has_one :curator, dependent: :destroy
   has_one :address, as: :addressable, dependent: :destroy
+
+  has_many :initiated_meetings, class_name: 'Meeting'
   has_many :going_tos, dependent: :destroy
-  has_many :meetings, through: :going_tos
+  has_many :attended_meetings, through: :going_tos, source: :meeting
+
   has_many :posts, as: :author, dependent: :destroy, class_name: 'UserPost'
   has_many :comments, dependent: :destroy
   has_many :location_ownerships, dependent: :destroy

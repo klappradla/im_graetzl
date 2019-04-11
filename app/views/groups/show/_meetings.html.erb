@@ -1,8 +1,7 @@
 <div class="meetings-section -page">
 
   <div class="header">
-
-    <% if @group.users.include?(current_user) %>
+    <% if @group.postable_by?(current_user) %>
       <%= link_to new_meeting_path(group_id: @group.id), class: 'btn-userIcons' do %>
       <span class="ico-left">
         <%= icon_tag('calendar-2') %>
@@ -10,15 +9,12 @@
       </span>
       <% end %>
     <% end %>
-
   </div>
 
   <div class="cardBoxCollection -tripple">
-
-    <% @meetings.each do |meeting| %>
-      <%= render 'meetings/meeting', meeting: meeting %>
+    <% @group.meetings.include_for_box.sort_by(&:starts_at_date).reverse_each do |meeting| %>
+      <%= render meeting %>
     <% end %>
-
   </div>
 
 </div>
