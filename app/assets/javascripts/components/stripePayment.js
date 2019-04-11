@@ -14,6 +14,7 @@ APP.components.stripePayment = (function() {
   var amount;
   var name;
   var email;
+  var message;
   var stripeCompany;
   var stripeAddressName;
   var stripeAddress;
@@ -101,6 +102,7 @@ APP.components.stripePayment = (function() {
       stripeAmount = amount * 100 // Integer in Cent for Stripe
       email = encodeURI($('#stripeForm #stripeEmail').val());
       name = encodeURI($('#stripeForm #stripeName').val());
+      message = encodeURI($('#stripeForm #message').val());
       description = encodeURI($('#stripeForm #stripeDescription').val());
 
       var sourceData = {
@@ -113,6 +115,7 @@ APP.components.stripePayment = (function() {
           '&stripeEmail=' + email +
           '&stripeName=' + name +
           '&stripeDescription=' + description +
+          '&message=' + message +
           '&stripeToken=&stripeSource=',
         },
         sofort: {

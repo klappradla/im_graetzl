@@ -65,7 +65,7 @@
         <%= icon_tag "open-book" %>
         <span>Deine Nachricht</span>
       <% end %>
-      <%= text_area_tag :message, nil, placeholder: "Wir freuen uns über ein kurzes Feedback von dir.." %>
+      <%= text_area_tag :message, nil, placeholder: "Wir freuen uns über ein kurzes Feedback von dir (max 500 Zeichen).." %>
     </div>
 
     <%= link_to 'Rechnungsanschrift hinzufügen?', 'javascript:', class: 'triggerBillingInformation' %>

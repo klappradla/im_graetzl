@@ -4,6 +4,7 @@ APP.controllers.payment = (function() {
     APP.components.stripePayment.init();
     if($('.triggerBillingInformation').exists()) initBillingInformation();
     if($('.payment-selection').exists()) initPaymentMethod();
+    if($('textarea#message').exists()) initPaymentMessage();
   }
 
   function initBillingInformation() {
@@ -19,6 +20,15 @@ APP.controllers.payment = (function() {
     $("input[name='payment_method']").change(function(){
         $(".payment-method").hide();
         $('#'+this.value).show();
+    });
+  }
+
+  function initPaymentMessage() {
+    var maxlength = 500;
+    $("textarea#message").on("propertychange input", function() {
+      if (this.value.length > maxlength) {
+          this.value = this.value.substring(0, maxlength);
+      }
     });
   }
 
