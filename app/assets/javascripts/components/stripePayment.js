@@ -1,4 +1,4 @@
-APP.components.stripeCheckout = (function() {
+APP.components.stripePayment = (function() {
 
   function init() {
     if($('#stripeForm').exists()) initForm();

@@ -1,7 +1,7 @@
 APP.controllers.payment = (function() {
 
   function init() {
-    APP.components.stripeCheckout.init();
+    APP.components.stripePayment.init();
     if($('.triggerBillingInformation').exists()) initBillingInformation();
     if($('.payment-selection').exists()) initPaymentMethod();
   }
