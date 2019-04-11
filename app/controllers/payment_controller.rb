@@ -22,8 +22,9 @@ class PaymentController < ApplicationController
   end
 
   def processing
-    stripeForm = payment_params[:stripeForm]
-    stripeParams = request.fullpath.split("?")[1]
+    # Build Form Action via Return URL Params from Payment
+    stripeForm = payment_params[:stripeForm] # Which Form Action
+    stripeParams = request.fullpath.split("?")[1] # Include Params to Form Action
     @stripeFormAction = "#{stripeForm}?#{stripeParams}"
     render :template => '/payment/processing'
   end

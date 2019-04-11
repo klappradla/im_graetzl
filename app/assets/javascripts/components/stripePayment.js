@@ -322,21 +322,19 @@ APP.components.stripePayment = (function() {
     var source = getUrlVars()["source"];
 
     // After some amount of time, we should stop trying to resolve the order synchronously:
-    var MAX_POLL_COUNT = 10;
+    var MAX_POLL_COUNT = 5;
     var pollCount = 0;
 
     function pollForSourceStatus() {
 
       stripe.retrieveSource({id: source, client_secret: client_secret}).then(function(result) {
         var source = result.source;
-
-        console.log(result);
-        console.log(source);
-        console.log(source.status);
+        //console.log(source);
+        //console.log(source.status);
 
         if (source.status === 'chargeable') {
           // Make a request to your server to charge the Source.
-          // Depending on the Charge status, show your customer the relevant message.
+          // Submit Charge Form
           $("#stripeForm").submit();
         } else if (source.status === 'pending' && pollCount < MAX_POLL_COUNT) {
           // Try again in a second, if the Source is still `pending`:
