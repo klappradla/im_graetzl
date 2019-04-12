@@ -6,6 +6,7 @@ class StripeChargesServices
   DEFAULT_FOOTER = 'Lieben Dank für deine Unterstützung - Dein Team von imGrätzl.at'
 
   def initialize(params, user)
+    @reusable_source = true
     @user = user ? user : User.find_by_email(params[:stripeEmail]) # current_user if logged in
     @payment_method = params[:payment_method]
 
@@ -13,8 +14,10 @@ class StripeChargesServices
       @stripe_source = params[:stripeToken]
     elsif !params[:stripeSource].empty?
       @stripe_source = params[:stripeSource]
+      @reusable_source = reusable_source?(@stripe_source)
     else
       @stripe_source = params[:source]
+      @reusable_source = reusable_source?(@stripe_source)
     end
 
     @stripe_email = params[:stripeEmail]
@@ -83,7 +86,11 @@ class StripeChargesServices
   def retrieve_and_update_customer(customer_id)
     @customer = Stripe::Customer.update(
       customer_id,
-      {source: stripe_source}
+      {
+        source: stripe_source,
+        description: name,
+        shipping: insert_shipping
+      }
     )
     @customer
   end
@@ -142,7 +149,7 @@ class StripeChargesServices
       #default_source: stripe_source,
       footer: DEFAULT_FOOTER
     )
-    puts invoice # Todo: save charge infos in DB
+    #puts invoice # Todo: save charge infos in DB
     send_payment_confirmation("#{STRIPE_DASHBOARD}/invoices/#{invoice.id}")
   end
 
@@ -160,6 +167,14 @@ class StripeChargesServices
       ],
     )
     #puts subscription # Todo: save charge infos in DB
+  end
+
+  def reusable_source?(source)
+    if Stripe::Source.retrieve(source).usage == 'reusable'
+      return true
+    else
+      return false
+    end
   end
 
   # Create Address Hash for Stripe Customer

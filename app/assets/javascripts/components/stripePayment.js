@@ -8,6 +8,11 @@ APP.components.stripePayment = (function() {
     if($('.payment-processing').exists()) initStripePaymentPolling();
   }
 
+  function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+
   function urldecode(str) {
     return decodeURIComponent((str+'').replace(/\+/g, '%20'));
   }
@@ -88,8 +93,8 @@ APP.components.stripePayment = (function() {
     } else if (name == '') {
       $('#flash').html('<p>Bitte gib deinen Vor- & Nachname an.</p>').show();
       document.location.href = '#';
-    } else if (email == '') {
-      $('#flash').html('<p>Bitte gib deine E-Mail Adresse an.</p>').show();
+    } else if (!validateEmail(email)) {
+      $('#flash').html('<p>Bitte gib eine gültige E-Mail Adresse an.</p>').show();
       document.location.href = '#';
     } else {
       $('#flash').hide();
@@ -109,27 +114,36 @@ APP.components.stripePayment = (function() {
       event.preventDefault();
       //showLoading();
 
+      form = $('#stripeForm').attr('action');
       amount = amount * 1; // Needs to be an integer!
       stripeAmount = amount * 100 // Integer in Cent for Stripe
       email = encodeURI($('#stripeForm #stripeEmail').val());
       name = encodeURI($('#stripeForm #stripeName').val());
       message = encodeURI($('#stripeForm #message').val());
       description = encodeURI($('#stripeForm #stripeDescription').val());
-      form = $('#stripeForm').attr('action');
+      stripeCompany = encodeURI($('#stripeForm #stripeCompany').val());
+      stripeAddressName = encodeURI($('#stripeForm #stripeAddressName').val());
+      stripeAddress = encodeURI($('#stripeForm #stripeAddress').val());
+      stripePostalCode = encodeURI($('#stripeForm #stripePostalCode').val());
+      stripeCity = encodeURI($('#stripeForm #stripeCity').val());
 
       var sourceData = {
         type: 'sofort',
         amount: Math.round(stripeAmount),
         currency: 'eur',
         redirect: {
-          return_url: host + '/payment/processing?' +
-          'amount=' + amount +
-          '&stripeEmail=' + email +
-          '&stripeName=' + name +
-          '&stripeDescription=' + description +
-          '&message=' + message +
+          return_url: host + '/payment/processing?stripeToken=&stripeSource=' +
           '&stripeForm=' + form +
-          '&stripeToken=&stripeSource=',
+          '&amount=' + amount +
+          '&stripeName=' + name +
+          '&stripeEmail=' + email +
+          '&stripeDescription=' + description +
+          '&stripeCompany=' + stripeCompany +
+          '&stripeAddressName=' + stripeAddressName +
+          '&stripeAddress=' + stripeAddress +
+          '&stripePostalCode=' + stripePostalCode +
+          '&stripeCity=' + stripeCity +
+          '&message=' + message
         },
         sofort: {
           country: 'AT',
@@ -342,7 +356,7 @@ APP.components.stripePayment = (function() {
           setTimeout(pollForSourceStatus, 1000);
         } else {
           // Depending on the Source status, show your customer the relevant message.
-          $("#stripeForm #message").text('Zahlung failed');
+          $("#stripeForm #message").html('<b>Zahlung abgebrochen.</b><br>Bei Fragen kontaktiere uns unter wir@imgraetzl.at');
         }
       });
     }

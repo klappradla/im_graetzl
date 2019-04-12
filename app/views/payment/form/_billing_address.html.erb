@@ -11,7 +11,7 @@
     <%= icon_tag "user-avatar" %>
     <span>Name</span>
   <% end %>
-  <%= text_field_tag :stripeAddressName, current_user ? current_user.full_name : nil, placeholder: 'Vor- & Nachname' %>
+  <%= text_field_tag :stripeAddressName, nil, placeholder: 'Vor- & Nachname' %>
 </div>
 
 <div class="input-field">
@@ -19,7 +19,7 @@
     <%= icon_tag "map-location" %>
     <span>Strasse & Nr.</span>
   <% end %>
-  <%= text_field_tag :stripeAddress, current_user && current_user.address.street_name ? current_user.address.street_name : nil, placeholder: 'Strasse & Nr.' %>
+  <%= text_field_tag :stripeAddress, nil, placeholder: 'Strasse & Nr.' %>
 </div>
 
 <div class="input-field">
@@ -27,7 +27,7 @@
     <%= icon_tag "map-location" %>
     <span>Postleitzahl</span>
   <% end %>
-  <%= text_field_tag :stripePostalCode, current_user && current_user.address.zip ? current_user.address.zip : nil, placeholder: 'PLZ' %>
+  <%= text_field_tag :stripePostalCode, nil, placeholder: 'PLZ' %>
 </div>
 
 <div class="input-field">
@@ -35,5 +35,5 @@
     <%= icon_tag "map-location" %>
     <span>Ort/Stadt</span>
   <% end %>
-  <%= text_field_tag :stripeCity, current_user && current_user.address.city ? current_user.address.city : nil, placeholder: 'Stadt' %>
+  <%= text_field_tag :stripeCity, nil, placeholder: 'Stadt' %>
 </div>
