@@ -382,6 +382,26 @@ section.help {
       @include font-size-primaryFont('large');
     }
 
+    img.ablauf {
+      width:50%;
+      display: block;
+      margin: auto;
+      margin-bottom: 30px;
+    }
+
+
+    .-mentors {
+      .single-mentor {
+        width:50%;
+        float:left;
+        @include respond-to(">=medium") {
+          width:33%;
+        }
+        @include respond-to(">=large") {
+          width:25%;
+        }
+      }
+    }
     // Single Mentor Card
     .single-mentor {
       margin-bottom:50px;
@@ -389,8 +409,11 @@ section.help {
         display: block;
         text-align: center;
       }
+      h3 {
+        padding:0px 0px 5px;
+      }
       a {
-        text-decoration: none;
+        //text-decoration: none;
       }
       a:hover {
         img {
