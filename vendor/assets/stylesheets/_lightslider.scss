@@ -83,20 +83,20 @@
     padding: 0 5px;
 }
 .lSSlideOuter .lSPager.lSpg > li a {
-    background-color: #222222;
+    background-color: #69a8a7;
     border-radius: 30px;
     display: inline-block;
-    height: 8px;
+    height: 10px;
     overflow: hidden;
     text-indent: -999em;
-    width: 8px;
+    width: 10px;
     position: relative;
     z-index: 99;
     -webkit-transition: all 0.5s linear 0s;
     transition: all 0.5s linear 0s;
 }
 .lSSlideOuter .lSPager.lSpg > li:hover a, .lSSlideOuter .lSPager.lSpg > li.active a {
-    background-color: #428bca;
+    background-color: #EC776A;
 }
 .lSSlideOuter .media {
     opacity: 0.8;

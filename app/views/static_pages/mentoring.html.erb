@@ -138,9 +138,7 @@
     <div class="wrp">
       <p>
         <strong>
-          Das imGrätzl Team stellt das Unterstützer-Team zusammen und organisiert es,
-          die Gruppe und das Programm sind eine Art "Do-it & Dranbleibe" Tank.
-          Du wirst Woche für Woche begleitet und das drei Monate lang.
+          Das imGrätzl Team stellt das Unterstützer-Team zusammen und organisiert es, die Gruppe und das Programm sind ein "Ins-Tun-kommen & Dranbleiben" Motivation. Du wirst Woche für Woche begleitet und das drei Monate lang.
         </strong>
       </p>
       <p>
@@ -154,7 +152,7 @@
     <div class="card"></div>
   </div>
 
-  <%= image_tag('info/ablauf-txt.jpg', class: 'ablauf') %>
+  <%= image_tag('info/ablauf-txt.png', class: 'ablauf') %>
 
   <div class="ablauf">
     <ul>
@@ -194,6 +192,74 @@
   <!-- END DER ABLAUF -->
 
 
+  <!-- SLIDER -->
+
+  <div class="hl-subtext" id="teilnahme">
+    <h1><em>Was andere TeilnehmerInnen sagen</em></h1>
+    <p>
+      Sie können garnicht genug bekommen vom Programm!
+    </p>
+  </div>
+
+  <div class="lightSliderWrapper card-slider-container">
+    <div class="cardBoxCollection -quotes" id="card-slider">
+
+      <!-- Single Quote -->
+      <div class="cardBox -quote">
+        <div class="user">
+          <div class="avatar">
+              <img class="attachment user avatar img-round" src="https://d1dcf21ighh4hq.cloudfront.net/attachments/c7c148e36a5f61b380880e9fe78018d83185e1bb/store/fill/200/200/d4ab821fd180b4352bdef2b41f54121ace32bc36b26b499ced5a8a8465ae/avatar.jpeg">
+          </div>
+          <div class="infos">
+            <span>Teresa<br>Scheicher</span>
+          </div>
+        </div>
+        <blockquote class="txt">
+          &#8222;
+          Das erste Programm war richtig richtig cool! Ich konnte garnicht mehr aufhören zu arbeiten!
+          &#8220;
+        </blockquote>
+      </div>
+
+      <!-- Single Quote -->
+      <div class="cardBox -quote">
+        <div class="user">
+          <div class="avatar">
+            <img class="attachment user avatar img-round" src="https://d1dcf21ighh4hq.cloudfront.net/attachments/4711771d5c8665092b4b0b3554006f235719d3e5/store/fill/200/200/6b252b7ecfb4d7af419116c3c008610c9ee5425d714a3160e47f21869d25/avatar.jpeg">
+          </div>
+          <div class="infos">
+            <span>Robert<br>Kalb</span>
+          </div>
+        </div>
+        <blockquote class="txt">
+          &#8222;
+          Es war der Hammer! Ich hab noch nie sowas wahnsinnig durchdachtes erlebt. Ich hab jetzt 20 neue Kunden und komme garnicht mehr nach!
+          &#8220;
+        </blockquote>
+      </div>
+
+      <!-- Single Quote -->
+      <div class="cardBox -quote">
+        <div class="user">
+          <div class="avatar">
+            <img class="attachment user avatar img-round" src="https://d1dcf21ighh4hq.cloudfront.net/attachments/a44904de315d3c9d1228bedeaf7c3bedbd03698d/store/fill/100/100/d87ce1e9862722a4ba02ff58420e33673d1bb5eae9ea5c05f3711ab23f03/avatar.jpeg">
+          </div>
+          <div class="infos">
+            <span>Natascha<br>Meis</span>
+          </div>
+        </div>
+        <blockquote class="txt">
+          &#8222;
+          Das erste Programm war richtig richtig cool! Ich konnte garnicht mehr aufhören zu arbeiten!
+          &#8220;
+        </blockquote>
+      </div>
+
+    </div>
+  </div>
+  <!-- /SLIDER -->
+
+
   <!-- TEILNEHMEN -->
   <div class="hl-subtext" id="teilnahme">
     <h1><em>So kannst du teilnehmen</em></h1>
@@ -203,10 +269,6 @@
   </div>
 
   <div class="anmeldung cardBox <%= '-login' if !current_user %>"  <%= 'data-featherlight=#login-panel-modal' if !current_user %>>
-
-
-
-
     <% if !Group.where(id: 28).empty? %>
       <% group = Group.find_by_id(28) %>
       <%= form_tag request_join_group_path(group) do %>

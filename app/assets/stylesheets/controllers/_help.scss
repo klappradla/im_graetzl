@@ -389,6 +389,33 @@ section.help {
       margin-bottom: 30px;
     }
 
+    .-quotes {
+      .-quote {
+        background-color: rgba($color-ambient-mint-light,0.75);
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .user {
+        width:30%;
+        img {
+          width:100%;
+          height:auto;
+        }
+        .infos {
+          text-align: center;
+          font-style: italic;
+        }
+      }
+      .txt {
+        width:70%;
+        text-align: center;
+        align-self: center;
+        font-style: italic;
+        @include font-size-primaryFont('large');
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+    }
 
     .-mentors {
       .single-mentor {

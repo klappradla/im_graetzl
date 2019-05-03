@@ -21,6 +21,53 @@ function initMentoring() {
       $("#flash .notice").html('Vielen Dank für Deine Registrierung. Du bist nun angemeldet und kannst das <a href="#teilnahme">Teilnahme Formular</a> (unterhalb) ausfüllen.');
     }
   }
+
+  if ($("#card-slider").exists()) {
+    $('#card-slider').lightSlider({
+      item: 2,
+      autoWidth: false,
+      slideMove: 2, // slidemove will be 1 if loop is true
+      slideMargin: 15,
+      addClass: '',
+      mode: "slide",
+      useCSS: true,
+      cssEasing: 'ease', //'cubic-bezier(0.25, 0, 0.25, 1)',//
+      easing: 'linear', //'for jquery animation',////
+      speed: 750, //ms'
+      auto: true,
+      loop: true,
+      slideEndAnimation: true,
+      pause: 5000,
+      keyPress: false,
+      controls: false,
+      prevHtml: '',
+      nextHtml: '',
+      adaptiveHeight:false,
+      pager: true,
+      //currentPagerPosition: 'middle',
+      enableTouch:true,
+      enableDrag:false,
+      freeMove:true,
+      swipeThreshold: 40,
+      responsive : [
+        {
+          breakpoint:850,
+          settings: {
+            item: 2,
+            slideMove: 2,
+          }
+        },
+        {
+          breakpoint:530,
+          settings: {
+            item: 1,
+            slideMove: 1
+          }
+        }
+      ]
+    });
+  }
+
 }
 
 function initGuideDownload() {
