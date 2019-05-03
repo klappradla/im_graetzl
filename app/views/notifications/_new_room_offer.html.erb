@@ -1,5 +1,5 @@
 <% room_offer = notification.activity.trackable %>
-<% graetzl = Graetzl.memoized(post.graetzl_id) %>
+<% graetzl = Graetzl.memoized(room_offer.graetzl_id) %>
 
 <%= content_tag(:li, id: dom_id(notification), data: { behavior: 'notification-item' }, class: 'notification-item') do %>
   <%= link_to room_offer do %>
