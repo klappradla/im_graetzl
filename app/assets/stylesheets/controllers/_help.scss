@@ -408,7 +408,7 @@ section.help {
       }
       .txt {
         width:70%;
-        text-align: center;
+        //text-align: center;
         align-self: center;
         font-style: italic;
         @include font-size-primaryFont('large');
@@ -466,6 +466,7 @@ section.help {
       margin-bottom:60px;
       li {
         margin-bottom:15px;
+        @include font-size-primaryFont('large');
       }
     }
 
@@ -490,5 +491,4 @@ section.help {
     }
 
   }
-
 }

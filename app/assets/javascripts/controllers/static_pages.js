@@ -37,7 +37,7 @@ function initMentoring() {
       auto: true,
       loop: true,
       slideEndAnimation: true,
-      pause: 5000,
+      pause: 10000,
       keyPress: false,
       controls: false,
       prevHtml: '',
