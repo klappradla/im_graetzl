@@ -9,6 +9,11 @@ APP.components.notificationSettings = (function() {
         $webToggles = $("[data-behavior='website-notification-toggle']");
         $mailToggles = $("[data-behavior='mail-notification-toggle']");
         if (($webToggles.exists()) && ($mailToggles.exists())) setup();
+
+        // Get Target for Mandrill Linking
+        $(document).ready(function() {
+          scrollToTarget();
+        });
     }
 
     function setup() {
@@ -55,6 +60,22 @@ APP.components.notificationSettings = (function() {
                 }
             });
         }
+    }
+
+    function scrollToTarget() {
+      var target = getUrlVars()["target"];
+      if (typeof target !== 'undefined') {
+        var tabLink = $('a[href="#'+target+'"]');
+        tabLink.click();
+      }
+    }
+
+    function getUrlVars() {
+      var vars = {};
+      var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+          vars[key] = value;
+      });
+      return vars;
     }
 
     return {

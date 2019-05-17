@@ -26,8 +26,9 @@
       Events & Workshops
       <span class="-more"><%= icon_tag "arrow-right-2" %></span>
     <% end %>
-    <%= link_to edit_user_path do %>
+    <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-settings'} do %>
       <%= icon_tag "gears" %> Einstellungen
+      <span class="-more"><%= icon_tag "arrow-right-2" %></span>
     <% end %>
     <% if current_user.admin? %>
       <%= link_to admin_root_path do %>
@@ -39,6 +40,18 @@
     <% end %>
     <%= link_to destroy_user_session_path, method: :delete do %>
       <%= icon_tag "power" %> Abmelden
+    <% end %>
+  </section>
+
+  <section class="second -settings">
+    <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-settings'} do %>
+      <%= icon_tag "arrow-left-2" %> Zurück
+    <% end %>
+    <%= link_to edit_user_path do %>
+      <%= icon_tag "gears" %> Profil Einstellungen
+    <% end %>
+    <%= link_to edit_user_path(:target => "tab-2") do %>
+      <%= icon_tag "mail-1" %> E-Mail Benachrichtigungen
     <% end %>
   </section>
 

@@ -23,7 +23,7 @@ APP.controllers.discussions = (function() {
     $(window).on("load", function() {
       setTimeout(scrollToTarget, 250)
     });
-    
+
   }
 
   function scrollToTarget() {
