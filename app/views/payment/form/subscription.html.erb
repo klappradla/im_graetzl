@@ -1,15 +1,14 @@
 <% title('Zahlung') %>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="https://js.stripe.com/v3/"></script>
 
 <%= form_tag subscription_create_payment_index_path, id: 'stripeForm' do %>
   <%= hidden_field_tag :publishable_key, Rails.configuration.stripe[:publishable_key] %>
   <%= hidden_field_tag :stripeToken %>
+  <%= hidden_field_tag :stripeSource %>
   <%= hidden_field_tag :stripeIcon, image_url('stripe_logo.png') %>
   <%= hidden_field_tag :stripeDescription, 'Deine Unterstützung' %>
   <%= hidden_field_tag :stripePlan, 'plan_EcPqKaYViIkWOr' %>
-
-  <!--<%= hidden_field_tag :stripeBillingCycleAnchor, '2019-05-01' %>-->
-  <!--<%= hidden_field_tag :stripeTrialEnd, '2019-05-01' %>-->
-  <!--<%= hidden_field_tag :stripeCancelAtPeriodEnd, true %>-->
 
   <section class="payment-form -subscription">
 
@@ -17,6 +16,41 @@
       <h1>Du möchtest <span>imGrätzl unterstützen?</span></h1>
       <p>Wähle selbst deinen monatlichen Wunschbetrag.</p>
     </div>
+
+    <div class="input-field">
+      <%= label_tag(:stripeName) do %>
+        <%= icon_tag "user-avatar" %>
+        <span>Vor- & Nachname</span>
+      <% end %>
+      <%= text_field_tag :stripeName, current_user ? current_user.full_name : nil, placeholder: 'Vor- & Nachname' %>
+    </div>
+
+    <% if current_user %>
+      <%= hidden_field_tag :stripeEmail, current_user.email %>
+    <% else %>
+      <div class="input-field">
+        <%= label_tag(:stripeEmail) do %>
+          <%= icon_tag "at-symbol" %>
+          <span>E-Mail Adresse</span>
+        <% end %>
+        <%= email_field_tag :stripeEmail, nil, placeholder: 'E-Mail Adresse' %>
+      </div>
+      <script>
+        function getUrlVars() {
+          var vars = {};
+          var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+              vars[key] = value;
+          });
+          return vars;
+        }
+        $(document).ready(function() {
+          var mail = getUrlVars()["mail"];
+          if (typeof mail !== 'undefined') {
+            $('#stripeForm #stripeEmail').val(mail);
+          }
+        });
+      </script>
+    <% end %>
 
     <div class="input-select">
       <%= label_tag(:amount) do %>
@@ -43,24 +77,12 @@
     </div>
 
     <div class="input-field">
-      <%= label_tag(:amount) do %>
+      <%= label_tag(:message) do %>
         <%= icon_tag "open-book" %>
         <span>Deine Nachricht</span>
       <% end %>
       <%= text_area_tag :message, nil, placeholder: "Wir freuen uns über ein kurzes Feedback von dir.." %>
     </div>
-
-    <% if current_user %>
-      <%= hidden_field_tag :stripeEmail, current_user.email %>
-    <% else %>
-      <div class="input-field">
-        <%= label_tag(:stripeEmail) do %>
-          <%= icon_tag "at-symbol" %>
-          <span>E-Mail Adresse</span>
-        <% end %>
-        <%= email_field_tag :stripeEmail, nil, placeholder: 'E-Mail Adresse' %>
-      </div>
-    <% end %>
 
     <%= link_to 'Rechnungsanschrift hinzufügen?', 'javascript:', class: 'triggerBillingInformation' %>
 
@@ -69,20 +91,91 @@
     </div>
 
 
-    <div class="input-button">
-      <%= button_tag 'Weiter zur Zahlung mit Kreditkarte', class: 'btn-primary -mint -large stripe-submit-subscription' %>
+    <div class="billing-information">
+      <%= render 'payment/form/billing_address' %>
     </div>
 
-    <div class="txt -footer">
-      <p>
-        Die Abwicklung der Zahlung wird über den sicheren Zahlungsanbeiter
-        <%= link_to 'Stripe', 'https://stripe.com/at', target: '_blank' %> durchgeführt.<br>
-        imGrätzl hat zu keiner Zeit Zugriff auf deine Kreditkarteninformationen.
-      </p>
-      <p>
-        Du kannst deine monatliche Unterstützung jederzeit mit sofortiger Wirkung beenden.<br>
-        Hast du Fragen? Schreib uns an <a href="mailto:wir@imgraetzl.at">wir@imgraetzl.at</a>.
-      </p>
+    <div class="hl-subtext -small -payment">
+      <h2><span>Wie</span> möchtest du bezahlen?</h2>
+      <div class="payment-selection">
+        <div class="input-radio">
+          <input type="radio" value="card" name="payment_method" id="payment_method_card" checked="checked">
+          <label for="payment_method_card">Kreditkarte</label>
+        </div>
+        <div class="input-radio">
+          <input type="radio" value="sofort" name="payment_method" id="payment_method_sofort">
+          <label for="payment_method_sofort">SOFORT Überweisung</label>
+        </div>
+        <div class="input-radio">
+          <input type="radio" value="sepa" name="payment_method" id="payment_method_sepa">
+          <label for="payment_method_sepa">SEPA Lastschrift</label>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="payment-methods">
+
+      <div class="payment-method" id="card">
+        <div class="input-button">
+          <button name="button" type="submit" class="btn-primary -mint -large stripe-submit-card">
+            <span class="-amount"></span>Zahlen mit Kreditkarte
+          </button>
+        </div>
+        <div class="txt -footer">
+          Die Abwicklung der Zahlung wird über den sicheren Zahlungsanbeiter
+          <%= link_to 'Stripe', 'https://stripe.com/at', target: '_blank' %> durchgeführt.<br>
+          imGrätzl hat zu keiner Zeit Zugriff auf deine Kreditkarteninformationen.
+        </div>
+      </div>
+
+      <div class="payment-method" id="sofort">
+
+        <div id="sofort-error-message" role="alert"></div>
+
+        <div class="input-button">
+          <button name="button" type="submit" class="btn-primary -mint -large stripe-submit-sofort">
+            <span class="-amount"></span>Zahlen mit SOFORT
+          </button>
+        </div>
+        <div class="txt -footer">
+          Du wirst zum Onlinebanking deiner Bank weitergeleitet.<br>
+          Die Abwicklung der Zahlung wird über den sicheren Zahlungsanbeiter
+          <%= link_to 'Stripe', 'https://stripe.com/at', target: '_blank' %> durchgeführt.<br>
+          imGrätzl hat zu keiner Zeit Zugriff auf deine Kontodaten.
+        </div>
+      </div>
+
+      <div class="payment-method" id="sepa">
+
+        <div class="input-field">
+          <label for="iban-element">
+            <%= icon_tag "profile-vcard" %>
+            <span>Konto IBAN</span>
+          </label>
+          <div id="iban-element">
+            <!-- A Stripe Element will be inserted here. -->
+          </div>
+        </div>
+
+        <div id="bank-name"></div>
+        <div id="sepa-error-message" role="alert"></div>
+
+        <div class="input-button">
+          <button name="button" type="submit" class="btn-primary -mint -large stripe-submit-sepa">
+            <span class="-amount"></span>Zahlen mit SEPA Lastschrift
+          </button>
+        </div>
+        <div class="txt -footer">
+          Ich ermächtige imGrätzl.at / Stripe (unseren Zahlungsdienstleister) Zahlungen von meinem Konto mittels SEPA Lastschriften einzuziehen. Zugleich weise ich mein Kreditinstitut an, die von "imGrätzl.at / Stripe" auf mein Konto gezogen SEPA Lastschriften einzulösen.
+          <br><br>
+          Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, die Erstattung des belasteten Betrages verlangen.
+          Es gelten dabei die mit meinem Kreditinstitut vereinbarten Bedingungen. imGrätzl.at wird betrieben von der morgenjungs GmbH.
+        </div>
+      </div>
+
     </div>
 
   </section>

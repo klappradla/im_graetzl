@@ -1,7 +1,9 @@
 APP.components.stripePayment = (function() {
 
   function init() {
-    if($('#stripeForm').exists()) initForm();
+    if($('#stripeForm .payment-form').exists()) initForm();
+    if($('#stripeForm #amount').exists()) initAmount();
+    //if($('#stripeForm .payment-form #stripePlan').exists()) initSubscriptionAmount();
     if($('#stripeForm #payment_method_card').exists()) initStripeCheckout();
     if($('#stripeForm #payment_method_sofort').exists()) initStripeSofort();
     if($('#stripeForm #payment_method_sepa').exists()) initStripeSepa();
@@ -37,22 +39,29 @@ APP.components.stripePayment = (function() {
   var stripePostalCode;
   var stripeCity;
 
+  function initAmount() {
+    // Set Amount on Window Load
+    $(document).ready(function(){
+      amount = cleanUpAmount($('#amount').val());
+      setPayButtonAmount(amount);
+    })
+  }
+
+  // TODO: Amount bei Plans finalisieren!!! (auslesen aus dropdown?!)
+  function initSubscriptionAmount() {
+    // Set Amount on Window Load
+    $(document).ready(function(){
+      console.log($('#stripePlan').find(":selected").text());
+      setPayButtonAmount(amount);
+    })
+  }
+
   function initForm() {
+
     // onFocusOut -> Abrunden auf ganzen Betrag, wenn Zahl.
-    $('#amount').focusout(function(){
+    $('.choose_amount').focusout(function(){
       amount = cleanUpAmount(this.value);
-      if (!isNaN(amount)) {
-        $(this).val(amount + ',00'); // Display correct Amount
-        // Set Amount Value in Pay Buttons
-        $('.-amount').each(function(index, obj) {
-          $(obj).text('€ ' + amount + ',00 - ');
-          $(obj).show();
-        });
-      } else {
-        $('.-amount').each(function(index, obj) {
-          $(obj).hide();
-        });
-      }
+      setPayButtonAmount(amount);
     });
 
     // Set Stripe Description for selected Plan (Subscription)
@@ -61,8 +70,30 @@ APP.components.stripePayment = (function() {
       var stripeDescription = $('#stripeForm #stripeDescription').val();
       stripeDescription += ': ' + stripePlan + ' / Monat';
       $('#stripeForm #stripeDescription').val(stripeDescription);
+
+      // TODO: Amount bei Change anpassen.
+      //var isAmount = stripePlan.indexOf("€");
+      //amount = stripePlan.substring(0, isAmount);
+      //amount = cleanUpAmount(amount);
+      //setPayButtonAmount(amount);
+
     });
 
+  }
+
+  // Set Amount in Pay Buttons
+  function setPayButtonAmount(amount) {
+    if (!isNaN(amount)) {
+      // Set Amount Value in Pay Buttons
+      $('.-amount').each(function(index, obj) {
+        $(obj).text('€ ' + amount + ',00 - ');
+        $(obj).show();
+      });
+    } else {
+      $('.-amount').each(function(index, obj) {
+        $(obj).hide();
+      });
+    }
   }
 
   // Function for CleanUp Amount - Check ob Zahl und Abrunden auf ganzen Betrag
@@ -299,9 +330,9 @@ APP.components.stripePayment = (function() {
     $('.stripe-submit-card').on('click', function(e) {
       e.preventDefault();
       if (checkFormInputs() == true) {
-        amount = amount * 100; // Integer in Cent for Stripe
+        var checkoutamount = amount * 100; // Integer in Cent for Stripe
         stripeCheckoutHandler.open({
-          amount: Math.round(amount),
+          amount: Math.round(checkoutamount),
           email: $('#stripeForm #stripeEmail').val(),
         })
       }

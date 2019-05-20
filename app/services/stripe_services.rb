@@ -1,4 +1,4 @@
-class StripeChargesServices
+class StripeServices
   DEFAULT_CURRENCY = 'eur'.freeze
   DEFAULT_TAX = 20
   DEFAULT_TAX_COMMA = 1.2
@@ -27,9 +27,6 @@ class StripeChargesServices
     @description = params[:stripeDescription]
     @message = params[:message]
     @plan = params[:stripePlan]
-    @billing_cycle_anchor = DateTime.parse(params[:stripeBillingCycleAnchor]).to_i if params[:stripeBillingCycleAnchor].present?
-    @trial_end = DateTime.parse(params[:stripeTrialEnd]).to_i if params[:stripeTrialEnd].present?
-    @cancel_at_period_end = params[:stripeCancelAtPeriodEnd] if params[:stripeCancelAtPeriodEnd].present?
     @billing_address = params[:stripebillingAddress] if params[:stripebillingAddress].present?
 
     @company = !params[:stripeCompany].nil? ? params[:stripeCompany] : nil
@@ -38,10 +35,6 @@ class StripeChargesServices
     @plz = !params[:stripePostalCode].nil? ? params[:stripePostalCode] : nil
     @city = !params[:stripeCity].nil? ? params[:stripeCity] : nil
 
-  end
-
-  def init_charge
-    create_charge(find_customer)
   end
 
   def init_invoice
@@ -119,16 +112,6 @@ class StripeChargesServices
       )
     end
     @customer
-  end
-
-  def create_charge(customer)
-    charge = Stripe::Charge.create(
-      customer: customer.id,
-      currency: DEFAULT_CURRENCY,
-      amount: amount,
-      description: description
-    )
-    #puts charge # Todo: save charge infos in DB
   end
 
   def create_invoice_item(customer)

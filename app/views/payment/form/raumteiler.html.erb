@@ -1,7 +1,7 @@
 <% title('Raumteiler - Wähle deinen Betrag') %>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-
 <script src="https://js.stripe.com/v3/"></script>
+
 <%= form_tag raumteiler_create_payment_index_path, id: 'stripeForm' do %>
 
   <%= hidden_field_tag :publishable_key, Rails.configuration.stripe[:publishable_key] %>
@@ -22,7 +22,7 @@
         <%= icon_tag "currency-euro" %>
         <span>Wähle deinen Betrag</span>
       <% end %>
-      <%= text_field_tag :amount, nil, placeholder: "z.b. 25,00 €", id: 'amount', required: true %>
+      <%= text_field_tag :amount, nil, placeholder: "z.b. 25,00 €", id: 'amount', class: 'choose_amount',required: true %>
     </div>
 
     <div class="input-field">
@@ -61,7 +61,7 @@
     <% end %>
 
     <div class="input-field">
-      <%= label_tag(:amount) do %>
+      <%= label_tag(:message) do %>
         <%= icon_tag "open-book" %>
         <span>Deine Nachricht</span>
       <% end %>

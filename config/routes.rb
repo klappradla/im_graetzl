@@ -175,10 +175,10 @@ Rails.application.routes.draw do
 
   resources :payment do
     collection do
-      get :raumteiler, :charge, :subscription, :mentoring, :processing
+      get :raumteiler, :subscription, :mentoring, :processing
     end
     collection do
-      post :raumteiler_create, :charge_create, :subscription_create, :mentoring_create, :processing
+      post :raumteiler_create, :subscription_create, :mentoring_create, :processing
     end
   end
 

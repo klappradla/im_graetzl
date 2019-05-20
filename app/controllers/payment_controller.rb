@@ -9,10 +9,6 @@ class PaymentController < ApplicationController
     render :template => '/payment/form/raumteiler'
   end
 
-  def charge
-    render :template => '/payment/form/charge'
-  end
-
   def subscription
     render :template => '/payment/form/subscription'
   end
@@ -30,7 +26,7 @@ class PaymentController < ApplicationController
   end
 
   def raumteiler_create
-    StripeChargesServices.new(payment_params, current_user).init_invoice
+    StripeServices.new(payment_params, current_user).init_invoice
     amount = payment_params[:amount].to_i
     description = payment_params[:stripeDescription]
     @payment_confirmation_info = "#{amount},00 € - Deine #{description}"
@@ -39,17 +35,8 @@ class PaymentController < ApplicationController
     render :template => '/payment/confirmation'
   end
 
-  def charge_create
-    StripeChargesServices.new(payment_params, current_user).init_charge
-    amount = payment_params[:amount].to_i
-    description = payment_params[:stripeDescription]
-    @payment_confirmation_info = "#{amount},00 € - #{description}"
-    @email = payment_params[:stripeEmail]
-    render :template => '/payment/confirmation'
-  end
-
   def subscription_create
-    StripeChargesServices.new(payment_params, current_user).init_subscription
+    StripeServices.new(payment_params, current_user).init_subscription
     description = payment_params[:stripeDescription]
     @payment_confirmation_info = "#{description}"
     @email = payment_params[:stripeEmail]
@@ -57,7 +44,7 @@ class PaymentController < ApplicationController
   end
 
   def mentoring_create
-    StripeChargesServices.new(payment_params, current_user).init_invoice
+    StripeServices.new(payment_params, current_user).init_invoice
     amount = payment_params[:amount].to_i
     description = payment_params[:stripeDescription]
     @payment_confirmation_info = "#{amount},00 € - #{description}"
