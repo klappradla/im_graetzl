@@ -10,10 +10,11 @@
 	.featherlight-previous {
 		display: block;
 		position: absolute;
-		top: 25px;
-		right: 25px;
+		top: 0px;
+		right: 0px;
 		bottom: 0;
-		left: 80%;
+		width:100px;
+		//left: 80%;
 		cursor: pointer;
 		/* preventing text selection */
 		-webkit-touch-callout: none;
@@ -27,13 +28,13 @@
 	}
 
 	.featherlight-previous {
-		left: 25px;
-		right: 80%;
+		left: 0px;
+		//right: 80%;
 	}
 
 	.featherlight-next:hover,
 	.featherlight-previous:hover {
-		background: rgba(255,255,255,0.25);
+		background: rgba(255,255,255,0.20);
 	}
 
 
@@ -43,26 +44,27 @@
 		position: absolute;
 
 		top: 50%;
-		left: 5%;
-		width: 82%;
+		//left: 5%;
+		width: 100%;
 
 		/* center horizontally */
 		text-align: center;
 
-		font-size: 80px;
-		line-height: 80px;
+		font-size: 50px;
+		line-height: 50px;
 
 		/* center vertically */
-		margin-top: -40px;
+		margin-top: -25px;
 
-		text-shadow: 0px 0px 5px #fff;
+		//text-shadow: 0px 0px 5px #fff;
 		color: #fff;
 		font-style: normal;
 		font-weight: normal;
+
 	}
 	.featherlight-next span {
-		right: 5%;
-		left: auto;
+		//right: 5%;
+		//left: auto;
 	}
 
 
@@ -104,19 +106,25 @@
 @media only screen and (max-width: 1024px) {
 	.featherlight-next,
 	.featherlight-previous {
-		top: 10px;
-		right: 10px;
-		left: 85%;
+		width:70px;
+		//top: 10px;
+		//right: 10px;
+		//left: 85%;
 	}
 
 	.featherlight-previous {
-		left: 10px;
-		right: 85%;
+		//left: 10px;
+		//right: 85%;
 	}
 
 	.featherlight-next span,
 	.featherlight-previous span {
-		margin-top: -30px;
-		font-size: 40px;
+		//margin-top: -30px;
+		//font-size: 40px;
+		font-size: 30px;
+		line-height: 30px;
+
+		/* center vertically */
+		margin-top: -15px;
 	}
 }

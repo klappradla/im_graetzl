@@ -182,6 +182,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :toolteiler do
+    collection do
+      get :show, :list
+    end
+  end
+
   resources :graetzls, path: '', only: [:show] do
     get 'treffen', action: 'meetings', as: 'meetings', on: :member
     get 'locations', on: :member

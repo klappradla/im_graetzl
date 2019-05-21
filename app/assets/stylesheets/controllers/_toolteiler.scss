@@ -1,0 +1,305 @@
+section.toolTeiler {
+
+  // HEADER Image --------------
+  .imgHeader {
+    position: relative;
+    z-index: 10;
+    height: 320px;
+    max-height: 320px !important;
+
+    @include respond-to("<medium") {
+      padding-top: 0px;
+    }
+
+    @include respond-to(">=medium") {
+      height: 380px;
+      max-height: 380px !important;
+    }
+    @include respond-to(">=large") {
+      height: 430px;
+      max-height: 430px !important;
+    }
+
+    .titleImg {
+      border-bottom: 10px solid $color-ambient-mint-light;
+      object-fit: cover;
+      height:100%;
+      width:100%;
+    }
+  }
+
+  // HEADER Content --------------
+  .headContent {
+    z-index: 10;
+    right:0px;
+    text-align: center;
+
+    .category-tags {
+      text-align: center;
+      margin: 20px 0px 10px 0px;
+      justify-content: center;
+    }
+
+    .category-tags ul {
+      display: inline-block;
+      margin-right: 10px;
+      margin-left: 20px;
+    }
+
+    .category-tags li {
+      margin-right: 10px;
+      margin-bottom: 10px;
+      @include respond-to(">=medium") {
+        float: right;
+      }
+    }
+  }
+
+  // LAYOUT Positioning --------------
+
+  @include respond-to(">=small") {
+    aside {
+      top:40px;
+    }
+    .headContent {
+      position: absolute;
+      bottom: 0px;
+      text-align: center;
+    }
+    .mainContent {
+      top:30px;
+      position: relative;
+      z-index: 8;
+      //margin-bottom: 3em;
+    }
+  }
+
+  @include respond-to(">=medium") {
+    aside {
+      top:40px;
+    }
+    .headContent {
+      text-align: right;
+    }
+    .mainContent {
+      width: calc(100% - 295px);
+      top:40px;
+      margin-bottom: 0;
+      z-index: 10;
+    }
+  }
+
+  @include respond-to(">=large") {
+    aside {
+      top:-50px;
+    }
+    .headContent {
+      max-width: 675px;
+    }
+    .mainContent {
+      width: calc(100% - 280px);
+      top:35px;
+    }
+  }
+
+
+  @include cf;
+
+  main {
+    padding-bottom: 0;
+  }
+
+  section {
+    margin: 2em 0;
+  }
+
+  .bigicontext-element {
+    margin-bottom: 1em;
+    .txt {
+      font-size: 1.2em;
+      margin-left: 24px;
+    }
+  }
+
+  // SIDEBAR --------------
+
+  .sideBar {
+    position: relative;
+    z-index: 10;
+    margin: 0 auto 50px auto;
+
+    @include respond-to(">=large") {
+      margin: 0 0 50px -25px;
+    }
+
+    .sideflag {
+      text-decoration: none;
+      margin-left: -12px;
+      margin-top: -17px;
+    }
+
+  }
+
+  .sideBarbox {
+
+    border: 1px solid $color-ambient-grey-light;
+    background-color: #ffffff;
+    border-radius: 8px;
+
+    h3.sidebar {
+      text-align: center;
+      padding-bottom:15px;
+    }
+
+    a.btn-primary {
+      color: white;
+    }
+
+    .innerbox {
+      padding: 0px 5px 15px 15px;
+    }
+
+    .gmap {
+      img {
+        display: block;
+        width: 100%;
+      }
+    }
+
+    .user-wrp {
+      display: flex;
+      align-items: center;
+      .img-round {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+      }
+    }
+
+  }
+
+  .rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    display: inline-block;
+    text-align: left;
+  }
+  .rating-container .txt {
+    padding-left:3px;
+  }
+  .rating > span {
+    display: inline-block;
+    position: relative;
+    width: 1.1em;
+  }
+  .rating > span:hover:before,
+  .rating > span:hover ~ span:before, span.fill ~ span:before {
+     content: "\2605";
+     position: absolute;
+     color: $color-ambient-mint-dark;
+  }
+
+
+  .pricing-info {
+    display: flex;
+    justify-content:space-around;
+    margin-bottom: 15px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid $color-ambient-grey-light;
+
+    div {
+      text-align: center;
+      width:30%;
+    }
+    span {
+      display: block;
+    }
+    .price {
+      @include font-size-secondaryFont('medium');
+      color: $color-ambient-rosa-dark;
+    }
+    .info {
+      @include font-size-primaryFont('small');
+    }
+  }
+
+  .request {
+    border-bottom: 1px solid $color-ambient-grey-light;
+    margin-bottom:15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom:5px;
+
+    .input-field {
+      padding-bottom:15px;
+    }
+    .input-field label {
+      min-width:50px !important;
+      max-width:50px !important;
+    }
+  }
+
+  .pricing-summary {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 0;
+    list-style: none;
+
+    li {
+      display: flex;
+      clear:both;
+      margin-bottom: 17px;
+      div.cost {
+        display:table;
+        color: $color-ambient-mint-dark;
+        min-width: 60px;
+        white-space: nowrap;
+        margin-right:9px;
+        text-align: right;
+      }
+      div.costname {
+      }
+    }
+    li.sum {
+      font-weight: bold;
+      border-top: 1px solid $color-ambient-mint-light;
+      padding-top:15px;
+    }
+  }
+
+  // MAIN CONTENT --------------
+
+  .introtxt {
+    margin-bottom: 30px;
+    h3 {
+      @include font-size-primaryFont('larger');
+      margin-bottom: 15px;
+    }
+    .brand, .model {
+      font-style: italic;
+    }
+  }
+  .mainContent .txt {
+    white-space: pre-wrap;
+  }
+
+  // Gallery Pics
+  .entryImgUploads {
+    img {
+      width: 152px;
+      height:152px;
+      object-fit: cover;
+      @include respond-to(">=large") {
+
+      }
+    }
+  }
+
+  .category-tags {
+    margin: 20px 0px 40px;
+    .bigicontext-element {
+      margin-bottom: 20px;
+    }
+  }
+
+}
