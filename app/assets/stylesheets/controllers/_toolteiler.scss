@@ -1,3 +1,4 @@
+// ToolTeiler Detail View
 section.toolTeiler {
 
   // HEADER Image --------------
@@ -57,26 +58,22 @@ section.toolTeiler {
 
   // LAYOUT Positioning --------------
 
-  @include respond-to(">=small") {
-    aside {
-      top:40px;
-    }
-    .headContent {
-      position: absolute;
-      bottom: 0px;
-      text-align: center;
-    }
-    .mainContent {
-      top:30px;
-      position: relative;
-      //z-index: 8;
-      //margin-bottom: 3em;
-    }
+  aside {
+    top:40px;
+  }
+  .headContent {
+    position: absolute;
+    bottom: 0px;
+    text-align: center;
+  }
+  .mainContent {
+    top:30px;
+    position: relative;
   }
 
   @include respond-to(">=medium") {
     aside {
-      top:40px;
+
     }
     .headContent {
       text-align: right;
@@ -85,7 +82,6 @@ section.toolTeiler {
       width: calc(100% - 295px);
       top:40px;
       margin-bottom: 0;
-      //z-index: 10;
     }
   }
 
@@ -101,7 +97,6 @@ section.toolTeiler {
       top:35px;
     }
   }
-
 
   @include cf;
 
@@ -131,13 +126,11 @@ section.toolTeiler {
     @include respond-to(">=large") {
       margin: 0 0 50px -25px;
     }
-
     .sideflag {
       text-decoration: none;
       margin-left: -12px;
       margin-top: -17px;
     }
-
   }
 
   .sideBarbox {
@@ -232,11 +225,15 @@ section.toolTeiler {
 
     .input-field {
       padding-bottom:15px;
+      @include respond-to("<medium") {
+        @include field-HorizontalLayout;
+      }
     }
     .input-field label {
       min-width:50px !important;
       max-width:50px !important;
     }
+    .hidden {display: none;}
   }
 
   .pricing-summary {
@@ -263,7 +260,8 @@ section.toolTeiler {
     li.sum {
       font-weight: bold;
       border-top: 1px solid $color-ambient-mint-light;
-      padding-top:15px;
+      padding-top: 20px;
+      margin-bottom: 20px;
     }
   }
 
@@ -303,3 +301,4 @@ section.toolTeiler {
   }
 
 }
+// End ToolTeiler Detail View

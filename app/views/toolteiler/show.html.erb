@@ -44,12 +44,16 @@
       <div class="request">
         <%= form_for 'toolteiler' do |f| %>
 
+          <!-- hidden input for removing focus from first date picker - otherwise it would open-->
+          <%= f.text_field :hidden, class: 'hidden' %>
+          <!-- end hack -->
+
           <div class="input-field">
             <%= f.label :starts_at_date do %>
               <%= icon_tag "calendar-2" %>
               <span></span>
             <% end %>
-            <%= f.text_field :starts_at_date, class: 'datepicker', placeholder: 'Von' %>
+            <%= f.text_field :starts_at_date, class: 'starts_at_date', placeholder: 'Von' %>
           </div>
 
           <div class="input-field">
@@ -57,7 +61,7 @@
               <%= icon_tag "calendar-2" %>
               <span></span>
             <% end %>
-            <%= f.text_field :ends_at_date, class: 'datepicker', placeholder: 'Bis' %>
+            <%= f.text_field :ends_at_date, class: 'ends_at_date', placeholder: 'Bis' %>
           </div>
 
         <% end %>
@@ -159,10 +163,10 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 
       <h3 class="sideflag -L">Infos & Adresse</h3>
 
-      <a class="innerbox user-wrp" target="_blank" href="/users/gregory">
+      <div class="innerbox user-wrp">
         <img class="attachment user avatar img-round" src="https://d1dcf21ighh4hq.cloudfront.net/attachments/fad5d1e8df9b7eba405c9f2deec155f27c709f09/store/fill/400/400/0a90d925fcde3d6fa5b1b3f35f7ba2753972a5c6164acc222ab2e172d1ae/avatar.png">
         <span class="name">
-          Michael Walchhütter
+          <a target="_blank" href="/users/gregory">Michael Walchhütter</a>
           <div class="rating-container">
             <div class="rating">
               <span class="fill">☆</span>
@@ -174,7 +178,7 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
             <small class="txt">4,2 von 5</small>
           </div>
         </span>
-      </a>
+      </div>
 
       <div class="innerbox icontxt">
         <svg class="icon-map-location"><use xlink:href="#icon-map-location"></use></svg>
