@@ -22,7 +22,7 @@ class MeetingsSerializer
         graetzl: meeting.graetzl.name,
         graetzl_url: site_url(:graetzl_url, meeting.graetzl),
         location: location_fields(meeting.location),
-        address: address_fields(meeting.address || meeting.location.address)
+        address: address_fields(meeting.display_address)
       )
     end
   end
