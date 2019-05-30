@@ -3,7 +3,7 @@ APP.components.stripePayment = (function() {
   function init() {
     if($('#stripeForm .payment-form').exists()) initForm();
     if($('#stripeForm #amount').exists()) initAmount();
-    //if($('#stripeForm .payment-form #stripePlan').exists()) initSubscriptionAmount();
+    if($('#stripeForm #stripePlan').exists()) initSubscriptionAmount();
     if($('#stripeForm #payment_method_card').exists()) initStripeCheckout();
     if($('#stripeForm #payment_method_sofort').exists()) initStripeSofort();
     if($('#stripeForm #payment_method_sepa').exists()) initStripeSepa();
@@ -50,10 +50,8 @@ APP.components.stripePayment = (function() {
   // TODO: Amount bei Plans finalisieren!!! (auslesen aus dropdown?!)
   function initSubscriptionAmount() {
     // Set Amount on Window Load
-    $(document).ready(function(){
-      console.log($('#stripePlan').find(":selected").text());
-      setPayButtonAmount(amount);
-    })
+    console.log($('select#stripePlan').find(":selected").text());
+    //setPayButtonAmount(amount);
   }
 
   function initForm() {
@@ -71,6 +69,7 @@ APP.components.stripePayment = (function() {
       stripeDescription += ': ' + stripePlan + ' / Monat';
       $('#stripeForm #stripeDescription').val(stripeDescription);
 
+      initSubscriptionAmount();
       // TODO: Amount bei Change anpassen.
       //var isAmount = stripePlan.indexOf("€");
       //amount = stripePlan.substring(0, isAmount);
