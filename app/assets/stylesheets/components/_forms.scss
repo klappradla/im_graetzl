@@ -612,17 +612,7 @@ input[type=url]:invalid + em::after {
 
 // ---------------------------------------------------------------------- Login Panel Modal
 
-.login-panel-modal {
-  display: none;
-  .hl-subtext {
-    margin-bottom: 30px;
-    h1 {
-      @include font-size-secondaryFont('medium');
-    }
-    p {
-      @include font-size-primaryFont('base');
-    }
-  }
+.login-panel-modal, .login-panel {
   .container {
     display: flex;
     flex-wrap: wrap;
@@ -630,15 +620,6 @@ input[type=url]:invalid + em::after {
     .login {
       .input-field {
         margin-bottom:10px;
-      }
-      .sharedLinks {
-        margin-top:25px;
-        margin-bottom:25px;
-        padding-top:15px;
-        border-top: solid 1px $color-ambient-mint-light;
-        a {
-          color: $color-ambient-grey;
-        }
       }
     }
     .register {
@@ -651,8 +632,92 @@ input[type=url]:invalid + em::after {
         }
       }
     }
+    .sharedLinks {
+      margin-top:25px;
+      margin-bottom:25px;
+      padding-top:15px;
+      border-top: solid 1px $color-ambient-mint-light;
+      a {
+        color: $color-ambient-grey;
+      }
+    }
     .btn-primary {
       width:100%;
+    }
+  }
+
+  &.-content {
+    .container {
+
+      // Remove Linebreak for labels if small
+      .input-field {
+        @include respond-to("<medium") {
+          @include field-HorizontalLayout;
+        }
+      }
+      .input-field label {
+        min-width:50px !important;
+        max-width:50px !important;
+      }
+      // End
+
+      align-items: stretch;
+      justify-content: space-between;
+
+      .login, .register {
+        margin:0px;
+        width:100%;
+        @include respond-to(">=medium") {
+          width:48%;
+        }
+      }
+      .register {
+        border-top: solid 1px $color-ambient-mint-light;
+        border-bottom: solid 1px $color-ambient-mint-light;
+        //background-color: rgba($color-ambient-mint-light,0.1);
+        //border: solid 1px $color-ambient-mint-light;
+        background-color: white;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .wrp {
+          font-weight: bold;
+          height: calc(100% - 46px);
+          display: flex;
+          align-items: center;
+          text-align: center;
+          padding-top:20px;
+          padding-bottom:20px;
+          @include respond-to(">=medium") {
+            padding:0px;
+          }
+        }
+      }
+    }
+    .sharedLinks {
+      margin-top:0px;
+      margin-bottom:0px;
+      padding-top:0px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      a {
+        color: $color-ambient-mint-dark;
+      }
+    }
+  }
+}
+.login-panel-modal {
+  display: none;
+  .hl-subtext {
+    margin-bottom: 30px;
+    h1 {
+      @include font-size-secondaryFont('medium');
+    }
+    p {
+      @include font-size-primaryFont('base');
     }
   }
 }

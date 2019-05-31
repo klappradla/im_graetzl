@@ -1,0 +1,36 @@
+.paymentMethods {
+  margin-bottom:30px;
+
+  .input-radio {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top:10px;
+    padding-bottom:10px;
+    border-bottom: 1px solid $color-ambient-mint-light;
+
+    &::after {
+      content: '';
+      height:40px;
+      width:100px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: right;
+    }
+    &.-card::after {
+      background-image: url(image_path('pay-ico-mastercard-visa.png'));
+    }
+    &.-sofort::after {
+      background-image: url(image_path('pay-ico-klarna.svg'));
+    }
+    &.-eps::after {
+      background-image: url(image_path('pay-ico-eps.png'));
+    }
+
+  }
+
+  .input-radio:last-of-type {
+    border:none;
+  }
+
+}

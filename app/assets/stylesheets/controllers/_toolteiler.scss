@@ -236,35 +236,6 @@ section.toolTeiler {
     .hidden {display: none;}
   }
 
-  .pricing-summary {
-    padding-left: 15px;
-    padding-right: 15px;
-    margin: 0;
-    list-style: none;
-
-    li {
-      display: flex;
-      clear:both;
-      margin-bottom: 17px;
-      div.cost {
-        display:table;
-        color: $color-ambient-mint-dark;
-        min-width: 60px;
-        white-space: nowrap;
-        margin-right:9px;
-        text-align: right;
-      }
-      div.costname {
-      }
-    }
-    li.sum {
-      font-weight: bold;
-      border-top: 1px solid $color-ambient-mint-light;
-      padding-top: 20px;
-      margin-bottom: 20px;
-    }
-  }
-
   // MAIN CONTENT --------------
 
   .introtxt {
@@ -302,3 +273,66 @@ section.toolTeiler {
 
 }
 // End ToolTeiler Detail View
+
+// Form Rent a Tool
+section.form-rent-tool {
+
+  // Layout Grid
+  display: flex;
+  flex-wrap: wrap;
+
+  .col-content {
+    width:100%;
+    margin-bottom:40px;
+    @include respond-to(">=large") {
+      width: 64%;
+      margin-right: 3%;
+    }
+  }
+  .col-sidebar {
+    width:100%;
+    margin-left: auto;
+    margin-right: auto;
+    @include respond-to(">=medium") {
+      width: 50%;
+    }
+    @include respond-to(">=large") {
+      width: 33%;
+    }
+  }
+  // End Layout Grid
+
+  // tabs-nav
+  .tabs-nav {
+    display: none;
+    @include respond-to(">=medium") {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  // FORMS
+  .col-content {
+    label {
+      min-width: 160px;
+    }
+    textarea {
+      min-height:150px;
+    }
+    .input-field, .input-textarea, .input-select {
+      margin-bottom: 15px;
+    }
+    .btn-primary {
+
+    }
+  }
+
+  .col-sidebar {
+    h3.sidebar {
+      text-align: center;
+      padding-bottom:15px;
+    }
+  }
+
+
+}

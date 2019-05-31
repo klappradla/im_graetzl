@@ -27,6 +27,9 @@ class WienController < ApplicationController
     @category = GroupCategory.find_by(id: params[:category])
   end
 
+  def toolteiler
+  end
+
   def zuckerl
   end
 end

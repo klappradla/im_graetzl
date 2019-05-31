@@ -1,0 +1,60 @@
+<ul class="tabs-nav -small">
+    <li><a href="/toolteiler/rent_1">Anmelden</a></li>
+    <li class="active"><a href="/toolteiler/rent_2">Rechnungsadresse</a></li>
+    <li><a href="/toolteiler/rent_3">Zahlungsart</a></li>
+    <li><a href="/toolteiler/rent_4">Zusammenfassung</a></li>
+</ul>
+
+<%= form_tag 'toolteiler', method: :get do |f| %>
+
+<div class="hl-subtext">
+  <h1>Rechnungsadresse</h1>
+  <p>
+    Gib deine Rechnungsadresse an, um den Toolteiler anzufragen.
+  </p>
+</div>
+
+
+<div class="input-field">
+  <%= label_tag(:Company) do %>
+    <%= icon_tag "user-avatar" %>
+    <span>Firma</span>
+  <% end %>
+  <%= text_field_tag :Company, nil, placeholder: 'Firma (optional)' %>
+</div>
+
+<div class="input-field">
+  <%= label_tag(:Name) do %>
+    <%= icon_tag "user-avatar" %>
+    <span>Name</span>
+  <% end %>
+  <%= text_field_tag :Name, current_user ? current_user.full_name : nil, placeholder: 'Vor- & Nachname' %>
+</div>
+
+<div class="input-field">
+  <%= label_tag(:Address) do %>
+    <%= icon_tag "map-location" %>
+    <span>Strasse & Nr.</span>
+  <% end %>
+  <%= text_field_tag :Address, current_user && current_user.address.street_name ? current_user.address.street_name : nil, placeholder: 'Strasse & Nr.' %>
+</div>
+
+<div class="input-field">
+  <%= label_tag(:PostalCode) do %>
+    <%= icon_tag "map-location" %>
+    <span>Postleitzahl</span>
+  <% end %>
+  <%= text_field_tag :PostalCode, current_user && current_user.address.zip ? current_user.address.zip : nil, placeholder: 'PLZ' %>
+</div>
+
+<div class="input-field">
+  <%= label_tag(:City) do %>
+    <%= icon_tag "map-location" %>
+    <span>Ort/Stadt</span>
+  <% end %>
+  <%= text_field_tag :City, current_user && current_user.address.city ? current_user.address.city : nil, placeholder: 'Stadt' %>
+</div>
+
+<a class="btn-primary">Weiter</a>
+
+<% end %>

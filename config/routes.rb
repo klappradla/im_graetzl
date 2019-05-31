@@ -50,7 +50,6 @@ Rails.application.routes.draw do
   resource :user, only: [:edit], path_names: { edit: 'einstellungen' } do
     get 'locations'
     get 'raumteiler', action: 'rooms', as: 'rooms'
-    #get 'groups'
     get 'gruppen', action: 'groups', as: 'groups'
     get 'zuckerl', action: 'zuckerls', as: 'zuckerls'
   end
@@ -123,6 +122,7 @@ Rails.application.routes.draw do
     get 'locations'
     get 'raumteiler', action: 'rooms', as: 'rooms'
     get 'gruppen', action: 'groups', as: 'groups'
+    get 'toolteiler'
     get 'zuckerl', action: 'zuckerls', as: 'zuckerls'
   end
 
@@ -132,6 +132,7 @@ Rails.application.routes.draw do
     get 'locations', on: :member
     get 'raumteiler', action: 'rooms', as: 'rooms', on: :member
     get 'gruppen', action: 'groups', as: 'groups', on: :member
+    get 'toolteiler', on: :member
     get 'zuckerl', action: 'zuckerls', as: 'zuckerls', on: :member
   end
 
@@ -184,7 +185,8 @@ Rails.application.routes.draw do
 
   resources :toolteiler do
     collection do
-      get :show, :list
+      get :show,
+          :rent_1, :rent_2, :rent_3, :rent_4
     end
   end
 
@@ -195,9 +197,11 @@ Rails.application.routes.draw do
     get 'zuckerl', action: 'zuckerls', as: 'zuckerls', on: :member
     get 'ideen', action: 'posts', as: 'posts', on: :member
     get 'gruppen', action: 'groups', as: 'groups', on: :member
+    get 'toolteiler', on: :member
     resources :meetings, path: 'treffen', only: [:show]
     resources :groups, path: 'gruppen', only: [:show]
     resources :locations, only: [:show]
+    resources :toolteiler, only: [:show]
     resources :users, only: [:show]
     resources :user_posts, path: 'ideen', only: [:new, :show, :create, :destroy]
   end

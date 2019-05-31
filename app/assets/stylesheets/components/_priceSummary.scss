@@ -1,0 +1,33 @@
+.pricing-summary {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 0;
+  list-style: none;
+
+  &.-duration {
+    border-bottom: 1px solid $color-ambient-mint-light;
+    margin-bottom: 20px;
+  }
+
+  li {
+    display: flex;
+    clear:both;
+    margin-bottom: 17px;
+    div.cost, div.duration {
+      display:table;
+      color: $color-ambient-mint-dark;
+      min-width: 60px;
+      white-space: nowrap;
+      margin-right:9px;
+      text-align: right;
+    }
+    div.costname, div.title {
+    }
+  }
+  li.sum {
+    font-weight: bold;
+    border-top: 1px solid $color-ambient-mint-light;
+    padding-top: 20px;
+    margin-bottom: 20px;
+  }
+}
