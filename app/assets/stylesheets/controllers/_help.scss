@@ -362,6 +362,13 @@ section.help {
       //opacity: 0.7;
     }
 
+    .mentoring-illu {
+      width: 70%;
+      display: block;
+      margin: auto;
+      margin-top: -20px;
+    }
+
     .anmeldung-badge {
       display: none;
       @include respond-to(">=medium") {
