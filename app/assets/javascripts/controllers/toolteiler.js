@@ -1,9 +1,8 @@
 APP.controllers.toolteiler = (function() {
 
     function init() {
-      if ($("section.toolTeiler").exists()) {
-        initToolteilerDetail();
-      }
+      if ($("section.toolTeiler").exists()) { initToolteilerDetail(); }
+      if ($("section.form-rent-tool").exists()) { initToolteilerForm(); }
     }
 
     function initToolteilerDetail() {
@@ -29,7 +28,15 @@ APP.controllers.toolteiler = (function() {
           //{ from: -365, to: request_start_date }
         //]
       });
-      
+
+    }
+
+    function initToolteilerForm() {
+
+      // Add Active Class to Actual Step
+      var step = $('*[data-step]').attr("data-step");
+      $('#step'+step).addClass('active');
+
     }
 
     return {

@@ -1,9 +1,6 @@
-<ul class="tabs-nav -small">
-    <li><a href="/toolteiler/rent_1">Anmelden</a></li>
-    <li class="active"><a href="/toolteiler/rent_2">Rechnungsadresse</a></li>
-    <li><a href="/toolteiler/rent_3">Zahlungsart</a></li>
-    <li><a href="/toolteiler/rent_4">Zusammenfassung</a></li>
-</ul>
+<section class="address" data-step="2">
+
+<%= render "/toolteiler/form/rent/tabs-nav" %>
 
 <%= form_tag 'toolteiler', method: :get do |f| %>
 
@@ -58,3 +55,4 @@
 <a class="btn-primary">Weiter</a>
 
 <% end %>
+</section>

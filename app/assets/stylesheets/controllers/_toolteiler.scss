@@ -304,11 +304,26 @@ section.form-rent-tool {
 
   // tabs-nav
   .tabs-nav {
-    display: none;
-    @include respond-to(">=medium") {
-      display: flex;
-      justify-content: center;
+    display: flex;
+    justify-content: center;
+
+    li {
+      width:100%;
+      text-align: center;
     }
+    .desk {
+      display: none;
+      @include respond-to(">=medium") {
+        display: inline-block;
+      }
+    }
+    .mob {
+      display: none;
+      @include respond-to("<medium") {
+        display: inline-block;
+      }
+    }
+
   }
 
   // FORMS
@@ -344,6 +359,7 @@ section.form-rent-tool {
     }
     div.avatar {
       width:20%;
+      text-align: center;
       @include respond-to("<=small") {
         width:13%;
       }
