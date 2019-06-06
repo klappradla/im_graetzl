@@ -14,6 +14,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.mask
+//= require jquery.detect_swipe
 //= require picker
 //= require jquery.tabslet.min
 //= require picker.date
@@ -34,7 +35,6 @@
 //= require masonry.pkgd.min
 //= require imagesloaded
 //= require jquery.tagsinput
-//= require jquery.detect_swipe
 //= require linkify.min
 //= require linkify-jquery.min
 //= require jquery.remotipart
