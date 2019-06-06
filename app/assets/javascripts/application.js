@@ -34,6 +34,7 @@
 //= require masonry.pkgd.min
 //= require imagesloaded
 //= require jquery.tagsinput
+//= require jquery.detect_swipe
 //= require linkify.min
 //= require linkify-jquery.min
 //= require jquery.remotipart
