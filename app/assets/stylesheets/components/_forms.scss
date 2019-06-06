@@ -672,10 +672,12 @@ input[type=url]:invalid + em::after {
         }
       }
       .register {
+        margin-top:20px;
+        @include respond-to(">=medium") {
+          margin-top:0px;
+        }
         border-top: solid 1px $color-ambient-mint-light;
         border-bottom: solid 1px $color-ambient-mint-light;
-        //background-color: rgba($color-ambient-mint-light,0.1);
-        //border: solid 1px $color-ambient-mint-light;
         background-color: white;
 
         display: flex;

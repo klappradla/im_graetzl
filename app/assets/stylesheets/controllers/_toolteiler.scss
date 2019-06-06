@@ -272,9 +272,9 @@ section.toolTeiler {
   }
 
 }
-// End ToolTeiler Detail View
+// End ToolTeiler Detail View --------------
 
-// Form Rent a Tool
+// Toolteiler Form Rent a Tool --------------
 section.form-rent-tool {
 
   // Layout Grid
@@ -322,9 +322,6 @@ section.form-rent-tool {
     .input-field, .input-textarea, .input-select {
       margin-bottom: 15px;
     }
-    .btn-primary {
-
-    }
   }
 
   .col-sidebar {
@@ -334,5 +331,44 @@ section.form-rent-tool {
     }
   }
 
-
+  .summarybox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    div {
+      width:38%;
+      @include respond-to("<=small") {
+        width:43%;
+      }
+    }
+    div.avatar {
+      width:20%;
+      @include respond-to("<=small") {
+        width:13%;
+      }
+      img {
+        width:100%;
+        height:auto;
+      }
+    }
+    &:last-of-type {
+      margin-bottom:30px;
+    }
+    .icon-share {
+      margin:auto;
+      color: $color-ambient-mint-light;
+      width:50px;
+      height:50px;
+      margin-top:10px;
+      margin-bottom:10px;
+      @include respond-to("<=small") {
+        width:30px;
+        height:30px;
+      }
+    }
+    .line {
+      border-bottom: 3px solid $color-ambient-mint-light;
+    }
+  }
 }
