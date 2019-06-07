@@ -111,6 +111,13 @@
 		galleryFadeIn: 100,          /* fadeIn speed when image is loaded */
 		galleryFadeOut: 300,         /* fadeOut speed before image is loaded */
 
+    beforeOpen: function() {
+        document.body.style.overflow = 'hidden';
+    },
+    beforeClose: function() {
+        document.body.style.overflow = '';
+    },
+
 		slides: function() {
 			if (this.filter) {
 				return this.$source.find(this.filter);
