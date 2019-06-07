@@ -1,4 +1,4 @@
-// ToolTeiler Detail View
+// -------------- ToolTeiler Detail View --------------
 section.toolTeiler {
 
   // HEADER Image --------------
@@ -270,12 +270,11 @@ section.toolTeiler {
       margin-bottom: 20px;
     }
   }
-
 }
-// End ToolTeiler Detail View --------------
 
-// Toolteiler Form Rent a Tool --------------
-section.form-rent-tool {
+
+// -------------- Toolteiler Form Rent a Tool --------------
+section.form-rent-toolteiler {
 
   // Layout Grid
   display: flex;
@@ -387,4 +386,38 @@ section.form-rent-tool {
       border-bottom: 3px solid $color-ambient-mint-light;
     }
   }
+}
+
+
+
+// -------------- New Toolteiler Form --------------
+section.form-new-toolteiler {
+
+  max-width: 775px;
+  margin: 0 auto;
+  label {min-width:175px;}
+  textarea {min-height:150px;}
+
+  h2 {
+    @include font-size-secondaryFont;
+    margin: 40px 0 15px;
+    text-align: center;
+  }
+  div.hl-subtext {
+    margin: 40px 0 15px;
+    h2 { margin: 0px 0 5px; }
+    p {
+      @include font-size-primaryFont('large');
+    }
+  }
+
+  .form-columns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    div {
+      width:49%;
+    }
+  }
+
 }

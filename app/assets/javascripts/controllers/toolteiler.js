@@ -2,7 +2,7 @@ APP.controllers.toolteiler = (function() {
 
     function init() {
       if ($("section.toolTeiler").exists()) { initToolteilerDetail(); }
-      if ($("section.form-rent-tool").exists()) { initToolteilerForm(); }
+      if ($("section.form-rent-toolteiler").exists()) { initToolteilerForm(); }
     }
 
     function initToolteilerDetail() {
