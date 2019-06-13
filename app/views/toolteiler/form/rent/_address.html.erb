@@ -1,7 +1,5 @@
 <section class="address" data-step="2">
 
-<%= render "/toolteiler/form/rent/tabs-nav" %>
-
 <%= form_tag 'toolteiler', method: :get do |f| %>
 
 <div class="hl-subtext">
@@ -52,7 +50,7 @@
   <%= text_field_tag :City, current_user && current_user.address.city ? current_user.address.city : nil, placeholder: 'Stadt' %>
 </div>
 
-<a class="btn-primary">Weiter</a>
+<a href="/toolteiler/rent_3" class="btn-primary">Weiter</a>
 
 <% end %>
 </section>

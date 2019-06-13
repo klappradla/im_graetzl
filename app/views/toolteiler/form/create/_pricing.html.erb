@@ -1,0 +1,45 @@
+<%= form_for'toolteiler' do |f| %>
+
+<div class="form-block" data-step="3">
+
+  <div class="hl-subtext">
+    <h2>Lege den <span>Preis</span> fest.</h2>
+    <p>
+      Über den Preis, den du für deinen Toolteiler nimmst, entscheidest du selbst.
+      Der Mietpreis sollte sich nach Equipment und Ausstattung richten.
+      Um mehr Langzeitbuchungen zu erhalten, legen manche Vermieter auch einen Tages- oder Wochenrabatt fest.
+    </p>
+  </div>
+
+  <div class="input-field">
+    <%= label_tag(:Price) do %>
+      <%= icon_tag "currency-euro" %>
+      <span>Preis / Tag</span>
+    <% end %>
+    <%= text_field_tag :Price, nil, placeholder: 'Lege deinen gewünschten Tagespreis fest ..' %>
+  </div>
+
+  <div class="form-columns">
+
+    <div class="input-field">
+      <%= label_tag(:Price) do %>
+        <%= icon_tag "sale-label" %>
+        <span>Tagesrabatt (%)</span>
+      <% end %>
+      <%= text_field_tag :Price, nil, placeholder: '% Rabatt ab 2 Tagen' %>
+    </div>
+
+    <div class="input-field">
+      <%= label_tag(:Price) do %>
+        <%= icon_tag "sale-label" %>
+        <span>Wochenrabatt (%)</span>
+      <% end %>
+      <%= text_field_tag :Price, nil, placeholder: '% Rabatt ab 1 Woche' %>
+    </div>
+
+  </div>
+
+  <a href="/toolteiler/new_4" class="btn-primary">Weiter</a>
+
+</div>
+<% end %>

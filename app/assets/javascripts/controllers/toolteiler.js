@@ -2,7 +2,8 @@ APP.controllers.toolteiler = (function() {
 
     function init() {
       if ($("section.toolTeiler").exists()) { initToolteilerDetail(); }
-      if ($("section.form-rent-toolteiler").exists()) { initToolteilerForm(); }
+      if ($("section.form-rent-toolteiler").exists()) { initToolteilerRent(); }
+      if ($("section.form-new-toolteiler").exists()) { initToolteilerCreate(); }
     }
 
     function initToolteilerDetail() {
@@ -31,12 +32,26 @@ APP.controllers.toolteiler = (function() {
 
     }
 
-    function initToolteilerForm() {
+    function initToolteilerRent() {
 
-      // Add Active Class to Actual Step
+      tabsNavActivating();
+
+    }
+
+    function initToolteilerCreate() {
+
+      tabsNavActivating();
+
+      $('#custom-keywords').tagsInput({
+        'defaultText':'Kurz in Stichworten ..'
+      });
+
+    }
+
+    // Add Active Class to Actual Step
+    function tabsNavActivating() {
       var step = $('*[data-step]').attr("data-step");
       $('#step'+step).addClass('active');
-
     }
 
     return {

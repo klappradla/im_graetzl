@@ -272,6 +272,33 @@ section.toolTeiler {
   }
 }
 
+// -------------- Forms Tabs-Nav (Create and Rent) --------------
+
+section.form-rent-toolteiler, section.form-new-toolteiler {
+  // tabs-nav
+  .tabs-nav {
+    display: flex;
+    justify-content: center;
+
+    li {
+      width:100%;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .desk {
+      display: none;
+      @include respond-to(">=medium") {
+        display: inline-block;
+      }
+    }
+    .mob {
+      display: none;
+      @include respond-to("<medium") {
+        display: inline-block;
+      }
+    }
+  }
+}
 
 // -------------- Toolteiler Form Rent a Tool --------------
 section.form-rent-toolteiler {
@@ -300,30 +327,6 @@ section.form-rent-toolteiler {
     }
   }
   // End Layout Grid
-
-  // tabs-nav
-  .tabs-nav {
-    display: flex;
-    justify-content: center;
-
-    li {
-      width:100%;
-      text-align: center;
-    }
-    .desk {
-      display: none;
-      @include respond-to(">=medium") {
-        display: inline-block;
-      }
-    }
-    .mob {
-      display: none;
-      @include respond-to("<medium") {
-        display: inline-block;
-      }
-    }
-
-  }
 
   // FORMS
   .col-content {
@@ -405,6 +408,7 @@ section.form-new-toolteiler {
   }
   div.hl-subtext {
     margin: 40px 0 15px;
+    h1 { margin: 0px 0 15px; }
     h2 { margin: 0px 0 5px; }
     p {
       @include font-size-primaryFont('large');
@@ -418,6 +422,11 @@ section.form-new-toolteiler {
     div {
       width:49%;
     }
+  }
+
+  .btn-primary {
+    margin-top:15px;
+    float: right;
   }
 
 }

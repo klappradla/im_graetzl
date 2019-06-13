@@ -1,0 +1,114 @@
+<%= form_for'toolteiler' do |f| %>
+
+<div class="form-block" data-step="1">
+
+  <h2 class="hl-main">
+    Wähle zuerst eine <span>Kategorie</span>
+  </h2>
+
+  <div class="form-columns">
+    <div class="input-select">
+      <%= f.label :category do %>
+        <%= icon_tag "layout-document" %>
+        <span>1. Hauptkategorie</span>
+      <% end %>
+      <select>
+        <option value="">auwählen ..</option>
+        <option value="1">Kategorie 1</option>
+        <option value="2">Kategorie 2</option>
+      </select>
+    </div>
+
+    <div class="input-select">
+      <%= f.label :category do %>
+        <%= icon_tag "layout-document" %>
+        <span>2. Unterkategorie</span>
+      <% end %>
+      <select>
+        <option value="">auswählen ..</option>
+        <option value="1">Kategorie 1</option>
+        <option value="2">Kategorie 2</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="hl-subtext">
+    <h2><span>Beschreibe</span> deinen <span>Toolteiler</span></h2>
+    <p>
+      Wähle einen treffenden Titel und beschriebe deinen Toolteiler ausführlicher im Beschreibungsfeld.
+      Wenn du auch noch Marke und Modell weisst, perfekt! Und ein gutes Headerbild ist wichtig!
+    </p>
+  </div>
+
+  <div class="input-field">
+    <%= f.label :title do %>
+    <%= icon_tag "record" %>
+    <span>Titel</span>
+    <% end %>
+    <%= f.text_field :title, placeholder: 'Gib deinem Toolteiler einen kurzen Titel ...' %>
+  </div>
+
+  <div class="form-columns">
+    <div class="input-field">
+      <%= f.label :rented_area do %>
+        <%= icon_tag "label-tag" %>
+        <span>Marke</span>
+      <% end %>
+      <%= f.number_field :rented_area, placeholder: 'Marke ..' %>
+    </div>
+    <div class="input-field">
+      <%= f.label :total_area do %>
+        <%= icon_tag "label-tag" %>
+        <span>Modell</span>
+      <% end %>
+      <%= f.number_field :total_area, placeholder: 'Modell ..' %>
+    </div>
+  </div>
+
+  <div class="input-textarea">
+    <%= f.label :description do %>
+    <%= icon_tag "layout-document" %>
+    <span>Beschreibung</span>
+    <% end %>
+    <%= f.text_area :description, placeholder: 'Hier kannst du deinen Toolteiler in wenigen Sätzen ausführlicher beschreiben ..' %>
+  </div>
+
+  <div class="upload-oldschool">
+    <label for="room_offer_images">
+      <svg class="icon-photo-camera"><use xlink:href="#icon-photo-camera"></use></svg>
+      <span>Headerbild</span>
+    </label>
+    <div class="field-wrp">
+      <input multiple="multiple" value="[]" data-reference="a60082a9415734d766034569ba5c5568" type="hidden" name="room_offer[images_files][]"><input multiple="multiple" direct="true" presigned="true" data-direct="true" data-as="file" data-url="/attachments/cache" data-reference="a60082a9415734d766034569ba5c5568" accept="image/jpeg,image/gif,image/png" include_hidden="false" type="file" name="room_offer[images_files][]" id="room_offer_images_files">
+    </div>
+  </div>
+
+  <div class="upload-oldschool">
+    <label for="room_offer_images">
+      <svg class="icon-photo-camera"><use xlink:href="#icon-photo-camera"></use></svg>
+      <span>Weitere Fotos</span>
+    </label>
+    <div class="field-wrp">
+      <input multiple="multiple" value="[]" data-reference="a60082a9415734d766034569ba5c5568" type="hidden" name="room_offer[images_files][]"><input multiple="multiple" direct="true" presigned="true" data-direct="true" data-as="file" data-url="/attachments/cache" data-reference="a60082a9415734d766034569ba5c5568" accept="image/jpeg,image/gif,image/png" include_hidden="false" type="file" name="room_offer[images_files][]" id="room_offer_images_files">
+    </div>
+  </div>
+
+
+
+  <div class="hl-subtext">
+    <h2><span>Ausstattung</span> - kurz das wichtigste</h2>
+    <p>Hier kannst du stichwortartig noch besondere Ausstattungsmermale festlegen.</p>
+  </div>
+
+  <div class="input-tags">
+    <%= label_tag :custom_keywords do %>
+    <%= icon_tag "label-tag" %>
+    <span>Ausstattung<br/><small>(mit Komma getrennt)</small></span>
+    <% end %>
+    <%= text_field_tag :custom_keywords, nil, id: 'custom-keywords' %>
+  </div>
+
+  <a href="/toolteiler/new_2" class="btn-primary">Weiter</a>
+
+</div>
+<% end %>

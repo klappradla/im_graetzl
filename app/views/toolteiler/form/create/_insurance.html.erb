@@ -1,0 +1,44 @@
+<%= form_for'toolteiler' do |f| %>
+
+<div class="form-block" data-step="4">
+
+  <div class="hl-subtext">
+    <h2>Infos für die <span>Versicherung</span></h2>
+    <p>Dein Toolteiler ist versichert, wann immer er gemietet wird. Um Dir den richtigen Versicherungswert gewähren zu können, müssen wir noch den Wert deines Toolteilers wissen, bzw. etwaige bekannte Mängel. Wenn du auch noch die Seriennummer weisst, perfekt!</p>
+  </div>
+
+  <div class="form-columns">
+    <div class="input-select">
+      <%= f.label :rented_area do %>
+        <%= icon_tag "label-tag" %>
+        <span>Wert deines Toolteilers</span>
+      <% end %>
+      <select>
+        <option value="1">Bis zu 1.000 €</option>
+        <option value="2">Bis zu 2.000 €</option>
+        <option value="3">Bis zu 3.000 €</option>
+        <option value="4">Bis zu 4.000 €</option>
+        <option value="5">Bis zu 5.000 €</option>
+      </select>
+    </div>
+    <div class="input-field">
+      <%= f.label :total_area do %>
+        <%= icon_tag "label-tag" %>
+        <span>Seriennummer</span>
+      <% end %>
+      <%= f.number_field :total_area, placeholder: 'Seriennummer ..' %>
+    </div>
+  </div>
+
+  <div class="input-textarea">
+    <%= f.label :description do %>
+    <%= icon_tag "layout-document" %>
+    <span>Bekannte Mängel</span>
+    <% end %>
+    <%= f.text_area :description, placeholder: 'Falls dir Mängel bekannt sind, gib sie hier kurz an ..' %>
+  </div>
+
+  <%= f.button 'Toolteiler erstellen', data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
+
+</div>
+<% end %>
