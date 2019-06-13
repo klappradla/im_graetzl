@@ -28,15 +28,33 @@
     <ul class="pricing-summary">
       <li>
         <div class="cost">250,00 €</div>
-        <div class="costname">10 Tage x 25 €</div>
+        <div class="costname">
+          10 Tage x 25 €
+
+          <!-- Hint Questionmark Panel-->
+          <%= render 'shared/questionmark',hint_id: "1" ,hint_message: 'Das ist der Tagespreis für die Anzahl der Tage die du den Toolteiler mieten möchtest.' %>
+
+        </div>
       </li>
       <li>
         <div class="cost">- 50,00 €</div>
-        <div class="costname">Rabatt 10 Tage x 5 €</div>
+        <div class="costname">
+          Rabatt 10 Tage x 5 €
+
+          <!-- Hint Questionmark Panel-->
+          <%= render 'shared/questionmark',hint_id: "2" ,hint_message: 'Dieser Toolteiler hat 10% Rabatt ab einer Miete von 2 Tagen.' %>
+
+        </div>
       </li>
       <li>
         <div class="cost">40,00 €</div>
-        <div class="costname">Servicegebühr inkl. Versicherung</div>
+        <div class="costname">
+          Servicegebühr inkl. Versicherung
+
+          <!-- Hint Questionmark Panel-->
+          <%= render 'shared/questionmark',hint_id: "3" ,hint_message: 'Hier kommt noch der Versicherungstext rein sauber' %>
+
+        </div>
       </li>
       <li class=sum>
         <div class="cost">240,00 €</div>

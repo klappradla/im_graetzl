@@ -1,0 +1,26 @@
+a.hint-questionmark {
+  position: absolute;
+  margin-top:-2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: rgba($color-ambient-grey, 0.40);
+  //color: $color-ambient-mint-dark;
+  svg {
+    width:24px;
+    height:24px;
+  }
+}
+a.hint-questionmark:hover {
+  color: $color-ambient-rosa-dark;
+}
+.hint-info {
+  min-width:150px;
+  max-width:200px;
+  margin-left:-80px;
+  margin-top:5px;
+  //color: $color-ambient-grey;
+  @include font-size-primaryFont('small');
+  .jq-dropdown-panel {
+    background-color: $color-ambient-mint-light !important;
+  }
+}

@@ -1,0 +1,10 @@
+<!-- Hint Questionmark Panel-->
+<%= link_to 'javascript:', data: { jq_dropdown: "#questionmark-#{local_assigns[:hint_id]}" }, class: 'hint-questionmark' do %>
+  <svg class="icon-questions-answers"><use xlink:href="#icon-questions-answers"></use></svg>
+<% end %>
+<div id="questionmark-<%= local_assigns[:hint_id] %>" class="jq-dropdown jq-dropdown-relative dropdown-container hint-info">
+  <div class="jq-dropdown-panel">
+    <%= local_assigns[:hint_message] %>
+  </div>
+</div>
+<!-- Hint Questionmark Panel-->
