@@ -195,25 +195,10 @@ section.toolTeiler {
 
   .pricing-info {
     display: flex;
-    justify-content:space-around;
+    justify-content:space-evenly;
     margin-bottom: 15px;
     padding-bottom: 25px;
     border-bottom: 1px solid $color-ambient-grey-light;
-
-    div {
-      text-align: center;
-      width:30%;
-    }
-    span {
-      display: block;
-    }
-    .price {
-      @include font-size-secondaryFont('medium');
-      color: $color-ambient-rosa-dark;
-    }
-    .info {
-      @include font-size-primaryFont('small');
-    }
   }
 
   .request {
@@ -398,8 +383,10 @@ section.form-new-toolteiler {
 
   max-width: 775px;
   margin: 0 auto;
-  label {min-width:175px;}
   textarea {min-height:150px;}
+  @include respond-to(">medium") {
+    label {min-width:175px;}
+  }
 
   h2 {
     @include font-size-secondaryFont;
@@ -420,7 +407,10 @@ section.form-new-toolteiler {
     flex-wrap: wrap;
     justify-content: space-between;
     div {
-      width:49%;
+      width:100%;
+      @include respond-to(">small") {
+        width:48.5%;
+      }
     }
   }
 

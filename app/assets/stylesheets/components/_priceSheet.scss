@@ -6,7 +6,7 @@
   overflow: hidden;
   line-height: 1;
   padding: 14px 0 4px 0;
-  width: 60px;
+  min-width: 60px;
   position: relative;
   .price {
     width: 100%;
@@ -21,6 +21,8 @@
     width: 100%;
     font-size: 1.2rem;
     font-weight: 300;
+    padding-left: 5px;
+    padding-right: 5px;
   }
   &:before, &:after {
     content: '';
@@ -36,5 +38,18 @@
   &:after {
     background-color: $color-ambient-rosa-dark;
     right: 0;
+  }
+  &.-variant2 {
+    background-color: rgba($color-ambient-rosa-light, 0.3);
+    min-width: 70px;
+    .txt {
+      color: rgba($color-ambient-rosa-dark, 0.7);
+    }
+    &:before {
+      background-color: $color-ambient-rosa;
+    }
+    &:after {
+      background-color: $color-ambient-rosa-dark;
+    }
   }
 }
