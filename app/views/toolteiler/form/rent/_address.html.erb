@@ -34,20 +34,24 @@
   <%= text_field_tag :Address, current_user && current_user.address.street_name ? current_user.address.street_name : nil, placeholder: 'Strasse & Nr.' %>
 </div>
 
-<div class="input-field">
-  <%= label_tag(:PostalCode) do %>
-    <%= icon_tag "map-location" %>
-    <span>Postleitzahl</span>
-  <% end %>
-  <%= text_field_tag :PostalCode, current_user && current_user.address.zip ? current_user.address.zip : nil, placeholder: 'PLZ' %>
-</div>
+<div class="form-columns">
 
-<div class="input-field">
-  <%= label_tag(:City) do %>
-    <%= icon_tag "map-location" %>
-    <span>Ort/Stadt</span>
-  <% end %>
-  <%= text_field_tag :City, current_user && current_user.address.city ? current_user.address.city : nil, placeholder: 'Stadt' %>
+  <div class="input-field">
+    <%= label_tag(:PostalCode) do %>
+      <%= icon_tag "map-location" %>
+      <span>Postleitzahl</span>
+    <% end %>
+    <%= text_field_tag :PostalCode, current_user && current_user.address.zip ? current_user.address.zip : nil, placeholder: 'PLZ' %>
+  </div>
+
+  <div class="input-field">
+    <%= label_tag(:City) do %>
+      <%= icon_tag "map-location" %>
+      <span>Ort/Stadt</span>
+    <% end %>
+    <%= text_field_tag :City, current_user && current_user.address.city ? current_user.address.city : nil, placeholder: 'Stadt' %>
+  </div>
+
 </div>
 
 <a href="/toolteiler/rent_3" class="btn-primary">Weiter</a>

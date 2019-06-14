@@ -12,12 +12,12 @@ class ToolteilerController < ApplicationController
   end
 
   def new_3
-    @content = 'pricing' # Render Demo Partial
+    @content = 'insurance' # Render Demo Partial
     render :template => '/toolteiler/form/create/new'
   end
 
   def new_4
-    @content = 'insurance' # Render Demo Partial
+    @content = 'pricing' # Render Demo Partial
     render :template => '/toolteiler/form/create/new'
   end
 

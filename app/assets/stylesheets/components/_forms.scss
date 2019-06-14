@@ -19,6 +19,18 @@ input, select, textarea {
   box-shadow: inset 2px 2px 2px 0 rgba(0,0,0,0.05);
 }
 
+// 2 Form Fields in a row on Desktop
+.form-columns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  div {
+    width:100%;
+    @include respond-to(">small") {
+      width:48.5%;
+    }
+  }
+}
 
 // ---------------------------------------------------------------------- textfield & select & textarea
 @mixin field-HorizontalLayout {
@@ -124,12 +136,6 @@ input, select, textarea {
   input {
     height: $fieldHeight;
   }
-  /*input.ico-search {
-    background-image: url(image_path('svg/icon-search.svg'));
-    background-repeat: no-repeat;
-    background-size: 40px 40px, 100% 100%;
-    background-position: center right;
-  }*/
   &.search-filter {
     justify-content: center;
     label, input, .SumoSelect p.SelectBox, .input-field > input, input::placeholder {
