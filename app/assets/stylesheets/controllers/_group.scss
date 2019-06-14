@@ -556,13 +556,10 @@ section.group-form-page {
   }
 
   // Single Discussion PAGE
-  &.discussion-page {
+  &.discussion-area {
     h2.title {
       padding-bottom: 35px;
       color: $color-ambient-mint-dark;
-    }
-    div.content {
-      margin-bottom:50px;
     }
   } // END PAGE
 
@@ -579,17 +576,7 @@ section.group-form-page {
   } // END PAGE
 
   // DISCUSSIONS STYLING
-  .discussion-preview, &.discussion-page {
-    margin-bottom:50px;
-    .user {
-      .name {
-        font-weight: bold;
-      }
-      .img-round {
-        width:60px;
-        height:60px;
-      }
-    }
+  &.discussion-area {
     h3 {
       margin-bottom:3px;
     }
@@ -628,28 +615,20 @@ section.group-form-page {
       }
     }
 
+    .user {
+      .img-round {
+        width:60px;
+        height:60px;
+      }
+    }
+
     .content {
       @include respond-to(">=medium") {
         margin-left: 70px;
       }
-
-      padding-top:5px;
-      p {
-        white-space: pre-wrap;
-      }
-      .ctrl {
-        margin-top:10px;
-        a.btn-secondary {
-          display: inline-block;
-        }
-      }
     }
-
-  } // discussion preview
-
-  .discussion-preview:last-of-type {
-    margin-bottom:50px;
   }
+
 
   .discussion-form {
     .img-round {
@@ -675,7 +654,7 @@ section.group-form-page {
     display: none;
   }
 
-  &.discussion-page {
+  &.discussion-area {
 
     .entryImgUploads {
       img {
@@ -698,10 +677,6 @@ section.group-form-page {
     }
   }
 
-  &.mail-page {
-
-  }
-
 
   // form customization
   ::-webkit-input-placeholder {
@@ -715,98 +690,5 @@ section.group-form-page {
   }
   :-moz-placeholder {
     @include groupsPlaceholder;
-  }
-}
-
-.discussion-page {
-
-  .user-post {
-    .btn-control { opacity: 0; transition: opacity 0.5s; }
-    .edit-post-form { display: none; }
-    .content { display: block; }
-  }
-
-  .user-post:hover {
-    .btn-control { opacity: 1; }
-  }
-
-  .user-post.editing {
-    .edit-post-form { display: block; margin-top:20px;}
-    .content { display: none; }
-  }
-
-  .user-post .btn-control, .discussion-infos .btn-control {
-    a { display: inline-block; }
-    svg {
-      margin-left: 10px;
-      color: $color-ambient-grey;
-      width: 25px;
-      height: 25px;
-    }
-    a:hover {
-      svg { color: $color-ambient-rosa; }
-    }
-  }
-  .discussion-infos .btn-control {
-    display:flex;
-    svg {
-      margin-left:0px;
-    }
-  }
-
-  .user-post .edit-post-form {
-    .actions { margin: 15px 0; }
-    .actions button, .actions input { display: inline-block; margin-right: 15px; }
-  }
-
-  .comment-container {
-    display: none;
-  }
-
-  // Show last 3 Comments (if change numer, also change in groups/discussion_posts/posts.html.erb)
-  .comment-container:nth-last-child(-n+3) {
-    display: block;
-  }
-
-
-  .show-all-comments-link {
-    //font-size: 12px;
-    @include font-size-primaryFont('small');
-    font-style: italic;
-    color: #69a8a7;
-    display: block;
-    text-decoration: none;
-    margin-bottom: 20px;
-    @include respond-to(">=medium") {
-      //margin-left: 60px;
-    }
-  }
-  .entryCommentForm {
-    .img-round {display: none;}
-    &.is-focused {
-      .img-round { display: block; }
-    }
-  }
-  .post-comments {
-    margin-top:20px;
-    .comment-container.hide { display: none; }
-  }
-  .entryUserComment {
-    .userCreateInfo {
-      .name {
-        a {
-          text-decoration: none;
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-      }
-    }
-    .entryImgUploads, .txt {
-      margin-left: 50px;
-    }
-    .txt {
-      white-space: pre-wrap;
-    }
   }
 }

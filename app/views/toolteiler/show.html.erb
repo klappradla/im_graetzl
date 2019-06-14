@@ -204,30 +204,170 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
   <!-- /SIDEBAR -->
 
   <!-- MAIN CONTENT -->
-  <div class="mainContent">
+  <div class="mainContent discussion-area">
 
     <section>
+
+      <!-- Create new Post-->
       <div class="stream">
         <div class="bigicontext-element">
           <svg class="icon-layout-text"><use xlink:href="#icon-layout-text"></use></svg>
-          <div class="txt">Frage zum Toolteiler</div>
+          <div class="txt">Kommentare zum Toolteiler</div>
         </div>
-        <div class="entryCreate js-initialized" data-behavior="stream-form">
+        <div class="entryCreate" data-behavior="stream-form">
           <img class="attachment user avatar img-round" src="https://d1dcf21ighh4hq.cloudfront.net/attachments/b08edf6d2190549a24d5c51f4acbf49a87767fd1/store/fill/100/100/0a90d925fcde3d6fa5b1b3f35f7ba2753972a5c6164acc222ab2e172d1ae/avatar.png">
           <form class="textEditor" id="new_comment" enctype="multipart/form-data" action="/comments" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="✓">
             <input type="hidden" value="513" name="comment[commentable_id]" id="comment_commentable_id">
             <input type="hidden" value="RoomOffer" name="comment[commentable_type]" id="comment_commentable_type">
-            <textarea cols="80" rows="5" placeholder="Kommentar abgeben" class="input-plain" name="comment[content]" id="comment_content" style="overflow: hidden; resize: none; height: 135px;"></textarea>
+            <textarea cols="80" rows="5" placeholder="Beitrag schreiben .." class="input-plain" name="comment[content]" id="comment_content" style="overflow: hidden; resize: none; height: 135px;"></textarea>
             <div class="hideBlock">
               <div class="upload-streamImgs">
                 <svg class="icon-photo-camera"><use xlink:href="#icon-photo-camera"></use></svg>
                 <input multiple="multiple" value="[]" data-reference="6c4d1b6fce5b6a6b496a8a996e42044e" type="hidden" name="comment[images_files][]"><input multiple="multiple" direct="true" presigned="true" data-direct="true" data-as="file" data-url="/attachments/cache/presign" data-presigned="true" data-reference="6c4d1b6fce5b6a6b496a8a996e42044e" accept="image/jpeg,image/gif,image/png" include_hidden="false" type="file" name="comment[images_files][]" id="comment_images_files">
               </div>
-              <button name="button" type="submit" data-disable-with="sendet..." class="btn-secondary">Kommentar senden</button>
+              <button name="button" type="submit" data-disable-with="sendet..." class="btn-secondary">Beitrag senden</button>
             </div>
           </form>
         </div>
       </div>
+      <!-- /Create new Post-->
+
+
+
+      <!-- !!! DISCUSSION ELEMENT use same like on Groups Page !!! -->
+
+      <!-- User Post -->
+      <div class="user-post" id="discussion-post-561">
+        <div class="user">
+          <div class="avatar">
+            <img class="attachment user avatar img-round" src="https://d1dcf21ighh4hq.cloudfront.net/attachments/a44904de315d3c9d1228bedeaf7c3bedbd03698d/store/fill/100/100/d87ce1e9862722a4ba02ff58420e33673d1bb5eae9ea5c05f3711ab23f03/avatar.jpeg">
+          </div>
+          <div class="infos">
+            <div class="name">Natascha Meis</div>
+            <div class="date">
+              Di, 11. Juni 2019, 05:29
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          <div class="bbcode">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
+          <div class="post-comments">
+            <div class="comment-container">
+              <div id="comment_3411" class="comment">
+                <div class="entryUserComment">
+                  <div class="editControls">
+                    <a data-confirm="Kommentar wirklich löschen?" data-disable-with="lädt..." data-remote="true" rel="nofollow" data-method="delete" href="/comments/3411">
+                      <div class="btn-delete">
+                        <svg class="icon-trash-delete-remove"><use xlink:href="#icon-trash-delete-remove"></use></svg>
+                      </div>
+                    </a>
+                  </div>
+                  <a name="comment-3411"></a>
+                  <div class="userCreateInfo">
+                    <img class="attachment user avatar img-round" src="https://d1dcf21ighh4hq.cloudfront.net/attachments/8482d6c33c1b1c989a6dd2e0f81aa66d37d3acff/store/fill/100/100/012cfe24f3b802de461d1b67665f9070bb2089d1a14a8a19f0e33fa0508a/avatar.jpeg">
+                    <div class="infos">
+                      <div class="name"><a href="/users/mirjam">Mirjam  Mieschendahl</a></div>
+                      <div class="date">
+                        Di, 11. Juni 2019, 12:29
+                      </div>
+                    </div>
+                  </div>
+                  <div class="txt">Ja, freut mich voll zu lesen, weil das macht absolut Sinn Natascha:) Und wenn du dann Stück für Stück umsetzt, dann ist die Freude auch gleich viel größer, als wenn man immer so einen Berg vor sich hinschiebt .... </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <form class="entryCommentForm" id="new_comment" data-behavior="comment-form-561" enctype="multipart/form-data" action="/groups/7/discussion_posts/561/comments" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="✓">
+            <label>
+              <img class="attachment user avatar img-round" src="https://d1dcf21ighh4hq.cloudfront.net/attachments/b08edf6d2190549a24d5c51f4acbf49a87767fd1/store/fill/100/100/0a90d925fcde3d6fa5b1b3f35f7ba2753972a5c6164acc222ab2e172d1ae/avatar.png">
+              <textarea placeholder=" Kommentieren" name="comment[content]" id="comment_content" style="overflow: hidden; resize: none; height: 40px;"></textarea>
+            </label>
+            <div class="hideBlock">
+              <div class="upload-streamImgs">
+                <svg class="icon-photo-camera"><use xlink:href="#icon-photo-camera"></use></svg>
+                <input multiple="multiple" value="[]" data-reference="6c3e2ad55f0d6e6f37b6273b6a567059" type="hidden" name="comment[images_files][]"><input multiple="multiple" direct="true" presigned="true" data-direct="true" data-as="file" data-url="/attachments/cache/presign" data-presigned="true" data-reference="6c3e2ad55f0d6e6f37b6273b6a567059" accept="image/jpeg,image/gif,image/png" include_hidden="false" type="file" name="comment[images_files][]" id="comment_images_files">
+              </div>
+              <button name="button" type="submit" data-disable-with="sendet...">Antwort senden</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- User Post -->
+      <div class="user-post" id="discussion-post-561">
+        <div class="user">
+          <div class="avatar">
+            <img class="attachment user avatar img-round" src="https://d1dcf21ighh4hq.cloudfront.net/attachments/a44904de315d3c9d1228bedeaf7c3bedbd03698d/store/fill/100/100/d87ce1e9862722a4ba02ff58420e33673d1bb5eae9ea5c05f3711ab23f03/avatar.jpeg">
+          </div>
+          <div class="infos">
+            <div class="name">Natascha Meis</div>
+            <div class="date">
+              Di, 11. Juni 2019, 05:29
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          <div class="bbcode">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
+          <div class="post-comments">
+            <div class="comment-container">
+              <div id="comment_3411" class="comment">
+                <div class="entryUserComment">
+                  <div class="editControls">
+                    <a data-confirm="Kommentar wirklich löschen?" data-disable-with="lädt..." data-remote="true" rel="nofollow" data-method="delete" href="/comments/3411">
+                      <div class="btn-delete">
+                        <svg class="icon-trash-delete-remove"><use xlink:href="#icon-trash-delete-remove"></use></svg>
+                      </div>
+                    </a>
+                  </div>
+                  <a name="comment-3411"></a>
+                  <div class="userCreateInfo">
+                    <img class="attachment user avatar img-round" src="https://d1dcf21ighh4hq.cloudfront.net/attachments/8482d6c33c1b1c989a6dd2e0f81aa66d37d3acff/store/fill/100/100/012cfe24f3b802de461d1b67665f9070bb2089d1a14a8a19f0e33fa0508a/avatar.jpeg">
+                    <div class="infos">
+                      <div class="name"><a href="/users/mirjam">Mirjam  Mieschendahl</a></div>
+                      <div class="date">
+                        Di, 11. Juni 2019, 12:29
+                      </div>
+                    </div>
+                  </div>
+                  <div class="txt">Ja, freut mich voll zu lesen, weil das macht absolut Sinn Natascha:) Und wenn du dann Stück für Stück umsetzt, dann ist die Freude auch gleich viel größer, als wenn man immer so einen Berg vor sich hinschiebt .... </div>
+                  <a name="comment-3411"></a>
+                  <div class="userCreateInfo">
+                    <img class="attachment user avatar img-round" src="https://d1dcf21ighh4hq.cloudfront.net/attachments/8482d6c33c1b1c989a6dd2e0f81aa66d37d3acff/store/fill/100/100/012cfe24f3b802de461d1b67665f9070bb2089d1a14a8a19f0e33fa0508a/avatar.jpeg">
+                    <div class="infos">
+                      <div class="name"><a href="/users/mirjam">Mirjam  Mieschendahl</a></div>
+                      <div class="date">
+                        Di, 11. Juni 2019, 12:29
+                      </div>
+                    </div>
+                  </div>
+                  <div class="txt">Ja, freut mich voll zu lesen, weil das macht absolut Sinn Natascha:) Und wenn du dann Stück für Stück umsetzt, dann ist die Freude auch gleich viel größer, als wenn man immer so einen Berg vor sich hinschiebt .... </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <form class="entryCommentForm" id="new_comment" data-behavior="comment-form-561" enctype="multipart/form-data" action="/groups/7/discussion_posts/561/comments" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="✓">
+            <label>
+              <img class="attachment user avatar img-round" src="https://d1dcf21ighh4hq.cloudfront.net/attachments/b08edf6d2190549a24d5c51f4acbf49a87767fd1/store/fill/100/100/0a90d925fcde3d6fa5b1b3f35f7ba2753972a5c6164acc222ab2e172d1ae/avatar.png">
+              <textarea placeholder=" Kommentieren" name="comment[content]" id="comment_content" style="overflow: hidden; resize: none; height: 40px;"></textarea>
+            </label>
+            <div class="hideBlock">
+              <div class="upload-streamImgs">
+                <svg class="icon-photo-camera"><use xlink:href="#icon-photo-camera"></use></svg>
+                <input multiple="multiple" value="[]" data-reference="6c3e2ad55f0d6e6f37b6273b6a567059" type="hidden" name="comment[images_files][]"><input multiple="multiple" direct="true" presigned="true" data-direct="true" data-as="file" data-url="/attachments/cache/presign" data-presigned="true" data-reference="6c3e2ad55f0d6e6f37b6273b6a567059" accept="image/jpeg,image/gif,image/png" include_hidden="false" type="file" name="comment[images_files][]" id="comment_images_files">
+              </div>
+              <button name="button" type="submit" data-disable-with="sendet...">Antwort senden</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- /DISCUSSION ELEMENT like on Groups Page-->
+
+
+
     </section>
 
   </div>

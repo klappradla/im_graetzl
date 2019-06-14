@@ -1,38 +1,137 @@
-.streamEntryNav {
-  display: flex;
-  margin-bottom: 8px;
-  @include respond-to(">=medium") {
-    max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-    transform: translate(-105px, -10px);
+// -------------- User Comment Posts in Groups and other commentable Views
+
+.discussion-area {
+
+  div.content {
+    margin-bottom:50px;
+    @include respond-to(">=medium") {
+      margin-left: 60px;
+    }
+
+    padding-top:5px;
+    p {
+      white-space: pre-wrap;
+    }
+    .ctrl {
+      margin-top:10px;
+      a.btn-secondary {
+        display: inline-block;
+      }
+    }
   }
-  > * {
-    flex: 0 0 auto;
+
+  .user-post {
+    .btn-control { opacity: 0; transition: opacity 0.5s; }
+    .edit-post-form { display: none; }
+    .content { display: block; }
+  }
+
+  .user-post:hover {
+    .btn-control { opacity: 1; }
+  }
+
+  .user-post.editing {
+    .edit-post-form { display: block; margin-top:20px;}
+    .content { display: none; }
+  }
+
+  .user-post .btn-control, .discussion-infos .btn-control {
+    a { display: inline-block; }
+    svg {
+      margin-left: 10px;
+      color: $color-ambient-grey;
+      width: 25px;
+      height: 25px;
+    }
+    a:hover {
+      svg { color: $color-ambient-rosa; }
+    }
+  }
+  .discussion-infos .btn-control {
+    display:flex;
+    svg {
+      margin-left:0px;
+    }
+  }
+
+  .user-post .edit-post-form {
+    .actions { margin: 15px 0; }
+    .actions button, .actions input { display: inline-block; margin-right: 15px; }
+  }
+
+  .comment-container {
+    display: none;
+  }
+
+  // Show last 3 Comments (if change numer, also change in groups/discussion_posts/posts.html.erb)
+  .comment-container:nth-last-child(-n+3) {
+    display: block;
+  }
+
+
+  .show-all-comments-link {
+    //font-size: 12px;
+    @include font-size-primaryFont('small');
+    font-style: italic;
+    color: #69a8a7;
+    display: block;
     text-decoration: none;
-    color: $color-font-primary;
+    margin-bottom: 20px;
+    @include respond-to(">=medium") {
+      //margin-left: 60px;
+    }
+  }
+  .entryCommentForm {
+    .img-round {display: none;}
+    &.is-focused {
+      .img-round { display: block; }
+    }
+  }
+  .post-comments {
+    margin-top:20px;
+    .comment-container.hide { display: none; }
+  }
+  .entryUserComment {
+    .userCreateInfo {
+      .name {
+        a {
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    .entryImgUploads, .txt {
+      margin-left: 50px;
+    }
+    .txt {
+      white-space: pre-wrap;
+    }
+  }
+
+  // User STYLING
+  .user {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-  }
-  .createEntry {
-    padding-right: 15px;
-    margin-right: 15px;
-    border-right: 1px dotted lighten($color-ambient-grey, 20);
-    [class^=icon-] {
-      color: $color-ambient-mint;
-      margin-right: 5px;
+    margin-right: 10px;
+
+    .infos {
+      .title {
+        font-style: italic;
+      }
+      .name {
+        font-weight: bold;
+      }
+      .date {
+        font-style: italic;
+        color: $color-ambient-grey;
+        @include font-size-primaryFont('small');
+      }
     }
-  }
-  .createMeeting {
-    background-image: url(image_path('svg/icon-right-blinky.svg')), url(image_path('svg/icon-left-blinky.svg'));
-    background-position: right center, left center;
-    background-repeat: no-repeat;
-    padding-left: 20px;
-    padding-right: 20px;
-    &:hover {
-      color: $color-ambient-rosa;
-    }
-  }
+  } // End User STYLING
+
 }
 
 
@@ -68,7 +167,7 @@
 
 .entryCreate {
   max-width: 650px;
-  margin: 0 auto 80px auto;
+  margin: 0 auto 60px auto;
   position: relative;
   @include respond-to(">=medium") {
     align-items: flex-start;
@@ -109,7 +208,6 @@
       float: right;
     }
   }
-
 }
 
 .hideBlock {
@@ -119,6 +217,7 @@
   opacity:0;
   transition: visibility 0s linear 0.3s, opacity 0.3s linear;
 }
+
 .entryCreate.is-focused,
 .entryCommentForm.is-focused {
   .hideBlock {
@@ -137,7 +236,6 @@
     }
   }
 }
-
 
 .textEditor {
   position: relative;
@@ -165,7 +263,6 @@
     margin-bottom: 10px;
     resize: vertical;
   }
-
 }
 
 
@@ -216,39 +313,6 @@
     .entryCommentForm { padding-left: 60px; }
     .entryCommentForm.is-focused {
       .img-round { display: block; }
-    }
-  }
-}
-
-
-.entryNewParticipants {
-  margin-bottom: 20px;
-  @include respond-to(">=medium") {
-    padding-left: 60px;
-  }
-  .singleParticipant {
-    display: flex;
-    align-items: center;
-    font-size: 1.4rem;
-    margin-bottom: 8px;
-    font-style: italic;
-    color: $color-ambient-grey;
-  }
-  .userPortraitName {
-    display: flex;
-    align-items: center;
-    img {
-      width: 40px;
-      height: 40px;
-      flex: none;
-    }
-    a {
-      margin-right: 5px;
-      margin-left: 5px;
-      text-decoration: none;
-      &:hover {
-        text-decoration: underline;
-      }
     }
   }
 }
@@ -308,77 +372,6 @@
     color: $color-ambient-rosa;
     float: right;
   }
-}
-
-
-
-.meetingTeaser {
-  position: relative;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  display: block;
-  color: $color-font-primary;
-  text-decoration: none;
-  &:hover, &:active {
-    h2 {
-      color: $color-ambient-rosa-dark;
-    }
-  }
-  @include respond-to(">=medium") {
-    margin-left: 60px;
-    max-width: 100%;
-    margin-top: 0;
-    padding: 8px;
-    background-color: #ffffff;
-    box-shadow: $boxShadow-light;
-  }
-
-  img {
-    width: 100%;
-  }
-
-  .facts {
-    @include respond-to(">=medium") {
-      padding-left: 5px;
-      padding-right: 5px;
-      width: 100%;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-    }
-  }
-
-  h2 {
-    text-align: center;
-    font-size: 2.4rem;
-    color: $color-ambient-rosa;
-    margin-bottom: 1rem;
-    line-height: 1;
-    @include respond-to(">=medium") {
-      padding-right: 30px;
-      text-align: left;
-      margin-bottom: 0;
-      font-size: 3.2rem;
-      max-width: 65%;
-    }
-  }
-
-  .dateLocation {
-    margin: 0 auto;
-    display: table;
-    @include respond-to(">=medium") {
-      max-width: 35%;
-      margin-left: auto;
-      margin-right: 0;
-    }
-  }
-
-  .dateTimeIconSmall, .locationIconSmall {
-    margin-top: 4px;
-    margin-bottom: 4px;
-    align-items: flex-start;
-  }
-
 }
 
 .editControls {

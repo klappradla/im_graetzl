@@ -21,21 +21,40 @@
 
   <div class="form-columns">
 
-    <div class="input-field">
+    <div class="input-select">
       <%= label_tag(:Price) do %>
         <%= icon_tag "sale-label" %>
-        <span>Tagesrabatt (%)</span>
+        <span>Tagesrabatt</span>
       <% end %>
-      <%= text_field_tag :Price, nil, placeholder: '% Rabatt ab 2 Tagen' %>
+      <select>
+        <option value="">% Rabatt ab 2 Tagen</option>
+        <option value="1">5 %</option>
+        <option value="2">10 %</option>
+        <option value="2">15 %</option>
+        <option value="2">20 %</option>
+        <option value="2">25 %</option>
+        <option value="2">30 %</option>
+        <option value="2">40 %</option>
+        <option value="2">50 %</option>
+      </select>
     </div>
 
-    <div class="input-field">
+    <div class="input-select">
       <%= label_tag(:Price) do %>
         <%= icon_tag "sale-label" %>
-        <span>Wochenrabatt (%)</span>
+        <span>Wochenrabatt</span>
       <% end %>
-      <%= text_field_tag :Price, nil, placeholder: '% Rabatt ab 1 Woche' %>
-    </div>
+      <select>
+        <option value="">% Rabatt ab 1 Woche</option>
+        <option value="1">5 %</option>
+        <option value="2">10 %</option>
+        <option value="2">15 %</option>
+        <option value="2">20 %</option>
+        <option value="2">25 %</option>
+        <option value="2">30 %</option>
+        <option value="2">40 %</option>
+        <option value="2">50 %</option>
+      </select>    </div>
 
   </div>
 

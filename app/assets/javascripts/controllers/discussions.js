@@ -7,7 +7,7 @@ APP.controllers.discussions = (function() {
   }
 
   function initControls() {
-    $(".discussion-page").on('click', '.edit-post-link', function() {
+    $(".discussion-area").on('click', '.edit-post-link', function() {
       $(this).parents(".user-post").addClass("editing");
       $(".edit-post-form textarea").autogrow({ onInitialize: true });
     }).on('click', '.cancel-edit-link', function() {
