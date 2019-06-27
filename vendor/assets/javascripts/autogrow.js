@@ -56,7 +56,7 @@
                 , clone
                 ;
             if (oldHeight < newHeight) { //user is typing
-                this.scrollTop = 0; //try to reduce the top of the content hiding for a second
+                //this.scrollTop = 0; // MICHAEL HACK - Auskommentiert wegen Meessenger Bug //try to reduce the top of the content hiding for a second
                 if(opts.animate) {
                     box.stop().animate({height: newHeight}, {duration: opts.speed, complete: notifyGrown});
                 } else {

@@ -191,6 +191,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :messenger do
+    collection do
+      get :show
+    end
+  end
+
   resources :graetzls, path: '', only: [:show] do
     get 'treffen', action: 'meetings', as: 'meetings', on: :member
     get 'locations', on: :member
