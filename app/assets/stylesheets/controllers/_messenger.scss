@@ -143,7 +143,6 @@ section.messenger {
 
     width: 70%;
     height: 100%;
-    overflow: scroll;
     padding-left:20px;
     padding-bottom:20px;
     border-left: 1px solid $color-ambient-mint-light;
@@ -159,6 +158,7 @@ section.messenger {
       width:100%;
       height: 100%;
       overflow: scroll;
+      -webkit-overflow-scrolling: touch;
       display: flex;
       flex-wrap: wrap;
       align-content: space-between;
@@ -207,7 +207,6 @@ section.messenger {
       padding: 0.8rem 1.4rem;
       height:38px;
       max-height: calc(30vh);
-      //overflow:scroll !important; // ???
       &::placeholder {
         color: $color-ambient-grey;
       }
