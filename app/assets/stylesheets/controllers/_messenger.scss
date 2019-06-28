@@ -1,19 +1,12 @@
 section.messenger {
 
-  .scrollfix {
-    position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        top: 0;
-  }
-
   // ----- Mobile First Size -----
   margin-top: -30px;
   margin-right: -5px;
   margin-left: -17px;
   #chat-container {
-    height: calc(100vh - 60px);
+    //height: calc(100vh - 60px);
+    height: calc(var(--vh, 1vh) * 100 - 60px);
   }
 
   // ----- > Tablet Size -----
@@ -21,7 +14,8 @@ section.messenger {
     margin-top: -50px;
     margin-left: -22px;
     #chat-container {
-      height: calc(100vh - 70px);
+      //height: calc(100vh - 70px);
+      height: calc(var(--vh, 1vh) * 100 - 70px);
     }
   }
 

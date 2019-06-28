@@ -5,10 +5,22 @@ APP.controllers.messenger = (function() {
     //if ($('.xyz').exists()) { initFunction(); }
   }
 
+  function calcExactVh() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    console.log(vh);
+  }
+
   function initMessenger() {
 
     var msg = '1';
     unscroll();
+    calcExactVh();
+
+    $( window ).resize(function() {
+      calcExactVh();
+    });
+
     /*
     document.body.addEventListener('touchmove', function(e) {
         e.preventDefault();
