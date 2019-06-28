@@ -5,20 +5,39 @@ APP.controllers.messenger = (function() {
     //if ($('.xyz').exists()) { initFunction(); }
   }
 
+  function lockBodyScroll(lock) {
+    var tag = document.querySelector('.chat-panel'); // the child element of body that contains the long content
+    if (!tag) return;
+    var elem = document.scrollingElement || document.body;
+    if (lock) {
+        var scrollTop = elem.scrollTop;
+        tag.classList.add('no-scroll');
+        tag.style.top = '-' + scrollTop + 'px';
+    } else {
+        var top = tag.offsetTop;
+        tag.classList.remove('no-scroll');
+        tag.style.top = '0px';
+        elem.scrollTop = - top;
+    }
+  }
+
   function initMessenger() {
 
     var msg = '1';
-    unscroll();
+    //unscroll();
+    lockBodyScroll();
     /*
     document.body.addEventListener('touchmove', function(e) {
         e.preventDefault();
     }, { passive: false });
     */
+    /*
     $('.chat-panel').on('touchmove', function(e) {
         e.preventDefault();
         e.stopPropagation();
         return false;
     });
+    */
 
     // Jump to end of Chat Messages -> Show newest.
     $(".chat-panel").scrollTop($(".chat-panel")[0].scrollHeight);

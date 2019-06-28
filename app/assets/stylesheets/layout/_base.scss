@@ -79,3 +79,8 @@ h1, h2 {
   font-family: $font-secondary;
   font-weight: normal;
 }
+
+.no-scroll {
+   position: fixed;
+   width: 100%;
+}
