@@ -42,6 +42,7 @@
 //= require modernizr.custom
 //= require fastclick
 //= require unscroll
+//= require body-scroll-lock
 //= require autogrow
 //= require datatables.min
 //= require timetable
