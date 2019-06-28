@@ -9,7 +9,7 @@ APP.controllers.messenger = (function() {
 
     var msg = '1';
     unscroll();
-    document.addEventListener('touchmove', function(e) {
+    document.body.addEventListener('touchmove', function(e) {
         e.preventDefault();
     }, { passive: false });
 
