@@ -15,6 +15,7 @@ APP.controllers.messenger = (function() {
 
     var msg = '1';
     unscroll();
+    iNoBounce.enable();
     calcExactVh();
 
     $( window ).resize(function() {
