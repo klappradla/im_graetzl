@@ -8,6 +8,7 @@ APP.controllers.messenger = (function() {
   function initMessenger() {
 
     var msg = '1';
+    unscroll();
 
     // Jump to end of Chat Messages -> Show newest.
     $(".chat-panel").scrollTop($(".chat-panel")[0].scrollHeight);

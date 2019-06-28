@@ -41,6 +41,7 @@
 //= require lightslider
 //= require modernizr.custom
 //= require fastclick
+//= require unscroll
 //= require autogrow
 //= require datatables.min
 //= require timetable
