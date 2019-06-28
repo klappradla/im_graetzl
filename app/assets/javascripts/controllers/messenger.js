@@ -7,7 +7,7 @@ APP.controllers.messenger = (function() {
 
   function calcExactVh() {
     let vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    document.documentElement.style.setProperty('--vh', vh+'px');
     console.log(vh);
   }
 
