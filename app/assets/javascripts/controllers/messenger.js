@@ -5,35 +5,22 @@ APP.controllers.messenger = (function() {
     //if ($('.xyz').exists()) { initFunction(); }
   }
 
-  function calcExactVh() {
-    var vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', vh+'px');
-    console.log(vh);
-  }
+
+
+
 
   function initMessenger() {
 
-    var msg = '1';
-    unscroll();
-    iNoBounce.enable();
-    calcExactVh();
-
+    // Init Functions
+    detectDeviceMode(); // Detect Device Mode
+    unscroll(); // Prevent Body Scroll on Dektop
+    calcExactVh(); // Get Exact Browser vh
+    iNoBounce.enable(); // Prevent Body Scroll on Mobile
     $( window ).resize(function() {
       calcExactVh();
     });
 
-    /*
-    document.body.addEventListener('touchmove', function(e) {
-        e.preventDefault();
-    }, { passive: false });
-    */
-    /*
-    $('.chat-panel').on('touchmove', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-    });
-    */
+    var msg = '1';
 
     // Jump to end of Chat Messages -> Show newest.
     $(".chat-panel").scrollTop($(".chat-panel")[0].scrollHeight);
@@ -108,9 +95,39 @@ APP.controllers.messenger = (function() {
       $(".message-wrapper").hide();
       $(".message-wrapper.fake"+msg).fadeIn();
       $(".chat-panel").scrollTop($(".chat-panel")[0].scrollHeight);
+
+      // If Mobile Show Chat Window
+      if (window.screenMode == 'mob') {
+        console.log('jetzt mob');
+      }
+
     });
 
 
+  }
+
+
+  function calcExactVh() {
+    // Needed for Exactly Mobile Height
+    var vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', vh+'px');
+  }
+
+
+  function detectDeviceMode() {
+    enquire
+        //mobile mode
+        .register("screen and (max-width:" + APP.config.majorBreakpoints.medium + "px)", {
+            match : function() {
+                window.screenMode = 'mob';
+            }
+        })
+        //desktop mode
+        .register("screen and (min-width:" + APP.config.majorBreakpoints.medium + "px)", {
+            match : function() {
+              window.screenMode = 'desk';
+            }
+        });
   }
 
   return {
