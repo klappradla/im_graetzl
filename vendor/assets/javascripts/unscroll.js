@@ -1,4 +1,5 @@
 // UMD wrapper from https://github.com/umdjs/umd
+
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     define([], factory);
