@@ -38,6 +38,8 @@ section.messenger {
     align-content: flex-start;
     border-bottom: 20px solid #fbfbfb;
     overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+
 
     // Top Controls
     .controls {
@@ -81,9 +83,7 @@ section.messenger {
     }
 
     .users-list {
-      //height: calc(100% - 70px);
-      width:100%;
-      overflow: scroll;
+      //width:100%;
     }
 
     .single-user {

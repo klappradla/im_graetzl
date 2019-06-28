@@ -9,9 +9,16 @@ APP.controllers.messenger = (function() {
 
     var msg = '1';
     unscroll();
+    /*
     document.body.addEventListener('touchmove', function(e) {
         e.preventDefault();
     }, { passive: false });
+    */
+    $('.chat-panel').on('touchmove', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    });
 
     // Jump to end of Chat Messages -> Show newest.
     $(".chat-panel").scrollTop($(".chat-panel")[0].scrollHeight);
