@@ -22,9 +22,13 @@ section.messenger {
     transition: all .3s ease-out;
     &.is-full-width {
       margin-left: -100%;
+      .back-ctrl {
+        display: flex;
+      }
     }
     .chat-panel {
-      height:calc(100% - 71px);
+      height:100%;
+      //height:calc(100% - 71px);
     }
   }
 
@@ -42,9 +46,6 @@ section.messenger {
     }
     #main-content {
       padding-left: 20px;
-      .back-ctrl {
-        display: none;
-      }
       .chat-panel {
         height:100%;
       }
@@ -180,15 +181,20 @@ section.messenger {
   }
 
   .back-ctrl {
+    display: none;
     width:100%;
-    position: sticky;
+    height:61px;
+    z-index: 999;
+    position: fixed;
     top:0;
+    left:0;
+    align-items: center;
     background-color: #fbfbfb;
     border-bottom: 1px solid $color-ambient-mint-light;
-    padding: 10px 20px 10px 10px;
+    padding: 10px 10px 10px 10px;
     svg {
       color: $color-ambient-mint-dark; transform: rotate(90deg);
-      height:50px;
+      //height:50px;
     }
   }
 
