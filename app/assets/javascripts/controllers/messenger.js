@@ -98,10 +98,17 @@ APP.controllers.messenger = (function() {
 
       // If Mobile Show Chat Window
       if (window.screenMode == 'mob') {
-        console.log('jetzt mob');
+        $('#side-bar').toggleClass('is-collapsed');
+        $('#main-content').toggleClass('is-full-width');
       }
-
     });
+
+    $('.back-btn').click(function() {
+      $('#side-bar').toggleClass('is-collapsed');
+      $('#main-content').toggleClass('is-full-width');
+    });
+
+
 
 
   }
@@ -120,12 +127,14 @@ APP.controllers.messenger = (function() {
         .register("screen and (max-width:" + APP.config.majorBreakpoints.medium + "px)", {
             match : function() {
                 window.screenMode = 'mob';
+                console.log('mob');
             }
         })
         //desktop mode
         .register("screen and (min-width:" + APP.config.majorBreakpoints.medium + "px)", {
             match : function() {
               window.screenMode = 'desk';
+              console.log('desk');
             }
         });
   }
