@@ -85,6 +85,7 @@ section.messenger {
 
     // Top Controls
     .controls {
+      z-index: 2;
       width:100%;
       position: sticky;
       top: 0;
@@ -129,6 +130,7 @@ section.messenger {
     }
 
     .single-user {
+      z-index:1;
       padding: 10px 30px 10px 10px;
       display: flex;
       justify-content: space-between;

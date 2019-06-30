@@ -6,12 +6,9 @@ APP.controllers.messenger = (function() {
   }
 
 
-
-
-
   function initMessenger() {
 
-    $( 'footer' ).hide();
+    $( 'footer' ).hide(); // important for mobile // but also on dektop not needed.
 
     // Init Functions
     detectDeviceMode(); // Detect Device Mode
