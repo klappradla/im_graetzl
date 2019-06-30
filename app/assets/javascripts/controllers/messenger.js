@@ -11,6 +11,8 @@ APP.controllers.messenger = (function() {
 
   function initMessenger() {
 
+    $( 'footer' ).hide();
+
     // Init Functions
     detectDeviceMode(); // Detect Device Mode
     unscroll(); // Prevent Body Scroll on Dektop
