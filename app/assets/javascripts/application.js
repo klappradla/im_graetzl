@@ -52,6 +52,10 @@
 //= require cocoon
 //= require refile
 //= require cookieconsent
+//= require overthrow-detect
+//= require overthrow-polyfill
+//= require overthrow-toss
+//= require overthrow-init
 //= require FileAPI.core
 //= require FileAPI.Image
 //= require_directory ./utils

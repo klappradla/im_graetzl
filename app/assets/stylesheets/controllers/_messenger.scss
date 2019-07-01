@@ -80,8 +80,8 @@ section.messenger {
   #side-bar {
     position: relative;
     border-bottom: 20px solid #fbfbfb;
-    overflow: scroll;
-    -webkit-overflow-scrolling: touch;
+    //overflow: scroll;
+    //-webkit-overflow-scrolling: touch;
 
     // Top Controls
     .controls {
@@ -210,8 +210,8 @@ section.messenger {
 
   .chat-panel {
     width:100%;
-    overflow: scroll;
-    -webkit-overflow-scrolling: touch;
+    //overflow: scroll;
+    //-webkit-overflow-scrolling: touch;
     display: flex;
     flex-wrap: wrap;
     align-content: space-between;
