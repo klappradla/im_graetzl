@@ -14,7 +14,7 @@ APP.controllers.messenger = (function() {
     detectDeviceMode(); // Detect Device Mode
     unscroll(); // Prevent Body Scroll on Dektop
     calcExactVh(); // Get Exact Browser vh
-    iNoBounce.enable(); // Prevent Body Scroll on Mobile
+    //iNoBounce.enable(); // Prevent Body Scroll on Mobile
     $( window ).resize(function() {
       calcExactVh();
     });
