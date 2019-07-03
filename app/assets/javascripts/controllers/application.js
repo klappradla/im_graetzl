@@ -4,8 +4,6 @@ APP.controllers.application = (function() {
 
   function init() {
 
-    iNoBounce.disable(); // Disable by default (Prevent Scrolling on Mobiles)
-
     APP.components.mainNavigation.init();
     APP.components.stream.init();
     APP.components.notificatonCenter.init();

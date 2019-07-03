@@ -89,5 +89,5 @@ h1, h2 {
 .overthrow-enabled .overthrow {
     overflow: auto;
     -webkit-overflow-scrolling: touch;
-    -ms-overflow-style:auto; // IE
+    -ms-overflow-style: -ms-autohiding-scrollbar; // IE
 }
