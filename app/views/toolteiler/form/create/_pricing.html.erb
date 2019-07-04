@@ -91,7 +91,9 @@
     <%= text_field_tag :IBAN, nil, placeholder: 'IBAN' %>
   </div>
 
-  <%= f.button 'Toolteiler erstellen', data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
+  <div class="input-button">
+    <%= f.button 'Toolteiler erstellen', data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
+  </div>
 
 </div>
 <% end %>

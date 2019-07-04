@@ -3,7 +3,7 @@
 <div class="form-block" data-step="3">
 
   <div class="hl-subtext">
-    <h2>Infos für die <span>Versicherung</span></h2>
+    <h2>Infos für deine <span>Versicherung</span></h2>
     <p>Dein Toolteiler ist versichert, wann immer er gemietet wird. Um Dir den richtigen Versicherungswert gewähren zu können, müssen wir noch den Wert deines Toolteilers wissen, bzw. etwaige bekannte Mängel. Wenn du auch noch die Seriennummer weisst, perfekt!</p>
   </div>
 
@@ -38,7 +38,17 @@
     <%= f.text_area :description, placeholder: 'Falls dir Mängel bekannt sind, gib sie hier kurz an ..' %>
   </div>
 
-  <a href="/toolteiler/new_4" class="btn-primary">Weiter</a>
+  <div class="input-button">
+    <a href="/toolteiler/new_4" class="btn-primary">Weiter</a>
+  </div>
+
+  <div class="footer-insurance">
+    <a href="/info/versicherung"><%= image_tag('logo-axa.png') %></a>
+    <p>
+      Jedes Gerät, dass du über den Toolteiler verleihst, ist mit bis zu 15.000 € versichert.<br>
+      Einfach und unbürokratisch. <a href="/info/versicherung">Mehr Infos</a>.
+    </p>
+  </div>
 
 </div>
 <% end %>
