@@ -8,8 +8,9 @@
   )
 %>
 
-<section class="wien -overview-pages">
-  <%= render 'header' %>
+<section class="overview groups">
+
+  <%= render 'navigation' %>
 
   <% if @featured_groups.present? && @category.nil? %>
     <div class="lightSliderWrapper card-slider-container">

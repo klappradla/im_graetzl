@@ -3,36 +3,39 @@
   )
 %>
 
-<section class="wien -overview-pages">
-  <%= render 'header' %>
+<section class="overview toolteiler">
 
+  <%= render 'navigation' %>
+
+  <div class="hl-subtext -toolteiler">
+    <h1><em>Toolteiler</em></h1>
+    <p>Nach Toolteiler suchen oder in Kategorien stöbern</p>
+  </div>
+
+  <%= form_tag 'toolteiler', method: :get, remote: true, class: 'cards-filter' do %>
+    <div class="input-field search-filter">
+      <div class="input-field">
+        <%= text_field_tag :query, nil, placeholder: 'Suche..', class: 'search-suggestion-trigger' %>
+      </div>
+      <div class="input-select label-select">
+        <%= select_tag :district_ids, options_for_select(district_select_options, District.all_memoized.keys), id: 'graetzl-suggestion', multiple: true %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= render 'filters/toolteiler_categories', selected_category: nil %>
+
+  <!--<div class="card-grid" data-behavior="toolteiler-card-container"></div>-->
+
+
+  <!-- WORKING EXAMPLE -->
   <div class="card-grid-container">
 
-    <div class="hl-subtext -toolteiler">
-      <h1>Stöbern in <span class="category_title">allen</span> Toolteilern</h1>
-      <p>Nach Tool suchen oder in Kategorien stöbern</p>
-    </div>
-
-    <%= form_tag 'toolteiler', method: :get, remote: true, class: 'cards-filter' do %>
-      <div class="input-field search-filter">
-        <div class="input-field">
-          <%= text_field_tag :query, nil, placeholder: 'Suche..', class: 'search-suggestion-trigger' %>
-        </div>
-        <div class="input-select label-select">
-          <%= select_tag :district_ids, options_for_select(district_select_options, District.all_memoized.keys), id: 'graetzl-suggestion', multiple: true %>
-        </div>
-      </div>
-    <% end %>
-
-    <%= render 'filters/toolteiler_categories', selected_category: nil %>
-
-    <!--<div class="card-grid" data-behavior="toolteiler-card-container"></div>-->
-
-
-    <!-- WORKING EXAMPLE -->
     <br>
     <div class="cardBoxCollection -tripple">
         <%= render 'toolteiler/toolteiler' %>
+        <%= render 'toolteiler/toolteiler' %>
+        <%= render 'toolteiler/action_card' %>
     </div>
     <!-- /WORKING EXAMPLE -->
 
