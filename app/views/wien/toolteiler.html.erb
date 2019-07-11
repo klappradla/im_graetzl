@@ -7,11 +7,54 @@
 
   <%= render 'navigation' %>
 
+
   <div class="hl-subtext -toolteiler">
     <h1><em>Toolteiler</em></h1>
-    <p>Nach Toolteiler suchen oder in Kategorien stöbern</p>
+    <p>Arbeitsequipment verleihen & Geld verdienen</p>
   </div>
 
+  <!-- SLIDER -->
+
+  <div class="category-slider-container">
+    <div id="category-slider">
+
+      <div class="-category cat-1" data-cat="1">
+        <h3>Gesundheit, Wohlbefinden, Sport</h3>
+      </div>
+
+      <div class="-category cat-2" data-cat="2">
+        <h3>Kreativ- & Kleinhandwerk</h3>
+      </div>
+
+      <div class="-category cat-3" data-cat="3">
+        <h3>Grafik, Film/Video, Fotografie</h3>
+      </div>
+
+      <div class="-category cat-4" data-cat="4">
+        <h3>Gastronomie & Küchengeräte</h3>
+      </div>
+
+      <div class="-category cat-1" data-cat="5">
+        <h3>Gesundheit, Wohlbefinden, Sport</h3>
+      </div>
+
+      <div class="-category cat-2" data-cat="6">
+        <h3>Kreativ- & Kleinhandwerk</h3>
+      </div>
+
+      <div class="-category cat-3" data-cat="7">
+        <h3>Grafik, Film/Video, Fotografie</h3>
+      </div>
+
+      <div class="-category cat-4" data-cat="8">
+        <h3>Gastronomie & Küchengeräte</h3>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!--
   <%= form_tag 'toolteiler', method: :get, remote: true, class: 'cards-filter' do %>
     <div class="input-field search-filter">
       <div class="input-field">
@@ -24,7 +67,7 @@
   <% end %>
 
   <%= render 'filters/toolteiler_categories', selected_category: nil %>
-
+  -->
   <!--<div class="card-grid" data-behavior="toolteiler-card-container"></div>-->
 
 

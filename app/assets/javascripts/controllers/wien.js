@@ -31,6 +31,10 @@ APP.controllers.wien = (function() {
           APP.components.cardSlider.init($("#card-slider"));
         }
 
+        if ($("section.toolteiler").exists()) {
+          initToolTeiler();
+        }
+
         initMobileNav();
     }
 
@@ -63,6 +67,98 @@ APP.controllers.wien = (function() {
 
       });
       $('[data-behavior=createTrigger]').jqDropdown('attach', '[data-behavior=createContainer]');
+    }
+
+    function initToolTeiler() {
+
+      var item_desk = 5;
+      var item_tab = 3;
+      var item_mob = 1;
+      var items = $('#category-slider div').length;
+
+      var slider = $('#category-slider').lightSlider({
+        item: item_desk,
+        autoWidth: true,
+        slideMove: 1, // slidemove will be 1 if loop is true
+        slideMargin: 15,
+        addClass: '',
+        mode: "slide",
+        useCSS: true,
+        cssEasing: 'ease', //'cubic-bezier(0.25, 0, 0.25, 1)',//
+        easing: 'linear', //'for jquery animation',////
+        speed: 750, //ms'
+        auto: false,
+        loop: false,
+        rtl:false,
+        slideEndAnimation: true,
+        pause: 15000,
+        keyPress: false,
+        controls: true,
+        pager: false,
+        prevHtml: '',
+        nextHtml: '',
+        adaptiveHeight:false,
+        //currentPagerPosition: 'middle',
+        enableTouch:true,
+        enableDrag:false,
+        freeMove:true,
+        swipeThreshold: 40,
+        pauseOnHover: true,
+        responsive : [
+          {
+            breakpoint:850,
+            settings: {
+              item: item_tab,
+              onBeforeSlide: function (el) {
+                showControls(el.getCurrentSlideCount(), item_tab);
+              }
+            }
+          },
+          {
+            breakpoint:415,
+            settings: {
+              item: item_mob,
+              controls: false,
+              onBeforeSlide: function (el) {
+                showControls(el.getCurrentSlideCount(), item_mob);
+              }
+            }
+          }
+        ],
+        onBeforeSlide: function (el) {
+          showControls(el.getCurrentSlideCount(), item_desk);
+        }
+      });
+
+      $('.lSPrev').hide(); // hide prev on load
+
+      // Show or Hide Control Buttons
+      function showControls(currentCount, itemCount) {
+        if (currentCount == 1) {
+          $('.lSPrev').hide();
+        } else {
+          $('.lSPrev').show();
+        }
+        if (currentCount > (items - itemCount)) {
+          $('.lSNext').hide();
+        } else {
+          $('.lSNext').show();
+        }
+      }
+
+      // Hover Slide
+      $('#category-slider .-category').hover(
+       function(){ $(this).addClass('hover') },
+       function(){ $(this).removeClass('hover')}
+     );
+
+     // Click Slide
+     $('#category-slider .-category').on('click', function(){
+       var cat_id = $(this).attr("data-cat");
+       $('#category-slider .-category').not(this).removeClass('activated');
+       $(this).toggleClass('activated');
+     });
+
     }
 
     return {
