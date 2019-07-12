@@ -276,11 +276,13 @@
   padding: 1px 3px;
 }
 
-.usersettingsContainer .nav-usersettings, .mobileUserSettings .nav-usersettings {
+.usersettingsContainer .nav-usersettings,
+.mobileUserSettings .nav-usersettings,
+.mobileMainNav {
 
   display: flex;
 
-  section.personal {
+  section.personal, section.general {
     position: relative;
     width:300px;
     overflow: hidden;

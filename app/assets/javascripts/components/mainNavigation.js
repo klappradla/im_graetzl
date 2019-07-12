@@ -67,10 +67,10 @@ APP.components.mainNavigation = (function() {
         });
 
 
-        // Personal Slide in Menue
+        // Slide in Menue
         var personalNavWidth = $('.usersettingsContainer section.personal').width();
         $('.usersettingsContainer section.second').css('left', personalNavWidth);
-        $('.mobileUserSettings section.second').css('left', '100%');
+        $('.mobileNavHolder section.second').css('left', '100%');
 
         //Desktop
         $('.usersettingsContainer .main a.-trigger').on('click', function(){
@@ -78,11 +78,11 @@ APP.components.mainNavigation = (function() {
           $('.usersettingsContainer ' + personalNavType ).animate({ "left": "0px" }, 250 );
         });
         //Mobile
-        $('.mobileUserSettings .main a.-trigger').on('click', function(){
-          var personalNavType = 'section.' + $(this).data("type");
-          var personalNavTypeHeight = $('.mobileUserSettings ' + personalNavType).height();
-          $('.mobileUserSettings ' + personalNavType ).animate({ "left": "0px" }, 250 );
-          $('.mobileUserSettings section.personal').animate({ "height": personalNavTypeHeight }, 250 );
+        $('.mobileNavHolder .main a.-trigger').on('click', function(){
+          var navType = 'section.' + $(this).data("type");
+          var navTypeHeight = $('.mobileNavHolder ' + navType).height();
+          $('.mobileNavHolder ' + navType ).animate({ "left": "0px" }, 250 );
+          $(this).closest('.-wrapper').animate({ "height": navTypeHeight }, 250 );
         });
 
         // Close Desktop
@@ -91,11 +91,11 @@ APP.components.mainNavigation = (function() {
           $('.usersettingsContainer ' + personalNavType ).animate({ "left": personalNavWidth }, 200 );
         });
         // Close Mobile
-        $('.mobileUserSettings .second a.-trigger').on('click', function(){
+        $('.mobileNavHolder .second a.-trigger').on('click', function(){
           var personalNavType = 'section.' + $(this).data("type");
-          $('.mobileUserSettings ' + personalNavType ).animate({ "left": '100%' }, 200 );
-          var personalNavTypeHeight = $('.mobileUserSettings section.main').height();
-          $('.mobileUserSettings section.personal').animate({ "height": personalNavTypeHeight }, 250 );
+          $('.mobileNavHolder ' + personalNavType ).animate({ "left": '100%' }, 200 );
+          var parentMainHeight = $(this).closest('div').find('.main').height();
+          $(this).closest('.-wrapper').animate({ "height": parentMainHeight }, 250 );
         });
         // End
 

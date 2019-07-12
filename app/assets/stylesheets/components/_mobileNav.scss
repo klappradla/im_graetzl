@@ -125,8 +125,9 @@
     }
   }
 
-  .mobileUserSettings .nav-usersettings {
-    section.personal {
+  .mobileUserSettings .nav-usersettings,
+  .mobileMainNav {
+    section.personal, section.general {
       width:100%;
       section.second {
         height: auto;
