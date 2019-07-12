@@ -98,19 +98,21 @@ APP.controllers.wien = (function() {
         prevHtml: '',
         nextHtml: '',
         adaptiveHeight:false,
-        //currentPagerPosition: 'middle',
+        currentPagerPosition: 'middle',
         enableTouch:true,
         enableDrag:false,
         freeMove:true,
         swipeThreshold: 40,
         pauseOnHover: true,
+        addClass: '-desktop',
         responsive : [
           {
             breakpoint:850,
             settings: {
               item: item_tab,
+              addClass: '-tablet',
               onBeforeSlide: function (el) {
-                showControls(el.getCurrentSlideCount(), item_tab);
+                //showControls(el.getCurrentSlideCount(), item_tab);
               }
             }
           },
@@ -119,18 +121,20 @@ APP.controllers.wien = (function() {
             settings: {
               item: item_mob,
               controls: false,
+              pager: true,
+              addClass: '-mobile',
               onBeforeSlide: function (el) {
-                showControls(el.getCurrentSlideCount(), item_mob);
+                //showControls(el.getCurrentSlideCount(), item_mob);
               }
             }
           }
         ],
         onBeforeSlide: function (el) {
-          showControls(el.getCurrentSlideCount(), item_desk);
+          //showControls(el.getCurrentSlideCount(), item_desk);
         }
       });
 
-      $('.lSPrev').hide(); // hide prev on load
+      //$('.lSPrev').hide(); // hide prev on load
 
       // Show or Hide Control Buttons
       function showControls(currentCount, itemCount) {
@@ -157,7 +161,15 @@ APP.controllers.wien = (function() {
        var cat_id = $(this).attr("data-cat");
        $('#category-slider .-category').not(this).removeClass('activated');
        $(this).toggleClass('activated');
+
+       // On mobile slide on click
+       if ($('.lSSlideOuter').is('.-mobile')) {
+         slider.goToSlide(cat_id-1);
+       }
+
      });
+
+
 
     }
 
