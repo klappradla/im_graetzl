@@ -97,6 +97,9 @@
 }
 
 // Filterstream Wide Scroll Band
+.filter-stream.-scrollnav::-webkit-scrollbar {
+  height: 0 !important
+}
 .filter-stream.-scrollnav {
   width: 100vw;
   position: relative;
@@ -107,6 +110,8 @@
   margin-right: -50vw;
   background-color:rgba($color-ambient-mint, 0.2);
   border-bottom: 1px solid #DEEAE6;
+  overflow: -moz-scrollbars-none !important; // Testen
+  -ms-overflow-style: none !important; // Testen
 
     // Mobile
     justify-content: flex-start;

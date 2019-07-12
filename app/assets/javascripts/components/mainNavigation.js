@@ -4,6 +4,7 @@ APP.components.mainNavigation = (function() {
 
     function init() {
 
+        $scrollableIconNav = $('.-scrollnav.overthrow');
         $mobileNavTrigger =  $('.mobileNavToggle');
         $mainNavHolder =  $(".mainNavHolder");
         $mobileNavHolder = $(".mobileNavHolder");
@@ -105,6 +106,11 @@ APP.components.mainNavigation = (function() {
             if ($mobileMainNav.hasClass("is-open")) closeMobileNav();
             else openMobileNav();
         });
+
+        if ($scrollableIconNav.exists()) {
+          scrollableIconNav();
+        }
+
     }
 
     function openMobileNav() {
@@ -144,6 +150,12 @@ APP.components.mainNavigation = (function() {
         var id = $ele.attr("data-mobileNavID");
         $ele.removeClass("is-open");
         $(".mobileNavHolder [data-mobileNavID="+id+"]").removeClass("is-open");
+    }
+
+    // Scroll to Active Icon
+    function scrollableIconNav() {
+      var clickedIconPosition = $scrollableIconNav.find('.active').position();
+      $scrollableIconNav.scrollLeft(clickedIconPosition.left-10);
     }
 
     return {
