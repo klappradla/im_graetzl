@@ -13,6 +13,21 @@
   </div>
   <!-- END mobile select menu -->
 
+  <%= active_link_to rooms_wien_path, class: "iconfilter" do %>
+    <%= icon_tag "raumteiler" %>
+    <div class="txt">Raum<br/>teiler</div>
+  <% end %>
+
+  <%= active_link_to '/wien/toolteiler', class: "iconfilter" do %>
+    <%= icon_tag "share" %>
+    <div class="txt">Tool<br>teiler</div>
+  <% end %>
+
+  <%= active_link_to groups_wien_path, class: "iconfilter -coopshare" do %>
+    <%= icon_tag "coop-share" %>
+    <div class="txt">Gruppen</div>
+  <% end %>
+
   <%= active_link_to locations_wien_path, class: "iconfilter" do %>
     <%= icon_tag "location" %>
     <div class="txt">Anbieter <br/>& Locations</div>
@@ -21,16 +36,6 @@
   <%= active_link_to meetings_wien_path, class: "iconfilter" do %>
     <%= icon_tag "calendar-2" %>
     <div class="txt">Events & <br/>Workshops</div>
-  <% end %>
-
-  <%= active_link_to rooms_wien_path, class: "iconfilter" do %>
-    <%= icon_tag "raumteiler" %>
-    <div class="txt">Raum<br/>teiler</div>
-  <% end %>
-
-  <%= active_link_to groups_wien_path, class: "iconfilter -coopshare" do %>
-    <%= icon_tag "coop-share" %>
-    <div class="txt">Gruppen</div>
   <% end %>
 
   <%= active_link_to zuckerls_wien_path, class: "iconfilter" do %>

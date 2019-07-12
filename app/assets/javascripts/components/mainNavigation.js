@@ -8,7 +8,7 @@ APP.components.mainNavigation = (function() {
         $mobileNavTrigger =  $('.mobileNavToggle');
         $mainNavHolder =  $(".mainNavHolder");
         $mobileNavHolder = $(".mobileNavHolder");
-        $dropdownTriggers = $(".graetzlTrigger, .dropdownTrigger, .usersettingsTrigger");
+        $dropdownTriggers = $(".graetzlTrigger, .wienTrigger, .dropdownTrigger, .usersettingsTrigger");
         $notificationList = $(".nav-notifications .notifications");
 
         enquire
@@ -41,6 +41,7 @@ APP.components.mainNavigation = (function() {
             .register("screen and (min-width:" + APP.config.majorBreakpoints.medium + "px)", {
                 deferSetup : true,
                 setup : function() {
+                    $(".wienTrigger").jqDropdown('attach', '.wienContainer');
                     $(".graetzlTrigger").jqDropdown('attach', '.graetzlContainer');
                     $(".notificationsTrigger").jqDropdown('attach', '.notificationsContainer');
                     $(".usersettingsTrigger").jqDropdown('attach', '.usersettingsContainer');
@@ -107,7 +108,7 @@ APP.components.mainNavigation = (function() {
             else openMobileNav();
         });
 
-        if ($scrollableIconNav.exists()) {
+        if ($scrollableIconNav.find('.active').exists()) {
           scrollableIconNav();
         }
 

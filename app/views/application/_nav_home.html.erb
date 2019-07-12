@@ -1,31 +1,34 @@
 <div class="mainNav">
   <%= link_to 'Home', root_path, class: 'homelink' %>
+  <div class="wienTrigger dropdownTrigger" data-horizontal-offset="0" data-mobileNavID="wien">
+    <%= icon_tag "arrow-down-2" %>
+    <span class="txt">Wien</span>
+  </div>
   <div class="graetzlTrigger dropdownTrigger" data-horizontal-offset="0" data-mobileNavID="graetzl">
     <%= icon_tag "arrow-down-2" %>
     <span class="txt">Grätzl entdecken</span>
   </div>
-  <%= link_to wien_path, class: 'bloglink' do %>
-    <%= icon_tag "map-location" %>
-    <div class="txt">Wien</div>
-  <% end %>
 
   <!-- dropDowns -->
-  <div class="graetzlContainer jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-left dropdown-container">
-    <div class="jq-dropdown-panel nav-graetzl">
+  <div class="wienContainer jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-left dropdown-container">
+    <div class="jq-dropdown-panel nav-wien">
       <%= link_to wien_path do %>
-        <%= icon_tag "map-location" %> Wien Übersicht
+        <%= icon_tag "map-location" %> Wien Karte
+      <% end %>
+      <%= link_to rooms_wien_path do %>
+        <%= icon_tag "raumteiler" %> Raumteiler
+      <% end %>
+      <%= link_to '/wien/toolteiler' do %>
+        <%= icon_tag "share" %> Toolteiler
+      <% end %>
+      <%= link_to groups_wien_path do %>
+        <%= icon_tag "coop-share-white" %> Gruppen
       <% end %>
       <%= link_to locations_wien_path do %>
         <%= icon_tag "location" %> Anbieter & Locations
       <% end %>
       <%= link_to meetings_wien_path do %>
         <%= icon_tag "calendar-2" %> Events & Workshops
-      <% end %>
-      <%= link_to rooms_wien_path do %>
-        <%= icon_tag "raumteiler" %> Raumteiler
-      <% end %>
-      <%= link_to groups_wien_path do %>
-        <%= icon_tag "coop-share" %> Gruppen
       <% end %>
       <%= link_to zuckerls_wien_path do %>
         <%= icon_tag "shopping-bag" %> Zuckerl & Angebote
@@ -41,4 +44,15 @@
 
     </div>
   </div>
+
+  <!-- dropDowns -->
+  <div class="graetzlContainer jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-left dropdown-container">
+    <div class="jq-dropdown-panel nav-graetzl">
+      <%= link_to wien_path do %>
+        <%= icon_tag "map-location" %> Wien Karte
+      <% end %>
+    </div>
+  </div>
+
+
 </div>

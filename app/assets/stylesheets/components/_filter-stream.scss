@@ -108,12 +108,12 @@
   margin: 0px 0px 0px 0px;
   margin-left: -50vw;
   margin-right: -50vw;
-  background-color:rgba($color-ambient-mint, 0.2);
-  border-bottom: 1px solid #DEEAE6;
   overflow: -moz-scrollbars-none !important; // Testen
   -ms-overflow-style: none !important; // Testen
 
     // Mobile
+    background-color:rgba($color-ambient-mint, 0.2);
+    border-bottom: 1px solid #DEEAE6;
     justify-content: flex-start;
     margin-top: -30px;
     margin-bottom:30px;
@@ -121,18 +121,20 @@
     .iconfilter .txt {display: none;}
 
   @include respond-to(">=medium") {
+    background:none;
+    border-bottom: none;
     justify-content: center;
     margin-top: -50px;
-    margin-bottom:40px;
     padding: 20px 20px 25px 20px;
-    .iconfilter .txt {display: block;}
   }
   @include respond-to(">=large") {
     margin-top: -80px;
     padding: 45px 20px 25px 20px;
+    .iconfilter .txt {display: block;}
   }
 
   @include respond-to(">=medium") {
+
     &::before {
       content: '';
       position: absolute;

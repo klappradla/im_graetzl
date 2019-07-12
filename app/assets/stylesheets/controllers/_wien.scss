@@ -4,8 +4,9 @@ section.wien {
   }
   .mapImgBlock {
     margin-bottom: 20px;
-    @include respond-to(">=large") {
-      margin-bottom: 50px;
+    margin-top:-60px;
+    @include respond-to(">=medium") {
+      margin-bottom: 30px;
     }
   }
 

@@ -48,6 +48,7 @@
   .bloglink,
   .createMeeting,
   .graetzlTrigger,
+  .wienTrigger,
   .registerlink,
   .loginlink,
   .notificationsTrigger,
@@ -72,10 +73,14 @@
 
 
 
-  .homelink {
+  .homelink, .wienTrigger span {
     padding-right: 20px;
     margin-right: 16px;
     border-right: 1px dotted lighten($color-ambient-mint, 20);
+  }
+
+  .wienTrigger svg {
+    margin-right: 10px;
   }
 
   .bloglink {

@@ -15,16 +15,6 @@
     <div class="txt">Grätzl <br/><%= user_signed_in? ? "Stream" : "Übersicht" %></div>
   <% end %>
 
-  <%= active_link_to locations_graetzl_path(@graetzl), class: "iconfilter" do %>
-    <%= icon_tag "location" %>
-    <div class="txt">Anbieter <br/>& Locations</div>
-  <% end %>
-
-  <%= active_link_to meetings_graetzl_path(@graetzl), class: "iconfilter" do %>
-    <%= icon_tag "calendar-2" %>
-    <div class="txt">Events & <br/>Workshops</div>
-  <% end %>
-
   <%= active_link_to rooms_graetzl_path(@graetzl), class: "iconfilter" do %>
     <%= icon_tag "raumteiler" %>
     <div class="txt">Raum<br/>teiler</div>
@@ -33,6 +23,16 @@
   <%= active_link_to groups_graetzl_path(@graetzl), class: "iconfilter -coopshare" do %>
     <%= icon_tag "coop-share" %>
     <div class="txt">Gruppen</div>
+  <% end %>
+
+  <%= active_link_to locations_graetzl_path(@graetzl), class: "iconfilter" do %>
+    <%= icon_tag "location" %>
+    <div class="txt">Anbieter <br/>& Locations</div>
+  <% end %>
+
+  <%= active_link_to meetings_graetzl_path(@graetzl), class: "iconfilter" do %>
+    <%= icon_tag "calendar-2" %>
+    <div class="txt">Events & <br/>Workshops</div>
   <% end %>
 
   <%= active_link_to zuckerls_graetzl_path(@graetzl), class: "iconfilter" do %>

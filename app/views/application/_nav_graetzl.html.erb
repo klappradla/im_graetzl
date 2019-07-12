@@ -1,37 +1,38 @@
 <div class="mainNav">
   <%= link_to 'Home', root_path, class: 'homelink' %>
+  <div class="wienTrigger dropdownTrigger" data-horizontal-offset="0" data-mobileNavID="wien">
+    <%= icon_tag "arrow-down-2" %>
+    <span class="txt">Wien</span>
+  </div>
   <div class="graetzlTrigger dropdownTrigger" data-horizontal-offset="0" data-mobileNavID="graetzl">
     <%= icon_tag "arrow-down-2" %>
     <span class="txt"><%= graetzl.name %></span>
   </div>
-  <%= link_to wien_path, class: 'bloglink' do %>
-    <%= icon_tag "map-location" %>
-    <div class="txt">Wien</div>
-  <% end %>
 
-  <!-- dropDown -->
-  <div class="graetzlContainer jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-left dropdown-container">
-    <div class="jq-dropdown-panel nav-graetzl">
-      <%= link_to graetzl_path(graetzl) do %>
-        <%= icon_tag "home" %> <%= graetzl.name %>
+
+  <!-- dropDowns -->
+  <div class="wienContainer jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-left dropdown-container">
+    <div class="jq-dropdown-panel nav-wien">
+      <%= link_to wien_path do %>
+        <%= icon_tag "map-location" %> Wien Karte
       <% end %>
-      <%= link_to locations_graetzl_path(graetzl) do %>
-        <%= icon_tag "location" %> Anbieter & Locations
-      <% end %>
-      <%= link_to meetings_graetzl_path(graetzl) do %>
-        <%= icon_tag "calendar-2" %> Events & Workshops
-      <% end %>
-      <%= link_to rooms_graetzl_path(graetzl) do %>
+      <%= link_to rooms_wien_path do %>
         <%= icon_tag "raumteiler" %> Raumteiler
       <% end %>
-      <%= link_to groups_graetzl_path(graetzl) do %>
-        <%= icon_tag "coop-share" %> Gruppen
+      <%= link_to '/wien/toolteiler' do %>
+        <%= icon_tag "share" %> Toolteiler
       <% end %>
-      <%= link_to zuckerls_graetzl_path(graetzl) do %>
+      <%= link_to groups_wien_path do %>
+        <%= icon_tag "coop-share-white" %> Gruppen
+      <% end %>
+      <%= link_to locations_wien_path do %>
+        <%= icon_tag "location" %> Anbieter & Locations
+      <% end %>
+      <%= link_to meetings_wien_path do %>
+        <%= icon_tag "calendar-2" %> Events & Workshops
+      <% end %>
+      <%= link_to zuckerls_wien_path do %>
         <%= icon_tag "shopping-bag" %> Zuckerl & Angebote
-      <% end %>
-      <%= link_to posts_graetzl_path(graetzl) do %>
-        <%= icon_tag "head-idea-lightbulb" %> Ideen im Grätzl
       <% end %>
 
       <%= link_to info_path do %>
@@ -40,6 +41,35 @@
 
       <%= link_to "https://blog.imgraetzl.at/", class: 'discover', target: '_blank' do %>
         <%= icon_tag "coffee" %> Blog
+      <% end %>
+
+    </div>
+  </div>
+
+
+  <!-- dropDown -->
+  <div class="graetzlContainer jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-left dropdown-container">
+    <div class="jq-dropdown-panel nav-graetzl">
+      <%= link_to graetzl_path(graetzl) do %>
+        <%= icon_tag "home" %> <%= graetzl.name %>
+      <% end %>
+      <%= link_to rooms_graetzl_path(graetzl) do %>
+        <%= icon_tag "raumteiler" %> Raumteiler
+      <% end %>
+      <%= link_to groups_graetzl_path(graetzl) do %>
+        <%= icon_tag "coop-share" %> Gruppen
+      <% end %>
+      <%= link_to locations_graetzl_path(graetzl) do %>
+        <%= icon_tag "location" %> Anbieter & Locations
+      <% end %>
+      <%= link_to meetings_graetzl_path(graetzl) do %>
+        <%= icon_tag "calendar-2" %> Events & Workshops
+      <% end %>
+      <%= link_to zuckerls_graetzl_path(graetzl) do %>
+        <%= icon_tag "shopping-bag" %> Zuckerl & Angebote
+      <% end %>
+      <%= link_to posts_graetzl_path(graetzl) do %>
+        <%= icon_tag "head-idea-lightbulb" %> Ideen im Grätzl
       <% end %>
     </div>
   </div>
