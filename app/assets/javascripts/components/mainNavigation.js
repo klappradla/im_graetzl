@@ -158,6 +158,17 @@ APP.components.mainNavigation = (function() {
       var clickedIconPosition = $scrollableIconNav.find('.active').position();
       //$scrollableIconNav.scrollLeft(clickedIconPosition.left-10);
       $scrollableIconNav.animate( { scrollLeft: clickedIconPosition.left-10 }, 750);
+
+      // Add Sticky Class
+      $(window).bind('scroll', function() {
+        if ($(window).scrollTop() > $('header').height()) {
+          $scrollableIconNav.addClass('fixed');
+        }
+        else {
+          $scrollableIconNav.removeClass('fixed');
+        }
+      });
+
     }
 
     return {

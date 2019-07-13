@@ -101,6 +101,17 @@
   height: 0 !important
 }
 .filter-stream.-scrollnav {
+
+@include respond-to("<=medium") {
+  &.fixed {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+    left:0;
+    z-index: 9999;
+  }
+}
+
   width: 100vw;
   position: relative;
   left: 50%;
@@ -113,7 +124,7 @@
 
     // Mobile
     //background-color:rgba($color-ambient-mint, 0.5);
-    //background-color:#DBEFEC;
+    background-color:#fcfcfc;
     border-bottom: 1px solid #DEEAE6;
     justify-content: flex-start;
     margin-top: -30px;
