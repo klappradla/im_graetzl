@@ -113,7 +113,7 @@
 
     // Mobile
     //background-color:rgba($color-ambient-mint, 0.5);
-    background-color:#DBEFEC;
+    //background-color:#DBEFEC;
     border-bottom: 1px solid #DEEAE6;
     justify-content: flex-start;
     margin-top: -30px;
@@ -177,10 +177,24 @@
     min-width: 55px;
     background-size: 55px 55px;
     background-image: url(image_path('svg/kringel-grey-white.svg'));
-    &:hover, &.active {
-      background-image: url(image_path('svg/kringel-grey-white-active.svg'));
+    &:hover {
+      background-image: url(image_path('svg/kringel-grey-white.svg'));
+      [class^=icon-] {
+        fill: $color-ambient-mint-dark;
+      }
+    }
+    &.active, &.active:hover {
+      background-image: url(image_path('svg/kringel-grey-mint.svg'));
       [class^=icon-] {
         fill: $color-ambient-rosa;
+      }
+    }
+    @include respond-to(">medium") {
+      &:hover, &.active {
+        background-image: url(image_path('svg/kringel-grey-mint.svg'));
+        [class^=icon-] {
+          fill: $color-ambient-rosa;
+        }
       }
     }
   }

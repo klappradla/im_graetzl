@@ -156,7 +156,8 @@ APP.components.mainNavigation = (function() {
     // Scroll to Active Icon
     function scrollableIconNav() {
       var clickedIconPosition = $scrollableIconNav.find('.active').position();
-      $scrollableIconNav.scrollLeft(clickedIconPosition.left-10);
+      //$scrollableIconNav.scrollLeft(clickedIconPosition.left-10);
+      $scrollableIconNav.animate( { scrollLeft: clickedIconPosition.left-10 }, 750);
     }
 
     return {
