@@ -153,11 +153,18 @@ APP.components.mainNavigation = (function() {
         $(".mobileNavHolder [data-mobileNavID="+id+"]").removeClass("is-open");
     }
 
-    // Scroll to Active Icon
+    // Scroll to Active Icon if needed
     function scrollableIconNav() {
-      var clickedIconPosition = $scrollableIconNav.find('.active').position();
-      //$scrollableIconNav.scrollLeft(clickedIconPosition.left-10);
-      $scrollableIconNav.animate( { scrollLeft: clickedIconPosition.left-10 }, 750);
+      
+      var clickedIcon = $scrollableIconNav.find('.active');
+      var clickedIconPosition = clickedIcon.position();
+      var clickedIconWidth = clickedIconPosition.left + clickedIcon.width();
+      var screenWidth = $(window).width();
+
+      // Scroll if needed
+      if (clickedIconWidth > screenWidth) {
+        $scrollableIconNav.animate( { scrollLeft: clickedIconWidth - screenWidth }, 750);
+      }
 
       // Add Sticky Class
       $(window).bind('scroll', function() {
