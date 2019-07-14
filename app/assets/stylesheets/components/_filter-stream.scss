@@ -111,6 +111,7 @@
   //margin-right: -50vw;
   margin-left:-20px;
   margin-right:-20px;
+  margin-bottom:30px;
   overflow: -moz-scrollbars-none !important; // Testen
   -ms-overflow-style: none !important; // Testen
 
@@ -164,6 +165,10 @@
       pointer-events: none;
       z-index: 9;
     }
+  }
+
+  .createentry, .loginlink {
+    margin-left:0;
   }
 
 
@@ -225,7 +230,7 @@
 }
 
 .filter-stream.-underMap {
-    margin-top:-35px;
+    margin-top:0px;
     &::before {
       display: none;
     }
@@ -234,7 +239,6 @@
     }
     @include respond-to(">=large") {
       margin-left:30px;
-      margin-top:-50px;
       padding-bottom: 30px;
     }
 }

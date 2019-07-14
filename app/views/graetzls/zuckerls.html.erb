@@ -11,7 +11,7 @@
 <section class="graetzls">
   <%= render 'map' %>
   <%= render 'curator' if @graetzl.curator %>
-  <%= render 'menu' %>
+  <%= render 'navigation' %>
 
   <% if !user_signed_in? %>
     <div class="hl-subtext">

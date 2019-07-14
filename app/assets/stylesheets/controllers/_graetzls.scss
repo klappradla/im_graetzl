@@ -1,12 +1,5 @@
 section.graetzls {
 
-  .mapImgBlock {
-    margin-bottom: 20px;
-    @include respond-to(">=large") {
-      margin-bottom: 50px;
-    }
-  }
-
   .filter-stream {
     margin-bottom: 60px;
   }

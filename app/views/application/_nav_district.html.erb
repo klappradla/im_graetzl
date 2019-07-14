@@ -56,6 +56,9 @@
       <%= link_to rooms_district_path(district) do %>
         <%= icon_tag "raumteiler" %> Raumteiler (<%= district.numeric %>. Bez.)
       <% end %>
+      <%= link_to '#' do %>
+        <%= icon_tag "share" %> Toolteiler (<%= district.numeric %>. Bez.)
+      <% end %>
       <%= link_to groups_district_path(district) do %>
         <%= icon_tag "coop-share" %> Gruppen (<%= district.numeric %>. Bez.)
       <% end %>

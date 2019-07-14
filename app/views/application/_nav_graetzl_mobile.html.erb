@@ -7,12 +7,32 @@
         <%= icon_tag "home" %> <%= graetzl.name %>
         <span class="-more"><%= icon_tag "arrow-right-2" %></span>
       <% end %>
+      <!--
       <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-wien'} do %>
         <%= icon_tag "map-location" %> Wien
         <span class="-more"><%= icon_tag "arrow-right-2" %></span>
       <% end %>
+      -->
       <%= link_to wien_path, class: 'discover' do %>
         <%= icon_tag "map-location" %> Wien Karte
+      <% end %>
+      <%= link_to rooms_wien_path do %>
+        <%= icon_tag "raumteiler" %> Raumteiler
+      <% end %>
+      <%= link_to '/wien/toolteiler' do %>
+        <%= icon_tag "share" %> Toolteiler
+      <% end %>
+      <%= link_to groups_wien_path do %>
+        <%= icon_tag "coop-share" %> Gruppen
+      <% end %>
+      <%= link_to locations_wien_path do %>
+        <%= icon_tag "location" %> Anbieter & Locations
+      <% end %>
+      <%= link_to meetings_wien_path do %>
+        <%= icon_tag "calendar-2" %> Events & Workshops
+      <% end %>
+      <%= link_to zuckerls_wien_path do %>
+        <%= icon_tag "shopping-bag" %> Zuckerl & Angebote
       <% end %>
       <%= link_to info_path do %>
         <%= icon_tag "lightbulb" %> Alle Services
@@ -29,11 +49,14 @@
       <% end %>
       <%= link_to graetzl_path(graetzl) do %>
         <%= icon_tag "home" %>
-        <%= graetzl.name %>
+        Home | <%= graetzl.name %>
       <% end %>
       <%= link_to rooms_graetzl_path(graetzl) do %>
         <%= icon_tag "raumteiler" %>
         Raumteiler
+      <% end %>
+      <%= link_to '#' do %>
+        <%= icon_tag "share" %> Toolteiler
       <% end %>
       <%= link_to groups_graetzl_path(graetzl) do %>
         <%= icon_tag "coop-share" %>
@@ -60,24 +83,6 @@
     <section class="second -wien">
       <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-wien'} do %>
         <%= icon_tag "arrow-left-2" %> Zurück
-      <% end %>
-      <%= link_to rooms_wien_path do %>
-        <%= icon_tag "raumteiler" %> Raumteiler
-      <% end %>
-      <%= link_to '/wien/toolteiler' do %>
-        <%= icon_tag "share" %> Toolteiler
-      <% end %>
-      <%= link_to groups_wien_path do %>
-        <%= icon_tag "coop-share" %> Gruppen
-      <% end %>
-      <%= link_to locations_wien_path do %>
-        <%= icon_tag "location" %> Anbieter & Locations
-      <% end %>
-      <%= link_to meetings_wien_path do %>
-        <%= icon_tag "calendar-2" %> Events & Workshops
-      <% end %>
-      <%= link_to zuckerls_wien_path do %>
-        <%= icon_tag "shopping-bag" %> Zuckerl & Angebote
       <% end %>
     </section>
 

@@ -11,7 +11,7 @@
 <section class="graetzls -groups">
   <%= render 'map' %>
   <%= render 'curator' if @graetzl.curator %>
-  <%= render 'menu' %>
+  <%= render 'navigation' %>
 
   <% if @featured_groups.present? && @category.nil? %>
     <div class="lightSliderWrapper card-slider-container">
