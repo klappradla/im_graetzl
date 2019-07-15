@@ -44,6 +44,7 @@
 //= require unscroll
 //= require autogrow
 //= require datatables.min
+//= require jBox.min
 //= require timetable
 //= require moment-with-locales.min
 //= require datetime-moment

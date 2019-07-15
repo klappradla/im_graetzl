@@ -36,48 +36,43 @@
   <% end %>
 
   <% if user_signed_in? %>
-    <%= link_to '#', class: 'iconfilter createentry', data: { behavior: 'createTrigger' } do %>
+    <%= link_to 'javascript:void(0);', class: 'iconfilter createentry', id: 'createContent' do %>
       <%= icon_tag "pencil" %>
     <% end %>
   <% end %>
+
 </div>
 
 <% if user_signed_in? %>
-  <div class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container createmenu" data-behavior="createContainer">
-    <div class="jq-dropdown-panel">
+  <div class="jBoxHidden jBoxDropdown" id="jBoxCreateContent">
+    <%= link_to new_meeting_path(graetzl_id: @graetzl.id) do %>
+      <%= icon_tag "calendar-2" %>
+      <div class="icontxt">Neues Treffen</div>
+    <% end %>
+    <%= link_to select_room_offers_path do %>
+      <%= icon_tag "raumteiler" %>
+      <div class="icontxt">Neuer Raumteiler</div>
+    <% end %>
+    <%= link_to new_group_path(graetzl_id: @graetzl.id) do %>
+      <%= icon_tag "speech-bubble" %>
+      <div class="icontxt">Neue Gruppe gründen</div>
+    <% end %>
+    <%= link_to new_graetzl_user_post_path(@graetzl) do %>
+      <%= icon_tag "head-idea-lightbulb" %>
+      <div class="icontxt">Neue Idee im Grätzl</div>
+    <% end %>
 
-      <%= link_to new_meeting_path(graetzl_id: @graetzl.id) do %>
-        <%= icon_tag "calendar-2" %>
-        <div class="icontxt">Neues Treffen</div>
+    <% current_user.locations.approved.each do |location| %>
+      <%= link_to graetzl_location_path(Graetzl.memoized(location.graetzl_id), location, anchor: 'location-post-form') do %>
+        <%= icon_tag "location" %>
+        <div class="icontxt">Neuigkeit meiner Location</div>
+        <%= attachment_image_tag location, :avatar, :fill, 35, 35, fallback: 'avatar/location/35x35.png', class: 'img-square' %>
       <% end %>
-
-      <%= link_to select_room_offers_path do %>
-        <%= icon_tag "raumteiler" %>
-        <div class="icontxt">Neuer Raumteiler</div>
+      <%= link_to new_location_zuckerl_path(location) do %>
+        <%= icon_tag "shopping-bag" %>
+        <div class="icontxt">Grätzlzuckerl meiner Location</div>
+        <%= attachment_image_tag location, :avatar, :fill, 35, 35, fallback: 'avatar/location/35x35.png', class: 'img-square' %>
       <% end %>
-
-      <%= link_to new_group_path(graetzl_id: @graetzl.id) do %>
-        <%= icon_tag "speech-bubble" %>
-        <div class="icontxt">Neue Gruppe gründen</div>
-      <% end %>
-
-      <%= link_to new_graetzl_user_post_path(@graetzl) do %>
-        <%= icon_tag "head-idea-lightbulb" %>
-        <div class="icontxt">Neue Idee im Grätzl</div>
-      <% end %>
-
-      <% current_user.locations.approved.each do |location| %>
-        <%= link_to graetzl_location_path(Graetzl.memoized(location.graetzl_id), location, anchor: 'location-post-form') do %>
-          <%= icon_tag "location" %>
-          <div class="icontxt">Neuigkeit meiner Location</div>
-          <%= attachment_image_tag location, :avatar, :fill, 35, 35, fallback: 'avatar/location/35x35.png', class: 'img-square' %>
-        <% end %>
-        <%= link_to new_location_zuckerl_path(location) do %>
-          <%= icon_tag "shopping-bag" %>
-          <div class="icontxt">Grätzlzuckerl meiner Location</div>
-          <%= attachment_image_tag location, :avatar, :fill, 35, 35, fallback: 'avatar/location/35x35.png', class: 'img-square' %>
-        <% end %>
-      <% end %>
-    </div>
+    <% end %>
   </div>
 <% end %>

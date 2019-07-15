@@ -3,8 +3,9 @@ APP.controllers.graetzls = (function() {
     function init() {
       initMap();
       initFilter();
-      initMobileNav();
       initSlider();
+      initJBox();
+      //initMobileNav();
     }
 
     function initSlider() {
@@ -31,6 +32,35 @@ APP.controllers.graetzls = (function() {
       }
     }
 
+    function initJBox() {
+
+      var mobCreate = new jBox('Modal', {
+        addClass:'jBox',
+        attach: '.mob #createContent',
+        content: $('#jBoxCreateContent'),
+        trigger: 'click',
+        closeOnClick:true,
+        isolateScroll:true,
+        animation:{open: 'zoomIn', close: 'zoomOut'},
+      });
+
+      var deskCreate = new jBox('Tooltip', {
+        addClass:'jBox',
+        attach: '.desk #createContent',
+        content: $('#jBoxCreateContent'),
+        trigger: 'click',
+        closeOnClick:true,
+        pointer:'right',
+        adjustTracker:true,
+        isolateScroll:true,
+        adjustDistance: {top: 25, right: 25, bottom: 25, left: 25},
+        animation:{open: 'zoomIn', close: 'zoomOut'},
+        maxHeight:500,
+      });
+
+    }
+
+    /*
     function initMobileNav() {
       var $dropdown = $(".filter-stream .input-select select");
       $(".filter-stream .iconfilter").not('.createentry, .loginlink').each(function() {
@@ -51,8 +81,9 @@ APP.controllers.graetzls = (function() {
 
       });
 
+
       $('[data-behavior=createTrigger]').jqDropdown('attach', '[data-behavior=createContainer]');
-    }
+    }*/
 
     return {
       init: init

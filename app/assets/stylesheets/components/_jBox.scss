@@ -1,0 +1,36 @@
+.jBoxHidden {
+  display:none;
+}
+.jBoxDropdown {
+  > div, a {
+    border-bottom: 1px solid $color-ambient-mint-light;
+    padding: 15px;
+    text-decoration: none;
+    color: $color-font-primary;
+    display: flex;
+    align-items: center;
+    &:hover, &:active {
+      background-color: $color-ambient-mint-light;
+    }
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  [class^=icon-] {
+    margin-right: 16px;
+    color: $color-ambient-rosa;
+    width: 30px;
+    height: 30px;
+    flex: none;
+  }
+  .icontxt {
+    margin-right: 20px;
+  }
+  .img-square {
+    width: 30px;
+    height: 30px;
+    margin-left: auto;
+    padding: 1px;
+    flex: 0 0 auto;
+  }
+}

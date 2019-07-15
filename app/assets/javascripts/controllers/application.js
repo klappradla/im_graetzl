@@ -1,7 +1,5 @@
 APP.controllers.application = (function() {
 
-
-
   function init() {
 
     APP.components.mainNavigation.init();
@@ -17,7 +15,28 @@ APP.controllers.application = (function() {
       "theme": false
     };
 
-    //injectSponsorCard();
+    // Set Screen Mode Class
+    enquire
+        .register("screen and (max-width:" + APP.config.majorBreakpoints.medium + "px)", {
+            deferSetup : true,
+            setup : function() {
+              $('body').addClass('mob');
+            },
+            match : function() {
+              $('body').addClass('mob');
+              $('body').removeClass('desk');
+            }
+        })
+        .register("screen and (min-width:" + APP.config.majorBreakpoints.medium + "px)", {
+            deferSetup : true,
+            setup : function() {
+              $('body').addClass('desk');
+            },
+            match : function() {
+              $('body').addClass('desk');
+              $('body').removeClass('mob');
+            }
+        });
 
   }
 
@@ -25,20 +44,7 @@ APP.controllers.application = (function() {
   // TODO: this is a hack! stuff should come from DB
   function injectSponsorCard() {
 
-    var $markup = $('<div class="cardBox -sponsor sponsorstuwerviertel">' +
-      '<div class="cardBoxHeader">' +
-      '<img src="/assets/img/stuwerlogo.png" width="248" height="315" alt="">' +
-      '<div class="sideflag -R">Partner von imGrätzl</div>' +
-      '</div>' +
-      '<div class="cardBoxContent">' +
-      '<img class="eks" src="/assets/img/ek_strassen_logo.jpg" width="118" height="125" alt="">' +
-      '<div class="txt">' +
-      '<p>Die Wiener Einkaufsstraßen sind eine Aktion der Wirtschaftskammer Wien.</p>' +
-      '<p>Gefördert aus den Mitteln der Stadt Wien durch die Wirtschaftsagentur Wien. Ein Fonds der Stadt Wien.</p>' +
-      '</div>' +
-      '<img class="wko" src="/assets/img/wko_wa_logo.jpg" width="253" height="65" alt="">' +
-      '</div>' +
-      '</div>');
+    var $markup = $('<div class="cardBox"></div>');
 
     if(APP.utils.URLendsWith('/stuwerviertel') && APP.utils.isLoggedIn()) {
       $('.card-grid .cardBox').eq(2).after($markup);
