@@ -14,7 +14,6 @@
     text-align: center;
     font-style: italic;
     position: relative;
-    top: -30px;
     z-index: 2;
     @include font-size-primaryFont('larger');
   }
@@ -169,7 +168,7 @@
     text-align: center;
     font-style: italic;
     position: relative;
-    top: -30px;
+    margin-bottom: 40px;
     z-index: 2;
     @include font-size-primaryFont('larger');
 
@@ -235,7 +234,6 @@
 }
 .search-suggestion {
   display: none;
-  margin-top: -10px;
   margin-bottom: 20px;
   @include respond-to(">=medium") {
     margin-left: 30px;
@@ -278,8 +276,4 @@
 }
 .search-suggestion ~ .card-grid {
   //margin-top:20px !important;
-}
-.cards-filter .search-filter {
-  //margin-top: -30px;
-  padding-bottom:30px;
 }

@@ -14,9 +14,9 @@
 
   <% if @featured_groups.present? && @category.nil? %>
     <div class="lightSliderWrapper card-slider-container">
-      <h1 class="hl-main"><span>Gruppen</span> - Austausch & Vernetzung</h1>
-      <div class="text">
-        Empfohlene & beliebte Gruppen im <%= @district.numeric %>. Bezirk
+      <div class="hl-subtext">
+        <h1><span>Gruppen</span> - Austausch & Vernetzung</h1>
+        <p>Empfohlene & beliebte Gruppen im <%= @district.numeric %>. Bezirk</p>
       </div>
       <div class="cardBoxCollection" id="card-slider">
         <%= render @featured_groups %>

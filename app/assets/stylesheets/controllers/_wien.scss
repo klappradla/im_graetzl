@@ -1,26 +1,4 @@
 section.wien {
-  .filter-stream {
-    a.hide {display: none !important;}
-  }
-  .mapImgBlock {
-    margin-bottom: 20px;
-    margin-top:-60px;
-    @include respond-to(">=medium") {
-      margin-bottom: 30px;
-    }
-  }
-
-  .navBlock {
-    .links {
-      @include respond-to(">=medium") {
-        width: 400px;
-      }
-    }
-  }
-
-  .address-block {
-    padding-top:30px;
-  }
 
   .sideflag {
     display: none;
@@ -40,13 +18,10 @@ section.wien {
     .links {
       display: none;
       @include respond-to(">=medium") {
+        width: 400px;
         display: block;
       }
     }
-  }
-
-  .filter-stream {
-    margin-bottom: 60px;
   }
 
   .activeArea {
@@ -60,51 +35,24 @@ section.wien {
     }
   }
 
-
-  .teaserBlock {
-    h2 {
-      @include font-size-secondaryFont('base');
-      text-align: center;
-      margin-bottom: 30px;
-    }
-  }
-
-}
-
-// Navigation Buttons on Vienna Overview Pages beside Illustration
-section.wien.-overview-pages {
-  .mapImgBlock {
-    @include respond-to(">=small") {
-      height:150px;
-      .filter-stream {
-        margin: 0px 0px 0px 0px;
-      }
-      &::after {
-        display:none;
-      }
-      margin-bottom:10px;
-      .input-select {width:310px;}
-    }
+  // Hide Map on Desktop Overview Pages
+  &:not(.-overview) {
     @include respond-to(">=medium") {
-      background-image: url(image_path('illu/illu-karte-transparent@2x.jpg'));
-      background-repeat: no-repeat;
-      background-size: 700px;
-      background-position: right, center;
-      .filter-stream {
-        margin: 0px 0px 0px 170px;
+      .mapImgBlock {
+        display: none;
       }
-      &::after {
-        display:block;
-      }
-      margin-bottom:50px;
-      .input-select {width:350px;}
+      margin-top: -50px;
     }
     @include respond-to(">=large") {
-      height:200px;
+      .mapImgBlock {
+        display: none;
+      }
+      margin-top: -80px;
       .filter-stream {
-        margin: 0px 0px 0px 0px;
+        padding-top:55px;
       }
     }
-    margin-left: -40px;
   }
+
+
 }

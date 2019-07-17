@@ -34,14 +34,6 @@ section.districts {
     }
   }
 
-
-  .teaserBlock {
-    h2 {
-      @include font-size-secondaryFont('base');
-      text-align: center;
-      margin-bottom: 30px;
-    }
-  }
 }
 
 

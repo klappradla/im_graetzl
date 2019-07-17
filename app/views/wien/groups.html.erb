@@ -8,17 +8,16 @@
   )
 %>
 
-<section class="overview groups">
+<section class="wien groups">
 
+  <%= render 'map' %>
   <%= render 'navigation' %>
 
   <% if @featured_groups.present? && @category.nil? %>
     <div class="lightSliderWrapper card-slider-container">
       <div class="hl-subtext">
         <h1><em>Gruppen - Austausch & Vernetzung</em></h1>
-      </div>
-      <div class="text">
-        Empfohlene & beliebte Gruppen in Wien
+        <p>Empfohlene & beliebte Gruppen in Wien</p>
       </div>
       <div class="cardBoxCollection" id="card-slider">
         <%= render @featured_groups %>
@@ -26,12 +25,12 @@
     </div>
   <% end %>
 
-  <div class="card-grid-container">
+  <div class="hl-subtext">
+    <h1>Stöbern in <span class="category_title">allen</span> Gruppen</h1>
+    <p>Nach Gruppe suchen oder in Kategorien stöbern</p>
+  </div>
 
-    <div class="hl-subtext -groups">
-      <h1>Stöbern in <span class="category_title">allen</span> Gruppen</h1>
-      <p>Nach Gruppe suchen oder in Kategorien stöbern</p>
-    </div>
+  <div class="card-grid-container">
 
     <%= form_tag groups_path, method: :get, remote: true, class: 'cards-filter' do %>
       <%= hidden_field_tag :group_category_id, @category.try(:id) %>

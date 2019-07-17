@@ -12,6 +12,9 @@
     font-style: inherit;
     display: inline-table;
   }
+  + .card-grid-container {
+    margin-top:-20px;
+  }
 }
 
 .hl-subtext {
@@ -40,10 +43,8 @@
     font-style: inherit;
     display: inline-table;
   }
-  ~ .card-grid-container {
-    padding-top:10px;
-  }
-  &.-groups, &.-toolteiler {
-    margin-bottom: 20px;
+  // Container Abstand zu Cards nach Headline
+  + .card-grid-container {
+    margin-top:-20px;
   }
 }

@@ -16,15 +16,13 @@
   <% if @featured_groups.present? && @category.nil? %>
     <div class="lightSliderWrapper card-slider-container">
 
-      <% if !user_signed_in? %>
-        <div class="hl-subtext">
-          <h1 class="hl-main"><span>Gruppen</span> - Austausch & Vernetzung</h1>
-        </div>
-      <% end %>
-
-      <div class="text">
-        Empfohlene & beliebte Gruppen im Grätzl <%= @graetzl.name %>
+      <div class="hl-subtext">
+        <% if !user_signed_in? %>
+        <h1><span>Gruppen</span> - Austausch & Vernetzung</h1>
+        <% end %>
+        <p>Empfohlene & beliebte Gruppen im Grätzl <%= @graetzl.name %></p>
       </div>
+
       <div class="cardBoxCollection" id="card-slider">
         <%= render @featured_groups %>
       </div>
