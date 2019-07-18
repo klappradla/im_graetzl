@@ -2,13 +2,13 @@ APP.controllers.messenger = (function() {
 
   function init() {
     initMessenger();
+    initJBox();
   }
 
   function initMessenger() {
 
     // ------ Load Init Functions
     $('footer').hide(); // Disable Footer for Turn-Off Body Scrolling and better Height Calc
-    detectDeviceMode(); // Detect Device Mode  and set window.screenMode
     unscroll(); // Prevent Body Scrolling on Desktop
     setWindowHeight(); // Set Exact Browser vh
     scrollToLastMessage();
@@ -97,7 +97,7 @@ APP.controllers.messenger = (function() {
       scrollToLastMessage();
 
       // If Mobile Show Chat Window
-      if (window.screenMode == 'mob') {
+      if ($('body').hasClass('mob')) {
         $('#side-bar').toggleClass('is-collapsed');
         $('#main-content').toggleClass('is-full-width');
       }
@@ -110,26 +110,29 @@ APP.controllers.messenger = (function() {
 
   }
 
+
   function setWindowHeight() {
     var vh = window.innerHeight * 0.01; // Needed for Exactly Mobile Height
     document.documentElement.style.setProperty('--vh', vh+'px');
   }
 
-  function detectDeviceMode() {
-    enquire
-    //mobile mode
-    .register("screen and (max-width:" + APP.config.majorBreakpoints.medium + "px)", {
-        match : function() {
-            window.screenMode = 'mob';
-        }
-    })
-    //desktop mode
-    .register("screen and (min-width:" + APP.config.majorBreakpoints.medium + "px)", {
-        match : function() {
-          window.screenMode = 'desk';
-        }
+
+  function initJBox() {
+    var filterMessages = new jBox('Tooltip', {
+      addClass:'jBox',
+      attach: '#filterMessages',
+      content: $('#jBoxFilterMessages'),
+      trigger: 'click',
+      closeOnClick:true,
+      pointer:'left',
+      adjustTracker:true,
+      isolateScroll:true,
+      adjustDistance: {top: 25, right: 25, bottom: 25, left: 25},
+      animation:{open: 'zoomIn', close: 'zoomOut'},
+      maxHeight:500,
     });
   }
+
 
   return {
     init: init

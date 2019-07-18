@@ -6,24 +6,25 @@
 
       <div class="controls">
         <div class="user-ctrl">
+          <!--
           <img class="attachment user avatar img-round" src="https://d1dcf21ighh4hq.cloudfront.net/attachments/fad5d1e8df9b7eba405c9f2deec155f27c709f09/store/fill/400/400/0a90d925fcde3d6fa5b1b3f35f7ba2753972a5c6164acc222ab2e172d1ae/avatar.png">
+          -->
+          <div class="filter">
+            <%= link_to 'javascript:', id: 'filterMessages' do %>
+              Alle Nachrichten<%= icon_tag "arrow-down-2" %>
+            <% end %>
+            <div class="jBoxHidden jBoxDropdown" id="jBoxFilterMessages">
+              <%= link_to 'Alle Nachrichten', 'javascript:' %>
+              <%= link_to 'Toolteiler' %>
+              <%= link_to 'Raumteiler' %>
+              <%= link_to 'Archiv' %>
+            </div>
+          </div>
           <div class="actions">
             <a href="#" class="new_message"><%= icon_tag "pencil" %></a>
           </div>
         </div>
-        <div class="filter">
-          <%= link_to 'javascript:', data: { jq_dropdown: "#filter-messages-dropdown" } do %>
-            Alle Nachrichten<%= icon_tag "arrow-down-2" %>
-          <% end %>
-          <div id="filter-messages-dropdown" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container">
-            <div class="jq-dropdown-panel">
-              <%= link_to 'Alle', 'javascript:' %>
-              <%= link_to 'Toolteiler Chats' %>
-              <%= link_to 'Raumteiler Chats' %>
-              <%= link_to 'Archiv' %>
-            </div>
-          </div>
-        </div>
+
       </div>
 
 

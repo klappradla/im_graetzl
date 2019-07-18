@@ -101,15 +101,16 @@ section.messenger {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 10px 20px 10px 10px;
+        padding: 20px 20px 20px 10px;
       }
       .filter {
         display: flex;
         justify-content: center;
-        padding: 10px 10px 10px 10px;
-        border-top: 1px solid $color-ambient-mint-light;
+        //padding: 10px 10px 10px 10px;
+        //border-top: 1px solid $color-ambient-mint-light;
         a {
           color: $color-ambient-mint-dark;
+          white-space: nowrap;
           font-weight: bold;
           font-style: italic;
           text-decoration: none;
@@ -140,7 +141,7 @@ section.messenger {
       &.-active {
         background-color: rgba($color-ambient-mint-light,0.60);
         .img-round {
-          border: 1px dashed $color-ambient-mint-dark;
+          border: 1px dotted $color-ambient-mint-dark;
         }
       }
       &.-new {
@@ -157,6 +158,8 @@ section.messenger {
       }
       .avatar {
         margin-right: 10px;
+        width:50px;
+        height:50px;
       }
       .wrp {
         width:100%;
@@ -266,6 +269,11 @@ section.messenger {
   }
 
   .chatMsg {
+
+    img.avatar {
+      width:50px;
+      height:50px;
+    }
 
     width:100%;
     display: flex;
