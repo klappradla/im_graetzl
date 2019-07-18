@@ -14,16 +14,17 @@
   <%= render 'navigation' %>
 
   <% if !user_signed_in? %>
-    <div class="hl-subtext">
+    <div class="hl-subtext -cards">
       <h1>Gestaltet euer Grätzl mit - <span>Ideen & Wünsche</span></h1>
       <p>Entdecke, was sich BewohnerInnen fürs Grätzl <%= @graetzl.name %> wünschen und welche Ideen im Raum stehen.</p>
     </div>
   <% end %>
 
-  <div class="card-grid-container">
-    <%= form_tag posts_path(graetzl_id: @graetzl), method: :get, remote: true, class: 'cards-filter' do; end %>
-    <div class="card-grid" data-behavior="posts-card-container"></div>
+  <%= form_tag posts_path(graetzl_id: @graetzl), method: :get, remote: true, class: 'cards-filter' do; end %>
 
+  <div class="card-grid-container">
+    <div class="card-grid" data-behavior="posts-card-container"></div>
     <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'posts-paginate-link' }, rel: 'nofollow' %>
   </div>
+
 </section>

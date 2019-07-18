@@ -28,12 +28,27 @@
       }
     }
   }
+  .iconfilter:last-of-type {
+    margin-right: 0px;
+  }
 
   a.hide {display: none !important;}
 
-  .iconfilter:not(.createentry):not(.loginlink)  {
+  .iconfilter {
     display: none;
-    @include respond-to(">=large") {
+  }
+
+  @include respond-to(">=medium") {
+    .iconfilter {
+      display: flex;
+    }
+    .iconfilter .txt {
+      display: none;
+    }
+  }
+
+  @include respond-to(">=large") {
+    .iconfilter .txt {
       display: flex;
     }
   }
@@ -91,24 +106,23 @@
   .input-select {
     flex: 1 1 200px;
     max-width: 500px;
-    @include respond-to(">=large") {
+    @include respond-to(">=medium") {
       display: none;
     }
   }
 
 }
 
-// Filterstream Wide Scroll Band
+// Filterstream Scroll
 .filter-stream.-scrollnav::-webkit-scrollbar {
   height: 0 !important
 }
 .filter-stream.-scrollnav {
 
   position: relative;
-  margin: 0px 0px 0px 0px;
+  margin-top: 0px;
   margin-left:-20px;
   margin-right:-20px;
-  margin-bottom:30px;
   overflow: -moz-scrollbars-none !important; // Testen
   -ms-overflow-style: none !important; // Testen
 
@@ -117,7 +131,7 @@
   background-color:#fcfcfc;
   border-bottom: 1px solid #DEEAE6;
   justify-content: flex-start;
-  margin-top: -30px;
+  //margin-top: -30px;
   margin-bottom:30px;
   padding: 10px 10px 10px 10px;
 
@@ -125,12 +139,13 @@
     background:none;
     border-bottom: none;
     justify-content: center;
-    margin-top: -50px;
+    //margin-top: -50px;
     padding: 20px 20px 20px 20px;
   }
 
   @include respond-to(">=large") {
-    margin-top: -80px;
+    //margin-top: -80px;
+    margin-left:30px;
     padding: 35px 20px 35px 20px;
     .iconfilter .txt {display: block;}
   }
@@ -159,7 +174,6 @@
   .iconfilter [class^=icon-] {
     width: 30px;
     height: 30px;
-    //fill: $color-ambient-mint-dark;
   }
   .iconfilter {
     height: 55px;
@@ -201,6 +215,7 @@
     }
   }
 
+  // Sticky Nav on Mobile
   @include respond-to("<=medium") {
     &.fixed {
       position: -webkit-sticky; /* Safari */
@@ -213,15 +228,7 @@
 
 }
 
-.filter-stream.-underMap {
-  margin-top:0px;
-
-  @include respond-to(">=large") {
-    margin-left:30px;
-  }
-
-}
-
+// ILLU BG
 .filter-stream.-illubg {
   @include respond-to(">=medium") {
     &::before {
@@ -237,4 +244,14 @@
       background-position: center, center;
     }
   }
+}
+
+.hl-main, .hl-subtext {
+  &.-cards {
+    margin-bottom:20px;
+  }
+}
+
+.search-filter, .filter-selection-text {
+  margin-bottom:30px;
 }

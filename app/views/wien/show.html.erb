@@ -13,9 +13,10 @@
   <%= render 'map' %>
   <%= render 'navigation' %>
 
-
   <div class="address-block">
-    <h1 class="hl-main">Lass uns dein <em>Heimatgrätzl</em> Finden</h1>
+    <h1 class="hl-main">
+      Lass uns dein <em>Heimatgrätzl</em> Finden
+    </h1>
     <%= form_tag visit_graetzl_wien_path, method: :get do %>
       <div class="input-field" id="addressSearchAutocomplete">
         <%= label_tag :address do %>
@@ -28,4 +29,5 @@
       </div>
     <% end %>
   <div>
+    
 </section>

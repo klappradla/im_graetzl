@@ -13,40 +13,40 @@
   <%= render 'map' %>
   <%= render 'navigation' %>
 
-  <div class="hl-subtext">
+  <div class="hl-subtext -cards">
     <h1><em>Raumteiler - Für neue Raumpartnerschaften</em></h1>
     <p>Gewerbeflächen teilen - Kosten teilen.</p>
   </div>
 
+  <%= form_tag rooms_path, method: :get, remote: true, class: 'cards-filter' do %>
+    <div class="filter-selection-text">
+      Zeig mir <%= link_to 'alle Raumteiler', '#filter-modal-type', data: { no_filter_label: 'alle Raumteiler'} %>,
+      aus <%= link_to 'allen Kategorien', '#filter-modal-categories', data: { no_filter_label: 'allen Kategorien'} %>,
+      in <%= link_to 'allen Bezirken', '#filter-modal-bezirk', data: { no_filter_label: 'allen Bezirken'} %>
+    </div>
+  <% end %>
+
+  <div id="filter-modal-type" class="filter-modal">
+    <%= render 'filters/room_type' %>
+  </div>
+
+  <div id="filter-modal-categories" class="filter-modal">
+    <%= render 'filters/room_categories' %>
+  </div>
+
+  <div id="filter-modal-bezirk" class="filter-modal">
+    <%= render 'filters/district_graetzl' %>
+  </div>
+
+
   <div class="card-grid-container">
-    <%= form_tag rooms_path, method: :get, remote: true, class: 'cards-filter' do %>
-      <div class="filter-selection-text">
-        Zeig mir <%= link_to 'alle Raumteiler', '#filter-modal-type', data: { no_filter_label: 'alle Raumteiler'} %>,
-        aus <%= link_to 'allen Kategorien', '#filter-modal-categories', data: { no_filter_label: 'allen Kategorien'} %>,
-        in <%= link_to 'allen Bezirken', '#filter-modal-bezirk', data: { no_filter_label: 'allen Bezirken'} %>
-      </div>
-    <% end %>
-
-    <div id="filter-modal-type" class="filter-modal">
-      <%= render 'filters/room_type' %>
-    </div>
-
-    <div id="filter-modal-categories" class="filter-modal">
-      <%= render 'filters/room_categories' %>
-    </div>
-
-    <div id="filter-modal-bezirk" class="filter-modal">
-      <%= render 'filters/district_graetzl' %>
-    </div>
-
     <div class="card-grid" data-behavior="rooms-card-container"></div>
     <div class="action-card-container" data-behavior="rooms-action-card-container">
       <%= render 'rooms/action_card' %>
     </div>
-
     <!-- Insert Raumteiler Group Featured Card -->
     <%= !Group.where(id: 15).empty? ? (render 'groups/group', group: Group.find(15), featured_card: 'featuredCard -hidden') : '' %>
-
     <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'rooms-paginate-link' }, rel: 'nofollow' %>
   </div>
+
 </section>

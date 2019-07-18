@@ -13,19 +13,20 @@
   <%= render 'map' %>
   <%= render 'navigation' %>
 
-  <div class="hl-subtext">
+  <div class="hl-subtext -cards">
     <h1><em>Grätzlzuckerl</em> im <%= I18n.localize Time.now.end_of_month, format: '%B' %></h1>
     <p>Tolle Angebote, Gutscheine & Rabatte von Selbständigen & Geschäften ums Eck</p>
   </div>
 
-  <div class="card-grid-container">
-    <%= form_tag zuckerls_path, method: :get, remote: true, class: 'cards-filter' do %>
-    <% end %>
+  <%= form_tag zuckerls_path, method: :get, remote: true, class: 'cards-filter' do %>
+  <% end %>
 
+  <div class="card-grid-container">
     <div class="card-grid" data-behavior="zuckerls-card-container"></div>
     <div class="action-card-container" data-behavior="zuckerls-action-card-container">
       <%= render 'zuckerls/action_card' %>
     </div>
     <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'zuckerls-paginate-link' }, rel: 'nofollow' %>
   </div>
+
 </section>

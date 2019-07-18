@@ -9,17 +9,21 @@
 %>
 
 <section class="districts">
-  <%= render 'districts/map' %>
+  <%= render 'map' %>
   <%= render 'navigation' %>
-  <h1 class="hl-main">Jeden Monat neu - Zuckerl &amp; Angebote <span>im <%= @district.numeric %>. Bezirk</span></h1>
+
+  <h1 class="hl-main -cards">
+    Jeden Monat neu - Zuckerl &amp; Angebote <span>im <%= @district.numeric %>. Bezirk</span>
+  </h1>
+
+  <%= form_tag zuckerls_path(district_id: @district.id), method: :get, remote: true, class: 'cards-filter' do; end %>
 
   <div class="card-grid-container">
-    <%= form_tag zuckerls_path(district_id: @district.id), method: :get, remote: true, class: 'cards-filter' do; end %>
-
     <div class="card-grid" data-behavior="zuckerls-card-container"></div>
     <div class="action-card-container" data-behavior="zuckerls-action-card-container">
       <%= render 'zuckerls/action_card', district: @district %>
     </div>
     <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'zuckerls-paginate-link' }, rel: 'nofollow' %>
   </div>
+
 </section>

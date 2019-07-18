@@ -12,28 +12,31 @@
   <%= render 'map' %>
   <%= render 'navigation' %>
 
-  <h1 class="hl-main">Anbieter, Locations &amp; Geschäfte <span>im <%= @district.numeric %>. Bezirk</span></h1>
+  <h1 class="hl-main -cards">
+    Anbieter, Locations &amp; Geschäfte <span>im <%= @district.numeric %>. Bezirk</span>
+  </h1>
+
+  <%= form_tag locations_path, method: :get, remote: true, class: 'cards-filter' do %>
+    <div class="filter-selection-text">
+      Zeige mir aus <%= link_to 'allen Kategorien', '#filter-modal-categories', data: { no_filter_label: 'allen Kategorien'} %>
+      in <%= link_to @district.zip_name, '#filter-modal-bezirk', class: 'filter-applied', data: { no_filter_label: 'allen Bezirken'} %>
+    </div>
+  <% end %>
+
+  <div id="filter-modal-categories" class="filter-modal">
+    <%= render 'filters/location_categories' %>
+  </div>
+
+  <div id="filter-modal-bezirk" class="filter-modal">
+    <%= render 'filters/district_graetzl', graetzl_ids: @district.graetzl_ids, district_ids: @district.id %>
+  </div>
 
   <div class="card-grid-container">
-    <%= form_tag locations_path, method: :get, remote: true, class: 'cards-filter' do %>
-      <div class="filter-selection-text">
-        Zeige mir aus <%= link_to 'allen Kategorien', '#filter-modal-categories', data: { no_filter_label: 'allen Kategorien'} %>
-        in <%= link_to @district.zip_name, '#filter-modal-bezirk', class: 'filter-applied', data: { no_filter_label: 'allen Bezirken'} %>
-      </div>
-    <% end %>
-
-    <div id="filter-modal-categories" class="filter-modal">
-      <%= render 'filters/location_categories' %>
-    </div>
-
-    <div id="filter-modal-bezirk" class="filter-modal">
-      <%= render 'filters/district_graetzl', graetzl_ids: @district.graetzl_ids, district_ids: @district.id %>
-    </div>
-
     <div class="card-grid" data-behavior="locations-card-container"></div>
     <div class="action-card-container" data-behavior="locations-action-card-container">
       <%= render 'locations/action_card', district: @district %>
     </div>
     <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'locations-paginate-link' }, rel: 'nofollow' %>
   </div>
+
 </section>

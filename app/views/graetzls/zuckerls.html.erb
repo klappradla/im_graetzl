@@ -14,18 +14,20 @@
   <%= render 'navigation' %>
 
   <% if !user_signed_in? %>
-    <div class="hl-subtext">
+    <div class="hl-subtext -cards">
       <h1>Die schönsten <span>Angebote im <%= I18n.localize Time.now.end_of_month, format: '%B' %></span> im Grätzl</h1>
       <p>Tolle Angebote, Gutscheine & Rabatte von Selbständigen & Geschäften ums Eck</p>
     </div>
   <% end %>
 
+  <%= form_tag zuckerls_path(graetzl_id: @graetzl), method: :get, remote: true, class: 'cards-filter' do; end %>
+
   <div class="card-grid-container">
-    <%= form_tag zuckerls_path(graetzl_id: @graetzl), method: :get, remote: true, class: 'cards-filter' do; end %>
     <div class="card-grid" data-behavior="zuckerls-card-container"></div>
     <div class="action-card-container" data-behavior="zuckerls-action-card-container">
       <%= render 'zuckerls/action_card', graetzl: @graetzl %>
     </div>
     <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'zuckerls-paginate-link' }, rel: 'nofollow' %>
   </div>
+
 </section>

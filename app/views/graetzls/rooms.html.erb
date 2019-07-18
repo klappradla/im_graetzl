@@ -14,33 +14,33 @@
   <%= render 'navigation' %>
 
   <% if !user_signed_in? %>
-    <div class="hl-subtext">
+    <div class="hl-subtext -cards">
       <h1><span>Raumteiler</span> - Für neue Raumpartnerschaften</h1>
       <p>Gewerbeflächen teilen - Kosten teilen.</p>
     </div>
   <% end %>
 
+  <%= form_tag rooms_path, method: :get, remote: true, class: 'cards-filter' do %>
+    <div class="filter-selection-text">
+      Zeige mir <%= link_to 'alle Raumteiler', '#filter-modal-type', data: { no_filter_label: 'alle Raumteiler'} %>,
+      aus <%= link_to 'allen Kategorien', '#filter-modal-categories', data: { no_filter_label: 'allen Kategorien'} %>,
+      in <%= link_to @graetzl.name, '#filter-modal-bezirk', class: 'filter-applied', data: { no_filter_label: 'allen Bezirken'} %>
+    </div>
+  <% end %>
+
+  <div id="filter-modal-type" class="filter-modal">
+    <%= render 'filters/room_type' %>
+  </div>
+
+  <div id="filter-modal-categories" class="filter-modal">
+    <%= render 'filters/room_categories' %>
+  </div>
+
+  <div id="filter-modal-bezirk" class="filter-modal">
+    <%= render 'filters/district_graetzl', graetzl_ids: @graetzl.id, district_ids: @graetzl.district.id %>
+  </div>
+
   <div class="card-grid-container">
-    <%= form_tag rooms_path, method: :get, remote: true, class: 'cards-filter' do %>
-      <div class="filter-selection-text">
-        Zeige mir <%= link_to 'alle Raumteiler', '#filter-modal-type', data: { no_filter_label: 'alle Raumteiler'} %>,
-        aus <%= link_to 'allen Kategorien', '#filter-modal-categories', data: { no_filter_label: 'allen Kategorien'} %>,
-        in <%= link_to @graetzl.name, '#filter-modal-bezirk', class: 'filter-applied', data: { no_filter_label: 'allen Bezirken'} %>
-      </div>
-    <% end %>
-
-    <div id="filter-modal-type" class="filter-modal">
-      <%= render 'filters/room_type' %>
-    </div>
-
-    <div id="filter-modal-categories" class="filter-modal">
-      <%= render 'filters/room_categories' %>
-    </div>
-
-    <div id="filter-modal-bezirk" class="filter-modal">
-      <%= render 'filters/district_graetzl', graetzl_ids: @graetzl.id, district_ids: @graetzl.district.id %>
-    </div>
-
     <div class="card-grid" data-behavior="rooms-card-container"></div>
     <div class="action-card-container" data-behavior="rooms-action-card-container">
       <%= render 'rooms/action_card', graetzl: @graetzl %>
@@ -51,4 +51,5 @@
 
     <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'rooms-paginate-link' }, rel: 'nofollow' %>
   </div>
+
 </section>

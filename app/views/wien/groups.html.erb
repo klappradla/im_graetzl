@@ -14,52 +14,42 @@
   <%= render 'navigation' %>
 
   <% if @featured_groups.present? && @category.nil? %>
+    <div class="hl-subtext -cards">
+      <h1><em>Gruppen - Austausch & Vernetzung</em></h1>
+      <p>Empfohlene & beliebte Gruppen in Wien</p>
+    </div>
     <div class="lightSliderWrapper card-slider-container">
-      <div class="hl-subtext">
-        <h1><em>Gruppen - Austausch & Vernetzung</em></h1>
-        <p>Empfohlene & beliebte Gruppen in Wien</p>
-      </div>
       <div class="cardBoxCollection" id="card-slider">
         <%= render @featured_groups %>
       </div>
     </div>
   <% end %>
 
-  <div class="hl-subtext">
+  <div class="hl-subtext -cards">
     <h1>Stöbern in <span class="category_title">allen</span> Gruppen</h1>
     <p>Nach Gruppe suchen oder in Kategorien stöbern</p>
   </div>
 
-  <div class="card-grid-container">
-
-    <%= form_tag groups_path, method: :get, remote: true, class: 'cards-filter' do %>
-      <%= hidden_field_tag :group_category_id, @category.try(:id) %>
-      <div class="input-field search-filter">
-        <div class="input-field">
-          <%= text_field_tag :query, @category ? @category.title : nil, placeholder: 'Suche..', class: 'search-suggestion-trigger' %>
-        </div>
-        <div class="input-select label-select">
-          <%= select_tag :district_ids, options_for_select(district_select_options, District.all_memoized.keys), id: 'graetzl-suggestion', multiple: true %>
-        </div>
+  <%= form_tag groups_path, method: :get, remote: true, class: 'cards-filter' do %>
+    <%= hidden_field_tag :group_category_id, @category.try(:id) %>
+    <div class="input-field search-filter">
+      <div class="input-field">
+        <%= text_field_tag :query, @category ? @category.title : nil, placeholder: 'Suche..', class: 'search-suggestion-trigger' %>
       </div>
-    <% end %>
-
-    <%= render 'filters/group_categories', selected_category: @category %>
-
-    <div id="graetzl-suggestion" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-left dropdown-container">
-      <div class="jq-dropdown-panel">
-        Bezirk auswählen ...
+      <div class="input-select label-select">
+        <%= select_tag :district_ids, options_for_select(district_select_options, District.all_memoized.keys), id: 'graetzl-suggestion', multiple: true %>
       </div>
     </div>
+  <% end %>
+  <%= render 'filters/group_categories', selected_category: @category %>
 
+  <div class="card-grid-container">
     <div class="card-grid" data-behavior="groups-card-container"></div>
     <div class="action-card-container" data-behavior="groups-action-card-container">
       <%= render 'groups/action_card' %>
     </div>
-
     <!-- Insert Featured Card -->
-    <%= render 'shared/featured_cards/mentoring' %>
-
     <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'groups-paginate-link' }, rel: 'nofollow' %>
   </div>
+
 </section>

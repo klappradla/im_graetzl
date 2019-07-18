@@ -13,31 +13,32 @@
   <%= render 'map' %>
   <%= render 'navigation' %>
 
-  <div class="hl-subtext">
+  <div class="hl-subtext -cards">
     <h1><em>Anbieter &amp; Locations</em></h1>
     <p>Finde grätzlansässige Projekte & Selbständige, Vereine & Geschäfte</p>
   </div>
 
+  <%= form_tag locations_path, method: :get, remote: true, class: 'cards-filter' do %>
+    <div class="filter-selection-text">
+      Zeige mir aus <%= link_to 'allen Kategorien', '#filter-modal-categories', data: { no_filter_label: 'allen Kategorien'} %>
+      in <%= link_to 'allen Bezirken', '#filter-modal-bezirk', data: { no_filter_label: 'allen Bezirken'} %>
+    </div>
+  <% end %>
+
+  <div id="filter-modal-categories" class="filter-modal">
+    <%= render 'filters/location_categories' %>
+  </div>
+
+  <div id="filter-modal-bezirk" class="filter-modal">
+    <%= render 'filters/district_graetzl' %>
+  </div>
+
   <div class="card-grid-container">
-    <%= form_tag locations_path, method: :get, remote: true, class: 'cards-filter' do %>
-      <div class="filter-selection-text">
-        Zeige mir aus <%= link_to 'allen Kategorien', '#filter-modal-categories', data: { no_filter_label: 'allen Kategorien'} %>
-        in <%= link_to 'allen Bezirken', '#filter-modal-bezirk', data: { no_filter_label: 'allen Bezirken'} %>
-      </div>
-    <% end %>
-
-    <div id="filter-modal-categories" class="filter-modal">
-      <%= render 'filters/location_categories' %>
-    </div>
-
-    <div id="filter-modal-bezirk" class="filter-modal">
-      <%= render 'filters/district_graetzl' %>
-    </div>
-
     <div class="card-grid" data-behavior="locations-card-container"></div>
     <div class="action-card-container" data-behavior="locations-action-card-container">
       <%= render 'locations/action_card' %>
     </div>
     <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'locations-paginate-link' }, rel: 'nofollow' %>
   </div>
+
 </section>

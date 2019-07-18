@@ -12,9 +12,6 @@
     font-style: inherit;
     display: inline-table;
   }
-  + .card-grid-container {
-    margin-top:-20px;
-  }
 }
 
 .hl-subtext {
@@ -42,9 +39,5 @@
     @include textShadowHard($color-ambient-rosa-dark);
     font-style: inherit;
     display: inline-table;
-  }
-  // Container Abstand zu Cards nach Headline
-  + .card-grid-container {
-    margin-top:-20px;
   }
 }

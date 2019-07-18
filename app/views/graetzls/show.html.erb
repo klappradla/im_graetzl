@@ -16,18 +16,17 @@
   <%= render 'navigation' %>
 
   <% if user_signed_in? %>
+
+    <%= form_tag activities_path(graetzl_id: @graetzl), method: :get, remote: true, class: 'cards-filter' do; end %>
     <div class="card-grid-container">
-      <%= form_tag activities_path(graetzl_id: @graetzl), method: :get, remote: true, class: 'cards-filter' do; end %>
       <div class="card-grid" data-behavior="activities-card-container"></div>
       <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'activities-paginate-link' }, rel: 'nofollow' %>
     </div>
 
-    <!-- Insert Featured Card -->
-    <%= render 'shared/featured_cards/mentoring' %>
-
-
   <% else %>
+
     <%= render "activity_sample" %>
+
   <% end %>
 
 </section>

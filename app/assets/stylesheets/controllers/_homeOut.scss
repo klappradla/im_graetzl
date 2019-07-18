@@ -1,35 +1,13 @@
 section.homeOut {
 
-  .hl-subtext {
-    margin-bottom: 40px;
-  }
-
   .graetzljump {
     max-width: 500px;
-    //margin: -60px auto 50px auto;
-    //@include respond-to(">=medium") {
-      margin: -10px auto 60px auto;
-    //}
+    margin:auto;
+    margin-bottom:50px;
   }
 
   .filter-stream {
-    margin-bottom: 70px;
-    .input-select {
-      //display: none;
-      margin-left:-16px;
-      margin-bottom:-25px;
-      @include respond-to(">=medium") {
-        display: none;
-      }
-    }
-    .iconfilter {
-      margin-right: 25px;
-    }
-    .iconfilter:not(.createentry):not(.loginlink)  {
-      @include respond-to(">=medium") {
-        display: flex;
-      }
-    }
+    margin-bottom: 50px;
   }
 
   .btn-primary {
@@ -37,7 +15,6 @@ section.homeOut {
       display: table;
       margin:auto;
     }
-
   }
 
 }
@@ -115,7 +92,6 @@ section.homeOut {
     }
 
   }
-
 
   .registerlink {
     position: relative;
@@ -245,11 +221,6 @@ section.homeOut {
     }
   }
 
-
-
-
-
-
 }
 
 .aboutGraetzl {
@@ -305,8 +276,6 @@ section.homeOut {
       }
     }
   }
-
-
 
 
 

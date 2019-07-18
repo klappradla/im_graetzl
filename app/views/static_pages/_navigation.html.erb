@@ -6,14 +6,12 @@
       <%= icon_tag "funnel-filter" %>
       <span>Stöbern in Wien nach ...</span>
     </label>
-    <select id="filter"><!-- generate links from desktop view via JS --></select>
+    <select id="filter">
+      <option>Auswählen</option>
+      <!-- generate links from desktop view via JS -->
+    </select>
   </div>
   <!-- END mobile select menu -->
-
-  <!--<%= active_link_to wien_path, class: "iconfilter" do %>
-    <%= icon_tag "map-location" %>
-    <div class="txt">Wien <br/>Übersicht</div>
-  <% end %>-->
 
   <%= active_link_to rooms_wien_path, class: "iconfilter" do %>
     <%= icon_tag "raumteiler" %>

@@ -14,23 +14,23 @@
   <%= render 'navigation' %>
 
   <% if !user_signed_in? %>
-    <div class="hl-subtext">
+    <div class="hl-subtext -cards">
       <h1><span>Events & Workshops</span> im Grätzl <%= @graetzl.name %></h1>
       <p>Motto: Runter vom Sofa & mitten rein ins Grätzlleben</p>
     </div>
   <% end %>
 
-  <div class="card-grid-container">
-    <%= form_tag meetings_path, method: :get, remote: true, class: 'cards-filter' do %>
-      <div class="filter-selection-text">
-        Zeige mir Einträge in <%= link_to @graetzl.name, '#filter-modal-bezirk', class: 'filter-applied', data: { no_filter_label: 'allen Bezirken'} %>
-      </div>
-    <% end %>
-
-    <div id="filter-modal-bezirk" class="filter-modal">
-      <%= render 'filters/district_graetzl', graetzl_ids: @graetzl.id, district_ids: @graetzl.district.id %>
+  <%= form_tag meetings_path, method: :get, remote: true, class: 'cards-filter' do %>
+    <div class="filter-selection-text">
+      Zeige mir Einträge in <%= link_to @graetzl.name, '#filter-modal-bezirk', class: 'filter-applied', data: { no_filter_label: 'allen Bezirken'} %>
     </div>
+  <% end %>
 
+  <div id="filter-modal-bezirk" class="filter-modal">
+    <%= render 'filters/district_graetzl', graetzl_ids: @graetzl.id, district_ids: @graetzl.district.id %>
+  </div>
+
+  <div class="card-grid-container">
     <div class="card-grid" data-behavior="meetings-card-container"></div>
     <div class="action-card-container" data-behavior="meetings-action-card-container">
       <%= render 'meetings/action_card', graetzl: @graetzl %>
