@@ -5,7 +5,6 @@ APP.controllers.graetzls = (function() {
       initFilter();
       initSlider();
       initJBox();
-      //initMobileNav();
     }
 
     function initSlider() {
@@ -33,7 +32,6 @@ APP.controllers.graetzls = (function() {
     }
 
     function initJBox() {
-
       var mobCreate = new jBox('Modal', {
         addClass:'jBox',
         attach: '.mob #createContent',
@@ -43,7 +41,6 @@ APP.controllers.graetzls = (function() {
         isolateScroll:true,
         animation:{open: 'zoomIn', close: 'zoomOut'},
       });
-
       var deskCreate = new jBox('Tooltip', {
         addClass:'jBox',
         attach: '.desk #createContent',
@@ -57,33 +54,7 @@ APP.controllers.graetzls = (function() {
         animation:{open: 'zoomIn', close: 'zoomOut'},
         maxHeight:500,
       });
-
     }
-
-    /*
-    function initMobileNav() {
-      var $dropdown = $(".filter-stream .input-select select");
-      $(".filter-stream .iconfilter").not('.createentry, .loginlink').each(function() {
-          var $this = $(this),
-              link = $this.prop('href'),
-              txt = $this.find('.txt').text();
-
-          $dropdown.append(getOption());
-          $dropdown.on('change', function() {
-              document.location.href = $dropdown.val();
-          });
-
-          function getOption() {
-              if($this.hasClass('active'))
-                  return '<option selected value="'+ link +'">'+ txt +'</option>';
-              return '<option value="'+ link +'">'+ txt +'</option>';
-          }
-
-      });
-
-
-      $('[data-behavior=createTrigger]').jqDropdown('attach', '[data-behavior=createContainer]');
-    }*/
 
     return {
       init: init

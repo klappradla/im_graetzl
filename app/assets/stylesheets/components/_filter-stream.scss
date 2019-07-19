@@ -168,7 +168,7 @@
     margin-left:0;
   }
 
-  .iconfilter:not(.createentry):not(.loginlink)  {
+  .iconfilter {
     display: flex;
   }
   .iconfilter [class^=icon-] {

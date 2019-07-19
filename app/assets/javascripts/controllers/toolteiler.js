@@ -30,6 +30,14 @@ APP.controllers.toolteiler = (function() {
         //]
       });
 
+      var toolTeilerGallery = new jBox('Image', {
+        addClass:'jBoxGallery',
+        imageCounter:true,
+        preloadFirstImage:true,
+        closeOnEsc:true,
+        animation:{open: 'zoomIn', close: 'zoomOut'},
+      });
+
     }
 
     function initToolteilerRent() {

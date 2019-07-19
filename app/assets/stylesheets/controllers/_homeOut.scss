@@ -8,6 +8,12 @@ section.homeOut {
 
   .filter-stream {
     margin-bottom: 50px;
+    
+    // Mobile Dropdown
+    .input-select {
+      margin-top:20px;
+      margin-bottom:-20px;
+    }
   }
 
   .btn-primary {
@@ -31,7 +37,6 @@ section.homeOut {
   padding-left: 18px;
   padding-right: 18px;
 
-
   @include respond-to(">=medium") {
     background-size: 400px auto, 1000px auto;
     background-position: 40px 75px, -30px -160px;
@@ -42,6 +47,7 @@ section.homeOut {
     padding-left: 25px;
     padding-right: 25px;
   }
+
   @include respond-to(">=large") {
     background-size: 507px auto, 936px auto;
     background-position: 10px 88px, 90px -31px;
@@ -157,145 +163,6 @@ section.homeOut {
         transform: rotate(-5deg);
         opacity: 0.9;
       }
-    }
-  }
-
-  .icons {
-    overflow: hidden;
-    @include respond-to(">=medium") {
-      margin-top: 175px;
-      .candies { margin-top: 60px; }
-      .makers { margin-top: 48px; }
-      .initiatives { margin-top: 11px; }
-    }
-    @include respond-to(">=large") {
-      margin-top: 365px;
-    }
-  }
-
-  .singleicon {
-    text-align: center;
-    color: $color-ambient-mint-dark;
-    position: relative;
-    width: 100px;
-    float: left;
-    margin-right: 30px;
-    display: none;
-    @include respond-to(">=medium") {
-      display: block;
-    }
-    &::before {
-      content: '';
-      width: 65px;
-      height: 65px;
-      background-size: 65px 65px;
-      margin: 0 auto;
-      display: block;
-      background-image: url(image_path('svg/kringel-mint-solid.svg'));
-      background-repeat: no-repeat;
-    }
-    [class^=icon-] {
-      position: absolute;
-      top: 9px;
-      left: 26px;
-      width: 45px;
-      height: 45px;
-    }
-    .txt {
-      font-family: $font-secondary;
-      font-size: 22px;
-      line-height: 1.2;
-    }
-    a.iconfilter {
-      text-decoration: none;
-      color: $color-ambient-mint-dark;
-      &:hover {
-        .txt {
-          color: $color-ambient-rosa;
-        }
-        &:hover {
-          color: $color-ambient-rosa;
-          background-image: url(image_path('svg/kringel-grey-rosa.svg'));
-        }
-      }
-    }
-  }
-
-}
-
-.aboutGraetzl {
-  padding-bottom: 3.0rem;
-
-  .grid {
-    overflow: hidden;
-    border: 1px solid #f0f0f0;
-    background-color: #ffffff;
-    border-radius: 8px;
-    margin-bottom: 30px;
-    @include respond-to(">=large") {
-      margin-right: -25px;
-      margin-left: -25px;
-      display: flex;
-    }
-    > [class*=-block] {
-      background-repeat: no-repeat;
-      padding: 200px 20px 20px 20px;
-      border-right: 1px dotted #f0f0f0;
-      background-position: center 20px;
-      @include respond-to(">=large") {
-        flex-basis: 33.33%;
-      }
-      &:last-child {
-        border-right: none;
-      }
-    }
-    .txt p:not(:last-child){
-      margin-bottom: 15px;
-    }
-
-
-    .resident-block {
-      background-image: url(image_path('illu/biker-plain.jpg'));
-      background-size: 240px auto;
-      @include respond-to(">=large") {
-        background-position: 40px 23px;
-      }
-    }
-    .maker-block {
-      background-image: url(image_path('illu/illu-wirtschaft2-plain.png'));
-      background-size: 181px auto;
-      @include respond-to(">=large") {
-        background-position: 60px 10px;
-      }
-    }
-    .shaper-block {
-      background-image: url(image_path('illu/illu-ideen-weissbg.png'));
-      background-size: 180px auto;
-      @include respond-to(">=large") {
-        background-position: 50px 38px;
-      }
-    }
-  }
-
-
-
-  h4 {
-    text-align: center;
-    margin-bottom: 30px;
-    @include font-size-secondaryFont('base');
-    span {
-      color: $color-ambient-rosa;
-    }
-  }
-
-
-
-  .btn-primary {
-    width: 100%;
-    margin: 0 auto;
-    @include respond-to(">=medium") {
-      margin-top: 3.0rem;
-      width: 50%;
     }
   }
 
