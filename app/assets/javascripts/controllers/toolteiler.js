@@ -35,8 +35,19 @@ APP.controllers.toolteiler = (function() {
         imageCounter:true,
         preloadFirstImage:true,
         closeOnEsc:true,
+        createOnInit:true,
         animation:{open: 'zoomIn', close: 'zoomOut'},
       });
+
+      /*
+
+      Integrate jQuery Mobile and listen to swipe-left / swipe-right.
+      Click Control Buttons on Swipe.
+
+      $('.jBoxGallery .jBox-content').on('click', function(){
+        $('.jBox-image-pointer-next').click();
+      });
+      */
 
     }
 

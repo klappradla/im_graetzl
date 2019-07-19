@@ -38,7 +38,7 @@ APP.controllers.graetzls = (function() {
         content: $('#jBoxCreateContent'),
         trigger: 'click',
         closeOnClick:true,
-        isolateScroll:true,
+        blockScroll:true,
         animation:{open: 'zoomIn', close: 'zoomOut'},
       });
       var deskCreate = new jBox('Tooltip', {
