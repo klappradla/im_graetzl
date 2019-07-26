@@ -1,20 +1,15 @@
 .priceSheet {
-  background-color: rgba(255, 255, 255, .8);
   color: $color-ambient-rosa-dark;
-  border-radius: 4px;
   text-align: center;
-  overflow: hidden;
   line-height: 1;
-  padding: 14px 0 4px 0;
-  min-width: 60px;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
   .price {
     width: 100%;
-    @include font-size-secondaryFont;
-    font-size: 40px !important;
-    font-weight: 600;
-    padding-left: 5px;
-    padding-right: 5px;
     white-space: nowrap;
   }
   .txt {
@@ -24,32 +19,87 @@
     padding-left: 5px;
     padding-right: 5px;
   }
-  &:before, &:after {
-    content: '';
-    height: 10px;
-    width: 50%;
-    position: absolute;
-    top: 0;
-  }
-  &:before {
-    background-color: $color-ambient-rosa;
-    left: 0;
-  }
-  &:after {
-    background-color: $color-ambient-rosa-dark;
-    right: 0;
-  }
-  &.-variant2 {
-    background-color: rgba($color-ambient-rosa-light, 0.3);
-    min-width: 70px;
-    .txt {
-      color: rgba($color-ambient-rosa-dark, 0.7);
+
+  &.-variant1 {
+    background-color: rgba(255, 255, 255, .8);
+    min-width: 60px;
+    border-radius: 4px;
+    padding: 14px 0 4px 0;
+
+    .price {
+      @include font-size-secondaryFont;
+      font-size: 40px !important;
+      font-weight: 600;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+    &:before, &:after {
+      content: '';
+      height: 10px;
+      width: 50%;
+      position: absolute;
+      top: 0;
     }
     &:before {
       background-color: $color-ambient-rosa;
+      left: 0;
     }
     &:after {
       background-color: $color-ambient-rosa-dark;
+      right: 0;
     }
   }
+
+  &.-variant2 {
+
+    &:before {
+      border-radius: 50%;
+      width: 100%;
+      padding-bottom: 100%;
+      background: $color-ambient-orange-light;
+      content: "";
+      position: absolute;
+      z-index: 1;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      padding-top:100%;
+      white-space: nowrap;
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: $color-ambient-grey;
+      margin-top:15px;
+      font-style: italic;
+    }
+
+    &.-discount-days::after {
+      content: "ab 2 Tagen";
+    }
+    &.-discount-week::after {
+      content: "ab 1 Woche";
+    }
+
+    max-width: 70px;
+    color: $color-ambient-orange;
+
+    .price {
+      @include font-size-primaryFont('largest');
+      z-index: 2;
+      line-height: 1.0;
+      font-weight: 900;
+      sup {
+        @include font-size-primaryFont('base');
+        font-weight: 200;
+      }
+    }
+    .txt {
+      z-index: 2;
+      font-style: italic;
+    }
+  }
+}
+
+.cardBox.-toolteiler .priceSheet.-variant2 {
+  margin-top:12px;
 }

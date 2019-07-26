@@ -30,6 +30,7 @@
  * The picker input element.
  */
 .picker__input {
+    background-color: $color-ambient-mint-light !important;
     cursor: default;
 }
 
@@ -39,6 +40,7 @@
  */
 .picker__input.picker__input--active {
     border-color: $input-active-border;
+    color: $color-font-primary !important;
 }
 
 
@@ -50,6 +52,3 @@
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
-
-
-

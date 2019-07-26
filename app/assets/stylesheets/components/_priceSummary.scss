@@ -15,13 +15,15 @@
     margin-bottom: 17px;
     div.cost, div.duration {
       display:table;
-      color: $color-ambient-mint-dark;
+      color: $color-ambient-orange;
       min-width: 60px;
       white-space: nowrap;
       margin-right:9px;
       text-align: right;
+      font-weight: bold;
     }
-    div.costname, div.title {
+    div.duration {
+      color: $color-font-primary;
     }
   }
   li.sum {

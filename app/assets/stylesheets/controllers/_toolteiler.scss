@@ -138,6 +138,7 @@ section.toolTeiler {
     border: 1px solid $color-ambient-grey-light;
     background-color: #ffffff;
     border-radius: 8px;
+    padding-top:15px;
 
     h3.sidebar {
       text-align: center;
@@ -197,7 +198,8 @@ section.toolTeiler {
     display: flex;
     justify-content:space-evenly;
     margin-bottom: 15px;
-    padding-bottom: 25px;
+    padding-top:20px;
+    padding-bottom: 55px;
     border-bottom: 1px solid $color-ambient-grey-light;
   }
 
