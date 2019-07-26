@@ -135,10 +135,13 @@ section.toolTeiler {
 
   .sideBarbox {
 
+    &.-top {
+      padding-top:15px;
+    }
+
     border: 1px solid $color-ambient-grey-light;
     background-color: #ffffff;
     border-radius: 8px;
-    padding-top:15px;
 
     h3.sidebar {
       text-align: center;
@@ -211,6 +214,7 @@ section.toolTeiler {
     padding-bottom:5px;
 
     .input-field {
+      overflow: hidden;
       padding-bottom:15px;
       @include respond-to("<medium") {
         @include field-HorizontalLayout;
