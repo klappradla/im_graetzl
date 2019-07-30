@@ -29,6 +29,10 @@ APP.controllers.graetzls = (function() {
       if ($('.cards-filter').exists()) {
         APP.components.cardFilter.init();
       }
+
+      if ($("section.toolteiler").exists()) {
+        APP.components.toolCategorySlider.init($('#category-slider'));
+      }
     }
 
     function initJBox() {

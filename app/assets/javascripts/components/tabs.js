@@ -1,27 +1,23 @@
 APP.components.tabs = (function() {
 
     function initTabs(tabgroup) {
-        $(tabgroup).tabslet({
-            animation: false,
-            deeplinking: true,
-            active: getFirstNotEmptyTab(tabgroup)
-        });
+      $(tabgroup).tabslet({
+        animation: false,
+        active: getFirstNotEmptyTab(tabgroup)
+      });
     }
 
 
     function getFirstNotEmptyTab(tabgroup) {
-        var active = 1;
-        $(tabgroup).find('[id^="tab-"]').each(function() {
-            if(!$(this).find(".defaultText").exists()) {
-                active = $(this).index();
-                return false;
-            }
-        });
-        return active;
+      if (window.location.hash && $(window.location.hash).length) {
+        return $(tabgroup).find('[id^="tab-"]').index($(window.location.hash)) + 1;
+      } else {
+        return 1;
+      }
     }
 
     return {
-        initTabs: initTabs
+      initTabs: initTabs
     }
 
 })();

@@ -1,0 +1,40 @@
+<% meta(
+    title: t('.title', numeric: @district.numeric, zip: @district.zip),
+    description: t('.description', numeric: @district.numeric, name: @district.name),
+    robots: 'index, follow',
+    og_title: t('.title', numeric: @district.numeric, zip: @district.zip),
+    og_description: t('.description', numeric: @district.numeric, name: @district.name),
+    og_image: image_url('meta/og_logo.png')
+  )
+%>
+
+<section class="districts toolteiler">
+  <%= render 'map' %>
+  <%= render 'navigation' %>
+
+  <h1 class="hl-main -cards">
+    Entdecke Toolteiler <span>im <%= @district.numeric %>. Bezirk</span>
+  </h1>
+
+  <%= render 'filters/tool_offer_categories' %>
+
+  <%= form_tag tool_offers_path, method: :get, remote: true, class: 'cards-filter' do %>
+    <div class="input-field search-filter">
+      <div class="input-field">
+        <%= text_field_tag :query, nil, placeholder: 'Suche..', class: 'search-suggestion-trigger' %>
+      </div>
+      <div class="input-select label-select">
+        <%= select_tag :district_ids, options_for_select(district_select_options, @district.id), id: 'graetzl-suggestion', multiple: true %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="card-grid-container">
+    <div class="card-grid" data-behavior="tool-offers-card-container"></div>
+    <div class="action-card-container" data-behavior="tool-offers-action-card-container">
+      <%= render 'tool_offers/action_card', district: @district %>
+    </div>
+    <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'tool-offers-paginate-link' }, rel: 'nofollow' %>
+  </div>
+
+</section>

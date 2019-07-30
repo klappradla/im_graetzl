@@ -19,7 +19,7 @@
       <%= link_to rooms_wien_path do %>
         <%= icon_tag "raumteiler" %> Raumteiler
       <% end %>
-      <%= link_to '/wien/toolteiler' do %>
+      <%= link_to tool_offers_wien_path do %>
         <%= icon_tag "share" %> Toolteiler
       <% end %>
       <%= link_to groups_wien_path do %>
@@ -56,7 +56,7 @@
       <%= link_to rooms_district_path(district) do %>
         <%= icon_tag "raumteiler" %> Raumteiler (<%= district.numeric %>. Bez.)
       <% end %>
-      <%= link_to '#' do %>
+      <%= link_to tool_offers_district_path(district) do %>
         <%= icon_tag "share" %> Toolteiler (<%= district.numeric %>. Bez.)
       <% end %>
       <%= link_to groups_district_path(district) do %>

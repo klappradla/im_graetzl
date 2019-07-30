@@ -1,0 +1,33 @@
+<% graetzl = Graetzl.memoized(tool_offer.graetzl_id) %>
+
+<div class="cardBox -toolteiler " data-behavior="masonry-card">
+
+  <div class="cardBoxHeader">
+    <div class="coverImgWrapper">
+      <%= link_to cover_photo_for(tool_offer), tool_offer %>
+    </div>
+    <div class="priceSheet -variant2">
+      <div class="txt">ab</div>
+      <div class="price"><%= tool_offer.daily_price(7) %><sup>€</sup></div>
+    </div>
+    <div class="categoryicon">
+      <svg class="icon-share"><use xlink:href="#icon-share"></use></svg>
+    </div>
+    <div class="graetzl-sideflag sideflag -R"><a href="/grinzing">Grinzing</a></div>
+  </div>
+
+  <div class="cardBoxContent">
+    <%= link_to tool_offer.user, class: 'initiator' do %>
+      <%= avatar_for(tool_offer.user) %>
+      <span><%= tool_offer.user.full_name %></span>
+    <% end %>
+
+    <div class="txt">
+      <h3><%= link_to tool_offer.title, tool_offer %></h3>
+      <p><%= tool_offer.description.truncate(250) %></p>
+    </div>
+
+    <%= link_to 'Ausleihen', tool_offer, class: 'btn-primary -mint' %>
+  </div>
+
+</div>

@@ -1,0 +1,24 @@
+<h3 class="sidebar">Deine Auswahl</h3>
+
+<ul class="pricing-summary">
+  <li>
+    <div class="cost"><%= '%.2f' % @calculator.basic_price %> €</div>
+    <div class="costname"><%= @calculator.days %> Tage x <%= '%.2f' % @calculator.daily_price %> €</div>
+  </li>
+  <% if @calculator.discount > 0 %>
+    <li>
+      <div class="cost">- <%= '%.2f' % @calculator.discount %> €</div>
+      <div class="costname">Rabatt <%= @calculator.days %> Tage</div>
+    </li>
+  <% end %>
+  <li>
+    <div class="cost"><%= '%.2f' % @calculator.service_fee %> €</div>
+    <div class="costname">Servicegebühr inkl. Versicherung</div>
+  </li>
+  <li class=sum>
+    <div class="cost"><%= '%.2f' % @calculator.total %> €</div>
+    <div class="costname">Gesamtpreis</div>
+  </li>
+</ul>
+
+<%= link_to "Jetzt anfragen", '#', class: "btn-primary" %>

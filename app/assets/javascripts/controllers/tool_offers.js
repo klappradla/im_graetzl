@@ -1,33 +1,30 @@
-APP.controllers.toolteiler = (function() {
+APP.controllers.tool_offers = (function() {
 
     function init() {
-      if ($("section.toolTeiler").exists()) { initToolteilerDetail(); }
+      if ($("section.form-new-toolteiler").exists()) { initToolOfferForm(); }
+      if ($("section.toolTeiler-detail").exists()) { initToolOfferDetails(); }
       if ($("section.form-rent-toolteiler").exists()) { initToolteilerRent(); }
-      if ($("section.form-new-toolteiler").exists()) { initToolteilerCreate(); }
     }
 
-    function initToolteilerDetail() {
+    function initToolOfferForm() {
+      APP.components.tabs.initTabs(".tabs-ctrl");
+      APP.components.addressSearchAutocomplete();
 
-      $('.starts_at_date').pickadate({
-        formatSubmit: 'yyyy-mm-dd',
-        hiddenName: true,
-        format: 'ddd, dd mmm, yyyy',
-        onSet: function(context) {
-          if (typeof context.select !== "undefined") {
-            var d = moment(context.select).locale('de').format('l');
-            console.log(d);
-          }
-
-        }
+      $(".next-screen").on("click", function() {
+        $('.tabs-ctrl').trigger('show', '#' + $(this).data("tab"));
+        $('.tabs-ctrl').get(0).scrollIntoView();
       });
+    }
 
-      $('.ends_at_date').pickadate({
-        formatSubmit: 'yyyy-mm-dd',
+    function initToolOfferDetails() {
+      $('.request-price-form').find(".date-from, .date-to").pickadate({
         hiddenName: true,
+        formatSubmit: 'yyyy-mm-dd',
         format: 'ddd, dd mmm, yyyy',
-        //disable: [
-          //{ from: -365, to: request_start_date }
-        //]
+      }).off('focus').on("change", function() {
+        if ($('.request-price-form .date-from').val() && $('.request-price-form .date-to').val()) {
+          $('.request-price-form').submit();
+        }
       });
 
       var toolTeilerGallery = new jBox('Image', {
@@ -54,16 +51,6 @@ APP.controllers.toolteiler = (function() {
     function initToolteilerRent() {
 
       tabsNavActivating();
-
-    }
-
-    function initToolteilerCreate() {
-
-      tabsNavActivating();
-
-      $('#custom-keywords').tagsInput({
-        'defaultText':'Kurz in Stichworten ..'
-      });
 
     }
 

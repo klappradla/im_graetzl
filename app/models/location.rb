@@ -20,6 +20,7 @@ class Location < ApplicationRecord
   accepts_nested_attributes_for :location_ownerships, allow_destroy: true
   has_many :users, through: :location_ownerships
   has_many :room_offers
+  has_many :tool_offers
   belongs_to :location_category
   has_many :meetings
   has_many :upcoming_meetings, -> { upcoming }, class_name: "Meeting"

@@ -50,6 +50,7 @@ Rails.application.routes.draw do
   resource :user, only: [:edit], path_names: { edit: 'einstellungen' } do
     get 'locations'
     get 'raumteiler', action: 'rooms', as: 'rooms'
+    get 'toolteiler', action: 'tools', as: 'tools'
     get 'gruppen', action: 'groups', as: 'groups'
     get 'zuckerl', action: 'zuckerls', as: 'zuckerls'
   end
@@ -67,6 +68,7 @@ Rails.application.routes.draw do
   end
   resources :zuckerls, only: [:index]
   resources :rooms, only: [:index]
+  resources :tool_offers, only: [:index]
   resources :posts, only: [:index]
   resources :groups, only: [:index]
 
@@ -89,6 +91,18 @@ Rails.application.routes.draw do
     get 'submission', on: :member
     post 'add_submission', on: :member
   end
+
+  resources :tool_offers, path: 'toolteiler', except: [:index] do
+    get 'calculate_price', on: :member
+  end
+
+    # resources :toolteiler do
+    #   collection do
+    #     get :rent_1, :rent_2, :rent_3, :rent_4
+    #   end
+    # end
+
+
 
   resources :groups, except: [:index] do
     resources :discussions, only: [:index, :show, :create, :edit, :update, :destroy] do
@@ -122,7 +136,7 @@ Rails.application.routes.draw do
     get 'locations'
     get 'raumteiler', action: 'rooms', as: 'rooms'
     get 'gruppen', action: 'groups', as: 'groups'
-    get 'toolteiler'
+    get 'toolteiler', action: 'tool_offers', as: 'tool_offers'
     get 'zuckerl', action: 'zuckerls', as: 'zuckerls'
   end
 
@@ -132,7 +146,7 @@ Rails.application.routes.draw do
     get 'locations', on: :member
     get 'raumteiler', action: 'rooms', as: 'rooms', on: :member
     get 'gruppen', action: 'groups', as: 'groups', on: :member
-    get 'toolteiler', on: :member
+    get 'toolteiler', action: 'tool_offers', as: 'tool_offers', on: :member
     get 'zuckerl', action: 'zuckerls', as: 'zuckerls', on: :member
   end
 
@@ -184,14 +198,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :toolteiler do
-    collection do
-      get :show,
-          :new_1, :new_2, :new_3, :new_4,
-          :rent_1, :rent_2, :rent_3, :rent_4
-    end
-  end
-
   resources :messenger do
     collection do
       get :show
@@ -205,11 +211,10 @@ Rails.application.routes.draw do
     get 'zuckerl', action: 'zuckerls', as: 'zuckerls', on: :member
     get 'ideen', action: 'posts', as: 'posts', on: :member
     get 'gruppen', action: 'groups', as: 'groups', on: :member
-    get 'toolteiler', on: :member
+    get 'toolteiler', action: 'tool_offers', as: 'tool_offers', on: :member
     resources :meetings, path: 'treffen', only: [:show]
     resources :groups, path: 'gruppen', only: [:show]
     resources :locations, only: [:show]
-    resources :toolteiler, only: [:show]
     resources :users, only: [:show]
     resources :user_posts, path: 'ideen', only: [:new, :show, :create, :destroy]
   end

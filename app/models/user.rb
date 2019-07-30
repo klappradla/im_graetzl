@@ -27,6 +27,7 @@ class User < ApplicationRecord
   has_many :room_calls
   has_many :room_offers
   has_many :room_demands
+  has_many :tool_offers
 
   has_and_belongs_to_many :business_interests
   belongs_to :location_category, optional: true

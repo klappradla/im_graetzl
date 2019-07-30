@@ -1,11 +1,9 @@
-<%= form_for'toolteiler' do |f| %>
-
-<div class="form-block" data-step="3">
+<div class="form-block" id="tab-insurance">
 
   <div class="hl-subtext">
     <h2>Infos für deine <span>Versicherung</span></h2>
     <p>
-      Dein Toolteiler ist automatisch <a href="/info/versicherung">versichert</a>,
+      Dein Toolteiler ist automatisch <%= link_to "versichert", info_versicherung_path %>,
       wenn er über den Toolteiler auf imGrätzl.at angemietet wird.
       Bitte gib jetzt noch den ungefähren Wert deines Arbeitsgerätes an und notiere bekannte Mängel.
       Wenn du auch noch die Seriennummer weisst, perfekt!
@@ -14,46 +12,39 @@
 
   <div class="form-columns">
     <div class="input-select">
-      <%= f.label :rented_area do %>
+      <%= f.label :value_up_to do %>
         <%= icon_tag "label-tag" %>
         <span>Wert deines Toolteilers</span>
       <% end %>
-      <select>
-        <option value="1">Bis zu 1.000 €</option>
-        <option value="2">Bis zu 2.000 €</option>
-        <option value="3">Bis zu 3.000 €</option>
-        <option value="4">Bis zu 4.000 €</option>
-        <option value="5">Bis zu 5.000 €</option>
-      </select>
+      <%= f.select :value_up_to, tool_insurance_values %>
     </div>
     <div class="input-field">
-      <%= f.label :total_area do %>
+      <%= f.label :serial_number do %>
         <%= icon_tag "label-tag" %>
         <span>Seriennummer</span>
       <% end %>
-      <%= f.number_field :total_area, placeholder: 'Seriennummer ..' %>
+      <%= f.text_field :serial_number, placeholder: 'Seriennummer ..' %>
     </div>
   </div>
 
   <div class="input-textarea">
-    <%= f.label :description do %>
+    <%= f.label :known_defects do %>
     <%= icon_tag "layout-document" %>
     <span>Bekannte Mängel</span>
     <% end %>
-    <%= f.text_area :description, placeholder: 'Falls dir Mängel bekannt sind, gib sie hier kurz an ..' %>
+    <%= f.text_area :known_defects, placeholder: 'Falls dir Mängel bekannt sind, gib sie hier kurz an ..' %>
   </div>
 
   <div class="input-button">
-    <a href="/toolteiler/new_4" class="btn-primary">Weiter</a>
+    <%= button_tag "Weiter", type: 'button', class: 'btn-primary next-screen', data: { tab: 'tab-price' } %>
   </div>
 
   <div class="footer-insurance">
-    <a href="/info/versicherung"><%= image_tag('logo-axa.png') %></a>
+    <%= link_to image_tag('logo-axa.png'), info_versicherung_path %>
     <p>
       Jedes Gerät, dass du über den Toolteiler verleihst, ist mit bis zu 15.000 € versichert.<br>
-      Einfach und unbürokratisch. <a href="/info/versicherung">Mehr Infos</a>.
+      Einfach und unbürokratisch. <%= link_to "Mehr Infos", info_versicherung_path %>.
     </p>
   </div>
 
 </div>
-<% end %>

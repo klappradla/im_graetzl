@@ -1,0 +1,81 @@
+<aside class="sideBar">
+  <div class="sideBarbox -top">
+
+    <h3 class="sidebar">Die Kosten</h3>
+
+    <div class="pricing-info">
+      <div class="priceSheet -variant2">
+        <div class="price"><%= @tool_offer.daily_price(1).to_i %><sup>€</sup></div>
+        <div class="txt">pro Tag</div>
+      </div>
+      <div class="priceSheet -variant2 -discount-days">
+        <div class="price"><%= @tool_offer.daily_price(2).to_i %><sup>€</sup></div>
+        <div class="txt">pro Tag</div>
+      </div>
+      <div class="priceSheet -variant2 -discount-week">
+        <div class="price"><%= @tool_offer.daily_price(7).to_i %><sup>€</sup></div>
+        <div class="txt">pro Tag</div>
+      </div>
+    </div>
+
+
+    <h3 class="sidebar">Zeitraum</h3>
+
+    <div class="request">
+      <%= form_tag [:calculate_price, @tool_offer], remote: true, method: :get, class: 'request-price-form' do %>
+        <div class="input-field">
+          <%= label_tag :date_from do %>
+            <%= icon_tag "calendar-2" %>
+            <span></span>
+          <% end %>
+          <%= text_field_tag :date_from, nil, class: 'date-from', placeholder: 'Von' %>
+        </div>
+
+        <div class="input-field">
+          <%= label_tag :date_to do %>
+            <%= icon_tag "calendar-2" %>
+            <span></span>
+          <% end %>
+          <%= text_field_tag :date_to, nil, class: 'date-to', placeholder: 'Bis' %>
+        </div>
+      <% end %>
+    </div>
+
+    <div id="calculated-price-container"></div>
+  </div>
+
+  <!-- Contactbox-->
+  <div class="sideBarbox">
+
+    <h3 class="sideflag -L">Infos & Adresse</h3>
+
+    <div class="innerbox user-wrp">
+      <%= avatar_for @tool_offer.user %>
+      <%= link_to @tool_offer.user, class: 'user-wrp', target: '_blank' do %>
+        <span class="name"><%= @tool_offer.user.full_name %></span>
+      <% end %>
+
+      <div class="rating-container">
+        <%= user_rating(@tool_offer.user) %>
+      </div>
+    </div>
+
+    <div class="address icontxt">
+      <%= icon_tag "map-location" %>
+      <%= @tool_offer.address.street %><br>
+      <%= "#{@tool_offer.address.zip} #{@tool_offer.address.city}" %><br>
+    </div>
+
+    <div class="created icontxt">
+      <%= icon_tag "pencil" %>
+      Erstellt / Aktualisiert:<br><%= I18n.localize(@tool_offer.updated_at, format:'%d. %b %Y') %>
+    </div>
+
+    <% if @tool_offer.address.try(:coordinates) %>
+      <%= link_to google_map_url(@tool_offer.address), class: 'gmap' do %>
+        <%= image_tag static_map_url(@tool_offer.address.coordinates, zoom: 16, size: [250,150]) %>
+      <% end %>
+    <% end %>
+
+  </div>
+</aside>

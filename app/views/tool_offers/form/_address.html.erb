@@ -1,0 +1,56 @@
+<div class="form-block" id="tab-address">
+
+  <div class="hl-subtext">
+    <h2>Deine <span>Abholadresse</span></h2>
+    <p>Wo kann sich der Mieter deinen Toolteiler abholen?</p>
+  </div>
+
+  <% if f.object.address.nil? %>
+
+    <div class="input-field" id="addressSearchAutocomplete">
+      <%= label_tag :address do %>
+        <%= icon_tag "map-location" %>
+        <span>Adresse</span>
+      <% end %>
+      <%= text_field_tag :address, nil, placeholder: "Straße und Hausnummer" %>
+      <%= hidden_field_tag :feature %>
+    </div>
+
+  <% else %>
+
+    <%= f.fields_for :address do |address_fields| %>
+      <div class="input-field">
+        <%= address_fields.label :street_name do %>
+          <span>Straße</span>
+        <% end %>
+        <%= address_fields.text_field :street_name %>
+      </div>
+
+      <div class="input-field">
+        <%= address_fields.label :street_number do %>
+          <span>Hausnummer</span>
+        <% end %>
+        <%= address_fields.text_field :street_number %>
+      </div>
+
+      <div class="input-field">
+        <%= address_fields.label :zip do %>
+          <span>Postleitzahl</span>
+        <% end %>
+        <%= address_fields.text_field :zip %>
+      </div>
+
+      <div class="input-field">
+        <%= address_fields.label :city do %>
+          <span>Ort</span>
+        <% end %>
+        <%= address_fields.text_field :city %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <div class="input-button">
+    <%= button_tag "Weiter", type: 'button', class: 'btn-primary next-screen', data: { tab: 'tab-insurance' } %>
+  </div>
+
+</div>

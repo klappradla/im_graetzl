@@ -1,27 +1,5 @@
 class ToolteilerController < ApplicationController
 
-
-  def new_1
-    @content = 'toolteiler' # Render Demo Partial
-    render :template => '/toolteiler/form/create/new'
-  end
-
-  def new_2
-    @content = 'address' # Render Demo Partial
-    render :template => '/toolteiler/form/create/new'
-  end
-
-  def new_3
-    @content = 'insurance' # Render Demo Partial
-    render :template => '/toolteiler/form/create/new'
-  end
-
-  def new_4
-    @content = 'pricing' # Render Demo Partial
-    render :template => '/toolteiler/form/create/new'
-  end
-
-
   def rent_1
     @content = 'login' # Render Demo Partial
     render :template => '/toolteiler/form/rent/show'

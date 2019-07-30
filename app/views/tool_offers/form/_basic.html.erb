@@ -1,6 +1,4 @@
-<%= form_for'toolteiler' do |f| %>
-
-<div class="form-block" data-step="1">
+<div class="form-block" id="tab-basic">
 
   <h2 class="hl-main">
     Wähle zuerst eine <span>Kategorie</span>
@@ -8,27 +6,19 @@
 
   <div class="form-columns">
     <div class="input-select">
-      <%= f.label :category do %>
+      <%= f.label :tool_category do %>
         <%= icon_tag "layout-document" %>
         <span>Hauptkategorie</span>
       <% end %>
-      <select>
-        <option value="">auwählen ..</option>
-        <option value="1">Kategorie 1</option>
-        <option value="2">Kategorie 2</option>
-      </select>
+      <%= f.select :tool_category, options_from_collection_for_select(ToolCategory.all, :id, :name), prompt: 'auwählen...' %>
     </div>
 
     <div class="input-select">
-      <%= f.label :category do %>
+      <%= f.label :tool_subcategory do %>
         <%= icon_tag "layout-document" %>
         <span>Unterkategorie</span>
       <% end %>
-      <select>
-        <option value="">auswählen ..</option>
-        <option value="1">Kategorie 1</option>
-        <option value="2">Kategorie 2</option>
-      </select>
+      <%= f.select :tool_category, options_from_collection_for_select(ToolCategory.all, :id, :name), prompt: 'auwählen...' %>
     </div>
   </div>
 
@@ -50,18 +40,18 @@
 
   <div class="form-columns">
     <div class="input-field">
-      <%= f.label :rented_area do %>
+      <%= f.label :brand do %>
         <%= icon_tag "label-tag" %>
         <span>Marke</span>
       <% end %>
-      <%= f.number_field :rented_area, placeholder: 'Marke ..' %>
+      <%= f.text_field :brand, placeholder: 'Marke...' %>
     </div>
     <div class="input-field">
-      <%= f.label :total_area do %>
+      <%= f.label :model do %>
         <%= icon_tag "label-tag" %>
         <span>Modell</span>
       <% end %>
-      <%= f.number_field :total_area, placeholder: 'Modell ..' %>
+      <%= f.text_field :model, placeholder: 'Modell...' %>
     </div>
   </div>
 
@@ -74,26 +64,42 @@
   </div>
 
   <div class="upload-oldschool">
-    <label for="room_offer_images">
-      <svg class="icon-photo-camera"><use xlink:href="#icon-photo-camera"></use></svg>
+    <%= f.label :cover_photo do %>
+      <%= icon_tag "photo-camera" %>
       <span>Headerbild</span>
-    </label>
+    <% end %>
     <div class="field-wrp">
-      <input multiple="multiple" value="[]" data-reference="a60082a9415734d766034569ba5c5568" type="hidden" name="room_offer[images_files][]"><input multiple="multiple" direct="true" presigned="true" data-direct="true" data-as="file" data-url="/attachments/cache" data-reference="a60082a9415734d766034569ba5c5568" accept="image/jpeg,image/gif,image/png" include_hidden="false" type="file" name="room_offer[images_files][]" id="room_offer_images_files">
+      <% if f.object.cover_photo %>
+      <div class="preview-wrp">
+        <%= image_tag attachment_url(f.object, :cover_photo, :fill, 159, 60) %>
+        <div class="input-checkbox">
+          <%= f.check_box :remove_cover_photo, { class: 'deleteCheckbox' } %>
+          <%= f.label :remove_cover_photo, 'Löschen' %>
+        </div>
+      </div>
+      <% end %>
+      <%= f.attachment_field :cover_photo, direct: true, presigned: true %>
     </div>
   </div>
 
   <div class="upload-oldschool">
-    <label for="room_offer_images">
-      <svg class="icon-photo-camera"><use xlink:href="#icon-photo-camera"></use></svg>
+    <%= f.label :images do %>
+      <%= icon_tag "photo-camera" %>
       <span>Weitere Fotos</span>
-    </label>
+    <% end %>
     <div class="field-wrp">
-      <input multiple="multiple" value="[]" data-reference="a60082a9415734d766034569ba5c5568" type="hidden" name="room_offer[images_files][]"><input multiple="multiple" direct="true" presigned="true" data-direct="true" data-as="file" data-url="/attachments/cache" data-reference="a60082a9415734d766034569ba5c5568" accept="image/jpeg,image/gif,image/png" include_hidden="false" type="file" name="room_offer[images_files][]" id="room_offer_images_files">
+      <%= f.fields_for :images do |ff| %>
+        <div class="preview-wrp">
+          <%= image_tag attachment_url(ff.object, :file, :fill, 159, 60) %>
+          <div class="input-checkbox">
+            <%= ff.check_box :_destroy, { class: 'deleteCheckbox' } %>
+            <%= ff.label :_destroy, 'Löschen' %>
+          </div>
+        </div>
+      <% end %>
+      <%= f.attachment_field :images_files, multiple: true, direct: true, presigned: true %>
     </div>
   </div>
-
-
 
   <div class="hl-subtext">
     <h2><span>Ausstattung</span> - kurz das wichtigste</h2>
@@ -101,16 +107,15 @@
   </div>
 
   <div class="input-tags">
-    <%= label_tag :custom_keywords do %>
+    <%= label_tag :keywords do %>
     <%= icon_tag "label-tag" %>
     <span>Ausstattung<br/><small>(mit Komma getrennt)</small></span>
     <% end %>
-    <%= text_field_tag :custom_keywords, nil, id: 'custom-keywords' %>
+    <%= text_field_tag :keywords, nil, id: 'custom-keywords' %>
   </div>
 
   <div class="input-button">
-    <a href="/toolteiler/new_2" class="btn-primary">Weiter</a>
+    <%= button_tag "Weiter", type: 'button', class: 'btn-primary next-screen', data: { tab: 'tab-address' } %>
   </div>
 
 </div>
-<% end %>

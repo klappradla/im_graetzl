@@ -1,0 +1,11 @@
+<%= form_for(@tool_offer) do |f| %>
+  <%= form_errors_for @tool_offer %>
+
+  <div class="tabs-ctrl">
+    <%= render "tool_offers/form/tabs_nav" %>
+    <%= render 'tool_offers/form/basic', f: f %>
+    <%= render 'tool_offers/form/address', f: f %>
+    <%= render 'tool_offers/form/insurance', f: f %>
+    <%= render 'tool_offers/form/price', f: f %>
+  </div>
+<% end %>

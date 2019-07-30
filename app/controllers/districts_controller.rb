@@ -18,6 +18,9 @@ class DistrictsController < ApplicationController
   def rooms
   end
 
+  def tool_offers
+  end
+
   def groups
     @featured_groups = @district.groups.include_for_box
     @category = GroupCategory.find_by(id: params[:category])

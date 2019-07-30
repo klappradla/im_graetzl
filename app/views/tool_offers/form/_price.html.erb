@@ -1,0 +1,75 @@
+<div class="form-block" id="tab-price">
+
+  <div class="hl-subtext">
+    <h2>Lege den <span>Preis</span> fest.</h2>
+    <p>
+      Über den Preis, den du für deinen Toolteiler nimmst, entscheidest du selbst.
+      Der Mietpreis sollte sich nach Equipment und Ausstattung richten.
+      Um mehr Langzeitbuchungen zu erhalten, legen manche Vermieter auch einen Tages- oder Wochenrabatt fest.
+    </p>
+  </div>
+
+  <div class="input-field">
+    <%= label_tag(:price_per_day) do %>
+      <%= icon_tag "currency-euro" %>
+      <span>Preis / Tag</span>
+    <% end %>
+    <%= f.number_field :price_per_day, placeholder: 'Lege deinen gewünschten Tagespreis fest ..' %>
+  </div>
+
+  <div class="form-columns">
+    <div class="input-select">
+      <%= label_tag(:two_day_discount) do %>
+        <%= icon_tag "sale-label" %>
+        <span>Tagesrabatt</span>
+      <% end %>
+      <%= f.select :two_day_discount, tool_discount_values, include_blank: "% Rabatt ab 2 Tagen" %>
+  </div>
+
+    <div class="input-select">
+      <%= label_tag(:weekly_discount) do %>
+        <%= icon_tag "sale-label" %>
+        <span>Wochenrabatt</span>
+      <% end %>
+      <%= f.select :weekly_discount, tool_discount_values, include_blank: "% Rabatt ab 1 Woche" %>
+    </div>
+  </div>
+
+  <div class="hl-subtext">
+    <h2>Dein <span>Auszahlungskonto</span></h2>
+    <p>
+      Auf deine Auszahlungskonto überweisen wir dir deine Mieteinnahmen. Du musst es daher spätestens hinzufügen, wenn du eine Miet-Anfrage als Vermieter akzeptierst.
+    </p>
+  </div>
+
+  <div class="form-columns">
+    <div class="input-field">
+      <%= f.label :first_name do %>
+        <%= icon_tag "user-avatar" %>
+        <span>Vorname</span>
+      <% end %>
+      <%= f.text_field :first_name, placeholder: 'Vorname' %>
+    </div>
+
+    <div class="input-field">
+      <%= f.label :last_name do %>
+        <%= icon_tag "user-avatar" %>
+        <span>Nachname</span>
+      <% end %>
+      <%= f.text_field :last_name, placeholder: 'Nachname' %>
+    </div>
+  </div>
+
+  <div class="input-field">
+    <%= f.label :iban do %>
+      <%= icon_tag "profile-vcard" %>
+      <span>Kontoverbindung</span>
+    <% end %>
+    <%= f.text_field :iban, placeholder: 'IBAN' %>
+  </div>
+
+  <div class="input-button">
+    <%= f.submit 'Toolteiler erstellen', data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
+  </div>
+
+</div>

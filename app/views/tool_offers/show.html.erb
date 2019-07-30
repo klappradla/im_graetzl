@@ -1,0 +1,83 @@
+<% meta(
+    title: t('.title', title: @tool_offer.title[0..45].gsub(/\s\w+\s*$/,'...')),
+    description: t('.description', desc: @tool_offer.description[0..160].gsub(/\n/, " ")),
+    robots: 'index, follow',
+    og_title: t('.title', title: @tool_offer.title[0..80].gsub(/\s\w+\s*$/,'...')),
+    og_description: t('.description', desc: @tool_offer.description[0..250].gsub(/\n/, " ")),
+    og_image: attachment_url(@tool_offer, :cover_photo, :fill, 1200, 630, host: url_for(:only_path => false, :overwrite_params => nil), fallback: 'meta/og_logo.png')
+  )
+%>
+
+<section class="toolTeiler-detail">
+  <div class="imgHeader">
+    <%= attachment_image_tag @tool_offer, :cover_photo, :fill, 980, 420, fallback: 'cover_photo/980x370.png', class: 'titleImg' %>
+    <div class="headContent">
+      <div class="category-tags">
+          <ul class="tag-list -mint">
+            <li><%= @tool_offer.tool_category.try(:name) %></li>
+            <li><%= @tool_offer.tool_subcategory.try(:name) %></li>
+          </ul>
+      </div>
+    </div>
+  </div>
+
+  <%= render 'tool_offers/show/sidebar' %>
+
+  <!-- MAIN CONTENT -->
+  <div class="mainContent">
+
+    <div class="introtxt">
+      <h3><%= @tool_offer.title %></h3>
+      <div class="brand">
+        <strong>Marke: </strong>
+        <%= @tool_offer.brand %>
+      </div>
+      <div class="model">
+        <strong>Modell: </strong>
+        <%= @tool_offer.model %>
+      </div>
+    </div>
+
+    <div class="txt">
+      <%= @tool_offer.description %>
+    </div>
+
+    <div class="entryImgUploads">
+      <% @tool_offer.images.each do |image| %>
+        <%= link_to attachment_image_tag(image, :file, :fill, 200, 200), attachment_url(image, :file, :limit, 800, 800), data: { jbox_image: "gallery1" } %>
+      <% end %>
+    </div>
+
+    <% if @tool_offer.keyword_list.present? %>
+      <section>
+        <div class="bigicontext-element">
+          <%= icon_tag "dot-3" %>
+          <div class="txt">Ausstattung</div>
+        </div>
+        <div class="category-tags">
+          <ul class="tag-list">
+            <% @tool_offer.keyword_list.each do |keyword| %>
+              <li><%= keyword %></li>
+            <% end %>
+          </ul>
+        </div>
+      </section>
+    <% end %>
+  </div>
+
+  <div class="mainContent discussion-area">
+
+    <section>
+      <div class="stream">
+        <div class="bigicontext-element">
+          <%= icon_tag "layout-text" %>
+          <div class="txt">Kommentare zum Toolteiler</div>
+        </div>
+        <%= render 'comments/form', commentable: @tool_offer %>
+        <%= render partial: 'comments/stream_comment', collection: @comments, as: 'comment' %>
+      </div>
+    </section>
+
+  </div>
+
+</section>

@@ -31,7 +31,7 @@ class WienController < ApplicationController
     @districts = District.order(zip: :asc)
   end
 
-  def toolteiler
+  def tool_offers
     @districts = District.order(zip: :asc)
   end
 
