@@ -53,13 +53,13 @@
       <%= icon_tag "raumteiler" %>
       <div class="icontxt">Neuer Raumteiler</div>
     <% end %>
+    <%= link_to new_tool_offer_path do %>
+      <%= icon_tag "share" %>
+      <div class="icontxt">Neuer Toolteiler</div>
+    <% end %>
     <%= link_to new_group_path(graetzl_id: @graetzl.id) do %>
       <%= icon_tag "speech-bubble" %>
       <div class="icontxt">Neue Gruppe gründen</div>
-    <% end %>
-    <%= link_to new_graetzl_user_post_path(@graetzl) do %>
-      <%= icon_tag "head-idea-lightbulb" %>
-      <div class="icontxt">Neue Idee im Grätzl</div>
     <% end %>
 
     <% current_user.locations.approved.each do |location| %>
