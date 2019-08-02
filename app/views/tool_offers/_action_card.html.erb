@@ -10,27 +10,19 @@
           <span>Dein Name</span>
         <% end %>
       </div>
-      <% if local_assigns[:graetzl] %>
-        <h3>Hast du einen Raum / oder suchst du einen Raum? <!--<%= graetzl.name %>--></h3>
-        <%= link_to 'Deinen Raumteiler eintragen', select_room_offers_path, class: 'btn-primary' %>
-      <% elsif local_assigns[:district] %>
-        <h3>Hast du einen Raum / oder suchst du einen Raum? <!--<%= district.numeric %>--></h3>
-        <%= link_to 'Deinen Raumteiler eintragen', select_room_offers_path, class: 'btn-primary' %>
-      <% else %>
-        <h3>Hast du einen Raum / oder suchst du einen Raum?</h3>
-        <%= link_to 'Deinen Raumteiler eintragen', select_room_offers_path, class: 'btn-primary -rose' %>
-      <% end %>
+      <h3>Hast du Equpiment zu verleihen und möchtest damit Geld verdienen?</h3>
+      <%= link_to 'Jetzt Toolteiler eintragen', new_tool_offer_path, class: 'btn-primary -rose' %>
     </div>
     <div class="card"></div>
   </div>
 
   <% if local_assigns[:view_all] %>
     <% if local_assigns[:graetzl] %>
-      <%= link_to 'Alle Raumteiler', rooms_graetzl_path(graetzl), class: 'link-more' %>
+      <%= link_to 'Alle Toolteiler', tool_offers_graetzl_path(graetzl), class: 'link-more' %>
     <% elsif local_assigns[:district] %>
-      <%= link_to 'Alle Raumteiler', rooms_district_path(district), class: 'link-more' %>
+      <%= link_to 'Alle Toolteiler', tool_offers_district_path(district), class: 'link-more' %>
     <% else %>
-      <%= link_to 'Alle Raumteiler', rooms_wien_path, class: 'link-more' %>
+      <%= link_to 'Alle Toolteiler', tool_offers_wien_path, class: 'link-more' %>
     <% end %>
   <% end %>
 </div>

@@ -1,5 +1,5 @@
 class ToolOffersController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     head :ok and return if browser.bot? && !request.format.js?

@@ -92,7 +92,7 @@ Rails.application.routes.draw do
     post 'add_submission', on: :member
   end
 
-  resources :tool_offers, path: 'toolteiler', except: [:index] do
+  resources :tool_offers, except: [:index] do
     get 'calculate_price', on: :member
   end
 

@@ -14,6 +14,11 @@ APP.controllers.tool_offers = (function() {
         $('.tabs-ctrl').trigger('show', '#' + $(this).data("tab"));
         $('.tabs-ctrl').get(0).scrollIntoView();
       });
+
+      $('#custom-keywords').tagsInput({
+        'defaultText':'Kurz in Stichworten ..'
+      });
+      
     }
 
     function initToolOfferDetails() {
