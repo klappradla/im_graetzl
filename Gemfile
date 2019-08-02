@@ -31,8 +31,7 @@ gem 'google_custom_search_api'
 gem 'mandrill-api', '~> 1.0.53', require: "mandrill"
 gem 'gibbon', '~> 3.0', '>= 3.0.2'
 gem 'newrelic_rpm'
-# gem 'rollbar'
-gem "bugsnag"
+gem 'rollbar'
 gem 'scout_apm'
 
 gem 'refile', github: 'refile/refile', require: 'refile/rails'

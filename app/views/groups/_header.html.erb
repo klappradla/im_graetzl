@@ -28,7 +28,7 @@
       <%= icon_tag('lock-1') if @group.private? %><%= @group.private? ? "Geschlossene" : "Offene" %> Gruppe
     </p>
     <div class="users">
-      <% @group.admins.each do |user| %>
+      <% @group.admins.first(5).each do |user| %>
       <div class="user">
         <div class="avatar">
           <%= attachment_image_tag user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
@@ -36,6 +36,16 @@
         <div class="infos">
           <div class="title">Organisiert von:</div>
           <span><%= user.full_name %></span>
+        </div>
+      </div>
+      <% end %>
+      <% if @group.admins.size > 5 %>
+      <div class="user -more">
+        <div class="avatar">
+          <%= icon_tag "user-avatar" %>
+        </div>
+        <div class="infos">
+          <span>+ <%= @group.admins.size - 5 %> weitere</span>
         </div>
       </div>
       <% end %>

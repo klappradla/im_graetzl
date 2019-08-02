@@ -111,8 +111,6 @@ GEM
     bb-ruby (1.4.0)
     bcrypt (3.1.12)
     browser (2.5.3)
-    bugsnag (6.11.1)
-      concurrent-ruby (~> 1.0)
     builder (3.2.3)
     capybara (3.15.0)
       addressable
@@ -267,7 +265,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2018.0812)
     mimemagic (0.3.3)
-    mini_magick (4.9.3)
+    mini_magick (4.9.5)
     mini_mime (1.0.1)
     mini_portile2 (2.4.0)
     mini_racer (0.2.4)
@@ -367,6 +365,7 @@ GEM
       rgeo (>= 1.0.0)
     rgeo-geojson (2.1.1)
       rgeo (>= 1.0.0)
+    rollbar (2.21.0)
     rspec-core (3.8.0)
       rspec-support (~> 3.8.0)
     rspec-expectations (3.8.2)
@@ -450,7 +449,6 @@ DEPENDENCIES
   autoprefixer-rails
   bb-ruby
   browser
-  bugsnag
   capybara
   cocoon
   database_cleaner
@@ -490,6 +488,7 @@ DEPENDENCIES
   remotipart
   rgeo
   rgeo-geojson
+  rollbar
   rspec-rails
   sass-rails
   scout_apm

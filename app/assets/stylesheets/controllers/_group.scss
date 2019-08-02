@@ -475,6 +475,25 @@ section.group-form-page {
     }
   }
 
+  .group-header {
+    .user {
+      &.-more {
+        .avatar {
+          margin-right: 10px;
+          svg {
+            @include img-round;
+            margin: 0 auto;
+            align-self: center;
+            padding:10px !important;
+          }
+        }
+        .infos {
+          font-style: italic;
+        }
+      }
+    }
+  }
+
   // Startpage Auszug
   .member-section {
     .user {

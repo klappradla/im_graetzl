@@ -12,6 +12,7 @@ class MeetingsSerializer
         :name,
         :description,
         :created_at,
+        :updated_at,
         :starts_at_date,
         :starts_at_time,
         :ends_at_date,
