@@ -15,10 +15,15 @@ APP.controllers.tool_offers = (function() {
         $('.tabs-ctrl').get(0).scrollIntoView();
       });
 
+      $(".category-select").on("change", function() {
+        $(".subcategory-select option").hide();
+        $(".subcategory-select option[data-parent-id=" + $(this).val() + "]").show();
+      }).change();
+
       $('#custom-keywords').tagsInput({
         'defaultText':'Kurz in Stichworten ..'
       });
-      
+
     }
 
     function initToolOfferDetails() {

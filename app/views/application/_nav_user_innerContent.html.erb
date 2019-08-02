@@ -12,6 +12,10 @@
       <%= icon_tag "raumteiler" %> Raumteiler
       <span class="-more"><%= icon_tag "arrow-right-2" %></span>
     <% end %>
+    <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-tools'} do %>
+      <%= icon_tag "share" %> Toolteiler
+      <span class="-more"><%= icon_tag "arrow-right-2" %></span>
+    <% end %>
     <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-groups'} do %>
       <%= icon_tag "coop-share" %> Gruppen
       <span class="-more"><%= icon_tag "arrow-right-2" %></span>
@@ -91,6 +95,21 @@
     <% end %>
     <%= link_to rooms_user_path do %>
       <%= icon_tag "raumteiler" %> Raumteiler erstellen
+    <% end %>
+  </section>
+
+  <section class="second -tools">
+    <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-tools'} do %>
+      <%= icon_tag "arrow-left-2" %> Zurück
+    <% end %>
+    <% current_user.tool_offers.first(6).each do |tool_offer| %>
+      <%= link_to tool_offer do %>
+        <%= attachment_image_tag tool_offer, :cover_photo, :fill, 100, 100, fallback: 'avatar/tool_offer/100x100.png', class: 'img-square' %>
+        <span><%= tool_offer.title %></span>
+      <% end %>
+    <% end %>
+    <%= link_to tool_offers_user_path do %>
+      <%= icon_tag "share" %> Toolteiler erstellen
     <% end %>
   </section>
 

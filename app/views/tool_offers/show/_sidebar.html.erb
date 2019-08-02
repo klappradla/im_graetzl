@@ -1,8 +1,8 @@
 <aside class="sideBar">
+
   <div class="sideBarbox -top">
 
     <h3 class="sidebar">Die Kosten</h3>
-
     <div class="pricing-info">
       <div class="priceSheet -variant2">
         <div class="price"><%= @tool_offer.daily_price(1).to_i %><sup>€</sup></div>
@@ -20,7 +20,6 @@
 
 
     <h3 class="sidebar">Zeitraum</h3>
-
     <div class="request">
       <%= form_tag [:calculate_price, @tool_offer], remote: true, method: :get, class: 'request-price-form' do %>
         <div class="input-field">
@@ -42,31 +41,33 @@
     </div>
 
     <div id="calculated-price-container"></div>
+    
   </div>
 
   <!-- Contactbox-->
   <div class="sideBarbox">
 
     <h3 class="sideflag -L">Infos & Adresse</h3>
-
     <div class="innerbox user-wrp">
       <%= avatar_for @tool_offer.user %>
-      <%= link_to @tool_offer.user, class: 'user-wrp', target: '_blank' do %>
-        <span class="name"><%= @tool_offer.user.full_name %></span>
-      <% end %>
+      <div class="">
+        <%= link_to @tool_offer.user, class: 'user-wrp', target: '_blank' do %>
+          <span class="name"><%= @tool_offer.user.full_name %></span>
+        <% end %>
 
-      <div class="rating-container">
-        <%= user_rating(@tool_offer.user) %>
+        <div class="rating-container">
+          <%= user_rating(@tool_offer.user) %>
+        </div>
       </div>
     </div>
 
-    <div class="address icontxt">
+    <div class="innerbox icontxt">
       <%= icon_tag "map-location" %>
       <%= @tool_offer.address.street %><br>
       <%= "#{@tool_offer.address.zip} #{@tool_offer.address.city}" %><br>
     </div>
 
-    <div class="created icontxt">
+    <div class="innerbox icontxt">
       <%= icon_tag "pencil" %>
       Erstellt / Aktualisiert:<br><%= I18n.localize(@tool_offer.updated_at, format:'%d. %b %Y') %>
     </div>

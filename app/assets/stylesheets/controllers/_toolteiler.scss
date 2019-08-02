@@ -120,6 +120,7 @@ section.toolTeiler-detail {
 
   .sideBar {
     position: relative;
+    z-index: 10;
     margin: 0 auto 50px auto;
 
     @include respond-to(">=large") {

@@ -50,7 +50,7 @@ Rails.application.routes.draw do
   resource :user, only: [:edit], path_names: { edit: 'einstellungen' } do
     get 'locations'
     get 'raumteiler', action: 'rooms', as: 'rooms'
-    get 'toolteiler', action: 'tools', as: 'tools'
+    get 'toolteiler', action: 'tool_offers', as: 'tool_offers'
     get 'gruppen', action: 'groups', as: 'groups'
     get 'zuckerl', action: 'zuckerls', as: 'zuckerls'
   end
@@ -68,7 +68,6 @@ Rails.application.routes.draw do
   end
   resources :zuckerls, only: [:index]
   resources :rooms, only: [:index]
-  resources :tool_offers, only: [:index]
   resources :posts, only: [:index]
   resources :groups, only: [:index]
 
@@ -92,17 +91,14 @@ Rails.application.routes.draw do
     post 'add_submission', on: :member
   end
 
-  resources :tool_offers, except: [:index] do
+  get 'toolteiler/rent_1'
+  get 'toolteiler/rent_2'
+  get 'toolteiler/rent_3'
+  get 'toolteiler/rent_4'
+
+  resources :tool_offers, path: 'toolteiler' do
     get 'calculate_price', on: :member
   end
-
-    # resources :toolteiler do
-    #   collection do
-    #     get :rent_1, :rent_2, :rent_3, :rent_4
-    #   end
-    # end
-
-
 
   resources :groups, except: [:index] do
     resources :discussions, only: [:index, :show, :create, :edit, :update, :destroy] do

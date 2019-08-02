@@ -197,6 +197,19 @@ de:
         status_message:
           enabled: Deine Raumsuche ist nun aktiv und sichtbar.
           disabled: Dein Raumsuche ist nun deaktiviert und scheint nicht mehr auf den Raumteilerseiten auf.
+      tool_offer:
+        address: Adresse
+        title: Titel
+        description: Beschreibung
+        cover_photo: Headerbild
+        first_name: Vorname
+        last_name: Nachname
+        email: Email
+        statuses:
+          enabled: Aktiv
+          disabled: Inaktiv
+          deleted: Deleted
+
       user:
         avatar: Profilbild
         confirmed_at: Bestätigt am

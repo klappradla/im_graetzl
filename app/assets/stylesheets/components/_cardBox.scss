@@ -114,6 +114,26 @@
     }
   } // Group Cardbox
 
+  &.-toolteiler {
+    .btn-group {
+      margin-top:15px;
+      display: flex;
+      margin-left: auto;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      .btn-secondary {
+        flex-basis: 49%;
+        margin-bottom: 5px;
+        &:first-child:not(:only-child) {
+          margin-right: 5px;
+        }
+      }
+      .btn-primary {
+        float: left;
+        flex-basis: 100%;
+      }
+    }
+  }
 }
 
 .card-grid .btn-userIcons, .card-slider-container .btn-userIcons, .block-groups .btn-userIcons {
@@ -237,13 +257,12 @@
       }
     }
   }
+
   &.-roomoffer {
     .slogan {
       margin-top: 5px;
     }
-
   }
-
 
   .updateteaser, .zuckerlteasertxt, .event-teaser-box, .basic-message-box {
     display: block;

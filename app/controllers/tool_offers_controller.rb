@@ -30,11 +30,11 @@ class ToolOffersController < ApplicationController
   end
 
   def edit
-    @tool_offer = current_user.tool_offers.find(params[:id])
+    @tool_offer = current_user.tool_offers.non_deleted.find(params[:id])
   end
 
   def update
-    @tool_offer = current_user.tool_offers.find(params[:id])
+    @tool_offer = current_user.tool_offers.non_deleted.find(params[:id])
     if @tool_offer.update(tool_offer_params)
       redirect_to @tool_offer
     else
@@ -59,14 +59,14 @@ class ToolOffersController < ApplicationController
 
   def collection_scope
     if params[:location_id].present?
-      ToolOffer.where(location_id: params[:location_id])
+      ToolOffer.enabled.where(location_id: params[:location_id])
     elsif params[:district_id].present?
       district = District.find(params[:district_id])
-      ToolOffer.where(graetzl_id: district.graetzl_ids)
+      ToolOffer.enabled.where(graetzl_id: district.graetzl_ids)
     elsif params[:graetzl_id].present?
-      ToolOffer.where(graetzl_id: params[:graetzl_id])
+      ToolOffer.enabled.where(graetzl_id: params[:graetzl_id])
     else
-      ToolOffer.all
+      ToolOffer.enabled
     end
   end
 
@@ -76,7 +76,7 @@ class ToolOffersController < ApplicationController
 
   def tool_offer_params
     params.require(:tool_offer).permit(
-      :title, :description, :brand, :model,
+      :title, :description, :brand, :model, :status,
       :value_up_to, :serial_number, :known_defects,
       :price_per_day, :two_day_discount, :weekly_discount,
       :tool_category_id, :tool_subcategory_id, :location_id,

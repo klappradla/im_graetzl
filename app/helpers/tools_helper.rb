@@ -1,5 +1,17 @@
 module ToolsHelper
 
+  def tool_categories_select_options
+    ToolCategory.top.map do |category|
+      [category.name, category.id]
+    end
+  end
+
+  def tool_subcategories_select_options
+    ToolCategory.subcategories.map do |category|
+      [category.name, category.id, 'data-parent-id' => category.parent_category_id]
+    end
+  end
+
   def tool_insurance_values
     [1000, 2000, 3000, 4000, 5000].map do |value|
       ["Bis zu #{value} €", value]

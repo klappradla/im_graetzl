@@ -8,7 +8,7 @@
     </div>
     <div class="priceSheet -variant2">
       <div class="txt">ab</div>
-      <div class="price"><%= tool_offer.daily_price(7) %><sup>€</sup></div>
+      <div class="price"><%= tool_offer.daily_price(7).to_i %><sup>€</sup></div>
     </div>
     <div class="categoryicon">
       <svg class="icon-share"><use xlink:href="#icon-share"></use></svg>
@@ -29,5 +29,23 @@
 
     <%= link_to 'Ausleihen', tool_offer, class: 'btn-primary -mint' %>
   </div>
+
+  <% if local_assigns[:manage_buttons].present? && current_user == tool_offer.user %>
+    <div class="btn-group">
+      <%= link_to 'Bearbeiten', edit_tool_offer_path(tool_offer), class: 'btn-secondary -mint -small' %>
+      <%= link_to "javascript:", data: { jq_dropdown: "#tool-offer-dropdown-#{tool_offer.id}" }, class: "btn-secondary -mint -small -state-#{tool_offer.status}" do %>
+        Status: <span><%= t("activerecord.attributes.tool_offer.statuses.#{tool_offer.status}") %></span>
+      <% end %>
+    </div>
+
+    <div id="tool-offer-dropdown-<%= tool_offer.id %>" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container">
+      <div class="jq-dropdown-panel">
+        <%= link_to 'Aktiv', [tool_offer, status: "enabled"], method: :patch %>
+        <%= link_to 'Inaktiv', [tool_offer, status: "disabled"], method: :patch %>
+        <%= link_to 'Löschen', tool_offer, method: :delete, data: { confirm: 'Bist du dir sicher?' } %>
+      </div>
+    </div>
+  <% end %>
+
 
 </div>

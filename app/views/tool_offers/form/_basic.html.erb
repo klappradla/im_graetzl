@@ -6,19 +6,19 @@
 
   <div class="form-columns">
     <div class="input-select">
-      <%= f.label :tool_category do %>
+      <%= f.label :tool_category_id do %>
         <%= icon_tag "layout-document" %>
         <span>Hauptkategorie</span>
       <% end %>
-      <%= f.select :tool_category, options_from_collection_for_select(ToolCategory.all, :id, :name), prompt: 'auwählen...' %>
+      <%= f.select :tool_category_id, tool_categories_select_options, { prompt: 'auwählen...' }, class: 'category-select' %>
     </div>
 
     <div class="input-select">
-      <%= f.label :tool_subcategory do %>
+      <%= f.label :tool_subcategory_id do %>
         <%= icon_tag "layout-document" %>
         <span>Unterkategorie</span>
       <% end %>
-      <%= f.select :tool_category, options_from_collection_for_select(ToolCategory.all, :id, :name), prompt: 'auwählen...' %>
+      <%= f.select :tool_category_id, tool_subcategories_select_options, { prompt: 'auwählen...' }, class: 'subcategory-select' %>
     </div>
   </div>
 

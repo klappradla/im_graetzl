@@ -28,6 +28,7 @@ class ToolOffer < ApplicationRecord
 
   before_create :set_graetzl
 
+  scope :non_deleted, -> { where.not(status: :deleted) }
   scope :by_currentness, -> { order(created_at: :desc) }
 
   def self.include_for_box

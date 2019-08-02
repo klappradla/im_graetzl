@@ -1,0 +1,15 @@
+collection @room_offers
+attributes :id,
+  :slogan,
+  :user_id,
+  :district_id,
+  :graetzl_id,
+  :created_at,
+  :room_category_ids,
+  :offer_type,
+  :first_name,
+  :last_name,
+  :email,
+  :wants_collaboration,
+  :website,
+  :slug

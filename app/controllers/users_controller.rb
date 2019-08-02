@@ -27,6 +27,10 @@ class UsersController < ApplicationController
     @rooms = RoomOffer.where(user_id: @user) + RoomDemand.where(user_id: @user)
   end
 
+  def tool_offers
+    @tool_offers = current_user.tool_offers.non_deleted
+  end
+
   def zuckerls
     @zuckerls = Zuckerl.where(location: current_user.locations).
       where.not(aasm_state: :cancelled)
