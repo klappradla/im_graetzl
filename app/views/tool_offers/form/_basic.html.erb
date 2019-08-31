@@ -10,7 +10,7 @@
         <%= icon_tag "layout-document" %>
         <span>Hauptkategorie</span>
       <% end %>
-      <%= f.select :tool_category_id, tool_categories_select_options, { prompt: 'auwählen...' }, class: 'category-select' %>
+      <%= f.select :tool_category_id, tool_categories_select_options, { include_blank: 'auwählen...' }, class: 'category-select' %>
     </div>
 
     <div class="input-select">
@@ -18,7 +18,7 @@
         <%= icon_tag "layout-document" %>
         <span>Unterkategorie</span>
       <% end %>
-      <%= f.select :tool_category_id, tool_subcategories_select_options, { prompt: 'auwählen...' }, class: 'subcategory-select' %>
+      <%= f.select :tool_subcategory_id, tool_subcategories_select_options, { include_blank: 'auwählen...' }, class: 'subcategory-select' %>
     </div>
   </div>
 
@@ -107,11 +107,11 @@
   </div>
 
   <div class="input-tags">
-    <%= label_tag :keywords do %>
+    <%= f.label :keyword_list do %>
     <%= icon_tag "label-tag" %>
     <span>Ausstattung<br/><small>(mit Komma getrennt)</small></span>
     <% end %>
-    <%= text_field_tag :keywords, nil, id: 'custom-keywords' %>
+    <%= f.text_field :keyword_list, value: @tool_offer.keyword_list.to_s, id: 'custom-keywords' %>
   </div>
 
   <div class="input-button">

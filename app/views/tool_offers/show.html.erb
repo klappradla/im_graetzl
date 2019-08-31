@@ -14,8 +14,8 @@
     <div class="headContent">
       <div class="category-tags">
           <ul class="tag-list -mint">
-            <li><%= @tool_offer.tool_category.try(:name) %></li>
             <li><%= @tool_offer.tool_subcategory.try(:name) %></li>
+            <li><%= @tool_offer.tool_category.try(:name) %></li>
           </ul>
       </div>
     </div>
@@ -46,7 +46,7 @@
       <% end %>
     </div>
 
-    <% if @tool_offer.keyword_list.present? %>
+    <% if @tool_offer.keywords.present? %>
       <section>
         <div class="bigicontext-element">
           <%= icon_tag "dot-3" %>
@@ -54,7 +54,7 @@
         </div>
         <div class="category-tags">
           <ul class="tag-list">
-            <% @tool_offer.keyword_list.each do |keyword| %>
+            <% @tool_offer.keywords.each do |keyword| %>
               <li><%= keyword %></li>
             <% end %>
           </ul>

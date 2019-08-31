@@ -1,17 +1,15 @@
 <div class="cardbox-wrp" data-behavior="masonry-card">
-  <div class="paperCard -cord1RT -illuteaser -rooms">
+  <div class="paperCard -cord1RT -illuteaser -insurance">
     <div class="wrp">
-      <div class="user">
-        <% if current_user %>
-          <%= attachment_image_tag current_user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
-          <span><%= current_user.username %></span>
-        <% else %>
-          <%= image_tag('avatar/user/default.png', class: 'img-round') %>
-          <span>Dein Name</span>
-        <% end %>
+      <h3>Mit Unterstützung von:</h3>
+      <div class="insurance">
+        <%= image_tag('logo-axa.png') %>
       </div>
-      <h3>Hast du Equpiment zu verleihen und möchtest damit Geld verdienen?</h3>
-      <%= link_to 'Jetzt Toolteiler eintragen', new_tool_offer_path, class: 'btn-primary -rose' %>
+      <p>
+        Jedes Gerät, das du über den Toolteiler verleihst, ist mit bis zu 15.000 € versichert.
+        Einfach und unbürokratisch.
+      </p>
+      <%= link_to 'Mehr Infos', info_versicherung_path, class: 'btn-primary -mint' %>
     </div>
     <div class="card"></div>
   </div>

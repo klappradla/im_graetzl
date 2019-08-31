@@ -2,23 +2,23 @@
 
 <ul class="pricing-summary">
   <li>
-    <div class="cost"><%= '%.2f' % @calculator.basic_price %> €</div>
-    <div class="costname"><%= @calculator.days %> Tage x <%= '%.2f' % @calculator.daily_price %> €</div>
+    <div class="cost"><%= number_to_currency(@calculator.basic_price, unit: "€") %></div>
+    <div class="costname"><%= @calculator.days %> Tage x <%= number_to_currency(@calculator.daily_price, unit: "€") %> </div>
   </li>
   <% if @calculator.discount > 0 %>
     <li>
-      <div class="cost">- <%= '%.2f' % @calculator.discount %> €</div>
+      <div class="cost"> <%= number_to_currency(-@calculator.discount, unit: "€") %></div>
       <div class="costname">Rabatt <%= @calculator.days %> Tage</div>
     </li>
   <% end %>
   <li>
-    <div class="cost"><%= '%.2f' % @calculator.service_fee %> €</div>
+    <div class="cost"><%= number_to_currency(@calculator.total_fee, unit: "€") %></div>
     <div class="costname">Servicegebühr inkl. Versicherung</div>
   </li>
-  <li class=sum>
-    <div class="cost"><%= '%.2f' % @calculator.total %> €</div>
+  <li class="sum">
+    <div class="cost"><%= number_to_currency(@calculator.total, unit: "€") %></div>
     <div class="costname">Gesamtpreis</div>
   </li>
 </ul>
 
-<%= link_to "Jetzt anfragen", '#', class: "btn-primary" %>
+<%= link_to "Jetzt anfragen", new_tool_rental_path(tool_rental_id: @tool_offer, date_from: @calculator.date_from, date_to: @calculator.date_to), class: "btn-primary" %>

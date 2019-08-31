@@ -1,0 +1,60 @@
+<div class="cardBox -toolteiler">
+  <div class="cardBoxHeader">
+    <div class="coverImgWrapper">
+      <%= link_to cover_photo_for(@tool_offer), @tool_offer %>
+    </div>
+    <div class="priceSheet -variant2">
+      <div class="txt">ab</div>
+      <div class="price"><%= @tool_offer.daily_price(7).to_i %><sup>€</sup></div>
+    </div>
+    <div class="categoryicon">
+      <%= icon_tag "share" %>
+    </div>
+  </div>
+
+  <div class="cardBoxContent">
+    <h3 class="sidebar">Deine Auswahl</h3>
+
+    <ul class="pricing-summary -duration">
+      <li>
+        <div class="duration">Miete:</div>
+        <div class="title"><%= @calculator.date_from.to_s(:weekday) %> - <%= @calculator.date_to.to_s(:weekday)%></div>
+      </li>
+    </ul>
+
+    <ul class="pricing-summary">
+      <li>
+        <div class="cost">
+          <%= number_to_currency(@calculator.basic_price, unit: "€") %>
+        </div>
+        <div class="costname">
+          <%= @calculator.days %> Tage x <%= number_to_currency(@calculator.daily_price, unit: "€") %>
+          <%= render 'shared/questionmark', hint_id: "1", hint_message: 'Das ist der Tagespreis für die Anzahl der Tage die du den Toolteiler mieten möchtest.' %>
+        </div>
+      </li>
+      <li>
+        <div class="cost">
+          <%= number_to_currency(-@calculator.discount, unit: "€") %>
+        </div>
+        <div class="costname">
+          Rabatt <%= @calculator.days %> Tage
+          <%= render 'shared/questionmark', hint_id: "2", hint_message: 'Dieser Toolteiler hat 10% Rabatt ab einer Miete von 2 Tagen.' %>
+        </div>
+      </li>
+      <li>
+        <div class="cost">
+          <%= number_to_currency(@calculator.service_fee, unit: "€") %>
+        </div>
+        <div class="costname">
+          Servicegebühr inkl. Versicherung
+          <%= render 'shared/questionmark',hint_id: "3" ,hint_message: 'Hier kommt noch der Versicherungstext rein sauber' %>
+        </div>
+      </li>
+      <li class=sum>
+        <div class="cost"><%= number_to_currency(@calculator.total, unit: "€") %></div>
+        <div class="costname">Gesamtpreis</div>
+      </li>
+    </ul>
+
+  </div>
+</div>

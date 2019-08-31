@@ -1,0 +1,73 @@
+<div class="summary" id="tab-summary">
+
+  <div class="hl-subtext">
+    <h1>Tool anfragen</h1>
+    <p>
+      Deine Auswahl
+    </p>
+  </div>
+
+  <div class="summarybox">
+    <div>
+      <p>
+        <strong>„<%= @tool_offer.title %>“</strong>
+      </p>
+    </div>
+    <div class="avatar">
+      <%= avatar_for @tool_offer.user %>
+    </div>
+    <div>
+      <p>
+        <strong>Vermieter</strong><br>
+        <%= @tool_offer.address.street %><br>
+        <%= @tool_offer.user.full_name %><br>
+        <%= @tool_offer.address.zip %> <%= @tool_offer.address.city %>
+      </p>
+    </div>
+  </div>
+
+  <div class="summarybox">
+    <div class="line"></div>
+    <div class="avatar">
+      <%= icon_tag "share" %>
+    </div>
+    <div class="line"></div>
+  </div>
+
+  <div class="summarybox">
+    <div class="payment-summary">
+      <p>
+        <strong>Zahlungsart</strong><br>
+        <span class="payment-method block"></span>
+        <span class="renter-name block"></span>
+
+        Kreditkarte<br>
+        endet auf <span class="card-last4"></span><br>
+        <%= link_to "ändern", 'javascript:', class: 'back-to-payment' %>
+      </p>
+    </div>
+
+    <div class="avatar">
+      <%= avatar_for current_user %>
+    </div>
+    <div class="renter-summary">
+      <p>
+        <strong>Mieter</strong><br>
+        <span class="renter-company block"></span>
+        <span class="renter-name block"></span>
+        <span class="renter-address block"></span>
+        <span class="renter-zip"></span> <span class="renter-city"></span>
+      </p>
+    </div>
+  </div>
+
+  <%= f.hidden_field :tool_offer_id %>
+  <%= f.hidden_field :rent_from %>
+  <%= f.hidden_field :rent_to %>
+  <%= f.hidden_field :stripe_payment_intent_id, id: 'payment-intent-input' %>
+  <%= f.hidden_field :payment_method, id: 'payment-method-input' %>
+
+  <% # Not using submit tag here to disable submiting the form with "enter" %>
+  <%= button_tag "Weiter", type: 'button', class: 'btn-primary submit-form' %>
+
+</div>

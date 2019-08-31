@@ -1,12 +1,16 @@
 class ToolPriceCalculator
 
-  def initialize(tool_offer, days)
+  attr_reader :date_from, :date_to
+
+  def initialize(tool_offer, date_from, date_to)
     @tool_offer = tool_offer
-    @days = days
+    date_from = Date.parse(date_from) if date_from.is_a?(String)
+    date_to = Date.parse(date_to) if date_to.is_a?(String)
+    @date_from, @date_to = [date_from, date_to].sort
   end
 
   def days
-    @days
+    (@date_from - @date_to).to_i.abs + 1
   end
 
   def daily_price
@@ -27,11 +31,19 @@ class ToolPriceCalculator
     end
   end
 
+  def total_fee
+    service_fee + insurance_fee
+  end
+
   def service_fee
-    40
+    ((basic_price - discount) * 0.12).round(2)
+  end
+
+  def insurance_fee
+    ((basic_price - discount) * 0.08).round(2)
   end
 
   def total
-    (basic_price - discount + service_fee).round(2)
+    basic_price - discount + total_fee
   end
 end

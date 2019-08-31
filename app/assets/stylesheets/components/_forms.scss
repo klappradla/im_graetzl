@@ -77,11 +77,11 @@ input, select, textarea {
   border-radius: 4px 4px 0 0;
   align-items: center;
   font-size: 1.6rem;
-  [class^=icon] {
+  .icon {
     fill: currentcolor;
     flex: 0 0 auto;
   }
-  [class^=icon] + span {
+  .icon + span {
     //min-width: 100px;
     margin-left: 10px;
     margin-right: 10px;
@@ -359,7 +359,7 @@ input, select, textarea {
     > label {
       padding-top: 20px;
       align-items: flex-start;
-      [class^=icon-] {
+      .icon {
         margin-top: -5px;
       }
     }
@@ -454,7 +454,7 @@ input, select, textarea {
       display: block;
     }
   }
-  [class*=icon-delete] {
+  .icon-delete {
     position: relative;
     z-index: 2;
     margin-left: 1rem;
@@ -730,3 +730,5 @@ input[type=url]:invalid + em::after {
     }
   }
 }
+
+#card-element {width:100%;}

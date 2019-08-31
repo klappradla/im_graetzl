@@ -13,6 +13,7 @@ class ToolOffer < ApplicationRecord
   belongs_to :tool_category, optional: true
   belongs_to :tool_subcategory, class_name: "ToolCategory", optional: true
 
+  has_many :tool_rentals
   has_many :comments, as: :commentable, dependent: :destroy
 
   enum status: { enabled: 0, disabled: 1, deleted: 2 }
@@ -26,7 +27,7 @@ class ToolOffer < ApplicationRecord
 
   validates_presence_of :title, :description, :address
 
-  before_create :set_graetzl
+  before_save :set_graetzl
 
   scope :non_deleted, -> { where.not(status: :deleted) }
   scope :by_currentness, -> { order(created_at: :desc) }
@@ -52,7 +53,7 @@ class ToolOffer < ApplicationRecord
   private
 
   def set_graetzl
-    self.graetzl = address.graetzl if address
+    self.graetzl = address.graetzl if address.present?
   end
 
 end

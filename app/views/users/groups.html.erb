@@ -23,14 +23,16 @@
   <% else %>
 
     <div class="hl-subtext -groups">
-      <h1>Deine <span>Gruppen</span></h1>
-      <p>Gruppen in denen du Miglied bist. Stöbern in <%= link_to 'allen Gruppen', groups_wien_path %>.</p>
+      <h1><span>Gruppen</span> Mitgliedschaften</h1>
     </div>
 
     <div class="cardBoxCollection -tripple" data-behavior="groups-card-container">
       <%= render @groups.order(created_at: :desc), manage_buttons: true %>
+    </div>
+    <div class="action-card-container">
       <%= render 'groups/action_card', user: @user, view_all: true %>
     </div>
+
 
   <% end %>
 

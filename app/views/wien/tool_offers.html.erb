@@ -10,12 +10,13 @@
 
   <div class="hl-subtext -cards">
     <h1><em>Toolteiler</em></h1>
-    <p>Arbeitsequipment verleihen & Geld verdienen</p>
+    <p>Arbeistequipment leihen - Ausstattung teilen</p>
   </div>
 
   <%= render 'filters/tool_offer_categories' %>
 
   <%= form_tag tool_offers_path, method: :get, remote: true, class: 'cards-filter' do %>
+    <%= hidden_field_tag :category_id %>
     <div class="input-field search-filter">
       <div class="input-field">
         <%= text_field_tag :query, nil, placeholder: 'Suche..', class: 'search-suggestion-trigger' %>

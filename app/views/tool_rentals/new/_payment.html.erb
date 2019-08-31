@@ -1,0 +1,50 @@
+<div class="payment" id="tab-payment">
+
+  <div class="hl-subtext">
+    <h1>Wähle deine Zahlungsart</h1>
+    <p>
+      Wir buchen erst Geld ab, wenn deine Anfrage vom Vermieter bestätigt wurde und der Deal zustande kommt.
+    </p>
+  </div>
+
+  <div class="paymentMethods">
+    <% ToolRental::PAYMENT_METHODS.each do |payment_method| %>
+      <div class="input-radio -<%= payment_method %>">
+        <%= f.radio_button :payment_method, payment_method %>
+        <%= f.label :"payment_method_#{payment_method}", payment_method_label(payment_method) %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="payment-method-container card-container">
+
+    <div class="error-message"></div>
+
+    <div class="input-field">
+      <%= f.label :card_info do %>
+        <%= icon_tag "credit-card" %>
+        <span>Kreditkarte</span>
+      <% end %>
+      <div id="card-element"></div>
+    </div>
+
+    <div class="input-field">
+      <%= f.label :cardholder_name do %>
+        <%= icon_tag "user-avatar" %>
+        <span>Karteninhaber</span>
+      <% end %>
+      <%= text_field_tag :cardholder_name, current_user.full_name, placeholder: 'Karte laufend auf ...', class: 'input-plain', id: 'cardholder-name' %>
+    </div>
+
+    <%= button_tag "Weiter", type: 'button', class: 'btn-primary next-screen' %>
+  </div>
+
+  <div class="payment-method-container sofort-container">
+    <p> Coming soon </p>
+  </div>
+
+  <div class="payment-method-container eps-container">
+    <p> Coming soon </p>
+  </div>
+
+</div>

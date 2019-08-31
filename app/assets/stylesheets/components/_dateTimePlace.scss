@@ -15,14 +15,14 @@
     top: 12px;
     left: 0;
   }
-  [class^=icon] {
+  .icon {
     fill: $color-ambient-mint;
     height: 35px;
     width: 35px;
   }
 
   &.-large {
-    [class^=icon] {
+    .icon {
       height: 50px;
       width: 50px;
     }
@@ -38,13 +38,13 @@
   font-size: 1.2rem;
   font-style: italic;
   text-decoration: none;
-  [class^=icon-] {
+  .icon {
     width: 35px;
     height: 35px;
     fill: $color-ambient-mint;
   }
 }
-a.iconMapLink:hover [class^=icon] {
+a.iconMapLink:hover .icon {
   fill: $color-ambient-rosa;
 }
 
@@ -95,7 +95,7 @@ a.iconMapLink:hover [class^=icon] {
   font-size: 1.3rem;
   display: flex;
   align-items: center;
-  [class^=icon-] {
+  .icon {
     display: inline-block;
     vertical-align: middle;
     width: 20px;
@@ -114,7 +114,7 @@ a.iconMapLink:hover [class^=icon] {
   display: flex;
   border-radius: 5px 0 0 5px;
   color: $color-ambient-mint-dark;
-  [class^=icon] {
+  .icon {
     fill: $color-ambient-mint-dark;
   }
 }

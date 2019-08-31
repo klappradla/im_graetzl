@@ -1,41 +1,32 @@
 context.instance_eval do
   columns do
     column do
-      panel 'Room Offer Details' do
-        attributes_table_for room_offer do
+      panel 'Tool Offer Details' do
+        attributes_table_for tool_offer do
           row :id
-          row :offer_type
-          row :slogan
+          row :title
+          row :description
           row :slug
           row :created_at
           row :updated_at
-          row :room_description
-          row :owner_description
-          row :tenant_description
-          row :total_area
-          row :rented_area
-          row :wants_collaboration
+          row :brand
+          row :model
+          row :value_up_to
+          row :serial_number
+          row :known_defects
+          row :price_per_day
+          row :two_day_discount
+          row :weekly_discount
           row :keyword_list
-
-          row :room_categories do |g|
-            safe_join(
-              g.room_categories.map do |category|
-                content_tag(:span, link_to(category.name, admin_room_category_path(category)))
-              end
-            )
-          end
 
           row :cover_photo do |r|
             r.cover_photo ? attachment_image_tag(r, :cover_photo, :fill, 200, 70) : nil
-          end
-          row :avatar do |r|
-            r.avatar ? attachment_image_tag(r, :avatar, :fill, 200, 200) : nil
           end
         end
       end
 
       panel 'Address Details' do
-        attributes_table_for room_offer.address do
+        attributes_table_for tool_offer.address do
           row :id
           row :description
           row :street_name
@@ -47,12 +38,10 @@ context.instance_eval do
       end
 
       panel 'Contact Details' do
-        attributes_table_for room_offer do
+        attributes_table_for tool_offer do
           row :first_name
           row :last_name
-          row :website
-          row :email
-          row :phone
+          row :iban
         end
       end
     end
@@ -61,7 +50,7 @@ context.instance_eval do
       panel 'Associations' do
         tabs do
           tab 'User' do
-            table_for room_offer.user do
+            table_for tool_offer.user do
               column(:id){|u| u.id}
               column(:username){|u| u.username}
               column(:role){|u| status_tag(u.role)}
@@ -69,7 +58,7 @@ context.instance_eval do
             end
           end
           tab 'Location' do
-            table_for(room_offer.location || []) do
+            table_for(tool_offer.location || []) do
               column :id
               column :name
               column(:state){|l| status_tag(l.state)}
@@ -79,7 +68,7 @@ context.instance_eval do
             end
           end
           tab 'Comments' do
-            table_for room_offer.comments do
+            table_for tool_offer.comments do
               column(:id){|c| c.id}
               column(:username){|c| c.user.username}
               column(:created_at)

@@ -2,7 +2,6 @@ APP.controllers.room_calls = (function() {
 
   function init() {
     if ($("section.room-call-form").exists()) initRoomForm();
-    if ($("#groups-btn-ctrl").exists()) groupsActionPanel();
     afterRegistration();
     afterCallSubmit();
   }
@@ -26,14 +25,6 @@ APP.controllers.room_calls = (function() {
         gtag('event', 'call', {'event_category': 'Call completed', 'event_label': callSlug});
       }
     }
-  }
-
-  function groupsActionPanel() {
-    // JS Action Button Dropdown for Groups
-    $('[data-behavior=actionTrigger]').on('click', function(){
-      var id = $(this).attr("data-id");
-      $(this).jqDropdown('attach', '[data-behavior=actionContainer-'+id+']');
-    });
   }
 
   function initMap() {

@@ -1,17 +1,17 @@
-section.user-settings {
+section.user-settings, section.usersetup.-toolteiler {
   h2 {
     @include font-size-secondaryFont('base');
     span {
       color: $color-ambient-rosa;
     }
   }
-  .block-settings {
+  .notifications-block {
     margin-bottom: 30px;
   }
 
   .tabs-nav {
     margin: 0 auto;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
   }
 }
 
@@ -124,7 +124,7 @@ div.notification-settings {
         //color: $color-ambient-grey;
         font-size: 14px;
         font-style: italic;
-        [class^=icon-] {
+        .icon {
           margin: 0 auto;
         }
       }
@@ -164,90 +164,6 @@ div.notification-settings {
       }
     }
   }
-}
-
-
-// ---------------------------------------------------------------------- location settings
-
-
-div.location-settings {
-  overflow: hidden;
-  .hl-main {
-    @include font-size-secondaryFont('base');
-    margin-bottom: 40px;
-  }
-
-  .toPersonal {
-    color: $color-ambient-rosa;
-    text-decoration: underline;
-    cursor: pointer;
-    &:hover {
-      text-decoration: none;
-    }
-  }
-  .locationSlice {
-    margin: 0 auto 40px auto;
-    display: table;
-    @include respond-to(">=medium") {
-      display: flex;
-      width: 690px;
-    }
-  }
-  .col1 {
-    margin-bottom: 30px;
-    @include respond-to(">=medium") {
-      margin-bottom: 0;
-      flex: 0 0 350px;
-    }
-  }
-  .col2 {
-    @include respond-to(">=medium") {
-      padding-top: 18px;
-
-    }
-    .txt {
-      font-style: italic;
-    }
-  }
-
-  .locationName {
-    display: flex;
-    font-family: $font-secondary;
-    @include font-size-secondaryFont('small');
-    .img-round {
-      margin-right: 15px;
-    }
-    .txt {
-      margin-top: 23px;
-    }
-  }
-  .locationMembers {
-    margin-left: 92px;
-    margin-top: -40px;
-    .singleMember {
-      display: flex;
-      align-items: center;
-      font-size: 13px;
-      margin-bottom: 5px;
-    }
-    .img-round {
-      margin-right: 10px;
-      width: 40px;
-      height: 40px;
-      padding: 2px;
-    }
-  }
-  .addlocation {
-    display: table;
-    margin: 0 auto;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    [class^=icon-] {
-      display: inline-block;
-      vertical-align: middle;
-    }
-  }
-
 }
 
 .btnCollection {

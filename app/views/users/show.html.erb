@@ -23,26 +23,83 @@
     <div class="col1">
       <%= attachment_image_tag(@user, :avatar, :fill, 400 ,400, class: 'img-round -largest', fallback: 'avatar/user/400x400.png') %>
       <div class="sideBarbox">
-        <% if @user.website %>
+
+        <div class="rating-block icontxt">
+          <%= icon_tag "user-avatar" %>
+          <div>
+            <span class="name"><%= @user.full_name %></span>
+            <div class="rating-container">
+              <%= user_rating(@user) %>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="icontxt">
+          <%= icon_tag "calendar-2" %>
+          Beigetreten: <%= l(@user.created_at, format: "%b, %Y") %>
+        </div>
+        <% if !@user.website.blank? %>
           <%= link_to @user.website, class: 'icontxt', target: '_blank' do %>
             <%= icon_tag "globe" %>
             <%= @user.website.sub(/^https?\:\/\//,'') %>
           <% end %>
         <% end %>
         <div class="icontxt">
-          <%= icon_tag "calendar-2" %>
-          Beigetreten: <%= l(@user.created_at, format: "%b, %Y") %>
-        </div>
-        <div class="icontxt">
-          <%= icon_tag "flag-1" %>
+          <%= icon_tag "map-location" %>
           <%= link_to @user.graetzl.name, @user.graetzl %>
         </div>
+
+
       </div>
     </div>
     <div class="col2"><%= @user.bio %></div>
   </div>
 
-  <%= render 'meetings' %>
+  <div class="tabs-ctrl">
+    <ul class="tabs-nav">
+      <% if @user.locations.approved.exists? %><li><a href="#tab-locations">Location</a></li><% end %>
+      <% if !@user.rooms.blank? %><li><a href="#tab-raumteiler">Raumteiler</a></li><% end %>
+      <% if @user.tool_offers.enabled.exists? %><li><a href="#tab-toolteiler">Toolteiler</a></li><% end %>
+      <% if @user.groups.exists? %><li><a href="#tab-gruppen">Mitglied in Gruppen</a></li><% end %>
+      <% if !@user.meetings.blank? %><li><a href="#tab-meetings">Teilnahme an Treffen</a></li><% end %>
+    </ul>
+
+    <% if @user.locations.exists? %>
+    <div id="tab-locations" class="cardBoxCollection -tripple">
+      <%= render @user.locations.approved %>
+    </div>
+    <% end %>
+
+    <% if !@user.rooms.blank? %>
+    <div id="tab-raumteiler" class="cardBoxCollection -tripple">
+      <%= render @user.rooms %>
+    </div>
+    <% end %>
+
+    <% if @user.tool_offers.enabled.exists? %>
+    <div id="tab-toolteiler" class="cardBoxCollection -tripple">
+      <%= render @user.tool_offers.enabled %>
+    </div>
+    <% end %>
+
+    <% if @user.groups.exists? %>
+    <div id="tab-gruppen" class="cardBoxCollection -tripple">
+      <%= render @user.groups.order(created_at: :desc) %>
+    </div>
+    <% end %>
+
+    <% if !@user.meetings.blank? %>
+    <div id="tab-meetings">
+      <%= render 'meetings' %>
+    </div>
+    <% end %>
+
+  </div>
+
+
+
+
 
   <div class="stream" data-behavior="stream-container">
     <h3>Persönliche <span>Pinnwand</span> von <%= @user.username %></h3>

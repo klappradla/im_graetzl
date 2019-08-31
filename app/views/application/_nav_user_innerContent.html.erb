@@ -70,7 +70,7 @@
       <% end %>
     <% end %>
     <%= link_to locations_user_path do %>
-      <%= icon_tag "location" %> Location einrichten
+      <%= icon_tag "location" %> Location verwalten
     <% end %>
     <%= link_to zuckerls_user_path do %>
       <%= icon_tag "shopping-bag" %> Grätzlzuckerl buchen
@@ -94,7 +94,7 @@
       <% end %>
     <% end %>
     <%= link_to rooms_user_path do %>
-      <%= icon_tag "raumteiler" %> Raumteiler erstellen
+      <%= icon_tag "raumteiler" %> Raumteiler verwalten
     <% end %>
   </section>
 
@@ -102,14 +102,14 @@
     <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-tools'} do %>
       <%= icon_tag "arrow-left-2" %> Zurück
     <% end %>
-    <% current_user.tool_offers.first(6).each do |tool_offer| %>
-      <%= link_to tool_offer do %>
-        <%= attachment_image_tag tool_offer, :cover_photo, :fill, 100, 100, fallback: 'avatar/tool_offer/100x100.png', class: 'img-square' %>
-        <span><%= tool_offer.title %></span>
-      <% end %>
-    <% end %>
     <%= link_to tool_offers_user_path do %>
-      <%= icon_tag "share" %> Toolteiler erstellen
+      <%= icon_tag "share" %> Toolteiler verwalten
+    <% end %>
+    <%= link_to tool_offers_user_path(:target => "tab-buchungsarchiv") do %>
+      <%= icon_tag "archive-storage" %> Buchungsarchiv
+    <% end %>
+    <%= link_to messenger_path do %>
+      <%= icon_tag "speech-bubbles" %> Anfragen Messenger
     <% end %>
   </section>
 
@@ -129,17 +129,14 @@
       <% end %>
     <% end %>
     <section class="content">
-      <% current_user.groups.size >= 8 ? maxgroups = 7 : maxgroups = 8 %>
-      <% current_user.groups.last(maxgroups).reverse.each do |group| %>
+      <% current_user.groups.last(8).reverse.each do |group| %>
         <%= link_to group do %>
           <%= icon_tag "coop-share" %>
           <span><%= group.title %></span>
         <% end %>
       <% end %>
-      <% if maxgroups == 7 %>
-        <%= link_to groups_user_path do %>
-          <%= icon_tag "speech-bubble" %> Alle Gruppen
-        <% end %>
+      <%= link_to groups_user_path do %>
+        <%= icon_tag "speech-bubble" %> Gruppen verwalten
       <% end %>
     </section>
   </section>

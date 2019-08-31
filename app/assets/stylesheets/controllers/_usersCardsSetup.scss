@@ -71,12 +71,12 @@ section.usersetup {
 
   }
 
-  .introcontainer.-location {
+  .introcontainer.-toolteiler {
     .paperCard .wrp {
-      //background-image: url(image_path('illu/illu-locationpin.jpg'));
-      //padding-top: 180px;
+      padding: 15px 30px 30px 30px;
     }
   }
+
   .introcontainer.-zuckerl {
     .paperCard .wrp {
       padding-top: 180px;
@@ -166,6 +166,19 @@ section.usersetup {
 
   .link-more {
     display:table;
+  }
+
+  &.-toolteiler {
+    .cardBox.-toolteiler {
+      .graetzl-sideflag, .-btn-rent {
+        display: none;
+      }
+    }
+  }
+
+  .tool-messenger {
+    text-align: center;
+    font-style: italic;
   }
 
 }

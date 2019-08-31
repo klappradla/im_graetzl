@@ -53,7 +53,7 @@ footer {
       &:hover {
         color: $color-ambient-facebook;
       }
-      [class^=icon-] {
+      .icon {
         position: absolute;
         right: -26px;
         top: 0;

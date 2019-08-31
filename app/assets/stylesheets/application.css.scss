@@ -46,6 +46,7 @@
 @import "components/userCreateInfo";
 @import "components/calendarSheet";
 @import "components/priceSheet";
+@import "components/userRating";
 @import "components/paymentMethods";
 @import "components/priceSummary";
 @import "components/lists";
@@ -72,6 +73,7 @@
 @import "components/mailTo";
 @import "components/bbcode";
 @import "components/jBox";
+@import "components/tableLayout";
 
 
 //---------------------------------------------------------------------------------------------*\
@@ -103,6 +105,7 @@
 @import "controllers/roomCall";
 @import "controllers/roomDetail";
 @import "controllers/toolteiler";
+@import "controllers/tool_rentals";
 @import "controllers/search";
 @import "controllers/group";
 @import "controllers/wien";

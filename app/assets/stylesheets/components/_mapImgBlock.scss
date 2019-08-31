@@ -116,7 +116,7 @@
         color: $color-ambient-mint-dark;
         position: relative;
         padding-left: 25px;
-        [class^=icon-] {
+        .icon {
           width: 20px;
           height: 20px;
           position: absolute;

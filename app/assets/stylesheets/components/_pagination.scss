@@ -36,18 +36,18 @@
     color: $color-ambient-rosa;
     position: relative;
     display: flex;
-    [class^=icon-] {
+    .icon {
       flex: none;
     }
   }
 
   .last a {
-    [class^=icon-] + [class^=icon-] {
+    .icon + .icon {
       transform: translate(-18px, 0);
     }
   }
   .first a {
-    [class^=icon-]:first-child {
+    .icon:first-child {
       transform: translate(18px, 0);
     }
   }

@@ -1,0 +1,11 @@
+var messageList = $(".chat-panel[data-thread-id='<%= @thread.id %>'] #message-list");
+<% @user_messages.each do |user_message| %>
+  if (messageList.find(".chat-message[data-id='<%= user_message.id %>']").length == 0) {
+    messageList.append(" <%= j render 'messenger/thread/message', user_message: user_message %>");
+  }
+<% end %>
+
+<% if @user_messages.present? %>
+  $(".chat-panel[data-thread-id='<%= @thread.id %>'] .last-message-input").val("<%= @user_messages.last.id %>");
+  $(".chat-panel").scrollTop($(".chat-panel")[0].scrollHeight);
+<% end %>

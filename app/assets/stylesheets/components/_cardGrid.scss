@@ -27,7 +27,7 @@
 // For Example Toolteiler Categories
 .category-slider-container {
   position: relative;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 
   @include respond-to(">=large") {
     width:978px;
@@ -47,11 +47,14 @@
     align-items: flex-end;
     justify-content: center;
     overflow: hidden;
-    background-position: center center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    border: 1px solid white;
-    border-radius: 8px;
+    //background-position: center center;
+    //background-size: cover;
+    //background-repeat: no-repeat;
+
+    img {
+      height: 100%;
+      border-radius: 10px;
+    }
 
     &.hover {
       cursor: pointer;
@@ -69,10 +72,11 @@
 
     h3 {
       position: absolute;
-      bottom:0;
+      bottom: 0;
       z-index: 1;
-      height:120px;
-      padding:30px;
+      height: 120px;
+      width: 200px;
+      padding: 30px;
       display: flex;
       align-items: center;
       margin-bottom:-20px;
@@ -99,14 +103,11 @@
       transform: rotate(-3deg);
     }
   }
-
-  .cat-1 {background-image: url(image_path('categories/tt-category-wellness.jpg'));}
-  .cat-2 {background-image: url(image_path('categories/tt-category-creative.jpg'));}
-  .cat-3 {background-image: url(image_path('categories/tt-category-foto.jpg'));}
-  .cat-4 {background-image: url(image_path('categories/tt-category-gastro.jpg'));}
-
 }
 
+.category-slider-container + .-open {
+  margin-top: -20px;
+}
 
 .card-grid-container {
 
@@ -170,7 +171,7 @@
   font-style: italic;
   position: relative;
   z-index: 2;
-  
+
   @include font-size-primaryFont('larger');
 
   a {

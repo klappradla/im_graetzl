@@ -11,9 +11,9 @@
       <div class="price"><%= tool_offer.daily_price(7).to_i %><sup>€</sup></div>
     </div>
     <div class="categoryicon">
-      <svg class="icon-share"><use xlink:href="#icon-share"></use></svg>
+      <%= icon_tag "share" %>
     </div>
-    <div class="graetzl-sideflag sideflag -R"><a href="/grinzing">Grinzing</a></div>
+    <%= graetzl_flag(graetzl) %>
   </div>
 
   <div class="cardBoxContent">
@@ -27,7 +27,7 @@
       <p><%= tool_offer.description.truncate(250) %></p>
     </div>
 
-    <%= link_to 'Ausleihen', tool_offer, class: 'btn-primary -mint' %>
+    <%= link_to 'Ausleihen', tool_offer, class: 'btn-primary -btn-rent -mint' %>
   </div>
 
   <% if local_assigns[:manage_buttons].present? && current_user == tool_offer.user %>
@@ -40,8 +40,8 @@
 
     <div id="tool-offer-dropdown-<%= tool_offer.id %>" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container">
       <div class="jq-dropdown-panel">
-        <%= link_to 'Aktiv', [tool_offer, status: "enabled"], method: :patch %>
-        <%= link_to 'Inaktiv', [tool_offer, status: "disabled"], method: :patch %>
+        <%= link_to 'Aktiv', [:update_status, tool_offer, status: "enabled"], method: :patch %>
+        <%= link_to 'Inaktiv', [:update_status,  tool_offer, status: "disabled"], method: :patch %>
         <%= link_to 'Löschen', tool_offer, method: :delete, data: { confirm: 'Bist du dir sicher?' } %>
       </div>
     </div>

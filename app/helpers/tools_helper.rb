@@ -1,13 +1,13 @@
 module ToolsHelper
 
   def tool_categories_select_options
-    ToolCategory.top.map do |category|
+    ToolCategory.top.sort_by(&:position).map do |category|
       [category.name, category.id]
     end
   end
 
   def tool_subcategories_select_options
-    ToolCategory.subcategories.map do |category|
+    ToolCategory.subcategories.sort_by(&:position).map do |category|
       [category.name, category.id, 'data-parent-id' => category.parent_category_id]
     end
   end
@@ -35,5 +35,16 @@ module ToolsHelper
     end
     html += content_tag(:small, "#{user_rating} von 5", class: 'txt')
     html
+  end
+
+  def payment_method_label(payment_method)
+    case payment_method
+    when 'card'
+      "Kreditkarte"
+    when 'sofort'
+      "Sofort Überweisung"
+    when 'eps'
+      "EPS Überweisung"
+    end
   end
 end

@@ -3,7 +3,6 @@ APP.controllers.tool_offers = (function() {
     function init() {
       if ($("section.form-new-toolteiler").exists()) { initToolOfferForm(); }
       if ($("section.toolTeiler-detail").exists()) { initToolOfferDetails(); }
-      if ($("section.form-rent-toolteiler").exists()) { initToolteilerRent(); }
     }
 
     function initToolOfferForm() {
@@ -15,11 +14,15 @@ APP.controllers.tool_offers = (function() {
         $('.tabs-ctrl').get(0).scrollIntoView();
       });
 
+      var subcategoryOptions = $(".subcategory-select option[data-parent-id]").detach();
       $(".category-select").on("change", function() {
-        $(".subcategory-select option").hide();
-        $(".subcategory-select option[data-parent-id=" + $(this).val() + "]").show();
+        $(".subcategory-select option[data-parent-id]").remove();
+        if ($(this).val()) {
+          $(".subcategory-select").append(subcategoryOptions.filter("[data-parent-id=" + $(this).val() + "]"));
+        }
       }).change();
 
+      // Tag Input JS
       $('#custom-keywords').tagsInput({
         'defaultText':'Kurz in Stichworten ..'
       });
@@ -34,6 +37,7 @@ APP.controllers.tool_offers = (function() {
       }).off('focus').on("change", function() {
         if ($('.request-price-form .date-from').val() && $('.request-price-form .date-to').val()) {
           $('.request-price-form').submit();
+          $('.-disabled').hide();
         }
       });
 
@@ -56,18 +60,6 @@ APP.controllers.tool_offers = (function() {
       });
       */
 
-    }
-
-    function initToolteilerRent() {
-
-      tabsNavActivating();
-
-    }
-
-    // Add Active Class to Actual Step
-    function tabsNavActivating() {
-      var step = $('*[data-step]').attr("data-step");
-      $('#step'+step).addClass('active');
     }
 
     return {

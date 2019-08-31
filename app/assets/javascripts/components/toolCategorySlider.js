@@ -6,6 +6,9 @@ APP.components.toolCategorySlider = (function() {
     var item_mob = 1;
     var items = element.find("div").length;
 
+    var filterForm = $(".cards-filter");
+    var suggestionForm = $(".search-suggestion-trigger");
+
     var slider = element.lightSlider({
       item: item_desk,
       autoWidth: true,
@@ -86,17 +89,26 @@ APP.components.toolCategorySlider = (function() {
      function(){ $(this).removeClass('hover')}
    );
 
+   filterForm.hide(); // Hide per default - Show on Category Click
+
    // Click Slide
    element.find('.-category').on('click', function(){
-     var cat_id = $(this).attr("data-cat");
-     element.find('.-category').not(this).removeClass('activated');
-     $(this).toggleClass('activated');
-
-     // On mobile slide on click
-     if ($('.lSSlideOuter').is('.-mobile')) {
-       slider.goToSlide(cat_id-1);
+     if ($(this).hasClass("activated")) {
+       $(this).removeClass('activated');
+       filterForm.find("[name=category_id]").val("");
+       suggestionForm.val("");
+       filterForm.submit();
+       filterForm.slideUp("fast");
+       filterForm.removeClass("-open");
+     } else {
+       element.find('.-category').removeClass('activated');
+       $(this).addClass('activated');
+       filterForm.find("[name=category_id]").val($(this).attr("data-id"));
+       suggestionForm.val("");
+       filterForm.submit();
+       filterForm.addClass("-open");
+       filterForm.slideDown("fast");
      }
-
    });
 
   }

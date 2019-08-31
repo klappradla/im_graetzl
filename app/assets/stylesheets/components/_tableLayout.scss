@@ -1,0 +1,166 @@
+$table-header: $color-ambient-mint-dark;
+$table-header-border: $color-ambient-mint-dark;
+$table-border: $color-ambient-grey-light;
+$row-bg: $color-ambient-grey-light;
+$row-hover-bg : $color-ambient-mint-light;
+
+.table-container {
+  display: block;
+  margin: 2em auto;
+  width: 100%;
+}
+
+.table-container {
+
+  line-height: 1.5;
+
+  a {
+    color: $color-ambient-mint-dark;
+  }
+
+  .flex-table {
+    display: flex;
+    flex-flow: row wrap;
+    border-left: solid 1px $table-border;
+    transition: 0.5s;
+    &:first-of-type {
+      border-top: solid 1px $table-header-border;
+      border-left: solid 1px $table-header-border;
+    }
+    &:first-of-type .flex-row {
+      background: $table-header;
+      border-color: $table-header-border;
+      font-weight: bold;
+      color: white;
+    }
+    &.row:nth-child(odd) .flex-row {
+      background-color: rgba($row-bg, 0.5);
+    }
+    &:hover {
+      background: $row-hover-bg;
+      transition: 500ms;
+    }
+  }
+
+  .flex-row {
+
+    display: flex;
+    justify-content: left;
+    padding:5px 10px 5px 10px;
+    border-right: solid 1px $table-border;
+    border-bottom: solid 1px $table-border;
+    //@include ellipsis();
+    //text-align: center;
+
+    &.wide20 {width: 20%; justify-content: left;}
+    &.wide25 {width: 25%; justify-content: left;}
+    width: calc(35% / 3);
+
+    .message {
+      display: inline-flex;
+      svg {
+        color: $color-ambient-rosa;
+        margin-right:7px;
+      }
+    }
+    .payment-status {padding-left: 5px;}
+  }
+
+  .header {
+    .flex-row {
+      justify-content: center;
+    }
+  }
+
+  .rowspan {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+
+  // Begin - For nested Rows only!
+  // See: https://medium.com/@snowleo208/how-to-create-responsive-table-d1662cb62075
+  .column {
+    display: flex;
+    flex-flow: column wrap;
+    width: 75%;
+    padding: 0;
+    .flex-row {
+      display: flex;
+      flex-flow: row wrap;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      border-bottom: solid 1px $table-border;
+      &:hover {
+        background: #F5F5F5;
+        transition: 500ms;
+      }
+    }
+  }
+  .flex-cell {
+    width: calc(100% / 3); //1px = border right
+    text-align: center;
+    padding: 0.5em 0.5em;
+    border-right: solid 1px $table-border;
+    //flex: 1 1 33.3%;
+    &:last-child {
+      // border-right: 0;
+    }
+  }
+  // END Nested Rows
+
+
+  // MEDIUM SIZE
+  @include respond-to("<=medium") {
+
+    .flex-row, .flex-row.wide20, .flex-row.wide25 {
+      width: calc(100% / 2); //1px = border right
+      justify-content: center;
+    }
+    .column {
+      width: 100%;
+    }
+
+  }
+
+  // MOBILE SIZE
+  @include respond-to("<=small") {
+
+    .flex-table {
+      .flex-row {
+        border-bottom: 0;
+      }
+      .flex-row:last-of-type {
+        border-bottom: solid 1px $table-border;
+      }
+    }
+
+    .header {
+      .flex-row {
+        border-bottom: solid 1px;
+      }
+      //.flex-row:not(.first) { display: none}
+    }
+
+    .flex-row, .flex-row.wide20, .flex-row.wide25 {
+      width: 100%; //1px = border right
+      justify-content: center;
+    }
+
+    .column {
+      width: 100%;
+      .flex-row {
+        border-bottom: solid 1px $table-border;
+      }
+    }
+
+    .flex-cell {
+      width: 100%; //1px = border right
+    }
+  }
+
+
+}

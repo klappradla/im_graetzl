@@ -16,7 +16,7 @@ APP.components.imgUploadPreview = function() {
             }
         });
 
-        $this.find('[class^=icon-delete]').on('click', function() {
+        $this.find('.icon-delete]').on('click', function() {
             resetLocalImg($this);
         });
 
@@ -36,7 +36,7 @@ APP.components.imgUploadPreview = function() {
 
     function showDeleteIcon($element) {
         $element
-            .find('[class^=icon-delete]').show().end()
+            .find('.icon-delete').show().end()
             .find('.deleteCheckbox').removeAttr('checked').end()
             .find('.checkbox-group').hide()
     }
@@ -44,7 +44,7 @@ APP.components.imgUploadPreview = function() {
     function resetLocalImg($element) {
         $element
             .find('.imgCrop').remove().end()
-            .find('[class^=icon-delete]').hide().end()
+            .find('.icon-delete').hide().end()
             .find('.deleteCheckbox').attr('checked', 'checked').end()
             .find('input[type=file]').val('');
     }

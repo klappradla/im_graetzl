@@ -1,0 +1,30 @@
+<section class="tool-rental-page">
+
+  <div class="col-content">
+    <%= form_for @tool_rental, html: { class: 'rental-form' } do |f| %>
+      <div class="tabs-ctrl">
+        <%= render "tool_rentals/new/tabs_nav" %>
+        <%= render "tool_rentals/new/address", f: f %>
+        <%= render "tool_rentals/new/payment", f: f %>
+        <%= render "tool_rentals/new/summary", f: f %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-sidebar">
+    <%= render 'tool_rentals/new/sidebar' %>
+  </div>
+
+  <%= form_tag create_intent_tool_rentals_url, class: 'payment-intent-form', remote: true, data: {type: 'json', with_credentials: true} do %>
+    <%= hidden_field_tag :tool_offer_id, @tool_offer.id %>
+    <%= hidden_field_tag :date_from, @calculator.date_from %>
+    <%= hidden_field_tag :date_to, @calculator.date_to %>
+    <%= hidden_field_tag :payment_method_id %>
+  <% end %>
+
+</section>
+
+<%= javascript_include_tag "https://js.stripe.com/v3/" %>
+<script>
+  window.stripe = Stripe("<%= Rails.configuration.stripe[:publishable_key] %>");
+</script>

@@ -39,7 +39,7 @@ class Address < ApplicationRecord
   private
 
   def get_coordinates
-    if (street_name && addressable_type == 'Location')
+    if street_name_changed? && street_name.present?
       self.coordinates = Coordinates.call(self)
     end
   end

@@ -1,4 +1,4 @@
-[class^="icon-"], [class*=" icon-"] {
+.icon {
   height: 28px;
   width: 28px;
   fill: currentColor;
@@ -19,7 +19,7 @@
 .icontxt {
   display: flex;
   align-items: center;
-  [class^=icon-] {
+  .icon {
     margin-right: 12px;
     flex: 0 0 auto;
   }

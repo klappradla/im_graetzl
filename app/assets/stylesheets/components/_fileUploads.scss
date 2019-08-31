@@ -1,12 +1,12 @@
 .upload-image {
   @extend %file-group;
 
-  [class^=icon-]:first-of-type {
+  .icon:first-of-type {
     margin-right: 1rem;
     display: inline-block;
     vertical-align: middle;
   }
-  [class^=icon-delete] {
+  .icon-delete {
     display: none;
   }
 }
@@ -28,7 +28,7 @@
     width: 52px;
     height: 52px;
   }
-  [class^=icon-delete] {
+  .icon-delete {
     display: none;
   }
 }

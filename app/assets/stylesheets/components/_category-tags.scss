@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-    [class^=icon-] {
+    .icon {
       width: 30px;
       height: 30px;
       margin-right: 8px;

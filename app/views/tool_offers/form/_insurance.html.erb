@@ -5,12 +5,11 @@
     <p>
       Dein Toolteiler ist automatisch <%= link_to "versichert", info_versicherung_path %>,
       wenn er über den Toolteiler auf imGrätzl.at angemietet wird.
-      Bitte gib jetzt noch den ungefähren Wert deines Arbeitsgerätes an und notiere bekannte Mängel.
-      Wenn du auch noch die Seriennummer weisst, perfekt!
+      Bitte notiere noch etwaige bekannte Mängel und wenn du auch noch die Seriennummer des Gerätes weißt, perfekt!
     </p>
   </div>
 
-  <div class="form-columns">
+  <!--<div class="form-columns">
     <div class="input-select">
       <%= f.label :value_up_to do %>
         <%= icon_tag "label-tag" %>
@@ -18,13 +17,14 @@
       <% end %>
       <%= f.select :value_up_to, tool_insurance_values %>
     </div>
-    <div class="input-field">
-      <%= f.label :serial_number do %>
-        <%= icon_tag "label-tag" %>
-        <span>Seriennummer</span>
-      <% end %>
-      <%= f.text_field :serial_number, placeholder: 'Seriennummer ..' %>
-    </div>
+  </div>-->
+
+  <div class="input-field">
+    <%= f.label :serial_number do %>
+      <%= icon_tag "label-tag" %>
+      <span>Seriennummer</span>
+    <% end %>
+    <%= f.text_field :serial_number, placeholder: 'Seriennummer ..' %>
   </div>
 
   <div class="input-textarea">
@@ -42,7 +42,7 @@
   <div class="footer-insurance">
     <%= link_to image_tag('logo-axa.png'), info_versicherung_path %>
     <p>
-      Jedes Gerät, dass du über den Toolteiler verleihst, ist mit bis zu 15.000 € versichert.<br>
+      Jedes Gerät, das du über den Toolteiler verleihst, ist mit bis zu 15.000 € versichert.<br>
       Einfach und unbürokratisch. <%= link_to "Mehr Infos", info_versicherung_path %>.
     </p>
   </div>

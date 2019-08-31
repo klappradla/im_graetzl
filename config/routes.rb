@@ -91,13 +91,16 @@ Rails.application.routes.draw do
     post 'add_submission', on: :member
   end
 
-  get 'toolteiler/rent_1'
-  get 'toolteiler/rent_2'
-  get 'toolteiler/rent_3'
-  get 'toolteiler/rent_4'
-
   resources :tool_offers, path: 'toolteiler' do
     get 'calculate_price', on: :member
+    patch 'update_status', on: :member
+  end
+
+  resources :tool_rentals, only: [:new, :create] do
+    post 'create_intent', on: :collection
+    post 'cancel', on: :member
+    post 'approve', on: :member
+    post 'reject', on: :member
   end
 
   resources :groups, except: [:index] do
@@ -114,6 +117,12 @@ Rails.application.routes.draw do
     get 'compose_mail', on: :member
     post 'send_mail', on: :member
   end
+
+  get 'messenger' => 'messenger#index'
+  get 'messenger/fetch_thread'
+  get 'messenger/fetch_new_messages'
+  post 'messenger/post_message'
+  post 'messenger/update_thread'
 
   get 'wien/raumteiler/raumsuche' => redirect('/wien/raumteiler')
   get 'wien/raumteiler/raum' => redirect('/wien/raumteiler')
@@ -191,12 +200,6 @@ Rails.application.routes.draw do
     end
     collection do
       post :raumteiler_create, :charge_create, :subscription_create, :mentoring_create
-    end
-  end
-
-  resources :messenger do
-    collection do
-      get :show
     end
   end
 

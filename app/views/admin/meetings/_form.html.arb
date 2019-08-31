@@ -24,9 +24,6 @@ active_admin_form_for [:admin, resource] do |f|
         a.input :description
         a.input :zip
         a.input :city
-        a.input :coordinates, as: :string,
-          placeholder: 'POINT (16.345169051785824 48.19314778332606)',
-          hint: 'e.g. POINT (16.345169051785824 48.19314778332606)'
       end
       actions
     end

@@ -3,16 +3,6 @@ APP.controllers.room_offers = (function() {
   function init() {
     if ($("section.room-offer-form").exists()) initRoomForm();
     if ($("#GAinfos").exists()) initshowContact();
-    if ($("#groups-btn-ctrl").exists()) groupsActionPanel();
-
-  }
-
-  function groupsActionPanel() {
-    // JS Action Button Dropdown for Groups
-    $('[data-behavior=actionTrigger]').on('click', function(){
-      var id = $(this).attr("data-id");
-      $(this).jqDropdown('attach', '[data-behavior=actionContainer-'+id+']');
-    });
   }
 
   function initshowContact(){
@@ -71,8 +61,7 @@ APP.controllers.room_offers = (function() {
 
   return {
     init: init,
-    initshowContact : initshowContact,
-    groupsActionPanel : groupsActionPanel
+    initshowContact : initshowContact
   }
 
 })();

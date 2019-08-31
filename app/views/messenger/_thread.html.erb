@@ -1,0 +1,30 @@
+<div class="back-ctrl">
+  <a href="#" class="back-btn"><%= icon_tag "arrow-down-2" %></a>
+</div>
+
+<div class="chat-panel overthrow" data-thread-id="<%= @thread.id %>">
+  <div class="message-wrapper">
+
+    <div class="thread-info">
+      <%= render 'messenger/thread/user_info' %>
+      <%= render 'messenger/thread/tool_rental', tool_rental: @thread.tool_rental if @thread.tool_rental %>
+    </div>
+
+    <div id="message-list">
+      <% @thread.user_messages.includes(:user).order("created_at").each do |user_message| %>
+        <%= render 'messenger/thread/message', user_message: user_message %>
+      <% end %>
+    </div>
+  </div>
+
+  <%= form_tag messenger_post_message_path(thread_id: @thread.id), remote: true, class: 'message-control post-message-form' do %>
+    <div class="input">
+      <%= text_area_tag :message, nil, class: "chat-message-input", placeholder: "Deine Nachricht .." %>
+    </div>
+    <%= submit_tag "Senden", class: "btn-primary -small" %>
+  <% end %>
+
+  <%= form_tag messenger_fetch_new_messages_path(thread_id: @thread.id), method: :get, remote: true, class: 'fetch-new-messages-form' do %>
+    <%= hidden_field_tag :last_message_id, @thread.user_messages.last.try(:id), class: 'last-message-input' %>
+  <% end %>
+</div>

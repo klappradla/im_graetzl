@@ -18,30 +18,56 @@
       </div>
     </div>
 
-
-    <h3 class="sidebar">Zeitraum</h3>
-    <div class="request">
-      <%= form_tag [:calculate_price, @tool_offer], remote: true, method: :get, class: 'request-price-form' do %>
-        <div class="input-field">
-          <%= label_tag :date_from do %>
-            <%= icon_tag "calendar-2" %>
-            <span></span>
+    <% if current_user == @tool_offer.user %>
+      <div class="innerbox edit">
+        <div class="btn-group">
+          <%= link_to 'Bearbeiten', edit_tool_offer_path(@tool_offer),
+            class: 'btn-secondary -mint -small'  %>
+        </div>
+        <div class="btn-group">
+          <%= link_to "javascript:", data: { jq_dropdown: "#tool-state-update-dropdown" }, class: "btn-secondary -mint -small -state-#{@tool_offer.status}" do %>
+            Status: <span><%= t("activerecord.attributes.tool_offer.statuses.#{@tool_offer.status}") %></span>
           <% end %>
-          <%= text_field_tag :date_from, nil, class: 'date-from', placeholder: 'Von' %>
+        </div>
+        <div id="tool-state-update-dropdown" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container">
+          <div class="jq-dropdown-panel">
+            <%= link_to 'Aktiv', [:update_status, @tool_offer, status: "enabled"], method: :patch %>
+            <%= link_to 'Inaktiv', [:update_status, @tool_offer, status: "disabled"], method: :patch %>
+            <%= link_to 'Löschen', @tool_offer, method: :delete, data: { confirm: 'Bist du dir sicher?' } %>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <h3 class="sidebar">Zeitraum</h3>
+      <% if @tool_offer.enabled? %>
+        <div class="request">
+          <%= form_tag [:calculate_price, @tool_offer], remote: true, method: :get, class: 'request-price-form' do %>
+            <div class="input-field">
+              <%= label_tag :date_from do %>
+                <%= icon_tag "calendar-2" %>
+                <span></span>
+              <% end %>
+              <%= text_field_tag :date_from, nil, class: 'date-from', placeholder: 'Von' %>
+            </div>
+
+            <div class="input-field">
+              <%= label_tag :date_to do %>
+                <%= icon_tag "calendar-2" %>
+                <span></span>
+              <% end %>
+              <%= text_field_tag :date_to, nil, class: 'date-to', placeholder: 'Bis' %>
+            </div>
+          <% end %>
         </div>
 
-        <div class="input-field">
-          <%= label_tag :date_to do %>
-            <%= icon_tag "calendar-2" %>
-            <span></span>
-          <% end %>
-          <%= text_field_tag :date_to, nil, class: 'date-to', placeholder: 'Bis' %>
+        <div id="calculated-price-container"></div>
+        <%= link_to "Wähle zuerst die Mietdauer", '', class: "btn-primary -disabled" %>
+      <% else %>
+        <div class="tool-offer-unavailable">
+          This toolteiler is unavailable
         </div>
       <% end %>
-    </div>
-
-    <div id="calculated-price-container"></div>
-    
+    <% end %>
   </div>
 
   <!-- Contactbox-->
@@ -50,7 +76,7 @@
     <h3 class="sideflag -L">Infos & Adresse</h3>
     <div class="innerbox user-wrp">
       <%= avatar_for @tool_offer.user %>
-      <div class="">
+      <div>
         <%= link_to @tool_offer.user, class: 'user-wrp', target: '_blank' do %>
           <span class="name"><%= @tool_offer.user.full_name %></span>
         <% end %>

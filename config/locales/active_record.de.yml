@@ -209,7 +209,17 @@ de:
           enabled: Aktiv
           disabled: Inaktiv
           deleted: Deleted
-
+      tool_rental:
+        rental_statuses:
+          pending: Wartend
+          canceled: Abgebrochen
+          rejected: Abgelehnt
+          approved: Akzeptiert
+        payment_statuses:
+          payment_pending: Zahlung wartend
+          payment_success: Zahlung erfolgreich
+          payment_failed: Zahlung fehlgeschlagen
+          payment_transfered: Zahlung überwiesen
       user:
         avatar: Profilbild
         confirmed_at: Bestätigt am

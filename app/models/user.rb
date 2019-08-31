@@ -28,6 +28,8 @@ class User < ApplicationRecord
   has_many :room_offers
   has_many :room_demands
   has_many :tool_offers
+  has_many :tool_offer_rentals, through: :tool_offers, source: :tool_rentals
+  has_many :tool_rentals
 
   has_and_belongs_to_many :business_interests
   belongs_to :location_category, optional: true
@@ -37,6 +39,9 @@ class User < ApplicationRecord
   has_many :groups, through: :group_users
   has_many :discussions
   has_many :discussion_followings
+
+  has_many :user_message_thread_members
+  has_many :user_message_threads, through: :user_message_thread_members
 
   has_many :wall_comments, as: :commentable, class_name: "Comment", dependent: :destroy
   accepts_nested_attributes_for :address
@@ -92,6 +97,14 @@ class User < ApplicationRecord
 
   def primary_location
     self.locations.first
+  end
+
+  def rooms
+    self.room_offers.enabled + self.room_demands.enabled
+  end
+
+  def meetings
+    self.initiated_meetings + self.attended_meetings
   end
 
   private

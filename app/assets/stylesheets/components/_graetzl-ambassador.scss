@@ -3,7 +3,7 @@
   display: table;
   font-size: 18px;
   margin: 0 auto 30px auto;
-  [class^=icon-] {
+  .icon {
     fill: $color-ambient-rosa;
     display: inline-block;
     vertical-align: middle;

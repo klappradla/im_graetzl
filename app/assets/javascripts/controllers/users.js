@@ -6,15 +6,24 @@ APP.controllers.users = (function() {
 
         if ($("section.userprofile").exists()) {
           $('.autosubmit-stream').submit();
-        }
-        if ($("section.rooms").exists()) {
-          APP.components.cardBox.moveActionCard3rd();
+          $('.userContent .col2').linkify({ target: "_blank"});
         }
 
-        $('[data-behavior=actionTrigger]').on('click', function(){
-          var id = $(this).attr("data-id");
-          $(this).jqDropdown('attach', '[data-behavior=actionContainer-'+id+']');
-        });
+        if ($("section.usersetup").exists()) {
+          addActionCard();
+        }
+
+        function addActionCard() {
+          if ($(".action-card-container").exists()) {
+            var actionCard = $(".action-card-container").children().first().clone();
+            var cardGrid = $('.cardBoxCollection');
+            if (cardGrid.children(":eq(1)").exists()) {
+              cardGrid.children(":eq(1)").after(actionCard);
+            } else {
+              cardGrid.append(actionCard);
+            }
+          }
+        }
 
     }
 

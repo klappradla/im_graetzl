@@ -63,7 +63,7 @@
     @include respond-to(">=large") {
       font-size: 2.2rem;
     }
-    [class^="icon-"], [class*=" icon-"] {
+    .icon {
       display: inline-block;
       float: left;
       //margin-right: 0.5em;
@@ -142,7 +142,7 @@
 
   .graetzlTrigger {
     margin-right: 20px;
-    [class^=icon-] {
+    .icon {
       margin-right: 8px;
     }
     .txt {
@@ -161,13 +161,13 @@
     padding-left: 20px;
     padding-right: 20px;
     height: 100%;
-    [class*=icon-] {
+    .icon {
       width: 32px;
       height: 32px;
       fill: $color-ambient-mint-dark;
     }
     &:hover, &.jq-dropdown-open, &.is-open {
-      [class*=icon-] {
+      .icon {
         fill: $color-ambient-rosa;
       }
     }
@@ -191,9 +191,6 @@
       padding: 2px 5px 2px 15px;
       z-index: 1;
       margin-left: -14px;
-    }
-    [class^=icon-] {
-
     }
     .username {
       display: none;
@@ -340,12 +337,17 @@
         right: -15px;
         svg {
           fill: $color-ambient-mint-light;
-          //fill: $color-ambient-grey-light;
         }
       }
     }
     section.second {
       z-index: 2;
+    }
+  }
+
+  .-trigger:hover {
+    .-more svg {
+      fill: $color-ambient-mint-dark !important;
     }
   }
 

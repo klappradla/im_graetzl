@@ -1,0 +1,53 @@
+<% if @tool_offers.empty? %>
+
+  <div class="introcontainer -toolteiler">
+
+    <div class="introtxt">
+
+      <div class="hl-subtext" id="teilnahme">
+        <h1><em>Der Toolteiler auf imGrätzl.at</em></h1>
+        <p>Lass dein Arbeitsequipment  & die Geräte an deinem Arbeitsplatz für dich arbeiten.</p>
+      </div>
+
+      <h3>Arbeistequipment leihen - Ausstattung teilen</h3>
+      <p>
+        Ermögliche GründerInnen, Selbstständigen, Kreativen und MacherInnen in Wien
+        die Nutzung deines Arbeitsequipments. Du kannst über den Toolteiler Geräte verleihen
+        oder auch den Zugang zur Ausstattung an deinem Arbeitsstandort ermöglichen.
+        Indem du deine Geräte verleihst, verdienst du nicht nur, sondern schonst
+        gleichzeitig Ressourcen. Es dreht sich beim Toolteiler alles um Gegenstände,
+        die man im Arbeitsumfeld benötigt, also nicht um Freizeitgegenstände,
+        wie z.B. eine Skiausrüstung
+      </p>
+
+      <h3>Du behältst immer die Kontrolle</h3>
+      <p>
+        Du bestimmst  den Tages- oder Wochenpreis für dein Gerät. Es liegt ganz bei dir, ob du eine Mietanfrage annimmst oder einfach ablehnst.
+      </p>
+
+      <h3>Dein Gerät ist automatisch versichert</h3>
+      <p>
+        Bei Beschädigung deines Gerätes hilft dir unsere Versicherung. Mit AXA XL haben wir dafür einen starken Partner an unserer Seite. <%= link_to "Mehr Info", info_versicherung_path %>
+      </p>
+
+      <h3>Die Abwicklung übernehmen wir</h3>
+      <p>
+        Die Buchung und die Geldverteilung erfolgt über uns, du musst dich um nichts kümmern, die Abwicklung des Mietvorgangs geht voll automatisiert.
+      </p>
+
+      <%= link_to 'Neuen Toolteiler erstellen', new_tool_offer_path, class: 'btn-primary -rose' %>
+
+    </div>
+    <%= render 'tool_offers/action_card', user: current_user %>
+  </div>
+
+<% else %>
+
+  <div class="cardBoxCollection -tripple" data-behavior="tool-offers-card-container">
+    <%= render @tool_offers, manage_buttons: true %>
+  </div>
+  <div class="action-card-container">
+    <%= render 'tool_offers/action_card', user: current_user %>
+  </div>
+
+<% end %>

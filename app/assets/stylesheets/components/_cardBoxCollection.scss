@@ -1,3 +1,5 @@
+.action-card-container { display: none; }
+
 .cardBoxCollection {
   @include cf();
   @include respond-to(">=large") {

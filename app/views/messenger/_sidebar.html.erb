@@ -1,0 +1,46 @@
+<div id="side-bar" class="overthrow">
+
+  <div class="controls">
+    <div class="user-ctrl">
+      <%= avatar_for(current_user) %>
+
+      <div class="filter">
+        <%= link_to 'javascript:', id: 'filterMessages' do %>
+          <span class="selected-filter">Alle Nachrichten</span>
+          <%= icon_tag "arrow-down-2" %>
+        <% end %>
+        <div class="jBoxHidden jBoxDropdown" id="jBoxFilterMessages">
+          <%= link_to 'Alle Nachrichten', 'javascript:', data: { filter: 'active' } %>
+          <%= link_to 'Toolteiler', 'javascript:', data: { filter: 'tool_rental' } %>
+          <%= link_to 'Raumteiler', 'javascript:', data: { filter: 'room_offer' } %>
+          <%= link_to 'Archiv', 'javascript:', data: { filter: 'archived' } %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="threads-list" data-thread="<%= params[:thread_id] %>" data-filter="<%= params[:filter] %>">
+    <% @threads.each do |thread| %>
+      <% user = thread_other_user(thread) %>
+      <div class="message-thread single-user <%= message_thread_class(thread) %>" data-id="<%= thread.id %>">
+        <%= form_tag messenger_fetch_thread_path(thread_id: thread.id), remote: true, method: :get, class: 'fetch-form' do; end %>
+        <%= avatar_for(user) %>
+        <div class="wrp">
+          <div class="user"><%= user.full_name %></div>
+          <div class="txt"><%= thread.last_message.try(:truncate, 100) %></div>
+          <div class="time"><%= thread.last_message_at.strftime("%d. %b") %></div>
+        </div>
+        <%= link_to 'javascript:', data: { jq_dropdown: "#action-msg-#{thread.id}" }, class:'actions' do %>
+          <%= icon_tag "dot-3" %>
+        <% end %>
+        <div id="action-msg-<%= thread.id %>" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container">
+          <div class="jq-dropdown-panel">
+            <%= link_to 'Archivieren', messenger_update_thread_path(thread_id: thread.id, status: 'archived'), method: :post %>
+            <%= link_to 'Löschen', messenger_update_thread_path(thread_id: thread.id, status: 'deleted'), method: :post %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div>

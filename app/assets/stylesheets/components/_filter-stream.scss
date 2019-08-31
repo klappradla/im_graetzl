@@ -18,7 +18,7 @@
     }
     &.-coopshare {
       background: none;
-      [class^=icon-] {
+      .icon {
         margin-left:0px;
         width: 75px;
         height: 75px;
@@ -68,7 +68,7 @@
 
   .loginlink {
     position: relative;
-    [class^=icon-] {
+    .icon {
       fill: white;
       position: relative;
       z-index: 2;
@@ -171,7 +171,7 @@
   .iconfilter {
     display: flex;
   }
-  .iconfilter [class^=icon-] {
+  .iconfilter .icon {
     width: 30px;
     height: 30px;
   }
@@ -182,20 +182,20 @@
     background-image: url(image_path('svg/kringel-grey-white.svg'));
     &:hover {
       background-image: url(image_path('svg/kringel-grey-white.svg'));
-      [class^=icon-] {
+      .icon {
         fill: $color-ambient-mint-dark;
       }
     }
     &.active, &.active:hover {
       background-image: url(image_path('svg/kringel-grey-mint.svg'));
-      [class^=icon-] {
+      .icon {
         fill: $color-ambient-rosa;
       }
     }
     @include respond-to(">medium") {
       &:hover, &.active {
         background-image: url(image_path('svg/kringel-grey-mint.svg'));
-        [class^=icon-] {
+        .icon {
           fill: $color-ambient-rosa;
         }
         &.-coopshare {
@@ -206,7 +206,7 @@
   }
   .-coopshare {
     background-image: none;
-    [class^=icon-] {
+    .icon {
       width: 55px;
       height: 55px;
     }

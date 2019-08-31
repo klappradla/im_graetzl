@@ -31,7 +31,7 @@
     padding: 1px;
     cursor: pointer;
     z-index: 1;
-    [class*=icon-] {
+    .icon {
       fill: $color-ambient-mint;
       position: absolute;
       top: 50%;

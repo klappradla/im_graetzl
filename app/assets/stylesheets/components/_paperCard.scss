@@ -161,3 +161,26 @@
   background-position-x: 40px;
   background-position-y: 25px;
 }
+.paperCard.-insurance .wrp {
+  background:none;
+  background-color:rgba(227, 242, 231, 0.5);
+  transform: rotate(1deg);
+  padding: 15px 30px 30px 30px;
+  h3 {
+    text-align: center;
+  }
+  p {
+    padding-top:20px;
+    padding-bottom: 20px;
+  }
+  .insurance {
+    text-align: center;
+    img {
+      width:130px;
+      height:130px;
+    }
+  }
+  .btn-primary, .insurance, p, h3 {
+    transform: rotate(-1deg);
+  }
+}

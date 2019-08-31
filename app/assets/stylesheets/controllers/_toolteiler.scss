@@ -137,6 +137,7 @@ section.toolTeiler-detail {
 
     &.-top {
       padding-top:15px;
+      margin-bottom:70px;
     }
 
     border: 1px solid $color-ambient-grey-light;
@@ -153,7 +154,7 @@ section.toolTeiler-detail {
     }
 
     .innerbox {
-      padding: 0px 5px 15px 15px;
+      padding: 0px 15px 15px 15px;
     }
 
     .gmap {
@@ -173,29 +174,14 @@ section.toolTeiler-detail {
       }
     }
 
-  }
+    .edit {
+      display: block;
+      .btn-group:first-child {
+        margin-bottom: 10px;
+      }
+    }
 
-  .rating {
-    unicode-bidi: bidi-override;
-    direction: rtl;
-    display: inline-block;
-    text-align: left;
   }
-  .rating-container .txt {
-    padding-left:3px;
-  }
-  .rating > span {
-    display: inline-block;
-    position: relative;
-    width: 1.1em;
-  }
-  .rating > span:hover:before,
-  .rating > span:hover ~ span:before, span.fill ~ span:before {
-     content: "\2605";
-     position: absolute;
-     color: $color-ambient-mint-dark;
-  }
-
 
   .pricing-info {
     display: flex;
@@ -206,12 +192,17 @@ section.toolTeiler-detail {
     border-bottom: 1px solid $color-ambient-grey-light;
   }
 
+  #calculated-price-container {
+    h3.sidebar {
+      padding-top:15px;
+      border-top: 1px solid $color-ambient-grey-light;
+    }
+  }
+
   .request {
-    border-bottom: 1px solid $color-ambient-grey-light;
-    margin-bottom:15px;
+    margin-bottom: 10px;
     padding-left: 15px;
     padding-right: 15px;
-    padding-bottom:5px;
 
     .input-field {
       overflow: hidden;
@@ -225,6 +216,11 @@ section.toolTeiler-detail {
       max-width:50px !important;
     }
     .hidden {display: none;}
+  }
+
+  .tool-offer-unavailable {
+    padding-left: 15px;
+    margin-bottom: 10px;
   }
 
   // MAIN CONTENT --------------
@@ -263,9 +259,7 @@ section.toolTeiler-detail {
   }
 }
 
-// -------------- Forms Tabs-Nav (Create and Rent) --------------
-
-section.form-rent-toolteiler, section.form-new-toolteiler {
+section.form-new-toolteiler {
   // tabs-nav
   .tabs-nav {
     display: flex;
@@ -290,99 +284,6 @@ section.form-rent-toolteiler, section.form-new-toolteiler {
     }
   }
 }
-
-// -------------- Toolteiler Form Rent a Tool --------------
-section.form-rent-toolteiler {
-
-  // Layout Grid
-  display: flex;
-  flex-wrap: wrap;
-
-  .col-content {
-    width:100%;
-    margin-bottom:40px;
-    @include respond-to(">=large") {
-      width: 64%;
-      margin-right: 3%;
-    }
-  }
-  .col-sidebar {
-    width:100%;
-    margin-left: auto;
-    margin-right: auto;
-    @include respond-to(">=medium") {
-      width: 50%;
-    }
-    @include respond-to(">=large") {
-      width: 33%;
-    }
-  }
-  // End Layout Grid
-
-  // FORMS
-  .col-content {
-    label {
-      min-width: 160px;
-    }
-    textarea {
-      min-height:150px;
-    }
-    .input-field, .input-textarea, .input-select {
-      margin-bottom: 15px;
-    }
-  }
-
-  .col-sidebar {
-    h3.sidebar {
-      text-align: center;
-      padding-bottom:15px;
-    }
-  }
-
-  .summarybox {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    div {
-      width:38%;
-      @include respond-to("<=small") {
-        width:43%;
-      }
-    }
-    div.avatar {
-      width:20%;
-      text-align: center;
-      @include respond-to("<=small") {
-        width:13%;
-      }
-      img {
-        width:100%;
-        height:auto;
-      }
-    }
-    &:last-of-type {
-      margin-bottom:30px;
-    }
-    .icon-share {
-      margin:auto;
-      color: $color-ambient-mint-light;
-      width:50px;
-      height:50px;
-      margin-top:10px;
-      margin-bottom:10px;
-      @include respond-to("<=small") {
-        width:30px;
-        height:30px;
-      }
-    }
-    .line {
-      border-bottom: 3px solid $color-ambient-mint-light;
-    }
-  }
-}
-
-
 
 // -------------- New Toolteiler Form --------------
 section.form-new-toolteiler {

@@ -1,5 +1,5 @@
 class ToolOffersController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :calculate_price]
 
   def index
     head :ok and return if browser.bot? && !request.format.js?
@@ -9,7 +9,7 @@ class ToolOffersController < ApplicationController
   end
 
   def show
-    @tool_offer = ToolOffer.find(params[:id])
+    @tool_offer = ToolOffer.non_deleted.find(params[:id])
     @comments = @tool_offer.comments.includes(:user, :images).order(created_at: :desc)
   end
 
@@ -42,41 +42,50 @@ class ToolOffersController < ApplicationController
     end
   end
 
+  def update_status
+    @tool_offer = current_user.tool_offers.non_deleted.find(params[:id])
+    @tool_offer.update(status: params[:status])
+    redirect_back(fallback_location: tool_offers_user_path)
+  end
+
   def calculate_price
     @tool_offer = ToolOffer.find(params[:id])
-    days = Date.parse(params[:date_from]) - Date.parse(params[:date_to])
-    days = days.to_i.abs + 1
-    @calculator = ToolPriceCalculator.new(@tool_offer, days)
+    @calculator = ToolPriceCalculator.new(@tool_offer, params[:date_from], params[:date_to])
   end
 
   def destroy
     @tool_offer = current_user.tool_offers.find(params[:id])
     @tool_offer.deleted!
-    redirect_to tools_user_path
+    redirect_to tool_offers_user_path
   end
 
   private
 
   def collection_scope
-    if params[:location_id].present?
-      ToolOffer.enabled.where(location_id: params[:location_id])
-    elsif params[:district_id].present?
-      district = District.find(params[:district_id])
-      ToolOffer.enabled.where(graetzl_id: district.graetzl_ids)
-    elsif params[:graetzl_id].present?
-      ToolOffer.enabled.where(graetzl_id: params[:graetzl_id])
-    else
-      ToolOffer.enabled
-    end
+    ToolOffer.enabled
   end
 
   def filter_collection(collection)
+    district_ids = params[:district_ids]&.select(&:present?)
+    if district_ids.present?
+      graetzl_ids = Graetzl.joins(:districts).where(districts: {id: district_ids}).distinct.pluck(:id)
+      collection = collection.where(graetzl_id: graetzl_ids)
+    end
+
+    if params[:category_id].present?
+      collection = collection.where(tool_category_id: params[:category_id])
+    end
+
+    if params[:query].present?
+      collection = collection.where("title ILIKE :q OR description ILIKE :q", q: "%#{params[:query]}%")
+    end
+
     collection
   end
 
   def tool_offer_params
     params.require(:tool_offer).permit(
-      :title, :description, :brand, :model, :status,
+      :title, :description, :brand, :model, :status, :keyword_list,
       :value_up_to, :serial_number, :known_defects,
       :price_per_day, :two_day_discount, :weekly_discount,
       :tool_category_id, :tool_subcategory_id, :location_id,
@@ -89,4 +98,5 @@ class ToolOffersController < ApplicationController
       ],
     )
   end
+
 end

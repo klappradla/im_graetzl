@@ -1,6 +1,7 @@
-section.messenger {
+section.messenger-page {
 
-  // ----- Mobile First Size -----
+  // ----- Layout -----
+
   margin-top: -30px;
   margin-right: -17px;
   margin-left: -17px;
@@ -10,25 +11,22 @@ section.messenger {
     width:100%;
     height: calc(var(--vh, 1vh) * 100 - 60px); //height: calc(100vh - 60px);
   }
+
   #side-bar {
     flex: 1 0 100%;
     transition: all .3s ease-out;
-    &.is-collapsed {
-      transform: translateX(-100%);
-    }
   }
+
   #main-content {
     width: 100%;
     transition: all .3s ease-out;
-    &.is-full-width {
-      margin-left: -100%;
-      .back-ctrl {
-        display: flex;
-      }
-    }
-    .chat-panel {
-      height:100%;
-      //height:calc(100% - 71px);
+  }
+
+  @include respond-to("<=medium") {
+    #chat-container.show-messages {
+      #side-bar { transform: translateX(-100%); }
+      #main-content { margin-left: -100%; }
+      .back-ctrl { display: block; }
     }
   }
 
@@ -46,11 +44,7 @@ section.messenger {
     }
     #main-content {
       padding-left: 20px;
-      .chat-panel {
-        height:100%;
-      }
     }
-
   }
 
   // ----- > Desktop Fullsize -----
@@ -126,7 +120,7 @@ section.messenger {
       }
     }
 
-    .users-list {
+    .threads-list {
       width:100%;
     }
 
@@ -182,24 +176,28 @@ section.messenger {
         svg { color: $color-ambient-mint-dark; transform: rotate(90deg); }
         &:hover svg { color: $color-ambient-rosa; }
       }
+      &.archived .actions { display: none; }
+    }
+
+    .message-thread.hidden {
+      display: none;
     }
   }
 
   .back-ctrl {
     display: none;
-    width:100%;
-    height:61px;
+    width: 100%;
+    height: 61px;
+    line-height: 58px;
     z-index: 999;
     position: fixed;
-    top:0;
-    left:0;
-    align-items: center;
+    top:0; left:0;
     background-color: #fbfbfb;
     border-bottom: 1px solid $color-ambient-mint-light;
     padding: 10px 10px 10px 10px;
+    a { display: inline-block; }
     svg {
       color: $color-ambient-mint-dark; transform: rotate(90deg);
-      //height:50px;
     }
   }
 
@@ -212,7 +210,8 @@ section.messenger {
   }
 
   .chat-panel {
-    width:100%;
+    height: 100%;
+    width: 100%;
     //overflow: scroll;
     //-webkit-overflow-scrolling: touch;
     display: flex;
@@ -223,11 +222,7 @@ section.messenger {
 
   .message-wrapper {
     width:100%;
-
-    &.fake2 {
-      display: none;
-    }
-
+    padding: 50px 15px 15px 15px;
   }
 
   .message-control {
@@ -268,7 +263,7 @@ section.messenger {
     }
   }
 
-  .chatMsg {
+  .chat-message {
 
     img.avatar {
       width:50px;
@@ -279,10 +274,6 @@ section.messenger {
     display: flex;
     align-items: center;
     margin-bottom:20px;
-
-    &:first-child {
-      margin-top:50px;
-    }
 
     // Firefox Hack -> Margin Bottom at last chat bubble
     &:last-child {
@@ -337,83 +328,79 @@ section.messenger {
         }
       }
     }
+  }
 
-    &.-chatBot {
-      flex-wrap: wrap;
+  .thread-info {
+
+    .user-info {
+      margin: auto;
+      display: flex;
       justify-content: center;
-      div.info {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        &.-message {
-          width:100%;
-          flex-wrap: wrap;
-          .-toolteiler {
-            text-align: center;
-            margin-bottom:20px;
-          }
-          .title {
-            a {
-              color:$color-ambient-mint-dark;
-            }
-          }
-          .time {
-
-          }
-          .action {
-            position: relative;
-            margin-top:0px;
-            padding: 10px 10px 10px 14px;
-            background-color: rgba($color-ambient-grey-light,0.70);
-            border-radius: 9px;
-            display: flex;
-            align-items: center;
-            .ico {
-              position: absolute;
-              top:-20px;
-              left:calc(50% - 20px);
-              background-color: #fbfbfb;
-              border-radius: 50%;
-              width:40px;
-              height:40px;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              [class^="icon-"], [class*=" icon-"] {
-                color:$color-ambient-mint-dark;
-                padding:2px;
-                margin-top:2px;
-                margin-left:-2px;
-              }
-            }
-            .note {
-              width:70%;
-              @include font-size-primaryFont('small');
-            }
-            .btns {
-              width:30%;
-              a:nth-child(2) {
-                margin-top:10px;
-              }
-            }
-          }
-          &:after {
-            content: '--';
-            margin-top:15px;
-          }
-        }
-
+      align-items: center;
+      padding: 0px 20px 10px 20px;
+      border-bottom: 1px solid rgba($color-ambient-mint-light,0.60);
+      margin-bottom:10px;
+      img.avatar {
+        width:100px;
+        height:100px;
+        margin-right:15px;
       }
-      .-user {
-        padding: 0px 20px 10px 20px;
-        border-bottom: 1px solid rgba($color-ambient-mint-light,0.60);
-        margin-bottom:10px;
-        img.avatar {
-          width:100px;
-          height:100px;
-          margin-right:15px;
+    }
+
+    .tool-rental-info {
+      text-align: center;
+      margin-bottom: 20px;
+      .title  {
+        font-weight: bold;
+        a {
+          color:$color-ambient-mint-dark;
+          font-weight: bold;
         }
       }
     }
+
+    .action-box {
+      position: relative;
+      margin-top: 20px;
+      //padding: 10px 10px 10px 14px;
+      padding:20px;
+      text-align: left;
+      background-color: rgba($color-ambient-grey-light,0.70);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .box-icon {
+        position: absolute;
+        top: -20px;
+        left: calc(50% - 20px);
+        background-color: #fbfbfb;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        svg {
+          padding: 2px;
+          margin-top: 2px;
+          margin-left: -2px;
+          color: $color-ambient-mint-dark;
+        }
+      }
+      .note {
+        @include font-size-primaryFont('small');
+        .contact {
+          font-style: italic;
+          padding:10px;
+        }
+      }
+      .buttons {
+        margin-left:20px;
+        min-width: 25%;
+        a:nth-child(2) { margin-top: 10px; }
+      }
+    }
+
   }
 }

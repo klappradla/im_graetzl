@@ -173,13 +173,13 @@
 }
 .lSAction > .lSPrev {
     background-image: url(image_path('controls-prev.png'));
-    left: -30px;
+    left: -20px;
     //-webkit-transform: rotate(90deg);
     //transform: rotate(90deg);
 }
 .lSAction > .lSNext {
     background-image: url(image_path('controls-next.png'));
-    right: -30px;
+    right: -20px;
     //-webkit-transform: rotate(-90deg);
     //transform: rotate(-90deg);
 }
