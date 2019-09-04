@@ -25,7 +25,7 @@ class ToolOffer < ApplicationRecord
   accepts_attachments_for :images, attachment: :file, append: true
   accepts_nested_attributes_for :images, allow_destroy: true, reject_if: :all_blank
 
-  validates_presence_of :title, :description, :address
+  validates_presence_of :title, :description, :address, :tool_category_id, :cover_photo, :price_per_day, :iban
 
   before_save :set_graetzl
 
@@ -42,9 +42,9 @@ class ToolOffer < ApplicationRecord
 
   def daily_price(days)
     if days >= 7
-      price_per_day * (100 - weekly_discount) / 100
+      price_per_day * (100 - weekly_discount.to_i) / 100
     elsif days >= 2
-      price_per_day * (100 - two_day_discount) / 100
+      price_per_day * (100 - two_day_discount.to_i) / 100
     else
       price_per_day
     end

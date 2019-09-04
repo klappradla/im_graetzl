@@ -23,9 +23,9 @@ class ToolPriceCalculator
 
   def discount
     if days >= 7
-      (basic_price * @tool_offer.weekly_discount / 100).round(2)
+      (basic_price * @tool_offer.weekly_discount.to_i / 100).round(2)
     elsif days >= 2
-      (basic_price * @tool_offer.two_day_discount / 100).round(2)
+      (basic_price * @tool_offer.two_day_discount.to_i / 100).round(2)
     else
       0
     end

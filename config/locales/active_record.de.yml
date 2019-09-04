@@ -205,6 +205,9 @@ de:
         first_name: Vorname
         last_name: Nachname
         email: Email
+        tool_category_id: Kategorie
+        price_per_day: Tagespreis
+        iban: Kontoverbindung (IBAN)
         statuses:
           enabled: Aktiv
           disabled: Inaktiv

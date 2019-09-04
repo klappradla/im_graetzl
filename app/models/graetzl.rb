@@ -11,6 +11,7 @@ class Graetzl < ApplicationRecord
   has_many :room_demand_graetzls
   has_many :room_demands, through: :room_demand_graetzls
   has_many :room_calls
+  has_many :tool_offers
   has_many :group_graetzls
   has_many :groups, through: :group_graetzls
   has_many :operating_ranges

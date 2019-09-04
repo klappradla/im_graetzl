@@ -13,6 +13,7 @@ class ActivityStream
       Activity.where(trackable_id: @graetzl.room_offer_ids, key: ['room_offer.create', 'room_offer.comment']),
       Activity.where(trackable_id: @graetzl.room_demand_ids, key: ['room_demand.create']),
       Activity.where(trackable_id: @graetzl.room_call_ids, key: ['room_call.create']),
+      Activity.where(trackable_id: @graetzl.tool_offers.enabled.pluck(:id), key: ['tool_offer.create']),
       Activity.where(trackable_id: @graetzl.groups.non_private.pluck(:id), key: ['group.create']),
     ].reduce(:or)
 

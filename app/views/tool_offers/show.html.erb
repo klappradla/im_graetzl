@@ -14,7 +14,7 @@
     <div class="headContent">
       <div class="category-tags">
           <ul class="tag-list -mint">
-            <li><%= @tool_offer.tool_subcategory.try(:name) %></li>
+            <% if @tool_offer.tool_subcategory.present? %><li><%= @tool_offer.tool_subcategory.try(:name) %></li><% end %>
             <li><%= @tool_offer.tool_category.try(:name) %></li>
           </ul>
       </div>
