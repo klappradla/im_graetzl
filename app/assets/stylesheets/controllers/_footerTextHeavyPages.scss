@@ -29,6 +29,15 @@ section.graetzlmarie {
   }
 }
 
+section.datenschutz {
+  p, h3, .cardBox, p:first-child {
+    margin-bottom: 20px !important;
+  }
+  h3 {
+    padding-top:30px;
+  }
+}
+
 .sign-block {
   background-color: #fff;
   border: 1px solid #f0f0f0;
