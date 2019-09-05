@@ -1,6 +1,6 @@
 <div class="flex-table row" role="rowgroup">
   <div class="flex-row wide20 first" role="cell">
-    <%= link_to tool_rental.tool_offer.title, tool_rental.tool_offer %>
+    <%= link_to tool_rental.tool_offer.title.truncate(50), tool_rental.tool_offer %>
   </div>
   <div class="flex-row wide20" role="cell">
     <%= link_to messenger_path(thread_id: tool_rental.user_message_thread.id), class: 'message' do %>

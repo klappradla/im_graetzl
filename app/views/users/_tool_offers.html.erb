@@ -35,10 +35,8 @@
         Die Buchung und die Geldverteilung erfolgt über uns, du musst dich um nichts kümmern, die Abwicklung des Mietvorgangs geht voll automatisiert.
       </p>
 
-      <%= link_to 'Neuen Toolteiler erstellen', new_tool_offer_path, class: 'btn-primary -rose' %>
-
     </div>
-    <%= render 'tool_offers/action_card', user: current_user %>
+    <%= render 'tool_offers/action_card', user: current_user, create_link: true %>
   </div>
 
 <% else %>
@@ -47,7 +45,7 @@
     <%= render @tool_offers, manage_buttons: true %>
   </div>
   <div class="action-card-container">
-    <%= render 'tool_offers/action_card', user: current_user %>
+    <%= render 'tool_offers/action_card', user: current_user, create_link: true %>
   </div>
 
 <% end %>

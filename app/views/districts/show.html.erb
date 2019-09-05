@@ -44,6 +44,16 @@
       <%= render 'rooms/action_card', district: @district, view_all: true %>
     </div>
   </div>
+  <div class="block-tools">
+    <div class="hl-subtext">
+      <h1>Entdecke — <span>Toolteiler</span> im <%= @district.numeric %>. Bezirk</h1>
+      <p>Arbeistequipment leihen - Ausstattung teilen</p>
+    </div>
+    <div class="cardBoxCollection -tripple -morelink">
+      <%= render @activity_sample.tool_offers %>
+      <%= render 'tool_offers/action_card', district: @district, view_all: true %>
+    </div>
+  </div>
   <div class="block-groups">
     <div class="hl-subtext">
       <h1>Entdecke — <span>Gruppen</span> im Grätzl</h1>

@@ -35,6 +35,16 @@ class ActivitySample
     end
   end
 
+  def tool_offers
+    if @graetzl
+      @graetzl.tool_offers.enabled.by_currentness.first(2)
+    elsif @district
+      @district.tool_offers.enabled.by_currentness.first(2)
+    else
+      ToolOffer.enabled.by_currentness.first(2)
+    end
+  end
+
   def rooms
     room_call = RoomCall.open_calls.first
     if @graetzl

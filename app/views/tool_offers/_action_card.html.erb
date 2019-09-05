@@ -3,7 +3,7 @@
     <div class="wrp">
       <h3>Mit Unterstützung von:</h3>
       <div class="insurance">
-        <%= image_tag('logo-axa.png') %>
+        <%= link_to info_versicherung_path do %><%= image_tag('logo-axa.png') %><% end %>
       </div>
       <p>
         Jedes Gerät, das du über den Toolteiler verleihst, ist mit bis zu 15.000 € versichert.
@@ -23,4 +23,11 @@
       <%= link_to 'Alle Toolteiler', tool_offers_wien_path, class: 'link-more' %>
     <% end %>
   <% end %>
+
+  <% if local_assigns[:create_link] %>
+    <div class="create_link">
+      <%= link_to 'Neuen Toolteiler erstellen', new_tool_offer_path, class: 'btn-primary' %>
+    </div>
+  <% end %>
+
 </div>

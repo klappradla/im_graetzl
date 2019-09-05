@@ -23,8 +23,8 @@
     <% end %>
 
     <div class="txt">
-      <h3><%= link_to tool_offer.title, tool_offer %></h3>
-      <p><%= tool_offer.description.truncate(250) %></p>
+      <h3><%= link_to tool_offer.title.truncate(100), tool_offer %></h3>
+      <p><%= tool_offer.description.truncate(180) %></p>
     </div>
 
     <%= link_to 'Ausleihen', tool_offer, class: 'btn-primary -btn-rent -mint' %>
