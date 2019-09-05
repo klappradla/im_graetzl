@@ -5,6 +5,9 @@
       <div class="-category" data-id="<%= category.id %>">
         <%= category_photo_for(category) %>
         <h3><%= category.name %></h3>
+        <%= button_tag '', class: 'close-ico' do %>
+          <%= icon_tag "cross" %>
+        <% end %>
       </div>
     <% end %>
   </div>
