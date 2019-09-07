@@ -124,9 +124,6 @@
       <%= link_to groups_wien_path do %>
         <%= icon_tag "coop-share" %> Stöbern in Gruppen
       <% end %>
-      <%= link_to groups_user_path do %>
-        <%= icon_tag "speech-bubble" %> Neue Gruppe gründen
-      <% end %>
     <% end %>
     <section class="content">
       <% current_user.groups.last(8).reverse.each do |group| %>

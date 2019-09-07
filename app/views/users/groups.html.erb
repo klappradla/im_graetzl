@@ -2,37 +2,41 @@
 
   <% if @groups.empty? %>
 
-  <div class="introcontainer -groups">
-    <div class="introtxt">
-      <h1>Trete jetzt einer <span>Gruppe</span> bei.</h1>
-      <p>
-        Durchstöbere die Gruppen auf imGrätzl und trete einer passenden Gruppe bei.
-        <br>
-        Hier gehts zu allen <%= link_to "Gruppen in deinem Grätzl", groups_graetzl_path(current_user.graetzl) %> <%= current_user.graetzl.name %>.
-      </p>
-      <p>
-        Du kannst natürlich auch in den Gruppen in ganz Wien stöbern, oder eine neue Gruppe gründen.
-      </p>
-      <p class="btns">
-        <%= link_to 'Weitere Infos', info_gruppen_path, class: 'btn-primary -grey' %>
-        <%= link_to 'Zu allen Gruppen in ganz Wien', groups_wien_path, class: 'btn-primary -mint' %>
-      </p>
+    <div class="introcontainer -groups">
+      <div class="introtxt">
+
+        <div class="hl-subtext" id="teilnahme">
+          <h1><em>Gruppen auf imGrätzl.at</em></h1>
+          <p>Deine Wien- & Bezirksgruppen für Kooperationen, Austausch und Zusammenarbeit!</p>
+        </div>
+
+        <h3>Stöbern in Gruppen</h3>
+        <p>Durchstöbere die Gruppen auf imGrätzl.at und trete gleich einer Gruppe bei.
+          <br>
+          Hier gehts zur <%= link_to "Übersicht aller Gruppen", groups_wien_path %>.
+        </p>
+
+        <h3>Du möchtest eine neue Gruppe gründen?</h3>
+        <p>
+          Schreib uns ein kurzes Mail an <%= mail_to 'wir@imgraetzl.at' %> mit ein paar Infos zu deiner Gruppe die du gründen möchtest.
+          Wir geben dir Feedback und schalten dich gerne frei, um eine neue Gruppe zu starten.
+        </p>
+
+      </div>
+      <%= render 'groups/action_card', user: @user %>
     </div>
-    <%= render 'groups/action_card', user: @user %>
-  </div>
+
   <% else %>
 
     <div class="hl-subtext -groups">
-      <h1><span>Gruppen</span> Mitgliedschaften</h1>
+      <h1>Deine <span>Gruppen</span> Mitgliedschaften</h1>
     </div>
-
     <div class="cardBoxCollection -tripple" data-behavior="groups-card-container">
       <%= render @groups.order(created_at: :desc), manage_buttons: true %>
     </div>
     <div class="action-card-container">
       <%= render 'groups/action_card', user: @user, view_all: true %>
     </div>
-
 
   <% end %>
 

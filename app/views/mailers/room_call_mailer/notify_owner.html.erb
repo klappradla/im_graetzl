@@ -1,0 +1,88 @@
+<% content_for(:above_title, "Hey #{@submission.room_call.user.first_name}") %>
+<% content_for(:title, "Es gibt eine neue Call Bewerbung!") %>
+
+<!-- --------------- BLOCK HEADLINE --------------- -->
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
+  <tr>
+    <td style="height:30px"> </td>
+  </tr>
+  <tr>
+    <td valign="top" class="mcnTextContent" style="padding-top:0;  padding-bottom:9px; padding-left:18px; padding-right:18px;">
+      <h4 style="color:#69a8a7; font-family:Georgia; font-size:125%; font-weight:normal; font-style:italic; text-align:left;">
+        Neuer ausgefüllter Call von:
+      </h4>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding-left:9px; padding-right:9px;">
+      <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td>
+            <span></span>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<!-- --------------- ITEM NEW REQUEST --------------- -->
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #efefef; margin-bottom:18px;" width="100%" class="mcnTextContentContainer">
+  <tbody>
+    <tr>
+      <td valign="center" class="mcnTextContent" style="padding-left:18px; padding-right:18px;">
+        <%= image_tag Notifications::ImageService.new.avatar_url(@submission.user), style: "width:60px; height:60px; border-radius: 30px; max-width:60px; min-width:60px;", class: "mcnImage" %>
+      </td>
+      <td class="mcnTextContent" style="padding-right:18px; width:100%;">
+        <p>
+          <em><strong><%= @submission.user.full_name %></strong></em><br>
+          <%= @submission.user.email %>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" style="padding-bottom:18px;"></td>
+    </tr>
+
+    <% @submission.room_call_submission_fields.includes(:room_call_field).each do |sf| %>
+      <tr>
+        <td colspan="2" class="mcnTextContent" style="padding-left:18px; padding-right:18px;">
+          <p>
+            <strong><%= sf.room_call_field.label %></strong>
+          </p>
+          <p>
+            <%= sf.content %>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" style="padding-bottom:18px;"></td>
+      </tr>
+    <% end %>
+
+    <tr>
+      <td colspan="2">
+        <!-- BUTTON -->
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnButtonBlock" style="min-width:100%;">
+          <tbody class="mcnButtonBlockOuter">
+            <tr>
+              <td style="padding-top:0; padding-right:18px; padding-bottom:18px; padding-left:18px;" valign="top" align="right" class="mcnButtonBlockInner">
+                <table border="0" cellpadding="0" cellspacing="0" class="mcnButtonContentContainer" style="border-collapse: separate !important;border-top-left-radius: 4px;border-top-right-radius: 4px;border-bottom-right-radius: 4px;border-bottom-left-radius: 4px;background-color: #69A8A7;">
+                  <tbody>
+                    <tr>
+                      <td align="center" valign="middle" class="mcnButtonContent" style="font-family: Arial; font-size: 16px; padding: 10px;">
+                        <%= link_to "#{@submission.user.first_name} für die Gruppe freischalten", group_url(@submission.room_call.group), class: "mcnButton", title: "Button", target: "_blank", style: "font-weight: normal;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;" %>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- /BUTTON -->
+      </td>
+    </tr>
+
+  </tbody>
+</table>

@@ -24,11 +24,11 @@ APP.controllers.tool_rentals = (function() {
     function initAddressScreen() {
       var screen = $("#tab-address");
       screen.find(".next-screen").on("click", function() {
-        $('#tab-summary .renter-summary .renter-company').text(screen.find(".renter-company-input").val());
-        $('#tab-summary .renter-summary .renter-name').text(screen.find(".renter-name-input").val());
-        $('#tab-summary .renter-summary .renter-address').text(screen.find(".renter-address-input").val());
-        $('#tab-summary .renter-summary .renter-zip').text(screen.find(".renter-zip-input").val());
-        $('#tab-summary .renter-summary .renter-city').text(screen.find(".renter-city-input").val());
+        screen.find(".renter-input").each(function(i, el) {
+          var inputName = $(el).data('field');
+          $('#tab-summary .renter-summary .' + inputName).text($(el).val());
+          $('#tab-summary .rental-form #' + inputName + "-input").val($(el).val());
+        });
         openTab('payment');
       });
     }
@@ -44,9 +44,83 @@ APP.controllers.tool_rentals = (function() {
     }
 
     function initCardPayment() {
-
       var container = $(".card-container");
+      var nextButton = container.find(".next-screen");
+      var nameInput = container.find('#cardholder-name');
+      var card = initCardInput();
+      var cardReady = false;
 
+      card.mount('#card-element');
+      card.addEventListener('change', function(event) {
+        if (event.error) {
+          showFormError(container, event.error.message);
+        } else {
+          hideFormError(container);
+        }
+        cardReady = event.complete;
+        checkCreditCard();
+      });
+
+      nameInput.on('input', function() {
+        checkCreditCard();
+      });
+
+      function checkCreditCard() {
+        if (cardReady && nameInput.val()) {
+          nextButton.removeAttr("disabled");
+        } else {
+          nextButton.attr("disabled", true);
+        }
+      }
+
+      var paymentIntentFrom = container.find(".payment-intent-form");
+      var paymentMethod;
+
+      nextButton.on("click", function() {
+        nextButton.attr("disabled", true);
+        hideFormError(container);
+        stripe.createPaymentMethod('card', card, {
+          billing_details: { name: nameInput.val() }
+        }).then(function(result) {
+          if (result.error) {
+            showFormError(container, result.error.message);
+            nextButton.removeAttr("disabled");
+          } else {
+            paymentMethod = result.paymentMethod;
+            paymentIntentFrom.find("[name=payment_method_id]").val(result.paymentMethod.id);
+            paymentIntentFrom.submit();
+          }
+        });
+      });
+
+      $(".payment-intent-form").on("ajax:success", function(e, data) {
+        if (data.success) {
+          paymentConfirmed(data.payment_intent_id);
+        } else {
+          stripe.handleCardAction(data.payment_intent_client_secret).then(function(result) {
+            if (result.error) {
+              showFormError(container, result.error.message);
+            } else {
+              paymentConfirmed(result.paymentIntent.id);
+            }
+          });
+        }
+      }).on('ajax:error', function(e, xhr) {
+        var error = xhr.responseJSON && xhr.responseJSON.error;
+        error = error || "An error occurred. Please check your connection and try again."
+        showFormError(container, error)
+      }).on('ajax:complete', function() {
+        nextButton.removeAttr("disabled");
+      });
+
+      function paymentConfirmed(intentId) {
+        $("#tab-summary .rental-form #stripe-payment-intent-input").val(intentId);
+        $("#tab-summary .payment-summary .card-last4").text(paymentMethod.card.last4);
+        openTab('summary');
+      }
+    }
+
+    function initCardInput() {
       var elements = stripe.elements({
         fonts: [
           { cssSrc: 'https://fonts.googleapis.com/css?family=Lato:400,400i,300' }
@@ -56,7 +130,7 @@ APP.controllers.tool_rentals = (function() {
       var style = {
         base: {
           fontFamily: '"Lato", sans-serif',
-          fontWeight:400,
+          fontWeight: 400,
           fontSmoothing: 'antialiased',
           fontSize: '16px',
           color:'#615454',
@@ -68,65 +142,21 @@ APP.controllers.tool_rentals = (function() {
         }
       };
 
-      var cardElement = elements.create('card', {style: style, hidePostalCode: true, classes: {base: 'input-plain'}});
-      cardElement.mount('#card-element');
-
-      var paymentMethod;
-
-      container.find(".next-screen").on("click", function() {
-        container.find(".next-screen").prop("disabled", true);
-        container.find(".error-message").text("");
-        stripe.createPaymentMethod('card', cardElement, {
-          billing_details: { name: container.find("#cardholder-name").val() }
-        }).then(function(result) {
-          if (result.error) {
-            showPaymentError(container, result.error.message);
-          } else {
-            paymentMethod = result.paymentMethod;
-            $(".payment-intent-form [name=payment_method_id]").val(result.paymentMethod.id);
-            $(".payment-intent-form").submit();
-          }
-        });
-      });
-
-      $(".payment-intent-form").on("ajax:success", function(e, data) {
-        if (data.error) {
-          showPaymentError(container, data.error)
-        } else if (data.success) {
-          paymentConfirmed(data.payment_intent_id, paymentMethod);
-        } else {
-          stripe.handleCardAction(data.payment_intent_client_secret).then(function(result) {
-            if (result.error) {
-              showPaymentError(container, result.error.message);
-            } else {
-              paymentConfirmed(result.paymentIntent.id, paymentMethod);
-            }
-          });
-        }
-      }).on('ajax:complete', function() {
-        container.find(".next-screen").prop("disabled", false);
-      });
+      return elements.create('card', {style: style, hidePostalCode: true, classes: {base: 'input-plain'}});
     }
 
-    function showPaymentError(container, error) {
+    function showFormError(container, error) {
       container.find(".error-message").text(error);
-      container.find(".next-screen").prop("disabled", false);
     }
 
-    function paymentConfirmed(intentId, paymentMethod) {
-      $(".rental-form #payment-intent-input").val(intentId);
-      $("#tab-summary .payment-summary .card-last4").text(paymentMethod.card.last4);
-      openTab('summary');
+    function hideFormError(container) {
+      container.find(".error-message").text("");
     }
 
     function initSummaryScreen() {
       var screen = $("#tab-summary");
       screen.find(".back-to-payment").on("click", function() {
         openTab('payment');
-      });
-
-      screen.find(".submit-form").on("click", function() {
-        $(".rental-form").submit();
       });
     }
 

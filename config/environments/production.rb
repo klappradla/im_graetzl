@@ -78,7 +78,8 @@ Rails.application.configure do
     enable_starttls_auto: true,
     user_name: ENV['MANDRILL_USER'],
     password: ENV['MANDRILL_KEY'],
-    authentication: :login
+    authentication: :login,
+    domain: 'imgraetzl.at',
   }
 
   # mandrill config

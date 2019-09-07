@@ -46,7 +46,7 @@
   <div class="card-grid-container">
     <div class="card-grid" data-behavior="groups-card-container"></div>
     <div class="action-card-container" data-behavior="groups-action-card-container">
-      <%= render 'groups/action_card' %>
+      <%= render 'groups/action_card', create_link: true %>
     </div>
     <!-- Insert Featured Card -->
     <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'groups-paginate-link' }, rel: 'nofollow' %>

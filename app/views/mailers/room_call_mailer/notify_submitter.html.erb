@@ -1,0 +1,136 @@
+<% content_for(:above_title, "Hey #{@submission.user.first_name}") %>
+<% content_for(:title, "Vielen Dank für deine Teilnahme am Call!") %>
+
+<!-- --------------- BLOCK HEADLINE --------------- -->
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
+  <tr>
+    <td style="height:30px"> </td>
+  </tr>
+  <tr>
+    <td valign="top" class="mcnTextContent" style="padding-top:0;  padding-bottom:9px; padding-left:18px; padding-right:18px;">
+      <h4 style="color:#69a8a7; font-family:Georgia; font-size:125%; font-weight:normal; font-style:italic; text-align:left;">
+        Deine Bewerbung ist erfolgreich bei uns eingegangen!
+      </h4>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding-left:9px; padding-right:9px;">
+      <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td>
+            <span></span>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<!-- --------------- ITEM NEW ANSWERS ON OWN CONTENT --------------- -->
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #efefef; margin-bottom:18px;" width="100%" class="mcnTextContentContainer">
+  <tbody>
+    <tr>
+      <td colspan="2" valign="center" class="mcnTextContent" style="padding-left:18px; padding-right:18px;">
+        <p>
+          Als Nächstes laden wir Dich in die zugehörige Raumteiler-Gruppe auf imGrätzl.at ein,
+          dort gibt es dann auch alle weiteren Infos zum Ablauf.
+        </p>
+        <p>
+          Sobald wir dich für die Gruppe freigeschalten haben, bekommst du eine Bestätigung per
+          E-Mail mit dem Link zur Gruppe.
+        </p>
+        <p>
+          Liebe Grüße und bis bald,<br>
+          <%= @submission.room_call.user.full_name %>,<br>
+          <%= @submission.room_call.user.email %>
+        </p>
+        <p>
+          <strong>Zum Call:</strong><br>
+          <%= link_to @submission.room_call.title, room_call_url(@submission.room_call), style: 'font-weight: bold' %>
+          <br>
+          <%= @submission.room_call.subtitle %>
+        </p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" valign="center" class="mcnTextContent" style="padding-left:18px; padding-right:18px;">
+        <%= link_to room_call_url(@submission.room_call) do %>
+          <%= image_tag(Notifications::ImageService.new.cover_photo_url(@submission.room_call), width: "100%", class: 'mcnImage') %>
+        <% end %>
+        <br><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- --------------- ITEM NEW ANSWERS ON OWN CONTENT --------------- -->
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #efefef; margin-bottom:18px;" width="100%" class="mcnTextContentContainer">
+  <tbody>
+    <tr>
+      <td colspan="2" valign="center" class="mcnTextContent" style="padding-left:18px; padding-right:18px;">
+        <h4 style="text-align:left;">
+          Unterstütze uns und teile den Call auch gleich auf Facebook oder Twitter - Vielleicht kennst du ja jemanden für den die Sache spannend klingt:
+        </h4>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <table align="center" border="0" cellpadding="0" cellspacing="0">
+          <tbody>
+            <tr>
+              <td align="center" valign="top">
+                <!--[if mso]>
+                <table align="center" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                <![endif]-->
+                <!--[if mso]>
+                <td align="center" valign="top">
+                <![endif]-->
+                <table align="left" border="0" cellpadding="0" cellspacing="0" class="mcnFollowStacked" style="display:inline;">
+                  <tbody>
+                    <tr>
+                      <td align="center" valign="top" class="mcnFollowIconContent" style="padding-right:10px; padding-bottom:9px;">
+                        <%= link_to "https://www.facebook.com/sharer/sharer.php?u=#{room_call_url(@submission.room_call)}", target: "_blank" do %>
+                          <img src="https://cdn-images.mailchimp.com/icons/social-block-v2/gray-facebook-96.png" alt="Facebook" class="mcnFollowBlockIcon" width="48" style="width:48px; max-width:48px; display:block;">
+                        <% end %>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!--[if mso]>
+                </td>
+                <![endif]-->
+                <!--[if mso]>
+                <td align="center" valign="top">
+                <![endif]-->
+                <table align="left" border="0" cellpadding="0" cellspacing="0" class="mcnFollowStacked" style="display:inline;">
+                  <tbody>
+                    <tr>
+                      <td align="center" valign="top" class="mcnFollowIconContent" style="padding-right:10px; padding-bottom:9px;">
+                        <%= link_to "https://twitter.com/intent/tweet?url=#{room_call_url(@submission.room_call)}", target: "_blank" do %>
+                          <img src="https://cdn-images.mailchimp.com/icons/social-block-v2/gray-twitter-96.png" alt="Twitter" class="mcnFollowBlockIcon" width="48" style="width:48px; max-width:48px; display:block;">
+                        <% end %>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!--[if mso]>
+                </td>
+                <![endif]-->
+                <!--[if mso]>
+                </tr>
+                </table>
+                <![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" valign="center" class="mcnTextContent" style="padding-left:18px; padding-right:18px; padding-bottom:18px;">
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,4 +1,9 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "imGrätzl.at <no-reply@imgraetzl.at>"
   layout 'mailer'
+
+  def self.inherited(subclass)
+    subclass.default template_path: "mailers/#{subclass.name.to_s.underscore}"
+  end
+
 end

@@ -18,7 +18,8 @@ class MessengerController < ApplicationController
 
   def fetch_new_messages
     @thread = current_user.user_message_threads.find(params[:thread_id])
-    @user_messages = @thread.user_messages.where("id > ?", params[:last_message_id]).includes(:user)
+    @user_messages = @thread.user_messages.includes(:user)
+    @user_messages = @user_messages.where("id > ?", params[:last_message_id]) if params[:last_message_id].present?
   end
 
   def post_message

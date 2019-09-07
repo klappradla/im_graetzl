@@ -1,0 +1,9 @@
+<% content_for(:above_title, "Hey #{@tool_rental.tool_offer.user.first_name}") %>
+<% content_for(:title, "That rental request has been canceled.") %>
+
+<p>
+  From:
+  <%= image_tag Notifications::ImageService.new.avatar_url(@tool_rental.user), style: "width:60px; height:60px; border-radius: 30px; max-width:60px; min-width:60px;", class: "mcnImage" %>
+  <%= @tool_rental.user.full_name %>
+  <%= @tool_rental.user.email %>
+</p>

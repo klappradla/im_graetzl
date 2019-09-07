@@ -10,15 +10,13 @@
           <span>Dein Name</span>
         <% end %>
       </div>
-      <% if local_assigns[:graetzl] %>
-        <h3>Trete jetzt einer Gruppe bei oder gründe eine neue Gruppe.</h3>
-        <%= link_to 'Neue Gruppe gründen', new_group_path(graetzl_id: graetzl.id), class: 'btn-primary' %>
-      <% elsif local_assigns[:district] %>
-        <h3>Trete jetzt einer Gruppe im <%= district.numeric %>. Bezirk bei oder gründe eine neue Gruppe.</h3>
-        <%= link_to 'Neue Gruppe gründen', new_group_path, class: 'btn-primary' %>
+      <h3>Kooperation, Austausch und Zusammenarbeit. Trete jetzt einer Gruppe bei.</h3>
+      <% if local_assigns[:create_link] %>
+        <%= link_to 'Zu deinen Gruppen', groups_user_path, class: 'btn-primary' %>
       <% else %>
-        <h3>Trete jetzt einer Gruppe bei oder gründe eine neue Gruppe.</h3>
-        <%= link_to 'Neue Gruppe gründen', new_group_path, class: 'btn-primary' %>
+        <% if current_user.admin? %>
+          <%= link_to 'Neue Gruppe gründen', new_group_path, class: 'btn-primary' %>
+        <% end %>
       <% end %>
     </div>
     <div class="card"></div>

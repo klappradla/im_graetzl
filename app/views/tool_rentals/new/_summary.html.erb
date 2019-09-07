@@ -61,13 +61,19 @@
     </div>
   </div>
 
-  <%= f.hidden_field :tool_offer_id %>
-  <%= f.hidden_field :rent_from %>
-  <%= f.hidden_field :rent_to %>
-  <%= f.hidden_field :stripe_payment_intent_id, id: 'payment-intent-input' %>
-  <%= f.hidden_field :payment_method, id: 'payment-method-input' %>
+  <%= form_for @tool_rental, html: { class: 'rental-form' } do |f| %>
+    <%= f.hidden_field :tool_offer_id %>
+    <%= f.hidden_field :rent_from %>
+    <%= f.hidden_field :rent_to %>
+    <%= f.hidden_field :renter_company, id: 'renter-company-input' %>
+    <%= f.hidden_field :renter_name, id: 'renter-name-input' %>
+    <%= f.hidden_field :renter_address, id: 'renter-address-input' %>
+    <%= f.hidden_field :renter_zip, id: 'renter-zip-input' %>
+    <%= f.hidden_field :renter_city, id: 'renter-city-input' %>
+    <%= f.hidden_field :stripe_payment_intent_id, id: 'stripe-payment-intent-input' %>
+    <%= f.hidden_field :payment_method, id: 'payment-method-input' %>
 
-  <% # Not using submit tag here to disable submiting the form with "enter" %>
-  <%= button_tag "Weiter", type: 'button', class: 'btn-primary submit-form' %>
+    <%= f.submit "Weiter", class: 'btn-primary submit-form' %>
+  <% end %>
 
 </div>

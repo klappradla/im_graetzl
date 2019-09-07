@@ -1,0 +1,134 @@
+<% content_for(:above_title, "Gute Neuigkeiten #{@user.first_name}") %>
+<% content_for(:title, "Deine Gruppe ist nun online!") %>
+
+<!-- --------------- BLOCK HEADLINE --------------- -->
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
+   <tr>
+     <td style="height:30px"> </td>
+   </tr>
+   <tr>
+     <td valign="top" class="mcnTextContent" style="padding-top:0;  padding-bottom:9px; padding-left:18px; padding-right:18px;">
+       <h4 style="text-align:left; color:#69a8a7; font-family:Georgia; font-size:125%; font-weight:normal; font-style:italic;">
+         Gruppen Infos:
+       </h4>
+     </td>
+   </tr>
+   <tr>
+     <td style="padding-left:9px; padding-right:9px;">
+       <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%">
+         <tr>
+           <td>
+             <span></span>
+           </td>
+         </tr>
+       </table>
+     </td>
+   </tr>
+ </table>
+
+<!-- --------------- ITEM GROUP NEW --------------- -->
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #efefef; margin-bottom:18px;" width="100%" class="mcnTextContentContainer">
+  <tbody>
+    <tr>
+      <td valign="center" class="mcnTextContent" style="padding-left:18px; padding-right:18px;">
+        <%= link_to group_url(@group) do %>
+          <%= image_tag Notifications::ImageService.new.cover_photo_url(@group), class: 'mcnImage', style: "width:290px; border-radius:5px; max-width:290px; min-width:100px;" %>
+         <% end %>
+      </td>
+      <td valign="center" class="mcnTextContent" width="100%">
+        <p>
+          <%= link_to @group.title, group_url(@group), style: "color:#ec776a; font-size:18px;" %>
+        </p>
+        <%= image_tag Notifications::ImageService.new.avatar_url(@user), style: "width: 40px; height: 40px; border-radius: 20px; display: block; float:left; margin-right:10px;" %>
+        <p>
+          <em>Organisiert von</em><br>
+          <%= @user.full_name %>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" style="padding-top:9px; padding-bottom:9px;" class="mcnTextContent">
+        <p>
+          <%= @group.description.truncate(255, separator: ' ') %>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <!-- BUTTON -->
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnButtonBlock" style="min-width:100%;">
+          <tbody class="mcnButtonBlockOuter">
+            <tr>
+              <td style="padding-top:0; padding-right:18px; padding-bottom:18px; padding-left:18px;" valign="top" align="right" class="mcnButtonBlockInner">
+                <table border="0" cellpadding="0" cellspacing="0" class="mcnButtonContentContainer" style="border-collapse: separate !important;border-top-left-radius: 4px;border-top-right-radius: 4px;border-bottom-right-radius: 4px;border-bottom-left-radius: 4px;background-color: #69A8A7;">
+                  <tbody>
+                    <tr>
+                      <td align="center" valign="middle" class="mcnButtonContent" style="font-family: Arial; font-size: 16px; padding: 10px;">
+                        <%= link_to "Zur Gruppe", group_url(@group), class: "mcnButton", title: "Button", target: "_blank", style: "font-weight: normal;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;" %>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- /BUTTON -->
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" style="padding-bottom:5px;"></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- --------------- STATIC FEATURE BOX --------------- -->
+
+<!-- ----------- BLOCK HEADLINE ----------- -->
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
+  <tr>
+    <td valign="top" class="mcnTextContent" style="padding-top:0;  padding-bottom:9px; padding-left:18px; padding-right:18px;">
+      <h4 style="color:#69a8a7; font-family:Georgia; font-size:125%; font-weight:normal; font-style:italic; text-align:left;">
+        Wie gehts nun weiter - Tipp:
+      </h4>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding-left:9px; padding-right:9px;">
+      <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%">
+          <tr>
+            <td>
+              <span></span>
+            </td>
+          </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ------------ BLOCK HEADLINE ----------- -->
+
+<!-- --------------- CONTENT --------------- -->
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px; border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #efefef;" width="100%" class="mcnTextContentContainer">
+  <tbody>
+    <tr>
+      <td valign="top" class="mcnTextContent" style="padding-top:0; padding-left:18px; padding-bottom:18px; padding-right:18px;">
+        <p>
+          <strong>Lade Interessierte im ersten Schritt persönlich in die Gruppe ein.</strong>
+        </p>
+        <p>
+          Denn sobald die ersten Gruppenmitglieder sich in der Gruppe eingefunden haben und es
+          Treffen und Aktivitäten in der Gruppe gibt, zieht das weitere Interessierte an. Sobald
+          du deine Gruppe zum Laufen gebracht hast, wirst du erleben, wie sie von selber wächst
+          und wächst und wächst.
+        </p>
+        <p>
+          <strong> Versende dazu einfach ein E-Mail an Interessierte mit folgenden Link zu deiner Gruppe: </strong>
+          <%= link_to group_url(@group), group_url(@group), style: "color: #ec776a; font-weight: bold" %>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- --------------- CONTENT --------------- -->
+
+<!-- --------------- STATIC FEATURE BOX --------------- -->

@@ -66,9 +66,8 @@
       <p>Vernetze dich mit anderen, tausch dich aus und kooperiere!</p>
     </div>
     <div class="cardBoxCollection -tripple -morelink">
-      <%= render @activity_sample.groups.first %>
-      <%= render 'shared/featured_cards/mentoring' %>
-      <%= render 'groups/action_card', view_all: true %>
+      <%= render @activity_sample.groups %>
+      <%= render 'groups/action_card', view_all: true, create_link: true %>
     </div>
   </div>
 

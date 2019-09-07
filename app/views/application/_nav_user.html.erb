@@ -41,9 +41,11 @@
         <%= icon_tag "share" %>
         <div class="icontxt">Neuer Toolteiler</div>
       <% end %>
-      <%= link_to new_group_path(graetzl_id: current_user.graetzl_id) do %>
-        <%= icon_tag "speech-bubble" %>
-        <div class="icontxt">Neue Gruppe gründen</div>
+      <% if current_user.admin? %>
+        <%= link_to new_group_path(graetzl_id: current_user.graetzl_id) do %>
+          <%= icon_tag "speech-bubble" %>
+          <div class="icontxt">Neue Gruppe gründen</div>
+        <% end %>
       <% end %>
       <% current_user.locations.approved.each do |location| %>
         <%= link_to graetzl_location_path(location.graetzl, location, anchor: 'location-post-form') do %>

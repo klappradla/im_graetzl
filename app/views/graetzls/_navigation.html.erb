@@ -57,9 +57,11 @@
       <%= icon_tag "share" %>
       <div class="icontxt">Neuer Toolteiler</div>
     <% end %>
-    <%= link_to new_group_path(graetzl_id: @graetzl.id) do %>
-      <%= icon_tag "speech-bubble" %>
-      <div class="icontxt">Neue Gruppe gründen</div>
+    <% if current_user.admin? %>
+      <%= link_to new_group_path(graetzl_id: @graetzl.id) do %>
+        <%= icon_tag "speech-bubble" %>
+        <div class="icontxt">Neue Gruppe gründen</div>
+      <% end %>
     <% end %>
 
     <% current_user.locations.approved.each do |location| %>

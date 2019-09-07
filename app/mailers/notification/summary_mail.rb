@@ -45,6 +45,10 @@ class Notification::SummaryMail
         name: 'Auf der Suche nach Raum',
         types: [Notifications::NewRoomDemand].map(&:to_s)
       },
+      {
+        name: 'Neuer Tool Offers',
+        types: [Notifications::NewToolOffer].map(&:to_s)
+      },
     ]
   }
 
@@ -157,7 +161,7 @@ class Notification::SummaryMail
   def generate_basic_block(block, notifications)
     notifications = notifications.select{|n| n.type.in?(block[:types])}
     return [] if notifications.blank?
-    
+
     meeting_attendee_notifications, other_notifications = notifications.partition{|n| n.type == "Notifications::AttendeeInUsersMeeting"}
     notification_vars = other_notifications.map(&:mail_vars)
     # Group meeting attendees by meeting

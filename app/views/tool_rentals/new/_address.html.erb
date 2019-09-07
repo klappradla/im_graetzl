@@ -8,48 +8,47 @@
   </div>
 
   <div class="input-field">
-    <%= f.label :renter_company do %>
+    <%= label_tag :renter_company do %>
       <%= icon_tag "user-avatar" %>
       <span>Firma</span>
     <% end %>
-    <%= f.text_field :renter_company, placeholder: 'Firma (optional)', class: 'renter-company-input' %>
+    <%= text_field_tag :renter_company, nil, placeholder: 'Firma (optional)', class: 'renter-input', data: { field: 'renter-company' } %>
   </div>
 
   <div class="input-field">
-    <%= f.label :renter_name do %>
+    <%= label_tag :renter_name do %>
       <%= icon_tag "user-avatar" %>
       <span>Name</span>
     <% end %>
-    <%= f.text_field :renter_name, placeholder: 'Vor- & Nachname', class: 'renter-name-input' %>
+    <%= text_field_tag :renter_name, current_user.full_name, placeholder: 'Vor- & Nachname', class: 'renter-input', data: { field: 'renter-name' } %>
   </div>
 
   <div class="input-field">
-    <%= f.label :renter_address do %>
+    <%= label_tag :renter_address do %>
       <%= icon_tag "map-location" %>
       <span>Strasse & Nr.</span>
     <% end %>
-    <%= f.text_field :renter_address, placeholder: 'Strasse & Nr.', class: 'renter-address-input' %>
+    <%= text_field_tag :renter_address, current_user.address.try(:street), placeholder: 'Strasse & Nr.', class: 'renter-input', data: { field: 'renter-address' } %>
   </div>
 
   <div class="form-columns">
 
     <div class="input-field">
-      <%= f.label :renter_zip do %>
+      <%= label_tag :renter_zip do %>
         <%= icon_tag "map-location" %>
         <span>Postleitzahl</span>
       <% end %>
-      <%= f.text_field :renter_zip, placeholder: 'PLZ', class: 'renter-zip-input' %>
+      <%= text_field_tag :renter_zip, current_user.address.try(:zip), placeholder: 'PLZ', class: 'renter-input', data: { field: 'renter-zip' } %>
     </div>
 
     <div class="input-field">
-      <%= f.label :renter_city do %>
+      <%= label_tag :renter_city do %>
         <%= icon_tag "map-location" %>
         <span>Ort/Stadt</span>
       <% end %>
-      <%= f.text_field :renter_city, placeholder: 'Stadt', class: 'renter-city-input' %>
+      <%= text_field_tag :renter_city, current_user.address.try(:city), placeholder: 'Stadt', class: 'renter-input', data: { field: 'renter-city' } %>
     </div>
   </div>
 
   <%= button_tag "Weiter", type: 'button', class: 'btn-primary next-screen' %>
-
 </div>

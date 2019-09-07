@@ -10,37 +10,25 @@
   <div class="paymentMethods">
     <% ToolRental::PAYMENT_METHODS.each do |payment_method| %>
       <div class="input-radio -<%= payment_method %>">
-        <%= f.radio_button :payment_method, payment_method %>
-        <%= f.label :"payment_method_#{payment_method}", payment_method_label(payment_method) %>
+        <%= radio_button_tag :payment_method, payment_method %>
+        <%= label_tag :"payment_method_#{payment_method}", payment_method_label(payment_method) %>
       </div>
     <% end %>
   </div>
 
   <div class="payment-method-container card-container">
-
-    <div class="error-message"></div>
-
-    <div class="input-field">
-      <%= f.label :card_info do %>
-        <%= icon_tag "credit-card" %>
-        <span>Kreditkarte</span>
-      <% end %>
-      <div id="card-element"></div>
-    </div>
-
-    <div class="input-field">
-      <%= f.label :cardholder_name do %>
-        <%= icon_tag "user-avatar" %>
-        <span>Karteninhaber</span>
-      <% end %>
-      <%= text_field_tag :cardholder_name, current_user.full_name, placeholder: 'Karte laufend auf ...', class: 'input-plain', id: 'cardholder-name' %>
-    </div>
-
-    <%= button_tag "Weiter", type: 'button', class: 'btn-primary next-screen' %>
+    <%= render 'tool_rentals/new/payment_credit_card' %>
   </div>
 
   <div class="payment-method-container sofort-container">
-    <p> Coming soon </p>
+    <div class="input-field">
+      <%= label_tag :cardholder_name do %>
+        <%= icon_tag "user-avatar" %>
+        <span>First name</span>
+      <% end %>
+      <%= text_field_tag :first_name, current_user.first_name, placeholder: '', class: 'input-plain' %>
+    </div>
+
   </div>
 
   <div class="payment-method-container eps-container">

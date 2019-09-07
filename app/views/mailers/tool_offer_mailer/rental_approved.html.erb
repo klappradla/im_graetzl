@@ -1,0 +1,13 @@
+<% content_for(:above_title, "Hey #{@tool_rental.user.first_name}") %>
+<% content_for(:title, "Your rental request has been approved!") %>
+
+<p>
+  From:
+  <%= image_tag Notifications::ImageService.new.avatar_url(@tool_rental.tool_offer.user), style: "width:60px; height:60px; border-radius: 30px; max-width:60px; min-width:60px;", class: "mcnImage" %>
+  <%= @tool_rental.tool_offer.user.full_name %>
+  <%= @tool_rental.tool_offer.user.email %>
+</p>
+
+<p>
+  <%= link_to "Continue discussion here", messenger_url(thread_id: @tool_rental.user_message_thread.id) %>
+</p>

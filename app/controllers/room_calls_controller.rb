@@ -53,7 +53,8 @@ class RoomCallsController < ApplicationController
     end
 
     if @room_call_submission.save
-      RoomCallMailer.new.send_submission_email(@room_call_submission)
+      RoomCallMailer.notify_submitter(@room_call_submission).deliver_later
+      RoomCallMailer.notify_owner(@room_call_submission).deliver_later
       if !@room_call.group.users.include?(current_user)
         @room_call.group.group_join_requests.create(user_id: current_user.id, request_message: "A call submitter wants to join the group.")
       end
