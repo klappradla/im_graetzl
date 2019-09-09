@@ -20,7 +20,7 @@
     &.-card::after {
       background-image: url(image_path('pay-ico-mastercard-visa.png'));
     }
-    &.-sofort::after {
+    &.-klarna::after {
       background-image: url(image_path('pay-ico-klarna.svg'));
     }
     &.-eps::after {

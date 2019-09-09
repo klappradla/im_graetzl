@@ -1,4 +1,12 @@
+.filter-stream.-help {
+  margin-bottom: -70px;
+  padding-top:40px;
+}
+
 section.help {
+
+  position: relative;
+  padding-bottom:50px;
 
   .paperCard {
     .wrp {
@@ -18,10 +26,6 @@ section.help {
         @include font-size-primaryFont('large');
       }
     }
-  }
-
-  .filter-stream {
-    margin-bottom: 50px;
   }
 
   // ----- HEADER ------ //

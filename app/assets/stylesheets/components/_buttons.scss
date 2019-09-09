@@ -13,8 +13,20 @@
   font-size: 1.8rem;
   display: block;
   text-align: center;
-  &.-flex {
+  &.-inlineflex {
     display: inline-flex;
+  }
+  &.-flex {
+    display: flex;
+    align-items: center;
+  }
+  &.-ico {
+    display: flex;
+    align-items: center;
+    svg {
+      width:22px; height:22px;
+      margin-right:8px;
+    }
   }
   &:hover {
     opacity: 0.9;

@@ -17,47 +17,5 @@ section.lp {
     background-color: white;
     color: #69a8a7;
   }
-
-  &.-raumteilerguide {
-
-    .download {
-      padding-top:20px;
-      a {
-        margin:auto;
-        display: table;
-      }
-    }
-
-    .clear {clear:both;}
-    .guide {
-      padding-top:10px;
-      p {
-        padding-bottom:20px;
-      }
-      div.input-field {
-        padding-bottom:20px;
-      }
-      div.wrp {
-        padding-bottom:20px;
-      }
-    }
-
-    div.form {
-      float:none;
-      @include respond-to(">=medium") {
-        float: right;
-        width:50%;
-        padding-left: 50px;
-      }
-    }
-
-    div.paperCard {
-      @include respond-to(">=medium") {
-        float: left;
-        width: 50%;
-      }
-      .wrp {padding:15px 20px 10px 15px;}
-      img {width:100%;}
-    }
-  }
+  
 }

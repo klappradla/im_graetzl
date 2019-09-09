@@ -1,4 +1,4 @@
-<div class="payment" id="tab-payment">
+<div class="payment">
 
   <div class="hl-subtext">
     <h1>Wähle deine Zahlungsart</h1>
@@ -10,7 +10,7 @@
   <div class="paymentMethods">
     <% ToolRental::PAYMENT_METHODS.each do |payment_method| %>
       <div class="input-radio -<%= payment_method %>">
-        <%= radio_button_tag :payment_method, payment_method %>
+        <%= radio_button_tag :payment_method, payment_method, payment_method == params[:payment_method] %>
         <%= label_tag :"payment_method_#{payment_method}", payment_method_label(payment_method) %>
       </div>
     <% end %>
@@ -20,19 +20,25 @@
     <%= render 'tool_rentals/new/payment_credit_card' %>
   </div>
 
-  <div class="payment-method-container sofort-container">
-    <div class="input-field">
-      <%= label_tag :cardholder_name do %>
-        <%= icon_tag "user-avatar" %>
-        <span>First name</span>
-      <% end %>
-      <%= text_field_tag :first_name, current_user.first_name, placeholder: '', class: 'input-plain' %>
-    </div>
-
+  <div class="payment-method-container klarna-container">
+    <%= render 'tool_rentals/new/payment_klarna' %>
   </div>
 
   <div class="payment-method-container eps-container">
-    <p> Coming soon </p>
+    <%= render 'tool_rentals/new/payment_eps' %>
   </div>
+
+  <%= form_tag summary_tool_rentals_url, method: :get, class: 'next-step-form' do %>
+    <%= hidden_field_tag :tool_offer_id, params[:tool_offer_id] %>
+    <%= hidden_field_tag :rent_from, params[:rent_from] %>
+    <%= hidden_field_tag :rent_to, params[:rent_to] %>
+    <%= hidden_field_tag :renter_company, params[:renter_company] %>
+    <%= hidden_field_tag :renter_name, params[:renter_name] %>
+    <%= hidden_field_tag :renter_address, params[:renter_address] %>
+    <%= hidden_field_tag :renter_zip, params[:renter_zip] %>
+    <%= hidden_field_tag :renter_city, params[:renter_city] %>
+    <%= hidden_field_tag :payment_method, params[:payment_method] %>
+    <%= hidden_field_tag :stripe_source_id, params[:source] %>
+  <% end %>
 
 </div>

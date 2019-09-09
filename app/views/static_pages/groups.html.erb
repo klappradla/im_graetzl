@@ -25,10 +25,9 @@
     <div class="card"></div>
   </div>
 
-  <%= render 'help_menu' %>
-
   <aside>
     <div id="help_nav">
+      <%= link_to info_path, class: "btn-primary -grey -ico" do %><%= icon_tag "arrow-left-2" %> Zu allen Services<% end %>
       <a href="#stoebern" class="btn-primary -mint" id="nav-one">Stöbern in Gruppen</a>
       <a href="#erstellen" class="btn-primary -mint" id="nav-two">Neue Gruppe gründen</a>
       <a href="#mails" class="btn-primary -mint" id="nav-three">E-Mail Benachrichtigungen</a>
@@ -100,3 +99,5 @@
   <div style="clear:both;"></div>
 
 </section>
+
+<%= render 'help_menu' %>

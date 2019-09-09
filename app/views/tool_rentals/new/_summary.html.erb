@@ -43,7 +43,7 @@
 
         Kreditkarte<br>
         endet auf <span class="card-last4"></span><br>
-        <%= link_to "ändern", 'javascript:', class: 'back-to-payment' %>
+        <%= link_to "ändern", choose_payment_tool_rentals_url(tool_rental_params) %>
       </p>
     </div>
 
@@ -53,27 +53,28 @@
     <div class="renter-summary">
       <p>
         <strong>Mieter</strong><br>
-        <span class="renter-company block"></span>
-        <span class="renter-name block"></span>
-        <span class="renter-address block"></span>
-        <span class="renter-zip"></span> <span class="renter-city"></span>
+        <span class="renter-company block"><%= params[:renter_company] %></span>
+        <span class="renter-name block"><%= params[:renter_name] %></span>
+        <span class="renter-address block"><%= params[:renter_address] %></span>
+        <span class="renter-zip"><%= params[:renter_zip] %></span> <span class="renter-city"><%= params[:renter_city] %></span>
       </p>
     </div>
   </div>
 
-  <%= form_for @tool_rental, html: { class: 'rental-form' } do |f| %>
-    <%= f.hidden_field :tool_offer_id %>
-    <%= f.hidden_field :rent_from %>
-    <%= f.hidden_field :rent_to %>
-    <%= f.hidden_field :renter_company, id: 'renter-company-input' %>
-    <%= f.hidden_field :renter_name, id: 'renter-name-input' %>
-    <%= f.hidden_field :renter_address, id: 'renter-address-input' %>
-    <%= f.hidden_field :renter_zip, id: 'renter-zip-input' %>
-    <%= f.hidden_field :renter_city, id: 'renter-city-input' %>
-    <%= f.hidden_field :stripe_payment_intent_id, id: 'stripe-payment-intent-input' %>
-    <%= f.hidden_field :payment_method, id: 'payment-method-input' %>
+  <%= form_tag tool_rentals_path, html: { class: 'rental-form' } do |f| %>
+    <%= hidden_field_tag :tool_offer_id, params[:tool_offer_id] %>
+    <%= hidden_field_tag :rent_from, params[:rent_from] %>
+    <%= hidden_field_tag :rent_to, params[:rent_to] %>
+    <%= hidden_field_tag :renter_company, params[:renter_company] %>
+    <%= hidden_field_tag :renter_name, params[:renter_name] %>
+    <%= hidden_field_tag :renter_address, params[:renter_address] %>
+    <%= hidden_field_tag :renter_zip, params[:renter_zip] %>
+    <%= hidden_field_tag :renter_city, params[:renter_city] %>
+    <%= hidden_field_tag :payment_method, params[:payment_method] %>
+    <%= hidden_field_tag :stripe_payment_intent_id, params[:stripe_payment_intent_id] %>
+    <%= hidden_field_tag :stripe_source_id, params[:stripe_source_id] %>
 
-    <%= f.submit "Weiter", class: 'btn-primary submit-form' %>
+    <%= submit_tag "Weiter", class: 'btn-primary submit-form' %>
   <% end %>
 
 </div>

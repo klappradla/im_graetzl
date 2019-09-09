@@ -38,8 +38,7 @@
 
   <article class="container -mentoring">
     <div class="txt">
-      <div class="headline -R">
-        <span class="bigicontext-element -large -badge">Neu</span>
+      <div class="headline">
         <div>
           <h2>Komm in dein Unterstützer-Team!</h2>
           <h3>Ideen gemeinsam auf den Boden bringen.</h3>
@@ -63,90 +62,82 @@
   </article>
 
 
+
   <article class="container">
     <div class="txt">
-      <div class="headline">
-        <div>
-          <h2>Kooperationen im Bezirk</h2>
-          <h3>z.B. im Marketing und Vertrieb</h3>
-        </div>
-      </div>
+      <h2>Raumteiler</h2>
+      <h3>Gewerbeflächen teilen - Kosten teilen.</h3>
       <p>
-        In den Bezirksgruppen dreht sich alles um Kooperationen zwischen den MacherInnen im Bezirk.
-        Das geht von der gemeinsamen Gutscheinaktion bis hin zur Organisation von Events oder
-        auch der engeren Zusammenarbeit zwischen Kulturschaffenden, DienstleisterInnen,
-        HändlerInnen und ProduzentInnen im Bezirk.
+        Der Raumteiler ist eine Art WG-Partnersuche für Gewerbeflächen und verbindet
+        Raumsuchende und Raumhabende auf imGrätzl.at in Raumpartnerschaften.
+        Es geht darum Gewerbeflächen, und im weiteren Kosten zu teilen.
+        Der Raumteiler ist auch ein Werkzeug, um Leerstand zu verhindern und verbindet
+        Raumsuchende in Gruppen, um Leerstand neu zu aktivieren.
       </p>
       <p class="link">
-        <%= link_to 'Zu den Bezirksgruppen', groups_wien_path(:category => 1), :class => 'btn-primary -mint -flex' %>
+        <%= link_to 'Mehr Infos', info_raumteiler_path, :class => 'btn-primary -grey -inlineflex' %>
+        <%= link_to 'Zu den Raumteilern', rooms_wien_path, :class => 'btn-primary -mint -inlineflex' %>
       </p>
     </div>
-    <div class="aside -img -bgpoints">
-      <%= link_to(image_tag('info/imGraetzl-Features-Kooperationen3.png'), groups_wien_path(:category => 1), class: '-illu -feature') %>
+    <div class="aside -img">
+      <%= link_to(image_tag('info/imGraetzl-Features-Raumteiler2.png'), rooms_wien_path, class: '-feature') %>
     </div>
   </article>
 
 
-  <article class="container -groups">
+
+  <article class="container">
     <div class="txt">
-      <div class="headline">
+      <div class="headline -R">
+        <span class="bigicontext-element -large -badge">Neu</span>
         <div>
-          <h2>Tauschglück – Gegengeschäfte</h2>
-          <h3>z.B. „Brauche Flyerdesign – biete Yogakurs an“</h3>
+          <h2>Toolteiler</h2>
+          <h3>Arbeistequipment leihen - Ausstattung teilen</h3>
         </div>
       </div>
       <p>
+         Ermögliche GründerInnen, Selbstständigen, Kreativen und MacherInnen in Wien
+         die Nutzung deines Arbeitsequipments. Du kannst über den Toolteiler Geräte verleihen
+         oder auch den Zugang zur Ausstattung an deinem Arbeitsstandort ermöglichen.
+         Indem du deine Geräte verleihst, verdienst du nicht nur, sondern schonst
+         gleichzeitig Ressourcen.<br><br>
+         <strong>Jedes Gerät, das du über den Toolteiler verleihst, ist mit bis zu 15.000 € versichert. Einfach und unbürokratisch.</strong>
+      </p>
+      <p class="link">
+        <%= link_to 'Mehr Infos', info_toolteiler_path, :class => 'btn-primary -grey -inlineflex' %>
+        <%= link_to 'Zu den Toolteilern', tool_offers_wien_path, :class => 'btn-primary -mint -inlineflex' %>
+      </p>
+    </div>
+    <div class="aside -img">
+      <%= link_to(image_tag('info/imGraetzl-Features-Toolteiler.png'), groups_wien_path(:category => 1), class: '-illu -feature') %>
+    </div>
+  </article>
+
+
+
+  <article class="container">
+    <div class="txt">
+      <h2>Gruppen</h2>
+      <h3>Kooperationen, Austausch und Zusammenarbeit. z.B.</h3>
+      <p>
+        Gruppe für <strong>„Auftrag zu vergeben & ProjektpartnerInnen gesucht“</strong>. -
+        Diese Gruppe ist die Anlaufstelle für alle, die gerade Ressourcen frei haben für neue Aufträge und für all diejenigen, die ProjektpartnerInnen suchen oder Projekte zu vergeben haben.
+        <br><br>
+        <strong>Tauschglück – Gegengeschäfte, z.B. „Brauche Flyerdesign – biete Yogakurs an“</strong>. -
         Das Motto dieser Gruppe ist es die eigenen Ressourcen über Gegengeschäfte zu erhöhen.
-        Die Tauschgeschäfte eröffnen einen zusätzlichen Weg Projekte und Wünsche zu realisieren
-        und das eigene Unternehmen aufzubauen. Ein gutes Geschäft für alle Beteiligten,
-        bei dem nicht ein einziger Cent fließt.
-      </p>
-    </div>
-    <div class="aside">
-      <%= !Group.where(id: 4).empty? ? (render Group.where(id: 4)) : '' %>
-    </div>
-  </article>
-
-
-  <article class="container -groups">
-    <div class="txt">
-      <div class="headline">
-        <div>
-          <h2>Aufträge & Zusammenarbeit</h2>
-          <h3>Auftrag zu vergeben & ProjektpartnerInnen gesucht</h3>
-        </div>
-      </div>
-      <p>
-        Wer kann mir das Newsletter Tool installieren? Brauche Grafik-Unterstützung bei einem
-        großen Auftrag, kennt jemand wen? Diese Gruppe ist die Anlaufstelle für alle,
-        die gerade Raum für neue Aufträge haben und für all diejenigen, die ProjektpartnerInnen
-        suchen oder Projekte zu vergeben haben.
-      </p>
-    </div>
-    <div class="aside">
-      <%= !Group.where(id: 6).empty? ? (render Group.where(id: 6)) : '' %>
-    </div>
-  </article>
-
-
-  <article class="container">
-    <div class="txt">
-      <h2>Gruppen für alle!</h2>
-      <h3>Eröffne deine eigene Gruppe</h3>
-      <p>
-        Du möchtest eine eigene Gruppe rund um ein Thema aufbauen, das dich interessiert,
-        du möchtest rund um dein Thema Treffen initiieren und in Kontakt mit Gleichgesinnten kommen?
-        Oder dock dich ganz einfach an eine bestehende Gruppe an.
       </p>
       <p class="link">
-        <%= link_to 'Mehr Infos', info_gruppen_path, :class => 'btn-primary -grey -flex' %>
-        <%= link_to 'Zu den Gruppen', groups_wien_path, :class => 'btn-primary -mint -flex' %>
+        <%= link_to 'Mehr Infos', info_gruppen_path, :class => 'btn-primary -grey -inlineflex' %>
+        <%= link_to 'Zu den Gruppen', groups_wien_path, :class => 'btn-primary -mint -inlineflex' %>
       </p>
     </div>
     <div class="aside -img">
       <%= link_to(image_tag('info/imGraetzl-Features-Gruppen.png'), groups_wien_path, class: '-feature') %>
     </div>
   </article>
+
+
+
 
 
   <article class="container">
@@ -161,34 +152,12 @@
         über eine Schnittstelle auf digitalen schwarzen Brettern angezeigt.
       </p>
       <p class="link">
-        <%= link_to 'Mehr Infos', info_anbieter_und_locations_path, :class => 'btn-primary -grey -flex' %>
-        <%= link_to 'Zu den Locations', locations_wien_path, :class => 'btn-primary -mint -flex' %>
+        <%= link_to 'Mehr Infos', info_anbieter_und_locations_path, :class => 'btn-primary -grey -inlineflex' %>
+        <%= link_to 'Zu den Locations', locations_wien_path, :class => 'btn-primary -mint -inlineflex' %>
       </p>
     </div>
     <div class="aside -img">
       <%= link_to(image_tag('info/imGraetzl-Features-Locationpage2.png'), locations_wien_path, class: '-feature') %>
-    </div>
-  </article>
-
-
-  <article class="container">
-    <div class="txt">
-      <h2>Raumteiler</h2>
-      <h3>Gewerbeflächen teilen - Kosten teilen.</h3>
-      <p>
-        Der Raumteiler ist eine Art WG-Partnersuche für Gewerbeflächen und verbindet
-        Raumsuchende und Raumhabende auf imGrätzl.at in Raumpartnerschaften.
-        Es geht darum Gewerbeflächen, und im weiteren Kosten zu teilen.
-        Der Raumteiler ist auch ein Werkzeug, um Leerstand zu verhindern und verbindet
-        Raumsuchende in Gruppen, um Leerstand neu zu aktivieren.
-      </p>
-      <p class="link">
-        <%= link_to 'Mehr Infos', info_raumteiler_path, :class => 'btn-primary -grey -flex' %>
-        <%= link_to 'Zu den Raumteilern', rooms_wien_path, :class => 'btn-primary -mint -flex' %>
-      </p>
-    </div>
-    <div class="aside -img">
-      <%= link_to(image_tag('info/imGraetzl-Features-Raumteiler2.png'), rooms_wien_path, class: '-feature') %>
     </div>
   </article>
 
@@ -203,12 +172,12 @@
         Du möchtest als BewohnerIn etwas in deinem Grätzl bekannt geben? - auch das geht!
       </p>
       <p class="link">
-        <%= link_to 'Mehr Infos', info_events_und_workshops_path, :class => 'btn-primary -grey -flex' %>
-        <%= link_to 'Zu den Events', meetings_wien_path, :class => 'btn-primary -mint -flex' %>
+        <%= link_to 'Mehr Infos', info_events_und_workshops_path, :class => 'btn-primary -grey -inlineflex' %>
+        <%= link_to 'Zu den Events', meetings_wien_path, :class => 'btn-primary -mint -inlineflex' %>
       </p>
     </div>
     <div class="aside -img">
-      <%= link_to(image_tag('info/imGraetzl-Features-Events-Workshops2.png'), meetings_wien_path, class: '-feature') %>
+      <%= link_to(image_tag('info/imGraetzl-Features-Events.png'), meetings_wien_path, class: '-feature') %>
     </div>
   </article>
 
@@ -225,8 +194,8 @@
         deinem Grätzl erscheinen? Auch das geht, für 120 € (excl. Ust).
       </p>
       <p class="link">
-        <%= link_to 'Mehr Infos', info_infos_zum_graetzlzuckerl_path, :class => 'btn-primary -grey -flex' %>
-        <%= link_to 'Zu den Grätzlzuckerln', zuckerls_wien_path, :class => 'btn-primary -mint -flex' %>
+        <%= link_to 'Mehr Infos', info_infos_zum_graetzlzuckerl_path, :class => 'btn-primary -grey -inlineflex' %>
+        <%= link_to 'Zu den Grätzlzuckerln', zuckerls_wien_path, :class => 'btn-primary -mint -inlineflex' %>
       </p>
     </div>
     <div class="aside -img">
@@ -234,6 +203,6 @@
     </div>
   </article>
 
-  <%= render 'help_menu' %>
-
 </section>
+
+<%= render 'help_menu' %>

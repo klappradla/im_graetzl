@@ -1,18 +1,18 @@
-<div class="filter-stream">
-
-  <!-- for mobile we use a select menu -->
-  <div class="input-select">
-    <label for="filter">
-      <%= icon_tag "funnel-filter" %>
-      <span>Hilfe Themen</span>
-    </label>
-    <select id="filter"><!-- generate links from desktop view via JS --></select>
-  </div>
-  <!-- END mobile select menu -->
+<div class="filter-stream overthrow -scrollnav -help">
 
   <%= active_link_to info_path, class: "iconfilter" do %>
     <%= icon_tag "lightbulb" %>
     <div class="txt">imGrätzl<br>Services</div>
+  <% end %>
+
+  <%= active_link_to info_raumteiler_path, class: "iconfilter" do %>
+    <%= icon_tag "raumteiler" %>
+    <div class="txt">Raum<br/>teiler</div>
+  <% end %>
+
+  <%= active_link_to info_toolteiler_path, class: "iconfilter" do %>
+    <%= icon_tag "share" %>
+    <div class="txt">Tool<br/>teiler</div>
   <% end %>
 
   <%= active_link_to info_gruppen_path, class: "iconfilter -coopshare" do %>
@@ -23,11 +23,6 @@
   <%= active_link_to info_anbieter_und_locations_path, class: "iconfilter" do %>
     <%= icon_tag "location" %>
     <div class="txt">Anbieter <br/>& Locations</div>
-  <% end %>
-
-  <%= active_link_to info_raumteiler_path, class: "iconfilter" do %>
-    <%= icon_tag "raumteiler" %>
-    <div class="txt">Raum<br/>teiler</div>
   <% end %>
 
   <%= active_link_to info_events_und_workshops_path, class: "iconfilter" do %>

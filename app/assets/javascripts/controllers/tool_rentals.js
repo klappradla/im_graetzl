@@ -1,11 +1,13 @@
 APP.controllers.tool_rentals = (function() {
 
     function init() {
-      if ($(".tool-rental-page").exists()) {
-        APP.components.tabs.initTabs(".tabs-ctrl");
+      if ($(".tool-rental-page.login-screen").exists()) {
         initLoginScreen();
+      } else if ($(".tool-rental-page.address-screen").exists()) {
         initAddressScreen();
+      } else if ($(".tool-rental-page.payment-screen").exists()) {
         initPaymentScreen();
+      } else if ($(".tool-rental-page.summary-screen").exists()) {
         initSummaryScreen();
       }
     }
@@ -22,25 +24,26 @@ APP.controllers.tool_rentals = (function() {
     }
 
     function initAddressScreen() {
-      var screen = $("#tab-address");
-      screen.find(".next-screen").on("click", function() {
-        screen.find(".renter-input").each(function(i, el) {
-          var inputName = $(el).data('field');
-          $('#tab-summary .renter-summary .' + inputName).text($(el).val());
-          $('#tab-summary .rental-form #' + inputName + "-input").val($(el).val());
-        });
-        openTab('payment');
-      });
     }
 
     function initPaymentScreen() {
-      var screen = $("#tab-payment");
+      var screen = $(".tool-rental-page.payment-screen");
       screen.find(".paymentMethods input").on("click", function() {
         screen.find(".payment-method-container").hide();
         screen.find("." + $(this).val() + "-container").show();
       });
 
+      screen.find(".paymentMethods input:checked").click();
+
+      screen.find(".remote-form").on('ajax:error', function(e, xhr) {
+        var error = xhr.responseJSON && xhr.responseJSON.error;
+        error = error || "An error occurred. Please check your connection and try again."
+        showFormError($(this), error);
+      });
+
       initCardPayment();
+      initKlarnaPayment();
+      initEpsPayment();
     }
 
     function initCardPayment() {
@@ -105,16 +108,13 @@ APP.controllers.tool_rentals = (function() {
             }
           });
         }
-      }).on('ajax:error', function(e, xhr) {
-        var error = xhr.responseJSON && xhr.responseJSON.error;
-        error = error || "An error occurred. Please check your connection and try again."
-        showFormError(container, error)
       }).on('ajax:complete', function() {
         nextButton.removeAttr("disabled");
       });
 
       function paymentConfirmed(intentId) {
         $("#tab-summary .rental-form #stripe-payment-intent-input").val(intentId);
+        $("#tab-summary .rental-form #payment-method-input").val('card');
         $("#tab-summary .payment-summary .card-last4").text(paymentMethod.card.last4);
         openTab('summary');
       }
@@ -145,6 +145,32 @@ APP.controllers.tool_rentals = (function() {
       return elements.create('card', {style: style, hidePostalCode: true, classes: {base: 'input-plain'}});
     }
 
+    function initKlarnaPayment() {
+      var container = $(".klarna-container");
+      var nextButton = container.find(".next-screen");
+
+      container.find(".klarna-source-form").on("ajax:success", function(e, data) {
+        location.href = data.redirect_url;
+      });
+
+      if ($('#klarna-payment-success').exists()) {
+        $(".next-step-form").submit();
+      }
+    }
+
+    function initEpsPayment() {
+      var container = $(".eps-container");
+      var nextButton = container.find(".next-screen");
+
+      container.find(".eps-source-form").on("ajax:success", function(e, data) {
+        location.href = data.redirect_url;
+      });
+
+      if ($('#eps-payment-success').exists()) {
+        $(".next-step-form").submit();
+      }
+    }
+
     function showFormError(container, error) {
       container.find(".error-message").text(error);
     }
@@ -154,10 +180,6 @@ APP.controllers.tool_rentals = (function() {
     }
 
     function initSummaryScreen() {
-      var screen = $("#tab-summary");
-      screen.find(".back-to-payment").on("click", function() {
-        openTab('payment');
-      });
     }
 
     function openTab(tab) {

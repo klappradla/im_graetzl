@@ -97,7 +97,11 @@ Rails.application.routes.draw do
   end
 
   resources :tool_rentals, only: [:new, :create] do
-    post 'create_intent', on: :collection
+    get 'choose_payment', on: :collection
+    get 'summary', on: :collection
+    post 'initiate_card_payment', on: :collection
+    post 'initiate_klarna_payment', on: :collection
+    post 'initiate_eps_payment', on: :collection
     post 'cancel', on: :member
     post 'approve', on: :member
     post 'reject', on: :member
@@ -155,11 +159,10 @@ Rails.application.routes.draw do
     get 'zuckerl', action: 'zuckerls', as: 'zuckerls', on: :member
   end
 
-  get 'lp/raumteiler-guide', to: 'static_pages#lp_raumteilerguide'
-  get 'lp/raumteiler-guide-danke', to: 'static_pages#lp_raumteilerguide_success'
   get 'unterstuetzer-team', to: 'static_pages#mentoring'
   get 'info', to: 'static_pages#help'
   get 'info/raumteiler', to: 'static_pages#raumteiler'
+  get 'info/toolteiler', to: 'static_pages#toolteiler'
   get 'info/gruppen', to: 'static_pages#groups'
   get 'info/anbieter-und-locations', to: 'static_pages#location'
   get 'info/events-und-workshops', to: 'static_pages#meetings'

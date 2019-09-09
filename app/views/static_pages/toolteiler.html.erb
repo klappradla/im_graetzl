@@ -1,0 +1,50 @@
+<% meta(
+    title: t('.title'),
+    description: t('.description'),
+    robots: 'index, follow'
+  )
+%>
+
+<section class="help -detail">
+
+  <div class="hl-subtext">
+    <h1><em>Toolteiler</em></h1>
+    <p>Arbeistequipment leihen - Ausstattung teilen</p>
+  </div>
+
+  <div class="paperCard -cord1RT container -top" id="zero">
+    <div class="wrp">
+      <p>
+        <strong>Toolteiler Short Infos</strong>
+      </p>
+      <p>
+        Toolteiler Short Infos ...
+      </p>
+    </div>
+    <div class="card"></div>
+  </div>
+
+  <aside>
+    <div id="help_nav">
+      <%= link_to info_path, class: "btn-primary -grey -ico" do %><%= icon_tag "arrow-left-2" %> Zu allen Services<% end %>
+      <a href="#thema-1" class="btn-primary -mint" id="nav-one">Toolteiler Menüpunkt</a>
+    </div>
+  </aside>
+
+  <div class="mainContent">
+
+    <article class="container" id="one">
+      <h2 id="thema-1">Thema 1</h2>
+      <h3>Thema 1 ...</h3>
+      <p>
+        Text ...
+      </p>
+    </article>
+
+  </div>
+
+  <div style="clear:both;"></div>
+
+</section>
+
+<%= render 'help_menu' %>

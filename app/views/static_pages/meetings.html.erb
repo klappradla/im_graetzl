@@ -21,10 +21,9 @@
     <div class="card"></div>
   </div>
 
-  <%= render 'help_menu' %>
-
   <aside>
     <div id="help_nav">
+      <%= link_to info_path, class: "btn-primary -grey -ico" do %><%= icon_tag "arrow-left-2" %> Zu allen Services<% end %>
       <a href="#worum-gehts" class="btn-primary -mint" id="nav-one">Woum gehts?</a>
       <a href="#events-erstellen" class="btn-primary -mint" id="nav-two">Events veröffentlichen</a>
       <a href="#sichtbarkeit" class="btn-primary -mint" id="nav-three">Sichtbarkeit für dein Event</a>
@@ -114,8 +113,8 @@
 
   </div>
 
-
-
   <div style="clear:both;"></div>
 
 </section>
+
+<%= render 'help_menu' %>

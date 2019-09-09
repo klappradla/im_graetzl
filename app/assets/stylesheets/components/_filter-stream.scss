@@ -228,6 +228,24 @@
 
 }
 
+.filter-stream.-help {
+  background:none;
+  border: none;
+  @include respond-to(">=medium") {
+    &::after {
+      content: '';
+      width: 100%;
+      height: 10px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-image: radial-gradient(ellipse farthest-side at center bottom, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0) 70%);
+      pointer-events: none;
+      z-index: 9;
+    }
+  }
+}
+
 // ILLU BG
 .filter-stream.-illubg {
   @include respond-to(">=medium") {

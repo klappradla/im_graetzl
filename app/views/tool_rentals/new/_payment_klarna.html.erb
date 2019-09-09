@@ -1,0 +1,62 @@
+<%= form_tag initiate_klarna_payment_tool_rentals_url, class: 'klarna-source-form remote-form', remote: true, data: {type: 'json', with_credentials: true} do %>
+  <%= hidden_field_tag :tool_offer_id, params[:tool_offer_id] %>
+  <%= hidden_field_tag :rent_from, params[:rent_from] %>
+  <%= hidden_field_tag :rent_to, params[:rent_to] %>
+  <%= hidden_field_tag :redirect_url, choose_payment_tool_rentals_url(tool_rental_params.merge(payment_method: 'klarna')) %>
+
+  <div class="error-message"></div>
+
+  <div class="input-field">
+    <%= label_tag :first_name do %>
+    <%= icon_tag "user-avatar" %>
+      <span>Vorname</span>
+    <% end %>
+    <%= text_field_tag :first_name, current_user.first_name  %>
+  </div>
+
+  <div class="input-field">
+    <%= label_tag :last_name do %>
+    <%= icon_tag "user-avatar" %>
+      <span>Nachname</span>
+    <% end %>
+    <%= text_field_tag :last_name, current_user.last_name  %>
+  </div>
+
+  <div class="input-field">
+    <%= label_tag :email do %>
+    <%= icon_tag "at-symbol" %>
+      <span>Nachname</span>
+    <% end %>
+    <%= text_field_tag :email, current_user.email  %>
+  </div>
+
+  <div class="input-field">
+    <%= label_tag :address do %>
+    <%= icon_tag "map-location" %>
+      <span>Strasse & Nr.</span>
+    <% end %>
+    <%= text_field_tag :address, current_user.address.try(:street)  %>
+  </div>
+
+  <div class="input-field">
+    <%= label_tag :zip do %>
+      <%= icon_tag "map-location" %>
+      <span>Postleitzahl</span>
+    <% end %>
+    <%= text_field_tag :zip, current_user.address.try(:zip), placeholder: 'PLZ' %>
+  </div>
+
+  <div class="input-field">
+    <%= label_tag :city do %>
+      <%= icon_tag "map-location" %>
+      <span>Ort/Stadt</span>
+    <% end %>
+    <%= text_field_tag :city, current_user.address.try(:city), placeholder: 'Stadt' %>
+  </div>
+
+  <%= submit_tag "Weiter", class: 'btn-primary next-screen' %>
+<% end %>
+
+<% if params[:payment_method] == 'klarna' && @source_status == 'chargeable' %>
+  <div id="klarna-payment-success"></div>
+<% end %>

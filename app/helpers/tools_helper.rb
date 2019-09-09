@@ -41,10 +41,17 @@ module ToolsHelper
     case payment_method
     when 'card'
       "Kreditkarte"
-    when 'sofort'
-      "Sofort Überweisung"
+    when 'klarna'
+      "Klarna Überweisung"
     when 'eps'
       "EPS Überweisung"
     end
+  end
+
+  def tool_rental_params
+    params.permit(
+      :tool_offer_id, :rent_from, :rent_to, :renter_company, :renter_name, :renter_address,
+      :renter_zip, :renter_city,
+    )
   end
 end

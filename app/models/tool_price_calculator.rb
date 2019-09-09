@@ -1,16 +1,16 @@
 class ToolPriceCalculator
 
-  attr_reader :date_from, :date_to
+  attr_reader :rent_from, :rent_to, :tool_offer
 
-  def initialize(tool_offer, date_from, date_to)
+  def initialize(tool_offer, rent_from, rent_to)
     @tool_offer = tool_offer
-    date_from = Date.parse(date_from) if date_from.is_a?(String)
-    date_to = Date.parse(date_to) if date_to.is_a?(String)
-    @date_from, @date_to = [date_from, date_to].sort
+    rent_from = Date.parse(rent_from) if rent_from.is_a?(String)
+    rent_to = Date.parse(rent_to) if rent_to.is_a?(String)
+    @rent_from, @rent_to = [rent_from, rent_to].sort
   end
 
   def days
-    (@date_from - @date_to).to_i.abs + 1
+    (@rent_from - @rent_to).to_i.abs + 1
   end
 
   def daily_price

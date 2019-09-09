@@ -1,7 +1,7 @@
-<%= form_tag create_intent_tool_rentals_url, class: 'payment-intent-form', remote: true, data: {type: 'json', with_credentials: true} do %>
-  <%= hidden_field_tag :tool_offer_id, @tool_offer.id %>
-  <%= hidden_field_tag :date_from, @calculator.date_from %>
-  <%= hidden_field_tag :date_to, @calculator.date_to %>
+<%= form_tag initiate_card_payment_tool_rentals_url, class: 'payment-intent-form remote-form', remote: true, data: {type: 'json', with_credentials: true} do %>
+  <%= hidden_field_tag :tool_offer_id, params[:tool_offer_id] %>
+  <%= hidden_field_tag :rent_from, params[:rent_from] %>
+  <%= hidden_field_tag :rent_to, params[:rent_to] %>
   <%= hidden_field_tag :payment_method_id %>
 <% end %>
 

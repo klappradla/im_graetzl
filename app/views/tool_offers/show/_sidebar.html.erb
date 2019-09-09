@@ -47,19 +47,19 @@
         <div class="request">
           <%= form_tag [:calculate_price, @tool_offer], remote: true, method: :get, class: 'request-price-form' do %>
             <div class="input-field">
-              <%= label_tag :date_from do %>
+              <%= label_tag :rent_from do %>
                 <%= icon_tag "calendar-2" %>
                 <span></span>
               <% end %>
-              <%= text_field_tag :date_from, nil, class: 'date-from', placeholder: 'Von' %>
+              <%= text_field_tag :rent_from, nil, class: 'date-from', placeholder: 'Von' %>
             </div>
 
             <div class="input-field">
-              <%= label_tag :date_to do %>
+              <%= label_tag :rent_to do %>
                 <%= icon_tag "calendar-2" %>
                 <span></span>
               <% end %>
-              <%= text_field_tag :date_to, nil, class: 'date-to', placeholder: 'Bis' %>
+              <%= text_field_tag :rent_to, nil, class: 'date-to', placeholder: 'Bis' %>
             </div>
           <% end %>
         </div>

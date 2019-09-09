@@ -21,4 +21,4 @@
   </li>
 </ul>
 
-<%= link_to "Jetzt anfragen", new_tool_rental_path(tool_offer_id: @tool_offer, date_from: @calculator.date_from, date_to: @calculator.date_to), class: "btn-primary" %>
+<%= link_to "Jetzt anfragen", new_tool_rental_path(tool_offer_id: @tool_offer.id, rent_from: @calculator.rent_from, rent_to: @calculator.rent_to), class: "btn-primary" %>

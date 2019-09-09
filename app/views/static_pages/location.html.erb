@@ -24,10 +24,9 @@
     <div class="card"></div>
   </div>
 
-  <%= render 'help_menu' %>
-
   <aside>
     <div id="help_nav">
+      <%= link_to info_path, class: "btn-primary -grey -ico" do %><%= icon_tag "arrow-left-2" %> Zu allen Services<% end %>
       <a href="#einrichten" class="btn-primary -mint" id="nav-one">Location einrichten</a>
       <a href="#neuigkeiten" class="btn-primary -mint" id="nav-two">Neuigkeiten posten</a>
     </div>
@@ -142,3 +141,5 @@
   <div style="clear:both;"></div>
 
 </section>
+
+<%= render 'help_menu' %>

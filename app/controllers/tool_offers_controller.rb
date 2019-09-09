@@ -50,7 +50,7 @@ class ToolOffersController < ApplicationController
 
   def calculate_price
     @tool_offer = ToolOffer.find(params[:id])
-    @calculator = ToolPriceCalculator.new(@tool_offer, params[:date_from], params[:date_to])
+    @calculator = ToolPriceCalculator.new(@tool_offer, params[:rent_from], params[:rent_to])
   end
 
   def destroy

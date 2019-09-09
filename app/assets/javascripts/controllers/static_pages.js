@@ -2,10 +2,8 @@ APP.controllers.static_pages = (function() {
 
     function init() {
       if($("#help_nav").exists()) initHelpScroller();
-      if($("section.help").exists()) initMobileNav();
       if($("section.homeOut").exists()) initMobileNav();
       if($(".-mentoring-page").exists()) initMentoring();
-      if($("section.-raumteilerguide").exists()) initGuideLP();
       if($("#guide-download").exists()) initGuideDownload();
     }
 
@@ -71,77 +69,12 @@ function initMentoring() {
 }
 
 function initGuideDownload() {
-
   $('#guide-download').on('click', function(){
     gtag('event', 'Download', {
       'event_category': 'Raumteiler-Guide'
     });
   });
-
 }
-
-function initGuideLP() {
-
-  $(document).ready( function () {
-    var $form = $('#mc-embedded-subscribe-form');
-
-    // E-Mail Check
-    String.prototype.isEmail = function () {
-      var validmailregex = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.([a-z][a-z]+)|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i
-      return validmailregex.test(this);
-    }
-
-    $('#mc-embedded-subscribe').on('click', function( event ){
-      event.preventDefault();
-
-      var fname = $('#mce-FNAME').val();
-      var email = $('#mce-EMAIL').val();
-
-      if(fname == '' || email == '') {
-
-        $('#mce-error-response').fadeIn().html('Bitte gib deinen Vornamen und eine gültige E-Mail Adresse an.');
-
-      } else if (!email.isEmail()) {
-
-        $('#mce-error-response').fadeIn().html('Bitte gib eine gültige E-Mail Adresse an.');
-
-      }
-
-      else {
-        $('#mce-error-response').fadeOut();
-        subscribeMC($form);
-      }
-    })
-  });
-
-  var subscribeMC = function($form) {
-    $.ajax({
-        type: $form.attr('method'),
-        url: $form.attr('action'),
-        data: $form.serialize(),
-        cache       : false,
-        dataType    : 'json',
-        contentType: "application/json; charset=utf-8",
-        error       : function(err) { alert("Could not connect to the registration server. Please try again later."); },
-        success     : function(data) {
-            if (data.result != "success") {
-
-              $('#mce-error-response').fadeIn().html(data.msg);
-              console.log(data);
-
-            } else {
-              $('#mce-error-response').fadeOut();
-              $('.input-field').fadeOut();
-              $('#mc-embedded-subscribe').fadeOut();
-              $('#mce-success-response').fadeIn().html('<strong>Dein Guide ist unterwegs!</strong><br>Wir haben dir soeben eine E-Mail geschickt.<br>Bitte klicke auf den Bestätigungslink um zum Download zu gelangen..');
-            }
-        }
-    });
-  }
-
-}
-
-
 
 function initMobileNav() {
   var $dropdown = $(".filter-stream .input-select select");
@@ -167,7 +100,7 @@ function initMobileNav() {
 
 // Dont scroll over the Footer Element
 function checkOffset() {
-    if($('#help_nav').offset().top + $('#help_nav').height() >= $('#footer').offset().top )
+    if($('#help_nav').offset().top + $('#help_nav').height() >= $('.filter-stream').offset().top )
       $('#help_nav').addClass( "fix_nav" ).removeClass( "float_nav" );
 }
 
@@ -180,7 +113,7 @@ function initHelpScroller() {
               $('#help_nav').addClass( "float_nav" ).removeClass( "fix_nav" );
               checkOffset();
           } else {
-              $('#help_nav').css('position','static').removeClass( "fix_nav" ).removeClass( "float_nav" );
+              $('#help_nav').removeClass( "fix_nav" ).removeClass( "float_nav" );
           }
   });
 
