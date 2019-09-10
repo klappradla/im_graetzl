@@ -3,6 +3,7 @@ class GroupMailer < ApplicationMailer
   def group_online(group, user)
     @group = group
     @user = user
+    headers("X-MC-Tags" => "notification-group-online")
     mail(to: user.email, subject: "Deine Gruppe ist nun online.")
   end
 
