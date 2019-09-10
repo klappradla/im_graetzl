@@ -2,6 +2,7 @@ class RoomCallMailer < ApplicationMailer
 
   def notify_submitter(room_call_submission)
     @submission = room_call_submission
+    headers("X-MC-Tags" => "room-call-submission")
     mail(to: @submission.user.email, subject: "Danke für deine Teilnahme! Die ersten Infos für dich ...")
   end
 
