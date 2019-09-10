@@ -1,13 +1,133 @@
 <% content_for(:above_title, "Hey #{@tool_rental.user.first_name}") %>
-<% content_for(:title, "Your rental request has been rejected") %>
+<% content_for(:title, "#{@tool_rental.tool_offer.user.first_name} hat deine Anfrage leider abgelehnt.") %>
 
-<p>
-  From:
-  <%= image_tag Notifications::ImageService.new.avatar_url(@tool_rental.tool_offer.user), style: "width:60px; height:60px; border-radius: 30px; max-width:60px; min-width:60px;", class: "mcnImage" %>
-  <%= @tool_rental.tool_offer.user.full_name %>
-  <%= @tool_rental.tool_offer.user.email %>
-</p>
+<!-- --------------- BLOCK HEADLINE --------------- -->
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
+   <tr>
+     <td style="height:30px"> </td>
+   </tr>
+   <tr>
+     <td valign="top" class="mcnTextContent" style="padding-top:0;  padding-bottom:9px; padding-left:18px; padding-right:18px;">
+       <h4 style="text-align:left; color:#69a8a7; font-family:Georgia; font-size:125%; font-weight:normal; font-style:italic;">
+         Toolteiler: <%= link_to @tool_rental.tool_offer.title.truncate(45), tool_offer_url(@tool_rental.tool_offer), style: "color:#ec776a;" %>
+       </h4>
+     </td>
+   </tr>
+   <tr>
+     <td style="padding-left:9px; padding-right:9px;">
+       <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%">
+         <tr>
+           <td>
+             <span></span>
+           </td>
+         </tr>
+       </table>
+     </td>
+   </tr>
+ </table>
 
-<p>
-  <%= link_to "Continue discussion here", messenger_url(thread_id: @tool_rental.user_message_thread.id) %>
-</p>
+ <!-- --------------- ITEM NEW REQUEST --------------- -->
+ <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #efefef; margin-bottom:18px;" width="100%" class="mcnTextContentContainer">
+  <tbody>
+    <tr>
+      <td valign="top" class="mcnTextContent" style="padding-left:18px; padding-right:18px; vertical-align:top;">
+        <%= image_tag Notifications::ImageService.new.avatar_url(@tool_rental.tool_offer.user), style: "width:60px; height:60px; border-radius: 30px; max-width:60px; min-width:60px;", class: "mcnImage" %>
+      </td>
+      <td class="mcnTextContent" style="padding-right:18px; width:100%;">
+        <p>
+          <em><strong><%= @tool_rental.tool_offer.user.full_name %> kann dir den Toolteiler leider nicht vermieten.</strong></em><br>
+        </p>
+        <p>
+          Klicke auf jetzt antworten, wenn du mit <%= @tool_rental.tool_offer.user.first_name %> im Toolteiler-Messenger in Kontakt treten, und den genauen Grund erfahren möchtest.
+        </p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" style="padding-bottom:9px;"></td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+        <!-- BUTTON -->
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnButtonBlock" style="min-width:100%;">
+          <tbody class="mcnButtonBlockOuter">
+            <tr>
+              <td style="padding-top:0; padding-right:18px; padding-bottom:18px; padding-left:18px; vertical-align:top;" valign="top" align="right" class="mcnButtonBlockInner">
+                <table border="0" cellpadding="0" cellspacing="0" class="mcnButtonContentContainer" style="border-collapse: separate !important;border-top-left-radius: 4px;border-top-right-radius: 4px;border-bottom-right-radius: 4px;border-bottom-left-radius: 4px;background-color: #69A8A7;">
+                  <tbody>
+                    <tr>
+                      <td align="center" valign="middle" class="mcnButtonContent" style="font-family: Arial; font-size: 16px; padding: 10px;">
+                        <%= link_to "Jetzt antworten", messenger_url(thread_id: @tool_rental.user_message_thread.id), class: "mcnButton", title: "Button", target: "_blank", style: "font-weight: normal;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;" %>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- /BUTTON -->
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:10px;" width="100%" class="mcnTextContentContainer">
+  <tr>
+    <td class="mcnTextContent" style="padding-left:18px; padding-right:18px;">
+      <i>PS.: Du findest den Messenger auch eingeloggt auf imGrätzl.at rechts oben im Menü unter "Toolteiler".</i>
+    </td>
+  </tr>
+</table>
+
+<!-- --------------- BLOCK HEADLINE --------------- -->
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
+   <tr>
+     <td style="height:30px"> </td>
+   </tr>
+   <tr>
+     <td valign="top" class="mcnTextContent" style="padding-top:0;  padding-bottom:9px; padding-left:18px; padding-right:18px;">
+       <h4 style="text-align:left; color:#69a8a7; font-family:Georgia; font-size:125%; font-weight:normal; font-style:italic;">
+         Deine ursprüngliche Toolteiler Anfrage:
+       </h4>
+     </td>
+   </tr>
+   <tr>
+     <td style="padding-left:9px; padding-right:9px;">
+       <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%">
+         <tr>
+           <td>
+             <span></span>
+           </td>
+         </tr>
+       </table>
+     </td>
+   </tr>
+ </table>
+
+<!-- --------------- CONTENT --------------- -->
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #efefef; margin-bottom:18px;" width="100%" class="mcnTextContentContainer">
+  <tbody>
+    <tr>
+      <td valign="center" class="mcnTextContent" style="padding-left:18px; padding-right:18px;">
+        <%= link_to tool_offer_url(@tool_rental.tool_offer) do %>
+          <%= image_tag Notifications::ImageService.new.cover_photo_url(@tool_rental.tool_offer), class: 'mcnImage', style: "width:280px; border-radius:5px; max-width:280px; min-width:100px;" %>
+         <% end %>
+      </td>
+      <td valign="center" class="mcnTextContent" width="100%">
+        <p>
+          <em>Toolteiler:</em><br>
+          <%= link_to @tool_rental.tool_offer.title, tool_offer_url(@tool_rental.tool_offer), style: "color:#ec776a;" %>
+        </p>
+        <p>
+          <em>Zeitraum:</em><br>
+          <%= @tool_rental.rent_from.to_s(:weekday) %> bis <%= @tool_rental.rent_to.to_s(:weekday) %>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" style="padding-bottom:20px;"></td>
+    </tr>
+  </tbody>
+</table>
