@@ -29,7 +29,7 @@
   <div class="summarybox">
     <div class="line"></div>
     <div class="avatar">
-      <%= icon_tag "share" %>
+      <%= icon_tag "tacker" %>
     </div>
     <div class="line"></div>
   </div>
@@ -38,11 +38,10 @@
     <div class="payment-summary">
       <p>
         <strong>Zahlungsart</strong><br>
-        <span class="payment-method block"></span>
-        <span class="renter-name block"></span>
-
-        Kreditkarte<br>
-        endet auf <span class="card-last4"></span><br>
+        <span class="payment-method block">
+          <%= payment_method_label(params[:payment_method]) %> <br>
+          <% if @card %> endet auf <%= @card.last4 %> <span class="card-last4"></span> <% end %>
+        </span>
         <%= link_to "ändern", choose_payment_tool_rentals_url(tool_rental_params) %>
       </p>
     </div>

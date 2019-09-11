@@ -12,13 +12,17 @@ class ToolRentalsController < ApplicationController
     @tool_offer = ToolOffer.enabled.find(params[:tool_offer_id])
     @calculator = ToolPriceCalculator.new(@tool_offer, params[:rent_from], params[:rent_to])
     if params[:source].present?
-      @source_status = p Stripe::Source.retrieve(params[:source]).status
+      @source_status = Stripe::Source.retrieve(params[:source]).status
     end
   end
 
   def summary
     @tool_offer = ToolOffer.enabled.find(params[:tool_offer_id])
     @calculator = ToolPriceCalculator.new(@tool_offer, params[:rent_from], params[:rent_to])
+    if params[:stripe_payment_intent_id].present?
+      intent = Stripe::PaymentIntent.retrieve(params[:stripe_payment_intent_id])
+      @card = intent.charges.data.first.payment_method_details.card
+    end
   end
 
   def initiate_card_payment

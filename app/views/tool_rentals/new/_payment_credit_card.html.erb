@@ -1,11 +1,10 @@
 <%= form_tag initiate_card_payment_tool_rentals_url, class: 'payment-intent-form remote-form', remote: true, data: {type: 'json', with_credentials: true} do %>
+  <div class="error-message"></div>
   <%= hidden_field_tag :tool_offer_id, params[:tool_offer_id] %>
   <%= hidden_field_tag :rent_from, params[:rent_from] %>
   <%= hidden_field_tag :rent_to, params[:rent_to] %>
   <%= hidden_field_tag :payment_method_id %>
 <% end %>
-
-<div class="error-message"></div>
 
 <div class="input-field">
   <%= label_tag :card_info do %>

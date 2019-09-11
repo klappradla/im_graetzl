@@ -38,6 +38,7 @@
     <%= hidden_field_tag :renter_zip, params[:renter_zip] %>
     <%= hidden_field_tag :renter_city, params[:renter_city] %>
     <%= hidden_field_tag :payment_method, params[:payment_method] %>
+    <%= hidden_field_tag :stripe_payment_intent_id %>
     <%= hidden_field_tag :stripe_source_id, params[:source] %>
   <% end %>
 

@@ -1,17 +1,21 @@
 <div class="flex-table row" role="rowgroup">
   <div class="flex-row wide20 first" role="cell">
-    <%= link_to tool_rental.tool_offer.title.truncate(50), tool_rental.tool_offer %>
+    <%= link_to tool_rental.tool_offer.title.truncate(33), tool_rental.tool_offer %>
   </div>
   <div class="flex-row wide20" role="cell">
-    <%= link_to messenger_path(thread_id: tool_rental.user_message_thread.id), class: 'message' do %>
-      <%= icon_tag "speech-bubbles" %>
+    <% if !tool_rental.user_message_thread.nil? %>
+      <%= link_to messenger_path(thread_id: tool_rental.user_message_thread.id), class: 'message' do %>
+        <%= icon_tag "speech-bubbles" %>
+        <%= user.full_name %>
+      <% end %>
+    <% else %>
       <%= user.full_name %>
     <% end %>
   </div>
   <div class="flex-row" role="cell"><%= tool_rental.rent_from.to_s(:weekday) %></div>
   <div class="flex-row" role="cell"><%= tool_rental.rent_to.to_s(:weekday) %></div>
   <div class="flex-row" role="cell"><%= number_to_currency(tool_rental.total_price, unit: "€") %></div>
-  <div class="flex-row wide25" role="cell">
+  <div class="flex-row wide20" role="cell">
     <%= t("activerecord.attributes.tool_rental.rental_statuses.#{tool_rental.rental_status}") %>
     <% if tool_rental.approved? %>
       / <%= t("activerecord.attributes.tool_rental.payment_statuses.#{tool_rental.payment_status}") %>

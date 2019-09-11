@@ -35,7 +35,9 @@ APP.controllers.tool_rentals = (function() {
 
       screen.find(".paymentMethods input:checked").click();
 
-      screen.find(".remote-form").on('ajax:error', function(e, xhr) {
+      screen.find(".remote-form").on('ajax:before', function() {
+        hideFormError($(this));
+      }).on('ajax:error', function(e, xhr) {
         var error = xhr.responseJSON && xhr.responseJSON.error;
         error = error || "An error occurred. Please check your connection and try again."
         showFormError($(this), error);
@@ -77,7 +79,6 @@ APP.controllers.tool_rentals = (function() {
       }
 
       var paymentIntentFrom = container.find(".payment-intent-form");
-      var paymentMethod;
 
       nextButton.on("click", function() {
         nextButton.attr("disabled", true);
@@ -89,14 +90,13 @@ APP.controllers.tool_rentals = (function() {
             showFormError(container, result.error.message);
             nextButton.removeAttr("disabled");
           } else {
-            paymentMethod = result.paymentMethod;
             paymentIntentFrom.find("[name=payment_method_id]").val(result.paymentMethod.id);
             paymentIntentFrom.submit();
           }
         });
       });
 
-      $(".payment-intent-form").on("ajax:success", function(e, data) {
+      paymentIntentFrom.on("ajax:success", function(e, data) {
         if (data.success) {
           paymentConfirmed(data.payment_intent_id);
         } else {
@@ -113,10 +113,10 @@ APP.controllers.tool_rentals = (function() {
       });
 
       function paymentConfirmed(intentId) {
-        $("#tab-summary .rental-form #stripe-payment-intent-input").val(intentId);
-        $("#tab-summary .rental-form #payment-method-input").val('card');
-        $("#tab-summary .payment-summary .card-last4").text(paymentMethod.card.last4);
-        openTab('summary');
+        var nextForm = $(".next-step-form");
+        nextForm.find("[name=stripe_payment_intent_id]").val(intentId);
+        nextForm.find("[name=payment_method]").val('card');
+        nextForm.submit();
       }
     }
 

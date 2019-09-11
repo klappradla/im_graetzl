@@ -12,4 +12,8 @@ class GroupMailerPreview < ActionMailer::Preview
     GroupMailer.join_request_accepted(Group.first, User.first)
   end
 
+  def message_to_user
+    GroupMailer.message_to_user(Group.first, User.first, User.last, "Hello", "Hello world", "test")
+  end
+
 end

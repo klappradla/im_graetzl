@@ -26,15 +26,13 @@ class GroupMailer < ApplicationMailer
     reply_to = from_email.present? ? "#{from_email}@imgraetzl.at" : from_user.email
     from_email = from_email.present? ? "#{from_email}@imgraetzl.at" : "no-reply@imgraetzl.at"
 
-    html_body = body.gsub("\r\n", "<br/>")
-
     headers(
       "X-MC-Tags" => "group-user-mail",
       "X-MC-GoogleAnalytics" => 'staging.imgraetzl.at, www.imgraetzl.at',
       "X-MC-GoogleAnalyticsCampaign" => "group-user-mail",
     )
     mail(
-      to: to_user.email, from: "#{from_user} | imGrätzl.at <#{from_email}>",
+      to: to_user.email, from: "#{from_user.full_name} | imGrätzl.at <#{from_email}>",
       reply_to: reply_to, subject: subject
     )
   end
