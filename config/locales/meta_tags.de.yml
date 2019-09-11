@@ -24,7 +24,7 @@ de:
       description: 'Fragen & Antworten zum Raumteiler / Teilen von Gewerbeflächen'
     toolteiler:
       title: 'Toolteiler – Hilfe, Tipps & Tricks.'
-      description: 'Fragen & Antworten zum Toolteiler / Arbeistequipment leihen - Ausstattung teilen'
+      description: 'Fragen & Antworten zum Toolteiler / Arbeitsequipment leihen & Ausstattung am Standort nutzen'
     location:
       title: 'Anbieter & Locations – Hilfe, Tipps & Tricks.'
       description: 'Fragen & Antworten zur Locationseite und weitere Funktionen für lokale Anbieter.'
@@ -55,7 +55,7 @@ de:
       title: 'Raumteiler in Wien - Gewerbeflächen teilen - Kosten teilen'
       description: 'Wir möchten Selbständige, Kreative, Vereine und kleine Unternehmen mit dem „Raumteiler“ dabei unterstützen ihre Kosten für Gewerbeflächen zu senken bzw. zu teilen.'
     tool_offers:
-      title: 'Toolteiler in Wien - Arbeistequipment leihen - Ausstattung teilen'
+      title: 'Toolteiler in Wien - Arbeitsequipment leihen & Ausstattung am Standort nutzen'
       description: 'Du kannst über den Toolteiler Geräte verleihen oder auch den Zugang zur Ausstattung an deinem Arbeitsstandort ermöglichen. Indem du deine Geräte verleihst, verdienst du nicht nur, sondern schonst gleichzeitig Ressourcen.'
     groups:
       title: 'Gruppen in Wien'
@@ -78,7 +78,7 @@ de:
       title: 'Räume zum Teilen im %{numeric}. Bezirk | Raumteiler %{zip}'
       description: 'Neue Räume und Raumsuchende aus dem %{numeric}. Bezrk. Selbständige, Kreative und lokale Unternehmen teilen sich Gewerbeflächen um Kosten zu sparen. Jetzt neue Raumteiler finden ...'
     tool_offers:
-      title: 'Toolteiler im %{numeric}. Bezirk - Arbeistequipment leihen - Ausstattung teilen'
+      title: 'Toolteiler im %{numeric}. Bezirk - Arbeitsequipment leihen & Ausstattung am Standort nutzen'
       description: 'Du kannst über den Toolteiler Geräte verleihen oder auch den Zugang zur Ausstattung an deinem Arbeitsstandort ermöglichen. Indem du deine Geräte verleihst, verdienst du nicht nur, sondern schonst gleichzeitig Ressourcen.'
     groups:
       title: 'Gruppen im %{numeric}. Bezirk'
@@ -104,7 +104,7 @@ de:
       title: '%{graetzl} Raumteiler | Neue Räume & Raumsuchende'
       description: 'Selbständige, Kreative und lokale Unternehmen teilen sich Gewerbeflächen um Kosten zu sparen. Jetzt neue Raumteiler aus dem Grätzl %{graetzl} finden ...'
     tool_offers:
-      title: '%{graetzl} Toolteiler - Arbeistequipment leihen - Ausstattung teilen'
+      title: '%{graetzl} Toolteiler - Arbeitsequipment leihen & Ausstattung am Standort nutzen'
       description: 'Du kannst über den Toolteiler Geräte verleihen oder auch den Zugang zur Ausstattung an deinem Arbeitsstandort ermöglichen. Indem du deine Geräte verleihst, verdienst du nicht nur, sondern schonst gleichzeitig Ressourcen.'
     groups:
       title: '%{graetzl} Gruppen'

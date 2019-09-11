@@ -395,6 +395,24 @@ section.help {
     ol, ul {
       margin-left:20px;
     }
+    .axa-logo {
+      img {
+        margin-left:15px;
+        margin-bottom:5px;
+        width:65px;
+        height:65px;
+        float:right;
+      }
+    }
+    .toolteiler-faq {
+      padding-top:20px;
+      li {
+        padding-bottom:25px;
+      }
+      em.quote {
+        display: block;
+      }
+    }
   }
   // ----- HELP Detailpage END ------ //
 

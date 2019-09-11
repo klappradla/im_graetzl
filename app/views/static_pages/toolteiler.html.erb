@@ -8,17 +8,21 @@
 <section class="help -detail">
 
   <div class="hl-subtext">
-    <h1><em>Toolteiler</em></h1>
-    <p>Arbeistequipment leihen - Ausstattung teilen</p>
+    <h1><em>Toolteiler: mieten statt kaufen</em></h1>
+    <p>Arbeitsequipment leihen & Ausstattung am Standort nutzen</p>
   </div>
 
   <div class="paperCard -cord1RT container -top" id="zero">
     <div class="wrp">
       <p>
-        <strong>Toolteiler Short Infos</strong>
+        Mit dem Toolteiler möchten wir Selbstständigen, GründerInnen, MacherInnen und Kreativen eine Möglichkeit eröffnen Arbeitsequipment gegen eine Gebühr an andere lokale AkteurInnen in Wien zu verleihen, das umfasst z.B. auch den Verleih von größeren Geräten am Arbeitsstandort.
       </p>
       <p>
-        Toolteiler Short Infos ...
+        Mit dem Toolteiler bekommst du Zugriff auf Arbeitsequipment, das du nur temporär oder zum Start benötigst und zwar zu einem Bruchteil der Anschaffungskosten. Ressourcen werden mit dem Toolteiler mehrfach genutzt und die lokale Kreislaufwirtschaft wird gestärkt.
+      </p>
+      <p>
+        <%= link_to image_tag('logo-axa.png'), info_versicherung_path, class: 'axa-logo' %>
+        Das Schöne: Verleiher, Leihende und die im Toolteiler angebotenen Gegenstände sind mit einer Versicherungssumme von bis zu 15.000 € pro Transaktion abgesichert durch unseren Versicherungspartner AXA XL.
       </p>
     </div>
     <div class="card"></div>
@@ -27,18 +31,117 @@
   <aside>
     <div id="help_nav">
       <%= link_to info_path, class: "btn-primary -grey -ico" do %><%= icon_tag "arrow-left-2" %> Zu allen Services<% end %>
-      <a href="#thema-1" class="btn-primary -mint" id="nav-one">Toolteiler Menüpunkt</a>
+      <a href="#thema-1" class="btn-primary -mint" id="nav-one">Kurz das Wichtigste</a>
+      <a href="#thema-2" class="btn-primary -mint" id="nav-two">Häufige Fragen</a>
+      <a href="#thema-3" class="btn-primary -mint" id="nav-three">Welche Tools eignen sich?</a>
     </div>
   </aside>
 
   <div class="mainContent">
 
     <article class="container" id="one">
-      <h2 id="thema-1">Thema 1</h2>
-      <h3>Thema 1 ...</h3>
+      <h2 id="thema-1">Toolteiler - das Wichtigste auf einem Blick</h2>
+
+      <h3>Du behältst immer die Kontrolle</h3>
       <p>
-        Text ...
+        Du bestimmst  den Tages- oder Wochenpreis für dein Gerät. Es liegt ganz bei dir, ob du eine Mietanfrage annimmst oder einfach ablehnst.
       </p>
+
+      <h3>Dein Gerät ist automatisch versichert</h3>
+      <p>
+        Bei Beschädigung deines Gerätes hilft dir unsere Versicherung. Mit AXA XL haben wir dafür einen starken Partner an unserer Seite. Mehr Info (Link zu Versicherungsübersichtseite)
+      </p>
+
+      <h3>Die Abwicklung übernehmen wir</h3>
+      <p>
+        Die Buchung und die Geldverteilung erfolgt über imGrätzl, du musst dich um nichts kümmern, die Abwicklung des Mietvorgangs geht voll automatisiert.
+      </p>
+
+    </article>
+
+    <article class="container" id="two">
+      <h2 id="thema-2">Häufige gestellte Fragen & Infos</h2>
+
+      <ul class="toolteiler-faq">
+        <li>Verleiher von Arbeitsequipment und Leiher werden via Toolteiler auf imGrätzl.at miteinander verbunden. </li>
+        <li>Der Ausleihvorgang, die Bezahlung und Geldverteilung erfolgt online über den Toolteiler. </li>
+        <li>Die Übergabe der Geräte erfolgt persönlich. </li>
+        <li>Bei jedem Ausleihvorgang wird automatisch eine Versicherung von unserem Versicherungspartner AXA XL aktiviert, die Leihende, Verleiher und die Gegenstände mit bis zu 15.000 € absichert. <%= link_to 'Hier mehr dazu', info_versicherung_path %></li>
+        <li>Stelle dein Arbeitsequipment in den Toolteiler rein, das du nicht rund um die Uhr selber benötigst und verdiene etwas dazu. Hast du Geräte am deinem Arbeitsplatz (z.B. einen Brennofen), die nicht laufend in Betrieb sind? Auch die Nutzung von größeren Geräten kannst du im Toolteiler anderen ermöglichen. </li>
+        <li>Es gibt unterschiedliche Kategorien: von Ausstattung für Märkte und Events bis Künstlerbedarf und von Geräten fürs Handwerk bis Produktion und Instrumentenverleih ist alles dabei, was man im Arbeitsumfeld benötigen könnte. Nicht gedacht ist der Toolteiler für Freizeitgegenstände, also z.B. für die Skiausrüstung oder z.B. auch Alltagskleidung</li>
+        <li>Verleiher bekommen nach dem Verleihende die Leihgebühr auf das hinterlegte Konto überwiesen. Dies kann bis zu 5 Werktage dauern. </li>
+        <li>Ausleiher stehen zwei Bezahlformen zur Verfügung: Kreditkarte und KLARNA. </li>
+        <li>Die Leihgebühr wird eingezogen, sobald der Verleihvorgang aktiviert wurde und zwar indem der Ausleiher der konkreten Leihanfrage zusagt. </li>
+        <li>Bei jedem Verleihvorgang wird zusätzlich eine Servicegebühr erhoben, darin ist die Gebühr für die Versicherung bereits enthalten. imGrätzl bietet viele kostenlose Services an und ihr tragt mit der Servicegebühr dazu bei, dass die laufenden Plattformkosten gedeckt werden können. Großes Dankeschön an der Stelle! </li>
+        <li>Darf man eigentlich seine Geräte an andere verleihen? Was sagt das Gewerberecht dazu? Unter § 32 Abs. 1 Z 10 der Gewerbeordnung steht dazu:
+        <em class="quote">Weiters wird ein allgemeines Recht aller Gewerbetreibenden bestimmt, Waren zu vermieten und zu vermitteln, wobei es unerheblich ist, ob die Waren in einem sachlichen Zusammenhang mit der Haupttätigkeit des Gewerbetreibenden stehen oder nicht. Bei der Vermittlung ist es irrelevant, ob tatsächlich ein Kaufvertrag zwischen den Vertragspartnern zustande kommt. Link: <%= link_to 'https://www.wko.at/service/wirtschaftsrecht-gewerberecht/sonstige-rechte-nebenrechte-gewerbetreibende.html', 'https://www.wko.at/service/wirtschaftsrecht-gewerberecht/sonstige-rechte-nebenrechte-gewerbetreibende.html' %></em>
+        Falls ihr Fragen dazu habt, erkundigt euch bitte dazu bei der Wirtschaftskammer Wien. </li>
+        <li>Wenn du Einnahmen über den Toolteiler generierst, dann musst du diese Einnahmen auch steuerlich berücksichtigen, bitte frage dazu deinen Steuerberater. Du bekommst über jeden erfolgreichen Verleih eine Gutschrift von uns ausgestellt.</li>
+        <li>Wenn du Arbeitsequipment ausleihst, bekommt du eine Rechnung über die Einnahmen inkl. der Servicegebühr und Steuern. </li>
+        <li>Du kannst auch Arbeitsequipment als Privatperson leihen und ausleihen. </li>
+        <li>Falls ihr Geräte verleiht, deren Nutzung eine besondere Schulung oder Ausbildung erfordern, bitte stellt als Verleiher sicher, dass die Ausleiher die entsprechende Ausbildung und Kenntnisse haben und lasst euch einen Nachweis darüber zeigen. </li>
+        <li>Hast du Fragen: Bitte kontaktiere uns unter: <%= mail_to 'wir@imgraetzl.at' %></li>
+      </ul>
+
+    </article>
+
+    <article class="container" id="three">
+      <h2 id="thema-3">Ein paar Ideen, welche Geräte ihr im Toolteiler vermieten könnt:</h2>
+
+      <h3>Märkte, Messen, Events, Ausstellung</h3>
+      <p>
+        Von Verkaufsständen, Garderoben, Kleiderständer, Spiegel, Tische, Stühle und Bierbänke und Zelte, Verkehrsschilder, Absperrungen, Beschriftunstafeln, Bühnenelemente, Leinwand, Tapiziertische, Markise, Theke, Podeste, Platten, Plakatständer, Vitrinen, Hochtische, Prospektständer, Flipchart, Zelt, Marktstand, mobile Umkleidekabinen, Leuchtmittel, Hüpfburgen.
+      </p>
+
+      <h3>Musikerbedarf & Instrumente</h3>
+      <p>
+        Geige, Klavier, Drums, Gitarre, Schlagzeug, Blasinstrumente, Noten, Software
+      </p>
+
+      <h3>Handwerk & Produktion</h3>
+      <p>
+        z.B. Lötstation, PUK für Feinschweißen,
+        Kompressoren, Lupen, Werkbank, Galvanisierungsgerät, Kaltlichtleuchten, Fräse,
+        Mikroskope, elektrische Drehscheiben, Drehspindel, Hartschaumsäge, Kreisschneider, Klebepistolen,
+        Lasergravur und Schneidegerät, 3-D Drucker
+      </p>
+
+      <h3>Kreativ- & Künstlerbedarf</h3>
+      <p>
+        Nähmaschinen, Brennofen, Zubehör für Keramikarbeiten, Siebdruck-Geräte, Druckpressen, Geräte zur Steinbearbeitung, Holzberarbeitung, Zangen, Ateliertisch, Strickmaschinen, Stickmaschinen, Webstühle
+      </p>
+
+      <h3>Gastronomie- & Küchengeräte</h3>
+      <p>
+        Kühlschrank, Tiefkühltruhe, Salamander, heiße Theke, Teigknetmaschine, Konditorei- & Bäckereiofen, Geschirr & Gläser, Kuchenformen
+      </p>
+
+      <h3>Technik, Sound, Film, Foto</h3>
+      <p>
+        Licht- und Tontechnik, wie Musikanlage, Micro, Mischpult, Boxen,Scheinwerfer und Beamer, Fernseher, Kabel, Adapter, Leuchttisch, Hintergründe, Kameras, Objektive, Fotolampen, Lichtformer, Stative, Reflektoren, Lichtzelte und mobile Stationen
+      </p>
+
+      <h3>Grafik, Architektur, Design</h3>
+      <p>
+        Grafiktabletts und –Stifte, Zeichentisch, Artograph, Modellbauzubehör, Lichtbox, Schneidesystem, Rundcutter, Plotter, A3-A0-Drucker, Scanner bis A0, Falzmaschinen
+      </p>
+
+      <h3>Gesundheit, Fitness, Wohlbefinden</h3>
+      <p>
+        von mobile Massagestühlen (z.B. Shiatsu),
+        Klangschalen, Pilates Reformer, Yoga Geräte wie Aerial Aufhängung oder Yoga-Matten in höherer Stückzahl bis zu Sportgeräte, wie Handelsets, Vibrationsplatten, Trampolin oder Multifunktionsbank. Kosmetik und Friseurausstattung wie Make-up Stühle, Liegen, Bedampfer, mobiler Friseurstuhl.
+      </p>
+
+      <h3>Deko-Materialien</h3>
+      <p>
+        z.B. Kleinmöbel und Deko für Geschäfte,
+      </p>
+
+      <h3>Transport (nicht motorisiert)</h3>
+      <p>
+        Lastenfahrräder, Anhänger für Fahrrad, Schubkarre
+      </p>
+
     </article>
 
   </div>
