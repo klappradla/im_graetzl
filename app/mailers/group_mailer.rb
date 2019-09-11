@@ -23,7 +23,7 @@ class GroupMailer < ApplicationMailer
 
   def message_to_user(group, from_user, to_user, subject, message, from_email)
     @group, @user, @message = group, from_user, message
-    reply_to = from_email.present? ? "#{from_email}@imgraetzl.at" : from_user.email
+    @reply_to = from_email.present? ? "#{from_email}@imgraetzl.at" : from_user.email
     from_email = from_email.present? ? "#{from_email}@imgraetzl.at" : "no-reply@imgraetzl.at"
 
     headers(
@@ -33,7 +33,7 @@ class GroupMailer < ApplicationMailer
     )
     mail(
       to: to_user.email, from: "#{from_user.full_name} | imGrätzl.at <#{from_email}>",
-      reply_to: reply_to, subject: subject
+      reply_to: @reply_to, subject: subject
     )
   end
 
