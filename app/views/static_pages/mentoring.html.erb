@@ -10,13 +10,13 @@
 
 <section class="help -mentoring-page">
   <div class="imgHeader -fullwidth">
-    <%= image_tag('info/mentoring-team2-anmeldung.png', class: 'anmeldung-badge') %>
     <div class="wrp">
       <h1>Komm in dein Unterstützer-Team</h1>
     </div>
   </div>
 
   <div class="paperCard -cord1RT -header -top">
+    <!--<%= image_tag('info/button_mentoring_ausgebucht.png', class: 'anmeldung-badge') %>-->
     <div class="wrp">
       <a href="#teilnahme" class="badge -mint -arrow">
         Jetzt durchstarten!
@@ -257,11 +257,19 @@
     </div>
 
     <div class="single-mentor">
-      <%= link_to "https://blog.imgraetzl.at/allgemein/we-proudly-present-das-imgraetzl-mentoring-team-sebastian-howorka-finanzen-business-case-entwicklung/", target: '_blank' do %>
-        <%= image_tag('info/mentorin-sebastian-howorka.jpg', class: 'img-round') %>
-        <h3>Sebastian Howorka</h3>
+      <%= link_to "https://blog.imgraetzl.at/allgemein/we-proudly-present-das-imgraetzl-expertinnen-team-alexandra-adler-nachhaltigkeit-mitdenken-oekologische-und-faire-wertschoepfungskette-csr/", target: '_blank' do %>
+        <%= image_tag('info/mentorin-alexandra-adler.jpg', class: 'img-round') %>
+        <h3>Alexandra Adler</h3>
       <% end %>
-      <p class="title">Finanzen – Business Case Entwicklung</p>
+      <p class="title">CSR, ökologische & faire Wertschöpfungskette</p>
+    </div>
+
+    <div class="single-mentor">
+      <%= link_to "https://blog.imgraetzl.at/allgemein/new-imgraetzl-mentoring-team-sandra-hoegendorfer-konzeption-grafikdesign-branding/", target: '_blank' do %>
+        <%= image_tag('info/mentorin-sandra-hoegendorfer.jpg', class: 'img-round') %>
+        <h3>Sandra Högendorfer</h3>
+      <% end %>
+      <p class="title">Konzeption, Grafikdesign & Branding</p>
     </div>
 
     <div class="single-mentor">
@@ -273,11 +281,35 @@
     </div>
 
     <div class="single-mentor">
-      <%= link_to "https://blog.imgraetzl.at/allgemein/we-proudly-present-das-imgraetzl-expertinnen-team-alexandra-adler-nachhaltigkeit-mitdenken-oekologische-und-faire-wertschoepfungskette-csr/", target: '_blank' do %>
-        <%= image_tag('info/mentorin-alexandra-adler.jpg', class: 'img-round') %>
-        <h3>Alexandra Adler</h3>
+      <%= link_to "https://blog.imgraetzl.at/allgemein/we-proudly-present-das-imgraetzl-mentoring-team-sebastian-howorka-finanzen-business-case-entwicklung/", target: '_blank' do %>
+        <%= image_tag('info/mentorin-sebastian-howorka.jpg', class: 'img-round') %>
+        <h3>Sebastian Howorka</h3>
       <% end %>
-      <p class="title">CSR, ökologische & faire Wertschöpfungskette</p>
+      <p class="title">Finanzen – Business Case Entwicklung</p>
+    </div>
+
+    <div class="single-mentor">
+      <%= link_to "https://blog.imgraetzl.at/allgemein/new-imgraetzl-mentoring-team-verena-hirzenberger-personalfitnesstrainerin-mit-one2one-coachings-gruppentrainings/", target: '_blank' do %>
+        <%= image_tag('info/mentorin-verena-hirzenberger.jpg', class: 'img-round') %>
+        <h3>Verena Hirzenberger</h3>
+      <% end %>
+      <p class="title">Personalfitnesstrainerin: Einzel- & Gruppentrainings</p>
+    </div>
+
+    <div class="single-mentor">
+      <%= link_to "https://blog.imgraetzl.at/allgemein/neu-im-organisationsteam-unterstuetzer-programm-daniela-schwarz/", target: '_blank' do %>
+        <%= image_tag('info/organisatorin-daniela.jpg', class: 'img-round') %>
+        <h3>Daniela Schwarz</h3>
+      <% end %>
+      <p class="title"><strong>Organisation Unterstützer Team</strong></p>
+    </div>
+
+    <div class="single-mentor">
+      <%= link_to "https://blog.imgraetzl.at/allgemein/vorstellung-unseres-organisationsteam-fuer-das-unterstuetzer-programm-mirjam-mieschendahl/", target: '_blank' do %>
+        <%= image_tag('info/organisatorin-mirjam.jpg', class: 'img-round') %>
+        <h3>Mirjam Mieschendahl</h3>
+      <% end %>
+      <p class="title"><strong>Organisation Unterstützer Team</strong> / imGrätzl Gründerin</p>
     </div>
 
   </div>
@@ -319,6 +351,34 @@
     <% end %>
   </div>
   <!-- END TEILNEHMEN -->
+
+
+  <!-- SPONSORING -->
+  <div class="hl-subtext">
+    <h1>Supporter und FreundInnen des Unterstützer-Programms</h1>
+    <p>
+      Diese PartnerInnen fördern das Unterstützer-Team
+    </p>
+  </div>
+
+  <div class="sponsoring">
+    <div class="cardBox">
+      <%= link_to "https://filmschoolvienna.at", target: '_blank' do %>
+        <%= image_tag('info/logo-filmschool-vienna.jpg', class: 'logo') %>
+      <% end %>
+      <p>
+        1000 Dank für den Raum an <%= link_to "Filmschool Vienna", "https://filmschoolvienna.at", target: '_blank' %>
+        <br>Zum <%= link_to "Raumteiler", "https://www.imgraetzl.at/wien/raumteiler/raum/proberaum-in-der-filmschool-vienna", target: '_blank' %>
+      </p>
+    </div>
+
+    <div class="cardBox">
+      <p>
+        1000 Dank für den Raum an <%= link_to "Bezirksmuseum Neubau", "http://www.bezirksmuseum.at/de/bezirksmuseum_7/veranstaltungen/", target: '_blank' %>
+      </p>
+    </div>
+  </div>
+
 
   <!----------- LOGIN PANEL MODAL ----------->
   <%= render 'shared/login_panel',redirect: request.original_url ,origin: 'mentoring' %>

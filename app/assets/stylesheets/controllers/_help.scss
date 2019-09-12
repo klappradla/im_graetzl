@@ -479,13 +479,19 @@ section.help {
     }
 
     .anmeldung-badge {
-      display: none;
+      //display: none;
+      z-index: 99;
+      position: absolute;
+      top: -75px;
+      left: 0px;
+      width:110px;
+      height:110px;
+
       @include respond-to(">=medium") {
-        display: block;
-        width:22%;
-        position: absolute;
-        bottom: 20px;
-        left: 10px;
+        top: -200px;
+        left: -50px;
+        width:200px;
+        height:200px;
       }
     }
 
@@ -547,7 +553,7 @@ section.help {
     }
     // Single Mentor Card
     .single-mentor {
-      margin-bottom:50px;
+      //margin-bottom:20px;
       h2, h3, p.title {
         display: block;
         text-align: center;
@@ -556,7 +562,13 @@ section.help {
         padding:0px 0px 5px;
       }
       a {
+        display: block;
         //text-decoration: none;
+      }
+      p {
+        height:90px;
+        max-height: 90px;
+        overflow: hidden;
       }
       a:hover {
         img {
@@ -603,6 +615,29 @@ section.help {
       }
       &.-disabled {
         //opacity: 0.5;
+      }
+    }
+
+    .sponsoring {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      .cardBox {
+        width: 100%;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        .logo {
+          width:90%;
+        }
+        @include respond-to(">=medium") {
+          width: 40%;
+        }
       }
     }
 
