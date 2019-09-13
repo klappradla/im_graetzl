@@ -91,7 +91,7 @@ class User < ApplicationRecord
   end
 
   def after_confirmation
-    UsersMailer.new.send_welcome_email(self)
+    UsersMailer.welcome_email(self).deliver_later
     MailchimpSubscribeJob.perform_later(self)
   end
 

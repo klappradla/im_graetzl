@@ -7,7 +7,11 @@
 
     <div class="thread-info">
       <%= render 'messenger/thread/user_info' %>
-      <%= render 'messenger/thread/tool_rental', tool_rental: @thread.tool_rental if @thread.tool_rental %>
+      <% if @thread.tool_rental && current_user == @thread.tool_rental.owner %>
+        <%= render 'messenger/thread/tool_owner', tool_rental: @thread.tool_rental %>
+      <% elsif @thread.tool_rental && current_user == @thread.tool_rental.renter %>
+        <%= render 'messenger/thread/tool_renter', tool_rental: @thread.tool_rental %>
+      <% end %>
     </div>
 
     <div id="message-list">

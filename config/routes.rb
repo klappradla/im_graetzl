@@ -105,6 +105,8 @@ Rails.application.routes.draw do
     post 'cancel', on: :member
     post 'approve', on: :member
     post 'reject', on: :member
+    post 'confirm_return', on: :member
+    post 'leave_rating', on: :member
   end
 
   resources :groups, except: [:index] do

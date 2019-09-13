@@ -1,0 +1,60 @@
+<% content_for(:above_title, "Hallo #{@user.first_name}") %>
+<% content_for(:title, "Dein Grätzlzuckerl ist nun online!") %>
+
+<!-- --------------- BLOCK HEADLINE --------------- -->
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
+   <tr>
+     <td style="height:30px"> </td>
+   </tr>
+   <tr>
+     <td valign="top" class="mcnTextContent" style="padding-top:0;  padding-bottom:9px; padding-left:18px; padding-right:18px;">
+       <h4 style="text-align:left; color:#69a8a7; font-family:Georgia; font-size:125%; font-weight:normal; font-style:italic;">
+         Dein Grätzlzuckerl - <%= I18n.localize Date.today, format: '%B %Y' %>
+       </h4>
+     </td>
+   </tr>
+   <tr>
+     <td style="padding-left:9px; padding-right:9px;">
+       <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%">
+         <tr>
+           <td>
+             <span></span>
+           </td>
+         </tr>
+       </table>
+     </td>
+   </tr>
+</table>
+
+<!-- CONTENT-Table -->
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
+  <tr>
+    <td class="mcnTextContent" style="padding-left:18px; padding-right:18px;">
+
+      Dein Zuckerl mit dem Titel "<strong><em><%= @zuckerl.title %></em></strong>" läuft nun für einen Monat im Grätzl
+      <%= @zuckerl.location.graetzl.name %> und im ganzen zugehörigen Bezirk!
+
+      <p>
+        <strong>Im Grätzl <%= @zuckerl.location.graetzl.name %>:</strong><br/>
+        <%= link_to zuckerls_graetzl_url(@zuckerl.location.graetzl), zuckerls_graetzl_url(@zuckerl.location.graetzl), style: "color:#f48a85;" %>
+      </p>
+
+      <p>
+        <strong>Auf deiner Locationseite:</strong><br/>
+        <%= link_to graetzl_location_url(@zuckerl.location.graetzl, @zuckerl.location), graetzl_location_url(@zuckerl.location.graetzl, @zuckerl.location), style: "color:#f48a85;" %>
+      </p>
+
+      <p>
+        <strong>Tipp:</strong> Du möchtest dein Grätzlzuckerl gleich auf Facebook teilen -
+        Verwende dafür einfach einen der beiden Links oberhalb!
+      </p>
+
+      <br>
+
+      Viele Grüße,<br/>
+      dein Team von imGrätzl.at
+
+    </td>
+  </tr>
+</table>
+<!-- /CONTENT-Table -->

@@ -1,5 +1,5 @@
 <% content_for(:above_title, "Hey #{@tool_rental.owner.first_name}") %>
-<% content_for(:title, "#{@tool_rental.renter.first_name} hat die Toolteiler Anfrage zurückgezogen.") %>
+<% content_for(:title, "Bitte bestätige die Rückgabe deines Toolteilers.") %>
 
 <!-- --------------- BLOCK HEADLINE --------------- -->
 <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
@@ -30,25 +30,23 @@
  <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #efefef; margin-bottom:18px;" width="100%" class="mcnTextContentContainer">
   <tbody>
     <tr>
-      <td valign="top" class="mcnTextContent" style="padding-left:18px; padding-right:18px; vertical-align:top;">
-        <%= image_tag Notifications::ImageService.new.avatar_url(@tool_rental.renter), style: "width:60px; height:60px; border-radius: 30px; max-width:60px; min-width:60px;", class: "mcnImage" %>
-      </td>
-      <td class="mcnTextContent" style="padding-right:18px; width:100%;">
+      <td class="mcnTextContent" style="padding-left:18px; padding-right:18px; width:100%;">
         <p>
-          <em><strong><%= @tool_rental.renter.full_name %> möchte deinen Toolteiler doch nicht mehr ausborgen.</strong></em><br>
+          Wir hoffen die Verleihung deines Toolteilers an <%= @tool_rental.renter.first_name %> war erfolgreich und es hat alles gepasst.
         </p>
         <p>
-          Klicke auf jetzt antworten, wenn du mit <%= @tool_rental.renter.first_name %> im Toolteiler-Messenger in Kontakt treten möchtest.
+          Bitte bestätige nun im Messenger die Rückgabe des Toolteilers.<br>
+          <strong>Die Auszahlung deiner Mieteinnahmen auf dein Konto erfolgt innerhalb von 5 Tagen nachdem du die Rückgabe bestätigt hast.</strong>
         </p>
       </td>
     </tr>
 
     <tr>
-      <td colspan="2" style="padding-bottom:9px;"></td>
+      <td style="padding-bottom:9px;"></td>
     </tr>
 
     <tr>
-      <td colspan="2">
+      <td>
         <!-- BUTTON -->
         <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnButtonBlock" style="min-width:100%;">
           <tbody class="mcnButtonBlockOuter">
@@ -58,7 +56,7 @@
                   <tbody>
                     <tr>
                       <td align="center" valign="middle" class="mcnButtonContent" style="font-family: Arial; font-size: 16px; padding: 10px;">
-                        <%= link_to "Jetzt antworten", messenger_url(thread_id: @tool_rental.user_message_thread.id), class: "mcnButton", title: "Button", target: "_blank", style: "font-weight: normal;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;" %>
+                        <%= link_to "Rückgabe bestätigen", messenger_url(thread_id: @tool_rental.user_message_thread.id), class: "mcnButton", title: "Button", target: "_blank", style: "font-weight: normal;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;" %>
                       </td>
                     </tr>
                   </tbody>
@@ -72,11 +70,4 @@
     </tr>
 
   </tbody>
-</table>
-<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:10px;" width="100%" class="mcnTextContentContainer">
-  <tr>
-    <td class="mcnTextContent" style="padding-left:18px; padding-right:18px;">
-      <i>PS.: Du findest den Messenger auch eingeloggt auf imGrätzl.at rechts oben im Menü unter "Toolteiler".</i>
-    </td>
-  </tr>
 </table>

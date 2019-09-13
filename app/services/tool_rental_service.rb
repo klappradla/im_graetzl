@@ -99,7 +99,7 @@ class ToolRentalService
     if tool_rental.payment_method.in?(['klarna', 'eps'])
       capture_immediately = tool_rental.payment_method == 'eps' ? true : false
       stripe_charge = Stripe::Charge.create(
-        customer: tool_rental.user.stripe_customer_id,
+        customer: tool_rental.renter.stripe_customer_id,
         amount: (tool_rental.total_price * 100).to_i,
         currency: 'eur',
         source: tool_rental.stripe_source_id,

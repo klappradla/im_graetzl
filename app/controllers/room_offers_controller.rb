@@ -21,7 +21,7 @@ class RoomOffersController < ApplicationController
     @room_offer.address = Address.from_feature(params[:feature])
     if @room_offer.save
       MailchimpRoomOfferUpdateJob.perform_later(@room_offer)
-      RoomsMailer.new.send_new_room_offer_email(@room_offer)
+      RoomMailer.room_offer_published(@room_offer).deliver_later
       @room_offer.create_activity(:create, owner: @room_offer.user)
       redirect_to @room_offer
     else
@@ -58,7 +58,7 @@ class RoomOffersController < ApplicationController
       flash[:notice] = 'Du wurdest von der Warteliste entfernt.'
     else
       @room_offer.room_offer_waiting_users.create(user_id: current_user.id)
-      RoomsMailer.new.send_waitinglist_update_email(@room_offer, current_user)
+      RoomMailer.waiting_list_updated(@room_offer, current_user).deliver_later
       flash[:notice] = "Du stehst nun auf der Warteliste und #{@room_offer.first_name} #{@room_offer.last_name} wurde darüber per E-Mail informiert."
     end
     redirect_to @room_offer

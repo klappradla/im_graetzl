@@ -11,8 +11,8 @@ class UserMessageThread < ApplicationRecord
 
   def self.create_for_tool_rental(tool_rental)
     thread = create(tool_rental: tool_rental)
-    thread.users << tool_rental.user
-    thread.users << tool_rental.tool_offer.user
+    thread.users << tool_rental.renter
+    thread.users << tool_rental.owner
     thread
   end
 

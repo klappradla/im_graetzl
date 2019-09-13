@@ -1,4 +1,4 @@
-<% content_for(:above_title, "Hey #{@tool_rental.tool_offer.user.first_name}") %>
+<% content_for(:above_title, "Hey #{@tool_rental.owner.first_name}") %>
 <% content_for(:title, "Du hast eine neue Toolteiler Anfrage") %>
 
 <!-- --------------- BLOCK HEADLINE --------------- -->
@@ -31,19 +31,19 @@
   <tbody>
     <tr>
       <td valign="top" class="mcnTextContent" style="padding-left:18px; padding-right:18px; vertical-align:top; padding-top:20px;">
-        <%= image_tag Notifications::ImageService.new.avatar_url(@tool_rental.user), style: "width:60px; height:60px; border-radius: 30px; max-width:60px; min-width:60px;", class: "mcnImage" %>
+        <%= image_tag Notifications::ImageService.new.avatar_url(@tool_rental.renter), style: "width:60px; height:60px; border-radius: 30px; max-width:60px; min-width:60px;", class: "mcnImage" %>
       </td>
       <td class="mcnTextContent" style="padding-right:18px; width:100%;">
         <p>
-          <em><strong><%= @tool_rental.user.full_name %> möchte deinen Toolteiler ausleihen:</strong></em><br>
-          <strong>Dauer:</strong> <%= @calculator.days %> Tage<br>
+          <em><strong><%= @tool_rental.renter.full_name %> möchte deinen Toolteiler ausleihen:</strong></em><br>
+          <strong>Dauer:</strong> <%= @tool_rental.days %> Tage<br>
           <strong>Von:</strong> <%= @tool_rental.rent_from.to_s(:weekday) %> bis <%= @tool_rental.rent_to.to_s(:weekday) %>
         </p>
         <p>
-          Wenn du deinen Toolteiler an <%= @tool_rental.user.first_name %> verleihst, verdienst du dadurch <strong><%= number_to_currency(@tool_rental.basic_price - @tool_rental.discount, unit: "€") %></strong>.
+          Wenn du deinen Toolteiler an <%= @tool_rental.renter.first_name %> verleihst, verdienst du dadurch <strong><%= number_to_currency(@tool_rental.basic_price - @tool_rental.discount, unit: "€") %></strong>.
         </p>
         <p>
-          Klicke auf jetzt antworten um mit <%= @tool_rental.user.first_name %> im Toolteiler-Messenger in Kontakt zu treten.
+          Klicke auf jetzt antworten um mit <%= @tool_rental.renter.first_name %> im Toolteiler-Messenger in Kontakt zu treten.
         </p>
       </td>
     </tr>

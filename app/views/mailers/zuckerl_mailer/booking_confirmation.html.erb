@@ -1,0 +1,151 @@
+<% content_for(:above_title, "Hallo #{@user.first_name}") %>
+<% content_for(:title, "Vielen Dank für die Buchung deines Grätzlzuckerls!") %>
+
+<!-- --------------- BLOCK HEADLINE --------------- -->
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
+   <tr>
+     <td style="height:30px"> </td>
+   </tr>
+   <tr>
+     <td valign="top" class="mcnTextContent" style="padding-top:0;  padding-bottom:9px; padding-left:18px; padding-right:18px;">
+       <h4 style="text-align:left; color:#69a8a7; font-family:Georgia; font-size:125%; font-weight:normal; font-style:italic;">
+         Hinweise zur Zahlung
+       </h4>
+     </td>
+   </tr>
+   <tr>
+     <td style="padding-left:9px; padding-right:9px;">
+       <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%">
+         <tr>
+           <td>
+             <span></span>
+           </td>
+         </tr>
+       </table>
+     </td>
+   </tr>
+</table>
+
+<!-- CONTENT-Table -->
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
+  <tr>
+    <td class="mcnTextContent" style="padding-left:18px; padding-right:18px;">
+      <strong>Wichtig: </strong>
+      Um deine Buchung erfolgreich abschließen und dein Grätzlzuckerl zeitgerecht am
+      <%= I18n.localize Time.now.end_of_month+1.day, format: '%d.%m.%Y' %>
+      schalten zu können, <strong>beachte bitte folgende Zahlungsinformationen:</strong>
+      <br><br>
+      Bitte überweise den offenen Betrag von 15,00 € an folgende Kontoverbindung.
+      <br/>
+      Nach erfolgreichem Zahlungseingang senden wir dir erneut eine Bestätigung für die Schaltung deines Grätzlzuckerls zu.
+      <br/><br/>
+      <p>
+        <em><strong>Kontoverbindung:</strong></em><br/>
+        morgenjungs GmbH<br/>
+        IBAN: AT03 2011 1826 6988 6500<br/>
+        BIC: GIBAATWWXXX<br/><br/>
+        <em><strong>Verwendungszweck:</strong></em><br/>
+        <%= @zuckerl.payment_reference %><br/>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- /CONTENT-Table -->
+
+
+<!-- --------------- BLOCK HEADLINE --------------- -->
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
+   <tr>
+     <td valign="top" class="mcnTextContent" style="padding-top:0;  padding-bottom:9px; padding-left:18px; padding-right:18px;">
+       <h4 style="text-align:left; color:#69a8a7; font-family:Georgia; font-size:125%; font-weight:normal; font-style:italic;">
+         Buchungsbestätigung
+       </h4>
+     </td>
+   </tr>
+   <tr>
+     <td style="padding-left:9px; padding-right:9px;">
+       <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%">
+         <tr>
+           <td>
+             <span></span>
+           </td>
+         </tr>
+       </table>
+     </td>
+   </tr>
+</table>
+
+<!-- CONTENT-Table -->
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
+  <tr>
+    <td class="mcnTextContent" style="padding-left:18px; padding-right:18px;">
+
+      <table width="100%" cellpadding="2">
+        <tr>
+          <td width="15%"><strong>Anzahl</strong></td>
+          <td width="65%"><strong>Grätzlzuckerl Buchung</strong></td>
+          <td width="20%"><strong>Preis</strong></td>
+        </tr>
+        <tr>
+          <td valign="top">1</td>
+          <td valign="top" style="padding-bottom:5px;">
+            "<%= @zuckerl.location.name %>"
+          </td>
+          <td valign="top" nowrap="nowrap">12,50 € (exkl. USt.)</td>
+        </tr>
+        <tr>
+          <td colspan="3" style="border-top-width: 2px;border-top-style: solid;border-top-color: #64A8A7;"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td align="right">zzgl. 20% USt: </td>
+          <td>&nbsp;&nbsp;2,50 €</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td align="right" style="padding-bottom:5px;"><strong>Gesamt inkl. USt: </strong></td>
+          <td><strong>15,00 €</strong></td>
+        </tr>
+        <tr>
+          <td colspan="3" style="border-top-width: 2px;border-top-style: solid;border-top-color: #64A8A7;"></td>
+        </tr>
+      </table>
+
+      <br/>
+
+      Bei Fragen zu deiner Buchung sende uns bitte ein Mail an wir@imgraetzl.at
+      <br/>
+      Hier kannst du dein gebuchtes Zuckerl nochmals ansehen. Bitte beachte das du dafür eingeloggt sein musst:
+      <br/><br/>
+
+      <!-- BUTTON -->
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnButtonBlock" style="min-width:100%;">
+        <tbody class="mcnButtonBlockOuter">
+          <tr>
+            <td style="padding-top:0; padding-right:18px; padding-bottom:18px; padding-left:18px;" valign="top" align="right" class="mcnButtonBlockInner">
+              <table border="0" cellpadding="0" cellspacing="0" class="mcnButtonContentContainer" style="border-collapse: separate !important;border-top-left-radius: 4px;border-top-right-radius: 4px;border-bottom-right-radius: 4px;border-bottom-left-radius: 4px;background-color: #69A8A7;">
+                <tbody>
+                  <tr>
+                    <td align="center" valign="middle" class="mcnButtonContent" style="font-family: Arial; font-size: 16px; padding: 10px;">
+                      <%= link_to "Zuckerl nochmals ansehen", zuckerls_user_url, target: "_blank", style: "color: #FFFFFF; text-decoration: none;" %>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- /BUTTON -->
+
+      --<br/><br/>
+      Dies ist keine Rechnung - Nach erhalt der Zahlung senden wir Dir erneut eine Bestätigung inkl. Rechnung zu.
+      <br/><br/>
+
+      <strong>Vielen Dank und liebe Grüße,</strong><br/>
+      Dein Team von imGrätzl.at<br/>
+
+    </td>
+  </tr>
+</table>
+<!-- /CONTENT-Table -->

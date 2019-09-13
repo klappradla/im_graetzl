@@ -52,15 +52,15 @@ class Zuckerl < ApplicationRecord
 
   def send_booking_confirmation
     AdminMailer.new_zuckerl(self).deliver_later
-    Zuckerl::BookingConfirmationJob.perform_later self
+    ZuckerlMailer.booking_confirmation(self).deliver_later
   end
 
   def send_invoice
-    update paid_at: Time.now
-    Zuckerl::InvoiceJob.perform_later self
+    update(paid_at: Time.now)
+    ZuckerlMailer.invoice(self).deliver_later
   end
 
   def send_live_information
-    Zuckerl::LiveInformationJob.perform_later self
+    ZuckerlMailer.live_information(self).deliver_later
   end
 end

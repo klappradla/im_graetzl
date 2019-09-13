@@ -1,0 +1,69 @@
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
+  <tbody>
+    <tr>
+      <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
+        Hallo <%= @user.first_name %> - Herzlich willkommen, schön, dass du bei imGrätzl.at dabei bist!
+        <p>
+          Mit imGrätzl.at bieten wir dir eine ganze Palette von Services an, die dich dabei unterstützen
+          deine Ressourcen zu erhöhen, Kosten zu senken und die dich vor allem mit spannenden und
+          kooperativen Menschen vernetzen! Weg von der Einzelanstrengung hin zu neuen Formen der
+          Zusammenarbeit. Ganz lokal in Wien.
+        </p>
+
+        <strong>1.)</strong>
+        <em>
+          <strong>Richte dir deine Locationseite ein</strong>, um mit deinen Aktionen und deinem Angebot
+          im Stadtteil sichtbar zu werden. Zum Einrichten deiner Locationseite:
+          <%= link_to locations_user_url, locations_user_url, target: '_blank' %>
+        </em>
+
+        <br><br>
+
+        <strong>2.)</strong>
+        <em>
+          <strong>Du möchtest deine Gewerbefläche teilen, oder suchst Raum zum Andocken?</strong>
+          Dann stelle jetzt deinen Raumteilerwunsch beim Raumteiler ein. Zum Raumteiler:
+          <%= link_to rooms_wien_url, rooms_wien_url, target: '_blank' %>
+        </em>
+
+        <br><br>
+
+
+        <strong>3.)</strong>
+        <em>
+          <strong>Komm in dein Unterstützer-Team!</strong>
+          Das imGrätzl Mentoring-Programm für Selbständige und MacherInnen startet. Alle Infos:
+          <%= link_to unterstuetzer_team_url, unterstuetzer_team_url, target: '_blank' %>
+        </em>
+
+        <br><br>
+
+        <strong>4.)</strong>
+        <em>
+          <strong>Entdecke die coop & share Services: </strong>
+          Schließe dich z.B. deiner Bezirksgruppe für Kooperationen an, erhöhe deine Ressourcen in
+          der Gruppe für Gegengeschäfte (Tauschglück) oder suchst du ProjektpartnerInnen? Dann bitte
+          hier entlang:
+          <%= link_to groups_wien_url, groups_wien_url, target: '_blank' %>
+        </em>
+
+        <br><br>
+
+        <p>Viel Freude mit imGrätzl und wenn du Fragen hast, dann melde dich einfach bei mir.</p>
+
+        Liebe Grüße,<br>
+        Mirjam<br>
+
+        <p>
+          PS: Ich sende dir in den nächsten Tagen weitere nützliche Tipps zu imGrätzl zu, damit du
+          für dich das Passende rauspicken kannst!
+        </p>
+
+
+        <% if @user.origin == 'mentoring' %>
+        <% else %>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>

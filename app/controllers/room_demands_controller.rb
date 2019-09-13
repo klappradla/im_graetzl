@@ -16,8 +16,8 @@ class RoomDemandsController < ApplicationController
     @room_demand.user_id = current_user.admin? ? params[:user_id] : current_user.id
 
     if @room_demand.save
-      RoomsMailer.new.send_new_room_demand_email(@room_demand)
       MailchimpRoomDemandUpdateJob.perform_later(@room_demand)
+      RoomMailer.room_demand_published(@room_demand).deliver_later
       @room_demand.create_activity(:create, owner: @room_demand.user)
       redirect_to @room_demand
     else

@@ -16,4 +16,7 @@ class ToolOfferMailerPreview < ActionMailer::Preview
     ToolOfferMailer.rental_canceled(ToolRental.last)
   end
 
+  def rental_return_pending
+    ToolOfferMailer.rental_return_pending(ToolRental.last)
+  end
 end

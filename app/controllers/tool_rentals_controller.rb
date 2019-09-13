@@ -109,6 +109,23 @@ class ToolRentalsController < ApplicationController
     redirect_to messenger_url(thread_id: @tool_rental.user_message_thread.id)
   end
 
+  def confirm_return
+    @tool_rental = current_user.tool_offer_rentals.return_pending.find(params[:id])
+    @tool_rental.update(rental_status: :return_confirmed)
+    redirect_to messenger_url(thread_id: @tool_rental.user_message_thread.id)
+  end
+
+  def leave_rating
+    @tool_rental = ToolRental.find(params[:id])
+
+    if @tool_rental.owner == current_user
+      @tool_rental.update(renter_rating: params[:rating])
+    elsif @tool_rental.renter == current_user
+      @tool_rental.update(owner_rating: params[:rating])
+    end
+
+    redirect_to messenger_url(thread_id: @tool_rental.user_message_thread.id)
+  end
   private
 
   def tool_rental_params

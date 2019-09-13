@@ -1,5 +1,5 @@
-<% content_for(:above_title, "Hey #{@tool_rental.user.first_name}") %>
-<% content_for(:title, "Glückwunsch, #{@tool_rental.tool_offer.user.first_name} hat deine Anfrage bestätigt!") %>
+<% content_for(:above_title, "Hey #{@tool_rental.renter.first_name}") %>
+<% content_for(:title, "Glückwunsch, #{@tool_rental.owner.first_name} hat deine Anfrage bestätigt!") %>
 
 <!-- --------------- BLOCK HEADLINE --------------- -->
 <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
@@ -130,16 +130,16 @@
 <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #efefef; margin-bottom:18px;" width="100%" class="mcnTextContentContainer">
   <tr>
     <td valign="center" class="mcnTextContent" style="padding-left:18px; padding-right:18px;">
-      <%= image_tag Notifications::ImageService.new.avatar_url(@tool_rental.tool_offer.user), style: "width:120px; height:120px; border-radius: 60px; max-width:120px; min-width:120px;", class: "mcnImage" %>
+      <%= image_tag Notifications::ImageService.new.avatar_url(@tool_rental.owner), style: "width:120px; height:120px; border-radius: 60px; max-width:120px; min-width:120px;", class: "mcnImage" %>
     </td>
     <td valign="center" class="mcnTextContent" width="100%">
       <p>
-        <strong><%= @tool_rental.tool_offer.user.full_name %></strong><br>
+        <strong><%= @tool_rental.owner.full_name %></strong><br>
         <%= @tool_rental.tool_offer.address.street %><br>
         <%= "#{@tool_rental.tool_offer.address.zip} #{@tool_rental.tool_offer.address.city}" %>
       </p>
       <p>
-        <em>Klicke auf jetzt antworten um mit <%= @tool_rental.tool_offer.user.first_name %> im Toolteiler-Messenger in Kontakt zu treten.</em>
+        <em>Klicke auf jetzt antworten um mit <%= @tool_rental.owner.first_name %> im Toolteiler-Messenger in Kontakt zu treten.</em>
       </p>
     </td>
   </tr>
