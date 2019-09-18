@@ -32,7 +32,7 @@
     <div id="help_nav">
       <%= link_to info_path, class: "btn-primary -grey -ico" do %><%= icon_tag "arrow-left-2" %> Zu allen Services<% end %>
       <a href="#thema-1" class="btn-primary -mint" id="nav-one">Kurz das Wichtigste</a>
-      <a href="#thema-2" class="btn-primary -mint" id="nav-two">Häufige Fragen</a>
+      <a href="#thema-2" class="btn-primary -mint" id="nav-two">Häufige Fragen & Infos</a>
       <a href="#thema-3" class="btn-primary -mint" id="nav-three">Welche Tools eignen sich?</a>
     </div>
   </aside>
@@ -61,27 +61,58 @@
 
     <article class="container" id="two">
       <h2 id="thema-2">Häufige gestellte Fragen & Infos</h2>
-
+      <h3>Allgemein zum Toolteiler</h3>
       <ul class="toolteiler-faq">
-        <li>Verleiher von Arbeitsequipment und Leiher werden via Toolteiler auf imGrätzl.at miteinander verbunden. </li>
-        <li>Der Ausleihvorgang, die Bezahlung und Geldverteilung erfolgt online über den Toolteiler. </li>
-        <li>Die Übergabe der Geräte erfolgt persönlich. </li>
-        <li>Bei jedem Ausleihvorgang wird automatisch eine Versicherung von unserem Versicherungspartner AXA XL aktiviert, die Leihende, Verleiher und die Gegenstände mit bis zu 15.000 € absichert. <%= link_to 'Hier mehr dazu', info_versicherung_path %></li>
-        <li>Stelle dein Arbeitsequipment in den Toolteiler rein, das du nicht rund um die Uhr selber benötigst und verdiene etwas dazu. Hast du Geräte am deinem Arbeitsplatz (z.B. einen Brennofen), die nicht laufend in Betrieb sind? Auch die Nutzung von größeren Geräten kannst du im Toolteiler anderen ermöglichen. </li>
+        <li>Verleiher von Arbeitsequipment und Leiher werden via Toolteiler auf imGrätzl.at miteinander verbunden.</li>
+        <li>Der Ausleihvorgang, die Bezahlung und Geldverteilung erfolgt online über den Toolteiler.</li>
+        <li>Die Übergabe der Geräte erfolgt persönlich.</li>
+        <li>Bei jedem Ausleihvorgang wird automatisch eine Versicherung von unserem gewerblichen Versicherungspartner AXA XL aktiviert, die Leihende, Verleiher und die Gegenstände mit bis zu 15.000 € absichert. <%= link_to 'Hier mehr dazu', info_versicherung_path %></li>
+        <li>Stelle dein Arbeitsequipment in den Toolteiler rein, das du nicht rund um die Uhr selber benötigst und verdiene etwas dazu. Hast du Geräte am deinem Arbeitsplatz (z.B. einen Brennofen), die nicht laufend in Betrieb sind? Auch die Nutzung von größeren Geräten kannst du im Toolteiler anderen ermöglichen.</li>
         <li>Es gibt unterschiedliche Kategorien: von Ausstattung für Märkte und Events bis Künstlerbedarf und von Geräten fürs Handwerk bis Produktion und Instrumentenverleih ist alles dabei, was man im Arbeitsumfeld benötigen könnte. Nicht gedacht ist der Toolteiler für Freizeitgegenstände, also z.B. für die Skiausrüstung oder z.B. auch Alltagskleidung</li>
-        <li>Verleiher bekommen nach dem Verleihende die Leihgebühr auf das hinterlegte Konto überwiesen. Dies kann bis zu 5 Werktage dauern. </li>
-        <li>Ausleiher stehen zwei Bezahlformen zur Verfügung: Kreditkarte und KLARNA. </li>
-        <li>Die Leihgebühr wird eingezogen, sobald der Verleihvorgang aktiviert wurde und zwar indem der Ausleiher der konkreten Leihanfrage zusagt. </li>
-        <li>Bei jedem Verleihvorgang wird zusätzlich eine Servicegebühr erhoben, darin ist die Gebühr für die Versicherung bereits enthalten. imGrätzl bietet viele kostenlose Services an und ihr tragt mit der Servicegebühr dazu bei, dass die laufenden Plattformkosten gedeckt werden können. Großes Dankeschön an der Stelle! </li>
-        <li>Darf man eigentlich seine Geräte an andere verleihen? Was sagt das Gewerberecht dazu? Unter § 32 Abs. 1 Z 10 der Gewerbeordnung steht dazu:
-        <em class="quote">Weiters wird ein allgemeines Recht aller Gewerbetreibenden bestimmt, Waren zu vermieten und zu vermitteln, wobei es unerheblich ist, ob die Waren in einem sachlichen Zusammenhang mit der Haupttätigkeit des Gewerbetreibenden stehen oder nicht. Bei der Vermittlung ist es irrelevant, ob tatsächlich ein Kaufvertrag zwischen den Vertragspartnern zustande kommt. Link: <%= link_to 'https://www.wko.at/service/wirtschaftsrecht-gewerberecht/sonstige-rechte-nebenrechte-gewerbetreibende.html', 'https://www.wko.at/service/wirtschaftsrecht-gewerberecht/sonstige-rechte-nebenrechte-gewerbetreibende.html' %></em>
-        Falls ihr Fragen dazu habt, erkundigt euch bitte dazu bei der Wirtschaftskammer Wien. </li>
-        <li>Wenn du Einnahmen über den Toolteiler generierst, dann musst du diese Einnahmen auch steuerlich berücksichtigen, bitte frage dazu deinen Steuerberater. Du bekommst über jeden erfolgreichen Verleih eine Gutschrift von uns ausgestellt.</li>
-        <li>Wenn du Arbeitsequipment ausleihst, bekommt du eine Rechnung über die Einnahmen inkl. der Servicegebühr und Steuern. </li>
-        <li>Du kannst auch Arbeitsequipment als Privatperson leihen und ausleihen. </li>
-        <li>Falls ihr Geräte verleiht, deren Nutzung eine besondere Schulung oder Ausbildung erfordern, bitte stellt als Verleiher sicher, dass die Ausleiher die entsprechende Ausbildung und Kenntnisse haben und lasst euch einen Nachweis darüber zeigen. </li>
-        <li>Hast du Fragen: Bitte kontaktiere uns unter: <%= mail_to 'wir@imgraetzl.at' %></li>
+        <li>Falls ihr Geräte verleiht, deren Nutzung eine besondere Schulung oder Ausbildung erfordern, bitte stellt als Verleiher sicher, dass die Ausleiher die entsprechende Ausbildung und Kenntnisse haben und lasst euch einen Nachweis darüber zeigen.</li>
       </ul>
+
+      <h3>Rund ums Bezahlen</h3>
+      <ul class="toolteiler-faq">
+        <li>Verleiher bekommen nach dem Verleihende die Leihgebühr auf das hinterlegte Konto überwiesen, sobald der Verleiher angegeben hat im Toolteiler, dass das Gerät wieder zurückgegeben wurde. Die Auszahlung kann bis zu 5 Werktage dauern.</li>
+        <li>Ausleiher stehen zwei Bezahlformen zur Verfügung: Kreditkarte und KLARNA.</li>
+        <li>Die Leihgebühr wird eingezogen, sobald der Verleihvorgang aktiviert wurde und zwar indem der Ausleiher der konkreten Leihanfrage zusagt.</li>
+        <li>Bei jedem Verleihvorgang wird eine Servicegebühr von uns erhoben. imGrätzl bietet viele kostenlose Services an und ihr tragt mit der Servicegebühr dazu bei, dass die laufenden Plattformkosten gedeckt werden können. Großes Dankeschön an der Stelle!</li>
+        <li>Die Servicegebühr wird aufgeteilt zwischen Verleiher und Leihenden: es werden beiden Parteien jeweils 6,5 % des Mietpreises verrechnet. Zusätzlich dazu wird die Umsatzsteuer auf die Service Fee ausgewiesen. Der Leihende trägt die Service Fee für den automatischen Versicherungsschutz.</li>
+      </ul>
+
+      <h3>Darf man seine Geräte ausleihen? Was sagt das Gewerberecht dazu?</h3>
+      <ul class="toolteiler-faq">
+        <li>
+          Du hast ein Gewerbe? Unter § 32 Abs. 1 Z 10 der Gewerbeordnung steht dazu:<br><br>
+          <em class="quote">Weiters wird ein allgemeines Recht aller Gewerbetreibenden bestimmt, Waren zu vermieten und zu vermitteln, wobei es unerheblich ist, ob die Waren in einem sachlichen Zusammenhang mit der Haupttätigkeit des Gewerbetreibenden stehen oder nicht. Bei der Vermittlung ist es irrelevant, ob tatsächlich ein Kaufvertrag zwischen den Vertragspartnern zustande kommt. Link: <%= link_to 'https://www.wko.at/service/wirtschaftsrecht-gewerberecht/sonstige-rechte-nebenrechte-gewerbetreibende.html', 'https://www.wko.at/service/wirtschaftsrecht-gewerberecht/sonstige-rechte-nebenrechte-gewerbetreibende.html' %></em>
+          <br>
+          Falls ihr Fragen dazu habt, erkundigt euch bitte dazu bei der Wirtschaftskammer Wien.
+        </li>
+      </ul>
+
+      <h3>Transaktionsbelege für Privatpersonen, Kleingewerbe, größere Unternehmen ...</h3>
+      <ul class="toolteiler-faq">
+        <li>Du kannst Transaktionsbelege ganz einfach für alle deine Verleihvorgänge herunterladen. Log dich über imGrätzl.at ein und gehe zu Deinem Buchungsarchiv. Hier findest du eine Liste mit allen Zahlungen und Einnahmen, die du über den Toolteiler gemacht hast, inklusive Link zum Download des Transaktionsbelegs. Die Transaktionsbelege haben eine rechtliche Gültigkeit und können auch als Abrechnung genutzt werden.</li>
+        <li>Wenn du Einnahmen über den Toolteiler generierst, dann musst du diese Einnahmen auch steuerlich berücksichtigen, bitte sprich dazu mit deinem Steuerberater.</li>
+        <li>
+          Der Toolteiler richtet sich vor allem an Kleingewerbetreibende, KünstlerInnen, Vereine und Privatpersonen. Kleingewerbetreibende bis 30.000 € Jahresumsatz sind von der Umsatzsteuer befreit, deshalb wird die Umsatzsteuer auf den Mietpreis nicht in den automatisierten Transaktionsbelegen ausgewiesen. Eine Rechnung mit ausgewiesener Umsatzsteuer kann nur vom Vermieter selber erstellt werden, da sie auch individuelle Informationen enthält wie z.B. eine Rechnungsnummer. Bitte den Vermieter dir eine Rechnung mit ausgewiesener Umsatzsteuer zu stellen: Der Betrag, den der Mieter über die Plattform bezahlt hat, muss als Rechnungsbetrag eingetragen werden. Diese Information ist im Toolteiler Buchungsarchiv zu finden. Vergiss nicht, alle Informationen der Anmietung auf der Rechnung anzugeben, darunter fallen der Name des Mieters, Adresse, Details zum Mietgerät, Anzahl Tage, Rechnungsnummer und Datumsangaben.
+          <br><br>
+          Als Beispiel eine Anmietung, bei der der Mieter 70 € bezahlt hat. Die Rechnung muss den zu versteuernden Betrag, die Höhe der Mehrwertsteuer und den Rechnungsbetrag, inklusive 20% Mehrwertsteuer enthalten. 
+          <br><br>
+          - Zu besteuernder Betrag = 70,00 € / 1,20 = 58,33 €<br>
+          - Höhe der Mehrwertsteuer = 58,33 € * 20% = 11,66 €<br>
+          <strong>- Rechnungsbetrag (inklusive Mehrwertsteuer) = 58,33 € + 11,66 € = 70,00 €</strong>
+        </li>
+      </ul>
+
+      <h3>Gewerbliche Gerätevermieter?</h3>
+      <ul class="toolteiler-faq">
+        <li>Der Toolteiler richtet sich vor allem an Kleingewerbetreibende, kleine Unternehmen, KünstlerInnen, Vereine und Privatpersonen, die nebenher ihre eigenen Arbeitsgeräte verleihen. Gewerbliche, also professionelle Gerätevermieter müssen spezielle Vorgaben beachten, werden gekennzeichnet und werden nach einer persönlichen Kontaktaufnahme und Prüfung für die Nutzung des Toolteilers ggf. freigeschaltet. Interesse? Bitte kontaktiert uns über <%= mail_to 'wir@imgraetzl.at' %>.</li>
+      </ul>
+
+      <h3>Hast Du Fragen?</h3>
+      <p>Bitte kontaktiere uns unter: <%= mail_to 'wir@imgraetzl.at' %></p>
 
     </article>
 

@@ -142,10 +142,7 @@
         </div>
         <!-- /Contact Block -->
         <% if user_signed_in? && current_user == @room_offer.user || user_signed_in? && current_user.admin? %>
-          <script>
-            $('#contact-infos-block').show();
-            $('#show-contact-link').hide();
-          </script>
+          <div id="hide-contact-link"></div>
         <% else %>
           <div id="GAinfos">
             <span id="roomContact_url" data-id="<%= room_offer_url(@room_offer) =%>"></span>

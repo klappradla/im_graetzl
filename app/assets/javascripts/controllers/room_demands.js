@@ -3,8 +3,8 @@ APP.controllers.room_demands = (function() {
   function init() {
     if ($("section.room-offer-form").exists()) initRoomForm();
     if ($("#GAinfos").exists()) initshowContact();
+    if ($("#hide-contact-link").exists()) inithideContactLink();
   }
-
 
   function initshowContact(){
 
@@ -44,6 +44,11 @@ APP.controllers.room_demands = (function() {
       $('#room-contact-btn').on('click', function(event){
         click_track();
       });
+    }
+
+    function inithideContactLink(){
+      $('#contact-infos-block').show();
+      $('#show-contact-link').hide();
     }
 
 

@@ -3,6 +3,7 @@ APP.controllers.room_offers = (function() {
   function init() {
     if ($("section.room-offer-form").exists()) initRoomForm();
     if ($("#GAinfos").exists()) initshowContact();
+    if ($("#hide-contact-link").exists()) inithideContactLink();
   }
 
   function initshowContact(){
@@ -39,10 +40,16 @@ APP.controllers.room_offers = (function() {
       $(this).hide();
       click_track();
     });
+
     // Sidebar Button Click
     $('#room-contact-btn').on('click', function(event){
       click_track();
     });
+  }
+
+  function inithideContactLink(){
+    $('#contact-infos-block').show();
+    $('#show-contact-link').hide();
   }
 
 

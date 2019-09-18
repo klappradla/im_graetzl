@@ -6,7 +6,7 @@ ol.list-formal {
     display: block;
   }
   > li {
-    margin-bottom: 40px;
+    margin-bottom: 60px;
   }
   > li > ol {
     padding-left: 20px;
@@ -16,6 +16,15 @@ ol.list-formal {
     padding-left: 20px;
     list-style: disc;
     margin-bottom: 10px;
+  }
+  > li > ul > li, > li > ol > li {
+    margin-bottom: 15px;
+  }
+  > li > ol > li > ol {
+    padding-left: 20px;
+    li {
+      margin-top: 15px;
+    }
   }
   p {
     margin-bottom: 10px;

@@ -105,11 +105,11 @@
     <%= link_to tool_offers_user_path do %>
       <%= icon_tag "tacker" %> Toolteiler verwalten
     <% end %>
-    <%= link_to tool_offers_user_path(:target => "tab-buchungsarchiv") do %>
-      <%= icon_tag "archive-storage" %> Buchungsarchiv
-    <% end %>
     <%= link_to messenger_path do %>
       <%= icon_tag "speech-bubbles" %> Anfragen Messenger
+    <% end %>
+    <%= link_to tool_offers_user_path(:target => "tab-buchungsarchiv") do %>
+      <%= icon_tag "archive-storage" %> Buchungsarchiv
     <% end %>
   </section>
 
