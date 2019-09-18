@@ -31,7 +31,6 @@
   <tr>
     <td class="mcnTextContent" style="padding-left:18px; padding-right:18px;">
 
-
       <p>
         <strong>Wir bestätigen hiermit den Eingang deiner Zahlung und die erfolgreiche Buchung.</strong>
         Dein Grätzlzuckerl für die Location
@@ -42,27 +41,7 @@
         Dein Team von imGrätzl.at
       </p>
 
-      <!-- BUTTON -->
-      <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnButtonBlock" style="min-width:100%;">
-        <tbody class="mcnButtonBlockOuter">
-          <tr>
-            <td style="padding-top:0; padding-right:18px; padding-left:18px;" valign="top" align="right" class="mcnButtonBlockInner">
-              <table border="0" cellpadding="0" cellspacing="0" class="mcnButtonContentContainer" style="border-collapse: separate !important;border-top-left-radius: 4px;border-top-right-radius: 4px;border-bottom-right-radius: 4px;border-bottom-left-radius: 4px;background-color: #69A8A7;">
-                <tbody>
-                  <tr>
-                    <td align="center" valign="middle" class="mcnButtonContent" style="font-family: Arial; font-size: 16px; padding: 10px;">
-                      <%= link_to "Zum Grätzlzuckerl", zuckerls_user_url, style: "color: #FFFFFF; text-decoration: none;", target: "_blank" %>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <!-- /BUTTON -->
-
-
+      <%= render 'mailers/shared/button', title: "Zum Grätzlzuckerl", url: zuckerls_user_url %>
     </td>
   </tr>
 </table>

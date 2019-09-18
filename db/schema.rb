@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_08_204230) do
+ActiveRecord::Schema.define(version: 2019_09_17_213638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -721,6 +721,7 @@ ActiveRecord::Schema.define(version: 2019_09_08_204230) do
     t.integer "payment_status", default: 0
     t.string "stripe_source_id"
     t.string "stripe_charge_id"
+    t.decimal "tax", precision: 10, scale: 2
     t.index ["stripe_payment_intent_id"], name: "index_tool_rentals_on_stripe_payment_intent_id"
     t.index ["tool_offer_id"], name: "index_tool_rentals_on_tool_offer_id"
     t.index ["user_id"], name: "index_tool_rentals_on_user_id"

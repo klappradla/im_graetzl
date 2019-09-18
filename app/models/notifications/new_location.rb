@@ -11,24 +11,15 @@ class Notifications::NewLocation < Notification
     'Es gibt eine neue Location in deinem Grätzl'
   end
 
-  def custom_mail_vars
-    {
-      location_name: activity.trackable.name,
-      location_url: graetzl_location_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
-      location_slogan: activity.trackable.slogan,
-      location_category: activity.trackable.location_category.try(:name),
-      location_address: printable_address(activity.trackable),
-      owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.trackable),
-    }
-  end
-
   def mail_subject
     'Es gibt eine neue Location in deinem Grätzl'
   end
 
-  private
+  def location
+    activity.trackable
+  end
 
-  def printable_address(location)
+  def location_printable_address
     if location.address
       "#{location.address.street}, #{location.address.zip} #{location.address.city}"
     end

@@ -32,11 +32,15 @@ class ToolPriceCalculator
   end
 
   def total_fee
-    service_fee + insurance_fee
+    service_fee + tax + insurance_fee
   end
 
   def service_fee
-    ((basic_price - discount) * 0.12).round(2)
+    ((basic_price - discount) * 0.065).round(2)
+  end
+
+  def tax
+    (service_fee * 0.20).round(2)
   end
 
   def insurance_fee

@@ -1,0 +1,28 @@
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:300px; margin-bottom:20px; border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #efefef;" width="100%" class="mcnTextContentContainer">
+  <tbody>
+
+    <tr>
+      <td valign="top" class="mcnTextContent" style="padding-top:0; padding-left:18px; padding-bottom:9px; padding-right:18px;">
+        <%= link_to graetzl_meeting_url(notification.meeting.graetzl, notification.meeting) do %>
+          <%= image_tag Notifications::ImageService.new.cover_photo_url(notification.meeting), style: "width:100%; padding-bottom:10px; padding-top:10px;", class: "mcnImage" %>
+        <% end %>
+        <p>
+          <%= notification.meeting.name %>
+        </p>
+      </td>
+    </tr>
+
+    <tr>
+      <td valign="top" class="mcnTextContent" style="padding-top:0; padding-left:18px; padding-bottom:18px; padding-right:18px;">
+        <em>Dieses Treffen wurde abgesagt ..</em>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <%= render 'mailers/shared/button', title: "Treffen ansehen", url: graetzl_meeting_url(notification.meeting.graetzl, notification.meeting) %>
+      </td>
+    </tr>
+
+  </tbody>
+</table>

@@ -11,23 +11,41 @@ class Notifications::AlsoCommentedLocationPost < Notification
     'Es gibt neue Antworten auf Inhalte die ich auch kommentiert habe'
   end
 
-  def custom_mail_vars
-    {
-      #post_title: activity.trackable.title,
-      #post_url: graetzl_location_url(activity.trackable.graetzl, activity.trackable.author, anchor: ApplicationController.helpers.dom_id(activity.trackable), host: DEFAULT_URL_OPTIONS[:host]),
-      type: 'also_commented',
-      headline: 'Neuer Kommentar bei Location-Update:',
-      title: activity.trackable.title,
-      url: graetzl_location_url(activity.trackable.graetzl, activity.trackable.author, anchor: ApplicationController.helpers.dom_id(activity.trackable), host: DEFAULT_URL_OPTIONS[:host]),
-      comment_url: graetzl_location_url(activity.trackable.graetzl, activity.trackable.author, anchor: ApplicationController.helpers.dom_id(activity.trackable), host: DEFAULT_URL_OPTIONS[:host]),
-      comment_content: activity.recipient.content.truncate(300, separator: ' '),
-      owner_name: activity.owner.username,
-      owner_url: user_url(activity.owner, DEFAULT_URL_OPTIONS),
-      owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.owner),
-    }
+  def mail_template
+    "also_commented"
   end
 
   def mail_subject
     "#{activity.owner.username} hat einen Beitrag ebenfalls kommentiert."
+  end
+
+  def headline
+    'Neuer Kommentar bei Location-Update'
+  end
+
+  def content_title
+    location_post.title
+  end
+
+  def content_url_params
+    [location.graetzl, location]
+  end
+
+  def comment_content_preview
+    activity.recipient.content.truncate(300, separator: ' ')
+  end
+
+  def comment_url_params
+    [location.graetzl, location]
+  end
+
+  private
+
+  def location_post
+    activity.trackable
+  end
+
+  def location
+    location_post.author
   end
 end

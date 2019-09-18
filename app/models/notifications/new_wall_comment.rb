@@ -15,19 +15,12 @@ class Notifications::NewWallComment < Notification
     'Jemand hat auf meine Pinnwand geschrieben'
   end
 
-  def custom_mail_vars
-    {
-      type: 'commented',
-      headline: 'Neuer Eintrag auf deiner Pinnwand:',
-      comment_url: graetzl_user_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS) + "#comment-#{activity.recipient.id}",
-      comment_content: activity.recipient.content.truncate(300, separator: ' '),
-      owner_name: activity.owner.username,
-      owner_url: user_url(activity.owner, DEFAULT_URL_OPTIONS),
-      owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.owner)
-    }
-  end
-
   def mail_subject
     "#{activity.owner.username} hat auf deine Pinnwand geschrieben."
   end
+
+  def comment
+    activity.recipient
+  end
+
 end

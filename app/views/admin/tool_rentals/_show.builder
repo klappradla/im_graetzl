@@ -29,6 +29,7 @@ context.instance_eval do
       row :discount
       row :service_fee
       row :insurance_fee
+      row :tax
       row :total_price
       row :payment_method
       row :payment_status

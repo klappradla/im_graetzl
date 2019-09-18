@@ -1,0 +1,65 @@
+<% content_for(:above_title, "Hey #{@user.first_name},") %>
+<% content_for(:title, "Neuer Beitrag in der Gruppe:") %>
+
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
+  <tr>
+    <td style="height:30px"> </td>
+  </tr>
+  <tr>
+    <td valign="top" class="mcnTextContent" style="padding-top:0;  padding-bottom:9px; padding-left:18px; padding-right:18px;">
+      <h4 style="color:#69a8a7; font-family:Georgia; font-size:125%; font-weight:normal; font-style:italic; text-align:left;">
+        <%= @notification.group.title %>
+      </h4>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding-left:9px; padding-right:9px;">
+      <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td>
+            <span></span>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #efefef; margin-bottom:18px;" width="100%" class="mcnTextContentContainer">
+  <tbody>
+    <tr>
+      <td colspan="2" valign="center" class="mcnTextContent" style="padding-left:18px; padding-right:18px;">
+        <p>
+          <em><strong>Neuer Beitrag im Thema:</strong></em>
+        </p>
+        <p>
+          <%= link_to @notification.discussion.title, group_discussion_url(@notification.group, @notification.discussion), style: "color:#ec776a; font-size:18px;" %>
+        </p>
+      </td>
+    </tr>
+
+    <tr>
+      <td valign="center" class="mcnTextContent" style="padding-left:18px; padding-right:18px;">
+        <%= image_tag Notifications::ImageService.new.avatar_url(@notification.post.user), style: "width:60px; height:60px; border-radius: 30px; max-width:60px; min-width:60px;", class: "mcnImage" %>
+      </td>
+      <td class="mcnTextContent" style="padding-right:18px; width:100%;">
+        <p>
+          <em><strong><%= @notification.activity.owner.first_name %>:</strong></em>
+          <br>
+          <%= @notification.post.content.truncate(300, separator: ' ') %>
+        </p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" style="padding-bottom:9px;"></td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+        <%= render 'mailers/shared/button', title: "Zum Beitrag", url: group_discussion_url(@notification.group, @notification.discussion, anchor: "discussion-post-#{@notification.discussion_post.id}") %>
+      </td>
+    </tr>
+
+  </tbody>
+</table>

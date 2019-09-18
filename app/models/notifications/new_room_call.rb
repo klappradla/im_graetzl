@@ -15,22 +15,12 @@ class Notifications::NewRoomCall < Notification
     true
   end
 
-  def custom_mail_vars
-    {
-      room_title: activity.trackable.title,
-      room_url: room_call_url(activity.trackable, DEFAULT_URL_OPTIONS),
-      room_description: activity.trackable.description.truncate(255, separator: ' '),
-      room_call_starts_at: activity.trackable.starts_at,
-      room_call_ends_at: activity.trackable.ends_at,
-      cover_photo_url: Notifications::ImageService.new.cover_photo_url(activity.trackable),
-      owner_name: activity.owner.username,
-      owner_url: user_url(activity.owner, DEFAULT_URL_OPTIONS),
-      owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.trackable),
-    }
-  end
-
   def mail_subject
     "#{activity.owner.username} hat einen neuen Call gestartet."
+  end
+
+  def room_call
+    activity.trackable
   end
 
   private

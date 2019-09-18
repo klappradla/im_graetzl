@@ -15,23 +15,41 @@ class Notifications::CommentOnLocationPost < Notification
     "Meine erstellten Inhalte wurden kommentiert"
   end
 
-  def custom_mail_vars
-    {
-      #post_title: activity.trackable.title,
-      #post_url: graetzl_location_url(activity.trackable.author.graetzl, activity.trackable.author, anchor: ApplicationController.helpers.dom_id(activity.trackable), host: DEFAULT_URL_OPTIONS[:host]),
-      type: 'commented',
-      headline: 'Neuer Kommentar bei deinem Location-Update:',
-      title: activity.trackable.title,
-      url: graetzl_location_url(activity.trackable.author.graetzl, activity.trackable.author, anchor: ApplicationController.helpers.dom_id(activity.trackable), host: DEFAULT_URL_OPTIONS[:host]),
-      comment_url: graetzl_location_url(activity.trackable.author.graetzl, activity.trackable.author, anchor: ApplicationController.helpers.dom_id(activity.trackable), host: DEFAULT_URL_OPTIONS[:host]),
-      comment_content: activity.recipient.content.truncate(300, separator: ' '),
-      owner_name: activity.owner.username,
-      owner_url: user_url(activity.owner, DEFAULT_URL_OPTIONS),
-      owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.owner)
-    }
+  def mail_template
+    "commented"
   end
 
   def mail_subject
     "#{activity.owner.username} hat dein Location-Update kommentiert."
+  end
+
+  def headline
+    'Neuer Kommentar bei deinem Location-Update'
+  end
+
+  def content_title
+    location_post.title
+  end
+
+  def content_url_params
+    [location.graetzl, location]
+  end
+
+  def comment_content_preview
+    activity.recipient.content.truncate(300, separator: ' ')
+  end
+
+  def comment_url_params
+    [location.graetzl, location]
+  end
+
+  private
+
+  def location_post
+    activity.trackable
+  end
+
+  def location
+    location_post.author
   end
 end

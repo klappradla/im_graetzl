@@ -1,0 +1,37 @@
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
+  <tbody>
+    <tr>
+      <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
+        Hallo <%= @user.first_name %>,
+        <p>
+          ich habe deine Locationseite auf imGrätz.at gerade freigeschaltet.<br>
+          <%= link_to graetzl_location_url(@location.graetzl, @location), graetzl_location_url(@location.graetzl, @location) %>
+        </p>
+
+        <p>
+          Und: Deine Locationseite wird außerdem im nächsten Stadtteil Newsletter vorgestellt.
+        </p>
+
+        <p>
+          Wir schicken dir in den nächsten Wochen immer wieder kurze Schritt-für-Schritt Anleitungen,
+          damit du langsam reinkommst, was du mit deiner Locationseite so alles machen kannst.
+        </p>
+
+        <p>
+          Du kannst mir aber natürlich auch gerne jetzt gleich schreiben, wenn du Fragen zu imGrätzl.at hast.
+        </p>
+
+        <p>
+          Viel Freude auf imGrätzl.at<br>
+          Mirjam
+        </p>
+
+        <p>
+          PS: Wenn dir die Idee von imGrätzl gefällt, würden wir uns sehr freuen, wenn du die
+          Möglichkeiten an andere Selbständige, kleinen Unternehmen, Kulturschaffende oder Vereine
+          weiterträgst.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>

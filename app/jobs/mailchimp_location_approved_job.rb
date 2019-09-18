@@ -5,6 +5,8 @@ class MailchimpLocationApprovedJob < ApplicationJob
     list_id = Rails.application.secrets.mailchimp_list_id
 
     location.users.each do |user|
+      UsersMailer.location_approved(location, user).deliver_now
+
       member_id = mailchimp_member_id(user)
 
       begin

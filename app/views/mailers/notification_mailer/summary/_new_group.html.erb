@@ -1,0 +1,47 @@
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #efefef; margin-bottom:18px;" width="100%" class="mcnTextContentContainer">
+  <tbody>
+
+    <tr>
+      <td valign="center" class="mcnTextContent" style="padding-left:18px; padding-right:18px;">
+        <%= link_to group_url(notification.group) do %>
+          <%= image_tag Notifications::ImageService.new.cover_photo_url(notification.group), style: "width:200px; height:100px; border-radius:5px; max-width:200px; min-width:100px;", class: "mcnImage" %>
+        <% end %>
+      </td>
+
+      <td valign="center" class="mcnTextContent" width="100%">
+        <p>
+          <%= link_to notification.group.title, group_url(notification.group), style: "color:#ec776a; font-size:18px;" %>
+        </p>
+        <%= image_tag Notifications::ImageService.new.avatar_url(notification.activity.owner), style: "width: 40px; height: 40px; border-radius: 20px; display: block; float:left; margin-right:10px;" %>
+        <p>
+          <em>Organisiert von</em><br>
+          <%= notification.activity.owner.full_name %>
+       	</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" style="padding-bottom:9px; padding-top:9px; padding-left:18px; padding-right:18px;" class="mcnTextContent">
+        <p>
+          <%= notification.group.description.truncate(255, separator: ' ') %>
+        </p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" style="padding-bottom:9px;">
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+        <%= render 'mailers/shared/button', title: "Zur Gruppe", url: group_url(notification.group) %>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" style="padding-bottom:5px;">
+      </td>
+    </tr>
+
+</tbody></table>

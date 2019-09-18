@@ -11,24 +11,20 @@ class Notifications::NewGroupDiscussion < Notification
     'Eine neue Diskussion wurde gestartet.'
   end
 
-  def custom_mail_vars
-    {
-      group_name: group.title,
-      discussion_title: activity.trackable.title,
-      discussion_url: group_discussion_url(group, activity.trackable, :target => "topic"),
-      discussion_category: activity.trackable.discussion_category.try(:title),
-      post_content: activity.trackable.discussion_posts.first.content.truncate(300, separator: ' '),
-      owner_firstname: activity.owner.first_name,
-      owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.trackable.user),
-    }
-  end
-
   def mail_subject
     "Neues Thema von #{activity.owner.first_name} in der Gruppe #{group.title}."
   end
 
+  def discussion
+    activity.trackable
+  end
+
   def group
-    activity.trackable.group
+    discussion.group
+  end
+
+  def initial_post
+    discussion.discussion_posts.first
   end
 
 end

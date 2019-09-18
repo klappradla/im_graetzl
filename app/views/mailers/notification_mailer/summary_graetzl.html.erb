@@ -1,0 +1,20 @@
+<% content_for(:above_title, "Hey #{@user.first_name},") %>
+<% if @period == :daily %>
+  <% content_for(:title, "Neuigkeiten von Heute") %>
+<% elsif @period == :weekly %>
+  <% content_for(:title, "Neuigkeiten der Woche") %>
+<% end %>
+<% content_for(:subtitle, "aus dem Grätzl #{@user.graetzl.name}") %>
+
+<% NotificationMailer::GRAETZL_SUMMARY_BLOCKS.each do |block_title, notification_types| %>
+  <% notifications = @notifications.select{|n| n.class.in?(notification_types)} %>
+  <% next if notifications.empty? %>
+
+  <%= render 'summary/block_header', title: block_title %>
+
+  <% notifications.each do |notification| %>
+    <%= render "summary/#{notification.mail_template}", notification: notification %>
+  <% end %>
+
+
+<% end %>

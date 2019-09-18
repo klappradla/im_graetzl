@@ -15,18 +15,12 @@ class Notifications::NewUserPost < Notification
     true
   end
 
-  def custom_mail_vars
-    {
-      post_title: activity.trackable.title,
-      post_content: activity.trackable.content.truncate(255, separator: ' '),
-      owner_name: activity.owner.username,
-      owner_url: user_url(activity.owner, DEFAULT_URL_OPTIONS),
-      owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.trackable.author),
-      post_url: graetzl_user_post_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS)
-    }
+  def mail_subject
+    "Neue Idee im Grätzl #{user_post.graetzl.name}"
   end
 
-  def mail_subject
-    "Neue Idee im Grätzl #{activity.trackable.graetzl.name}"
+  def user_post
+    activity.trackable
   end
+
 end

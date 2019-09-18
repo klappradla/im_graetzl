@@ -70,14 +70,16 @@ module User::Notifiable
     save
   end
 
-  def pending_daily_notifications
-    notifications.ready_to_be_sent.where(["bitmask & ? > 0", daily_mail_notifications])
+  def pending_notifications(period)
+    if period == :daily
+      notifications.ready_to_be_sent.where(["bitmask & ? > 0", daily_mail_notifications])
+    elsif period == :weekly
+      notifications.ready_to_be_sent.where(["bitmask & ? > 0", weekly_mail_notifications])
+    else
+      notification.none
+    end
   end
-
-  def pending_weekly_notifications
-    notifications.ready_to_be_sent.where(["bitmask & ? > 0", weekly_mail_notifications])
-  end
-
+  
   private
 
   def set_default_notification_settings

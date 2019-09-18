@@ -19,25 +19,12 @@ class Notifications::NewMeeting < Notification
     true
   end
 
-  def custom_mail_vars
-    {
-      owner_name: activity.owner.username,
-      owner_url: user_url(activity.owner, DEFAULT_URL_OPTIONS),
-      owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.owner),
-      meeting_name: activity.trackable.name.truncate(70, separator: ' '),
-      meeting_url: graetzl_meeting_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
-      meeting_starts_at: (activity.trackable.starts_at_date && activity.trackable.starts_at_time) ? "#{I18n.localize(activity.trackable.starts_at_date, format:'%A %d. %B')}, #{I18n.localize(activity.trackable.starts_at_time, format:'%H:%M')} Uhr" : '',
-      meeting_starts_at_date: activity.trackable.starts_at_date ? I18n.localize(activity.trackable.starts_at_date, format:'%A %d. %B') : '',
-      meeting_starts_at_time: activity.trackable.starts_at_time ? I18n.localize(activity.trackable.starts_at_time, format:'%H:%M') : '',
-      meeting_starts_at_day: activity.trackable.starts_at_date ? I18n.localize(activity.trackable.starts_at_date, format:'%d.') : '',
-      meeting_starts_at_month: activity.trackable.starts_at_date ? I18n.localize(activity.trackable.starts_at_date, format:'%b') : '',
-      meeting_description: activity.trackable.description.truncate(255, separator: ' '),
-      cover_photo_url: Notifications::ImageService.new.cover_photo_url(activity.trackable),
-    }
+  def mail_subject
+    "Neues Treffen im Grätzl #{meeting.graetzl.name}"
   end
 
-  def mail_subject
-    "Neues Treffen im Grätzl #{activity.trackable.graetzl.name}"
+  def meeting
+    activity.trackable
   end
 
   private

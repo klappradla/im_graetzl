@@ -15,19 +15,12 @@ class Notifications::AttendeeInUsersMeeting < Notification
     'Mein erstelltes Treffen hat einen neuen Teilnehmer'
   end
 
-  def custom_mail_vars
-    {
-      meeting_name: activity.trackable.name,
-      meeting_url: graetzl_meeting_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
-      owner_name: activity.owner.username,
-      owner_url: user_url(activity.owner, DEFAULT_URL_OPTIONS),
-      owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.owner),
-      cover_photo_url: Notifications::ImageService.new.cover_photo_url(activity.trackable)
-    }
-  end
-
   def mail_subject
     "Neuer Teilnehmer an deinem Treffen"
+  end
+
+  def meeting
+    activity.trackable
   end
 
   def meeting_id

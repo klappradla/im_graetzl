@@ -14,7 +14,11 @@ class ToolRental < ApplicationRecord
   end
 
   def total_price
-    basic_price - discount + service_fee + insurance_fee
+    basic_price - discount + total_fee
+  end
+
+  def total_fee
+    service_fee + tax + insurance_fee
   end
 
   def owner

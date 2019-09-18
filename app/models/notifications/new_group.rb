@@ -11,19 +11,12 @@ class Notifications::NewGroup < Notification
     'Es gibt eine neue Gruppe im Grätzl'
   end
 
-  def custom_mail_vars
-    {
-      group_name: activity.trackable.title,
-      group_description: activity.trackable.description.truncate(255, separator: ' '),
-      group_url: group_url(activity.trackable),
-      owner_name: activity.owner.full_name,
-      owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.owner),
-      cover_photo_url: Notifications::ImageService.new.cover_photo_url(activity.trackable),
-    }
-  end
-
   def mail_subject
     "Neue Gruppe von #{activity.owner.full_name}."
+  end
+
+  def group
+    activity.trackable
   end
 
 end

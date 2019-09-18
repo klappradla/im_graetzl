@@ -9,4 +9,14 @@ class UsersMailer < ApplicationMailer
     )
   end
 
+  def location_approved(location, user)
+    @location = location
+    @user = user
+    mail(
+      to: @user.email,
+      from: "Mirjam | imGrätzl.at <mirjam@imgraetzl.at>",
+      subject: "Deine Location wurde freigeschalten",
+    )
+  end
+
 end

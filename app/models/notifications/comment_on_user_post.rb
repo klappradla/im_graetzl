@@ -15,23 +15,38 @@ class Notifications::CommentOnUserPost < Notification
     'Meine erstellten Inhalte wurden kommentiert'
   end
 
-  def custom_mail_vars
-    {
-      #post_title: activity.trackable.content.truncate(50, separator: ' '),
-      #post_url: graetzl_user_post_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
-      type: 'commented',
-      headline: 'Neuer Kommentar bei deinem Beitrag:',
-      title: activity.trackable.content.truncate(50, separator: ' '),
-      url: graetzl_user_post_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
-      comment_url: graetzl_user_post_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
-      comment_content: activity.recipient.content.truncate(300, separator: ' '),
-      owner_name: activity.owner.username,
-      owner_url: user_url(activity.owner, DEFAULT_URL_OPTIONS),
-      owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.owner)
-    }
+  def mail_template
+    "commented"
   end
 
   def mail_subject
     "#{activity.owner.username} hat deinen Beitrag kommentiert."
   end
+
+  def headline
+    'Neuer Kommentar bei deinem Beitrag'
+  end
+
+  def content_title
+    user_post.title
+  end
+
+  def content_url_params
+    [user_post.graetzl, user_post]
+  end
+
+  def comment_content_preview
+    activity.recipient.content.truncate(300, separator: ' ')
+  end
+
+  def comment_url_params
+    [user_post.graetzl, user_post]
+  end
+
+  private
+
+  def user_post
+    activity.trackable
+  end
+
 end

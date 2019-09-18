@@ -11,25 +11,38 @@ class Notifications::CommentOnRoomDemand < Notification
     "Meine erstellten Inhalte wurden kommentiert"
   end
 
-  def custom_mail_vars
-    {
-      #room_title: activity.trackable.slogan,
-      #room_url: room_demand_url(activity.trackable, DEFAULT_URL_OPTIONS),
-      room_type: I18n.t("activerecord.attributes.room_demand.demand_types_active.#{activity.trackable.demand_type}"),
-      room_description: activity.trackable.demand_description,
-      type: 'commented',
-      headline: 'Neuer Kommentar bei deinem Raumteiler:',
-      title: activity.trackable.slogan,
-      url: room_demand_url(activity.trackable, DEFAULT_URL_OPTIONS),
-      comment_url: room_demand_url(activity.trackable, DEFAULT_URL_OPTIONS),
-      comment_content: activity.recipient.content.truncate(300, separator: ' '),
-      owner_name: activity.owner.username,
-      owner_url: user_url(activity.owner, DEFAULT_URL_OPTIONS),
-      owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.owner)
-    }
+  def mail_template
+    "commented"
   end
 
   def mail_subject
     "#{activity.owner.username} hat dein Raumgesuch kommentiert."
   end
+
+  def headline
+    'Neuer Kommentar bei deinem Raumteiler'
+  end
+
+  def content_title
+    room_demand.slogan
+  end
+
+  def content_url_params
+    room_demand
+  end
+
+  def comment_content_preview
+    activity.recipient.content.truncate(300, separator: ' ')
+  end
+
+  def comment_url_params
+    room_demand
+  end
+
+  private
+
+  def room_demand
+    activity.trackable
+  end
+
 end

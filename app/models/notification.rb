@@ -36,7 +36,7 @@ class Notification < ApplicationRecord
   end
 
   def self.triggered_by?(activity)
-    activity.key == self::TRIGGER_KEY
+    activity.key.in?(Array(self::TRIGGER_KEY))
   end
 
   def self.dasherized
@@ -59,7 +59,7 @@ class Notification < ApplicationRecord
           display_on_website = u.enabled_website_notification?(klass) && u != activity.owner
           n = klass.create(activity: activity, user: u, display_on_website: display_on_website)
           send_immediate_email = u.enabled_mail_notification?(klass, :immediate)
-          SendMailNotificationJob.perform_later(n) if send_immediate_email
+          NotificationMailer.send_immediate(n).deliver_later if send_immediate_email
           notified_user_ids[u.id] = true if display_on_website || send_immediate_email
         end
       end
@@ -71,26 +71,7 @@ class Notification < ApplicationRecord
   end
 
   def mail_template
-    "notification-#{type.demodulize.underscore.dasherize}"
-  end
-
-  def mail_vars
-    { type: type.demodulize.underscore }.merge(custom_mail_vars)
-  end
-
-  def basic_mail_vars
-    if activity.trackable.respond_to?(:graetzl)
-      [
-        { name: 'graetzl_name', content: activity.trackable.graetzl.name },
-        { name: 'graetzl_url', content: graetzl_url(activity.trackable.graetzl, DEFAULT_URL_OPTIONS) },
-      ]
-    else
-      []
-    end
-  end
-
-  def custom_mail_vars
-    raise NotImplementedError, "custom_mail_vars method not implemented for #{self.class}"
+    type.demodulize.underscore
   end
 
   def mail_subject

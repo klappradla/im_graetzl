@@ -1,0 +1,11 @@
+<%- tool_offer = notification.activity.trackable %>
+
+<%= content_tag(:li, id: dom_id(notification), data: { behavior: 'notification-item' }, class: 'notification-item') do %>
+  <%= link_to tool_offer do %>
+    <%= attachment_image_tag notification.activity.owner, :avatar, :fill, 40, 40, fallback: 'avatar/user/40x40.png', class: 'img-round' %>
+    <div class="msg">
+      <div class="timeago">vor <%= time_ago_in_words(notification.activity.created_at) %></div>
+      <span class="username"><%= notification.activity.owner.username %></span> hat einen Toolteiler ebenfalls kommentiert
+    </div>
+  <% end %>
+<% end %>

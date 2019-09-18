@@ -11,23 +11,38 @@ class Notifications::AlsoCommentedMeeting < Notification
     'Es gibt neue Antworten auf Inhalte die ich auch kommentiert habe'
   end
 
-  def custom_mail_vars
-    {
-      #meeting_name: activity.trackable.name,
-      #meeting_url: graetzl_meeting_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
-      type: 'also_commented',
-      headline: 'Neuer Kommentar bei Treffen:',
-      title: activity.trackable.name,
-      url: graetzl_meeting_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
-      comment_url: graetzl_meeting_url(activity.trackable.graetzl, activity.trackable, DEFAULT_URL_OPTIONS),
-      comment_content: activity.recipient.content.truncate(300, separator: ' '),
-      owner_name: activity.owner.username,
-      owner_url: user_url(activity.owner, DEFAULT_URL_OPTIONS),
-      owner_avatar_url: Notifications::ImageService.new.avatar_url(activity.owner)
-    }
+  def mail_template
+    "also_commented"
   end
 
   def mail_subject
     "#{activity.owner.username} hat ein Treffen ebenfalls kommentiert."
   end
+
+  def headline
+    'Neuer Kommentar bei einem Treffen'
+  end
+
+  def content_title
+    meeting.name
+  end
+
+  def content_url_params
+    [meeting.graetzl, meeting]
+  end
+
+  def comment_content_preview
+    activity.recipient.content.truncate(300, separator: ' ')
+  end
+
+  def comment_url_params
+    [meeting.graetzl, meeting]
+  end
+
+  private
+
+  def meeting
+    activity.trackable
+  end
+
 end

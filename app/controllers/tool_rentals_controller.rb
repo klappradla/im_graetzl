@@ -80,6 +80,7 @@ class ToolRentalsController < ApplicationController
       discount: @calculator.discount,
       service_fee: @calculator.service_fee,
       insurance_fee: @calculator.insurance_fee,
+      tax: @calculator.tax,
     )
     @tool_rental.save!
 

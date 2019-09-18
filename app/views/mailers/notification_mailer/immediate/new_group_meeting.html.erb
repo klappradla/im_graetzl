@@ -1,0 +1,62 @@
+<% content_for(:above_title, "Hey #{@user.first_name},") %>
+<% content_for(:title, "Neues Treffen in der Gruppe:") %>
+
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
+  <tr>
+    <td style="height:30px"> </td>
+  </tr>
+  <tr>
+    <td valign="top" class="mcnTextContent" style="padding-top:0;  padding-bottom:9px; padding-left:18px; padding-right:18px;">
+      <h4 style="color:#69a8a7; font-family:Georgia; font-size:125%; font-weight:normal; font-style:italic; text-align:left;">
+        <%= @notification.group.title %>
+      </h4>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding-left:9px; padding-right:9px;">
+      <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td>
+            <span></span>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:300px; margin-bottom:20px; border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #efefef;" width="100%" class="mcnTextContentContainer">
+  <tbody>
+    <tr>
+      <td valign="top" class="mcnTextContent" style="padding-top:0; padding-left:18px; padding-bottom:18px; padding-right:18px;">
+        <table>
+          <tr>
+            <td>
+              <%= image_tag Notifications::ImageService.new.avatar_url(@notification.activity.owner), style: "width:30px; height:30px; border-radius: 15px; max-width:30px; min-width:30px;", class: "mcnImage" %>
+            </td>
+            <td>
+            </td>
+            <td style="font-size:12px; line-height:16px;">
+              <%= link_to @notification.activity.owner.first_name, user_url(@notification.activity.owner), style: "color:#ec776a; font-size:12px;" %>
+              <br>
+              <%= I18n.localize(@notification.meeting.starts_at_date, format:'%A %d. %B') if @notification.meeting.starts_at_date %>
+            </td>
+          </tr>
+        </table>
+
+        <%= image_tag Notifications::ImageService.new.cover_photo_url(@notification.meeting), style: "width:100%; padding-bottom:10px; padding-top:10px;", class: 'mcnImage' %>
+
+        <p>
+          <%= @notification.meeting.name %>
+        </p>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <%= render 'mailers/shared/button', title: "Zum Gruppentreffen", url: graetzl_meeting_url(@notification.meeting.graetzl, @notification.meeting) %>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
