@@ -2,24 +2,25 @@
 <% content_for(:title, "persönliche Neuigkeiten") %>
 <% content_for(:subtitle, "für dich zusammengefasst:") %>
 
-<% if @attendee_notifications.present? %>
+<% if @notifications[:atendees].present? %>
   <%= render 'summary/block_header', title: 'Neuer Teilnehmer bei einem Treffen' %>
-  <% @attendee_notifications.group_by(&:meeting).each do |meeting, notifications| %>
+  <% @notifications[:atendees].group_by(&:meeting).each do |meeting, notifications| %>
     <%= render "summary/attendees_by_meeting", meeting: meeting, notifications: notifications %>
   <% end %>
 <% end %>
 
 <% NotificationMailer::PERSONAL_SUMMARY_BLOCKS.each do |block_title, notification_types| %>
-  <% notifications = @personal_notifications.select{|n| n.class.in?(notification_types)} %>
+  <% notifications = @notifications[:personal].select{|n| n.class.in?(notification_types)} %>
   <% next if notifications.empty? %>
 
   <%= render 'summary/block_header', title: block_title %>
+
   <% notifications.each do |notification| %>
     <%= render "summary/#{notification.mail_template}", notification: notification %>
   <% end %>
 <% end %>
 
-<% @group_notifications.group_by(&:group).each do |group, group_notifications| %>
+<% @notifications[:groups] && @notifications[:groups].group_by(&:group).each do |group, group_notifications| %>
   <%= render 'summary/block_header', title: "Gruppe: „#{group.title}“" %>
 
   <% NotificationMailer::GROUP_SUMMARY_TYPES.each do |type| %>

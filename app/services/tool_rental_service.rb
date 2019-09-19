@@ -1,7 +1,6 @@
 class ToolRentalService
 
   def initiate_card_payment(user, tool_offer, amount, payment_method_id)
-
     if user.stripe_customer_id.blank?
       stripe_customer = Stripe::Customer.create(email: user.email)
       user.update(stripe_customer_id: stripe_customer.id)
@@ -115,8 +114,11 @@ class ToolRentalService
     elsif tool_rental.payment_method == 'klarna'
       Stripe::Charge.capture(tool_rental.stripe_charge_id)
     end
-    tool_rental.update(rental_status: :approved, payment_status: :payment_success)
+
+    invoice_number = "Toolteiler #{tool_rental.tool_offer_id} / #{ToolRental.next_invoice_number}"
+    tool_rental.update(rental_status: :approved, payment_status: :payment_success, invoice_number: invoice_number)
     ToolOfferMailer.rental_approved(tool_rental).deliver_later
+    ToolOfferMailer.renter_invoice(tool_rental).deliver_later
   rescue Stripe::InvalidRequestError => e
     tool_rental.update(rental_status: :rejected, payment_status: :payment_failed)
   end
@@ -139,6 +141,11 @@ class ToolRentalService
     end
     tool_rental.canceled!
     ToolOfferMailer.rental_canceled(tool_rental).deliver_later
+  end
+
+  def confirm_return(tool_rental)
+    tool_rental.update(rental_status: :return_confirmed)
+    ToolOfferMailer.owner_invoice(tool_rental).deliver_later
   end
 
 end

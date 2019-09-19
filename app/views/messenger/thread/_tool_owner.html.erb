@@ -58,21 +58,28 @@
     <% elsif tool_rental.return_pending? %>
 
       <div class="note">
-        Confirm return.
-        <%= link_to "Ablehnen", confirm_return_tool_rental_path(tool_rental), method: :post, class: "btn-primary" %>
+        Wir hoffen die Verleihung deines Toolteilers war erfolgreich und es hat alles gepasst.
+        Bitte bestätige nun die Rückgabe deines Toolteilers.
+        Die Auszahlung deiner Mieteinnahmen auf dein Konto erfolgt innerhalb von 5 Tagen nach Bestätigung der Rückgabe.
+      </div>
+      <div class="buttons">
+        <%= link_to "Rückgabe bestätigen", confirm_return_tool_rental_path(tool_rental), method: :post, class: "btn-primary -small -mint" %>
       </div>
 
     <% elsif tool_rental.return_confirmed? %>
 
       <div class="note">
-        Return confirmed.
+        <strong>Rückgabe bestätigt.</strong><br>
         <% if tool_rental.owner_rating.blank? %>
-          Please rate of the renter:
+          Bitte bewerte nun den Verleihvorgang bzw. den Mieter:
+          <div class="rating-container">
+            <%= user_rating(thread_other_user(@thread)) %>
+          </div>
           <% (1..5).each do |rating| %>
             <%= link_to rating, leave_rating_tool_rental_path(tool_rental, rating: rating), method: 'post' %>
           <% end %>
         <% else %>
-          Thank you for your rating.
+          Danke für deine Bewertung.
         <% end %>
       </div>
 

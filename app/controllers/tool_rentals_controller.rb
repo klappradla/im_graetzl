@@ -112,7 +112,7 @@ class ToolRentalsController < ApplicationController
 
   def confirm_return
     @tool_rental = current_user.tool_offer_rentals.return_pending.find(params[:id])
-    @tool_rental.update(rental_status: :return_confirmed)
+    ToolRentalService.new.confirm_return(@tool_rental)
     redirect_to messenger_url(thread_id: @tool_rental.user_message_thread.id)
   end
 

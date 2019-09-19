@@ -4,7 +4,7 @@
     ['Sofort', :immediate],
     ['Täglich', :daily],
     ['Wöchentlich', :weekly]
-  ], current_user.enabled_mail_notification(type)), id: type.dasherized, data: {
+  ], current_user.enabled_mail_notification(type)), data: {
     behavior: "mail-notification-toggle", type: type.name
   } %>
 </div>

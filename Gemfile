@@ -26,6 +26,8 @@ gem 'jbuilder'
 gem 'kaminari'
 gem 'remotipart'
 gem 'sitemap_generator'
+gem 'prawn'
+gem 'prawn-table'
 gem 'google_custom_search_api'
 
 gem 'mandrill-api', '~> 1.0.53', require: "mandrill"
@@ -38,6 +40,7 @@ gem 'refile', github: 'refile/refile', require: 'refile/rails'
 gem 'refile-mini_magick', github: 'refile/refile-mini_magick'
 gem 'sinatra', github: 'sinatra/sinatra'
 gem 'refile-s3'
+gem 'aws-sdk', '~> 2'
 
 gem 'sass-rails'
 gem 'uglifier'

@@ -38,7 +38,15 @@
         </div>
         <div class="costname">
           Rabatt <%= @calculator.days %> Tage
-          <%= render 'shared/questionmark', hint_id: "2", hint_message: 'Dieser Toolteiler hat 10% Rabatt ab einer Miete von 2 Tagen.' %>
+          <% if @tool_offer.two_day_discount? && @tool_offer.weekly_discount? %>
+            <%= render 'shared/questionmark', hint_id: "2", hint_message: "Dieser Toolteiler hat #{@tool_offer.two_day_discount}% Rabatt ab einer Miete von 2 Tagen und #{@tool_offer.weekly_discount}% ab einer Miete von einer Woche." %>
+          <% elsif @tool_offer.two_day_discount? %>
+            <%= render 'shared/questionmark', hint_id: "2", hint_message: "Dieser Toolteiler hat #{@tool_offer.two_day_discount}% Rabatt ab einer Miete von 2 Tagen." %>
+          <% elsif @tool_offer.weekly_discount? %>
+            <%= render 'shared/questionmark', hint_id: "2", hint_message: "Dieser Toolteiler hat #{@tool_offer.weekly_discount}% Rabatt ab einer Miete von einer Woche." %>
+          <% else %>
+            <%= render 'shared/questionmark', hint_id: "2", hint_message: "Dieser Toolteiler hat keinen Tages oder Wochenrabatt." %>
+          <% end %>
         </div>
       </li>
       <li>
@@ -47,7 +55,7 @@
         </div>
         <div class="costname">
           Servicegebühr inkl. Versicherung
-          <%= render 'shared/questionmark',hint_id: "3" ,hint_message: 'Hier kommt noch der Versicherungstext rein sauber' %>
+          <%= render 'shared/questionmark',hint_id: "3" ,hint_message: 'Beinhaltet die imGrätzl Servicegebühr (inkl. Mwst) und die Toolteiler Versicherung.' %>
         </div>
       </li>
       <li class=sum>

@@ -57,20 +57,24 @@
     <% elsif tool_rental.return_pending? %>
 
       <div class="note">
-        Waiting for the owner to confirm return.
+        Wir hoffen die Miete des Toolteilers war erfolgreich und es hat alles gepasst.
+        Sobald <%= thread_other_user(@thread).full_name %> die Rückgabe des Toolteilers bestätigt hat, kannst du hier den Mietvorgang bewerten.
       </div>
 
     <% elsif tool_rental.return_confirmed? %>
 
       <div class="note">
-        Return confirmed.
+        <strong><%= thread_other_user(@thread).first_name %> hat die Rückgabe bestätigt.</strong><br>
         <% if tool_rental.owner_rating.blank? %>
-          Please rate of the owner:
+          Bitte bewerte nun den Verleihvorgang bzw. <%= thread_other_user(@thread).first_name %> als Vermieter:
+          <div class="rating-container">
+            <%= user_rating(thread_other_user(@thread)) %>
+          </div>
           <% (1..5).each do |rating| %>
             <%= link_to rating, leave_rating_tool_rental_path(tool_rental, rating: rating), method: 'post' %>
           <% end %>
         <% else %>
-          Thank you for your rating
+          Danke für deine Bewertung.
         <% end %>
       </div>
 

@@ -9,6 +9,18 @@ class ToolRental < ApplicationRecord
 
   PAYMENT_METHODS = ['card', 'klarna', 'eps'].freeze
 
+  def self.next_invoice_number
+    ToolRental.where("invoice_number IS NOT NULL").count + 1
+  end
+
+  def owner
+    tool_offer.user
+  end
+
+  def renter
+    user
+  end
+
   def days
     (rent_to - rent_from).to_i + 1
   end
@@ -21,12 +33,18 @@ class ToolRental < ApplicationRecord
     service_fee + tax + insurance_fee
   end
 
-  def owner
-    tool_offer.user
+  def owner_payout_amount
+    basic_price - discount - service_fee - tax
   end
 
-  def renter
-    user
+  def owner_invoice
+    bucket = Aws::S3::Resource.new.bucket('invoices.imgraetzl.at')
+    bucket.object("#{Rails.env}/tool_rentals/#{id}-owner.pdf")
+  end
+
+  def renter_invoice
+    bucket = Aws::S3::Resource.new.bucket('invoices.imgraetzl.at')
+    bucket.object("#{Rails.env}/tool_rentals/#{id}-renter.pdf")
   end
 
 end

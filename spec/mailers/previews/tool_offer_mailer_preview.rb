@@ -19,4 +19,12 @@ class ToolOfferMailerPreview < ActionMailer::Preview
   def rental_return_pending
     ToolOfferMailer.rental_return_pending(ToolRental.last)
   end
+
+  def renter_invoice
+    ToolOfferMailer.renter_invoice(ToolRental.last)
+  end
+
+  def owner_invoice
+    ToolOfferMailer.owner_invoice(ToolRental.last)
+  end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_17_213638) do
+ActiveRecord::Schema.define(version: 2019_09_19_113512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -714,14 +714,15 @@ ActiveRecord::Schema.define(version: 2019_09_17_213638) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "payment_method"
-    t.decimal "basic_price", precision: 10, scale: 2
-    t.decimal "discount", precision: 10, scale: 2
-    t.decimal "service_fee", precision: 10, scale: 2
-    t.decimal "insurance_fee", precision: 10, scale: 2
+    t.decimal "basic_price", precision: 10, scale: 2, default: "0.0"
+    t.decimal "discount", precision: 10, scale: 2, default: "0.0"
+    t.decimal "service_fee", precision: 10, scale: 2, default: "0.0"
+    t.decimal "insurance_fee", precision: 10, scale: 2, default: "0.0"
     t.integer "payment_status", default: 0
     t.string "stripe_source_id"
     t.string "stripe_charge_id"
-    t.decimal "tax", precision: 10, scale: 2
+    t.decimal "tax", precision: 10, scale: 2, default: "0.0"
+    t.string "invoice_number"
     t.index ["stripe_payment_intent_id"], name: "index_tool_rentals_on_stripe_payment_intent_id"
     t.index ["tool_offer_id"], name: "index_tool_rentals_on_tool_offer_id"
     t.index ["user_id"], name: "index_tool_rentals_on_user_id"

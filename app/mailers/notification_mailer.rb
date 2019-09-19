@@ -32,6 +32,18 @@ class NotificationMailer < ApplicationMailer
     'Neue Gruppen' => [
       Notifications::NewGroup
     ],
+    'Neuer Raumteiler Call' => [
+      Notifications::NewRoomCall
+    ],
+    'Neue Räume zum Andocken' => [
+      Notifications::NewRoomOffer
+    ],
+    'Auf der Suche nach Raum' => [
+      Notifications::NewRoomDemand
+    ],
+    'Neuer Tool Offers' => [
+      Notifications::NewToolOffer
+    ],
   }
 
   def summary_graetzl(user, period)
@@ -51,41 +63,6 @@ class NotificationMailer < ApplicationMailer
       to: @user.email,
       from: "imGrätzl.at | Neuigkeiten <neuigkeiten@imgraetzl.at>",
       subject: "#{@user.graetzl.name} - Neue Treffen & Location Updates",
-    )
-  end
-
-  ROOMS_SUMMARY_BLOCKS = {
-    'Neuer Raumteiler Call' => [
-      Notifications::NewRoomCall
-    ],
-    'Neue Räume zum Andocken' => [
-      Notifications::NewRoomOffer
-    ],
-    'Auf der Suche nach Raum' => [
-      Notifications::NewRoomDemand
-    ],
-    'Neuer Tool Offers' => [
-      Notifications::NewToolOffer
-    ],
-  }
-
-  def summary_rooms(user, period)
-    @user, @period = user, period
-    @notifications = user.pending_notifications(@period).where(
-      type: ROOMS_SUMMARY_BLOCKS.values.flatten.map(&:to_s)
-    )
-    return if @notifications.empty?
-
-    @notifications.update_all(sent: true)
-
-    headers(
-      "X-MC-GoogleAnalytics" => 'staging.imgraetzl.at, www.imgraetzl.at',
-      "X-MC-GoogleAnalyticsCampaign" => "notification-mail",
-    )
-    mail(
-      to: @user.email,
-      from: "imGrätzl.at | Raumteiler <raumteiler@imgraetzl.at>",
-      subject: "#{@user.graetzl.name} - Neue Räume & Raumsuchende",
     )
   end
 
@@ -120,21 +97,22 @@ class NotificationMailer < ApplicationMailer
 
   def summary_personal(user, period)
     @user, @period = user, period
-    @attendee_notifications = user.pending_notifications(@period).where(
+
+    @notifications[:atendees] = user.pending_notifications(@period).where(
       type: "Notifications::AttendeeInUsersMeeting"
     )
-    @personal_notifications = user.pending_notifications(@period).where(
+    @notifications[:personal] = user.pending_notifications(@period).where(
       type: PERSONAL_SUMMARY_BLOCKS.values.flatten.map(&:to_s)
     )
-    @group_notifications = user.pending_notifications(@period).where(
+    @notifications[:groups] = user.pending_notifications(@period).where(
       type: GROUP_SUMMARY_TYPES.map(&:to_s)
     )
 
-    return if @attendee_notifications.empty? && @personal_notifications.empty? && @group_notifications.empty?
+    if @notifications.values.all?(&:empty?)
+      return
+    end
 
-    @attendee_notifications.update_all(sent: true)
-    @personal_notifications.update_all(sent: true)
-    @group_notifications.update_all(sent: true)
+    @notifications.values.each { |n| n.update_all(sent: true) }
 
     headers(
       "X-MC-GoogleAnalytics" => 'staging.imgraetzl.at, www.imgraetzl.at',

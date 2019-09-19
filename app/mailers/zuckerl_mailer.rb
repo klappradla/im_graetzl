@@ -15,6 +15,7 @@ class ZuckerlMailer < ApplicationMailer
   def invoice(zuckerl)
     @zuckerl = zuckerl
     @user = @zuckerl.location.boss
+    headers("X-MC-Tags" => "zuckerl-paid")
     mail(to: @user.email, bcc_address: 'michael@imgraetzl.at', subject: "Zahlungsbestätigung deines Grätzlzuckerls")
   end
 

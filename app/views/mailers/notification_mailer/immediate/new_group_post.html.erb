@@ -40,13 +40,13 @@
 
     <tr>
       <td valign="center" class="mcnTextContent" style="padding-left:18px; padding-right:18px;">
-        <%= image_tag Notifications::ImageService.new.avatar_url(@notification.post.user), style: "width:60px; height:60px; border-radius: 30px; max-width:60px; min-width:60px;", class: "mcnImage" %>
+        <%= image_tag Notifications::ImageService.new.avatar_url(@notification.discussion_post.user), style: "width:60px; height:60px; border-radius: 30px; max-width:60px; min-width:60px;", class: "mcnImage" %>
       </td>
       <td class="mcnTextContent" style="padding-right:18px; width:100%;">
         <p>
           <em><strong><%= @notification.activity.owner.first_name %>:</strong></em>
           <br>
-          <%= @notification.post.content.truncate(300, separator: ' ') %>
+          <%= @notification.discussion_post.content.truncate(300, separator: ' ') %>
         </p>
       </td>
     </tr>

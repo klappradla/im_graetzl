@@ -2,6 +2,7 @@ class UsersMailer < ApplicationMailer
 
   def welcome_email(user)
     @user = user
+    headers("X-MC-Tags" => "welcome-mail")
     mail(
       to: @user.email,
       from: "Mirjam | imGrätzl.at <mirjam@imgraetzl.at>",
@@ -12,6 +13,7 @@ class UsersMailer < ApplicationMailer
   def location_approved(location, user)
     @location = location
     @user = user
+    headers("X-MC-Tags" => "location-approved")
     mail(
       to: @user.email,
       from: "Mirjam | imGrätzl.at <mirjam@imgraetzl.at>",
