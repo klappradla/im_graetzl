@@ -78,8 +78,9 @@ section.usersetup {
   }
 
   &.-toolteiler {
-    .paperCard .wrp {
-      padding: 15px 30px 30px 30px;
+    // REMOVE TMP CLASS AFTER WE CAN USE AXA LOGO
+    .paperCard.-tmp .wrp {
+      h3 {margin-bottom:0px;}
     }
   }
 
