@@ -33,7 +33,7 @@ module ToolsHelper
       content_tag(:span, '☆', class: user.rating > 3.5 ? 'fill' : nil) +
       content_tag(:span, '☆', class: user.rating > 4.5 ? 'fill' : nil)
     end
-    html += content_tag(:small, "#{user.rating} von 5", class: 'txt')
+    html += content_tag(:small, "(#{user.ratings_count})", class: 'txt')
     html
   end
 

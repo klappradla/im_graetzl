@@ -109,7 +109,7 @@ class User < ApplicationRecord
 
   def recalculate_rating
     ratings = (tool_rentals.pluck(:renter_rating) + owned_tool_rentals.pluck(:owner_rating)).compact
-    update(rating: ratings.sum * 1.0 / ratings.size) if ratings.present?
+    update(rating: ratings.sum * 1.0 / ratings.size, ratings_count: ratings.size) if ratings.present?
   end
 
   private
