@@ -33,20 +33,20 @@ class ToolRentalInvoice
   end
 
   def add_renter_price_info(pdf, tool_rental)
-    pdf.text "Invoice number: #{tool_rental.invoice_number}"
-    pdf.text "Date Issued: #{tool_rental.created_at.to_date}"
+    pdf.text "Rechnungsnummer: #{tool_rental.invoice_number}"
+    pdf.text "Datum: #{tool_rental.created_at.to_date}"
     pdf.move_down 10
-    pdf.text "Your Invoice", size: 20, style: :bold
+    pdf.text "Rechnung", size: 20, style: :bold
     pdf.move_down 10
 
     table_data = []
-    table_data << ["Rental ID", "Tool", "Start Date", "End Date", "Lister", "Price"]
+    table_data << ["ID", "Toolteiler", "Start", "Ende", "Vermieter", "Preis"]
     table_data << [tool_rental.id, tool_rental.tool_offer.title, tool_rental.rent_from, tool_rental.rent_to, tool_rental.owner.full_name, format_price(tool_rental.basic_price)]
-    table_data << [nil, nil, nil, nil, "Discount", format_price(-tool_rental.discount)] if tool_rental.discount?
-    table_data << [nil, nil, nil, nil, "Service Renter Fee", format_price(tool_rental.service_fee)]
+    table_data << [nil, nil, nil, nil, "Rabatt", format_price(-tool_rental.discount)] if tool_rental.discount?
+    table_data << [nil, nil, nil, nil, "Servicegebühr", format_price(tool_rental.service_fee)]
     table_data << [nil, nil, nil, nil, "(20% MwSt.)", format_price(tool_rental.tax)]
-    table_data << [nil, nil, nil, nil, "Total Fee (Incl. Fee, Insurance and Tax)", format_price(tool_rental.total_fee)]
-    table_data << [nil, nil, nil, nil, "Total Price", format_price(tool_rental.total_price)]
+    table_data << [nil, nil, nil, nil, "Servicegebühr Gesamt (Inkl. Versicherung und MwSt)", format_price(tool_rental.total_fee)]
+    table_data << [nil, nil, nil, nil, "Gesamt", format_price(tool_rental.total_price)]
 
     pdf.table(table_data, width: pdf.bounds.width, column_widths: {5 => 60}) do
       cells.borders = []
@@ -67,20 +67,20 @@ class ToolRentalInvoice
   end
 
   def add_owner_price_info(pdf, tool_rental)
-    pdf.text "Invoice number: #{tool_rental.invoice_number}"
-    pdf.text "Date Issued: #{tool_rental.created_at.to_date}"
+    pdf.text "Rechnungsnummer: #{tool_rental.invoice_number}"
+    pdf.text "Datum: #{tool_rental.created_at.to_date}"
     pdf.move_down 10
-    pdf.text "Credit note", size: 20, style: :bold
+    pdf.text "Gutschrift", size: 20, style: :bold
     pdf.move_down 10
 
     table_data = []
-    table_data << ["Rental ID", "Tool", "Start Date", "End Date", "Renter", "Price"]
+    table_data << ["ID", "Toolteiler", "Start", "Ende", "Mieter", "Preis"]
     table_data << [tool_rental.id, tool_rental.tool_offer.title, tool_rental.rent_from, tool_rental.rent_to, tool_rental.renter_name, format_price(tool_rental.basic_price)]
-    table_data << [nil, nil, nil, nil, "Discount", format_price(-tool_rental.discount)] if tool_rental.discount?
-    table_data << [nil, nil, nil, nil, "Service OWNER Fee", format_price(-tool_rental.service_fee)]
+    table_data << [nil, nil, nil, nil, "Rabatt", format_price(-tool_rental.discount)] if tool_rental.discount?
+    table_data << [nil, nil, nil, nil, "Servicegebühr", format_price(-tool_rental.service_fee)]
     table_data << [nil, nil, nil, nil, "(20% MwSt.)", format_price(-tool_rental.tax)]
-    table_data << [nil, nil, nil, nil, "Total Owner Fee", format_price(-tool_rental.service_fee - tool_rental.tax)]
-    table_data << [nil, nil, nil, nil, "Payout Amount", format_price(tool_rental.owner_payout_amount)]
+    table_data << [nil, nil, nil, nil, "Servicegebühr Gesamt (Inkl. MwSt)", format_price(-tool_rental.service_fee - tool_rental.tax)]
+    table_data << [nil, nil, nil, nil, "Auszahlungsbetrag", format_price(tool_rental.owner_payout_amount)]
 
     pdf.table(table_data, width: pdf.bounds.width, column_widths: {5 => 60}) do
       cells.borders = []
@@ -94,8 +94,11 @@ class ToolRentalInvoice
   end
 
   def add_company_info(pdf)
-    pdf.text "Imgraetzl Company"
-    pdf.text "Imgraetzl Address and other info"
+    pdf.text "imGrätzl.at wird betrieben von:"
+    pdf.text "morgenjungs GmbH"
+    pdf.text "Ausstellungsstrasse 9/9"
+    pdf.text "A-1020 Wien"
+    pdf.text "wir@imgraetzl.at"
   end
 
   def format_price(amount)

@@ -1,32 +1,15 @@
-.rating-container .txt {
-  padding-left:3px;
-}
-.rating-block {
-  display: flex;
-  align-items: center;
-  .img-round {
-    width: 30px !important;
-    height: 30px !important;
-    padding: 2px !important;
-    margin:0 !important;
-    margin-right: 10px !important;
-  }
-}
-
-.rating {
-  unicode-bidi: bidi-override;
-  direction: rtl;
+.user-rating {
   display: inline-block;
   text-align: left;
-}
-.rating > span {
-  display: inline-block;
-  position: relative;
-  width: 1.1em;
-}
-.rating > span:hover:before,
-.rating > span:hover ~ span:before, span.fill ~ span:before {
-   content: "\2605";
-   position: absolute;
-   color: $color-ambient-mint-dark;
+  padding-right: 3px;
+  span {
+    display: inline-block;
+    position: relative;
+    width: 1.1em;
+  }
+  span.fill:before {
+    content: "\2605";
+    position: absolute;
+    color: $color-ambient-mint-dark;
+  }
 }

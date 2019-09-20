@@ -99,19 +99,19 @@ class ToolRentalsController < ApplicationController
   end
 
   def approve
-    @tool_rental = current_user.tool_offer_rentals.pending.find(params[:id])
+    @tool_rental = current_user.owned_tool_rentals.pending.find(params[:id])
     ToolRentalService.new.approve(@tool_rental)
     redirect_to messenger_url(thread_id: @tool_rental.user_message_thread.id)
   end
 
   def reject
-    @tool_rental = current_user.tool_offer_rentals.pending.find(params[:id])
+    @tool_rental = current_user.owned_tool_rentals.pending.find(params[:id])
     ToolRentalService.new.reject(@tool_rental)
     redirect_to messenger_url(thread_id: @tool_rental.user_message_thread.id)
   end
 
   def confirm_return
-    @tool_rental = current_user.tool_offer_rentals.return_pending.find(params[:id])
+    @tool_rental = current_user.owned_tool_rentals.return_pending.find(params[:id])
     ToolRentalService.new.confirm_return(@tool_rental)
     redirect_to messenger_url(thread_id: @tool_rental.user_message_thread.id)
   end
@@ -121,8 +121,10 @@ class ToolRentalsController < ApplicationController
 
     if @tool_rental.owner == current_user
       @tool_rental.update(renter_rating: params[:rating])
+      @tool_rental.renter.recalculate_rating
     elsif @tool_rental.renter == current_user
       @tool_rental.update(owner_rating: params[:rating])
+      @tool_rental.owner.recalculate_rating
     end
 
     redirect_to messenger_url(thread_id: @tool_rental.user_message_thread.id)

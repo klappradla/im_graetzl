@@ -1,0 +1,34 @@
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:300px; margin-bottom:20px; border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #efefef;" width="100%" class="mcnTextContentContainer">
+  <tbody>
+
+    <tr>
+      <td valign="top" class="mcnTextContent" style="padding-top:0; padding-left:18px; padding-bottom:18px; padding-right:18px;">
+        <table>
+          <tr>
+            <td>
+              <%= image_tag Notifications::ImageService.new.avatar_url(notification.activity.owner), style: "width:30px; height:30px; border-radius: 15px; max-width:30px; min-width:30px;", class: "mcnImage" %>
+            </td>
+            <td> </td>
+            <td style="font-size:12px; line-height:16px;">
+              <%= link_to notification.activity.owner.username, user_url(notification.activity.owner), style: "color:#ec776a; font-size:12px;" %>
+              <br>
+              verleiht ab <%= notification.tool_offer.daily_price(7).to_i %> € pro Tag:
+            </td>
+          </tr>
+        </table>
+        <%= link_to tool_offer_url(notification.tool_offer), target: "_blank" do %>
+          <%= image_tag Notifications::ImageService.new.cover_photo_url(notification.tool_offer), style: "width:100%; padding-bottom:10px; padding-top:10px;", class: "mcnImage" %>
+        <% end %>
+
+        <p><%= notification.tool_offer.title.truncate(75, separator: ' ') %></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <%= render 'mailers/shared/button', title: "Toolteiler ausleihen", url: tool_offer_url(notification.tool_offer), style: "width:100%;" %>
+      </td>
+    </tr>
+
+  </tbody>
+</table>

@@ -1,7 +1,7 @@
 class NotificationMailerPreview < ActionMailer::Preview
 
   def send_immediate
-    notification = Notifications::NewGroupPost.first
+    notification = Notifications::NewMeeting.first
     NotificationMailer.send_immediate(notification)
   end
 
@@ -10,13 +10,13 @@ class NotificationMailerPreview < ActionMailer::Preview
   end
 
   def summary_personal
-    NotificationMailer.summary_personal(prepare_user, :daily)
+    NotificationMailer.summary_personal(prepare_user, :weekly)
   end
 
   private
 
   def prepare_user
-    user = User.find(1)
+    user = User.find(4)
     user.notifications.update_all(sent: false)
     user
   end

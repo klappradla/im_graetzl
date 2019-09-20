@@ -86,11 +86,11 @@
       <td valign="center" class="mcnTextContent" style="padding-left:18px; padding-right:18px;">
         <p>
           Mietpreis: <%= number_to_currency(@tool_rental.basic_price - @tool_rental.discount, unit: "€") %><br>
-          Servicegebühr inkl. Versicherung: <%= number_to_currency(@tool_rental.service_fee + @tool_rental.insurance_fee, unit: "€") %> <br>
+          Servicegebühr inkl. Versicherung und MwSt: <%= number_to_currency(@tool_rental.total_fee, unit: "€") %> <br>
           <strong>Gesamtkosten: <%= number_to_currency(@tool_rental.total_price, unit: "€") %></strong>
         </p>
         <p>
-          Deine Zahlung wurde erfolgreich gebucht. Du findest die Rechnung eingeloggt in deinem <%= link_to "Buchungsarchiv", tool_offers_user_url(:target => "tab-buchungsarchiv"), style: "color:#ec776a;" %>.
+          Deine Zahlung wurde erfolgreich gebucht. Du findest die Rechnung angehängt und eingeloggt in deinem <%= link_to "Buchungsarchiv", tool_offers_user_url(:target => "tab-buchungsarchiv"), style: "color:#ec776a;" %>.
         </p>
       </td>
     </tr>

@@ -107,6 +107,18 @@ section.userprofile {
       }
     }
 
+    .rating-block {
+      display: flex;
+      align-items: center;
+      .img-round {
+        width: 30px !important;
+        height: 30px !important;
+        padding: 2px !important;
+        margin:0 !important;
+        margin-right: 10px !important;
+      }
+    }
+
     .col2 {
       white-space: pre-wrap;
       @include font-size-primaryFont('large');

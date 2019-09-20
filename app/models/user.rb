@@ -28,7 +28,7 @@ class User < ApplicationRecord
   has_many :room_offers
   has_many :room_demands
   has_many :tool_offers
-  has_many :tool_offer_rentals, through: :tool_offers, source: :tool_rentals
+  has_many :owned_tool_rentals, through: :tool_offers, source: :tool_rentals
   has_many :tool_rentals
 
   has_and_belongs_to_many :business_interests
@@ -105,6 +105,11 @@ class User < ApplicationRecord
 
   def meetings
     self.initiated_meetings + self.attended_meetings
+  end
+
+  def recalculate_rating
+    ratings = (tool_rentals.pluck(:renter_rating) + owned_tool_rentals.pluck(:owner_rating)).compact
+    update(rating: ratings.sum * 1.0 / ratings.size) if ratings.present?
   end
 
   private

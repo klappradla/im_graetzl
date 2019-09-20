@@ -9,6 +9,9 @@ class ToolOfferMailer < ApplicationMailer
 
   def rental_approved(tool_rental)
     @tool_rental = tool_rental
+    invoice_pdf = ToolRentalInvoice.new.generate_for_renter(@tool_rental)
+    @tool_rental.renter_invoice.put(body: invoice_pdf)
+    attachments['imgraetzl-rechnung.pdf'] = invoice_pdf
     headers("X-MC-Tags" => "tool-rental-approved")
     mail(to: @tool_rental.renter.email, subject: "Deine Toolteiler Buchung wurde bestätigt")
   end

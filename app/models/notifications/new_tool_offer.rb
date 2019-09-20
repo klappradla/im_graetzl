@@ -18,4 +18,9 @@ class Notifications::NewToolOffer < Notification
   def mail_subject
     "Neuer Toolteiler im Grätzl #{activity.trackable.graetzl.name}"
   end
+
+  def tool_offer
+    activity.trackable
+  end
+
 end

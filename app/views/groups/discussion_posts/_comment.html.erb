@@ -11,7 +11,9 @@
     <% end %>
     <a name="comment-<%= comment.id -%>"></a>
     <div class="userCreateInfo">
-      <%= attachment_image_tag comment.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+      <%= link_to comment.user do %>
+        <%= attachment_image_tag comment.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+      <% end %>
       <div class="infos">
         <div class="name"><%= link_to comment.user.full_name, comment.user %></div>
         <div class="date">

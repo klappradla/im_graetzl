@@ -1,10 +1,12 @@
 <div class="user-post" id="discussion-post-<%= post.id %>">
   <div class="user">
     <div class="avatar">
-      <%= attachment_image_tag post.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+      <%= link_to post.user do %>
+        <%= attachment_image_tag post.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+      <% end %>
     </div>
     <div class="infos">
-      <div class="name"><%= post.user.full_name %></div>
+      <div class="name"><%= link_to post.user.full_name, post.user %></div>
       <div class="date">
         <%= I18n.localize(post.created_at, format:'%a, %d. %B %Y, %H:%M') %>
       </div>

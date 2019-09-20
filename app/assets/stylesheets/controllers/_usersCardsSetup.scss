@@ -77,20 +77,23 @@ section.usersetup {
 
   }
 
-  .introcontainer.-toolteiler {
+  &.-toolteiler {
     .paperCard .wrp {
       padding: 15px 30px 30px 30px;
     }
   }
 
-  .introcontainer.-zuckerl {
+  &.-zuckerl {
     .paperCard .wrp {
       padding-top: 180px;
       background-image: url(image_path('illu/illu-zuckerlbag.jpg'));
     }
+    .btn-primary {
+      margin-bottom: 20px;
+    }
   }
 
-  .introcontainer.-rooms {
+  &.-rooms {
     .paperCard .wrp {
       padding-top: 180px;
       background-image: url(image_path('illu/illu-werkbank-plain.png'));

@@ -1,15 +1,19 @@
 <div class="cardbox-wrp" data-behavior="masonry-card">
-  <div class="paperCard -cord1RT -illuteaser -insurance">
+  <div class="paperCard -cord1RT -illuteaser -insurance -tmp">
     <div class="wrp">
+      <!--
       <h3>Mit Unterstützung von:</h3>
       <div class="insurance">
         <%= link_to info_versicherung_path do %><%= image_tag('logo-axa.png') %><% end %>
       </div>
+      -->
+      <h3>Mit Unterstützung von AXA XL Insurance</h3>
       <p>
         Geräte, die du auf imGrätzl.at - Toolteiler verleihst sind im Rahmen der Versicherungsbedingungen
         bis zu 15.000 € versichert. Einfach und unbürokratisch.
         Mehr Infos zu der Versicherungspolizze und den allgemeinen Versicherungsbedingungen findest du <%= link_to 'hier', info_versicherung_path %>.
       </p>
+      <%= link_to 'Neuen Toolteiler erstellen', new_tool_offer_path, class: 'btn-primary -mint' %>
     </div>
     <div class="card"></div>
   </div>

@@ -198,6 +198,13 @@ section.help {
       background-image: none;
       //opacity: 0.7;
     }
+
+    // REMOVE TMP CLASS AFTER WE CAN USE AXA LOGO
+    &.-tmp {
+      .axa-logo {
+        background-image: url(image_path('illu/illu-werkbank-plain.png'));
+      }
+    }
   }
 
   // ----- HELP STARTPAGE ------ //

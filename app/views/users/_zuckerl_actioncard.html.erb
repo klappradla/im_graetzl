@@ -1,0 +1,10 @@
+<div class="paperCard -illuteaser -cord1RT">
+  <div class="wrp">
+    <h3>Schalte jetzt dein Grätzlzuckerl für den Monat <%= I18n.localize Time.now.end_of_month+1.day, format: '%B' %>.</h3>
+    <%= link_to 'Grätzlzuckerl buchen', new_zuckerl_path, class: 'btn-primary' %>
+    <div class="zuckerlfaqlink">Du hast Fragen zum Grätzlzuckerl?
+      <%= link_to 'Hier gibts Antworten.', info_infos_zum_graetzlzuckerl_path %>
+    </div>
+  </div>
+  <div class="card"></div>
+</div>

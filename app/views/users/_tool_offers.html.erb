@@ -1,6 +1,6 @@
 <% if @tool_offers.empty? %>
 
-  <div class="introcontainer -toolteiler">
+  <div class="introcontainer">
 
     <div class="introtxt">
 
@@ -36,7 +36,7 @@
       </p>
 
     </div>
-    <%= render 'tool_offers/action_card', user: current_user, create_link: true %>
+    <%= render 'tool_offers/action_card', user: current_user, create_link: false %>
   </div>
 
 <% else %>
@@ -45,7 +45,7 @@
     <%= render @tool_offers, manage_buttons: true %>
   </div>
   <div class="action-card-container">
-    <%= render 'tool_offers/action_card', user: current_user, create_link: true %>
+    <%= render 'tool_offers/action_card', user: current_user, create_link: false %>
   </div>
 
 <% end %>

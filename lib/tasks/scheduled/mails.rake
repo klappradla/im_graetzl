@@ -4,7 +4,6 @@ namespace :scheduled do
     puts "Rake daily_summary_mail start at #{Time.now}"
     User.find_each do |user|
       Notification::SummaryMail.new(user, :graetzl, :daily).deliver
-      Notification::SummaryMail.new(user, :rooms, :daily).deliver
       Notification::SummaryMail.new(user, :personal, :daily).deliver
     end
   end
@@ -14,7 +13,6 @@ namespace :scheduled do
     puts "Rake weekly_summary_mail start at #{Time.now}"
     User.find_each do |user|
       Notification::SummaryMail.new(user, :graetzl, :weekly).deliver if Date.today.tuesday?
-      Notification::SummaryMail.new(user, :rooms, :weekly).deliver if Date.today.thursday?
       Notification::SummaryMail.new(user, :personal, :weekly).deliver if Date.today.saturday?
     end
   end
@@ -22,14 +20,12 @@ namespace :scheduled do
   task test_daily_summary_mail: :environment do
     user = User.find_by(email: "michael.walchhuetter@gmail.com")
     Notification::SummaryMail.new(user, :graetzl, :daily).deliver
-    Notification::SummaryMail.new(user, :rooms, :daily).deliver
     Notification::SummaryMail.new(user, :personal, :daily).deliver
   end
 
   task test_weekly_summary_mail: :environment do
     user = User.find_by(email: "michael.walchhuetter@gmail.com")
     Notification::SummaryMail.new(user, :graetzl, :weekly).deliver
-    Notification::SummaryMail.new(user, :rooms, :weekly).deliver
     Notification::SummaryMail.new(user, :personal, :weekly).deliver
   end
 

@@ -184,3 +184,14 @@
     transform: rotate(-1deg);
   }
 }
+// REMOVE .TMP Class AFTER WE CAN USE AXA LOGO
+.paperCard.-insurance.-tmp .wrp {
+  padding: 180px 30px 30px 30px;
+  background-position: center top 15px;
+  background-size: auto 180px;
+  background-repeat: no-repeat;
+  background-image: url(image_path('illu/illu-werkbank-plain.png'));
+  h3 {
+    margin-bottom:0px;
+  }
+}

@@ -363,6 +363,25 @@ section.messenger-page {
           font-weight: bold;
         }
       }
+      .leave-rating-container {
+        width: 150px;
+        margin: auto;
+        .star {
+          display: inline-block;
+          position: relative;
+          font-size: 20px;
+          text-decoration: none;
+          color: $color-ambient-mint-dark;
+        }
+        &:hover .star::before {
+          content: "\2605";
+          position: absolute;
+          color: $color-ambient-mint-dark;
+        }
+        .star:hover ~ .star::before {
+          content: '';
+        }
+      }
     }
 
     .action-box {

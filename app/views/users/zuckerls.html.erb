@@ -1,9 +1,16 @@
-<section class="usersetup">
-  <div class="introcontainer -zuckerl">
+<section class="usersetup -zuckerl">
+
+<% if @zuckerls.empty? %>
+
+  <div class="introcontainer">
     <div class="introtxt">
-      <h1>Dein <span>Grätzlzuckerl</span></h1>
-      <p>Mit einem Grätzlzuckerl hast du die Möglichkeit günstig, einfach und unkompliziert <strong>Werbung für dein spezielles
-        Angebot in deinem Grätzl und Bezirk</strong> zu schalten.</p>
+
+      <div class="hl-subtext">
+        <h1><em>Deine Grätzlzuckerl</em></h1>
+        <p>Mit einem Grätzlzuckerl hast du die Möglichkeit günstig, einfach und unkompliziert Werbung für dein spezielles
+          Angebot in deinem Grätzl und Bezirk zu schalten.</p>
+      </div>
+
       <p>Als Grätzlzuckerl eignen sich besondere <strong>Angebote, Gutscheine oder Rabattaktionen, aber auch Werbung für deine
         Produkte</strong>.</p>
       <p>Grätzlzuckerl können immer für den kommenden Monat gebucht werden und laufen dann einen vollen Monat. Ein
@@ -14,22 +21,22 @@
         im Bezirk gesendet wird.</p>
       <p><strong>Aber das Schönste daran:</strong> Mit den Einnahmen aus den Grätzlzuckerln werden die Initiativen & Aktiven in deinem
         Stadtteil finanziell unterstützt und du entscheidest welche.</p>
+
     </div>
-    <div class="paperCard -illuteaser -cord1RT">
-      <div class="wrp">
-        <h3>Schalte jetzt dein Grätzlzuckerl für den Monat <%= I18n.localize Time.now.end_of_month+1.day, format: '%B' %>.</h3>
-        <%= link_to 'Grätzlzuckerl buchen', new_zuckerl_path, class: 'btn-primary' %>
-        <div class="zuckerlfaqlink">Du hast Fragen zum Grätzlzuckerl?
-          <%= link_to 'Hier gibts Antworten.', info_infos_zum_graetzlzuckerl_path %>
-        </div>
-      </div>
-      <div class="card"></div>
-    </div>
+    <%= render partial: 'users/zuckerl_actioncard' %>
   </div>
-  <% if @zuckerls.present? %>
-    <h2 class="hl-main">Deine <span>gebuchten Grätzlzuckerl</span> verwalten</h2>
-    <div class="cardBoxCollection -tripple">
-      <%= render partial: 'users/zuckerl', collection: @zuckerls %>
-    </div>
-  <% end %>
+
+<% else %>
+
+  <h2 class="hl-main">Deine <span>Grätzlzuckerl</span> verwalten</h2>
+
+  <div class="cardBoxCollection -tripple" data-behavior="zuckerls-card-container">
+    <%= render partial: 'users/zuckerl', collection: @zuckerls %>
+  </div>
+  <div class="action-card-container">
+    <%= render partial: 'users/zuckerl_actioncard' %>
+  </div>
+
+<% end %>
+
 </section>

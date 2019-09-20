@@ -6,7 +6,7 @@
     <%= attachment_image_tag tool_offer.user, :avatar, :fill, 40, 40, fallback: 'avatar/user/40x40.png', class: 'img-round' %>
     <div class="msg">
       <div class="timeago">vor <%= time_ago_in_words(notification.activity.created_at) %></div>
-      <span class="username"><%= notification.activity.owner.username %></span> hat einen neuen Tool im Grätzl <span class="matter"><%= graetzl.name %></span> erstellt
+      <span class="username"><%= notification.activity.owner.username %></span> hat einen neuen Toolteiler im Grätzl <span class="matter"><%= graetzl.name %></span> erstellt
     </div>
   <% end %>
 <% end %>

@@ -7,9 +7,10 @@
       </td>
     </tr>
 
-    <% notifications.each do |notification| %>
       <tr>
         <td valign="center" class="mcnTextContent" style="padding-left:18px;">
+
+          <% notifications.each do |notification| %>
           <table align="left" border="0" cellpadding="0" cellspacing="0" style="float:left; margin-right:16px; margin-bottom:16px;">
             <tr>
               <td align="center">
@@ -31,9 +32,10 @@
               </td>
             </tr>
           </table>
+          <% end %>
+
         </td>
       </tr>
-    <% end %>
 
   </tbody>
 </table>

@@ -1,4 +1,4 @@
-<section class="usersetup">
+<section class="usersetup -location">
 
   <% if @locations.present? %>
     <h2 class="hl-main">Deine <span>Location</span> verwalten</h2>
@@ -7,7 +7,7 @@
     </div>
     <%= link_to 'Weitere Location hinzufügen', new_location_path, class: 'btn-secondary -grey -small addlocation' %>
   <% else %>
-    <div class="introcontainer -location">
+    <div class="introcontainer">
       <div class="introtxt">
         <div class="step-element">
           <h2><span class="number">1.</span> Richte dir deine Location ein</h2>

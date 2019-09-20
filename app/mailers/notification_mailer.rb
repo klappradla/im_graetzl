@@ -32,6 +32,9 @@ class NotificationMailer < ApplicationMailer
     'Neue Gruppen' => [
       Notifications::NewGroup
     ],
+    'Neue Toolteiler in deinem Grätzl' => [
+      Notifications::NewToolOffer
+    ],
     'Neuer Raumteiler Call' => [
       Notifications::NewRoomCall
     ],
@@ -40,9 +43,6 @@ class NotificationMailer < ApplicationMailer
     ],
     'Auf der Suche nach Raum' => [
       Notifications::NewRoomDemand
-    ],
-    'Neuer Tool Offers' => [
-      Notifications::NewToolOffer
     ],
   }
 
@@ -53,21 +53,24 @@ class NotificationMailer < ApplicationMailer
     )
     return if @notifications.empty?
 
-    @notifications.update_all(sent: true)
-
     headers(
+      "X-MC-Tags" => "summary-graetzl-mail",
       "X-MC-GoogleAnalytics" => 'staging.imgraetzl.at, www.imgraetzl.at',
       "X-MC-GoogleAnalyticsCampaign" => "notification-mail",
     )
     mail(
       to: @user.email,
-      from: "imGrätzl.at | Neuigkeiten <neuigkeiten@imgraetzl.at>",
-      subject: "#{@user.graetzl.name} - Neue Treffen & Location Updates",
+      from: "imGrätzl.at <neuigkeiten@imgraetzl.at>",
+      subject: "Neues aus dem Grätzl #{@user.graetzl.name}",
     )
+    @notifications.update_all(sent: true)
   end
 
   PERSONAL_SUMMARY_BLOCKS = {
-    "Änderungen in einem Treffen" => [
+    'Neuer Kommentar auf deiner Pinnwand' => [
+      Notifications::NewWallComment,
+    ],
+    "Änderungen an einem Treffen" => [
       Notifications::MeetingCancelled, Notifications::MeetingUpdated,
     ],
     "Neuer Kommentar bei" => [
@@ -80,9 +83,6 @@ class NotificationMailer < ApplicationMailer
       Notifications::AlsoCommentedAdminPost, Notifications::AlsoCommentedLocationPost,
       Notifications::AlsoCommentedMeeting, Notifications::AlsoCommentedRoomDemand,
       Notifications::AlsoCommentedRoomOffer, Notifications::AlsoCommentedUserPost,
-    ],
-    'Neuer Kommentar auf deiner Pinnwand' => [
-      Notifications::NewWallComment,
     ]
   }
 
@@ -98,6 +98,7 @@ class NotificationMailer < ApplicationMailer
   def summary_personal(user, period)
     @user, @period = user, period
 
+    @notifications = {}
     @notifications[:atendees] = user.pending_notifications(@period).where(
       type: "Notifications::AttendeeInUsersMeeting"
     )
@@ -112,9 +113,8 @@ class NotificationMailer < ApplicationMailer
       return
     end
 
-    @notifications.values.each { |n| n.update_all(sent: true) }
-
     headers(
+      "X-MC-Tags" => "summary-personal-mail",
       "X-MC-GoogleAnalytics" => 'staging.imgraetzl.at, www.imgraetzl.at',
       "X-MC-GoogleAnalyticsCampaign" => "summary-mail",
     )
@@ -123,6 +123,7 @@ class NotificationMailer < ApplicationMailer
       from: "imGrätzl.at | Updates <updates@imgraetzl.at>",
       subject: "Persönliche Neuigkeiten für #{@user.first_name} zusammengefasst",
     )
+    @notifications.values.each { |n| n.update_all(sent: true) }
   end
 
   private

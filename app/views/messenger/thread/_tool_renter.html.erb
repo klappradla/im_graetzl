@@ -6,7 +6,7 @@
 
   <div class="title">
     Du hast nach dem Toolteiler „<%= link_to "#{tool_rental.tool_offer.title}", tool_rental.tool_offer %>“
-    bei <%= thread_other_user(@thread).full_name %> angefragt.
+    bei <%= tool_rental.owner.full_name %> angefragt.
   </div>
 
   <div class="time">
@@ -22,7 +22,7 @@
     <% if tool_rental.pending? %>
 
       <div class="note">
-        Du kannst jetzt im Chat mit <%= thread_other_user(@thread).full_name %> noch offene Fragen klären.
+        Du kannst jetzt im Chat mit <%= tool_rental.owner.full_name %> noch offene Fragen klären.
         Eine zahlungspflichtige Buchung erfolgt erst nach Bestätigung der Anfrage durch den Vermieter.
       </div>
       <div class="buttons">
@@ -38,10 +38,10 @@
     <% elsif tool_rental.approved? %>
 
       <div class="note">
-        <strong>Glückwunsch</strong>, <%= thread_other_user(@thread).first_name %> hat deine Anfrage angenommen, damit ist der Toolteiler erfolgreich gebucht.
+        <strong>Glückwunsch</strong>, <%= tool_rental.owner.first_name %> hat deine Anfrage angenommen, damit ist der Toolteiler erfolgreich gebucht.
         Die Kontaktdaten sind wie folgt, alle Details wurden dir auch per E-Mail gesendet.
         <p class="contact">
-          <%= thread_other_user(@thread).full_name %><br>
+          <%= tool_rental.owner.full_name %><br>
           <%= tool_rental.tool_offer.address.street_name %> <%= tool_rental.tool_offer.address.street_number %>, <%= tool_rental.tool_offer.address.zip %> <%= tool_rental.tool_offer.address.city %>
         </p>
         Macht euch am besten gleich hier im Chat eine genaue Uhrzeit und einen Treffpunkt aus.
@@ -58,21 +58,20 @@
 
       <div class="note">
         Wir hoffen die Miete des Toolteilers war erfolgreich und es hat alles gepasst.
-        Sobald <%= thread_other_user(@thread).full_name %> die Rückgabe des Toolteilers bestätigt hat, kannst du hier den Mietvorgang bewerten.
+        Sobald <%= tool_rental.owner.full_name %> die Rückgabe des Toolteilers bestätigt hat, kannst du hier den Mietvorgang bewerten.
       </div>
 
     <% elsif tool_rental.return_confirmed? %>
 
       <div class="note">
-        <strong><%= thread_other_user(@thread).first_name %> hat die Rückgabe bestätigt.</strong><br>
+        <strong><%= tool_rental.owner.first_name %> hat die Rückgabe bestätigt.</strong><br>
         <% if tool_rental.owner_rating.blank? %>
-          Bitte bewerte nun den Verleihvorgang bzw. <%= thread_other_user(@thread).first_name %> als Vermieter:
-          <div class="rating-container">
-            <%= user_rating(thread_other_user(@thread)) %>
+          Bitte bewerte nun den Verleihvorgang bzw. <%= tool_rental.owner.first_name %> als Vermieter:
+          <div class="leave-rating-container">
+            <% (1..5).each do |rating| %>
+              <%= link_to '☆', leave_rating_tool_rental_path(tool_rental, rating: rating), method: 'post', class: 'star' %>
+            <% end %>
           </div>
-          <% (1..5).each do |rating| %>
-            <%= link_to rating, leave_rating_tool_rental_path(tool_rental, rating: rating), method: 'post' %>
-          <% end %>
         <% else %>
           Danke für deine Bewertung.
         <% end %>

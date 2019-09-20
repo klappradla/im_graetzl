@@ -421,6 +421,13 @@ section.group-form-page {
       .title {
         font-style: italic;
       }
+      .name a {
+        text-decoration: none;
+        font-style: italic;
+      }
+      .name a:hover {
+        text-decoration: underline;
+      }
       .date {
         font-style: italic;
         color: $color-ambient-grey;
