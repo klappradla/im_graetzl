@@ -1,5 +1,7 @@
-<% content_for(:above_title, "Hey #{@tool_rental.owner.first_name}") %>
-<% content_for(:title, "Du hast eine neue Toolteiler Anfrage") %>
+<% content_for(:above_title, "Hey #{@tool_rental.renter.first_name}") %>
+<% content_for(:title, "#{@tool_rental.owner.first_name} hat die Rückgabe bestätigt.") %>
+<% content_for(:subtitle, "Bewerte nun den Verleihvorgang.") %>
+
 
 <!-- --------------- BLOCK HEADLINE --------------- -->
 <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
@@ -30,20 +32,15 @@
  <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #efefef; margin-bottom:18px;" width="100%" class="mcnTextContentContainer">
   <tbody>
     <tr>
-      <td valign="top" class="mcnTextContent" style="padding-left:18px; padding-right:18px; vertical-align:top; padding-top:20px;">
-        <%= image_tag Notifications::ImageService.new.avatar_url(@tool_rental.renter), style: "width:60px; height:60px; border-radius: 30px; max-width:60px; min-width:60px;", class: "mcnImage" %>
+      <td valign="top" class="mcnTextContent" style="padding-left:18px; padding-right:18px; vertical-align:top;">
+        <%= image_tag Notifications::ImageService.new.avatar_url(@tool_rental.owner), style: "width:60px; height:60px; border-radius: 30px; max-width:60px; min-width:60px;", class: "mcnImage" %>
       </td>
       <td class="mcnTextContent" style="padding-right:18px; width:100%;">
         <p>
-          <em><strong><%= @tool_rental.renter.full_name %> möchte deinen Toolteiler ausleihen:</strong></em><br>
-          <strong>Dauer:</strong> <%= @tool_rental.days %> Tage<br>
-          <strong>Von:</strong> <%= l(@tool_rental.rent_from, format: :short) %> bis <%= l(@tool_rental.rent_to, format: :short) %>
+          <em><strong>Du kannst nun <%= @tool_rental.owner.full_name %> als Vermieter/in bzw. den Verleihvorgang bewerten.</strong></em><br>
         </p>
         <p>
-          Wenn du deinen Toolteiler an <%= @tool_rental.renter.first_name %> verleihst, verdienst du dadurch <strong><%= number_to_currency(@tool_rental.basic_price - @tool_rental.discount, unit: "€") %></strong>.
-        </p>
-        <p>
-          Klicke auf jetzt antworten um mit <%= @tool_rental.renter.first_name %> im Toolteiler-Messenger in Kontakt zu treten.
+          Klicke auf jetzt bewerten, um deine Bewertung im Toolteiler-Messenger abzugeben.
         </p>
       </td>
     </tr>
@@ -54,7 +51,7 @@
 
     <tr>
       <td colspan="2">
-        <%= render 'mailers/shared/button', title: "Jetzt antworten", url: messenger_url(thread_id: @tool_rental.user_message_thread.id) %>
+        <%= render 'mailers/shared/button', title: "Jetzt bewerten", url: messenger_url(thread_id: @tool_rental.user_message_thread.id) %>
       </td>
     </tr>
 

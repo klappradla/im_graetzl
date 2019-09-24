@@ -5,26 +5,27 @@ class ToolOfferMailerPreview < ActionMailer::Preview
   end
 
   def rental_approved
-    ToolOfferMailer.rental_approved(ToolRental.last)
+    ToolOfferMailer.rental_approved(ToolRental.approved.last || ToolRental.last)
   end
 
   def rental_rejected
-    ToolOfferMailer.rental_rejected(ToolRental.last)
+    ToolOfferMailer.rental_rejected(ToolRental.rejected.last || ToolRental.last)
   end
 
   def rental_canceled
-    ToolOfferMailer.rental_canceled(ToolRental.last)
+    ToolOfferMailer.rental_canceled(ToolRental.canceled.last || ToolRental.last)
   end
 
   def rental_return_pending
-    ToolOfferMailer.rental_return_pending(ToolRental.last)
+    ToolOfferMailer.rental_return_pending(ToolRental.approved.last || ToolRental.last)
   end
 
-  def renter_invoice
-    ToolOfferMailer.renter_invoice(ToolRental.last)
+  def return_confirmed_renter
+    ToolOfferMailer.return_confirmed_renter(ToolRental.approved.last || ToolRental.last)
   end
 
-  def owner_invoice
-    ToolOfferMailer.owner_invoice(ToolRental.last)
+  def return_confirmed_owner
+    ToolOfferMailer.return_confirmed_owner(ToolRental.approved.last || ToolRental.last)
   end
+
 end

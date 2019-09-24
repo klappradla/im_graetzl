@@ -1,0 +1,54 @@
+<% content_for(:above_title, "Hey #{@user.first_name}") %>
+<% content_for(:title, "Du hast neue Nachrichten.") %>
+
+<!-- --------------- BLOCK HEADLINE --------------- -->
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
+   <tr>
+     <td style="height:20px"> </td>
+   </tr>
+   <tr>
+     <td valign="top" class="mcnTextContent" style="padding-top:0;  padding-bottom:9px; padding-left:18px; padding-right:18px;">
+       <h4 style="text-align:left; color:#69a8a7; font-family:Georgia; font-size:125%; font-weight:normal; font-style:italic;">
+       </h4>
+     </td>
+   </tr>
+   <tr>
+     <td style="padding-left:9px; padding-right:9px;">
+       <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%">
+         <tr>
+           <td>
+             <span></span>
+           </td>
+         </tr>
+       </table>
+     </td>
+   </tr>
+ </table>
+
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #efefef; margin-bottom:18px;" width="100%" class="mcnTextContentContainer">
+ <tbody>
+   <% @messages.each do |message| %>
+   <tr>
+     <td valign="top" class="mcnTextContent" style="padding-left:18px; padding-right:18px; vertical-align:top;">
+       <%= image_tag Notifications::ImageService.new.avatar_url(message.user), style: "width:60px; height:60px; border-radius: 30px; max-width:60px; min-width:60px;", class: "mcnImage" %>
+     </td>
+     <td class="mcnTextContent" style="padding-right:18px; width:100%;">
+       <p>
+         <em><strong><%= message.user.full_name %></strong></em>
+       </p>
+       <p>
+         <%= message.message %>
+       </p>
+     </td>
+   </tr>
+   <tr>
+     <td colspan="2" style="padding-bottom:20px;"></td>
+   </tr>
+   <% end %>
+   <tr>
+     <td colspan="2">
+       <%= render 'mailers/shared/button', title: "Jetzt antworten", url: 'xyz' %>
+     </td>
+   </tr>
+ </tbody>
+</table>

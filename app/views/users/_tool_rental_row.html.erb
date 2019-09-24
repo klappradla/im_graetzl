@@ -12,16 +12,20 @@
       <%= user.full_name %>
     <% end %>
   </div>
-  <div class="flex-row" role="cell"><%= tool_rental.rent_from.to_s(:weekday) %></div>
-  <div class="flex-row" role="cell"><%= tool_rental.rent_to.to_s(:weekday) %></div>
+  <div class="flex-row" role="cell"><%= l(tool_rental.rent_from) %></div>
+  <div class="flex-row" role="cell"><%= l(tool_rental.rent_to) %></div>
   <div class="flex-row" role="cell"><%= number_to_currency(tool_rental.total_price, unit: "€") %></div>
   <div class="flex-row wide20" role="cell">
     <%= t("activerecord.attributes.tool_rental.rental_statuses.#{tool_rental.rental_status}") %>
     <% if tool_rental.approved? %>
-      / <%= t("activerecord.attributes.tool_rental.payment_statuses.#{tool_rental.payment_status}") %>
+      <br><%= t("activerecord.attributes.tool_rental.payment_statuses.#{tool_rental.payment_status}") %>
     <% end %>
-    <% if tool_rental.payment_transfered? %>
-      <%= link_to "Gutschriften", '#', class: 'invoice-link' %>
+    <% if tool_rental.invoice_ready? %>
+      <% if user == tool_rental.owner %>
+        <br><%= link_to "Download Gutschrift", tool_rental.owner_invoice.presigned_url(:get), class: 'invoice-link' %>
+      <% elsif user == tool_rental.renter %>
+        <br><%= link_to "Download Rechnung", tool_rental.renter_invoice.presigned_url(:get), class: 'invoice-link' %>
+      <% end %>
     <% end %>
   </div>
 </div>

@@ -9,9 +9,7 @@ class ToolOfferMailer < ApplicationMailer
 
   def rental_approved(tool_rental)
     @tool_rental = tool_rental
-    invoice_pdf = ToolRentalInvoice.new.generate_for_renter(@tool_rental)
-    @tool_rental.renter_invoice.put(body: invoice_pdf)
-    attachments['imgraetzl-rechnung.pdf'] = invoice_pdf
+    attachments['imgraetzl-rechnung.pdf'] = @tool_rental.renter_invoice.get.body.read
     headers("X-MC-Tags" => "tool-rental-approved")
     mail(to: @tool_rental.renter.email, subject: "Deine Toolteiler Buchung wurde bestätigt")
   end
@@ -34,19 +32,16 @@ class ToolOfferMailer < ApplicationMailer
     mail(to: @tool_rental.owner.email, subject: "Bitte bestätige die Rückgabe deines Toolteilers.")
   end
 
-  def renter_invoice(tool_rental)
+  def return_confirmed_renter(tool_rental)
     @tool_rental = tool_rental
-    invoice_pdf = ToolRentalInvoice.new.generate_for_renter(@tool_rental)
-    @tool_rental.renter_invoice.put(body: invoice_pdf)
-    attachments['invoice.pdf'] = invoice_pdf
-    mail(to: @tool_rental.renter.email, subject: "Your receipt.")
+    headers("X-MC-Tags" => "tool-rental-return-confirmed-renter")
+    mail(to: @tool_rental.renter.email, subject: "#{@tool_rental.owner.first_name} hat die Rückgabe bestätigt. Bewerte nun den Verleihvorgang.")
   end
 
-  def owner_invoice(tool_rental)
+  def return_confirmed_owner(tool_rental)
     @tool_rental = tool_rental
-    invoice_pdf = ToolRentalInvoice.new.generate_for_owner(@tool_rental)
-    @tool_rental.owner_invoice.put(body: invoice_pdf)
-    attachments['invoice.pdf'] = invoice_pdf
-    mail(to: @tool_rental.owner.email, subject: "Your receipt.")
+    attachments['imgraetzl-gutschrift.pdf'] = @tool_rental.owner_invoice.get.body.read
+    headers("X-MC-Tags" => "tool-rental-return-confirmed-owner")
+    mail(to: @tool_rental.owner.email, subject: "Du hast die Rückgabe bestätigt. Deine Gutschrift.")
   end
 end

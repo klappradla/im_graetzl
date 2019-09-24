@@ -115,10 +115,10 @@ class ToolRentalService
       Stripe::Charge.capture(tool_rental.stripe_charge_id)
     end
 
-    invoice_number = "Toolteiler #{tool_rental.tool_offer_id} / #{ToolRental.next_invoice_number}"
+    invoice_number = "#{Date.current.year}/TT-#{tool_rental.tool_offer_id}-RT-#{tool_rental.id}/#{ToolRental.next_invoice_number}"
     tool_rental.update(rental_status: :approved, payment_status: :payment_success, invoice_number: invoice_number)
+    generate_invoices(tool_rental)
     ToolOfferMailer.rental_approved(tool_rental).deliver_later
-    #ToolOfferMailer.renter_invoice(tool_rental).deliver_later
   rescue Stripe::InvalidRequestError => e
     tool_rental.update(rental_status: :rejected, payment_status: :payment_failed)
   end
@@ -145,7 +145,17 @@ class ToolRentalService
 
   def confirm_return(tool_rental)
     tool_rental.update(rental_status: :return_confirmed)
-    ToolOfferMailer.owner_invoice(tool_rental).deliver_later
+    ToolOfferMailer.return_confirmed_owner(tool_rental).deliver_later
+    ToolOfferMailer.return_confirmed_renter(tool_rental).deliver_later
+  end
+
+  private
+
+  def generate_invoices(tool_rental)
+    renter_invoice = ToolRentalInvoice.new.generate_for_renter(tool_rental)
+    tool_rental.renter_invoice.put(body: renter_invoice)
+    owner_invoice = ToolRentalInvoice.new.generate_for_owner(tool_rental)
+    tool_rental.owner_invoice.put(body: owner_invoice)
   end
 
 end

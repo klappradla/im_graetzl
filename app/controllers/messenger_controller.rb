@@ -7,8 +7,8 @@ class MessengerController < ApplicationController
   end
 
   def update_thread
-    @thread = current_user.user_message_thread_members.find_by(user_message_thread_id: params[:thread_id])
-    @thread.update(status: params[:status])
+    @user_thread = current_user.user_message_thread_members.find_by(user_message_thread_id: params[:thread_id])
+    @user_thread.update(status: params[:status])
     redirect_to messenger_url
   end
 
@@ -19,7 +19,10 @@ class MessengerController < ApplicationController
   def fetch_new_messages
     @thread = current_user.user_message_threads.find(params[:thread_id])
     @user_messages = @thread.user_messages.includes(:user)
-    @user_messages = @user_messages.where("id > ?", params[:last_message_id]) if params[:last_message_id].present?
+    @user_messages = @user_messages.where("id > ?", params[:last_message_id]).order(:id) if params[:last_message_id].present?
+    if @user_messages.present?
+      update_last_seen(@thread, @user_messages.last)
+    end
   end
 
   def post_message
@@ -27,6 +30,7 @@ class MessengerController < ApplicationController
     message = params[:message].to_s.strip
     if message.present?
       @user_message = @thread.user_messages.create(user: current_user, message: message)
+      update_last_seen(@thread, @user_message)
     else
       head :ok
     end
@@ -38,4 +42,15 @@ class MessengerController < ApplicationController
     statuses = current_user.user_message_thread_members.pluck(:user_message_thread_id, :status).to_h
     threads.each { |t| t.status = statuses[t.id] }
   end
+
+  def update_last_seen(thread, message)
+    thread.user_message_thread_members.where(
+      user_id: current_user.id
+    ).where(
+      "last_message_seen_id < ?", message.id
+    ).update_all(
+      last_message_seen_id: message.id
+    )
+  end
+
 end
