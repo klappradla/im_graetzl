@@ -1,0 +1,6 @@
+<p> You've got some new messages</p>
+
+<% @messages.each do |message| %>
+<p><%= message.user.full_name %>:</p>
+<p><%= message.message %></p>
+<% end %>

@@ -22,7 +22,7 @@
     <!-- /Table Header-->
 
     <% @owned_tool_rentals.each do |rental| %>
-      <%= render 'users/tool_rental_row', tool_rental: rental, user: rental.user %>
+      <%= render 'users/tool_rental_row', tool_rental: rental, user: rental.renter %>
     <% end %>
   </div>
 <% end %>
@@ -41,7 +41,7 @@
     </div>
 
     <% @tool_rentals.each do |rental| %>
-      <%= render 'users/tool_rental_row', tool_rental: rental, user: rental.tool_offer.user %>
+      <%= render 'users/tool_rental_row', tool_rental: rental, user: rental.owner %>
     <% end %>
   </div>
 <% end %>

@@ -11,7 +11,7 @@
 
   <div class="time">
     <%= tool_rental.days %> Tage /
-    <%= tool_rental.rent_from.to_s(:weekday) %> – <%= tool_rental.rent_to.to_s(:weekday) %>
+    <%= l(tool_rental.rent_from, format: :short) %> - <%= l(tool_rental.rent_to, format: :short) %>
   </div>
 
   <div class="action-box">

@@ -37,6 +37,10 @@ class ToolRental < ApplicationRecord
     basic_price - discount - service_fee - tax
   end
 
+  def invoice_ready?
+    payment_success? || payment_transfered?
+  end
+
   def owner_invoice
     bucket = Aws::S3::Resource.new.bucket('invoices.imgraetzl.at')
     bucket.object("#{Rails.env}/tool_rentals/#{id}-owner.pdf")

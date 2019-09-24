@@ -37,7 +37,7 @@
         <p>
           <em><strong><%= @tool_rental.renter.full_name %> möchte deinen Toolteiler ausleihen:</strong></em><br>
           <strong>Dauer:</strong> <%= @tool_rental.days %> Tage<br>
-          <strong>Von:</strong> <%= @tool_rental.rent_from.to_s(:weekday) %> bis <%= @tool_rental.rent_to.to_s(:weekday) %>
+          <strong>Von:</strong> <%= l(@tool_rental.rent_from, format: :short) %> bis <%= l(@tool_rental.rent_to, format: :short) %>
         </p>
         <p>
           Wenn du deinen Toolteiler an <%= @tool_rental.renter.first_name %> verleihst, verdienst du dadurch <strong><%= number_to_currency(@tool_rental.basic_price - @tool_rental.discount, unit: "€") %></strong>.

@@ -104,7 +104,7 @@
         </p>
         <p>
           <em>Zeitraum:</em><br>
-          <%= @tool_rental.rent_from.to_s(:weekday) %> bis <%= @tool_rental.rent_to.to_s(:weekday) %>
+          <%= l(@tool_rental.rent_from, format: :short) %> bis <%= l(@tool_rental.rent_to, format: :short) %>
         </p>
       </td>
     </tr>
