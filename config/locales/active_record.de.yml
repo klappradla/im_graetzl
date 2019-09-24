@@ -214,10 +214,12 @@ de:
           deleted: Deleted
       tool_rental:
         rental_statuses:
-          pending: Wartend
-          canceled: Abgebrochen
-          rejected: Abgelehnt
-          approved: Akzeptiert
+          pending: Warte auf Antwort
+          canceled: Anfrage zurückgezogen
+          rejected: Anfrage abgelehnt
+          approved: Anfrage akzeptiert
+          return_pending: Rückgabe noch nicht bestätigt
+          return_confirmed: Rückgabe bestätigt
         payment_statuses:
           payment_pending: Zahlung wartend
           payment_success: Zahlung erfolgreich

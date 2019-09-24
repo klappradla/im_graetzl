@@ -1,1 +1,105 @@
-<p>Here's your invoice!</p>
+<% content_for(:above_title, "Hey #{@tool_rental.owner.first_name}") %>
+<% content_for(:title, "Du hast die Rückgabe bestätigt - Bewerte nun den Verleihvorgang.") %>
+<% content_for(:subtitle, "Anbei findest du auch deine Gutschrift.") %>
+
+
+<!-- --------------- BLOCK HEADLINE --------------- -->
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
+   <tr>
+     <td style="height:30px"> </td>
+   </tr>
+   <tr>
+     <td valign="top" class="mcnTextContent" style="padding-top:0;  padding-bottom:9px; padding-left:18px; padding-right:18px;">
+       <h4 style="text-align:left; color:#69a8a7; font-family:Georgia; font-size:125%; font-weight:normal; font-style:italic;">
+         Toolteiler: <%= link_to @tool_rental.tool_offer.title.truncate(45), tool_offer_url(@tool_rental.tool_offer), style: "color:#ec776a;" %>
+       </h4>
+     </td>
+   </tr>
+   <tr>
+     <td style="padding-left:9px; padding-right:9px;">
+       <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%">
+         <tr>
+           <td>
+             <span></span>
+           </td>
+         </tr>
+       </table>
+     </td>
+   </tr>
+ </table>
+
+ <!-- --------------- ITEM NEW REQUEST --------------- -->
+ <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #efefef; margin-bottom:18px;" width="100%" class="mcnTextContentContainer">
+  <tbody>
+    <tr>
+      <td valign="top" class="mcnTextContent" style="padding-left:18px; padding-right:18px; vertical-align:top;">
+        <%= image_tag Notifications::ImageService.new.avatar_url(@tool_rental.renter), style: "width:60px; height:60px; border-radius: 30px; max-width:60px; min-width:60px;", class: "mcnImage" %>
+      </td>
+      <td class="mcnTextContent" style="padding-right:18px; width:100%;">
+        <p>
+          <em><strong>Du kannst nun <%= @tool_rental.renter.full_name %> als Mieter/in bzw. den Verleihvorgang bewerten.</strong></em><br>
+        </p>
+        <p>
+          Klicke auf jetzt bewerten, um deine Bewertung im Toolteiler-Messenger abzugeben.
+        </p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" style="padding-bottom:9px;"></td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+        <%= render 'mailers/shared/button', title: "Jetzt bewerten", url: messenger_url(thread_id: @tool_rental.user_message_thread.id) %>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:10px;" width="100%" class="mcnTextContentContainer">
+  <tr>
+    <td class="mcnTextContent" style="padding-left:18px; padding-right:18px;">
+      <i>PS.: Du findest den Messenger auch eingeloggt auf imGrätzl.at rechts oben im Menü unter "Toolteiler".</i>
+    </td>
+  </tr>
+</table>
+
+<!-- --------------- BLOCK HEADLINE --------------- -->
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
+   <tr>
+     <td style="height:30px"> </td>
+   </tr>
+   <tr>
+     <td valign="top" class="mcnTextContent" style="padding-top:0;  padding-bottom:9px; padding-left:18px; padding-right:18px;">
+       <h4 style="text-align:left; color:#69a8a7; font-family:Georgia; font-size:125%; font-weight:normal; font-style:italic;">
+        Infos zu deiner Gutschrift
+       </h4>
+     </td>
+   </tr>
+   <tr>
+     <td style="padding-left:9px; padding-right:9px;">
+       <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%">
+         <tr>
+           <td>
+             <span></span>
+           </td>
+         </tr>
+       </table>
+     </td>
+   </tr>
+ </table>
+
+ <!-- --------------- ITEM NEW REQUEST --------------- -->
+ <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #efefef; margin-bottom:18px;" width="100%" class="mcnTextContentContainer">
+  <tbody>
+    <tr>
+      <td class="mcnTextContent" style="padding-left:18px; padding-right:18px; width:100%;">
+        <p>
+         Wir überweisen dir innerhalb der nächsten 5 Tage deine Gutschrift auf das von dir angegebene Konto.
+         Details zu deiner Gutschrift findest du angehängt und eingeloggt in deinem <%= link_to "Buchungsarchiv", tool_offers_user_url(:target => "tab-buchungsarchiv"), style: "color:#ec776a;" %>.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+ </table>
