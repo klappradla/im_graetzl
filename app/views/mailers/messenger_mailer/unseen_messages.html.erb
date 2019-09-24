@@ -47,7 +47,7 @@
    <% end %>
    <tr>
      <td colspan="2">
-       <%= render 'mailers/shared/button', title: "Jetzt antworten", url: 'xyz' %>
+       <%= render 'mailers/shared/button', title: "Jetzt antworten", url: messenger_url(thread_id: @thread.id) %>
      </td>
    </tr>
  </tbody>

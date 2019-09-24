@@ -1,7 +1,7 @@
 ActiveAdmin.register ToolRental do
   menu parent: 'Toolteiler'
   includes :tool_offer, :user
-  actions :all, except: [:new, :create, :edit, :update]
+  actions :all, except: [:new, :create, :destroy]
 
   scope :all, default: true
 
@@ -14,16 +14,8 @@ ActiveAdmin.register ToolRental do
 
   index { render 'index', context: self }
   show { render 'show', context: self }
+  form partial: 'form'
 
-  action_item :payment_transfered, only: :show, if: proc{ tool_rental.payment_success? } do
-    link_to 'Payment Transfered to Renter', payment_transfered_admin_tool_rental_path(tool_rental), { method: :patch }
-  end
-
-  # member actions
-  member_action :payment_transfered, method: :patch do
-    resource.payment_transfered!
-    flash[:success] = 'Payment marked as transfered.'
-    redirect_to admin_tool_rentals_path
-  end
+  permit_params :rental_status, :payment_status
 
 end

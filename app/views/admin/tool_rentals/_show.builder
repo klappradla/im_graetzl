@@ -31,8 +31,18 @@ context.instance_eval do
       row :insurance_fee
       row :tax
       row :total_price
+      row :owner_payout_amount
       row :payment_method
       row :payment_status
+    end
+  end
+
+  if tool_rental.approved?
+    panel 'Invoices' do
+      attributes_table_for tool_rental do
+        row(:owner_invoice) { |r| link_to "PDF", r.owner_invoice.presigned_url(:get) }
+        row(:renter_invoice) { |r| link_to "PDF", r.renter_invoice.presigned_url(:get) }
+      end
     end
   end
 

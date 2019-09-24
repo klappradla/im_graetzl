@@ -2,7 +2,7 @@ ActiveAdmin.register ToolOffer do
   include ViewInApp
   menu parent: 'Toolteiler'
   includes :graetzl, :location, :user, :comments
-  actions :all, except: [:new, :create]
+  actions :all, except: [:new, :create, :destroy]
 
   scope :all, default: true
 

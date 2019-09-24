@@ -6,6 +6,7 @@ context.instance_eval do
   column :rent_from
   column :rent_to
   column :total_price
+  column :owner_payout_amount
   column :rental_status
   column :payment_status
   column :payment_method
