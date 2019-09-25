@@ -1,9 +1,13 @@
 <div class="flex-table row" role="rowgroup">
   <div class="flex-row wide20 first" role="cell">
-    <%= link_to tool_rental.tool_offer.title.truncate(33), tool_rental.tool_offer %>
+    <% if tool_rental.tool_offer.enabled? %>
+      <%= link_to tool_rental.tool_offer.title.truncate(33), tool_rental.tool_offer %>
+    <% else %>
+      <%= tool_rental.tool_offer.title.truncate(33) %>
+    <% end %>
   </div>
   <div class="flex-row wide20" role="cell">
-    <% if !tool_rental.user_message_thread.nil? %>
+    <% if tool_rental.user_message_thread %>
       <%= link_to messenger_path(thread_id: tool_rental.user_message_thread.id), class: 'message' do %>
         <%= icon_tag "speech-bubbles" %>
         <%= user.full_name %>

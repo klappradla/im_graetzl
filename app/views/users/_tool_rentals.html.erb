@@ -19,10 +19,9 @@
       <div class="flex-row" role="columnheader">Auszahlung</div>
       <div class="flex-row wide20" role="columnheader">Status</div>
     </div>
-    <!-- /Table Header-->
 
     <% @owned_tool_rentals.each do |rental| %>
-      <%= render 'users/tool_rental_row', tool_rental: rental, user: rental.renter %>
+      <%= render 'users/tool_rental_row', tool_rental: rental, user: rental.owner %>
     <% end %>
   </div>
 <% end %>
@@ -41,7 +40,7 @@
     </div>
 
     <% @tool_rentals.each do |rental| %>
-      <%= render 'users/tool_rental_row', tool_rental: rental, user: rental.owner %>
+      <%= render 'users/tool_rental_row', tool_rental: rental, user: rental.renter %>
     <% end %>
   </div>
 <% end %>

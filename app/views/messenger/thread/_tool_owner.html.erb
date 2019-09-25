@@ -6,7 +6,8 @@
 
   <div class="title">
     <%= tool_rental.renter.full_name %> möchte deinen Toolteiler
-    „<%= link_to "#{tool_rental.tool_offer.title}", tool_rental.tool_offer %>“ mieten.
+    „<%= link_to_if tool_rental.tool_offer.enabled?, "#{tool_rental.tool_offer.title}", tool_rental.tool_offer %>“
+    mieten.
   </div>
 
   <div class="time">

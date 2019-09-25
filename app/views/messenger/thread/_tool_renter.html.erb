@@ -5,7 +5,8 @@
   -->
 
   <div class="title">
-    Du hast nach dem Toolteiler „<%= link_to "#{tool_rental.tool_offer.title}", tool_rental.tool_offer %>“
+    Du hast nach dem Toolteiler
+    „<%= link_to_if tool_rental.tool_offer.enabled?, "#{tool_rental.tool_offer.title}", tool_rental.tool_offer %>“
     bei <%= tool_rental.owner.full_name %> angefragt.
   </div>
 
