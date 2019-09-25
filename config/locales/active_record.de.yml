@@ -224,7 +224,7 @@ de:
           payment_pending: Zahlung wartend
           payment_success: Zahlung erfolgreich
           payment_failed: Zahlung fehlgeschlagen
-          payment_transfered: Zahlung überwiesen
+          payment_transfered: Gutschrift überwiesen
       user:
         avatar: Profilbild
         confirmed_at: Bestätigt am

@@ -1,0 +1,31 @@
+<div class="flex-table row" role="rowgroup">
+  <div class="flex-row wide20 first" role="cell">
+    <% if tool_rental.tool_offer.enabled? %>
+      <%= link_to tool_rental.tool_offer.title.truncate(33), tool_rental.tool_offer %>
+    <% else %>
+      <%= tool_rental.tool_offer.title.truncate(33) %>
+    <% end %>
+  </div>
+  <div class="flex-row wide20" role="cell">
+    <% if tool_rental.user_message_thread %>
+      <%= link_to messenger_path(thread_id: tool_rental.user_message_thread.id), class: 'message' do %>
+        <%= icon_tag "speech-bubbles" %>
+        <%= tool_rental.owner.full_name %>
+      <% end %>
+    <% else %>
+      <%= tool_rental.owner.full_name %>
+    <% end %>
+  </div>
+  <div class="flex-row" role="cell"><%= l(tool_rental.rent_from) %></div>
+  <div class="flex-row" role="cell"><%= l(tool_rental.rent_to) %></div>
+  <div class="flex-row" role="cell"><%= number_to_currency(tool_rental.total_price, unit: "€") %></div>
+  <div class="flex-row wide20" role="cell">
+    <%= t("activerecord.attributes.tool_rental.rental_statuses.#{tool_rental.rental_status}") %>
+    <% if tool_rental.approved? || tool_rental.return_pending? || tool_rental.return_confirmed? %>
+      <br><%= t("activerecord.attributes.tool_rental.payment_statuses.#{tool_rental.payment_status}") %>
+    <% end %>
+    <% if tool_rental.invoice_ready? %>
+      <br><%= link_to "Download Rechnung", tool_rental.renter_invoice.presigned_url(:get), class: 'invoice-link' %>
+    <% end %>
+  </div>
+</div>

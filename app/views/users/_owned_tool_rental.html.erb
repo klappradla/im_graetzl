@@ -10,26 +10,22 @@
     <% if tool_rental.user_message_thread %>
       <%= link_to messenger_path(thread_id: tool_rental.user_message_thread.id), class: 'message' do %>
         <%= icon_tag "speech-bubbles" %>
-        <%= user.full_name %>
+        <%= tool_rental.renter.full_name %>
       <% end %>
     <% else %>
-      <%= user.full_name %>
+      <%= tool_rental.renter.full_name %>
     <% end %>
   </div>
   <div class="flex-row" role="cell"><%= l(tool_rental.rent_from) %></div>
   <div class="flex-row" role="cell"><%= l(tool_rental.rent_to) %></div>
-  <div class="flex-row" role="cell"><%= number_to_currency(tool_rental.total_price, unit: "€") %></div>
+  <div class="flex-row" role="cell"><%= number_to_currency(tool_rental.owner_payout_amount, unit: "€") %></div>
   <div class="flex-row wide20" role="cell">
     <%= t("activerecord.attributes.tool_rental.rental_statuses.#{tool_rental.rental_status}") %>
-    <% if tool_rental.approved? %>
+    <% if tool_rental.return_confirmed? && tool_rental.payment_transfered? %>
       <br><%= t("activerecord.attributes.tool_rental.payment_statuses.#{tool_rental.payment_status}") %>
     <% end %>
     <% if tool_rental.invoice_ready? %>
-      <% if user == tool_rental.owner %>
-        <br><%= link_to "Download Gutschrift", tool_rental.owner_invoice.presigned_url(:get), class: 'invoice-link' %>
-      <% elsif user == tool_rental.renter %>
-        <br><%= link_to "Download Rechnung", tool_rental.renter_invoice.presigned_url(:get), class: 'invoice-link' %>
-      <% end %>
+      <br><%= link_to "Download Gutschrift", tool_rental.owner_invoice.presigned_url(:get), class: 'invoice-link' %>
     <% end %>
   </div>
 </div>
