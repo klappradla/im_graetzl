@@ -1,4 +1,4 @@
-a.hint-questionmark {
+a.hint-questionmark, a.hint-questionlink {
   position: absolute;
   margin-top:-2px;
   padding-left: 5px;
@@ -10,7 +10,7 @@ a.hint-questionmark {
     height:24px;
   }
 }
-a.hint-questionmark:hover {
+a.hint-questionmark:hover, a.hint-questionlink:hover {
   color: $color-ambient-rosa-dark;
 }
 .hint-info {
@@ -23,4 +23,12 @@ a.hint-questionmark:hover {
   .jq-dropdown-panel {
     background-color: $color-ambient-mint-light !important;
   }
+}
+a.hint-questionlink {
+  display: inline-flex;
+  align-self: center;
+  top: .125em;
+  position: relative;
+  color: rgba($color-ambient-grey, 0.70);
+  padding: 0px;
 }
