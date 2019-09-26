@@ -29,6 +29,7 @@ class ToolOffer < ApplicationRecord
 
   before_save :check_discounts
   before_save :set_graetzl
+  after_save :remove_activities_if_deleted
 
   scope :non_deleted, -> { where.not(status: :deleted) }
   scope :by_currentness, -> { order(created_at: :desc) }
@@ -65,6 +66,12 @@ class ToolOffer < ApplicationRecord
 
   def set_graetzl
     self.graetzl = address.graetzl if address.present?
+  end
+
+  def remove_activities_if_deleted
+    if disabled? || deleted?
+      activities.destroy_all
+    end
   end
 
 end
