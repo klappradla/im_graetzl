@@ -18,7 +18,7 @@
     <div class="iconlist">
       <% unless @location.users.empty? %>
         <% @location.users.each do |user| %>
-          <%= link_to user, class: 'user-wrp', target: '_blank' do %>
+          <%= link_to user, class: 'user-wrp' do %>
             <%= avatar_for user %>
             <span class="name"><%= user.username %></span>
           <% end %>

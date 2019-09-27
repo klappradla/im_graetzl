@@ -124,7 +124,7 @@ section.userprofile {
       @include font-size-primaryFont('large');
       @include respond-to(">=medium") {
         @include col(2/3);
-        padding-top: 50px;
+        padding-top: 60px;
         padding-right: 40px;
       }
 

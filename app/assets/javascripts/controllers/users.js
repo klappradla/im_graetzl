@@ -4,9 +4,11 @@ APP.controllers.users = (function() {
         APP.components.tabs.initTabs(".tabs-ctrl");
         APP.components.notificationSettings.init();
 
+        // User Profile
         if ($("section.userprofile").exists()) {
           $('.autosubmit-stream').submit();
           $('.userContent .col2').linkify({ target: "_blank"});
+          if (!$(".tabs-nav li").exists()) { $(".tabs-ctrl").hide(); } // Hide Taby if empty
         }
 
         if ($("section.usersetup").exists()) {

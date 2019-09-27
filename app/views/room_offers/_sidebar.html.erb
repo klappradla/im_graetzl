@@ -5,7 +5,7 @@
 
     <div class="iconlist">
 
-      <%= link_to @room_offer.user, class: 'user-wrp', target: '_blank' do %>
+      <%= link_to @room_offer.user, class: 'user-wrp' do %>
         <%= avatar_for @room_offer.user %>
         <span class="name"><%= @room_offer.user.username %></span>
       <% end %>

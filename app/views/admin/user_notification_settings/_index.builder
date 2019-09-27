@@ -16,6 +16,11 @@ context.instance_eval do
       "New Room Call: #{u.enabled_mail_notification(Notifications::NewRoomCall)}",
     ].join("<br>").html_safe
   }
+  column("Toolteiler") { |u|
+    [
+      "New Tool Offer: #{u.enabled_mail_notification(Notifications::NewToolOffer)}",
+    ].join("<br>").html_safe
+  }
   column("Betrifft Mich") { |u|
     [
       "Commented Content: #{u.enabled_mail_notification(Notifications::CommentInUsersMeeting)}",

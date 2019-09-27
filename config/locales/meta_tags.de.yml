@@ -142,6 +142,20 @@ de:
       title: 'Toolteiler: %{title}'
       description: '%{desc}'
 
+  tool_rentals:
+    login:
+      title: 'Toolteiler anfragen - Einloggen'
+    new:
+      title: 'Toolteiler anfragen - Rechnungsadresse'
+    choose_payment:
+      title: 'Toolteiler anfragen - Zahlungsart wählen'
+    summary:
+      title: 'Toolteiler anfragen - Zusammenfassung'
+
+  messenger:
+    index:
+      title: 'Messenger'
+
   reports:
     index:
       title: 'Admin Reports'
