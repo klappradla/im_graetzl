@@ -12,6 +12,28 @@
     </tbody>
   </table>
 
+  <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #efefef; margin-bottom:18px;" width="100%" class="mcnTextContentContainer">
+    <tbody>
+      <tr>
+        <td valign="center" class="mcnTextContent" style="padding-left:18px; padding-right:18px;">
+          <%= image_tag Notifications::ImageService.new.avatar_url(discussion_post.user), style: "width:60px; height:60px; border-radius: 30px; max-width:60px; min-width:60px;", class: "mcnImage" %>
+        </td>
+        <td class="mcnTextContent" style="padding-right:18px; width:100%;">
+          <p>
+            <em><strong><%= discussion_post.user.first_name %>:</strong></em>
+            <br>
+            <%= discussion_post.content.truncate(300, separator: ' ') %>
+          </p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" style="padding-bottom:9px;"></td>
+      </tr>
+
+    </tbody>
+  </table>
+
   <% post_notifications.sort_by(&:created_at).each do |notification| %>
     <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #efefef; margin-bottom:18px;" width="100%" class="mcnTextContentContainer">
       <tbody>
