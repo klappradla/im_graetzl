@@ -25,11 +25,15 @@
 
     <div class="users">
       <% group.admins.last(10).each do |user| %>
-          <%= attachment_image_tag user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+        <%= link_to user_path(user) do %>
+          <%= attachment_image_tag user, :avatar, :fill, 200, 200, fallback: 'avatar/user/200x200.png', class: 'img-round' %>
+        <% end %>
       <% end %>
       <% if group.admins.size < 10 %>
         <% group.members.last(10 - group.admins.size).each do |user| %>
-          <%= attachment_image_tag user, :avatar, :fill, 200, 200, fallback: 'avatar/user/200x200.png', class: 'img-round' %>
+          <%= link_to user_path(user) do %>
+            <%= attachment_image_tag user, :avatar, :fill, 200, 200, fallback: 'avatar/user/200x200.png', class: 'img-round' %>
+          <% end %>
         <% end %>
       <% end %>
       <% if group.group_users.size > 10 %>

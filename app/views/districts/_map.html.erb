@@ -16,9 +16,3 @@
     </select>
   </div>
 </div>
-
-<% unless @district.curators.empty? %>
-  <div class="graetzl-ambassador">
-    Grätzlbotschafter <%= icon_tag "love" %> <%= @district.curators.collect{ |c| link_to(c.name, c.website, target: '_blank') }.to_sentence.html_safe %>
-  </div>
-<% end %>

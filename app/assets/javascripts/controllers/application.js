@@ -15,6 +15,31 @@ APP.controllers.application = (function() {
       "theme": false
     };
 
+
+    // Set Screen Mode Class
+    enquire
+        .register("screen and (max-width:" + APP.config.majorBreakpoints.medium + "px)", {
+            deferSetup : true,
+            setup : function() {
+              $('body').addClass('mob');
+            },
+            match : function() {
+              $('body').addClass('mob');
+              $('body').removeClass('desk');
+            }
+        })
+        .register("screen and (min-width:" + APP.config.majorBreakpoints.medium + "px)", {
+            deferSetup : true,
+            setup : function() {
+              $('body').addClass('desk');
+            },
+            match : function() {
+              $('body').addClass('desk');
+              $('body').removeClass('mob');
+            }
+        });
+    
+
     // TODO: this is a hack! stuff should come from DB
     function injectSponsorCard() {
 

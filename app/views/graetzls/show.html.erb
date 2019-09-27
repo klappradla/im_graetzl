@@ -12,8 +12,8 @@
 
 <section class="graetzls">
   <%= render 'map' %>
-  <%= render 'curator' if @graetzl.curator %>
   <%= render 'navigation' %>
+  <%= render 'curator' if @graetzl.curator %>
 
   <% if user_signed_in? %>
 
