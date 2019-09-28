@@ -32,9 +32,9 @@
     <button class="btn-primary -rosa pages" data-nav="page_users">User</button>
     <button class="btn-primary -mint pages" data-nav="page_locations">Locations</button>
     <button class="btn-primary -mint pages" data-nav="page_rooms">Raumteiler</button>
+    <button class="btn-primary -mint pages" data-nav="page_tools">Toolteiler</button>
     <button class="btn-primary -mint pages" data-nav="page_meetings">Treffen</button>
     <button class="btn-primary -mint pages" data-nav="page_graetzls">Grätzl</button>
-    <button class="btn-primary -mint pages" data-nav="page_mailings">Mailings</button>
     <button class="btn-primary -mint" id="btn-search">Suche</button>
   </div>
 
@@ -198,6 +198,24 @@
         <tr>
           <th class="-id">ID</th>
           <th>Treffen</th>
+          <th>Grätzl</th>
+          <th class="-date">Erstellt am</th>
+        </tr>
+      </thead>
+    </table>
+
+  </div>
+<!-- /PAGE MEETINGS -->
+
+<!-- PAGE TOOLS -->
+  <div id="page_tools" class="page">
+
+    <!-- Users Datatable -->
+    <table id="datatable_tools" class="stripe hover row-border dtb" width="100%" data-page-length='100'>
+      <thead>
+        <tr>
+          <th class="-id">ID</th>
+          <th>Toolteiler</th>
           <th>Grätzl</th>
           <th class="-date">Erstellt am</th>
         </tr>

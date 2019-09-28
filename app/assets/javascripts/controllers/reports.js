@@ -6,7 +6,7 @@ APP.controllers.reports = (function() {
 
 
     // ---------------------------------------------------------------------- Public
-    
+
     // REPORTS INIT
     var initReports = function initReports() {
       /*********************************
@@ -22,6 +22,8 @@ APP.controllers.reports = (function() {
       var usersearch = []; // User Serach Result
 
       var rooms = []; // Clean Room Array to work with
+
+      var tools = []; // Clean Toolteiler Array to work with
 
       var meetings = []; // Clean Meetings Array to work with
 
@@ -345,7 +347,58 @@ APP.controllers.reports = (function() {
               });
             }.bind(this)
           );
+        }; // Get Tools
+
+        this.requestTools = function() {
+          return new Promise(
+            function(resolve, reject) {
+              var startDate = convertDateToISOString(this.startDate());
+              var endDate = convertDateToISOString(this.endDate()); //var startDate = this.startDate().toISOString().slice(0, 10);
+              //var endDate = this.endDate().toISOString().slice(0, 10);
+
+              $.ajax({
+                url:
+                  "/admin/tool_offers.json?" +
+                  ajaxStartDate +
+                  startDate +
+                  ajaxEndDate +
+                  endDate,
+                method: "GET",
+                success: function success(response) {
+                  tools = [];
+
+                  for (i = 0; i < response.length; i++) {
+                    // Push to Meetings Array
+                    tools.push({
+                      id: response[i].id,
+                      name: response[i].title,
+                      created_at: response[i].created_at,
+                      graetzl_id: response[i].graetzl_id,
+                      graetzl_name: "",
+                      user_id: response[i].user_id,
+                      tool_path: response[i].slug,
+                      tool_path_admin:
+                        host_admin + "tool_offers/" + response[i].slug
+                    }); // Extend Location Array with Grätzl-Infos from Grätzl Array
+
+                    var res = fetchFromID(tools[i].graetzl_id, "graetzls");
+
+                    for (var key in res) {
+                      tools[i].graetzl_name = res[key].name;
+                      tools[i].tool_path =
+                        res[key].graetzl_app_path +
+                        "/toolteiler/" +
+                        tools[i].tools_path;
+                    }
+                  }
+
+                  resolve("tools");
+                }
+              });
+            }.bind(this)
+          );
         }; // Get Locations
+
         // Get Rooms and Set Clean Rooms Array
 
         this.requestRooms = function(type) {
@@ -703,6 +756,17 @@ APP.controllers.reports = (function() {
             meetingsChart.drawChart(meetings, "" + meetings.length + " Treffen");
             stopSpinner();
             datatable_meetings();
+          });
+        }
+
+        if (page == "page_tools") {
+          resetTopChart();
+          showSpinner();
+          var toolsChart = new TimeChart(initDate, initPeriod);
+          Promise.resolve(toolsChart.requestTools()).then(function(res) {
+            toolsChart.drawChart(tools, "" + tools.length + " Toolteiler");
+            stopSpinner();
+            datatable_tools();
           });
         }
 
@@ -1357,8 +1421,54 @@ APP.controllers.reports = (function() {
             }
           ]
         });
-      }; // Create DATATABLE ROOMS
+      };
+      // Create DATATABLE TOOLS
+      var datatable_tools = function datatable_tools() {
+        $("#datatable_tools").DataTable({
+          data: tools,
+          order: [[3, "desc"]],
+          processing: true,
+          paging: false,
+          bDestroy: true,
+          searching: false,
+          columns: [
+            {
+              data: "id"
+            },
+            {
+              data: "name",
+              render: function render(data, type, row, meta) {
+                if (type === "display") {
+                  data =
+                    '<a href="' +
+                    row["tool_path_admin"] +
+                    '" target="_blank">' +
+                    data +
+                    "</a>";
+                }
 
+                return data;
+              }
+            },
+            {
+              data: "graetzl_name"
+            },
+            {
+              data: "created_at",
+              render: function render(data, type) {
+                if (type == "sort" || type == "type") {
+                  return data;
+                } else {
+                  // Use Friendly Format for Output
+                  return moment(data).format("lll");
+                }
+              }
+            }
+          ]
+        });
+      };
+
+      // Create DATATABLE ROOMS
       var datatable_rooms = function datatable_rooms() {
         $("#datatable_rooms").DataTable({
           data: rooms,
