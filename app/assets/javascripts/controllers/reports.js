@@ -1133,13 +1133,7 @@ APP.controllers.reports = (function() {
           searching: false,
           //"responsive": true,
           columns: [
-            //{ data: 'id' },
-            {
-              className: "details-control",
-              orderable: false,
-              data: null,
-              defaultContent: ""
-            },
+            { data: 'id' },
             {
               data: "username",
               render: function render(data, type, row, meta) {
