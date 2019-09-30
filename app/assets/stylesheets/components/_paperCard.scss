@@ -183,6 +183,9 @@
   .btn-primary, .insurance, p, h3 {
     transform: rotate(-1deg);
   }
+  .btn-primary {
+    margin-top: 20px;
+  }
 }
 // REMOVE .TMP Class AFTER WE CAN USE AXA LOGO
 .paperCard.-insurance.-tmp .wrp {
