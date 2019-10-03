@@ -43,9 +43,10 @@
 
     <div class="txt"><%= @room_offer.room_description %></div>
 
-    <div class="entryImgUploads" data-featherlight-gallery data-featherlight-filter="a">
+    <div class="entryImgUploads">
+      <%= link_to attachment_image_tag(@room_offer, :cover_photo, :fill, 200, 200), attachment_url(@room_offer, :cover_photo, :limit, 800, 800), data: { jbox_image: "gallery1" } %>
       <% @room_offer.images.each do |image| %>
-        <%= link_to attachment_image_tag(image, :file, :fill, 200, 200), attachment_url(image, :file, :limit, 800, 800) %>
+        <%= link_to attachment_image_tag(image, :file, :fill, 200, 200), attachment_url(image, :file, :limit, 800, 800), data: { jbox_image: "gallery1" } %>
       <% end %>
     </div>
 

@@ -41,6 +41,7 @@
     <div class="txt"><%= @tool_offer.description %></div>
 
     <div class="entryImgUploads">
+      <%= link_to attachment_image_tag(@tool_offer, :cover_photo, :fill, 200, 200), attachment_url(@tool_offer, :cover_photo, :limit, 800, 800), data: { jbox_image: "gallery1" } %>
       <% @tool_offer.images.each do |image| %>
         <%= link_to attachment_image_tag(image, :file, :fill, 200, 200), attachment_url(image, :file, :limit, 800, 800), data: { jbox_image: "gallery1" } %>
       <% end %>

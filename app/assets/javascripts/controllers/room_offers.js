@@ -4,6 +4,19 @@ APP.controllers.room_offers = (function() {
     if ($("section.room-offer-form").exists()) initRoomForm();
     if ($("#GAinfos").exists()) initshowContact();
     if ($("#hide-contact-link").exists()) inithideContactLink();
+    if ($("section.roomDetail").exists()) { initRoomDetail(); }
+  }
+
+  function initRoomDetail() {
+
+    var roomGallery = new jBox('Image', {
+      addClass:'jBoxGallery',
+      imageCounter:true,
+      preloadFirstImage:true,
+      closeOnEsc:true,
+      createOnInit:true,
+      animation:{open: 'zoomIn', close: 'zoomOut'},
+    });
   }
 
   function initshowContact(){

@@ -447,11 +447,14 @@ section.roomDetail {
     }
   }
 
+  // Gallery Pics
   .entryImgUploads {
     img {
-      max-width: 150px;
+      width: 152px;
+      height:152px;
+      object-fit: cover;
       @include respond-to(">=large") {
-        max-width: 205px;
+
       }
     }
   }

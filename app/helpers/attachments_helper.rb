@@ -14,10 +14,10 @@ module AttachmentsHelper
   end
 
   def cover_photo_for(resource)
-    attachment_image_tag(resource, :cover_photo, :fill, 300, 180, class: 'coverImg', fallback: 'cover_photo/300x180.png')
+    attachment_image_tag(resource, :cover_photo, :fill, 600, 440, class: 'coverImg', fallback: 'cover_photo/300x180.png')
   end
 
   def category_photo_for(resource)
-    attachment_image_tag(resource, :main_photo, :fill, 200, 300, fallback: 'cover_photo/200x200.png')
+    attachment_image_tag(resource, :main_photo, :fill, 400, 600, fallback: 'cover_photo/200x200.png')
   end
 end
