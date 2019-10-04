@@ -4,6 +4,7 @@
     <% ToolCategory.top.each do |category| %>
       <div class="-category" data-id="<%= category.id %>">
         <%= category_photo_for(category) %>
+        <div class="cat category-<%= category.id %>"></div>
         <h3><%= category.name %></h3>
         <%= button_tag '', class: 'close-ico' do %>
           <%= icon_tag "cross" %>

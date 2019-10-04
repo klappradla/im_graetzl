@@ -3,7 +3,7 @@ APP.components.toolCategorySlider = (function() {
   function init(element) {
     var item_desk = 5;
     var item_tab = 3;
-    var item_mob = 1;
+    var item_mob = 2;
     var items = element.find("div").length;
 
     var filterForm = $(".cards-filter");
@@ -11,8 +11,8 @@ APP.components.toolCategorySlider = (function() {
 
     var slider = element.lightSlider({
       item: item_desk,
-      autoWidth: true,
-      slideMove: 1, // slidemove will be 1 if loop is true
+      autoWidth: false,
+      slideMove: item_desk, // slidemove will be 1 if loop is true
       slideMargin: 15,
       addClass: '',
       mode: "slide",
@@ -43,6 +43,7 @@ APP.components.toolCategorySlider = (function() {
           breakpoint:850,
           settings: {
             item: item_tab,
+            slideMove: item_tab,
             addClass: '-tablet',
             onBeforeSlide: function (el) {
               //showControls(el.getCurrentSlideCount(), item_tab);
@@ -53,6 +54,7 @@ APP.components.toolCategorySlider = (function() {
           breakpoint:415,
           settings: {
             item: item_mob,
+            slideMove: item_mob,
             controls: false,
             pager: true,
             addClass: '-mobile',
@@ -106,8 +108,8 @@ APP.components.toolCategorySlider = (function() {
        filterForm.find("[name=category_id]").val($(this).attr("data-id"));
        suggestionForm.val("");
        filterForm.submit();
-       filterForm.addClass("-open");
-       filterForm.slideDown("fast");
+       //filterForm.addClass("-open"); // Search and District Filter vorübergehend deaktiviert
+       //filterForm.slideDown("fast"); // Search and District Filter vorübergehend deaktiviert
      }
    });
 

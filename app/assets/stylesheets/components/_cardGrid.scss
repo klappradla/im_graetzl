@@ -27,20 +27,21 @@
 // For Example Toolteiler Categories
 .category-slider-container {
   position: relative;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 
   @include respond-to(">=large") {
     width:978px;
     margin-left:-14px;
     margin-right:-34px;
+    margin-bottom: 50px;
   }
 
   .-category {
     position: relative;
-    height:300px;
-    width:200px;
+    //height:300px;
+    //width:200px;
     @include respond-to("<=medium") {
-      width:220px;
+      //width:220px;
     }
     z-index: 1;
     display: flex;
@@ -49,15 +50,17 @@
     overflow: hidden;
     border-radius: 10px;
 
-
-    img {
-      height: 100%;
+    .categoryImg {
+      //height: 100%;
+      width:100%;
+      max-height: 400px;
       opacity: .7;
+      border-radius: 10px;
     }
 
     &.hover {
       cursor: pointer;
-      img {
+      .categoryImg {
         opacity: 1.0;
       }
       h3 {
@@ -88,16 +91,46 @@
           rgba(0, 0, 0, 1.0)
         );
       }
-      /*
-      h3::after {
-        -webkit-transition: background-image 0.3s ease-in-out;
-        transition: background-image 0.3s ease-in-out;
-        background-image: url(image_path('illu/brush-bg-rosa.png'));
-        opacity: .8;
-      }
-      */
       .close-ico {
         display: block;
+      }
+      .cat {
+        width: 85px;
+        height: 85px;
+        @include respond-to(">=medium") {
+          width: 100px;
+          height: 100px;
+        }
+        &.category-1 {
+          background-image: url(image_path('svg/icon-kringel-gesundheit-active.svg'));
+        }
+        &.category-2 {
+          background-image: url(image_path('svg/icon-kringel-handwerk-active.svg'));
+        }
+        &.category-3 {
+          background-image: url(image_path('svg/icon-kringel-grafik-design-active.svg'));
+        }
+        &.category-4 {
+          background-image: url(image_path('svg/icon-kringel-event-active.svg'));
+        }
+        &.category-5 {
+          background-image: url(image_path('svg/icon-kringel-gastronomie-active.svg'));
+        }
+        &.category-6 {
+          background-image: url(image_path('svg/icon-kringel-technik-foto-active.svg'));
+        }
+        &.category-7 {
+          background-image: url(image_path('svg/icon-kringel-instrumente-active.svg'));
+        }
+        &.category-8 {
+          background-image: url(image_path('svg/icon-kringel-kunst-active.svg'));
+        }
+        &.category-9 {
+          background-image: url(image_path('svg/icon-kringel-grafik-design-active.svg'));
+        }
+        &.category-10 {
+          background-image: url(image_path('svg/icon-kringel-transport-active.svg'));
+        }
       }
     }
 
@@ -106,7 +139,7 @@
       bottom: 0;
       z-index: 1;
       height: 120px;
-      width: 200px;
+      width: 100%;
       padding: 15px;
       display: flex;
       align-items: center;
@@ -114,32 +147,57 @@
       justify-content: center;
       text-align: center;
       color: white;
-      //text-shadow: 0px 1px #000000;
       @include font-size-primaryFont('medium');
       background: linear-gradient(
         to bottom,
         rgba(0, 0, 0, 0),
         rgba(0, 0, 0, 0.7)
       );
-
     }
-    /*
-    h3::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 100%;
-      opacity: .5;
-      z-index: -1;
-      background-image: url(image_path('illu/brush-bg.png'));
-      background-position: center center;
-      background-size: cover;
+    .cat {
+      width: 65px;
+      height: 65px;
+      @include respond-to(">=medium") {
+        width: 85px;
+        height: 85px;
+      }
       background-repeat: no-repeat;
-      -webkit-transform: rotate(-3deg);
-      transform: rotate(-3deg);
-    }*/
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin-top: auto;
+      margin-bottom: auto;
+      &.category-1 {
+        background-image: url(image_path('svg/icon-kringel-gesundheit.svg'));
+      }
+      &.category-2 {
+        background-image: url(image_path('svg/icon-kringel-handwerk.svg'));
+      }
+      &.category-3 {
+        background-image: url(image_path('svg/icon-kringel-grafik-design.svg'));
+      }
+      &.category-4 {
+        background-image: url(image_path('svg/icon-kringel-event.svg'));
+      }
+      &.category-5 {
+        background-image: url(image_path('svg/icon-kringel-gastronomie.svg'));
+      }
+      &.category-6 {
+        background-image: url(image_path('svg/icon-kringel-technik-foto.svg'));
+      }
+      &.category-7 {
+        background-image: url(image_path('svg/icon-kringel-instrumente.svg'));
+      }
+      &.category-8 {
+        background-image: url(image_path('svg/icon-kringel-kunst.svg'));
+      }
+      &.category-9 {
+        background-image: url(image_path('svg/icon-kringel-grafik-design.svg'));
+      }
+      &.category-10 {
+        background-image: url(image_path('svg/icon-kringel-transport.svg'));
+      }
+    }
   }
 }
 

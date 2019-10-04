@@ -18,6 +18,6 @@ module AttachmentsHelper
   end
 
   def category_photo_for(resource)
-    attachment_image_tag(resource, :main_photo, :fill, 400, 600, fallback: 'cover_photo/200x200.png')
+    attachment_image_tag(resource, :main_photo, :fill, 400, 600, class: 'categoryImg', fallback: 'cover_photo/200x200.png')
   end
 end
