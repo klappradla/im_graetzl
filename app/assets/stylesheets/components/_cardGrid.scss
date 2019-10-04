@@ -28,6 +28,7 @@
 .category-slider-container {
   position: relative;
   margin-bottom: 30px;
+  padding-top:10px;
 
   @include respond-to(">=large") {
     width:978px;
@@ -126,7 +127,7 @@
           background-image: url(image_path('svg/icon-kringel-kunst-active.svg'));
         }
         &.category-9 {
-          background-image: url(image_path('svg/icon-kringel-grafik-design-active.svg'));
+          background-image: url(image_path('svg/icon-kringel-deko-active.svg'));
         }
         &.category-10 {
           background-image: url(image_path('svg/icon-kringel-transport-active.svg'));
@@ -192,7 +193,7 @@
         background-image: url(image_path('svg/icon-kringel-kunst.svg'));
       }
       &.category-9 {
-        background-image: url(image_path('svg/icon-kringel-grafik-design.svg'));
+        background-image: url(image_path('svg/icon-kringel-deko.svg'));
       }
       &.category-10 {
         background-image: url(image_path('svg/icon-kringel-transport.svg'));

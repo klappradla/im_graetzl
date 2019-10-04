@@ -33,3 +33,11 @@
 .headlineBarbapapa {
   @include headlineBarbapapa();
 }
+.toolteiler-headline {
+  width: 340px;
+  max-width: 70%;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  padding-left:30px;
+}

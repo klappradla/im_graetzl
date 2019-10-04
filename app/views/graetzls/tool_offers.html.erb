@@ -4,7 +4,7 @@
     robots: 'index, follow',
     og_title: t('.title', graetzl: @graetzl.name),
     og_description: t('.description', graetzl: @graetzl.name, numeric: @graetzl.district.numeric),
-    og_image: image_url('meta/og_logo.png')
+    og_image: image_url('meta/toolteiler.jpg')
   )
 %>
 
@@ -13,7 +13,7 @@
   <%= render 'navigation' %>
 
   <div class="hl-subtext -cards">
-    <h1><em>Toolteiler</em></h1>
+    <%= image_tag 'svg/toolteiler-headline.svg', class: 'toolteiler-headline' %>
     <p>Arbeitsequipment leihen & Geräte am Standort nutzen <%= render 'shared/questionmarklink', hint_url: info_toolteiler_path %></p>
   </div>
 

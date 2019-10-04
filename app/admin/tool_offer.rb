@@ -4,7 +4,10 @@ ActiveAdmin.register ToolOffer do
   includes :graetzl, :location, :user, :comments
   actions :all, except: [:new, :create, :destroy]
 
-  scope :all, default: true
+  scope :enabled, default: true
+  scope :all
+  scope :disabled
+  scope :deleted
 
   filter :graetzl, collection: proc { Graetzl.order(:name).pluck(:name, :id) }, include_blank: true, input_html: { class: 'admin-filter-select'}
   filter :user, collection: proc { User.admin_select_collection }, include_blank: true, input_html: { class: 'admin-filter-select'}
