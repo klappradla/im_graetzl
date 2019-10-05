@@ -11,6 +11,7 @@ context.instance_eval do
     attributes_table_for tool_rental do
       row :id
       row :user
+      row(:rental_status){|r| status_tag(r.rental_status)}
       row :rent_from
       row :rent_to
       row :renter_company
@@ -18,7 +19,6 @@ context.instance_eval do
       row :renter_address
       row :renter_zip
       row :renter_city
-      row :rental_status
       row :created_at
     end
   end

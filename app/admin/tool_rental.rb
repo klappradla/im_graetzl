@@ -4,6 +4,12 @@ ActiveAdmin.register ToolRental do
   actions :all, except: [:new, :create, :destroy]
 
   scope :all, default: true
+  scope :pending
+  scope :approved
+  scope :return_pending
+  scope :return_confirmed
+  scope :canceled
+  scope :rejected
 
   filter :rental_status, as: :select, collection: ToolRental.rental_statuses.keys
   filter :payment_status, as: :select, collection: ToolRental.payment_statuses.keys

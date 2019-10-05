@@ -5,6 +5,7 @@ context.instance_eval do
         attributes_table_for tool_offer do
           row :id
           row :title
+          row(:state){|l| status_tag(l.status)}
           row :description
           row :slug
           row :created_at
@@ -77,6 +78,16 @@ context.instance_eval do
 
         end
       end
+
+      panel 'Rent Requests' do
+        table_for tool_offer.tool_rentals do
+          column :id
+          column(:RentUser){|r| r.user}
+          column(:rental_status){|r| status_tag(r.rental_status)}
+          column(''){|l| link_to 'Anzeigen', admin_tool_rental_path(l) }
+        end
+      end
+
     end
   end
 end

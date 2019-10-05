@@ -58,6 +58,7 @@ context.instance_eval do
       end
     end
     column do
+
       panel 'Locations' do
         table_for user.locations do
           column :id
@@ -66,6 +67,16 @@ context.instance_eval do
           column(''){|l| link_to 'Anzeigen', admin_location_path(l) }
         end
       end
+
+      panel 'Toolteiler' do
+        table_for user.tool_offers do
+          column :id
+          column :title
+          column(:state){|l| status_tag(l.status)}
+          column(''){|l| link_to 'Anzeigen', admin_tool_offer_path(l) }
+        end
+      end
+
       panel 'Raumteiler | Habe Raum' do
         table_for user.room_offers do
           column :id
