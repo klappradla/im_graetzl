@@ -7,6 +7,7 @@ APP.components.toolCategorySlider = (function() {
     var items = element.find("div").length;
 
     var filterForm = $(".cards-filter");
+    var filterLine = $(".filter-line");
     var suggestionForm = $(".search-suggestion-trigger");
 
     var slider = element.lightSlider({
@@ -92,6 +93,7 @@ APP.components.toolCategorySlider = (function() {
    );
 
    filterForm.hide(); // Hide per default - Show on Category Click
+   //filterLine.hide(); // Hide per default - Show on Category Click
 
    // Click Slide
    element.find('.-category').on('click', function(){
@@ -102,12 +104,14 @@ APP.components.toolCategorySlider = (function() {
        filterForm.submit();
        filterForm.slideUp("fast");
        filterForm.removeClass("-open");
+       //filterLine.slideUp();
      } else {
        element.find('.-category').removeClass('activated');
        $(this).addClass('activated');
        filterForm.find("[name=category_id]").val($(this).attr("data-id"));
        suggestionForm.val("");
        filterForm.submit();
+       //filterLine.slideDown();
        //filterForm.addClass("-open"); // Search and District Filter vorübergehend deaktiviert
        //filterForm.slideDown("fast"); // Search and District Filter vorübergehend deaktiviert
      }
