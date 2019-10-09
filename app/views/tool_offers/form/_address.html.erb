@@ -5,15 +5,15 @@
     <p>Wo kann sich der Mieter deinen Toolteiler abholen?</p>
   </div>
 
-  <% if f.object.address.nil? %>
+  <% if f.object.new_record? %>
 
     <div class="input-field" id="addressSearchAutocomplete">
       <%= label_tag :address do %>
         <%= icon_tag "map-location" %>
         <span>Adresse</span>
       <% end %>
-      <%= text_field_tag :address, nil, placeholder: "Straße und Hausnummer" %>
-      <%= hidden_field_tag :feature %>
+      <%= text_field_tag :address, params[:address], placeholder: "Straße und Hausnummer" %>
+      <%= hidden_field_tag :feature, params[:feature] %>
     </div>
 
   <% else %>
