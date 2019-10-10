@@ -242,6 +242,9 @@
       &:last-child {
         margin-bottom: 0;
       }
+      + .streamElement {
+        margin-top: 20px;
+      }
     }
     .waiting-list {
       background-color: $color-ambient-mint-light;
