@@ -11,6 +11,8 @@ SitemapGenerator::Sitemap.create do
   add locations_wien_path, changefreq: 'always', priority: 0.9
   add meetings_wien_path, changefreq: 'always', priority: 0.7
   add rooms_wien_path, changefreq: 'always', priority: 0.9
+  add tool_offers_wien_path, changefreq: 'always', priority: 0.9
+  add groups_wien_path, changefreq: 'always', priority: 0.9
   add zuckerls_wien_path, changefreq: 'monthly', priority: 0.6
   District.find_each do |district|
     add district_path(district), changefreq: 'daily', priority: 0.8
@@ -63,19 +65,25 @@ SitemapGenerator::Sitemap.create do
     add group_path(group), changefreq: 'daily', priority: 0.5
   end
 
+  # Toolteiler
+  ToolOffer.non_deleted.find_each do |tool_offer|
+    add tool_offer_path(tool_offer), changefreq: 'daily', priority: 0.8
+  end
+
   # Info Help Pages
   add info_path, changefreq: 'monthly', priority: 0.4
   add info_anbieter_und_locations_path, changefreq: 'monthly', priority: 0.4
   add info_events_und_workshops_path, changefreq: 'monthly', priority: 0.4
   add info_raumteiler_path, changefreq: 'monthly', priority: 0.4
+  add info_toolteiler_path, changefreq: 'monthly', priority: 0.4
+  add info_gruppen_path, changefreq: 'monthly', priority: 0.4
+  add unterstuetzer_team_path, changefreq: 'monthly', priority: 0.4
 
   # Info Pages
   add info_agb_path, changefreq: 'never', priority: 0.3
   add info_datenschutz_path, changefreq: 'never', priority: 0.3
   add info_impressum_path, changefreq: 'never', priority: 0.3
   add info_infos_zum_graetzlzuckerl_path, changefreq: 'never', priority: 0.3
-  add info_fragen_und_antworten_path, changefreq: 'never', priority: 0.3
-  add info_infos_zur_graetzlmarie_path, changefreq: 'never', priority: 0.3
 
   # Registration (only get paths)
   add new_user_session_path, changefreq: 'never', priority: 0.3
