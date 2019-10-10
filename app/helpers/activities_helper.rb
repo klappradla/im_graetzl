@@ -8,7 +8,9 @@ module ActivitiesHelper
     when AdminPost.to_s
       parent
     when RoomOffer.to_s, RoomDemand.to_s
-      parent
+      [parent, anchor: 'comments-block']
+    when ToolOffer.to_s
+      [parent, anchor: 'comments-block']
     else
       [parent.graetzl, parent]
     end

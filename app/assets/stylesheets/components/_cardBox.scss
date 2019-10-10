@@ -103,14 +103,15 @@
     .infos {
       font-style: italic;
     }
-    .entryInitialContent {
-      margin-bottom: 0px;
-    }
-    .commentslink {
+    .txt .commentslink {
       text-decoration: none;
       color: $color-ambient-brown;
       @include font-size-primaryFont('base');
-      margin-bottom: 0px;
+      margin-top: 0px;
+      margin-left:0px;
+      &:hover {
+        text-decoration: underline;
+      }
     }
   } // Group Cardbox
 
@@ -134,6 +135,11 @@
       }
     }
   }
+
+  .entryInitialContent {
+    margin-bottom: 0px;
+  }
+
 }
 
 .card-grid .btn-userIcons,
@@ -398,7 +404,8 @@
     color: $color-ambient-rosa;
     font-size: 13px;
     text-decoration: none;
-    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-left:45px;
     display: block;
     &:hover {
       text-decoration: underline;

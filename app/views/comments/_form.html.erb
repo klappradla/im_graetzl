@@ -1,4 +1,4 @@
-<div class="entryCreate" data-behavior="stream-form">
+<div class="entryCreate" data-behavior="stream-form" id="comments-block">
   <%= attachment_image_tag current_user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
   <%= form_for Comment.new(commentable: commentable), html: { class: 'textEditor', remote: true } do |f| %>
     <%= f.hidden_field :commentable_id %>

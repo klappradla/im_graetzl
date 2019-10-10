@@ -28,6 +28,11 @@
     </div>
 
     <%= link_to 'Ausleihen', tool_offer, class: 'btn-primary -btn-rent -mint' %>
+
+    <% if local_assigns[:appendix].present? %>
+      <%= render 'activities/appendix', appendix: local_assigns[:appendix], parent: tool_offer %>
+    <% end %>
+
   </div>
 
   <% if local_assigns[:manage_buttons].present? && current_user == tool_offer.user %>
