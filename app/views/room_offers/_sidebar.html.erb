@@ -52,13 +52,6 @@
 
       <% if user_signed_in? && current_user == @room_offer.user %>
         <div class="btn-group">
-          <%= link_to 'Gruppe erstellen', new_group_path(room_offer_id: @room_offer.id, graetzl_id: @room_offer.graetzl_id),
-            class: 'btn-secondary -mint -small'  %>
-        </div>
-      <% end %>
-
-      <% if user_signed_in? && current_user == @room_offer.user %>
-        <div class="btn-group">
           <%= link_to 'Bearbeiten', edit_room_offer_path(@room_offer),
             class: 'btn-secondary -mint -small'  %>
         </div>

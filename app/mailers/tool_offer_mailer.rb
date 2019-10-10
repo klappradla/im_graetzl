@@ -1,5 +1,11 @@
 class ToolOfferMailer < ApplicationMailer
 
+  def tool_offer_published(tool_offer)
+    @tool_offer = tool_offer
+    headers("X-MC-Tags" => "notification-tool-online")
+    mail(to: @tool_offer.user.email, subject: "Dein Toolteiler ist nun online")
+  end
+
   def new_rental_request(tool_rental)
     @tool_rental = tool_rental
     @tool_offer = tool_rental.tool_offer

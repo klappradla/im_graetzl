@@ -1,5 +1,9 @@
 class ToolOfferMailerPreview < ActionMailer::Preview
 
+  def tool_offer_published
+    ToolOfferMailer.tool_offer_published(ToolOffer.last)
+  end
+
   def new_rental_request
     ToolOfferMailer.new_rental_request(ToolRental.last)
   end

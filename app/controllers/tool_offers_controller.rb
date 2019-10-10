@@ -22,6 +22,7 @@ class ToolOffersController < ApplicationController
     @tool_offer.user_id = current_user.id
     @tool_offer.address = Address.from_feature(params[:feature])
     if @tool_offer.save
+      ToolOfferMailer.tool_offer_published(@tool_offer).deliver_later
       @tool_offer.create_activity(:create, owner: @tool_offer.user)
       redirect_to @tool_offer
     else
