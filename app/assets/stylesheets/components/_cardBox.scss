@@ -367,9 +367,8 @@
   }
 
   .streamElement .txt {
-    @include respond-to(">=large") {
+      margin-top:0px;
       margin-left: 45px;
-    }
   }
 
   > .txt {
@@ -407,8 +406,8 @@
     color: $color-ambient-rosa;
     font-size: 13px;
     text-decoration: none;
-    margin-top: 10px;
-    margin-left:45px;
+    margin-top: 8px;
+    margin-left: 45px;
     display: block;
     &:hover {
       text-decoration: underline;

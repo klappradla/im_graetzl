@@ -16,10 +16,10 @@
           <table>
             <tr>
               <td>
-                <%= image_tag Notifications::ImageService.new.avatar_url(location), style: "width:70px; height:70px; border-radius: 4px; max-width:70px; min-width:70px; padding-right:10px;", class: "mcnImage" %>
+                <%= image_tag Notifications::ImageService.new.avatar_url(location), style: "width:60px; height:60px; border-radius: 4px; border: 1px solid #83C7BD; background-color: #ffffff; padding: 2px; margin-right:8px;", class: "mcnImage" %>
               </td>
               <td style="font-size:12px; line-height:16px; vertical-valign:center;">
-                <%= link_to location.name, graetzl_location_url(location.graetzl, location), style: "color:#ec776a;" %>
+                <%= link_to location.name, graetzl_location_url(location.graetzl, location), style: "color:#69a8a7;" %>
                 <br>
                 <%= location.location_category.name %>
                 <% if location.address %>
@@ -35,7 +35,7 @@
           <% end %>
           <table>
             <tr>
-              <td style="font-size:12px; line-height:25px; vertical-valign:center;"><img src="https://gallery.mailchimp.com/3accfa3feb5f05b82bd1fddc6/images/91f7f040-579d-43aa-968d-c19e08f100ef.png" style="width:20px; height:20px; padding-right:5px; float:left;" alt="" class="mcnImage">Grätzlzuckerl im <%= I18n.localize Time.now, format: '%B' %>:</td>
+              <td style="font-size:12px; line-height:25px; vertical-valign:center;"><img src="https://gallery.mailchimp.com/3accfa3feb5f05b82bd1fddc6/images/91f7f040-579d-43aa-968d-c19e08f100ef.png" style="width:20px; height:20px; padding-right:5px; float:left;" width="20" height="20" class="mcnImage">Grätzlzuckerl im <%= I18n.localize Time.now, format: '%B' %>:</td>
             </tr>
             <tr>
               <td>
