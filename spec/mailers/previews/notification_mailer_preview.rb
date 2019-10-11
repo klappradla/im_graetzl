@@ -16,7 +16,7 @@ class NotificationMailerPreview < ActionMailer::Preview
   private
 
   def prepare_user
-    user = User.find(4)
+    user = User.find(2)
     user.notifications.update_all(sent: false)
     user
   end

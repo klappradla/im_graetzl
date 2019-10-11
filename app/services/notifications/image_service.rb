@@ -18,6 +18,15 @@ class Notifications::ImageService
     end
   end
 
+  def image_url(owner)
+    if owner.image
+      Refile.attachment_url(owner, :image, :fill, 600, 300, host: host)
+    else
+      path = "cover_photo/600x300.png"
+      ApplicationController.helpers.image_url(path, host: host)
+    end
+  end
+
   private
 
   def host
