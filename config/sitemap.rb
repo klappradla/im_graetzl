@@ -3,7 +3,8 @@ SitemapGenerator::Sitemap.default_host = 'https://www.imgraetzl.at'
 # pick a place safe to write the files
 SitemapGenerator::Sitemap.public_path = 'tmp/'
 # store on S3 using aws-sdk
-SitemapGenerator::Sitemap.adapter = SitemapGenerator::AwsSdkAdapter.new(ENV['UPLOADS_BUCKET'], path: 'sitemaps/')
+SitemapGenerator::Sitemap.sitemaps_path = 'sitemaps/'
+SitemapGenerator::Sitemap.adapter = SitemapGenerator::AwsSdkAdapter.new(ENV['UPLOADS_BUCKET'])
 
 SitemapGenerator::Sitemap.create do
   # Districts
