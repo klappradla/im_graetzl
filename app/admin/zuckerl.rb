@@ -9,15 +9,19 @@ ActiveAdmin.register Zuckerl do
   filter :title
   filter :description
   filter :flyer
+  filter :all_districts
   filter :aasm_state, as: :select, collection: Zuckerl.aasm.states_for_select
   filter :paid_at
   filter :created_at
 
-  scope :all, default: true
-  scope :paid
+  scope "#{I18n.localize Time.now.end_of_month+1.day, format: '%B'} Zuckerl", :next_month, default: true
+  scope "Aktueller Monat", :this_month
+
+  scope "Alle", :all
+  scope "Bezahlt", :marked_as_paid
   scope :pending
-  scope :live
   scope :cancelled
+  scope :expired
 
   index { render 'index', context: self }
   show { render 'show', context: self }
@@ -52,6 +56,7 @@ ActiveAdmin.register Zuckerl do
                 :title,
                 :description,
                 :flyer,
+                :all_districts,
                 :aasm_state,
                 :active_admin_requested_event,
                 :paid_at,

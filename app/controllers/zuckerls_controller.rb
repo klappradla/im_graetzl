@@ -30,7 +30,7 @@ class ZuckerlsController < ApplicationController
   def update
     set_location
     set_zuckerl_or_redirect or return
-    if @zuckerl.update zuckerl_params
+    if @zuckerl.update zuckerl_params_edit
       redirect_to zuckerls_user_path, notice: 'Zuckerl wurde aktualisiert'
     else
       render :edit
@@ -85,7 +85,14 @@ class ZuckerlsController < ApplicationController
       :description,
       :image,
       :remove_image,
-      :initiative_id,
-      :flyer)
+      :all_districts)
+  end
+
+  def zuckerl_params_edit
+    params.require(:zuckerl).permit(
+      :title,
+      :description,
+      :image,
+      :remove_image)
   end
 end

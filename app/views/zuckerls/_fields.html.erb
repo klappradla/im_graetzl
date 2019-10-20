@@ -1,5 +1,8 @@
 <%= form_errors_for f.object %>
 <%= f.hidden_field :location_id %>
+<%= f.hidden_field :graetzl_price, value: zuckerl_price('graetzl') %>
+<%= f.hidden_field :all_districts_price, value: zuckerl_price('all_districts') %>
+
 
 <div class="input-field">
   <%= f.label :title do %>
@@ -35,32 +38,27 @@
   </div>
 </div>
 
-<div class="input-select">
-  <%= f.label :initiative_id do %>
-    <%= icon_tag "love" %>
-    <span>Mit dem Zuckerl unterstütze ich</span>
-  <% end %>
-  <%= f.select :initiative_id,
-    options_from_collection_for_select(f.object.location.graetzl.initiatives, :id, :name),
-    {include_blank: 'Alle Initiativen im Grätzl'},
-    data: { behavior: 'initiativeselect' },
-    id: 'zuckerl_support' %>
-</div>
-
 <div class="input-labledcheckbox">
-  <%= f.label :flyer do %>
-    <%= icon_tag "open-book" %>
-    <span>Grätzlzuckerl Flyer</span>
+  <%= f.label :all_districts do %>
+    <%= icon_tag "map-location" %>
+    <span>Zuckerl Sichtbarkeit</span>
   <% end %>
-  <div class="field-wrp">
-    <div class="input-checkbox">
-      <%= f.check_box :flyer %>
-      <%= f.label :flyer do %>
-        Ich möchte auch im Grätzlzuckerl Flyer erscheinen.<br/>
-        <small>
-          Wir kontaktieren dich sobald die nächste Print-Ausgabe für deinen Bezirk geplant ist. Du bezahlst & buchst jetzt nur das Online Zuckerl.
-        </small>
-      <% end %>
+  <div class="field-wrp district_visibility">
+    <div class="input-radio">
+      <%= f.radio_button :all_districts, false, data: { behavior: 'all_districts_false'} %>
+      <%= f.label "all_districts_false", "#{@location.districts.first.numeric}. Bezirk" %>
+    </div>
+    <div class="input-radio">
+      <%= f.radio_button :all_districts, true, data: { behavior: 'all_districts_true'} %>
+      <%= f.label "all_districts_true", "Ganz Wien" %>
+    </div>
+    <div class="description">
+      <small class="graetzl">
+        Dein Grätzlzuckerl läuft im gesamten <%= @location.districts.first.numeric %>. Bezirk und kostet <span data-behavior="pricepreview"></span>.
+      </small>
+      <small class="all_districts">
+        Dein Grätzlzuckerl läuft in ganz Wien und kostet <span data-behavior="pricepreview"></span>.
+      </small>
     </div>
   </div>
 </div>

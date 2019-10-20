@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_23_174453) do
+ActiveRecord::Schema.define(version: 2019_10_19_085559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,13 @@ ActiveRecord::Schema.define(version: 2019_09_23_174453) do
     t.integer "user_id"
     t.index ["business_interest_id"], name: "index_business_interests_users_on_business_interest_id"
     t.index ["user_id"], name: "index_business_interests_users_on_user_id"
+  end
+
+  create_table "categories_meetings", id: false, force: :cascade do |t|
+    t.integer "category_id"
+    t.integer "meeting_id"
+    t.index ["category_id"], name: "index_categories_meetings_on_category_id"
+    t.index ["meeting_id"], name: "index_categories_meetings_on_meeting_id"
   end
 
   create_table "comments", id: :serial, force: :cascade do |t|
@@ -823,6 +830,8 @@ ActiveRecord::Schema.define(version: 2019_09_23_174453) do
     t.datetime "updated_at", null: false
     t.integer "initiative_id"
     t.string "slug"
+    t.boolean "all_districts", default: false
+    t.string "invoice_number"
     t.index ["initiative_id"], name: "index_zuckerls_on_initiative_id"
     t.index ["location_id"], name: "index_zuckerls_on_location_id"
     t.index ["slug"], name: "index_zuckerls_on_slug"
@@ -837,7 +846,6 @@ ActiveRecord::Schema.define(version: 2019_09_23_174453) do
   add_foreign_key "discussion_posts", "users", on_delete: :nullify
   add_foreign_key "discussions", "discussion_categories", on_delete: :nullify
   add_foreign_key "discussions", "groups", on_delete: :cascade
-  add_foreign_key "discussions", "users", on_delete: :nullify
   add_foreign_key "district_graetzls", "districts", on_delete: :cascade
   add_foreign_key "district_graetzls", "graetzls", on_delete: :cascade
   add_foreign_key "group_graetzls", "graetzls", on_delete: :cascade

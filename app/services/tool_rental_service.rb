@@ -115,7 +115,7 @@ class ToolRentalService
       Stripe::Charge.capture(tool_rental.stripe_charge_id)
     end
 
-    invoice_number = "#{Date.current.year}/TT-#{tool_rental.tool_offer_id}-RT-#{tool_rental.id}/#{ToolRental.next_invoice_number}"
+    invoice_number = "#{Date.current.year}/ToolRental-#{tool_rental.id}/Nr-#{ToolRental.next_invoice_number}"
     tool_rental.update(rental_status: :approved, payment_status: :payment_success, invoice_number: invoice_number)
     generate_invoices(tool_rental)
     ToolOfferMailer.rental_approved(tool_rental).deliver_later

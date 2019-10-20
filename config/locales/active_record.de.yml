@@ -253,9 +253,13 @@ de:
         created_at: Erstellt am
         title: Titel
         description: Beschreibung
+        all_districts: Ganz Wien
         image: Bild
         paid_at: Bezahlt am
         payment_reference: Zahlungsreferenz
+        visibility: Sichtbarkeit
+        marked_as_paid: Als bezahlt markiert
+        invoice_number: Rechnungsnummer
       group:
         group_category_ids: Kategorie
         title: Titel

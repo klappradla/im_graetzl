@@ -31,11 +31,10 @@
   <tr>
     <td class="mcnTextContent" style="padding-left:18px; padding-right:18px;">
 
-      Dein Zuckerl mit dem Titel "<strong><em><%= @zuckerl.title %></em></strong>" läuft nun für einen Monat im Grätzl
-      <%= @zuckerl.location.graetzl.name %> und im ganzen zugehörigen Bezirk!
-
+      Dein Zuckerl mit dem Titel "<strong><em><%= @zuckerl.title %></em></strong>" läuft nun für einen Monat auf imGrätzl.at
+      mit folgender Sichtbarkeit: "<strong><em><%= @zuckerl.visibility %></em></strong>"
       <p>
-        <strong>Im Grätzl <%= @zuckerl.location.graetzl.name %>:</strong><br/>
+        <strong>Zu den Grätzlzuckerln im <%= @zuckerl.location.graetzl.name %>:</strong><br/>
         <%= link_to zuckerls_graetzl_url(@zuckerl.location.graetzl), zuckerls_graetzl_url(@zuckerl.location.graetzl), style: "color:#f48a85;" %>
       </p>
 

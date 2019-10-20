@@ -6,7 +6,7 @@
         <p>Um dein Grätzlzuckerl zeitgerecht am <%= I18n.localize(@zuckerl.created_at.end_of_month+1.day, format: '%d.%m.%Y') %> schalten zu können,
           überweise bitte den noch offenen Betrag an folgende Kontoverbindung.</p>
         <div class="bookingdetails">
-          <p><strong>Gesamtbetrag: 15 €</strong> (inkl. USt.)</p>
+          <p><strong>Gesamtbetrag: <%= @zuckerl.total_price_with_currency %></strong> (inkl. USt.)</p>
           <p><strong>Kontoverbindung:</strong><br/>
             morgenjungs GmbH<br/>
             IBAN: AT03 2011 1826 6988 6500<br/>
@@ -15,7 +15,7 @@
         </div>
         <p>Nach Zahlungseingang senden wir dir erneut eine Bestätigung (inkl. Rechnung) an folgende E-Mailadresse zu: <%= mail_to current_user.email, nil %></p>
         <p>Solltest du Fragen zu deiner Buchung haben, sende uns ein E-Mail an <%= mail_to 'wir@imgraetzl.at', nil %></p>
-        <%= link_to 'Fertig', root_path, class: 'btn-primary' %>
+        <%= link_to 'Fertig', zuckerls_user_path(anchor: "zuckerl-verwalten"), class: 'btn-primary' %>
       </div>
       <div class="collapsible">
         <div class="collapsibletrigger" data-collapsed="<%= @billing_address.errors.any? ? false : true %>">

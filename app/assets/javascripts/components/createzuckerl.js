@@ -1,18 +1,24 @@
 APP.components.createzuckerl = (function() {
 
-    var $titleinput, $descriptioninput, $imageinput, $titlepreview,
-        $descriptionpreview, $imagepreview, $initiativeselect,
-        $btnconfirm, $btnsend;
+    var price_graetzl = $('[data-behavior=zuckerlform] #zuckerl_graetzl_price').val();
+    var price_all_districts = $('[data-behavior=zuckerlform] #zuckerl_all_districts_price').val();
+
+    var $titleinput, $descriptioninput, $imageinput, $districtinput, $titlepreview,
+        $descriptionpreview, $imagepreview, $pricepreview, $btnconfirm, $btnsend,
+        $graetzlpreview, $alldistrictspreview;
 
     function init() {
 
         $titleinput = $("[data-behavior=titleinput]");
         $descriptioninput = $("[data-behavior=descriptioninput]");
         $imageinput = $("[data-behavior=imageinput]");
+        $districtinput = $('.district_visibility .input-radio');
         $titlepreview = $("[data-behavior=titlepreview]");
         $descriptionpreview = $("[data-behavior=descriptionpreview]");
+        $pricepreview = $("[data-behavior=pricepreview]");
+        $graetzlpreview = $("[data-behavior=graetzlpreview]");
+        $alldistrictspreview = $("[data-behavior=alldistrictspreview]");
         $imagepreview = $("[data-behavior=imagepreview]");
-        $initiativeselect = $("[data-behavior=initiativeselect]");
         $btnconfirm = $("[data-behavior=btn-confirm]");
         $btnsend = $("[data-behavior=btn-send]");
 
@@ -21,8 +27,9 @@ APP.components.createzuckerl = (function() {
         bindevents();
         updatetitle();
         updatedescription();
-        showinitiative();
+        updatedistricts();
         btnclickability();
+        disabledistricts();
 
     }
 
@@ -30,13 +37,17 @@ APP.components.createzuckerl = (function() {
         $titleinput.on("keyup change", updatetitle);
         $descriptioninput.on("keyup change", updatedescription);
         $imageinput.on("upload:complete", updateimage);
-        $initiativeselect.on("change", showinitiative);
+        $districtinput.on("change", updatedistricts);
         $btnconfirm.on("click", btnstate);
         $("[data-behavior=zuckerlform]").on("submit", submitzuckerlform);
         $titleinput.add($descriptioninput).add($imageinput).on("keyup change", function() {
             btnclickability();
             btnstate("reset");
         });
+    }
+
+    function disabledistricts() {
+        $('.-edit .district_visibility input:radio').attr('disabled',true);
     }
 
     function updatetitle() {
@@ -49,15 +60,27 @@ APP.components.createzuckerl = (function() {
         else $descriptionpreview.addClass("placeholder").text("Beschreibung des Angebots");
     }
 
+    function updatedistricts() {
+      var selected_area = $(".district_visibility input[type='radio']:checked").data('behavior');
+      if (selected_area == "all_districts_true") {
+        $('.description .graetzl').hide();
+        $('.description .all_districts').show();
+        $pricepreview.text(price_all_districts);
+        $graetzlpreview.hide();
+        $alldistrictspreview.show();
+      } else {
+        $('.description .all_districts').hide();
+        $('.description .graetzl').show();
+        $pricepreview.text(price_graetzl);
+        $alldistrictspreview.hide();
+        $graetzlpreview.show();
+      }
+    }
+
     function updateimage() {
         FileAPI.Image(this.files[0]).preview(300, 185).get(function (err, img){
             $imagepreview.empty().append(img);
         });
-    }
-
-    function showinitiative() {
-        var index = $initiativeselect.prop('selectedIndex');
-        $(".initiative-info").children().hide().eq(index).fadeIn();
     }
 
     function validatefields() {

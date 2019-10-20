@@ -19,7 +19,33 @@ section.createzuckerl {
 
   label {
     @include respond-to(">=large") {
-      min-width: 155px;
+      min-width: 200px;
+    }
+  }
+
+  &.-edit {
+    .district_visibility .input-radio label::before {
+      opacity: .5;
+    }
+  }
+
+  .district_visibility {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    .input-radio {
+      margin-left:10px;
+      margin-right: 10px;
+      label {
+        min-width: 0px;
+      }
+    }
+    .description {
+      margin-top:20px;
+      padding-top:10px;
+      border-top: 1px solid #DBEFEC;
+      width:100%;
+      text-align: center;
     }
   }
 
@@ -146,18 +172,6 @@ section.createzuckerl {
     }
   }
 
-  .initiative-container {
-    padding-left: 20px;
-    > p:first-child {
-      color: $color-ambient-rosa;
-      margin-bottom: 10px;
-    }
-  }
-  .initiative-info {
-    > * {
-      display: none;
-    }
-  }
   .imgpreview {
     min-height: 175px;
     border-radius: 4px;

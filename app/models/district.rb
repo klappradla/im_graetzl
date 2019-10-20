@@ -38,6 +38,6 @@ class District < ApplicationRecord
   end
 
   def zuckerls
-    @zuckerls ||= Zuckerl.live.where(location_id: locations.map(&:id))
+    Zuckerl.live.where(location_id: locations.map(&:id)).or(Zuckerl.live.all_districts)
   end
 end

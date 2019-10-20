@@ -29,10 +29,14 @@
       </div>
     </div>
     <div class="zuckerlteasertxt">
+      <div class="hl">
+        <%= icon_tag "shopping-bag" %>
+        Grätzlzuckerl <%= zuckerl_month_and_year(zuckerl) %>
+      </div>
       <div class="title"><%= zuckerl.title %></div>
       <div class="description"><%= zuckerl.description %></div>
     </div>
-    <div class="locationstate">
+    <div class="itemstate">
       <%= zuckerl_state_for(zuckerl) %>
     </div>
     <div class="btn-group">
@@ -41,6 +45,7 @@
         data: { confirm: 'Bist du dir sicher?' },
         method: :delete,
         class: 'btn-secondary -mint -small' %>
+      <%= link_to "Download Rechnung", zuckerl.zuckerl_invoice.presigned_url(:get), class: 'btn-secondary -grey -small -invoice' if zuckerl.invoice_number.present? %>
     </div>
   </div>
 </div>

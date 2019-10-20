@@ -1,42 +1,37 @@
 <section class="usersetup -zuckerl">
 
-<% if @zuckerls.empty? %>
-
   <div class="introcontainer">
     <div class="introtxt">
 
       <div class="hl-subtext">
         <h1><em>Deine Grätzlzuckerl</em></h1>
         <p>Mit einem Grätzlzuckerl hast du die Möglichkeit günstig, einfach und unkompliziert Werbung für dein spezielles
-          Angebot in deinem Grätzl und Bezirk zu schalten.</p>
+          Angebot in deinem Grätzl, Bezirk oder in ganz Wien zu schalten.</p>
       </div>
 
       <p>Als Grätzlzuckerl eignen sich besondere <strong>Angebote, Gutscheine oder Rabattaktionen, aber auch Werbung für deine
         Produkte</strong>.</p>
-      <p>Grätzlzuckerl können immer für den kommenden Monat gebucht werden und laufen dann einen vollen Monat. Ein
-        Online Zuckerl kostet dich 15 € (inkl. USt.)</p>
-      <p>Um deinem Zuckerl noch mehr Aufmerksamkeit und Sichtbarkeit zu schenken, erscheint es nicht nur in deinem
+
+      <p>Grätzlzuckerl können immer für den kommenden Monat im Voraus gebucht werden und laufen dann einen ganzen Monat.
+      <strong>Sprich, wenn du jetzt ein Grätzlzuckerl buchst, läuft dieses im Monat <%= I18n.localize Time.now.end_of_month+1.day, format: '%B %Y' %>.</strong></p>
+      <p><strong>Ein Grätzlzuckerl kostet dich <%= zuckerl_price('graetzl') %></strong> (inkl. USt.) Um deinem Zuckerl noch mehr Aufmerksamkeit und Sichtbarkeit zu schenken, erscheint es nicht nur in deinem
         eigenen Grätzl, sondern sogar <strong>im ganzen zugehörigen Bezirk!</strong></p>
-      <p>Darüber hinaus landet dein Zuckerl auch im <strong>Grätzlzuckerl Newsletter</strong>, der immer am 1. des Monats an die Bewohner
-        im Bezirk gesendet wird.</p>
-      <p><strong>Aber das Schönste daran:</strong> Mit den Einnahmen aus den Grätzlzuckerln werden die Initiativen & Aktiven in deinem
-        Stadtteil finanziell unterstützt und du entscheidest welche.</p>
+
+      <p><strong>Seit kurzem gibt es auch das Wien Zuckerl.</strong>
+      Dieses läuft dann in allen Bezirken und Grätzln auf der Plattform, also in ganz Wien und <strong>kostet dich <%= zuckerl_price('all_districts') %></strong>.</p>
 
     </div>
     <%= render partial: 'users/zuckerl_actioncard' %>
   </div>
 
-<% else %>
+  <% if @zuckerls.present? %>
 
-  <h2 class="hl-main">Deine <span>Grätzlzuckerl</span> verwalten</h2>
+    <h2 class="hl-main" id="zuckerl-verwalten">Deine <span>Grätzlzuckerl</span> verwalten</h2>
 
-  <div class="cardBoxCollection -tripple" data-behavior="zuckerls-card-container">
-    <%= render partial: 'users/zuckerl', collection: @zuckerls %>
-  </div>
-  <div class="action-card-container">
-    <%= render partial: 'users/zuckerl_actioncard' %>
-  </div>
+    <div class="cardBoxCollection -tripple" data-behavior="zuckerls-card-container">
+      <%= render partial: 'users/zuckerl', collection: @zuckerls %>
+    </div>
 
-<% end %>
+  <% end %>
 
 </section>

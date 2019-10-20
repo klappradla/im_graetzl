@@ -19,10 +19,10 @@
   &.non_meetable, &.deleted, &.rejected {
     background: red;
   }
-  &.pending, &.cancelled, &.nein, &.owner_meetable, &.disabled, &.return_pending {
+  &.pending, &.nein, &.owner_meetable, &.disabled, &.return_pending, &.cancelled {
     background: orange;
   }
-  &.approved, &.ja, &.meetable, &.paid, &.enabled, &.return_confirmed {
+  &.approved, &.ja, &.meetable, &.paid, &.enabled, &.return_confirmed, &.live {
     background: green;
   }
   &.recreation, &.public_space {

@@ -31,28 +31,11 @@
   </div>
 </div>
 
-
 <div class="basicdata">
   <div class="headline">Eckdaten</div>
   <ul class="facts">
     <li><strong>Laufzeit:</strong> <%= zuckerl_month_and_year(zuckerl) %></li>
-    <li><strong>Grätzl:</strong> <%= zuckerl.location.graetzl.name %></li>
-    <li><strong>Preis:</strong> 15 € (inkl. USt.)</li>
+    <li><strong>Grätzl:</strong> <%= zuckerl.visibility %></li>
+    <li><strong>Preis:</strong> <%= zuckerl.total_price_with_currency %> (inkl. 20% USt.)</li>
   </ul>
-</div>
-
-<div class="initiative-container">
-  <% if initiative = zuckerl.initiative %>
-    <p>Mit deinem Zuckerl unterstützt du:</p>
-    <div class="initiative-info">
-      <div>
-        <div class="name"><%= initiative.name %></div>
-        <p class="description">
-          <%= attachment_image_tag(initiative, :image, :fit, 100, 200, class: 'logo') if initiative.image %>
-          <%= initiative.description %>
-        </p>
-        <%= link_to initiative.website.sub(/^https?\:\/\//, ''), initiative.website, target: '_blank' %>
-      </div>
-    </div>
-  <% end %>
 </div>

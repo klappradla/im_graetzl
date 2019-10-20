@@ -35,7 +35,7 @@ class Graetzl < ApplicationRecord
 
   def zuckerls
     related_graetzl_ids = District.memoized(district.id).graetzl_ids
-    Zuckerl.live.joins(:graetzl).where(graetzls: { id: related_graetzl_ids})
+    Zuckerl.live.joins(:graetzl).where(graetzls: { id: related_graetzl_ids}).or(Zuckerl.live.all_districts.joins(:graetzl))
   end
 
   def build_meeting

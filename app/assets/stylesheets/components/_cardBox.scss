@@ -336,7 +336,7 @@
     color: $color-ambient-mint-dark;
   }
 
-  .locationstate {
+  .itemstate {
     .state {
       font-weight: 600;
       font-size: 13px;
@@ -362,6 +362,9 @@
     }
     .btn-primary {
       float: left;
+      flex-basis: 100%;
+    }
+    .-invoice {
       flex-basis: 100%;
     }
   }

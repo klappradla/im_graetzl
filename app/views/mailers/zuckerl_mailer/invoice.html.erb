@@ -109,7 +109,7 @@
           <td colspan="3" style="padding-bottom:5px;">
             <p>
               Rechnungsdatum: <%= Date.today.strftime('%d.%m.%Y') %><br/>
-              Verwendungszweck: <%= @zuckerl.payment_reference %><br/>
+              Rechnungsnummer: <%= @zuckerl.invoice_number %><br/>
               Zahlungsmittel: Banküberweisung
             </p>
           </td>
@@ -118,32 +118,30 @@
           <td colspan="3" style="border-top-width: 2px;border-top-style: solid;border-top-color: #64A8A7;"></td>
         </tr>
         <tr>
-          <td width="15%"><strong>Anzahl</strong></td>
-          <td width="65%"><strong>Grätzlzuckerl Buchung</strong></td>
+          <td width="80%"><strong>Grätzlzuckerl Buchung</strong></td>
           <td width="20%"><strong>Preis</strong></td>
         </tr>
         <tr>
-          <td valign="top" style="padding-bottom:5px;">1</td>
-          <td valign="top">
-            "<%= @zuckerl.location.name %>" - Laufzeit: <%= I18n.localize @zuckerl.created_at.end_of_month+1.day, format: '%B %Y' %>
+          <td valign="top" style="padding-bottom:5px;">
+            <em>Sichtbarkeit:</em> <%= @zuckerl.visibility %><br>
+            <em>Location:</em> <%= @zuckerl.location.name %><br>
+            <em>Laufzeit:</em> <%= I18n.localize @zuckerl.created_at.end_of_month+1.day, format: '%B %Y' %>
           </td>
-          <td valign="top" nowrap="nowrap">12,50 € (exkl. USt.)</td>
+          <td valign="top" nowrap="nowrap"><%= @zuckerl.basic_price_with_currency %> (exkl. USt.)</td>
         </tr>
         <tr>
-          <td colspan="3" style="border-top-width: 2px;border-top-style: solid;border-top-color: #64A8A7;"></td>
+          <td colspan="2" style="border-top-width: 2px;border-top-style: solid;border-top-color: #64A8A7;"></td>
         </tr>
         <tr>
-          <td style="padding-bottom:5px;"></td>
-          <td align="right">zzgl. 20% USt. </td>
-          <td>&nbsp;&nbsp;2,50 €</td>
+          <td align="right" style="padding-bottom:5px;">zzgl. 20% USt. </td>
+          <td>&nbsp;&nbsp;<%= @zuckerl.tax_with_currency %></td>
         </tr>
         <tr>
-          <td></td>
           <td align="right"><strong>Gesamt inkl. USt. </strong></td>
-          <td nowrap="nowrap"><strong>15,00 €</strong></td>
+          <td nowrap="nowrap"><strong><%= @zuckerl.total_price_with_currency %></strong></td>
         </tr>
         <tr>
-          <td colspan="3" style="border-top-width: 2px;border-top-style: solid;border-top-color: #64A8A7;"></td>
+          <td colspan="2" style="border-top-width: 2px;border-top-style: solid;border-top-color: #64A8A7;"></td>
         </tr>
       </table>
 
