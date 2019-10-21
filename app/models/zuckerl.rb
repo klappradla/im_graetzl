@@ -18,7 +18,7 @@ class Zuckerl < ApplicationRecord
   scope :all_districts, -> { where(all_districts: true) }
   scope :marked_as_paid, -> { where("paid_at IS NOT NULL") }
   scope :this_month_live, lambda {where("created_at > ? AND created_at < ?", Time.now.beginning_of_month - 1.month, Time.now.end_of_month - 1.month).or(Zuckerl.live)}
-  scope :next_month_live, lambda {where("created_at > ? AND created_at < ?", Time.now.beginning_of_month, Time.now.end_of_month) && (Zuckerl.where.not(aasm_state: 'live'))}
+  scope :next_month_live, lambda {where("created_at > ? AND created_at < ? AND aasm_state != ?", Time.now.beginning_of_month, Time.now.end_of_month, 'live')}
 
   aasm do
     state :pending, initial: true
