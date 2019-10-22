@@ -116,9 +116,9 @@ class Zuckerl < ApplicationRecord
   end
 
   def send_invoice
-    invoice_number = "#{Date.current.year}/Zuckerl-#{self.id}/Nr-#{Zuckerl.next_invoice_number}"
-    update(invoice_number: invoice_number)
     update(paid_at: Time.now)
+    invoice_number = "#{Date.current.year}_Zuckerl-#{self.id}_Nr-#{Zuckerl.next_invoice_number}"
+    update(invoice_number: invoice_number)
     generate_invoice(self)
     ZuckerlMailer.invoice(self).deliver_later
   end

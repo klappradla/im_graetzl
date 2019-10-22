@@ -115,27 +115,6 @@
     }
   } // Group Cardbox
 
-  &.-toolteiler {
-    .btn-group {
-      margin-top:15px;
-      display: flex;
-      margin-left: auto;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      .btn-secondary {
-        flex-basis: 49%;
-        margin-bottom: 5px;
-        &:first-child:not(:only-child) {
-          margin-right: 5px;
-        }
-      }
-      .btn-primary {
-        float: left;
-        flex-basis: 100%;
-      }
-    }
-  }
-
   .entryInitialContent {
     margin-bottom: 0px;
   }
@@ -250,24 +229,6 @@
       background-color: $color-ambient-mint-light;
     }
 
-    .btn-group {
-      margin-top:15px;
-      display: flex;
-      margin-left: auto;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      .btn-secondary {
-        flex-basis: 49%;
-        margin-bottom: 5px;
-        &:first-child:not(:only-child) {
-          margin-right: 5px;
-        }
-      }
-      .btn-primary {
-        float: left;
-        flex-basis: 100%;
-      }
-    }
   }
 
   &.-roomoffer {
@@ -319,6 +280,7 @@
     color: $color-ambient-rosa-dark;
     .description {
       white-space: pre-wrap;
+      overflow: hidden;
     }
   }
   .event-teaser-box {
@@ -352,20 +314,14 @@
     display: flex;
     margin-left: auto;
     flex-wrap: wrap;
-    justify-content: flex-end;
+    justify-content: space-between;
     .btn-secondary {
-      flex-basis: 49%;
-      margin-bottom: 5px;
-      &:first-child:not(:only-child) {
-        margin-right: 5px;
-      }
+      flex-basis: 48%;
     }
-    .btn-primary {
+    .btn-primary, .-invoice {
       float: left;
       flex-basis: 100%;
-    }
-    .-invoice {
-      flex-basis: 100%;
+      margin-top: 10px;
     }
   }
 

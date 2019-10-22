@@ -33,24 +33,23 @@
       <%= render 'activities/appendix', appendix: local_assigns[:appendix], parent: tool_offer %>
     <% end %>
 
-  </div>
-
-  <% if local_assigns[:manage_buttons].present? && current_user == tool_offer.user %>
-    <div class="btn-group">
-      <%= link_to 'Bearbeiten', edit_tool_offer_path(tool_offer), class: 'btn-secondary -mint -small' %>
-      <%= link_to "javascript:", data: { jq_dropdown: "#tool-offer-dropdown-#{tool_offer.id}" }, class: "btn-secondary -mint -small -state-#{tool_offer.status}" do %>
-        Status: <span><%= t("activerecord.attributes.tool_offer.statuses.#{tool_offer.status}") %></span>
-      <% end %>
-    </div>
-
-    <div id="tool-offer-dropdown-<%= tool_offer.id %>" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container">
-      <div class="jq-dropdown-panel">
-        <%= link_to 'Aktiv', [:update_status, tool_offer, status: "enabled"], method: :patch %>
-        <%= link_to 'Inaktiv', [:update_status,  tool_offer, status: "disabled"], method: :patch %>
-        <%= link_to 'Löschen', tool_offer, method: :delete, data: { confirm: 'Bist du dir sicher?' } %>
+    <% if local_assigns[:manage_buttons].present? && current_user == tool_offer.user %>
+      <div class="btn-group">
+        <%= link_to 'Bearbeiten', edit_tool_offer_path(tool_offer), class: 'btn-secondary -mint -small' %>
+        <%= link_to "javascript:", data: { jq_dropdown: "#tool-offer-dropdown-#{tool_offer.id}" }, class: "btn-secondary -mint -small -state-#{tool_offer.status}" do %>
+          Status: <span><%= t("activerecord.attributes.tool_offer.statuses.#{tool_offer.status}") %></span>
+        <% end %>
       </div>
-    </div>
-  <% end %>
 
+      <div id="tool-offer-dropdown-<%= tool_offer.id %>" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container">
+        <div class="jq-dropdown-panel">
+          <%= link_to 'Aktiv', [:update_status, tool_offer, status: "enabled"], method: :patch %>
+          <%= link_to 'Inaktiv', [:update_status,  tool_offer, status: "disabled"], method: :patch %>
+          <%= link_to 'Löschen', tool_offer, method: :delete, data: { confirm: 'Bist du dir sicher?' } %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
 
 </div>
