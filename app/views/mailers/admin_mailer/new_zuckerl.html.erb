@@ -1,16 +1,59 @@
-<h1>Buchung Grätzlzuckerl <%= I18n.localize Time.now, format: '%B' %></h1>
-<table>
-  <tr>
-    <td>Location:</td>
-    <td><%= @location.name %></td>
-  </tr>
-  <tr>
-    <td>Zuckerl:</td>
-    <td><%= @zuckerl.title %></td>
-  </tr>
-  <tr>
-    <td>Zahlungsreferenz:</td>
-    <td><%= @zuckerl.payment_reference %></td>
-  </tr>
-</table>
-<p><%= link_to 'Zuckerl Ansehen', admin_zuckerl_url(@zuckerl) %></p>
+<% content_for(:above_title, "Admin Info Mail") %>
+<% content_for(:title, "Grätzlzuckerl Buchung für #{I18n.localize Time.now, format: '%B'}") %>
+
+<!-- --------------- BLOCK HEADLINE --------------- -->
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
+   <tr>
+     <td style="height:30px"> </td>
+   </tr>
+   <tr>
+     <td valign="top" class="mcnTextContent" style="padding-top:0;  padding-bottom:9px; padding-left:18px; padding-right:18px;">
+       <h4 style="text-align:left; color:#69a8a7; font-family:Georgia; font-size:125%; font-weight:normal; font-style:italic;">
+         Facts:
+       </h4>
+     </td>
+   </tr>
+   <tr>
+     <td style="padding-left:9px; padding-right:9px;">
+       <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%">
+         <tr>
+           <td>
+             <span></span>
+           </td>
+         </tr>
+       </table>
+     </td>
+   </tr>
+ </table>
+
+
+ <!-- --------------- ITEM --------------- -->
+ <table align="left" border="0" cellpadding="3" cellspacing="0" style="max-width:600px; border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #efefef; margin-bottom:18px;" width="100%" class="mcnTextContentContainer">
+   <tbody>
+     <tr>
+       <td style="width:30%;"></td>
+       <td style="width:70%;"></td>
+     </tr>
+     <tr>
+       <td class="mcnTextContent" style="white-space:nowrap; padding-left:18px; font-style:italic;">Location:</td>
+       <td class="mcnTextContent"><%= @location.name %></td>
+     </tr>
+     <tr>
+       <td class="mcnTextContent" style="white-space:nowrap; padding-left:18px; font-style:italic;">Zuckerl:</td>
+       <td class="mcnTextContent"><%= @zuckerl.title %></td>
+     </tr>
+     <tr>
+       <td class="mcnTextContent" style="white-space:nowrap; padding-left:18px; font-style:italic;">Sichtbarkeit:</td>
+       <td class="mcnTextContent"><%= @zuckerl.visibility %></td>
+     </tr>
+     <tr>
+       <td class="mcnTextContent" style="white-space:nowrap; padding-left:18px; font-style:italic;">Zahlungsreferenz:</td>
+       <td class="mcnTextContent"><%= @zuckerl.payment_reference %></td>
+     </tr>
+     <tr>
+       <td colspan="2">
+         <%= render 'mailers/shared/button', title: "Zuckerl Ansehen", url: admin_zuckerl_url(@zuckerl) %>
+       </td>
+     </tr>
+   </tbody>
+ </table>
