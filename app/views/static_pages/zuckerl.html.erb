@@ -29,6 +29,9 @@
         <strong>Kurz gesagt:</strong> mit dem Grätzlzuckerl kannst du Werbung für dich und deine Angebote
         gezielt in deinem Bezirk schalten und die Bewohner in deinem Einzugsgebiet erreichen.
       </p>
+      <p>
+        <strong>Seit kurzem gibt es auch das Wien Zuckerl.</strong> Dieses läuft dann in allen Bezirken und Grätzln auf der Plattform - Also 1 Monat die volle Sichtbarkeit für dich :)
+      </p>
     </div>
     <div class="card"></div>
   </div>
@@ -44,28 +47,31 @@
 
     <div class="wrp">
       <h3>Wo erscheint das Grätzlzuckerl?</h3>
-      <p>Die Angebote werden unter dem Menüpunkt "Zuckerl & Angebote" auf imGrätzl.at veröffentlicht und zusätzlich im monatlichen Grätzlzuckerl Newsletter an die Bewohner verschickt. Um den Angeboten noch mehr Aufmerksamkeit und Sichtbarkeit zu schenken, erscheint das Grätzlzuckerl nicht nur im jeweiligen Grätzl, sondern im ganzen Bezirk! (also auch den umliegenden Grätzln) Darüber hinaus sollen die Grätzlzuckerln in Zukunft ebenfalls auf einer eigenen Facebook-Seite sichtbar gemacht und gestreut werden!</p>
+      <p>
+        Je nach eingestellter Sichtbarkeit deines Grätzlzuckerls (Bezirk oder Wien), erscheint dein Angebot in deinem Bezirk und allen zugehörigen Grätzln, oder sogar in ganz Wien.
+        Ausserdem werden Grätzlzuckerln in die jeweiligen Grätzl-Streams gestreut und erscheinen auch in den wöchentlichen Grätzl-Mails an die BewohnerInnen.
+      </p>
     </div>
 
     <div class="wrp">
       <h3>Wie kann ich mein gebuchtes Grätzlzuckerl bearbeiten?</h3>
-      <p>Du findest deine gebuchten Grätzlzuckerl im Grätzlzuckerl-Setup. Solange dein Zuckerl noch nicht aktiv läuft, kannst du dieses dort auch bearbeiten. Wenn dein Zuckerl einmal im gebuchten Monat aktiv läuft, kann es nicht mehr bearbeitet werden. Solltest du unbedingt noch etwas ändern müssen, so kontaktiere uns unter: <a href="mailto:&#119;&#105;&#114;&#064;&#105;&#109;&#103;&#114;&#097;&#101;&#116;&#122;&#108;&#046;&#097;&#116;">&#119;&#105;&#114;&#064;&#105;&#109;&#103;&#114;&#097;&#101;&#116;&#122;&#108;&#046;&#097;&#116;</a>. Löschen kannst du dein Zuckerl natürlich jederzeit.</p>
-    </div>
-
-    <div class="wrp">
-      <h3>Was ist der Grätzlzuckerl Printflyer?</h3>
-      <p>Zusätzlich zum Online Grätzlzuckerl gibt es auch die Möglichkeit, Angebote im Grätzlzuckerl Printflyer zu schalten. Der Grätzlzuckerl Printflyer ist ein liebevoll und hochwertig gestaltetes & gefaltetes Plakat, welches regelmäßig im jeweiligen Bezirk in die Postkästen der Bewohner verteilt wird.</p>
-    </div>
-
-    <div class="wrp">
-      <h3>Ich möchte im Grätzlzuckerl Printflyer erscheinen - Wie geht das?</h3>
-      <p>Wenn du ein Online-Grätzlzuckerls buchst, hast du die Möglichkeit anzuhaken, dass du im nächsten Grätzlzuckerl Printflyer erscheinen möchtest mit deiner Anzeige.</p>
-      <p>Der Printflyer wird gedruckt, wenn in einem Monat 20 Buchungsanfragen für den Printflyer in deinem Bezirk zustande kommen. Wir melden uns bei dir und geben dir Bescheid, ob der Printflyer in deinem Bezirk gedruckt wird, erst wenn wir sicher wissen, dass er zustande kommt, bekommst du eine Zahlungsaufforderung über 80 € von uns, 15 € hast du ja schon für das Online-Grätzlzuckerl bezahlt, das Online-Grätzlzuckerl bekommst du also gratis oben drauf :)</p>
+      <p>Du findest deine gebuchten Grätzlzuckerl im Grätzlzuckerl-Setup. Solange dein Zuckerl noch nicht aktiv läuft, kannst du dieses dort auch bearbeiten. Wenn dein Zuckerl einmal im gebuchten Monat aktiv ist, kann es nicht mehr bearbeitet werden. Solltest du unbedingt noch etwas ändern müssen, so kontaktiere uns unter: <a href="mailto:&#119;&#105;&#114;&#064;&#105;&#109;&#103;&#114;&#097;&#101;&#116;&#122;&#108;&#046;&#097;&#116;">&#119;&#105;&#114;&#064;&#105;&#109;&#103;&#114;&#097;&#101;&#116;&#122;&#108;&#046;&#097;&#116;</a>. Löschen kannst du dein Zuckerl natürlich jederzeit.</p>
     </div>
 
     <div class="wrp">
       <h3>Was kostet das Grätzlzuckerl?</h3>
-      <p>Eine Grätzlzuckerl kostet in der Onlinevariante 15 € (inkl. USt.) pro Monat, in der Flyervariante 95 € (inkl. USt.). In der Flyervariante ist das Online Grätzlzuckerl automatisch inkludiert und die 15 € (inkl. USt.) werden dir von den 95 € (inkl. USt.) abgezogen.</p>
+      <p>
+        Ein Grätzlzuckerl mit der Sichtbarkeit "Bezirk" kostet <%= zuckerl_price('graetzl') %> (inkl. 20% USt.).<br>
+        Ein Grätzlzuckerl mit der Sichtbarkeit "ganz Wien" kostet <%= zuckerl_price('all_districts') %> (inkl. 20% USt.).
+      </p>
+    </div>
+
+    <div class="wrp">
+      <h3>Wo finde ich eine Mwst Rechnung für mein Grätzlzuckerl?</h3>
+      <p>
+        Nachdem dein Grätzlzuckerl bezahlt wurde, senden wir dir eine Rechnung per E-Mail zu.
+        Du kannst aber auch nachträglich eingeloggt im Bereich "<%= link_to 'Grätzlzuckerl verwalten', zuckerls_user_path %>" deine Grätzlzuckerl Rechnungen downloaden. (Dies geht für alle Zuckerl die nach dem 01.11.2019 erstellt wurden.)
+      </p>
     </div>
 
     <div class="wrp">
@@ -79,30 +85,15 @@
     </div>
 
     <div class="wrp">
-      <h3>Kann ich das Grätzlzuckerl auch in mehreren Bezirken schalten?</h3>
-      <p>Das Grätzlzuckerl ist konzipiert für die lokalen Unternehmen und Selbständigen im Stadtteil, die die Bewohner in ihrem Einzugsgebiet erreichen möchten. Wir bieten andere schöne Werbemöglichkeiten für Unternehmen an, die in mehreren Bezirken, oder in ganz Wien sichtbar werden möchten. Bitte kontaktiert uns einfach: <a href="mailto:&#119;&#105;&#114;&#064;&#105;&#109;&#103;&#114;&#097;&#101;&#116;&#122;&#108;&#046;&#097;&#116;">&#119;&#105;&#114;&#064;&#105;&#109;&#103;&#114;&#097;&#101;&#116;&#122;&#108;&#046;&#097;&#116;</a></p>
-    </div>
-
-    <div class="wrp">
       <h3>Warum brauche ich eine Locationseite zum schalten eines Grätzlzuckerls?</h3>
       <p>Deine Locationseite ist dein persönliches Schaufenster für dich und deine Angebote im Grätzl und somit auch der Absender deines Grätzlzuckerls. Das virtuelle Schaufenster ist kostenlos und geht ganz easy einzurichten - Einfach Name, Beschreibung und Bild hochladen, danach schalten wir deine Seite frei und du kannst dein Grätzlzuckerl schon buchen.</p>
-      <p>Über deine Locationseite kannst du aber nicht nur Grätzlzuckerl schalten, sondern hast darüber hinaus noch weitere Werkzeuge um Sichtbarkeit in deinem Grätzl zu bekommen. Du kannst Treffen oder Termine kundtun, Neuigkeiten einstellen und vieles mehr. Richte dir gleich hier deine Seite ein.</p>
+      <p>Über deine Locationseite kannst du aber nicht nur Grätzlzuckerl schalten, sondern hast darüber hinaus noch weitere Werkzeuge um Sichtbarkeit in deinem Grätzl zu bekommen. Du kannst Treffen oder Termine kundtun, Neuigkeiten einstellen und vieles mehr. Richte dir <%= link_to 'gleich hier', new_location_path %> deine Seite ein.</p>
     </div>
 
     <div class="wrp">
       <h3>Interesse, aber keine Idee für ein Grätzlzuckerl?</h3>
-      <p>Wir helfen euch gerne dabei herauszufinden, welches eurer Angebote oder Aktionen ein schönes Grätzlzuckerl für die Bewohner sein könnte. Wir unterstützen euch auch beim Texten und beim Aussuchen von Bildmaterial.</p>
-      <p>Schreib uns einfach, wir würden uns freuen, unsere Erfahrung in diesem Bereich an euch weitergeben zu dürfen. (<a href="mailto:&#119;&#105;&#114;&#064;&#105;&#109;&#103;&#114;&#097;&#101;&#116;&#122;&#108;&#046;&#097;&#116;">&#119;&#105;&#114;&#064;&#105;&#109;&#103;&#114;&#097;&#101;&#116;&#122;&#108;&#046;&#097;&#116;</a>)</p>
-    </div>
-
-    <div class="wrp">
-      <h3>Initiativen mit meinem Grätzlzuckerl unterstützen - Was hat es mit der Grätzlmarie auf sich?</h3>
-      <p>Mit der Plattform imGrätzl.at möchten wir zur Grätzlbelebung beitragen. Es gibt sehr viele gute Ideen von engagierten Bewohnern und Stadtteilinitiativen in einem Grätzl, was man machen kann, um das jeweilige Viertel zu beleben. Oft scheitert die Umsetzung schlicht und einfach an den finanziellen Mitteln. Deshalb haben wir die Grätzlmarie ins Leben gerufen unter dem Motto "Werbung, die das Grätzl belebt".</p>
-      <p>Kurz gesagt: 50% der Erlöse (nach Abzug der Kosten, z.B. Druckkosten) aus dem Grätzlzuckerl fließen zurück zu den Vereinen und Initiativen im Stadtteil, damit diese ihre Ideen umsetzen können.</p>
-      <p>Beim Einbuchen deines Grätzlzuckerls, kannst du auswählen, welchem Projekt das Geld zugutekommen soll. Falls du nichts auswählst, werden die Erlöse unter allen gelisteten Initiativen im Viertel aufgeteilt. Die anderen 50% der Erlöse verbleiben übrigens bei der Plattform für den Betrieb und die Weiterentwicklung.</p>
-      <p>Sollten in deinem Grätzl noch keine Initiativen zur Auswahl stehen, dann hoffen wir darauf, dass die Initiativen und Aktiven bald andocken, damit sie von den zukünftigen Grätzlzuckerlerlösen profitieren können. Aus steuerrechtlichen Gründen können wir die Erlöse nicht rückwirkend sammeln und ausbezahlen.</p>
-      <p>Du kennst Initiativen oder engagierte GrätzlbeleberInnen, die wir in das Grätzlmarie Programm aufnehmen sollten? Oder du engagierst dich selbst? Gib uns Bescheid und schreib uns an <a href="mailto:&#119;&#105;&#114;&#064;&#105;&#109;&#103;&#114;&#097;&#101;&#116;&#122;&#108;&#046;&#097;&#116;">&#119;&#105;&#114;&#064;&#105;&#109;&#103;&#114;&#097;&#101;&#116;&#122;&#108;&#046;&#097;&#116;</a>.<br/>
-        <%= link_to 'Noch mehr Infos zur Grätzlmarie gibts hier', info_infos_zur_graetzlmarie_path %>.</p>
+      <p>Wir helfen euch gerne dabei herauszufinden, welches eurer Angebote oder Aktionen ein schönes Grätzlzuckerl für die Bewohner sein könnte. Wir unterstützen euch auch beim Texten und beim Aussuchen von Bildmaterial.<br>
+      Schreib uns einfach, wir würden uns freuen, unsere Erfahrung in diesem Bereich an euch weitergeben zu dürfen. (<a href="mailto:&#119;&#105;&#114;&#064;&#105;&#109;&#103;&#114;&#097;&#101;&#116;&#122;&#108;&#046;&#097;&#116;">&#119;&#105;&#114;&#064;&#105;&#109;&#103;&#114;&#097;&#101;&#116;&#122;&#108;&#046;&#097;&#116;</a>)</p>
     </div>
 
   <!--</div>-->
