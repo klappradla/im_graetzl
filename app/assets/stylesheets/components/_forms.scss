@@ -615,6 +615,7 @@ input[type=url]:invalid + em::after {
   display: block;
   margin-left: 10px;
 	content: "http:// oder https:// ..";
+  @include font-size-primaryFont('small');
 }
 
 // ---------------------------------------------------------------------- Login Panel Modal

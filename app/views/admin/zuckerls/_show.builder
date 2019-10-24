@@ -14,6 +14,7 @@ context.instance_eval do
     row :location
     row :title
     row :description
+    row :link
     row :image do |z|
       z.image ? attachment_image_tag(z, :image, :fill, 400, 400) : nil
     end

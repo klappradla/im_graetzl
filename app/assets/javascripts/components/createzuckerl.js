@@ -11,9 +11,11 @@ APP.components.createzuckerl = (function() {
 
         $titleinput = $("[data-behavior=titleinput]");
         $descriptioninput = $("[data-behavior=descriptioninput]");
+        $linkinput = $("[data-behavior=linkinput]");
         $imageinput = $("[data-behavior=imageinput]");
         $districtinput = $('.district_visibility .input-radio');
         $titlepreview = $("[data-behavior=titlepreview]");
+        $linkpreview = $("a.linkpreview");
         $descriptionpreview = $("[data-behavior=descriptionpreview]");
         $pricepreview = $("[data-behavior=pricepreview]");
         $graetzlpreview = $("[data-behavior=graetzlpreview]");
@@ -27,15 +29,17 @@ APP.components.createzuckerl = (function() {
         bindevents();
         updatetitle();
         updatedescription();
+        updatelink();
         updatedistricts();
         btnclickability();
         disabledistricts();
-
+        $linkpreview.hide();
     }
 
     function bindevents() {
         $titleinput.on("keyup change", updatetitle);
         $descriptioninput.on("keyup change", updatedescription);
+        $linkinput.on("keyup change", updatelink);
         $imageinput.on("upload:complete", updateimage);
         $districtinput.on("change", updatedistricts);
         $btnconfirm.on("click", btnstate);
@@ -58,6 +62,16 @@ APP.components.createzuckerl = (function() {
     function updatedescription() {
         if ($descriptioninput.val()) $descriptionpreview.removeClass("placeholder").text($descriptioninput.val());
         else $descriptionpreview.addClass("placeholder").text("Beschreibung des Angebots");
+    }
+
+    function updatelink() {
+        if ($linkinput.val()) {
+          $linkpreview.attr("data-behavior", $linkinput.val());
+          $linkpreview.show();
+        }
+        else {
+          $linkpreview.hide();
+        }
     }
 
     function updatedistricts() {
@@ -107,6 +121,14 @@ APP.components.createzuckerl = (function() {
             $btnsend.addClass("is-visible");
         }
     }
+
+    $("a.linkpreview").on('click', function(){
+      var link = $("a.linkpreview").attr("data-behavior");
+      if (!link.match(/^[a-zA-Z]+:\/\//)) {
+          link = 'http://' + link;
+      }
+      window.open(link, '_blank');
+    });
 
 
     return {

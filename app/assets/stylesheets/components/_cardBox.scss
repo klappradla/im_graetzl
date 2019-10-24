@@ -40,6 +40,24 @@
     //opacity: 1.0;
   }
 
+  // Zuckerl Crdbox
+  &.-zuckerl {
+    .btn-userIcons {
+      width:100%;
+      border-radius: 0px 0px 6px 6px;
+      background-color: $color-ambient-rosa-dark;
+      border-top: 1px dotted $color-ambient-rosa-dark;
+      svg {
+        margin-right:8px;
+      }
+    }
+    .zuckerlteasertxt {
+      &:hover, &:active {
+        opacity: 1;
+        cursor: auto;
+      }
+    }
+  }
 
   // Room Demand Cardbox
   &.-roomdemand {
@@ -221,7 +239,7 @@
       &:last-child {
         margin-bottom: 0;
       }
-      + .streamElement {
+      + .streamElement, + .btn-group {
         margin-top: 20px;
       }
     }
@@ -276,7 +294,7 @@
   }
   .zuckerlteasertxt {
     border-color: $color-ambient-rosa-dark;
-    background-color: $color-ambient-rosa-light;
+    background-color: rgba($color-ambient-rosa-light, 0.4);
     color: $color-ambient-rosa-dark;
     .description {
       white-space: pre-wrap;
@@ -358,8 +376,6 @@
     height: 35px;
     padding: 1px;
   }
-
-
 
   .commentslink {
     color: $color-ambient-rosa;

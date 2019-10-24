@@ -28,6 +28,17 @@
     data: { behavior: 'descriptioninput'} %>
 </div>
 
+<div class="input-field">
+  <%= f.label :link do %>
+    <%= icon_tag "globe" %>
+    <span>Link zum Angebot</span>
+  <% end %>
+  <%= f.url_field :link,
+    placeholder: 'http://www ...',
+    id: 'zuckerl_link',
+    data: { behavior: 'linkinput' } %><em></em>
+</div>
+
 <div class="upload-oldschool">
   <%= f.label :image do %>
     <%= icon_tag "photo-camera" %>

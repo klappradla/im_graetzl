@@ -1,11 +1,10 @@
-<div class="cardBox">
+<div class="cardBox -zuckerl">
   <div class="cardBoxHeader">
     <div class="imgpreview" data-behavior="imagepreview">
       <div class="coverImgWrapper">
         <%= attachment_image_tag(zuckerl, :image, :fill, 300, 180, class: 'coverImg') if zuckerl.image_id %>
       </div>
     </div>
-
     <div class="categoryicon">
       <%= icon_tag "shopping-bag" %>
     </div>
@@ -28,6 +27,11 @@
       <div class="title" data-behavior="titlepreview"></div>
       <div class="description" data-behavior="descriptionpreview"></div>
     </div>
+    <%= link_to "javascript:void(0);", class: 'btn-userIcons linkpreview', data: { behavior: ''} do %>
+      <%= icon_tag "globe" %>
+      Zum Angebot
+    <% end %>
+
   </div>
 </div>
 

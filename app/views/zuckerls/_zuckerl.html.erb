@@ -31,13 +31,21 @@
         <% end %>
       </div>
     </div>
-    <%= link_to [graetzl, location, anchor: dom_id(zuckerl)], class: 'zuckerlteasertxt' do %>
+
+    <div class="zuckerlteasertxt">
       <div class="hl">
         <%= icon_tag "shopping-bag" %>
         Grätzlzuckerl im <%= I18n.localize Time.now, format: '%B' %>
       </div>
       <div class="title"><%= zuckerl.title %></div>
       <div class="description"><%= zuckerl.description %></div>
+    </div>
+    <% if zuckerl.link %>
+      <%= link_to zuckerl.link, class: 'btn-userIcons', target: '_blank' do %>
+        <%= icon_tag "globe" %>
+        Zum Angebot
+      <% end %>
     <% end %>
+
   </div>
 </div>

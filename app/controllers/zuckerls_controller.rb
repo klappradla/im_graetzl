@@ -16,6 +16,7 @@ class ZuckerlsController < ApplicationController
     @location = Location.find(params[:location_id])
     @zuckerl = @location.zuckerls.new zuckerl_params
     if @zuckerl.save
+      @zuckerl.link ||= nil
       redirect_to zuckerl_billing_address_path @zuckerl
     else
       render :new
@@ -85,7 +86,8 @@ class ZuckerlsController < ApplicationController
       :description,
       :image,
       :remove_image,
-      :all_districts)
+      :all_districts,
+      :link)
   end
 
   def zuckerl_params_edit
@@ -93,6 +95,7 @@ class ZuckerlsController < ApplicationController
       :title,
       :description,
       :image,
-      :remove_image)
+      :remove_image,
+      :link)
   end
 end
