@@ -40,7 +40,7 @@
           <strong>Von:</strong> <%= l(@tool_rental.rent_from, format: :short) %> bis <%= l(@tool_rental.rent_to, format: :short) %>
         </p>
         <p>
-          Wenn du deinen Toolteiler an <%= @tool_rental.renter.first_name %> verleihst, verdienst du dadurch <strong><%= number_to_currency(@tool_rental.basic_price - @tool_rental.discount, unit: "€") %></strong>.
+          Wenn du deinen Toolteiler an <%= @tool_rental.renter.first_name %> verleihst, verdienst du dadurch <strong><%= number_to_currency(@tool_rental.owner_payout_amount, unit: "€") %></strong> (nach Abzug der Servicegebühr).
         </p>
         <p>
           Klicke auf jetzt antworten um mit <%= @tool_rental.renter.first_name %> im Toolteiler-Messenger in Kontakt zu treten.

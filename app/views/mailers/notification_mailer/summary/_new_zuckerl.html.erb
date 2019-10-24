@@ -33,7 +33,7 @@
           <%= link_to [graetzl, location, anchor: dom_id(zuckerl)] do %>
             <%= image_tag Notifications::ImageService.new.image_url(zuckerl), style: "width:100%; padding-bottom:10px; padding-top:10px;", class: "mcnImage" %>
           <% end %>
-          <table>
+          <table style="width:100%;">
             <tr>
               <td style="vertical-valign:center;"><img src="https://gallery.mailchimp.com/3accfa3feb5f05b82bd1fddc6/images/91f7f040-579d-43aa-968d-c19e08f100ef.png" style="width:20px; height:20px; max-width:20px; max-height:20px; padding-right:5px; float:left;" width="20" height="20" class="mcnImage"><em>Grätzlzuckerl im <%= I18n.localize Time.now, format: '%B' %>:</em></td>
             </tr>
