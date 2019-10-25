@@ -11,6 +11,9 @@ context.instance_eval do
     if zuckerl.invoice_number.present?
       row(:zuckerl_invoice) { |z| link_to "PDF Rechnung", z.zuckerl_invoice.presigned_url(:get) }
     end
+    row :user do
+      link_to zuckerl.location.boss.username, admin_user_path(zuckerl.location.boss.username)
+    end
     row :location
     row :title
     row :description

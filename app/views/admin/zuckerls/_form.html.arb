@@ -1,15 +1,13 @@
 active_admin_form_for [:admin, resource] do |f|
   inputs do
     semantic_errors
-    input :location, include_blank: false
+    input :location, collection: Location.order(:name), input_html: { :class => 'admin-filter-select'}
     input :title
     input :description
     input :link
     input :image, as: :file, hint: (image_tag(attachment_url(f.object, :image, :fill, 100, 100)) if f.object.image)
     input :remove_image, as: :boolean if f.object.image
-    input :flyer
     input :all_districts
-    input :initiative
     if resource.persisted?
       input :active_admin_requested_event, as: :select, collection: f.object.aasm.events(permitted: true).map{|event| [Zuckerl.aasm.human_event_name(event.name), event.name]}
     else

@@ -246,10 +246,10 @@ de:
       zuckerl:
         active_admin_requested_event: Status ändern
         aasm_state: Status
-        aasm_state/pending: Unbezahlt
-        aasm_state/paid: Bezahlt
-        aasm_state/expired: Abgelaufen
-        aasm_state/cancelled: Gelöscht
+        aasm_state/pending: Pending
+        aasm_state/paid: Paid
+        aasm_state/expired: Expired
+        aasm_state/cancelled: Deleted
         created_at: Erstellt am
         title: Titel
         description: Beschreibung

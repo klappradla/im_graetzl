@@ -11,10 +11,10 @@ de:
         disapprove_for_api: für API ablehnen
         reject: Ablehnen
         destroy: Löschen
-        mark_as_paid: Als bezahlt markieren
-        put_live: Live stellen
-        expire: Als abgelaufen markieren
-        cancel: Als gelöscht markieren
+        mark_as_paid: als bezahlt markieren
+        put_live: live stellen
+        expire: als abgelaufen markieren
+        cancel: als gelöscht markieren
       link: erstellen
       succesfully_destroyed:
         one: "Erfolgreich 1 %{model} gelöscht"
