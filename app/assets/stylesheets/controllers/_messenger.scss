@@ -9,7 +9,10 @@ section.messenger-page {
   #chat-container {
     display: flex;
     width:100%;
-    height: calc(var(--vh, 1vh) * 100 - 60px); //height: calc(100vh - 60px);
+    height:100%;
+    //height: calc(var(--vh, 1vh) * 100 - 60px);
+    height: calc(100vh - 60px);
+    min-height: calc(100vh - 60px);
   }
 
   #side-bar {
@@ -37,7 +40,10 @@ section.messenger-page {
     margin-left: -22px;
 
     #chat-container {
-      height: calc(var(--vh, 1vh) * 100 - 70px); //height: calc(100vh - 70px);
+      //height:100%;
+      //height: calc(var(--vh, 1vh) * 100 - 70px);
+      min-height: calc(100vh - 70px);
+      height: calc(100vh - 70px);
     }
     #side-bar {
       flex: 1 0 30%;
