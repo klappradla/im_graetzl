@@ -40,7 +40,6 @@ section.messenger-page {
     margin-left: -22px;
 
     #chat-container {
-      //height:100%;
       //height: calc(var(--vh, 1vh) * 100 - 70px);
       min-height: calc(100vh - 70px);
       height: calc(100vh - 70px);
@@ -73,7 +72,6 @@ section.messenger-page {
     position: relative;
     height: 100%;
     width:100%;
-    padding-bottom:20px;
     border-left: 1px solid $color-ambient-mint-light;
   }
 
@@ -106,8 +104,6 @@ section.messenger-page {
       .filter {
         display: flex;
         justify-content: center;
-        //padding: 10px 10px 10px 10px;
-        //border-top: 1px solid $color-ambient-mint-light;
         a {
           color: $color-ambient-mint-dark;
           white-space: nowrap;
@@ -224,7 +220,6 @@ section.messenger-page {
     display: flex;
     flex-wrap: wrap;
     align-content: space-between;
-    //align-content: space-between;
     position: relative;
   }
 
@@ -241,14 +236,17 @@ section.messenger-page {
 
     border-top: 1px solid $color-ambient-mint-light;
     background-color: #fbfbfb;
-    padding-top:20px;
-    //padding-bottom:20px;
+    padding:15px;
 
     display: flex;
     //align-items: flex-end;
     div.input {
       width:100%;
       margin-right: 10px;
+    }
+    .btn-primary {
+      padding-left:15px;
+      padding-right:15px;
     }
   }
 
@@ -264,7 +262,6 @@ section.messenger-page {
     width: 100%;
     display: block;
     color: $color-ambient-grey;
-    //height: 4.0rem;
     padding: 0.8rem 1.4rem;
     height:100px;
     max-height:100px;

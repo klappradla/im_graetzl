@@ -71,7 +71,11 @@ APP.controllers.messenger = (function() {
   }
 
   function scrollToLastMessage() {
-    $(".chat-panel").scrollTop($(".chat-panel")[0].scrollHeight);
+    //$(".chat-panel").scrollTop($(".chat-panel")[0].scrollHeight);
+    $('.chat-panel').animate({
+      scrollTop:$(".chat-panel")[0].scrollHeight
+    }, 500);
+
   }
 
   function initLayout() {
@@ -82,7 +86,6 @@ APP.controllers.messenger = (function() {
 
     $( window ).resize(function() {
       setWindowHeight();
-      //adjustWidthandHeight();
     });
 
     $('#main-content').on("click", '.back-btn', function() {
@@ -91,14 +94,6 @@ APP.controllers.messenger = (function() {
       history && history.replaceState({}, '', location.pathname);
       return false;
     });
-  }
-
-  function adjustWidthandHeight() {
-      var parentwidth = $("#main-content").width();
-      $("#msg-control").width(parentwidth);
-      var chatcontainerheight = $("#chat-container").height();
-      var msgcontrolheight = $("#msg-control").outerHeight(true);
-      $(".chat-panel").height(chatcontainerheight - msgcontrolheight);
   }
 
   function setWindowHeight() {

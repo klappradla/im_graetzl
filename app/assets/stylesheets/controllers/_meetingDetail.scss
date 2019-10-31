@@ -4,6 +4,7 @@ section.meeting {
     @include respond-to(">=medium") {
       margin-bottom: -80px;
     }
+    height:370px;
   }
 }
 

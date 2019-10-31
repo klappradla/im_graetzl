@@ -7,5 +7,8 @@ var messageList = $(".chat-panel[data-thread-id='<%= @thread.id %>'] #message-li
 
 <% if @user_messages.present? %>
   $(".chat-panel[data-thread-id='<%= @thread.id %>'] .last-message-input").val("<%= @user_messages.last.id %>");
-  $(".chat-panel").scrollTop($(".chat-panel")[0].scrollHeight);
+  //$(".chat-panel").scrollTop($(".chat-panel")[0].scrollHeight);
+  $('.chat-panel').animate({
+    scrollTop:$(".chat-panel")[0].scrollHeight
+  }, 500);
 <% end %>
