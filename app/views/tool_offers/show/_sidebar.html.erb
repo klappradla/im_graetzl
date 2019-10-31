@@ -4,20 +4,26 @@
 
     <h3 class="sidebar">Die Kosten</h3>
     <div class="pricing-info">
-      <div class="priceSheet -variant2">
-        <div class="price"><%= @tool_offer.daily_price(1).to_i %><sup>€</sup></div>
-        <div class="txt">pro Tag</div>
+      <div class="priceSheet">
+        <div class="price">
+          <%= @tool_offer.daily_price(1).to_i %><sup>€</sup>
+          <small>pro Tag</small>
+        </div>
       </div>
       <% if @tool_offer.two_day_discount? %>
-      <div class="priceSheet -variant2 -discount-days">
-        <div class="price"><%= @tool_offer.daily_price(2).to_i %><sup>€</sup></div>
-        <div class="txt">pro Tag</div>
+      <div class="priceSheet -discount-days">
+        <div class="price">
+          <%= @tool_offer.daily_price(2).to_i %><sup>€</sup>
+          <small>pro Tag</small>
+        </div>
       </div>
       <% end %>
       <% if @tool_offer.weekly_discount? %>
-      <div class="priceSheet -variant2 -discount-week">
-        <div class="price"><%= @tool_offer.daily_price(7).to_i %><sup>€</sup></div>
-        <div class="txt">pro Tag</div>
+      <div class="priceSheet -discount-week">
+        <div class="price">
+          <%= @tool_offer.daily_price(7).to_i %><sup>€</sup>
+          <small>pro Tag</small>
+        </div>
       </div>
       <% end %>
     </div>
