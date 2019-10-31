@@ -25,7 +25,7 @@
     <div class="input">
       <%= text_area_tag :message, nil, class: "chat-message-input", placeholder: "Deine Nachricht .." %>
     </div>
-    <%= submit_tag "Senden", class: "btn-primary -small" %>
+    <%= submit_tag "Senden", class: "btn-primary -small -mint" %>
   <% end %>
 
   <%= form_tag messenger_fetch_new_messages_path(thread_id: @thread.id), method: :get, remote: true, class: 'fetch-new-messages-form' do %>

@@ -215,8 +215,9 @@ section.messenger-page {
     width: 100%;
     //overflow: scroll;
     //-webkit-overflow-scrolling: touch;
-    //display: flex;
-    //flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
     //align-content: space-between;
     position: relative;
   }
@@ -224,20 +225,21 @@ section.messenger-page {
   .message-wrapper {
     width:100%;
     padding: 50px 15px 15px 15px;
+    flex-grow: 2;
   }
 
   .message-control {
-    width:50%;
-    position: fixed;
-    bottom: 0;
+    width:100%;
+    //position: fixed;
+    //bottom: 0;
 
     border-top: 1px solid $color-ambient-mint-light;
     background-color: #fbfbfb;
     padding-top:20px;
-    padding-bottom:20px;
+    //padding-bottom:20px;
 
     display: flex;
-    align-items: flex-end;
+    //align-items: flex-end;
     div.input {
       width:100%;
       margin-right: 10px;
@@ -256,10 +258,11 @@ section.messenger-page {
     width: 100%;
     display: block;
     color: $color-ambient-grey;
-    height: 4.0rem;
+    //height: 4.0rem;
     padding: 0.8rem 1.4rem;
-    height:38px;
-    max-height: calc(30vh);
+    height:100px;
+    max-height:100px;
+    //max-height: calc(30vh);
     &::placeholder {
       color: $color-ambient-grey;
     }

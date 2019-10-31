@@ -82,7 +82,7 @@ APP.controllers.messenger = (function() {
 
     $( window ).resize(function() {
       setWindowHeight();
-      adjustWidthandHeight();
+      //adjustWidthandHeight();
     });
 
     $('#main-content').on("click", '.back-btn', function() {
