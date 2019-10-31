@@ -9,3 +9,5 @@ var messageList = $(".chat-panel[data-thread-id='<%= @thread.id %>'] #message-li
   $(".chat-panel[data-thread-id='<%= @thread.id %>'] .last-message-input").val("<%= @user_messages.last.id %>");
   $(".chat-panel").scrollTop($(".chat-panel")[0].scrollHeight);
 <% end %>
+var parentwidth = $("#main-content").width();
+$("#msg-control").width(parentwidth);

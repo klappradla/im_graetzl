@@ -55,6 +55,10 @@ $row-hover-bg : $color-ambient-mint-light;
     &.wide20 {width: 20%; justify-content: left;}
     &.wide25 {width: 25%; justify-content: left;}
     width: calc(40% / 3);
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      // IE Fix
+      width: calc((40% / 3) - 1px);
+    }
 
     .message {
       display: inline-flex;
@@ -102,7 +106,7 @@ $row-hover-bg : $color-ambient-mint-light;
     }
   }
   .flex-cell {
-    width: calc(100% / 3); //1px = border right
+    width: 33%; //1px = border right
     text-align: center;
     padding: 0.5em 0.5em;
     border-right: solid 1px $table-border;
@@ -118,7 +122,7 @@ $row-hover-bg : $color-ambient-mint-light;
   @include respond-to("<=medium") {
 
     .flex-row, .flex-row.wide20, .flex-row.wide25 {
-      width: calc(100% / 2); //1px = border right
+      width: 50%; //1px = border right
       justify-content: center;
     }
     .column {

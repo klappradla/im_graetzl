@@ -156,7 +156,8 @@ section.messenger-page {
         height:50px;
       }
       .wrp {
-        width:100%;
+        //width:100%;
+        flex-grow: 2;
         display: grid;
         @include font-size-primaryFont('small');
         .user {
@@ -226,13 +227,14 @@ section.messenger-page {
   }
 
   .message-control {
-    width:100%;
-    position: sticky;
+    width:50%;
+    position: fixed;
     bottom: 0;
 
     border-top: 1px solid $color-ambient-mint-light;
     background-color: #fbfbfb;
     padding-top:20px;
+    padding-bottom:20px;
 
     display: flex;
     align-items: flex-end;
@@ -283,7 +285,8 @@ section.messenger-page {
     }
 
     div.bubble {
-      width:100%;
+      //width:100%;
+      flex-grow: 2;
       padding: 10px 14px;
       background-color: rgba($color-ambient-grey-light,0.70);
       border-radius: 9px;

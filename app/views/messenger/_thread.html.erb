@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <%= form_tag messenger_post_message_path(thread_id: @thread.id), remote: true, class: 'message-control post-message-form' do %>
+  <%= form_tag messenger_post_message_path(thread_id: @thread.id), remote: true, class: 'message-control post-message-form', id: 'msg-control' do %>
     <div class="input">
       <%= text_area_tag :message, nil, class: "chat-message-input", placeholder: "Deine Nachricht .." %>
     </div>

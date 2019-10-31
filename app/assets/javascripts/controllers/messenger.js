@@ -7,6 +7,10 @@ APP.controllers.messenger = (function() {
     initLayout();
   }
 
+  $(document).ready(function(){
+  // auszuführender Code, nachdem DOM geladen wurden
+});
+
   function initThreadFilter() {
     var filterMessages = new jBox('Tooltip', {
       addClass:'jBox',
@@ -78,6 +82,7 @@ APP.controllers.messenger = (function() {
 
     $( window ).resize(function() {
       setWindowHeight();
+      adjustWidth();
     });
 
     $('#main-content').on("click", '.back-btn', function() {
@@ -86,6 +91,11 @@ APP.controllers.messenger = (function() {
       history && history.replaceState({}, '', location.pathname);
       return false;
     });
+  }
+
+  function adjustWidth() {
+      var parentwidth = $("#main-content").width();
+      $("#msg-control").width(parentwidth);
   }
 
   function setWindowHeight() {

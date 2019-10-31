@@ -334,11 +334,11 @@
     flex-wrap: wrap;
     justify-content: space-between;
     .btn-secondary {
-      flex-basis: 48%;
+      width: 48%;
     }
     .btn-primary, .-invoice {
       float: left;
-      flex-basis: 100%;
+      width: 100%;
       margin-top: 10px;
     }
   }
