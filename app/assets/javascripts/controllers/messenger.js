@@ -82,7 +82,7 @@ APP.controllers.messenger = (function() {
 
     $( window ).resize(function() {
       setWindowHeight();
-      adjustWidth();
+      adjustWidthandHeight();
     });
 
     $('#main-content').on("click", '.back-btn', function() {
@@ -93,9 +93,12 @@ APP.controllers.messenger = (function() {
     });
   }
 
-  function adjustWidth() {
+  function adjustWidthandHeight() {
       var parentwidth = $("#main-content").width();
       $("#msg-control").width(parentwidth);
+      var chatcontainerheight = $("#chat-container").height();
+      var msgcontrolheight = $("#msg-control").outerHeight(true);
+      $(".chat-panel").height(chatcontainerheight - msgcontrolheight);
   }
 
   function setWindowHeight() {

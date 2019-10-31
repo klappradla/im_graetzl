@@ -1,1 +1,9 @@
-$("#main-content").html("<%= j render 'thread' %>")
+$("#main-content").html("<%= j render 'thread' %>");
+
+// Auslagern und zugreifen
+var parentwidth = $("#main-content").width();
+$("#msg-control").width(parentwidth);
+
+var chatcontainerheight = $("#chat-container").height();
+var msgcontrolheight = $("#msg-control").outerHeight(true);
+$(".chat-panel").height(chatcontainerheight - msgcontrolheight);
