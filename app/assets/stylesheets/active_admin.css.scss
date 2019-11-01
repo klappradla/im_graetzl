@@ -15,23 +15,30 @@
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
 //
+
+.mailtype {
+  display: inline-block;
+  width:130px;
+}
+
 .status_tag {
-  &.non_meetable, &.deleted, &.rejected {
+
+  &.non_meetable, &.deleted, &.rejected, &.off {
     background: red;
   }
   &.pending, &.nein, &.owner_meetable, &.disabled, &.return_pending, &.cancelled {
     background: orange;
   }
-  &.approved, &.ja, &.meetable, &.paid, &.enabled, &.return_confirmed, &.live {
+  &.approved, &.ja, &.meetable, &.paid, &.enabled, &.return_confirmed, &.live, &.immediate {
     background: green;
   }
   &.recreation, &.public_space {
     background: LightCoral;
   }
-  &.business {
+  &.business, &.weekly {
     background: LightBlue;
   }
-  &.vacancy {
+  &.vacancy, &.daily {
     background: LightSeaGreen;
   }
 }

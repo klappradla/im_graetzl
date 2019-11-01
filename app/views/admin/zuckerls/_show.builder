@@ -12,7 +12,7 @@ context.instance_eval do
       row(:zuckerl_invoice) { |z| link_to "PDF Rechnung", z.zuckerl_invoice.presigned_url(:get) }
     end
     row :user do
-      link_to zuckerl.location.boss.username, admin_user_path(zuckerl.location.boss.username)
+      link_to zuckerl.location.boss.username, admin_user_path(zuckerl.location.boss)
     end
     row :location
     row :title

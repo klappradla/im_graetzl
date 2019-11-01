@@ -12,9 +12,8 @@
 
         <strong>1.)</strong>
         <em>
-          <strong>Richte dir deine Locationseite ein</strong>, um mit deinen Aktionen und deinem Angebot
-          im Stadtteil sichtbar zu werden. Zum Einrichten deiner Locationseite:
-          <%= link_to locations_user_url, locations_user_url, target: '_blank' %>
+          <strong>Richte dir deine Locationseite ein</strong>, um mit deinen Aktionen und deinem Tun im Stadtteil sichtbar zu werden.
+          Zum Einrichten deiner Locationseite: <%= link_to locations_user_url, locations_user_url, target: '_blank' %>
         </em>
 
         <br><br>
@@ -42,8 +41,17 @@
         <strong>4.)</strong>
         <em>
           <strong>Komm in dein Unterstützer-Team!</strong>
-          Das imGrätzl Mentoring-Programm für Selbständige und MacherInnen startet. Alle Infos:
+          Das imGrätzl Mentoring-Programm für Selbständige und MacherInnen startet wieder in Kürze. Alle Infos:
           <%= link_to unterstuetzer_team_url, unterstuetzer_team_url, target: '_blank' %>
+        </em>
+
+        <br><br>
+
+        <strong>5.)</strong>
+        <em>
+          <strong>Du hast ein schönes Angebot, ein Rabatt oder Gutschein, den du bekannter machen möchtest?</strong>
+          Dann ist das Grätzlzuckerl dafür das Richtige, das spielt dein Angebot bezirksweise oder in ganz Wien aus, einen ganzen Monat lang:
+          <%= link_to zuckerls_user_url, zuckerls_user_url, target: '_blank' %>
         </em>
 
         <br><br>
@@ -61,6 +69,7 @@
 
         <% if @user.origin == 'mentoring' %>
         <% else %>
+        
         <% end %>
       </td>
     </tr>

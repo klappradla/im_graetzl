@@ -7,6 +7,9 @@ context.instance_eval do
           row :slug
           row :graetzl
           row :username
+          row "Benachrichtigungen" do |u|
+            link_to "Mail-Einstellungen von #{u.username}", admin_user_notification_settings_path(q: { id_eq: u.id })
+          end
           row :first_name
           row :last_name
           row :email

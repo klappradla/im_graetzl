@@ -2,11 +2,14 @@ ActiveAdmin.register User, as: "User Notification Settings" do
   menu parent: 'Users', priority: 2
 
   actions :index
-  config.filters = false
+  #config.filters = false
 
   scope :all, default: true
   scope :business
   scope :admin
+
+  filter :id, label: 'User', as: :select, collection: proc { User.admin_select_collection }, include_blank: true, input_html: { class: 'admin-filter-select'}
+  filter :email
 
   index { render 'index', context: self }
 
