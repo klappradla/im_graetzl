@@ -12,6 +12,10 @@ class DiscussionPost < ApplicationRecord
 
   after_create :set_discussion_last_post
 
+  def deleted?
+    user_id.blank?
+  end
+
   def edit_permission?(by_user)
     by_user && user_id == by_user.id
   end

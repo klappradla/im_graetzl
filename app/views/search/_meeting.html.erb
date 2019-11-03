@@ -28,7 +28,7 @@
     <% end %>
     <div class="txt">
       <h3><%= meeting['title'] %></h3>
-      <p><%= meeting['description'].truncate(120) %></p>
+      <p><%= meeting['description'].truncate(120) if meeting['description'] %></p>
     </div>
     <%= link_to 'Zum Treffen', item.link, class: 'btn-primary -mint' %>
   </div>

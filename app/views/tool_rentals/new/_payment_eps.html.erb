@@ -4,7 +4,11 @@
   <%= hidden_field_tag :rent_to, params[:rent_to] %>
   <%= hidden_field_tag :redirect_url, choose_payment_tool_rentals_url(tool_rental_params.merge(payment_method: 'eps')) %>
 
-  <div class="error-message"></div>
+  <div class="error-message">
+    <% if params[:payment_method] == 'eps' && @source_status == 'failed' %>
+      EPS Überweisung gescheitert.
+    <% end %>
+  </div>
 
   <div class="input-field">
     <%= label_tag :full_name do %>

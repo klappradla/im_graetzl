@@ -1,4 +1,4 @@
-<% last_post = discussion.discussion_posts.reject(&:initial_post?).max_by(&:created_at) %>
+<% last_post = discussion.discussion_posts.reject(&:initial_post?).reject(&:deleted?).max_by(&:created_at) %>
 
 <div class="cardBox -discussion" data-behavior="masonry-card">
   <div class="cardBoxHeader">
@@ -15,12 +15,22 @@
   </div>
   <div class="cardBoxContent">
     <div class="avatar-block">
-      <%= link_to discussion.user, class: 'avatarImg' do %>
-        <%= attachment_image_tag discussion.user, :avatar, :fill, 200, 200, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+      <% if discussion.user %>
+        <%= link_to discussion.user, class: 'avatarImg' do %>
+          <%= attachment_image_tag discussion.user, :avatar, :fill, 200, 200, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+        <% end %>
       <% end %>
       <div class="typetxt">
-        <div class="name"><%= link_to discussion.user.full_name, discussion.user %></div>
-        <div class="category"><%= discussion.discussion_category ? discussion.discussion_category.title : 'Allgemein'.html_safe %></div>
+        <div class="name">
+          <% if discussion.user %>
+            <%= link_to discussion.user.full_name, discussion.user %>
+          <% else %>
+            Gelöschtes Mitglied
+          <% end %>
+        </div>
+        <div class="category">
+          <%= discussion.discussion_category ? discussion.discussion_category.title : 'Allgemein'.html_safe %>
+        </div>
         <div class="infos">
           <%= discussion.discussion_posts.size  %> <%= discussion.discussion_posts.size > 1 ? 'Beiträge' : 'Beitrag'  %>
         </div>
@@ -28,7 +38,7 @@
     </div>
     <div class="txt">
       <h3><%= link_to discussion.title, [discussion.group, discussion, anchor: "topic"] %></h3>
-      <% if !last_post %>
+      <% if !last_post && !discussion.first_post.deleted? %>
         <p><%= truncate discussion.first_post.content, length: 150 %></p>
       <% end %>
     </div>

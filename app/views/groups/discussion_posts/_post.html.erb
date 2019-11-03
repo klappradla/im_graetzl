@@ -1,12 +1,22 @@
 <div class="user-post" id="discussion-post-<%= post.id %>">
   <div class="user">
     <div class="avatar">
-      <%= link_to post.user do %>
-        <%= attachment_image_tag post.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+      <% if post.deleted? %>
+        <%= image_tag 'avatar/user/100x100.png', class: 'attachment user avatar img-round' %>
+      <% else %>
+        <%= link_to post.user do %>
+          <%= attachment_image_tag post.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+        <% end %>
       <% end %>
     </div>
     <div class="infos">
-      <div class="name"><%= link_to post.user.full_name, post.user %></div>
+      <div class="name">
+        <% if post.deleted? %>
+          Gelöschtes Mitglied
+        <% else %>
+          <%= link_to post.user.full_name, post.user %>
+        <% end %>
+      </div>
       <div class="date">
         <%= I18n.localize(post.created_at, format:'%a, %d. %B %Y, %H:%M') %>
       </div>
@@ -29,14 +39,18 @@
 
   <div class="content">
 
-    <div class="bbcode"><%= post.content.bbcode_to_html.html_safe %></div>
+    <% if post.deleted? %>
+      <div class="bbcode">(Gelöschtes)</div>
+    <% else %>
+      <div class="bbcode"><%= post.content.bbcode_to_html.html_safe %></div>
 
-    <% if post.images.present? %>
-      <div class="entryImgUploads" data-featherlight-gallery data-featherlight-filter="a">
-        <% post.images.each do |image| %>
-          <%= link_to attachment_image_tag(image, :file, :fill, 200, 200), attachment_url(image, :file, :limit, 800, 800) %>
-        <% end %>
-      </div>
+      <% if post.images.present? %>
+        <div class="entryImgUploads" data-featherlight-gallery data-featherlight-filter="a">
+          <% post.images.each do |image| %>
+            <%= link_to attachment_image_tag(image, :file, :fill, 200, 200), attachment_url(image, :file, :limit, 800, 800) %>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
 
     <div class="post-comments">

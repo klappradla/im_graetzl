@@ -16,4 +16,5 @@ class Post < ApplicationRecord
   def edit_permission?(user)
     user && user.admin?
   end
+
 end
