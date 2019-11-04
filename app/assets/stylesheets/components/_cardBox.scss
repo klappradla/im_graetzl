@@ -469,7 +469,6 @@
   .address, .infos {
     @include ellipsis();
     font-size: 13px;
-    margin-left: -3px;
     color: $color-ambient-mint-dark;
     span {
       color: $color-ambient-rosa;

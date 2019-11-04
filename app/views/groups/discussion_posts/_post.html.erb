@@ -40,7 +40,7 @@
   <div class="content">
 
     <% if post.deleted? %>
-      <div class="bbcode">(Gelöschtes)</div>
+      <div class="bbcode">(Beitrag gelöscht ..)</div>
     <% else %>
       <div class="bbcode"><%= post.content.bbcode_to_html.html_safe %></div>
 
