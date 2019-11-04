@@ -12,6 +12,9 @@
       width:100%;
       text-align: center;
       white-space: nowrap;
+      a {
+        cursor:default;
+      }
     }
     .desk {
       display: none;
@@ -73,6 +76,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    text-align: center;
     div {
       width:38%;
       @include respond-to("<=small") {
@@ -105,8 +109,11 @@
         height:30px;
       }
     }
-    .line {
-      border-bottom: 3px solid $color-ambient-mint-light;
+    &.-line {
+
+      .line {
+        border-bottom: 3px solid $color-ambient-mint-light;
+      }
     }
     .block {
       display: block
@@ -126,4 +133,16 @@
     }
 
   }
+
+  .btn-primary {
+    margin-left:auto
+  }
+
+  .footer-txt {
+    border-top: 1px solid $color-ambient-mint-light;
+    padding-top:25px;
+    margin-top:20px;
+    font-style: italic;
+  }
+
 }

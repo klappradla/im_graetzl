@@ -1,32 +1,33 @@
 <div class="summary" id="tab-summary">
 
   <div class="hl-subtext">
-    <h1>Tool anfragen</h1>
+    <h1>Deine Toolteiler Anfrage</h1>
     <p>
-      Deine Auswahl
+      Zusammenfassung
     </p>
   </div>
 
   <div class="summarybox">
     <div>
+      <h3>Toolteiler</h3>
       <p>
-        <strong>„<%= @tool_offer.title %>“</strong>
+        „<%= @tool_offer.title %>“
       </p>
     </div>
     <div class="avatar">
       <%= avatar_for @tool_offer.user %>
     </div>
     <div>
+      <h3>Vermieter</h3>
       <p>
-        <strong>Vermieter</strong><br>
-        <%= @tool_offer.address.street %><br>
         <%= @tool_offer.user.full_name %><br>
+        <%= @tool_offer.address.street %><br>
         <%= @tool_offer.address.zip %> <%= @tool_offer.address.city %>
       </p>
     </div>
   </div>
 
-  <div class="summarybox">
+  <div class="summarybox -line">
     <div class="line"></div>
     <div class="avatar">
       <%= icon_tag "tacker" %>
@@ -36,8 +37,8 @@
 
   <div class="summarybox">
     <div class="payment-summary">
+      <h3>Zahlungsart</h3>
       <p>
-        <strong>Zahlungsart</strong><br>
         <span class="payment-method block">
           <%= payment_method_label(params[:payment_method]) %> <br>
           <% if @card %> endet auf <%= @card.last4 %> <span class="card-last4"></span> <% end %>
@@ -50,12 +51,17 @@
       <%= avatar_for current_user %>
     </div>
     <div class="renter-summary">
-      <p>
-        <strong>Mieter</strong><br>
+      <h3>Mieter</h3>
+      <!--<p>
         <span class="renter-company block"><%= params[:renter_company] %></span>
         <span class="renter-name block"><%= params[:renter_name] %></span>
         <span class="renter-address block"><%= params[:renter_address] %></span>
         <span class="renter-zip"><%= params[:renter_zip] %></span> <span class="renter-city"><%= params[:renter_city] %></span>
+      </p>-->
+      <p>
+        <span class="renter-name block"><%= current_user.full_name %></span>
+        <span class="renter-address block"><%= current_user.address.street %></span>
+        <span class="renter-zip"><%= current_user.address.zip %></span> <span class="renter-city"><%= current_user.address.city %></span>
       </p>
     </div>
   </div>

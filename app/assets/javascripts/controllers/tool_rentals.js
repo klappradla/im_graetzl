@@ -16,17 +16,32 @@ APP.controllers.tool_rentals = (function() {
       // Change Wording of Notice Message for Toolteiler Registrations
       if ($("#flash .notice").exists()) {
         var flashText = $("#flash .notice").text();
-        if (flashText.indexOf('Vielen Dank für Deine Registrierung.') >= 0){
+        if (flashText.indexOf('Super, du bist nun registriert!') >= 0){
           // Modifiy Message for Toolteiler Registrations
-          $("#flash .notice").text('Vielen Dank für Deine Registrierung. Du bist jetzt angemeldet und kannst mit deiner Toolteiler Anfrage fortfahren..');
+          $("#flash .notice").text(flashText + ' Danach gehts weiter mit deiner Toolteiler Anfrage.');
         }
       }
     }
 
     function initAddressScreen() {
+
+      setTab('step1');
+
+      // Change Wording of Notice Message for Toolteiler Registrations
+      if ($("#flash .notice").exists()) {
+        var flashText = $("#flash .notice").text();
+        if (flashText.indexOf('Vielen Dank für Deine Registrierung.') >= 0){
+          // Modifiy Message for Toolteiler Registrations
+          $("#flash .notice").text('Vielen Dank für Deine Registrierung. Du bist jetzt angemeldet und kannst mit deiner Toolteiler Anfrage fortfahren..');
+        }
+      }
+
     }
 
     function initPaymentScreen() {
+
+      setTab('step2');
+
       var screen = $(".tool-rental-page.payment-screen");
       screen.find(".paymentMethods input").on("click", function() {
         screen.find(".payment-method-container").hide();
@@ -180,11 +195,17 @@ APP.controllers.tool_rentals = (function() {
     }
 
     function initSummaryScreen() {
+      setTab('step3');
     }
 
     function openTab(tab) {
       $('.tabs-ctrl').trigger('show', '#tab-' + tab);
       $('.tabs-ctrl').get(0).scrollIntoView();
+    }
+
+    function setTab(tab) {
+      $('.tabs-ctrl li').removeClass('active');
+      $('.tabs-ctrl li#'+tab).addClass('active');
     }
 
     return {

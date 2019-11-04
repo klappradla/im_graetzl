@@ -227,8 +227,16 @@ section.messenger-page {
 
   .message-wrapper {
     width:100%;
-    padding: 50px 15px 15px 15px;
+    padding: 50px 15px 0px 15px;
     flex-grow: 2;
+  }
+
+  .empty-messages svg {
+    width:50px;
+    height:50px;
+    color: $color-ambient-mint-light;
+    opacity: 0.5;
+    margin: auto;
   }
 
   .message-control {
@@ -348,6 +356,7 @@ section.messenger-page {
   }
 
   .thread-info {
+    width: 100%;
 
     .user-info {
       margin: auto;
@@ -366,7 +375,7 @@ section.messenger-page {
 
     .tool-rental-info {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       .title  {
         font-weight: bold;
         a {
@@ -374,24 +383,25 @@ section.messenger-page {
           font-weight: bold;
         }
       }
-      .leave-rating-container {
-        width: 150px;
-        margin: auto;
-        .star {
-          display: inline-block;
-          position: relative;
-          font-size: 20px;
-          text-decoration: none;
-          color: $color-ambient-mint-dark;
-        }
-        &:hover .star::before {
-          content: "\2605";
-          position: absolute;
-          color: $color-ambient-mint-dark;
-        }
-        .star:hover ~ .star::before {
-          content: '';
-        }
+    }
+
+    .leave-rating-container {
+      width: 150px;
+      margin: auto;
+      .star {
+        display: inline-block;
+        position: relative;
+        font-size: 20px;
+        text-decoration: none;
+        color: $color-ambient-mint-dark;
+      }
+      &:hover .star::before {
+        content: "\2605";
+        position: absolute;
+        color: $color-ambient-mint-dark;
+      }
+      .star:hover ~ .star::before {
+        content: '';
       }
     }
 
@@ -400,8 +410,8 @@ section.messenger-page {
       margin-top: 20px;
       //padding: 10px 10px 10px 14px;
       padding:20px;
-      text-align: left;
-      background-color: rgba($color-ambient-grey-light,0.70);
+      text-align: center;
+      background-color: rgba($color-ambient-rosa-light,0.25);
       border-radius: 9px;
       display: flex;
       align-items: center;
@@ -421,7 +431,7 @@ section.messenger-page {
           padding: 2px;
           margin-top: 2px;
           margin-left: -2px;
-          color: $color-ambient-mint-dark;
+          color: $color-ambient-rosa;
         }
       }
       .note {
@@ -429,6 +439,8 @@ section.messenger-page {
         .contact {
           font-style: italic;
           padding:10px;
+          text-align: center;
+          color: $color-ambient-rosa-dark;
         }
       }
       .buttons {

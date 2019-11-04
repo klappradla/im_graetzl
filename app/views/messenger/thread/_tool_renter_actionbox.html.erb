@@ -1,20 +1,5 @@
 <div class="tool-rental-info">
 
-  <!--
-    <h3>Neue Toolteiler Anfrage</h3>
-  -->
-
-  <div class="title">
-    Du hast nach dem Toolteiler
-    „<%= link_to_if tool_rental.tool_offer.enabled?, "#{tool_rental.tool_offer.title}", tool_rental.tool_offer %>“
-    bei <%= tool_rental.owner.full_name %> angefragt.
-  </div>
-
-  <div class="time">
-    <%= tool_rental.days %> Tage /
-    <%= l(tool_rental.rent_from, format: :short) %> - <%= l(tool_rental.rent_to, format: :short) %>
-  </div>
-
   <div class="action-box">
     <div class="box-icon">
       <%= icon_tag "horn-promote" %>
@@ -23,11 +8,11 @@
     <% if tool_rental.pending? %>
 
       <div class="note">
-        Du kannst jetzt im Chat mit <%= tool_rental.owner.full_name %> noch offene Fragen klären.
-        Eine zahlungspflichtige Buchung erfolgt erst nach Bestätigung der Anfrage durch den Vermieter.
+        <%= tool_rental.owner.full_name %> wurde über deine Anfrage benachrichtigt. Ihr könnt jetzt im Chat noch offene Fragen klären.
+        Eine zahlungspflichtige Buchung erfolgt erst nach Bestätigung der Anfrage durch den Vermieter. Du kannst deine Anfrage auch noch zurückziehen.
       </div>
       <div class="buttons">
-        <%= link_to "Anfrage abbrechen", cancel_tool_rental_path(tool_rental), method: :post, class: "btn-primary -small -grey" %>
+        <%= link_to "Anfrage zurückziehen", cancel_tool_rental_path(tool_rental), method: :post, class: "btn-primary -small -grey" %>
       </div>
 
     <% elsif tool_rental.canceled? %>
@@ -39,11 +24,10 @@
     <% elsif tool_rental.approved? %>
 
       <div class="note">
-        <strong>Glückwunsch</strong>, <%= tool_rental.owner.first_name %> hat deine Anfrage angenommen, damit ist der Toolteiler erfolgreich gebucht.
+        <strong>Glückwunsch, <%= tool_rental.owner.first_name %> hat deine Anfrage angenommen, damit ist der Toolteiler erfolgreich gebucht.</strong>
         Die Kontaktdaten sind wie folgt, alle Details wurden dir auch per E-Mail gesendet.
         <p class="contact">
-          <%= tool_rental.owner.full_name %><br>
-          <%= tool_rental.tool_offer.address.street_name %> <%= tool_rental.tool_offer.address.street_number %>, <%= tool_rental.tool_offer.address.zip %> <%= tool_rental.tool_offer.address.city %>
+          <%= tool_rental.owner.full_name %>, <%= tool_rental.tool_offer.address.street_name %> <%= tool_rental.tool_offer.address.street_number %>, <%= tool_rental.tool_offer.address.zip %> <%= tool_rental.tool_offer.address.city %>
         </p>
         Macht euch am besten gleich hier im Chat eine genaue Uhrzeit und einen Treffpunkt aus.
       </div>
@@ -51,8 +35,8 @@
     <% elsif tool_rental.rejected? %>
 
       <div class="note">
-        Leider hat der Verleiher deine Anfrage abgelehnt.
-        Probiere es mit einer anderen <%= link_to "Toolteiler", tool_offers_wien_path %> Anfrage.
+        Leider hat der Vermieter deine Anfrage abgelehnt.
+        Probiere es mit einem anderen <%= link_to "Toolteiler", tool_offers_wien_path %>.
       </div>
 
     <% elsif tool_rental.return_pending? %>

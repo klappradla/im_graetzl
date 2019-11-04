@@ -1,20 +1,5 @@
 <div class="tool-rental-info">
 
-  <!--
-    <h3>Neue Toolteiler Anfrage</h3>
-  -->
-
-  <div class="title">
-    <%= tool_rental.renter.full_name %> möchte deinen Toolteiler
-    „<%= link_to_if tool_rental.tool_offer.enabled?, "#{tool_rental.tool_offer.title}", tool_rental.tool_offer %>“
-    mieten.
-  </div>
-
-  <div class="time">
-    <%= tool_rental.days %> Tage /
-    <%= l(tool_rental.rent_from, format: :short) %> - <%= l(tool_rental.rent_to, format: :short) %>
-  </div>
-
   <div class="action-box">
     <div class="box-icon">
       <%= icon_tag "horn-promote" %>
@@ -28,24 +13,23 @@
       </div>
       <div class="buttons">
         <%= link_to "Ablehnen", reject_tool_rental_path(tool_rental), method: :post, class: "btn-primary -small -grey" %>
-        <%= link_to "Akzeptieren", approve_tool_rental_path(tool_rental), method: :post, class: "btn-primary -small -mint" %>
+        <%= link_to "Akzeptieren", approve_tool_rental_path(tool_rental), method: :post, class: "btn-primary -small" %>
       </div>
 
     <% elsif tool_rental.canceled? %>
 
       <div class="note">
-        <%= tool_rental.renter.full_name %> hat die Anfrage zurückgezogen.
+        <strong><%= tool_rental.renter.full_name %> hat die Anfrage zurückgezogen.</strong>
       </div>
 
     <% elsif tool_rental.approved? %>
 
       <div class="note">
-        <strong>Glückwunsch</strong>, du hast die Anfrage akzeptiert und damit die Buchung bestätigt.
+        <strong>Glückwunsch, du hast die Anfrage akzeptiert und damit die Buchung bestätigt.</strong>
         Wir haben dir eine Buchungsbestätigung per E-Mail gesendet.
         Die Kontaktdaten des Mieters sind wie folgt:
         <p class="contact">
-          <%= tool_rental.renter.full_name %><br>
-          <%= tool_rental.renter.address.street_name %> <%= tool_rental.renter.address.street_number %>, <%= tool_rental.renter.address.zip %> <%= tool_rental.renter.address.city %>
+          <%= tool_rental.renter.full_name %>, <%= tool_rental.renter.address.street_name %> <%= tool_rental.renter.address.street_number %>, <%= tool_rental.renter.address.zip %> <%= tool_rental.renter.address.city %>
         </p>
         Macht euch am besten gleich hier im Chat eine genaue Uhrzeit und einen Treffpunkt aus.
       </div>
@@ -64,7 +48,7 @@
         Die Auszahlung deiner Mieteinnahmen auf dein Konto erfolgt innerhalb von 5 Tagen nach Bestätigung der Rückgabe.
       </div>
       <div class="buttons">
-        <%= link_to "Rückgabe bestätigen", confirm_return_tool_rental_path(tool_rental), method: :post, class: "btn-primary -small -mint" %>
+        <%= link_to "Rückgabe bestätigen", confirm_return_tool_rental_path(tool_rental), method: :post, class: "btn-primary -small" %>
       </div>
 
     <% elsif tool_rental.return_confirmed? %>

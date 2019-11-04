@@ -1,2 +1,3 @@
 var messageList = $(".chat-panel[data-thread-id='<%= @thread.id %>'] #message-list");
+$('.empty-messages').remove();
 messageList.append("<%= j render 'messenger/thread/message', user_message: @user_message %>");

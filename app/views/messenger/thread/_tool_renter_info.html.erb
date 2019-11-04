@@ -1,0 +1,14 @@
+<div class="tool-rental-info">
+
+  <div class="title">
+    Du hast nach dem Toolteiler
+    „<%= link_to_if tool_rental.tool_offer.enabled?, "#{tool_rental.tool_offer.title}", tool_rental.tool_offer %>“
+    bei <%= tool_rental.owner.full_name %> angefragt.
+  </div>
+
+  <div class="time">
+    <%= tool_rental.days %> Tage /
+    <%= l(tool_rental.rent_from, format: :short) %> - <%= l(tool_rental.rent_to, format: :short) %>
+  </div>
+
+</div>

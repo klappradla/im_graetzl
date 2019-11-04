@@ -8,9 +8,9 @@
     <div class="thread-info">
       <%= render 'messenger/thread/user_info' %>
       <% if @thread.tool_rental && current_user == @thread.tool_rental.owner %>
-        <%= render 'messenger/thread/tool_owner', tool_rental: @thread.tool_rental %>
+        <%= render 'messenger/thread/tool_owner_info', tool_rental: @thread.tool_rental %>
       <% elsif @thread.tool_rental && current_user == @thread.tool_rental.renter %>
-        <%= render 'messenger/thread/tool_renter', tool_rental: @thread.tool_rental %>
+        <%= render 'messenger/thread/tool_renter_info', tool_rental: @thread.tool_rental %>
       <% end %>
     </div>
 
@@ -18,17 +18,31 @@
       <% @thread.user_messages.includes(:user).order("created_at").each do |user_message| %>
         <%= render 'messenger/thread/message', user_message: user_message %>
       <% end %>
+      <% if @thread.user_messages.empty? %>
+        <div class="empty-messages">
+          <%= icon_tag "speech-bubbles" %>
+        </div>
+      <% end %>
     </div>
   </div>
 
-  <%= form_tag messenger_post_message_path(thread_id: @thread.id), remote: true, class: 'message-control post-message-form', id: 'msg-control' do %>
-    <div class="input">
-      <%= text_area_tag :message, nil, class: "chat-message-input", placeholder: "Deine Nachricht .." %>
-    </div>
-    <%= submit_tag "Senden", class: "btn-primary -small -mint" %>
-  <% end %>
+  <div class="thread-info">
+    <% if @thread.tool_rental && current_user == @thread.tool_rental.owner %>
+      <%= render 'messenger/thread/tool_owner_actionbox', tool_rental: @thread.tool_rental %>
+    <% elsif @thread.tool_rental && current_user == @thread.tool_rental.renter %>
+      <%= render 'messenger/thread/tool_renter_actionbox', tool_rental: @thread.tool_rental %>
+    <% end %>
+    <%= form_tag messenger_post_message_path(thread_id: @thread.id), remote: true, class: 'message-control post-message-form', id: 'msg-control' do %>
+      <div class="input">
+        <%= text_area_tag :message, nil, class: "chat-message-input", placeholder: "Deine Nachricht .." %>
+      </div>
+      <%= submit_tag "Senden", class: "btn-primary -small -mint" %>
+    <% end %>
 
-  <%= form_tag messenger_fetch_new_messages_path(thread_id: @thread.id), method: :get, remote: true, class: 'fetch-new-messages-form' do %>
-    <%= hidden_field_tag :last_message_id, @thread.user_messages.last.try(:id), class: 'last-message-input' %>
-  <% end %>
+    <%= form_tag messenger_fetch_new_messages_path(thread_id: @thread.id), method: :get, remote: true, class: 'fetch-new-messages-form' do %>
+      <%= hidden_field_tag :last_message_id, @thread.user_messages.last.try(:id), class: 'last-message-input' %>
+    <% end %>
+  </div>
+
+
 </div>
