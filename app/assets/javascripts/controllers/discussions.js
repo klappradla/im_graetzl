@@ -4,6 +4,11 @@ APP.controllers.discussions = (function() {
     APP.controllers.groups.init();
     initControls();
     if ($('.follow').exists()) { initFollowing(); }
+    if ($('.discussion-area .discussion-infos').exists()) { initDiscussionTab(); }
+  }
+
+  function initDiscussionTab() {
+    $(".tabs-nav .-topics").addClass('active');
   }
 
   function initControls() {

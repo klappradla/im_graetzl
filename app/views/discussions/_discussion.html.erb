@@ -19,6 +19,10 @@
         <%= link_to discussion.user, class: 'avatarImg' do %>
           <%= attachment_image_tag discussion.user, :avatar, :fill, 200, 200, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
         <% end %>
+      <% else %>
+        <div class="avatarImg">
+          <%= image_tag('avatar/user/default.png', class: 'img-round') %>
+        </div>
       <% end %>
       <div class="typetxt">
         <div class="name">

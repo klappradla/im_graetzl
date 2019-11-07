@@ -1,11 +1,11 @@
 <ul class="tabs-nav">
-  <li><%= link_to "Die Gruppe", group_path(@group, anchor: 'tab-info') %></li>
+  <li class="-info"><%= link_to "Die Gruppe", group_path(@group, anchor: 'tab-info') %></li>
   <% if @group.readable_by?(current_user) %>
-    <li><%= link_to "Themen", group_path(@group, anchor: 'tab-discussions') %></li>
-    <li><%= link_to "Treffen", group_path(@group, anchor: 'tab-meetings') %></li>
-    <li><%= link_to "Mitglieder", group_path(@group, anchor: 'tab-members') %></li>
+    <li class="-topics"><%= link_to "Themen", group_path(@group, anchor: 'tab-discussions') %></li>
+    <li class="-meetings"><%= link_to "Treffen", group_path(@group, anchor: 'tab-meetings') %></li>
+    <li class="-members"><%= link_to "Mitglieder", group_path(@group, anchor: 'tab-members') %></li>
   <% end %>
   <% if @group.room_call_readable_by?(current_user) %>
-    <li><%= link_to "Call", group_path(@group, anchor: 'tab-call') %></li>
+    <li class="-call"><%= link_to "Call", group_path(@group, anchor: 'tab-call') %></li>
   <% end %>
 </ul>

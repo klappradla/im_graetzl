@@ -33,14 +33,15 @@
       margin-right: 0;
     }
     &:not(.active) a {
-      color: $color-ambient-grey;
+      color: $color-ambient-mint-dark;
+      background-color: #fff;
       &:hover {
-        color: lighten($color-ambient-grey,10);
+        background-color: rgba($color-ambient-mint-light, 0.5);
       }
     }
     &.active a {
-      color: $color-ambient-mint-dark;
-      background-color: #fff;
+      color: #fff;
+      background-color: rgba($color-ambient-mint-dark, 1);
     }
     @include respond-to(">=medium") {
       float: left;
@@ -52,4 +53,3 @@
     }
   }
 }
-

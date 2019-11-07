@@ -7,7 +7,7 @@ class ToolRental < ApplicationRecord
   enum rental_status: { pending: 0, canceled: 1, rejected: 2, approved: 3, return_pending: 4, return_confirmed: 5 }
   enum payment_status: { payment_pending: 0, payment_success: 1, payment_failed: 2, payment_transfered: 3 }
 
-  PAYMENT_METHODS = ['card', 'eps'].freeze
+  PAYMENT_METHODS = ['card'].freeze
 
   def self.next_invoice_number
     ToolRental.where("invoice_number IS NOT NULL").count + 1
