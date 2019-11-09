@@ -93,7 +93,7 @@ $row-hover-bg : $color-ambient-mint-light;
         @include ellipsis();
       }
     }
-    &.pending, &.canceled {
+    &.pending, &.canceled, &.return_pending{
       color: #cd891b;
     }
   }
