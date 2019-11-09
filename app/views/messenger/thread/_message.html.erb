@@ -1,4 +1,4 @@
 <div class="chat-message <%= user_message.user == current_user ? '-right' : '-left' %>" data-id="<%= user_message.id %>">
   <%= avatar_for user_message.user %>
-  <div class="bubble"><%= user_message.message %></div>
+  <div class="bubble"><%= user_message.message %><small class="time"><%= l(user_message.created_at, format: '%e. %b, %H:%M') %></small></div>
 </div>

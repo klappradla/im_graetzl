@@ -214,7 +214,7 @@ de:
           deleted: Deleted
       tool_rental:
         rental_statuses:
-          pending: Warte auf Antwort
+          pending: Noch nicht akzeptiert
           canceled: Anfrage zurückgezogen
           rejected: Anfrage abgelehnt
           approved: Anfrage akzeptiert

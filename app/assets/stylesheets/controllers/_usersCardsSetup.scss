@@ -1,5 +1,20 @@
 section.usersetup {
 
+  .introcontainer .introtxt, &.-toolteiler {
+    h1 {
+      @include font-size-secondaryFont('base');
+      font-family: $font-secondary;
+      margin-bottom: 20px;
+      text-align: center;
+      span {
+        color: $color-ambient-rosa;
+      }
+    }
+    .hl-subtext {
+      margin-bottom:20px;
+    }
+  }
+
   .introcontainer {
     @include respond-to(">=large") {
       @include cf;
@@ -15,18 +30,6 @@ section.usersetup {
         padding-right: 20px;
         margin-bottom: 0;
         width: 65%;
-      }
-      h1 {
-        @include font-size-secondaryFont('base');
-        font-family: $font-secondary;
-        margin-bottom: 20px;
-        text-align: center;
-        span {
-          color: $color-ambient-rosa;
-        }
-      }
-      .hl-subtext {
-        margin-bottom:20px;
       }
       h3 {
         margin-bottom:5px;
@@ -81,6 +84,23 @@ section.usersetup {
     // REMOVE TMP CLASS AFTER WE CAN USE AXA LOGO
     .paperCard.-tmp .wrp {
       h3 {margin-bottom:0px;}
+    }
+    .tabs-nav {
+      margin: 0 auto;
+      margin-bottom: 50px;
+
+      li {
+        width:100%;
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      display: block;
+      @include respond-to(">=large") {
+        display: flex;
+        justify-content: center;
+      }
+
     }
   }
 

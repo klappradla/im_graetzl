@@ -43,18 +43,18 @@ $row-hover-bg : $color-ambient-mint-light;
   }
 
   .flex-row {
-
+    @include font-size-primaryFont('small');
     display: flex;
-    justify-content: left;
+    align-items: center;
+    //justify-content: left;
     padding:5px 10px 5px 10px;
     border-right: solid 1px $table-border;
     border-bottom: solid 1px $table-border;
-    //@include ellipsis();
-    //text-align: center;
 
-    &.wide20 {width: 20%; justify-content: left;}
-    &.wide25 {width: 25%; justify-content: left;}
-    width: calc(40% / 3);
+    &.small {width: 10%; justify-content: left;}
+    &.medium {width: 15%; justify-content: left;}
+    &.large {width: 20%; justify-content: left;}
+    //width: calc(28% / 2);
     @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
       // IE Fix
       width: calc((40% / 3) - 1px);
@@ -69,11 +69,30 @@ $row-hover-bg : $color-ambient-mint-light;
     }
     .payment-status {padding-left: 5px;}
     .invoice-link {display: contents;}
+
+    &.btn {
+      display: block;
+    }
+    &.user {
+      display: flex;
+      align-items: center;
+      .img-round {
+        width:35px;
+        height:35px;
+        margin-right:5px;
+      }
+      .name {
+        @include ellipsis();
+      }
+    }
+    &.pending, &.canceled {
+      color: #cd891b;
+    }
   }
 
   .header {
     .flex-row {
-      justify-content: center;
+      //justify-content: center;
     }
   }
 
@@ -121,9 +140,9 @@ $row-hover-bg : $color-ambient-mint-light;
   // MEDIUM SIZE
   @include respond-to("<=medium") {
 
-    .flex-row, .flex-row.wide20, .flex-row.wide25 {
+    .flex-row, .flex-row.small, .flex-row.medium, .flex-row.large {
       width: 50%; //1px = border right
-      justify-content: center;
+      //justify-content: center;
     }
     .column {
       width: 100%;
@@ -150,9 +169,9 @@ $row-hover-bg : $color-ambient-mint-light;
       //.flex-row:not(.first) { display: none}
     }
 
-    .flex-row, .flex-row.wide20, .flex-row.wide25 {
+    .flex-row, .flex-row.small, .flex-row.medium, .flex-row.large {
       width: 100%; //1px = border right
-      justify-content: center;
+      //justify-content: center;
     }
 
     .column {

@@ -1,31 +1,32 @@
 <div class="flex-table row" role="rowgroup">
-  <div class="flex-row wide20 first" role="cell">
-    <% if tool_rental.tool_offer.enabled? %>
-      <%= link_to tool_rental.tool_offer.title.truncate(33), tool_rental.tool_offer %>
-    <% else %>
-      <%= tool_rental.tool_offer.title.truncate(33) %>
-    <% end %>
-  </div>
-  <div class="flex-row wide20" role="cell">
-    <% if tool_rental.user_message_thread %>
-      <%= link_to messenger_path(thread_id: tool_rental.user_message_thread.id), class: 'message' do %>
-        <%= icon_tag "speech-bubbles" %>
-        <%= tool_rental.renter.full_name %>
+  <div class="flex-row large user" role="cell">
+    <div>
+      <%= link_to tool_rental.renter do %>
+        <%= avatar_for tool_rental.renter %>
       <% end %>
+    </div>
+    <div class="name">
+      <%= link_to tool_rental.renter.full_name, tool_rental.renter %>
+    </div>
+  </div>
+  <div class="flex-row large" role="cell">
+    <% if tool_rental.tool_offer.enabled? %>
+      <%= link_to tool_rental.tool_offer.title.truncate(35), tool_rental.tool_offer %>
     <% else %>
-      <%= tool_rental.renter.full_name %>
+      <%= tool_rental.tool_offer.title.truncate(35) %>
     <% end %>
   </div>
-  <div class="flex-row" role="cell"><%= l(tool_rental.rent_from) %></div>
-  <div class="flex-row" role="cell"><%= l(tool_rental.rent_to) %></div>
-  <div class="flex-row" role="cell"><%= number_to_currency(tool_rental.owner_payout_amount, unit: "€") %></div>
-  <div class="flex-row wide20" role="cell">
+  <div class="flex-row medium" role="cell"><%= l(tool_rental.rent_from, format: :short) %> - <%= l(tool_rental.rent_to, format: :short) %></div>
+  <div class="flex-row small" role="cell"><%= number_to_currency(tool_rental.owner_payout_amount, unit: "€") %></div>
+  <div class="flex-row large <%= tool_rental.rental_status %>" role="cell">
     <%= t("activerecord.attributes.tool_rental.rental_statuses.#{tool_rental.rental_status}") %>
-    <% if tool_rental.return_confirmed? && tool_rental.payment_transfered? %>
-      <br><%= t("activerecord.attributes.tool_rental.payment_statuses.#{tool_rental.payment_status}") %>
-    <% end %>
     <% if tool_rental.invoice_ready? %>
       <br><%= link_to "Download Gutschrift", tool_rental.owner_invoice.presigned_url(:get), class: 'invoice-link' %>
+    <% end %>
+  </div>
+  <div class="flex-row medium btn" role="cell">
+    <% if tool_rental.user_message_thread %>
+      <%= link_to 'Messenger', messenger_path(thread_id: tool_rental.user_message_thread.id), class: 'btn-secondary -small -mint' %>
     <% end %>
   </div>
 </div>

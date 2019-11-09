@@ -28,7 +28,7 @@
         <div class="wrp">
           <div class="user"><%= user.full_name %></div>
           <div class="txt"><%= thread.last_message.try(:truncate, 100) %></div>
-          <div class="time"><%= thread.last_message_at.strftime("%d. %b") %></div>
+          <div class="time"><%= l(thread.last_message_at, format: '%e. %b') %></div>
         </div>
         <%= link_to 'javascript:', data: { jq_dropdown: "#action-msg-#{thread.id}" }, class:'actions' do %>
           <%= icon_tag "dot-3" %>

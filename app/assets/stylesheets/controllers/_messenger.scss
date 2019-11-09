@@ -310,6 +310,18 @@ section.messenger-page {
       animation: fadeIn 1s ease-in;
       white-space: pre-line;
 
+      small.time {
+        display: none;
+        float:right;
+        color: $color-ambient-grey;
+      }
+
+      &:hover {
+        small.time {
+          display: block;
+        }
+      }
+
       &:after {
         content: '';
         position: absolute;
