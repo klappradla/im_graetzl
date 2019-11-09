@@ -6,7 +6,10 @@
       <% end %>
     </div>
     <div class="name">
-      <%= link_to tool_rental.owner.full_name, tool_rental.owner %>
+      <%= link_to tool_rental.owner do %>
+        <%= tool_rental.owner.first_name %><br>
+        <%= tool_rental.owner.last_name %>
+      <% end %>
     </div>
   </div>
   <div class="flex-row large" role="cell">
@@ -18,10 +21,14 @@
   </div>
   <div class="flex-row medium" role="cell"><%= l(tool_rental.rent_from, format: :short) %> - <%= l(tool_rental.rent_to, format: :short) %></div>
   <div class="flex-row small" role="cell"><%= number_to_currency(tool_rental.total_price, unit: "€") %></div>
-  <div class="flex-row large <%= tool_rental.rental_status %>" role="cell">
-    <%= t("activerecord.attributes.tool_rental.rental_statuses.#{tool_rental.rental_status}") %>
+  <div class="flex-row large status <%= tool_rental.rental_status %>" role="cell">
+    <span>
+      <%= t("activerecord.attributes.tool_rental.rental_statuses.#{tool_rental.rental_status}") %>
+    </span>
     <% if tool_rental.invoice_ready? %>
-      <br><%= link_to "Download Rechnung", tool_rental.renter_invoice.presigned_url(:get), class: 'invoice-link' %>
+    <span>
+      <%= link_to "Download Rechnung", tool_rental.renter_invoice.presigned_url(:get), class: 'invoice-link' %>
+    </span>
     <% end %>
   </div>
   <div class="flex-row medium btn" role="cell">

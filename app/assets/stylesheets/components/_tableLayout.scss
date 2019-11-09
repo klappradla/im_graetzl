@@ -16,6 +16,10 @@ $row-hover-bg : $color-ambient-mint-light;
 
   a {
     color: $color-ambient-mint-dark;
+    text-decoration: none;
+  }
+  a:hover:not(.btn-secondary) {
+    text-decoration: underline;
   }
 
   .flex-table {
@@ -67,19 +71,23 @@ $row-hover-bg : $color-ambient-mint-light;
         margin-right:7px;
       }
     }
-    .payment-status {padding-left: 5px;}
-    .invoice-link {display: contents;}
 
     &.btn {
       display: block;
     }
+    &.status {
+      flex-wrap: wrap;
+      span {
+        padding-right:10px;
+      }
+    }
     &.user {
       display: flex;
-      align-items: center;
       .img-round {
-        width:35px;
-        height:35px;
-        margin-right:5px;
+        width:38px;
+        height:38px;
+        margin-right:10px;
+        margin-top:2px;
       }
       .name {
         @include ellipsis();
