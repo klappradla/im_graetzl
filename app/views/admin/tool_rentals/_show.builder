@@ -37,7 +37,7 @@ context.instance_eval do
     end
   end
 
-  if tool_rental.approved?
+  if tool_rental.approved? || tool_rental.return_confirmed?
     panel 'Invoices' do
       attributes_table_for tool_rental do
         row(:owner_invoice) { |r| link_to "PDF", r.owner_invoice.presigned_url(:get) }
