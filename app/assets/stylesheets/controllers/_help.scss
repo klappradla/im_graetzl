@@ -597,11 +597,20 @@ section.help {
     }
 
     .ablauf ul {
-      margin-left:20px;
+      //margin-left:20px;
       margin-bottom:60px;
       li {
-        margin-bottom:15px;
+        margin-bottom:20px;
         @include font-size-primaryFont('large');
+        background: url(image_path('svg/icon-arrow-right-blinky-mint-dark.svg')) no-repeat left center;
+        padding-left: 45px;
+        list-style: none;
+      }
+      li:hover {
+        background: url(image_path('svg/icon-arrow-right-blinky-rosa-dark.svg')) no-repeat left center;
+      }
+      strong {
+        //color: $color-ambient-rosa-dark;
       }
     }
 
