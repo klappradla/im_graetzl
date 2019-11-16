@@ -22,6 +22,8 @@ class Meeting < ApplicationRecord
   attachment :cover_photo, type: :image
   enum state: { active: 0, cancelled: 1 }
 
+  scope :non_private, -> { where(private: false) }
+
   scope :by_currentness, -> {
     active.
     order(Arel.sql('CASE WHEN starts_at_date >= current_date THEN 0 WHEN starts_at_date IS NOT NULL THEN 1 ELSE 2 END')).
