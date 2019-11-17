@@ -41,6 +41,10 @@
   .img-round, .img-square {
     flex: none;
     margin-right: 10px;
+    svg {
+      height:100%;
+      margin:auto;
+    }
   }
   .msg {
     font-size: 13px;

@@ -1,0 +1,11 @@
+<% tool_rental = notification.activity.trackable %>
+
+<%= content_tag(:li, id: dom_id(notification), data: { behavior: 'notification-item' }, class: 'notification-item') do %>
+  <%= link_to messenger_path(thread_id: tool_rental.user_message_thread.id) do %>
+    <%= attachment_image_tag tool_rental.user, :avatar, :fill, 40, 40, fallback: 'avatar/user/40x40.png', class: 'img-round' %>
+    <div class="msg">
+      <div class="timeago">vor <%= time_ago_in_words(notification.activity.created_at) %></div>
+      <span class="username"><%= notification.activity.owner.username %></span><span class="matter"> hat die Toolteiler Anfrage zurückgezogen</span>. Erfahre mehr im Messenger.
+    </div>
+  <% end %>
+<% end %>

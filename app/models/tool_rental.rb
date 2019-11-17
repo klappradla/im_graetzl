@@ -1,4 +1,5 @@
 class ToolRental < ApplicationRecord
+  include Trackable
   belongs_to :user
   belongs_to :tool_offer
 

@@ -83,6 +83,7 @@ class ToolRentalsController < ApplicationController
       tax: @calculator.tax,
     )
     @tool_rental.save!
+    @tool_rental.create_activity(:create, owner: current_user)
 
     ToolRentalService.new.confirm_rental(@tool_rental)
 
@@ -94,18 +95,21 @@ class ToolRentalsController < ApplicationController
 
   def cancel
     @tool_rental = current_user.tool_rentals.pending.find(params[:id])
+    @tool_rental.create_activity(:cancel, owner: current_user)
     ToolRentalService.new.cancel(@tool_rental)
     redirect_to messenger_url(thread_id: @tool_rental.user_message_thread.id)
   end
 
   def approve
     @tool_rental = current_user.owned_tool_rentals.pending.find(params[:id])
+    @tool_rental.create_activity(:approve, owner: current_user)
     ToolRentalService.new.approve(@tool_rental)
     redirect_to messenger_url(thread_id: @tool_rental.user_message_thread.id)
   end
 
   def reject
     @tool_rental = current_user.owned_tool_rentals.pending.find(params[:id])
+    @tool_rental.create_activity(:reject, owner: current_user)
     ToolRentalService.new.reject(@tool_rental)
     redirect_to messenger_url(thread_id: @tool_rental.user_message_thread.id)
   end

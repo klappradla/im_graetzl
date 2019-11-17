@@ -1,0 +1,13 @@
+<% tool_rental = notification.activity.trackable %>
+
+<%= content_tag(:li, id: dom_id(notification), data: { behavior: 'notification-item' }, class: 'notification-item') do %>
+  <%= link_to messenger_path(thread_id: tool_rental.user_message_thread.id) do %>
+    <div class="img-round">
+      <%= icon_tag "horn-promote" %>
+    </div>
+    <div class="msg">
+      <div class="timeago">vor <%= time_ago_in_words(notification.activity.created_at) %></div>
+      <span class="matter">Bitte bestätige die Rückgabe deines Toolteilers</span>.
+    </div>
+  <% end %>
+<% end %>
