@@ -336,8 +336,8 @@
   </div>
 
   <div class="anmeldung cardBox <%= '-login' if !current_user %>"  <%= 'data-featherlight=#login-panel-modal' if !current_user %>>
-    <% if !Group.where(id: 28).empty? %>
-      <% group = Group.find_by_id(28) %>
+    <% if !Group.where(id: 46).empty? %>
+      <% group = Group.find_by_id(46) %>
       <%= form_tag request_join_group_path(group) do %>
         <% if group.group_join_questions.present? %>
 

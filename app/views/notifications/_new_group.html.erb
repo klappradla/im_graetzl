@@ -5,7 +5,7 @@
     <%= attachment_image_tag notification.activity.owner, :avatar, :fill, 40, 40, fallback: 'avatar/user/40x40.png', class: 'img-round' %>
     <div class="msg">
       <div class="timeago">vor <%= time_ago_in_words(notification.activity.created_at) %></div>
-      Neue gruppe von <span class="username"><%= notification.activity.owner.username %></span> bei: <span class="matter"><%= group.title %></span>
+      Neue Gruppe von <span class="username"><%= notification.activity.owner.username %></span>: <span class="matter"><%= group.title %></span>
     </div>
   <% end %>
 <% end %>
