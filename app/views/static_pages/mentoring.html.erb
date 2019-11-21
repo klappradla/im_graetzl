@@ -16,7 +16,6 @@
   </div>
 
   <div class="paperCard -cord1RT -header -top">
-    <!--<%= image_tag('info/button_mentoring_ausgebucht.png', class: 'anmeldung-badge') %>-->
     <div class="wrp">
       <a href="#teilnahme" class="badge -mint -arrow">
         Jetzt durchstarten!
@@ -137,12 +136,38 @@
         </strong>
       </p>
       <p>
-        Der Austausch mit dem Unterstützer-Team erfolgt hauptsächlich über eine online Gruppe,
-        es stehen aber auch ganz reale Treffen auf dem Programm. Die persönliche Betreuung
-        in Kleingruppen und Unterstützung bei der Umsetzung bringen handfeste Ergebnisse.
-        Deshalb sollten Interessierte unbedingt ein konkretes Ziel, Projekt, oder Idee in
-        ihr Unterstützungs-Team mitbringen.
+        Der Austausch mit dem Unterstützer-Team erfolgt hauptsächlich über eine online Gruppe, es stehen aber auch ganz reale Treffen auf dem Programm.
+        Alle TeilnehmerInnen bringen ein konkretes Ziel, Projekt oder Vorhaben in ihr Unterstützer-Team mit und planen Zeit für die Umsetzung ein. Daraus folgen handfeste Ergebnisse, weil sich das Wollen ins Machen verwandelt.
       </p>
+      <p class="-coworking">
+        <span>
+          <strong>Wenn du noch mehr Sog für dein Vorhaben erzeugen willst, dann nimm das Unterstützer-Programm Paket mit zusätzlichem Arbeitsplatz.</strong>
+          <br>Du bist an deinem Arbeitsplatz umgeben von anderen TeilnehmerInnen deines Unterstützer-Teams und eure Gemeinschaft im Coworking-Space "<%= link_to 'Die Tischlerei', 'http://www.dietischlerei.wien/de/', class: 'tischlerei-link', target: 'blank' %>" gibt euch zusätzliche Turboenergie.
+        </span>
+        <%= link_to image_tag('info/die-tischlerei-logo.svg'), 'http://www.dietischlerei.wien/de/', class: 'tischlerei-logo', target: 'blank' %>
+      </p>
+      <div class="tischlerei-infos">
+        <strong class="headline">Jetzt neu: Unterstützer-Programm mit Arbeitsplatz!</strong>
+        <p>
+          Um noch eine zusätzliche und intensivere Form des Unterstützer-Programms anbieten zu können, war uns klar, dass wir euch dafür eine Homebase bieten möchten. Stell dir vor: du hast einen Arbeitsplatz und triffst dort die Menschen aus deinem Unterstützer-Team. Eine Gemeinschaft aus lauter Menschen, die alle ihr Ding durchziehen. Nutze diese besondere Energie und erlebe, wie ihr gemeinsam wachst und zusammen immer größere Schritte geht. Ein gutes Umfeld & Inspiration pur!
+        </p>
+
+        <div class="entryImgUploads">
+          <%= link_to image_tag('info/die-tischlerei-1.jpg'), image_url('info/die-tischlerei-1.jpg'), data: { jbox_image: "gallery1" } %>
+          <%= link_to image_tag('info/die-tischlerei-2.jpg'), image_url('info/die-tischlerei-2.jpg'), data: { jbox_image: "gallery1" } %>
+          <%= link_to image_tag('info/die-tischlerei-3.jpg'), image_url('info/die-tischlerei-3.jpg'), data: { jbox_image: "gallery1" } %>
+          <%= link_to image_tag('info/die-tischlerei-4.jpg'), image_url('info/die-tischlerei-4.jpg'), data: { jbox_image: "gallery1" } %>
+          <%= link_to image_tag('info/die-tischlerei-5.jpg'), image_url('info/die-tischlerei-5.jpg'), data: { jbox_image: "gallery1" } %>
+        </div>
+
+        <p>
+          Unser Hintergedanke dazu: Einzelunternehmen, die im Homeoffice arbeiten, sind laut Studien, weniger erfolgreich und zufrieden im Vergleich zu denjenigen, die sich mit anderen zusammentun und einen externen Arbeitsplatz bespielen. Gilt sicher auch für alle anderen, die was vorhaben. Also raus aus dem Home-Office!
+        </p>
+        <p class="tischlerei-anita">
+          <strong>Anita, Gründerin von "Die Tischlerei" und unsere Gastgeberin passt mit ihrem Spirit zu uns wie der Topf auf den Deckel.</strong> Sie gehört nämlich auch eindeutig zu den Menschen, die in die Umsetzung gehen und es außerdem liebt Menschen miteinander zu verbinden. Ihr kommt in gute Hände!
+        </p>
+      </div>
+      <div class="arrow"></div>
     </div>
     <div class="card"></div>
   </div>
@@ -178,7 +203,7 @@
         <strong>Netzwerk öffne dich:</strong> Das Unterstützer-Programm verbindet dich mit Gleichgesinnten mit einem kooperativen Mindset in Wien. Adieu EinzelkämpferInnentum, hallo Gruppenpower.
       </li>
       <li>
-        <strong>Es gibt drei Treffen:</strong> das Kick-off Treffen, das Bergfest nach 6 Wochen und die Abschiedssause am Schluss.
+        <strong>Es gibt drei Treffen in unserer Homebase "Die Tischlerei":</strong> das Kick-off Treffen, das Bergfest nach 6 Wochen und die Abschiedssause am Schluss.
       </li>
       <li>
         <strong>Aus dem Workshop-Pool kannst du dir 3 passende Checks mit unseren MentorInnen aussuchen</strong> (z.B. Social Media, Finanzen, Webseite). Wenn zwischendurch der Schuh drückt, dann hast du eine MentorIn als persönliche Ansprechpartnerin, die dir zur Seite steht.
@@ -331,17 +356,53 @@
   <div class="hl-subtext" id="teilnahme">
     <h1><em>So kannst du teilnehmen</em></h1>
     <p>
-      Bei der Zusammenstellung der Unterstützer-Teams geht es in erster Linie darum, dass sich die TeilnehmerInnen gut ergänzen, deshalb haben wir ein paar Fragen vorbereitet:
+      Bei der Zusammenstellung der Unterstützer-Teams geht es in erster Linie darum, dass sich die TeilnehmerInnen gut ergänzen, deshalb haben wir ein paar Fragen vorbereitet.
+      <br>Wähle zunächst dein Paket:
     </p>
   </div>
 
-  <div class="anmeldung cardBox <%= '-login' if !current_user %>"  <%= 'data-featherlight=#login-panel-modal' if !current_user %>>
-    <% if !Group.where(id: 46).empty? %>
-      <% group = Group.find_by_id(46) %>
-      <%= form_tag request_join_group_path(group) do %>
-        <% if group.group_join_questions.present? %>
+  <% if !Group.where(id: 20).empty? && !Group.where(id: 21).empty? %> <!--46-->
+    <% group1 = Group.find_by_id(20) %>
+    <% group2 = Group.find_by_id(21) %>
 
-          <% group.group_join_questions.each do |join_question| %>
+    <!-- TODO !!!!!!!!! GRUPPEN ID ÄNDERN !!!!!!!!!!!!!!!! -->
+
+    <!--
+    <div class="group-switch">
+      <div class="input-radio">
+        <input required="required" type="radio" value="<%= request_join_group_path(group1) %>" checked="checked" name="group" id="group1">
+        <label for="group1">Unterstützer-Team | <small>290,00 €</small></label>
+      </div>
+
+      <div class="input-radio">
+        <input required="required" type="radio" value="<%= request_join_group_path(group2) %>" name="group" id="group2">
+        <label for="group2">Unterstützer-Team + 4 Monate Arbeitsplatz | <small>866,00 €</small></label>
+      </div>
+    </div>
+    -->
+
+    <ul class="tabs-nav" id="group-switch">
+      <li class="active" id="group1" data-group="<%= request_join_group_path(group1) %>"><a>Ohne Arbeitsplatz</a></li>
+      <li id="group2" data-group="<%= request_join_group_path(group2) %>"><a>Mit Arbeitsplatz</a></li>
+    </ul>
+
+    <div class="group-info group1">
+      <strong>4 Monate Teilnahme am Unterstützer-Programm</strong><br>
+      <span class="summary"><strong>Gesamtkosten: 290 €</strong> (inkl. 20% Mwst)</span>
+    </div>
+
+    <div class="group-info group2">
+      <strong>4 Monate Teilnahme am Unterstützer-Programm</strong> <small>(290 €)</small><br>
+      <strong>+ 4 Monate Flex-Arbeitsplatz im Coworking Space "Die Tischlerei"</strong> <small>(monatlich 150 € / statt regulär 180 €)</small><br>
+      <span class="summary"><strong>Gesamtkosten: 890 €</strong> (inkl. 20% Mwst)</span>
+    </div>
+
+    <div class="anmeldung cardBox <%= '-login' if !current_user %>"  <%= 'data-featherlight=#login-panel-modal' if !current_user %>>
+
+      <%= form_tag request_join_group_path(group1), id: "groupform" do %>
+        <% if group1.group_join_questions.present? %>
+
+          <% group1.group_join_questions.each do |join_question| %>
             <h4><%= join_question.question %></h4>
             <div class="input-textarea">
               <%= text_area_tag :"join_answers[]", nil, cols: 40, rows: 3, placeholder: 'Deine Antwort ..', required: true %>
@@ -357,10 +418,11 @@
         <% end %>
         <%= submit_tag "Anmeldung abschicken", class: 'btn-primary -large' %>
       <% end %>
-    <% else %>
-      Keine Gruppe verknüpft ...
-    <% end %>
-  </div>
+
+    </div>
+  <% else %>
+    Keine Gruppe verknüpft ...
+  <% end %>
   <!-- END TEILNEHMEN -->
 
 

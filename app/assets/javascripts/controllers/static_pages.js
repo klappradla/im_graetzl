@@ -12,6 +12,47 @@ APP.controllers.static_pages = (function() {
 function initMentoring() {
   $(".-login").featherlight({});
 
+  // Find question coworking and exchange ith radio buttons?
+  //var question_coworking = $("h4:contains('2')").next('.input-textarea').children('textarea').first();
+  //console.log(question_coworking);
+
+  /*
+  $('.group-switch input').on('change', function() {
+    var groupaction = $('input[name=group]:checked').val();
+    $('#groupform').attr('action', groupaction);
+  });
+  */
+
+  $( ".tischlerei-infos" ).hide();
+  $( ".arrow" ).click(function() {
+    $( ".tischlerei-infos" ).slideToggle(function() {
+      $( ".arrow" ).toggleClass( "-up" );
+    });
+  });
+
+  var roomGallery = new jBox('Image', {
+    addClass:'jBoxGallery',
+    imageCounter:true,
+    preloadFirstImage:true,
+    closeOnEsc:true,
+    createOnInit:true,
+    animation:{open: 'zoomIn', close: 'zoomOut'},
+  });
+
+  // Group Swicth for Submitting in selected Group
+  $('.group-info').hide();
+  var selectedgroup = $('#group-switch li.active').attr("id");
+  $('.group-info.' + selectedgroup).show();
+  $('#group-switch li').on('click', function(){
+    $('#group-switch li').removeClass('active');
+    $(this).addClass('active');
+    var group = $(this).attr("id");
+    var groupaction = $(this).attr("data-group");
+    $('.group-info').slideUp();
+    $('.group-info.' + group).slideDown();
+    $('#groupform').attr('action', groupaction);
+  })
+
   // Change Wording of Notice Message for Mentoring Registrations
   if ($("#flash .notice").exists()) {
     if ( $("#flash .notice").text().indexOf('Vielen Dank für Deine Registrierung.') >= 0 ){
