@@ -232,9 +232,9 @@
     </p>
   </div>
   <!-- Live: 46 / Staging: 2, 41 - Local: 20, 21s-->
-  <% if !Group.where(id: 20).empty? && !Group.where(id: 21).empty? %>
-    <% group1 = Group.find_by_id(20) %>
-    <% group2 = Group.find_by_id(21) %>
+  <% if !Group.where(id: 2).empty? && !Group.where(id: 41).empty? %>
+    <% group1 = Group.find_by_id(2) %>
+    <% group2 = Group.find_by_id(41) %>
 
     <ul class="tabs-nav" id="group-switch">
       <li id="group1" class="active" data-group="<%= request_join_group_path(group1) %>"><a>Ohne Arbeitsplatz</a></li>
@@ -276,7 +276,9 @@
 
     </div>
   <% else %>
-    Keine Gruppe verknüpft ...
+    <div class="anmeldung cardBox">
+      Keine Gruppe verknüpft ...
+    </div>
   <% end %>
   <!-- END TEILNEHMEN -->
 
