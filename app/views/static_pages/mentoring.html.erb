@@ -198,9 +198,6 @@
         <strong>Montags und freitags gibt es ein persönliches Erinnerungsmail</strong> von den OrganisatorInnen, oft packen wir da auch noch etwas zusätzliche Inspiration rein.
       </li>
       <li>
-        <strong>Netzwerk öffne dich:</strong> Das Unterstützer-Programm verbindet dich mit Gleichgesinnten mit einem kooperativen Mindset in Wien. Adieu EinzelkämpferInnentum, hallo Gruppenpower.
-      </li>
-      <li>
         <strong>Es gibt drei Treffen in unserer Homebase "Die Tischlerei":</strong> das Kick-off Treffen, das Bergfest nach 6 Wochen und die Abschiedssause am Schluss.
       </li>
       <li>
@@ -210,13 +207,13 @@
         <strong>Ein Grätzl-Zuckerl für deinen Bezirk ist inkludiert</strong> und deine Botschaft und dein Angebot verteilen wir zusätzlich über unsere Social Media Kanäle.
       </li>
       <li>
-        <strong>Alle TeilnehmerInnen bekommen das imGrätzl "coop&share" Badge</strong> auf ihre Profil-& Locationseite, dann sehen alle BesucherInnen sofort, dass du zum imGrätzl Freundeskreis gehörst und das schenkt zusätzliches Vertrauen, wenn Menschen sich deine Angebote, Toolteiler und Raumteiler anschauen.
+        <strong>Alle TeilnehmerInnen bekommen das imGrätzl "Freundeskreis" Badge</strong> auf ihre Profil-& Locationseite, dann sehen alle BesucherInnen sofort, dass du zum imGrätzl Freundeskreis gehörst und das schenkt zusätzliches Vertrauen, wenn Menschen sich deine Angebote, Toolteiler und Raumteiler anschauen.
       </li>
       <li>
         <strong>Das Programm dauert 4 Monate und startet am 02. März 2020.</strong>
       </li>
       <li>
-        <strong>Kosten:</strong> 250 € (zzgl. 20% Mwst) = <strong>300 €</strong>
+        <strong>Kontakt: </strong> Mirjam Mieschendahl, wir@imgraetzl.at, +43 699 / 150 28 277
       </li>
     </ul>
   </div>
@@ -231,10 +228,10 @@
       Wähle zunächst dein Paket:
     </p>
   </div>
-  <!-- Live: 46 / Staging: 2, 41 - Local: 20, 21s-->
-  <% if !Group.where(id: 2).empty? && !Group.where(id: 41).empty? %>
-    <% group1 = Group.find_by_id(2) %>
-    <% group2 = Group.find_by_id(41) %>
+  <!-- Live: 46, 47 / Staging: 2, 41 - Local: 20, 21-->
+  <% if !Group.where(id: 46).empty? && !Group.where(id: 47).empty? %>
+    <% group1 = Group.find_by_id(46) %>
+    <% group2 = Group.find_by_id(47) %>
 
     <ul class="tabs-nav" id="group-switch">
       <li id="group1" class="active" data-group="<%= request_join_group_path(group1) %>"><a>Ohne Arbeitsplatz</a></li>
@@ -243,13 +240,18 @@
 
     <div class="group-info group1">
       <strong>4 Monate Teilnahme am Unterstützer-Programm</strong><br>
-      <span class="summary">Kosten: 250 € (zzgl. 20% Mwst) = <strong>Gesamt: 300 €</strong></span>
+      <span class="summary earlybird">Early Bird bis 15. Dezember: 250 € (zzgl. 20% Mwst) = <strong>Gesamt: 300 €</strong></span>
+      <br>
+      <span class="summary">Ab 16. Dezember: 290 € (zzgl. 20% Mwst) = Gesamt: 348 €</span>
     </div>
 
     <div class="group-info group2">
-      <strong>4 Monate Teilnahme am Unterstützer-Programm</strong> <small>(250 €)</small><br>
-      <strong>+ 4 Monate Flex-Arbeitsplatz im Coworking Space "Die Tischlerei"</strong> <small>(monatlich 125 € / statt 150 €)</small><br>
-      <span class="summary">Kosten: 750 € (zzgl. 20% Mwst) = <strong>Gesamt: 900 €</strong></span>
+      <strong>4 Monate Teilnahme am Unterstützer-Programm</strong><br>
+      <strong>+ 4 Monate Flex-Arbeitsplatz im Coworking Space "Die Tischlerei"</strong>
+      <br>inkl. Internet, Druckernutzung, gratis Kaffee, Tee, Wasser und 24/7 Zugang<br>
+      <span class="summary earlybird">Early Bird bis 15. Dezember: 750 € (zzgl. 20% Mwst) = <strong>Gesamt: 900 €</strong></span>
+      <br>
+      <span class="summary">Ab 16. Dezember: 790 € (zzgl. 20% Mwst) = Gesamt: 948 €</span>
     </div>
 
     <div class="anmeldung cardBox <%= '-login' if !current_user %>"  <%= 'data-featherlight=#login-panel-modal' if !current_user %>>
@@ -324,14 +326,6 @@
           <h3>Karin Kiendler</h3>
         <% end %>
         <p class="title">Spezialistin Förderungen und Rechtsberatung</p>
-      </div>
-
-      <div class="single-mentor">
-        <%= link_to "https://blog.imgraetzl.at/allgemein/we-proudly-present-das-imgraetzl-mentoring-team-leonhard-kern-den-kunden-im-fokus/", target: '_blank' do %>
-          <%= image_tag('info/mentorin-leonhard-kern.jpg', class: 'img-round') %>
-          <h3>Leonhard Kern</h3>
-        <% end %>
-        <p class="title">Den Kunden im Fokus</p>
       </div>
 
       <div class="single-mentor">

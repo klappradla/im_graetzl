@@ -639,23 +639,41 @@ section.help {
 
     // Group Info Txt
     .group-info {
+      @include font-size-primaryFont('large');
       text-align: center;
       margin-bottom:30px;
       .summary {
         color: $color-ambient-mint-dark;
+        &.early {
+          text-decoration: line-through;
+        }
+      }
+      .earlybird {
+        color: $color-ambient-rosa-dark;
       }
     }
 
     .-coworking {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
       align-items: flex-start;
+      justify-content: center;
       span {
-        width:80%
+        width:100%
       }
       .tischlerei-logo {
-        width:20%;
+        margin-top:20px;
+        width:40%;
+      }
+      @include respond-to(">=medium") {
+        justify-content: space-between;
+        span {
+          width:80%;
+        }
+        .tischlerei-logo {
+          margin-top:0px;
+          width:20%;
+        }
       }
     }
 
@@ -669,11 +687,16 @@ section.help {
         color: $color-ambient-mint-dark;
       }
       .tischlerei-anita {
-        padding-right:110px;
+        padding-top:110px;
         background-image: url(image_path('info/die-tischlerei-anita.jpg'));
-        background-position: right top;
+        background-position: center top;
         background-repeat: no-repeat;
         background-size: 100px;
+        @include respond-to(">=large") {
+          padding-top:0px;
+          padding-right:110px;
+          background-position: right top;
+        }
       }
       .entryImgUploads {
         margin-top: 0px;
