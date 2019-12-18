@@ -51,6 +51,7 @@ class ToolOffersController < ApplicationController
 
   def calculate_price
     @tool_offer = ToolOffer.find(params[:id])
+    head :bad_request and return if params[:rent_from].blank? || params[:rent_to].blank?
     @calculator = ToolPriceCalculator.new(@tool_offer, params[:rent_from], params[:rent_to])
   end
 

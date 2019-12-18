@@ -224,35 +224,78 @@
   <!-- TEILNEHMEN -->
   <div class="hl-subtext" id="teilnahme">
     <h1><em>Hier anmelden</em></h1>
-    <p>
-      Wähle zunächst dein Paket:
-    </p>
   </div>
-  <!-- Live: 46, 47 / Staging: 2, 41 - Local: 20, 21-->
-  <% if !Group.where(id: 46).empty? && !Group.where(id: 47).empty? %>
-    <% group1 = Group.find_by_id(46) %>
-    <% group2 = Group.find_by_id(47) %>
 
+  <!-- Live: 46, 47 / Staging: 2, 41 - Local: 20, 21-->
+  <% group1 = Group.find_by_id(46) %>
+  <% group2 = Group.find_by_id(47) %>
+  <% if !group1.nil? && !group2.nil? %>
+
+    <div class="cardBox -unterstuetzer">
+      <div class="group-radio-switch" id="group-switch">
+        <div class="input-radio">
+          <input required="required" type="radio" value="<%= request_join_group_path(group1) %>" checked="checked" name="group" id="group1">
+          <label for="group1">Unterstützer Team</label>
+        </div>
+        <div class="input-radio">
+          <input required="required" type="radio" value="<%= request_join_group_path(group2) %>" name="group" id="group2">
+          <label for="group2">Unterstützer Team mit Arbeitsplatz</label>
+        </div>
+      </div>
+
+      <div class="group-info group1">
+        <ul>
+          <li><%= icon_tag "check" %>4 Monate Teilnahme am Unterstützer-Programm</li>
+        </ul>
+        <div class="price">
+          <span class="sum">300,00 €</span>
+          <strong class="early">Early Bird Preis bis 15. Dez 2019</strong><br>
+          <small>Danach 348,00 € (Preise inkl. 20% Mwst)</small>
+        </div>
+      </div>
+
+      <div class="group-info group2">
+        <ul>
+          <li><%= icon_tag "check" %>4 Monate Teilnahme am Unterstützer-Programm</li>
+          <li><%= icon_tag "check" %>4 Monate Flex-Arbeitsplatz im Coworking Space "Die Tischlerei"</li>
+          <li><%= icon_tag "check" %>inkl. Internet, Druckernutzung, gratis Kaffee, Tee, Wasser und 24/7 Zugang</li>
+        </ul>
+        <div class="price">
+          <span class="sum">900,00 €</span>
+          <strong class="early">Early Bird Preis bis 15. Dez 2019</strong><br>
+          <small>Danach 948,00 € (Preise inkl. 20% Mwst)</small>
+        </div>
+      </div>
+
+      <div class="group-info">
+        <strong>4 Monate Teilnahme am Unterstützer-Programm</strong><br>
+        <span class="summary earlybird">Early Bird bis 15. Dezember: 250 € (zzgl. 20% Mwst) = <strong>Gesamt: 300 €</strong></span>
+        <br>
+        <span class="summary">Ab 16. Dezember: 290 € (zzgl. 20% Mwst) = Gesamt: 348 €</span>
+      </div>
+
+      <div class="group-info">
+        <strong>4 Monate Teilnahme am Unterstützer-Programm</strong><br>
+        <strong>+ 4 Monate Flex-Arbeitsplatz im Coworking Space "Die Tischlerei"</strong>
+        <br>inkl. Internet, Druckernutzung, gratis Kaffee, Tee, Wasser und 24/7 Zugang<br>
+        <span class="summary earlybird">Early Bird bis 15. Dezember: 750 € (zzgl. 20% Mwst) = <strong>Gesamt: 900 €</strong></span>
+        <br>
+        <span class="summary">Ab 16. Dezember: 790 € (zzgl. 20% Mwst) = Gesamt: 948 €</span>
+      </div>
+
+    </div>
+
+
+    <!--
     <ul class="tabs-nav" id="group-switch">
       <li id="group1" class="active" data-group="<%= request_join_group_path(group1) %>"><a>Ohne Arbeitsplatz</a></li>
       <li id="group2" data-group="<%= request_join_group_path(group2) %>"><a>Mit Arbeitsplatz</a></li>
     </ul>
+    -->
 
-    <div class="group-info group1">
-      <strong>4 Monate Teilnahme am Unterstützer-Programm</strong><br>
-      <span class="summary earlybird">Early Bird bis 15. Dezember: 250 € (zzgl. 20% Mwst) = <strong>Gesamt: 300 €</strong></span>
-      <br>
-      <span class="summary">Ab 16. Dezember: 290 € (zzgl. 20% Mwst) = Gesamt: 348 €</span>
-    </div>
-
-    <div class="group-info group2">
-      <strong>4 Monate Teilnahme am Unterstützer-Programm</strong><br>
-      <strong>+ 4 Monate Flex-Arbeitsplatz im Coworking Space "Die Tischlerei"</strong>
-      <br>inkl. Internet, Druckernutzung, gratis Kaffee, Tee, Wasser und 24/7 Zugang<br>
-      <span class="summary earlybird">Early Bird bis 15. Dezember: 750 € (zzgl. 20% Mwst) = <strong>Gesamt: 900 €</strong></span>
-      <br>
-      <span class="summary">Ab 16. Dezember: 790 € (zzgl. 20% Mwst) = Gesamt: 948 €</span>
-    </div>
+    <p class="subline">
+      Und noch ein paar Fragen zu deinem Vorhaben:
+    </p>
 
     <div class="anmeldung cardBox <%= '-login' if !current_user %>"  <%= 'data-featherlight=#login-panel-modal' if !current_user %>>
 
@@ -382,6 +425,14 @@
           <h3>Verena Hirzenberger</h3>
         <% end %>
         <p class="title">Personalfitnesstrainerin: Einzel- & Gruppentrainings</p>
+      </div>
+
+      <div class="single-mentor">
+        <%= link_to "https://www.imgraetzl.at/gumpendorf-naschmarkt/locations/johanna-leitner-illustration-and-arts", target: '_blank' do %>
+          <%= image_tag('info/mentorin-johanna-leitner.jpg', class: 'img-round') %>
+          <h3>Johanna Leitner</h3>
+        <% end %>
+        <p class="title">Impulse für mehr Kreativität und Balance</p>
       </div>
 
       <div class="single-mentor">

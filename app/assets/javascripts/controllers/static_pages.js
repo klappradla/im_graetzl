@@ -16,13 +16,6 @@ function initMentoring() {
   //var question_coworking = $("h4:contains('2')").next('.input-textarea').children('textarea').first();
   //console.log(question_coworking);
 
-  /*
-  $('.group-switch input').on('change', function() {
-    var groupaction = $('input[name=group]:checked').val();
-    $('#groupform').attr('action', groupaction);
-  });
-  */
-
   $( ".tischlerei-infos" ).hide();
   $( ".arrow" ).click(function() {
     $( ".tischlerei-infos" ).slideToggle(function() {
@@ -39,10 +32,28 @@ function initMentoring() {
     animation:{open: 'zoomIn', close: 'zoomOut'},
   });
 
-  // Group Swicth for Submitting in selected Group
+
   $('.group-info').hide();
-  var selectedgroup = $('#group-switch li.active').attr("id");
+  var selectedgroup = $('input[name=group]:checked').attr("id");
   $('.group-info.' + selectedgroup).show();
+
+  // Radio Switch for Submitting in selected Group
+  $('#group-switch input').on('change', function() {
+    var groupaction = $('input[name=group]:checked').val();
+    var group = $('input[name=group]:checked').attr("id");
+    $('#groupform').attr('action', groupaction);
+
+    $('.group-info').hide();
+    $('.group-info.' + group).show();
+
+
+
+
+  });
+
+
+  // Button Switch for Submitting in selected Group
+  /*
   $('#group-switch li').on('click', function(){
     $('#group-switch li').removeClass('active');
     $(this).addClass('active');
@@ -52,6 +63,7 @@ function initMentoring() {
     $('.group-info.' + group).slideDown();
     $('#groupform').attr('action', groupaction);
   })
+  */
 
   // Change Wording of Notice Message for Mentoring Registrations
   if ($("#flash .notice").exists()) {

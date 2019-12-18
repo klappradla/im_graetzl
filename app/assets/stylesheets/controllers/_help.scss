@@ -614,42 +614,79 @@ section.help {
       }
     }
 
-    // Radio Button Switch
-    .group-switch {
-      margin-top:-20px;
-      display: flex;
-      justify-content: center;
-      .input-radio {
-        padding: 0px 20px 30px 20px;
-        label {
-          padding-left:15px;
-          @include font-size-primaryFont('large');
-        }
+    #teilnahme {
+      margin-bottom: 20px;
+    }
+
+    .cardBox {
+      &.-unterstuetzer {
+        padding:0px;
+        margin-bottom: 30px;
+        //background-color:rgba($color-ambient-mint-light, 0.5);
+        border-color:rgba($color-ambient-mint-light, 1);
       }
     }
 
-    .tabs-nav {
-      margin: 0 auto;
-      margin-top:-10px;
-      margin-bottom: 20px;
-      a {
-        cursor: pointer;
+    .subline {
+      text-align: center;
+      @include font-size-primaryFont('larger');
+      margin-bottom: 10px;
+    }
+
+    // Radio Button Switch
+    .group-radio-switch {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      border-bottom:1px solid rgba($color-ambient-mint-light, 0.5);
+      background-color:rgba($color-ambient-mint-light, 1);
+      padding:10px;
+      label {
+        @include font-size-primaryFont('larger');
+        font-weight: bold;
+        display: flex;
+      }
+      .input-radio {
+        margin-left: 20px;
+        margin-right: 20px;
       }
     }
 
     // Group Info Txt
     .group-info {
       @include font-size-primaryFont('large');
-      text-align: center;
-      margin-bottom:30px;
-      .summary {
-        color: $color-ambient-mint-dark;
-        &.early {
-          text-decoration: line-through;
+      ul {
+        text-align: center;
+        padding:20px;
+        padding-bottom: 15px;
+      }
+      li {
+        list-style: none;
+        display: inline-flex;
+        svg {
+          margin-right: 8px;
+          min-width: 30px;
+          width: 30px;
         }
       }
-      .earlybird {
-        color: $color-ambient-rosa-dark;
+      .price {
+        text-align: center;
+        border-top:1px solid rgba($color-ambient-mint-light, 1);
+        padding:10px;
+        .sum {
+          @include font-size-primaryFont('larger');
+          font-weight: bold;
+          display: block;
+          color: $color-ambient-mint-dark;
+        }
+        .early {
+          background-image: url(image_path('svg/icon-right-blinky.svg')), url(image_path('svg/icon-left-blinky.svg'));
+          background-position: right center, left center;
+          background-repeat: no-repeat;
+          background-size: 10px 20px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
       }
     }
 
