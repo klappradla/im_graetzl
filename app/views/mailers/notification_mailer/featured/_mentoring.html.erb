@@ -1,21 +1,27 @@
-<%= render 'summary/block_header', title: "Für GründerInnen, Selbstständige & MacherInnen, die 2020 was vorhaben!" %>
+<%= render 'summary/block_header', title: "Komm in dein Unterstützer-Team! Für alle, die ihre Ideen umsetzen möchten." %>
 
 <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #efefef; margin-bottom:18px;" width="100%" class="mcnTextContentContainer">
   <tbody>
     <tr>
-      <td valign="center" class="mcnTextContent" style="padding-left:18px; padding-right:18px;">
+      <td valign="center" class="mcnTextContent" width="100%" style="padding-left:18px; padding-right:18px;">
+
         <%= link_to unterstuetzer_team_url do %>
-          <%= image_tag 'https://gallery.mailchimp.com/3accfa3feb5f05b82bd1fddc6/images/2650949f-a62a-4d5e-8372-afe02f43c6ce.png', style: "width:140px; height:140px; max-width:140px; min-width:140px;", class: "mcnImage" %>
+          <%= image_tag 'https://gallery.mailchimp.com/3accfa3feb5f05b82bd1fddc6/images/6f121aeb-f4e9-4b7e-93bf-d996953a2ddb.jpg', style: "width:264px; min-width:264px; float:left; margin-right:18px; margin-bottom:18px;", class: "mcnImage" %>
         <% end %>
-      </td>
-      <td valign="center" class="mcnTextContent" width="100%">
-        <p>
-          <em><strong>Die neuen Unterstützer-Teams starten.</strong></em>
-        </p>
-        <p>
-          Für alle, die im neuen Jahr ein Vorhaben mit Gruppenpower im Rücken umsetzen möchten: 
-          <%= link_to 'www.imgraetzl.at/unterstuetzer-team', unterstuetzer_team_url, style: "color:#ec776a;" %>
-        </p>
+
+        <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; min-width:264px; width:264px;">
+          <tr>
+            <td>
+              <em><strong>Mit Unterstützung und Gruppenpower im Rücken geht es leichter. Bis Mi 08.01. noch zum Early Bird Preis.</strong></em>
+              <p>
+                Das neue Unterstützer-Team 2020 startet jetzt, alle Infos:
+                <%= link_to 'www.imgraetzl.at/unterstuetzer-team', unterstuetzer_team_url, style: "color:#ec776a;" %>
+              </p>
+            </td>
+          </tr>
+        </table>
+
+
       </td>
     </tr>
   </tbody>
