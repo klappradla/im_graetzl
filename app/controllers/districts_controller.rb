@@ -22,7 +22,7 @@ class DistrictsController < ApplicationController
   end
 
   def groups
-    @featured_groups = @district.groups.include_for_box
+    @featured_groups = @district.groups.featured.include_for_box
     @category = GroupCategory.find_by(id: params[:category])
   end
 

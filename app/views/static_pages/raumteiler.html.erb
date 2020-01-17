@@ -27,7 +27,7 @@
     <div id="help_nav">
       <%= link_to info_path, class: "btn-primary -grey -ico" do %><%= icon_tag "arrow-left-2" %> Zu allen Services<% end %>
       <a href="#worum-gehts" class="btn-primary -mint" id="nav-one">Worum geht es?</a>
-      <a href="#raumteiler-guide" class="btn-primary -mint" id="nav-two">Raumteiler Guide 2019</a>
+      <a href="#raumteiler-guide" class="btn-primary -mint" id="nav-two">Raumteiler Guide</a>
       <a href="#downloads" class="btn-primary -mint" id="nav-three">Download Vorlagen</a>
     </div>
   </aside>
@@ -63,31 +63,29 @@
     </article>
 
     <article class="container" id="two">
-      <h2 id="raumteiler-guide">Raumteiler Guide 2019</h2>
+      <h2 id="raumteiler-guide">Raumteiler Guide</h2>
       <h3>Deine Schritt-für-Schritt Anleitung zum Räume teilen.</h3>
       <a href="https://blog.imgraetzl.at/wp-content/uploads/2019/02/RaumteilerGuide2019.pdf">
         <%= image_tag'info/Raumteiler-Guide-2019-Deckblatt.png', class: 'guide' %>
       </a>
       <p>
-        Wenn du Fragen rund ums Räume teilen hast, der "Raumteiler Guide 2019" erklärt Schritt
+        Wenn du Fragen rund ums Räume teilen hast, der "Raumteiler Guide" erklärt Schritt
         für Schritt, was es beim Räume teilen und beim Andocken zu beachten gibt.
         Enthalten sind außerdem Musterverträge und die wichtigsten Anlaufadresse in Wien.
       </p>
       <br>
       <p>
-        <a href="https://blog.imgraetzl.at/wp-content/uploads/2019/02/RaumteilerGuide2019.pdf" class="btn-primary -mint -download" id="guide-download">Raumteiler Guide 2019 gratis downloaden</a>
+        <a href="https://blog.imgraetzl.at/wp-content/uploads/2019/02/RaumteilerGuide2019.pdf" class="btn-primary -mint -download" id="guide-download">Raumteiler Guide gratis downloaden</a>
       </p>
       <br>
       <p style="clear:both;">
-        Wir kooperieren außerdem mit den <a href="https://www.kreativeraeumewien.at" target="_blank" class="partner">Kreativen Räumen Wien</a>,
-        <a href="http://www.nest.agency" target="_blank" class="partner">Nest - der Agentur für Leerstandsmanagement</a>
+        Wir kooperieren außerdem mit den <a href="https://www.kreativeraeumewien.at" target="_blank" class="partner">Kreativen Räumen Wien</a>
         und der <a href="http://www.freielokale.at" target="_blank" class="partner">Wirtschaftskammer Wien - Freielokale.at</a>.
         Das heißt eure Raumteiler Gesuche übergeben wir ggf. auch an diese PartnerInnen, wenn wir denken,
         dass damit euer Raumwunsch vielleicht noch schneller in Erfüllung geht.
       </p>
       <p class="partner">
         <%= link_to(image_tag('logo-krw.png'), 'https://www.kreativeraeumewien.at', target: '_blank', :class => 'krw') %>
-        <%= link_to(image_tag('logo-nest.png'), 'http://www.nest.agency', target: '_blank', :class => 'nest') %>
         <%= link_to(image_tag('logo-wkw.png'), 'http://www.freielokale.at', target: '_blank', :class => 'wkw') %>
       </p>
     </article>

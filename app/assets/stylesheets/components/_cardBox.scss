@@ -606,8 +606,11 @@ main > .sponsorstuwerviertel {
       }
     }
     .coverImgWrapper { height: 200px; }
-    //.coverImg {object-fit: contain;}
-    //a.btn-primary {background-color: #cd9e3b;}
+  }
+  &.-featured {
+    .coverImgWrapper { height: 200px; }
+    .coverImg {object-fit: contain;}
+    a.btn-primary {background-color: #f2dd39; color: $color-font-primary}
   }
 }
 .homeOut {

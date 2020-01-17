@@ -87,9 +87,7 @@
           <%= link_to @meeting.user.username, @meeting.user %>
         <% end %>
       </div>
-      <div class="txt">
-        <%= @meeting.description %>
-      </div>
+      <div class="txt"><%= @meeting.description %></div>
     </div>
 
     <%= render 'meetings/participation', meeting: @meeting %>
