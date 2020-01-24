@@ -38,7 +38,7 @@ APP.controllers.application = (function() {
               $('body').removeClass('mob');
             }
         });
-    
+
 
     // TODO: this is a hack! stuff should come from DB
     function injectSponsorCard() {
@@ -57,11 +57,19 @@ APP.controllers.application = (function() {
     if (window.location.hostname == 'www.imgraetzl.at') {
       $(document).ready(function() {
         if ($("#flash .notice").exists()) {
+
+          // Registration
           if ( $("#flash .notice").text().indexOf('Super, du bist nun registriert!') >= 0 ){
             gtag('event', 'sign_up', {'event_category': 'Registration'}); // GA
             gtag('event', 'conversion', {'send_to': 'AW-807401138/zBwECJ738IABELLt_4AD'}); // G-AW
             fbq('track', 'CompleteRegistration'); // FB
           }
+
+          // SignUp Unterstützer-Team
+          if ( $("#flash .notice").text().indexOf('Deine Beitrittsanfrage wurde abgeschickt!') >= 0 && document.referrer.indexOf('unterstuetzer-team') >= 0 ){
+            fbq('trackCustom', 'UnterstuetzerSignUp');
+          }
+
         }
       });
     }

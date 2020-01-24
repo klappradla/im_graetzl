@@ -79,9 +79,12 @@ class DiscussionsController < ApplicationController
     if @group.nil?
       flash[:error] = "Gruppe nicht gefunden."
       redirect_to root_url
+    elsif !@group.readable_by?(current_user) && current_user
+      flash[:error] = "Nur für Gruppenmitglieder - Falls du Gruppenmitglied bist, logge dich bitte vorher ein."
+      redirect_to @group
     elsif !@group.readable_by?(current_user)
       flash[:error] = "Nur für eingeloggte Gruppenmitglieder - Falls du Gruppenmitglied bist, logge dich bitte vorher ein."
-      redirect_to @group
+      redirect_to new_user_session_url(redirect: request.original_url)
     end
   end
 

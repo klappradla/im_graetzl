@@ -49,8 +49,8 @@ class RoomOffer < ApplicationRecord
   private
 
   def set_graetzl_and_district
-    self.graetzl = address.graetzl if address.present?
-    self.district = graetzl.district if graetzl.present?
+    self.graetzl ||= address.graetzl if address.present?
+    self.district ||= graetzl.district if graetzl.present?
   end
 
   def has_one_category_at_least
