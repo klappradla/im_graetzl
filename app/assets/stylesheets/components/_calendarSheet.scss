@@ -34,4 +34,24 @@
     background-color: $color-ambient-rosa-dark;
     right: 0;
   }
+  &.-mint {
+    background-color: $color-ambient-mint-light;
+    color: $color-ambient-mint-dark;
+    &:before {
+      background-color: $color-ambient-mint;
+    }
+    &:after {
+      background-color: $color-ambient-mint-dark;
+    }
+  }
+  &.-additionalDate {
+    position: absolute;
+    left:60px;
+    min-height:48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include font-size-primaryFont('small');
+    font-style: italic;
+  }
 }

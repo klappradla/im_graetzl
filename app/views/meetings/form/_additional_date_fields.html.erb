@@ -1,0 +1,42 @@
+<div class="nested-fields">
+<div class="meet-when">
+  <div class="input-field">
+    <%= f.label :starts_at_date do %>
+      <%= icon_tag "calendar-2" %>
+      <span>Datum</span>
+    <% end %>
+    <%= f.text_field :starts_at_date,
+                     value: (I18n.localize(f.object.starts_at_date, format:'%A, %d. %B %Y') if f.object.starts_at_date),
+                     data: { value: (I18n.localize(f.object.starts_at_date, format:'%Y-%m-%d') if f.object.starts_at_date) },
+                     class: 'datepicker',
+                     placeholder: 'wählen' %>
+  </div>
+
+  <div class="input-field">
+    <%= f.label :starts_at_time do %>
+      <%= icon_tag "time-clock" %>
+      <span>Beginn</span>
+    <% end %>
+    <%= f.text_field :starts_at_time,
+                     value: (f.object.starts_at_time.strftime('%H:%M') if f.object.starts_at_time),
+                     class: 'timepicker',
+                     placeholder: 'wählen' %>
+  </div>
+
+  <div class="input-field">
+    <%= f.label :ends_at_time do %>
+      <%= icon_tag "time-clock" %>
+      <span>Ende</span>
+    <% end %>
+    <%= f.text_field :ends_at_time, ignore_date: true,
+                     value: (f.object.ends_at_time.strftime('%H:%M') if f.object.ends_at_time),
+                     class: 'timepicker', placeholder: 'wählen' %>
+  </div>
+
+</div>
+<%= link_to_remove_association f do %>
+  <div class="btn-delete">
+    <%= icon_tag "trash-delete-remove" %>
+  </div>
+<% end %>
+</div>

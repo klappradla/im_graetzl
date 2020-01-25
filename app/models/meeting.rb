@@ -6,6 +6,9 @@ class Meeting < ApplicationRecord
   belongs_to :graetzl
   has_many :districts, through: :graetzl
 
+  has_many :meeting_additional_dates, dependent: :destroy
+  accepts_nested_attributes_for :meeting_additional_dates, allow_destroy: true, reject_if: :all_blank
+
   belongs_to :location, optional: true
   belongs_to :user, optional: true
   belongs_to :group, optional: true

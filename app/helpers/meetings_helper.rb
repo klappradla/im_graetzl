@@ -14,8 +14,6 @@ module MeetingsHelper
   def localize_time(time, format)
     if time
       I18n.localize(time, format: format)
-    else
-      '???'
     end
   end
 
@@ -37,7 +35,7 @@ module MeetingsHelper
     coords = meeting.display_address.try(:coordinates)
     if coords
       link_to map_link(coords), target: '_blank', class: 'iconMapLink' do
-        icon_tag("map-location") + 'Karte'
+        icon_tag("map-location")
       end
     else
       content_tag(:div, icon_tag("map-location"), class: 'iconMapLink')
@@ -45,7 +43,7 @@ module MeetingsHelper
   end
 
   def meeting_address(meeting)
-    content_tag(:div, class: 'address') do
+    content_tag(:div, class: 'infotxt address') do
       location = meeting.location
       address = meeting.display_address
       case
@@ -55,10 +53,7 @@ module MeetingsHelper
           content_tag(:strong, address.description)
         when location
           link_to(location.name, [location.graetzl, location])
-        when address.street_name.blank?
-          content_tag(:strong, 'Ort steht noch nicht fest...')
         end
-        concat tag(:br)
         concat address.street
         concat tag(:br)
         concat "#{address.zip} #{address.city}"

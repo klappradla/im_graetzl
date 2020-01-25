@@ -76,7 +76,24 @@
                        value: (f.object.ends_at_time.strftime('%H:%M') if f.object.ends_at_time),
                        class: 'timepicker', placeholder: 'wählen' %>
     </div>
+
   </div>
+
+
+  <div class="additional-dates">
+
+      <% f.object.meeting_additional_dates.build if f.object.meeting_additional_dates.empty? %>
+      <%= f.fields_for :meeting_additional_dates, f.object.meeting_additional_dates.sort_by(&:starts_at_date) do |field_form| %>
+        <%= render 'meetings/form/additional_date_fields', f: field_form if f.object.meeting_additional_dates.exists? %>
+      <% end %>
+
+    <div class="meeting-additional-dates-links">
+      <%= link_to_add_association 'Weiteres Datum hinzufügen', f, :meeting_additional_dates, partial: 'meetings/form/additional_date_fields' %>
+    </div>
+
+  </div>
+
+
   <div class="meet-how">
     <p>Lade ein <span>Bild</span> für dein Treffen hoch</p>
 

@@ -39,54 +39,128 @@
   font-style: italic;
   text-decoration: none;
   .icon {
-    width: 35px;
-    height: 35px;
+    width: 50px;
+    height: 50px;
+    //fill: $color-ambient-rosa;
     fill: $color-ambient-mint;
   }
 }
 a.iconMapLink:hover .icon {
+  //fill: $color-ambient-mint;
   fill: $color-ambient-rosa;
 }
 
 
+.dateTime-container {
+  position: relative;
+  padding-right:50px;
+
+  .additionalSlider {
+    .lSAction {
+      a {
+        width:40px;
+        height:40px;
+        margin-top:-25px;
+      }
+    }
+    .lSAction > .lSNext {
+      right:0px;
+    }
+    .lSAction > .lSPrev {
+      left:calc(100% - 80px);
+    }
+  }
+}
+
 .dateTime {
   overflow: hidden;
-  .dayYearTimes {
-    float: left;
-    width: calc(100% - 65px);
-  }
-  .begin {
-    margin-right: 10px;
-    padding-right: 10px;
-    border-right: 1px dotted $color-font-primary;
-  }
+  display: flex;
+  position: relative;
 
+  .dateTimeItem {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .calendarSheet {
+    min-width: 50px;
+    margin-right:10px;
+  }
+  .additonal .calendarSheet {
+    //filter: grayscale(100%);
+  }
+  .dayYearTimes {
+    white-space: nowrap;
+    //font-weight: bold;
+    @include respond-to(">=medium") {
+      text-shadow: 1px 1px $color-ambient-bright;
+    }
+  }
+  .end {
+    margin-left: 10px;
+    padding-left: 10px;
+    border-left: 1px dotted $color-font-primary;
+  }
+  .time {
+    @include font-size-primaryFont('small');
+    font-weight: normal;
+  }
   .iconCalendarTextual {
     position: relative;
-    float: left;
     margin-right: 10px;
     display: block;
     @include respond-to(">=medium") {
       margin-right: 20px;
     }
   }
+
 }
 
 
-.place {
+.ico-row {
   overflow: hidden;
-  .address {
-    float: left;
-    width: calc(100% - 65px);
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  @include font-size-primaryFont('medium');
+
+  a, strong {
+    display: block;
+    //font-style: italic;
+  }
+  a {
+    display: block;
+    font-weight: bold;
+    color:$color-font-primary;
+    text-decoration: underline;
+    @include ellipsis();
+  }
+  em {
+    //font-weight: bold;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+  .address a {
+    font-weight: bold;
+    text-decoration: underline;
+    color:$color-font-primary;
+  }
+  .address a:hover {
+    text-decoration: none;
   }
   .iconMapLink {
     position: relative;
     float: left;
     margin-right: 10px;
     display: block;
-    @include respond-to(">=medium") {
-      margin-right: 20px;
-    }
+  }
+  img {
+    margin-right:10px;
+    //border-color: $color-ambient-rosa;
+  }
+  .infotxt {
+    overflow: auto;
   }
 }
 

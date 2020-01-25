@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_23_194937) do
+ActiveRecord::Schema.define(version: 2020_01_23_104003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -365,6 +365,16 @@ ActiveRecord::Schema.define(version: 2019_10_23_194937) do
     t.index ["graetzl_id"], name: "index_locations_on_graetzl_id"
     t.index ["last_activity_at"], name: "index_locations_on_last_activity_at"
     t.index ["slug"], name: "index_locations_on_slug"
+  end
+
+  create_table "meeting_additional_dates", force: :cascade do |t|
+    t.bigint "meeting_id"
+    t.date "starts_at_date"
+    t.time "starts_at_time"
+    t.time "ends_at_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meeting_id"], name: "index_meeting_additional_dates_on_meeting_id"
   end
 
   create_table "meetings", id: :serial, force: :cascade do |t|
@@ -860,6 +870,7 @@ ActiveRecord::Schema.define(version: 2019_10_23_194937) do
   add_foreign_key "groups", "room_calls", on_delete: :nullify
   add_foreign_key "groups", "room_demands", on_delete: :nullify
   add_foreign_key "groups", "room_offers", on_delete: :nullify
+  add_foreign_key "meeting_additional_dates", "meetings", on_delete: :cascade
   add_foreign_key "meetings", "groups", on_delete: :nullify
   add_foreign_key "meetings", "users", on_delete: :nullify
   add_foreign_key "notifications", "activities", on_delete: :cascade

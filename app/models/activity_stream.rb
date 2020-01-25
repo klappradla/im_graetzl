@@ -6,7 +6,6 @@ class ActivityStream
 
   def fetch
     activities = [
-      #Activity.where(trackable_id: @graetzl.meeting_ids, key: ['meeting.comment', 'meeting.create', 'meeting.go_to']),
       Activity.where(trackable_id: @graetzl.meetings.non_private.pluck(:id), key: ['meeting.comment', 'meeting.create', 'meeting.go_to']),
       Activity.where(trackable_id: @graetzl.location_ids, key: ['location.create']),
       Activity.where(trackable_id: @graetzl.post_ids, key: ['user_post.comment', 'user_post.create', 'admin_post.comment', 'admin_post.create', 'location_post.comment', 'location_post.create']),

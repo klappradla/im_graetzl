@@ -48,46 +48,57 @@
 
   <% if @meeting.active? %>
     <div class="entryDescription">
-      <div class="dateTime">
-        <div class="iconCalendarTextual">
-          <%= icon_tag 'calendar-2' %>
-        </div>
-        <div class="dayYearTimes">
+
+      <div class="dateTime-container">
+
+        <div class="dateTime">
+
           <% if @meeting.starts_at_date %>
-              <%= I18n.localize(@meeting.starts_at_date, format:'%A, %d. %B %Y') %>
-          <% else %>
-              Tag steht noch nicht fest...
+            <%= render 'meetings/datetime', date: @meeting %>
           <% end %>
-          <br>
-          <span class="begin">Beginn: <%= localize_time(@meeting.starts_at_time, '%H:%M') %></span>
-          <span class="end">Ende: <%= localize_time(@meeting.ends_at_time, '%H:%M') %></span>
+
+          <% if @meeting.meeting_additional_dates.present? %>
+            <% @meeting.meeting_additional_dates.sort_by(&:starts_at_date).each do |date| %>
+              <%= render 'meetings/datetime', date: date , additonal_date: 'additonal' %>
+            <% end %>
+          <% end %>
+
         </div>
+
       </div>
-      <div class="place">
+
+      <div class="ico-row">
         <%= meeting_place @meeting %>
       </div>
 
       <% if @meeting.group.present? %>
-        <div class="place">
-          <div class="iconMapLink">
-            <%= icon_tag 'speech-bubble' %>
-          </div>
-          <div>
-            <span><%= link_to @meeting.group.title, @meeting.group %></span>
+        <div class="ico-row">
+          <%= attachment_image_tag @meeting.group, :cover_photo, :fill, 100, 100, fallback: 'cover_photo/980x370.png', class: 'location avatar img-square' %>
+          <div class="infotxt">
+            <em class="info">Gruppe:</em><br>
+            <span><%= link_to @meeting.group.title, @meeting.group, class: 'infolink' %></span>
           </div>
         </div>
       <% end %>
 
-      <div class="userPortraitName">
+      <div class="ico-row userPortraitName">
         <% if @meeting.location && @meeting.location.users.include?(@meeting.user) %>
-          <%= avatar_for(@meeting.location, 100) %> Erstellt von
-          <%= link_to @meeting.location.name, [Graetzl.memoized(@meeting.location.graetzl_id), @meeting.location] %>
+          <%= avatar_for(@meeting.location, 100) %>
+          <div class="infotxt">
+            <em class="info">Erstellt von:</em><br>
+            <%= link_to @meeting.location.name, [Graetzl.memoized(@meeting.location.graetzl_id), @meeting.location], class: 'infolink' %>
+          </div>
         <% elsif @meeting.user %>
-          <%= avatar_for(@meeting.user, 100) %> Erstellt von
-          <%= link_to @meeting.user.username, @meeting.user %>
+          <%= avatar_for(@meeting.user, 100) %>
+          <div class="infotxt">
+            <em class="info">Erstellt von:</em><br>
+            <%= link_to @meeting.user.username, @meeting.user, class: 'infolink' %>
+          </div>
         <% end %>
       </div>
+
       <div class="txt"><%= @meeting.description %></div>
+
     </div>
 
     <%= render 'meetings/participation', meeting: @meeting %>

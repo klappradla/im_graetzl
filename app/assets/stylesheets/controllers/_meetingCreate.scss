@@ -34,6 +34,27 @@
       margin-bottom: 5.0rem;
     }
   }
+  .meet-when {
+    margin-bottom: 20px;
+  }
+  .nested-fields {
+    position: relative;
+    a.remove_fields {
+      position: absolute;
+      top:5px;
+      right:10px;
+      @include respond-to(">=medium") {
+        top:15px;
+      }
+    }
+  }
+  a.add_fields {
+    display: block;
+    margin-bottom: 2.5rem;
+    @include respond-to(">=medium") {
+      margin-bottom: 5.0rem;
+    }
+  }
 
   .input-field,
   .input-textarea {

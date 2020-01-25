@@ -14,9 +14,15 @@
         <div class="month"><%= I18n.localize(meeting.starts_at_date, format:'%b') %></div>
       </div>
     <% end %>
+
+    <% if meeting.meeting_additional_dates.present? %>
+    <div class="calendarSheet -additionalDate">
+      + <%= meeting.meeting_additional_dates.count %>
+    </div>
+    <% end %>
+
     <div class="categoryicon">
       <%= icon_tag "users" %>
-      <div class="count"><%= meeting.going_tos.size %></div>
     </div>
     <%= graetzl_flag(graetzl) %>
   </div>

@@ -102,9 +102,21 @@ class MeetingsController < ApplicationController
   end
 
   def meeting_params
-    result = params.require(:meeting).permit(:graetzl_id, :group_id, :name, :description, :starts_at_date, :starts_at_time,
-      :ends_at_time, :cover_photo, :remove_cover_photo, :location_id,
-      address_attributes: [:id, :description, :street_name, :street_number, :zip, :city, :coordinates]
+    result =
+      params.require(:meeting)
+      .permit(
+        :graetzl_id,
+        :group_id,
+        :name,
+        :description,
+        :starts_at_date,
+        :starts_at_time,
+        :ends_at_time,
+        :cover_photo,
+        :remove_cover_photo,
+        :location_id,
+        meeting_additional_dates_attributes: [:id, :starts_at_date, :starts_at_time, :ends_at_time, :_destroy],
+        address_attributes: [:id, :description, :street_name, :street_number, :zip, :city, :coordinates]
     )
 
     feature_address = Address.from_feature(params[:feature]) if params[:feature]

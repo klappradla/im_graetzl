@@ -1,0 +1,16 @@
+<div class="dateTimeItem <%= local_assigns[:additonal_date] %>">
+  <!--<div class="iconCalendarTextual"><%= icon_tag 'calendar-2' %></div>-->
+  <div class="calendarSheet">
+    <div class="day"><%= date.starts_at_date.day %></div>
+    <div class="month"><%= I18n.localize(date.starts_at_date, format:'%b') %></div>
+  </div>
+  <div class="dayYearTimes">
+    <%= I18n.localize(date.starts_at_date, format:'%a, %d. %B %Y') %>
+    <br>
+    <% if date.starts_at_time && date.ends_at_time %>
+      <span class="time">Von <%= localize_time(date.starts_at_time, '%H:%M') %> bis <%= localize_time(date.ends_at_time, '%H:%M') %></span>
+    <% elsif date.starts_at_time %>
+      <span class="time">Beginn: <%= localize_time(date.starts_at_time, '%H:%M') %></span>
+    <% end %>
+  </div>
+</div>

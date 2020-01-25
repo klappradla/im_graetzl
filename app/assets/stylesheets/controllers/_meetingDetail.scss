@@ -2,9 +2,11 @@ section.meeting {
   @include cf;
   .imgHeader {
     @include respond-to(">=medium") {
-      margin-bottom: -80px;
+      margin-bottom: -50px;
     }
-    height:370px;
+    @include respond-to(">=large") {
+      height:370px;
+    }
   }
 }
 
@@ -38,12 +40,8 @@ section.meeting {
     }
   }
 
-  .dateTime, .group {
-    padding-top: 10px;
+  .dateTime {
     margin-bottom: 1rem;
-    @include respond-to(">=medium") {
-      text-shadow: 1px 1px $color-ambient-bright;
-    }
   }
 
   .place {
@@ -55,21 +53,17 @@ section.meeting {
 
   .userPortraitName {
     margin-bottom: 20px;
-    margin-top: -10px;
     img {
-      width: 35px;
-      height: 35px;
+      width: 50px;
+      height: 50px;
       margin-right: 10px;
-      @include respond-to(">=medium") {
-        margin-right: 20px;
-      }
     }
     a {
-      margin-left: 5px;
-      text-decoration: none;
-      &:hover {
-        text-decoration: underline;
-      }
+      //color: $color-ambient-mint;
+      font-style: italic;
+      font-weight: bold;
+    }
+    a:hover {
     }
   }
 
