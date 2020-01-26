@@ -33,6 +33,7 @@
       <td valign="center" class="mcnTextContent" style="padding-left:18px; padding-right:18px;">
         <%= image_tag Notifications::ImageService.new.avatar_url(@notification.activity.owner), style: "width: 40px; height: 40px; border-radius: 20px; display: block; margin-bottom:5px;" %>
       </td>
+      <td>&nbsp;</td>
       <td class="mcnTextContent" style="padding-right:18px; width:100%;">
         <p>
           <em><strong>
@@ -44,11 +45,11 @@
     </tr>
 
     <tr>
-      <td colspan="2" style="padding-bottom:9px;"></td>
+      <td colspan="3" style="padding-bottom:9px;"></td>
     </tr>
 
     <tr>
-      <td colspan="2">
+      <td colspan="3">
         <%= render 'mailers/shared/button', title: "Zum Treffen", url: graetzl_meeting_url(@notification.meeting.graetzl, @notification.meeting) %>
       </td>
     </tr>
