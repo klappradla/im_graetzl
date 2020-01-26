@@ -13,6 +13,9 @@
               <%= link_to notification.activity.owner.username, user_url(notification.activity.owner), style: "color:#ec776a; font-size:12px;" %>
               <br>
               <%= I18n.localize(notification.meeting.starts_at_date, format:'%A %d. %B') if notification.meeting.starts_at_date.present? %>
+              <% if notification.meeting.meeting_additional_dates.present? %>
+              <br><em>+ <%= notification.meeting.meeting_additional_dates.count %> weitere Termine</em>
+              <% end %>
             </td>
           </tr>
         </table>

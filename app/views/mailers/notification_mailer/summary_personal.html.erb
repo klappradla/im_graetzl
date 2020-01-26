@@ -3,7 +3,7 @@
 <% content_for(:subtitle, "für dich zusammengefasst:") %>
 
 <% if @notifications[:atendees].present? %>
-  <%= render 'summary/block_header', title: 'Neuer Teilnehmer bei einem Treffen' %>
+  <%= render 'summary/block_header', title: 'An deinem Treffen interessiert' %>
   <% @notifications[:atendees].group_by(&:meeting).each do |meeting, notifications| %>
     <%= render "summary/attendees_by_meeting", meeting: meeting, notifications: notifications %>
   <% end %>

@@ -144,7 +144,7 @@
     <% end %>
     <% if current_user.attended_meetings.upcoming.empty? %>
       <div class="info">
-        Es gibt aktuell kein Treffen an dem du teilnimmst ..
+        Es gibt keine aktuellen Treffen an denen du interessiert bist ..
       </div>
     <% end %>
     <% current_user.attended_meetings.upcoming.first(8).each do |meeting| %>

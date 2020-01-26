@@ -8,11 +8,11 @@ class Notifications::MeetingCancelled < Notification
   end
 
   def self.description
-    'Absage eines Treffens an dem ich teilnehme'
+    'Absage eines Treffens an dem ich interessiert bin'
   end
 
   def mail_subject
-    'Absage eines Treffens an dem du teilnimmst'
+    'Absage eines Treffens an dem du interessiert bist'
   end
 
   def meeting

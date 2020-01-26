@@ -1,5 +1,5 @@
 <% content_for(:above_title, "Hallo #{@user.first_name},") %>
-<% content_for(:title, "Neue Teilnehmer/in bei deinem Treffen.") %>
+<% content_for(:title, "Neuer Interessent an deinem Treffen.") %>
 
 <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
   <tr>
@@ -37,7 +37,7 @@
         <p>
           <em><strong>
             <%= link_to @notification.activity.owner.username, user_url(@notification.activity.owner), style: "color:#f48a85; font-weight:bold;" %>
-            nimmt teil.
+            ist interessiert.
           </strong></em>
         </p>
       </td>

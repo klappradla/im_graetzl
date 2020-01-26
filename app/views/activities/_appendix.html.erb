@@ -19,7 +19,7 @@
     <%= link_to participant do %>
       <%= attachment_image_tag participant, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
     <% end %>
-    <span class="userAndType"><%= link_to participant.username, participant %> <span>nimmt am Treffen teil</span></span>
+    <span class="userAndType"><%= link_to participant.username, participant %> <span>ist interessiert.</span></span>
   </div>
 <% end %>
 
