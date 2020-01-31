@@ -4,7 +4,7 @@ namespace :db do
 
     # remove old data
     puts 'remove old data'
-    [User, Meeting, Location, Post, Category, Activity].each(&:destroy_all)
+    [User, Meeting, Location, Post, Group, RoomOffer, RoomDemand, ToolOffer, Activity].each(&:destroy_all)
 
     # check for seed data
     puts 'check for graetzl and districts'
@@ -15,7 +15,7 @@ namespace :db do
 
     # add users
     puts 'add users'
-    users = ['malano', 'mirjam', 'jack', 'peter', 'jeanine', 'max', 'tawan']
+    users = ['malano', 'mirjam', 'jack', 'peter', 'jeanine', 'max']
     users.each do |user|
       new_user = User.new(
         username: user,
@@ -34,22 +34,22 @@ namespace :db do
     end
 
     user_1 = User.create(
-      username: 'user_1',
-      first_name: 'user_1',
-      last_name: 'user_1',
-      email: 'user_1@example.com',
+      username: 'Michael',
+      first_name: 'Michael',
+      last_name: 'Walchhütter',
+      email: 'michael.walchhuetter@gmail.com',
       password: 'secret',
-      role: :business,
+      business: true,
       graetzl: Graetzl.find_by_name('Stuwerviertel'),
       confirmed_at: Time.now,
-      slug: 'user_1')
+      slug: 'michael')
     File.open(Rails.root+'lib/assets/avatars/user_1.jpg', 'rb') do |file|
       user_1.avatar = file
     end
     user_1.save(validate: false)
 
     # add categories
-    puts 'add categories'
+    puts 'add location categories'
     location_categories = [
       'Kreativwirtschaft / Handwerk',
       'Wohlbefinden & Gesundheit',
@@ -61,13 +61,13 @@ namespace :db do
       'Leerstand',
       'Sonstige Tätigkeit']
     location_categories.each do |c|
-      Category.create(name: c, context: Category.contexts[:business])
+      LocationCategory.create(name: c, context: LocationCategory.contexts[:business])
     end
 
     # add locations
     puts 'add locations'
     users = User.all
-    category = Category.business.first
+    category = LocationCategory.business.first
     2.times do
       users.each do |u|
         u.locations.create(
@@ -76,7 +76,7 @@ namespace :db do
           slogan: Faker::Company.catch_phrase,
           description: Faker::Lorem.paragraph(10),
           state: 'approved',
-          category: category,
+          location_category: category,
           contact_attributes: {
             website: Faker::Internet.url,
             email: Faker::Internet.email,
@@ -105,20 +105,6 @@ namespace :db do
         meeting.create_activity :create, owner: u
       end
     end
-
-    # add posts
-    # puts 'add posts'
-    # users = User.all
-    # posts = []
-    # 10.times do
-    #   users.each do |u|
-    #     posts << u.posts.build(content: Faker::Lorem.paragraph(3), graetzl: u.graetzl)
-    #   end
-    # end
-    # posts.shuffle.each do |p|
-    #   p.save
-    #   p.create_activity :create, owner: p.author
-    # end
 
     # save slugs
     User.find_each(&:save)

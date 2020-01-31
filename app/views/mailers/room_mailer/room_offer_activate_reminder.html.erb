@@ -1,0 +1,68 @@
+<% content_for(:above_title, "Hallo #{@room_offer.user.first_name},") %>
+<% content_for(:title, "Dein Raumteiler ist abgelaufen") %>
+
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
+  <tr>
+    <td style="height:30px"> </td>
+  </tr>
+  <tr>
+    <td valign="top" class="mcnTextContent" style="padding-top:0;  padding-bottom:9px; padding-left:18px; padding-right:18px;">
+      <h4 style="color:#69a8a7; font-family:Georgia; font-size:125%; font-weight:normal; font-style:italic; text-align:left;">
+        <%= I18n.t("activerecord.attributes.room_offer.offer_types.#{@room_offer.offer_type}") %>
+      </h4>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding-left:9px; padding-right:9px;">
+      <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td>
+            <span></span>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<!-- --------------- ITEM ROOM OFER --------------- -->
+
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:300px;" width="100%" class="mcnTextContentContainer">
+  <tbody>
+    <tr>
+      <td valign="top" class="mcnTextContent" style="padding-top:0; padding-left:18px; padding-right:18px;">
+
+        <%= link_to room_offer_url(@room_offer), target: 'blank' do %>
+          <%= image_tag Notifications::ImageService.new.cover_photo_url(@room_offer), style: "width:100%; padding-bottom:5px;", class: "mcnImage" %>
+        <% end %>
+
+        <p>
+          <%= link_to @room_offer.slogan, room_offer_url(@room_offer), style: "color:#ec776a; font-size:18px;" %>
+        </p>
+
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+
+<!-- --------------- ITEM ACTION BOX --------------- -->
+
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:300px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
+  <tbody>
+    <tr>
+      <td valign="top" class="mcnTextContent" style="padding-top:0; padding-left:18px; padding-bottom:18px; padding-right:18px;">
+
+        Wenn du deinen Raumteiler für <strong>weitere <%= RoomOffer::LIFETIME_MONTHS %> Monate aktivieren</strong> möchtest, dann klicke hier:
+
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <%= render 'mailers/shared/button', title: "Raumteiler wieder aktivieren", url: "#{room_offer_url(@room_offer)}/activate/#{@room_offer.activation_code}", style: "width:100%;" %>
+      </td>
+    </tr>
+  </tbody>
+</table>

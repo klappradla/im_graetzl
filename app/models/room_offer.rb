@@ -38,12 +38,24 @@ class RoomOffer < ApplicationRecord
   validate :has_one_category_at_least
 
   before_save :set_graetzl_and_district
+  before_create :set_last_activated_at
   after_destroy { MailchimpRoomDeleteJob.perform_later(user) }
 
   scope :by_currentness, -> { order(created_at: :desc) }
+  scope :reactivated, -> { enabled.where("last_activated_at > created_at") }
+
+  LIFETIME_MONTHS = 6
 
   def to_s
     slogan
+  end
+
+  def activation_code
+    return self.created_at.to_i
+  end
+
+  def set_last_activated_at
+    self.last_activated_at = Time.now
   end
 
   private

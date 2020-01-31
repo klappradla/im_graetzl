@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_23_104003) do
+ActiveRecord::Schema.define(version: 2020_01_30_130445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -578,6 +578,7 @@ ActiveRecord::Schema.define(version: 2020_01_23_104003) do
     t.string "avatar_id"
     t.string "avatar_content_type"
     t.integer "status", default: 0
+    t.date "last_activated_at"
     t.index ["location_id"], name: "index_room_demands_on_location_id"
     t.index ["user_id"], name: "index_room_demands_on_user_id"
   end
@@ -640,6 +641,7 @@ ActiveRecord::Schema.define(version: 2020_01_23_104003) do
     t.string "avatar_id"
     t.string "avatar_content_type"
     t.integer "status", default: 0
+    t.date "last_activated_at"
     t.index ["district_id"], name: "index_room_offers_on_district_id"
     t.index ["graetzl_id"], name: "index_room_offers_on_graetzl_id"
     t.index ["location_id"], name: "index_room_offers_on_location_id"

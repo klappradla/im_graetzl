@@ -4,7 +4,10 @@ ActiveAdmin.register RoomDemand do
   includes :location, :user, :comments
   actions :all, except: [:new, :create]
 
-  scope :all, default: true
+  scope :enabled, default: true
+  scope :reactivated
+  scope :disabled
+  scope :all
 
   filter :graetzls, collection: proc { Graetzl.order(:name).pluck(:name, :id) }, include_blank: true, input_html: { class: 'admin-filter-select'}
   filter :districts, collection: proc { District.order(:zip) }, include_blank: true, input_html: { class: 'admin-filter-select'}

@@ -23,15 +23,27 @@ class RoomDemand < ApplicationRecord
   attachment :avatar, type: :image
 
   scope :by_currentness, -> { order(created_at: :desc) }
+  scope :reactivated, -> { enabled.where("last_activated_at > created_at") }
+
+  LIFETIME_MONTHS = 6
 
   validates_presence_of :slogan, :demand_description, :personal_description, :avatar, :first_name, :last_name, :email
   validate :has_one_category_at_least
   validate :has_one_graetzl_at_least # doesn't work for some reason
 
+  before_create :set_last_activated_at
   after_destroy { MailchimpRoomDeleteJob.perform_later(user) }
 
   def to_s
     slogan
+  end
+
+  def activation_code
+    return self.created_at.to_i
+  end
+
+  def set_last_activated_at
+    self.last_activated_at = Time.now
   end
 
   private

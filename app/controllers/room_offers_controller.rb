@@ -1,5 +1,5 @@
 class RoomOffersController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, except: [:show, :activate]
 
   def show
     @room_offer = RoomOffer.find(params[:id])
@@ -49,6 +49,18 @@ class RoomOffersController < ApplicationController
     MailchimpRoomOfferUpdateJob.perform_later(@room_offer)
     flash[:notice] = t("activerecord.attributes.room_offer.status_message.#{@room_offer.status}")
     redirect_back(fallback_location: rooms_user_path)
+  end
+
+  def activate
+    @room_offer = RoomOffer.find(params[:id])
+    if params[:activation_code].to_i == @room_offer.activation_code
+      @room_offer.update(last_activated_at: @room_offer.set_last_activated_at)
+      @room_offer.update(status: "enabled")
+      flash[:notice] = "Dein Raumteiler wurde erfolgreich verlängert!"
+    else
+      flash[:notice] = "Der Aktivierungslink ist leider ungültig. #{@room_offer.created_at.to_i}"
+    end
+    redirect_to @room_offer
   end
 
   def toggle_waitlist
@@ -103,6 +115,7 @@ class RoomOffersController < ApplicationController
         :cover_photo,
         :remove_cover_photo,
         :avatar,
+        :activation_code,
         :remove_avatar,
         :first_name, :last_name, :website, :email, :phone, :location_id,
         images_files: [],

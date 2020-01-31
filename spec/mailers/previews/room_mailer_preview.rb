@@ -12,4 +12,12 @@ class RoomMailerPreview < ActionMailer::Preview
     RoomMailer.waiting_list_updated(RoomOffer.last, User.last)
   end
 
+  def room_offer_activate_reminder
+    RoomMailer.room_offer_activate_reminder(RoomOffer.last)
+  end
+
+  def room_demand_activate_reminder
+    RoomMailer.room_demand_activate_reminder(RoomDemand.last)
+  end
+
 end

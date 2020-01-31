@@ -7,5 +7,6 @@ context.instance_eval do
   column :email
   column(:comment_count) {|r| r.comments.size }
   column :created_at
+  column :last_activated_at
   actions
 end

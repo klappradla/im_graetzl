@@ -9,6 +9,7 @@ context.instance_eval do
           row :slug
           row :created_at
           row :updated_at
+          row :last_activated_at
           row :room_description
           row :owner_description
           row :tenant_description

@@ -7,6 +7,7 @@ context.instance_eval do
   column :email
   column(:comment_count) {|r| r.comments.size }
   column :created_at
+  column :last_activated_at
   #column :wants_collaboration
   #column(:room_categories) { |r| r.room_categories.map(&:name).join(", ") }
   column :graetzl
