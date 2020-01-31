@@ -15,7 +15,7 @@ module User::Notifiable
   end
 
   def enabled_website_notification?(type)
-    enabled_website_notifications & type::BITMASK > 0
+    (enabled_website_notifications & type::BITMASK > 0) || type::BITMASK == 0
   end
 
   def toggle_website_notification(type)
@@ -24,9 +24,9 @@ module User::Notifiable
   end
 
   def website_notifications
-    notifications.includes(activity: [:owner, :trackable]).
-                  where(["bitmask & ? > 0", enabled_website_notifications]).
-                  where(display_on_website: true)
+    notifications.includes(activity: [:owner, :trackable]).where(display_on_website: true).where(
+      "bitmask & ? > 0 OR bitmask = 0", enabled_website_notifications
+    )
   end
 
   def new_website_notifications_count
@@ -79,7 +79,7 @@ module User::Notifiable
       notification.none
     end
   end
-  
+
   private
 
   def set_default_notification_settings

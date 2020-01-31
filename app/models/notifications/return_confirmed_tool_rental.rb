@@ -1,7 +1,6 @@
 class Notifications::ReturnConfirmedToolRental < Notification
   TRIGGER_KEY = 'tool_rental.return_confirmed'
-  DEFAULT_INTERVAL = :immediate
-  BITMASK = 2**4
+  BITMASK = 0 # System notification
 
   def self.receivers(activity)
     User.where(id: activity.trackable.user_id)

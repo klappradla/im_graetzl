@@ -50,18 +50,17 @@ class Notification < ApplicationRecord
     #higher order bitmask types might not needed to be sent at all, when a user
     #has been already notified via a lower order type.
     triggered_types.sort{|a,b| a::BITMASK <=> b::BITMASK}.each do |klass|
-      if klass.condition(activity)
-        users = klass.receivers(activity)
-        users.each do |u|
-          next if notified_user_ids[u.id].present?
-          next if u == activity.owner && !klass.notify_owner?
+      next if !klass.condition(activity)
+      users = klass.receivers(activity)
+      users.each do |u|
+        next if notified_user_ids[u.id].present?
+        next if u == activity.owner && !klass.notify_owner?
 
-          display_on_website = u.enabled_website_notification?(klass) && u != activity.owner
-          n = klass.create(activity: activity, user: u, display_on_website: display_on_website)
-          send_immediate_email = u.enabled_mail_notification?(klass, :immediate)
-          NotificationMailer.send_immediate(n).deliver_later if send_immediate_email
-          notified_user_ids[u.id] = true if display_on_website || send_immediate_email
-        end
+        display_on_website = u.enabled_website_notification?(klass) && u != activity.owner
+        n = klass.create(activity: activity, user: u, display_on_website: display_on_website)
+        send_immediate_email = u.enabled_mail_notification?(klass, :immediate)
+        NotificationMailer.send_immediate(n).deliver_later if send_immediate_email
+        notified_user_ids[u.id] = true if display_on_website || send_immediate_email
       end
     end
   end
