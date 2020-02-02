@@ -39,17 +39,10 @@ class RoomDemandsController < ApplicationController
     end
   end
 
-  def toggle
-    @room_demand = current_user.room_demands.find(params[:id])
-    @room_demand.enabled? ? @room_demand.disabled! : @room_demand.enabled!
-    MailchimpRoomDemandUpdateJob.perform_later(@room_demand)
-    flash[:notice] = t("activerecord.attributes.room_demand.status_message.#{@room_demand.status}")
-    redirect_back(fallback_location: rooms_user_path)
-  end
-
   def update_status
     @room_demand = current_user.room_demands.find(params[:id])
     @room_demand.update(status: params[:status])
+    @room_demand.update(last_activated_at: @room_demand.set_last_activated_at) if @room_demand.enabled?
     MailchimpRoomDemandUpdateJob.perform_later(@room_demand)
     flash[:notice] = t("activerecord.attributes.room_demand.status_message.#{@room_demand.status}")
     redirect_back(fallback_location: rooms_user_path)

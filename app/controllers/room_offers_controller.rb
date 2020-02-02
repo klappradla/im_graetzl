@@ -46,6 +46,7 @@ class RoomOffersController < ApplicationController
   def update_status
     @room_offer = current_user.room_offers.find(params[:id])
     @room_offer.update(status: params[:status])
+    @room_offer.update(last_activated_at: @room_offer.set_last_activated_at) if @room_offer.enabled?
     MailchimpRoomOfferUpdateJob.perform_later(@room_offer)
     flash[:notice] = t("activerecord.attributes.room_offer.status_message.#{@room_offer.status}")
     redirect_back(fallback_location: rooms_user_path)
