@@ -55,7 +55,7 @@ class RoomDemandsController < ApplicationController
       @room_demand.update(status: "enabled")
       flash[:notice] = "Dein Raumteiler wurde erfolgreich verlängert!"
     else
-      flash[:notice] = "Der Aktivierungslink ist leider ungültig. #{@room_demand.created_at.to_i}"
+      flash[:notice] = "Der Aktivierungslink ist leider ungültig. Log dich ein um deinen Raumteiler zu aktivieren."
     end
     redirect_to @room_demand
   end

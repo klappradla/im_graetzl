@@ -4,9 +4,9 @@ namespace :scheduled do
 
     room_offer_lifetime_months = RoomOffer::LIFETIME_MONTHS
 
-    # Disable expiring Rooms and send reminder mail for activating
-    # Only send mai if valid -> status can be updated via link
-    # Also deactivate invalid rooms
+    # Disable expiring RoomOffers and send reminder mail for activating
+    # Only send mail if valid -> status can be updated via link
+    # Also deactivate invalids
     RoomOffer.enabled.where("last_activated_at < ?", room_offer_lifetime_months.months.ago).find_each do |room_offer|
       room_offer.update_attribute(:status, "disabled")
       unless room_offer.invalid?
@@ -16,7 +16,9 @@ namespace :scheduled do
 
     room_demand_lifetime_months = RoomDemand::LIFETIME_MONTHS
 
-    # Disable expiring Rooms and send reminder mail for activating
+    # Disable expiring RoomDemands and send reminder mail for activating
+    # Only send mail if valid -> status can be updated via link
+    # Also deactivate invalids
     RoomDemand.enabled.where("last_activated_at < ?", room_demand_lifetime_months.months.ago).find_each do |room_demand|
       room_demand.update_attribute(:status, "disabled")
       unless room_demand.invalid?
