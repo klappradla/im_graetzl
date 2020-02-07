@@ -16,6 +16,7 @@ ActiveAdmin.register Meeting do
   filter :description
   filter :created_at
   filter :starts_at_date
+  filter :platform_meeting
 
   index { render 'index', context: self }
   show { render 'show', context: self }
@@ -82,6 +83,7 @@ ActiveAdmin.register Meeting do
     :location_id,
     :group_id,
     :approved_for_api,
+    :platform_meeting,
     address_attributes: [
       :id,
       :street_name,

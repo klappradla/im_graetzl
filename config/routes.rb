@@ -151,6 +151,7 @@ Rails.application.routes.draw do
     get 'gruppen', action: 'groups', as: 'groups'
     get 'toolteiler', action: 'tool_offers', as: 'tool_offers'
     get 'zuckerl', action: 'zuckerls', as: 'zuckerls'
+    get 'community-events', action: 'platform_meetings', as: 'platform_meetings'
   end
 
   resources :districts, path: 'wien', only: [:show] do

@@ -29,14 +29,17 @@ section.meeting {
     font-weight: 600;
   }
 
-  .txt {
+  .bbcode {
     margin-bottom: 2rem;
     white-space: pre-wrap;
     @include respond-to(">=medium") {
       clear: both;
     }
     @include respond-to(">=large") {
-      padding-right: 70px;
+      padding-right: 40px;
+    }
+    h3 {
+      @include font-size-primaryFont('large');
     }
   }
 
@@ -104,5 +107,12 @@ section.meeting {
       color: $color-ambient-rosa;
       margin-right: 5px;
     }
+  }
+}
+
+.more-platform-meetings {
+  margin-top:50px;
+  .paperCard {
+    padding:20px;
   }
 }

@@ -26,6 +26,7 @@ class Meeting < ApplicationRecord
   enum state: { active: 0, cancelled: 1 }
 
   scope :non_private, -> { where(private: false) }
+  scope :platform_meeting, -> { where(platform_meeting: true) }
 
   scope :by_currentness, -> {
     active.

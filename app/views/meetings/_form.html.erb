@@ -118,6 +118,17 @@
 
   </div>
 
+
+  <% if current_user.admin? %>
+  <div class="meet-platform-meeting">
+    <div class="input-checkbox">
+      <%= f.check_box :platform_meeting %>
+      <%= f.label :platform_meeting, "imGrätzl Plattform Treffen (Admin Feature)" %>
+    </div>
+  </div>
+  <% end %>
+
+
   <%= f.button data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
 
 <% end %>

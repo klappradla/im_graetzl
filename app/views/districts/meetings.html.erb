@@ -19,6 +19,7 @@
   <%= form_tag meetings_path, method: :get, remote: true, class: 'cards-filter' do %>
     <div class="filter-selection-text">
       Zeige mir Einträge in <%= link_to @district.zip_name, '#filter-modal-bezirk', class: 'filter-applied', data: { no_filter_label: 'allen Bezirken'} %>
+      - Zu den <%= link_to 'Community Treffen', platform_meetings_wien_path, class: 'plain-link' %>
     </div>
   <% end %>
 

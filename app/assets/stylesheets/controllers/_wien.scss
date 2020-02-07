@@ -53,5 +53,16 @@ section.wien {
       }
     }
   }
-  
+
+  &.platform-meetings {
+    margin-top:40px;
+    .-top {
+      margin-bottom:50px;
+      .wrp {
+        padding:35px 50px 35px 50px;
+        @include font-size-primaryFont('large');
+      }
+    }
+  }
+
 }

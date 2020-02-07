@@ -17,6 +17,7 @@ active_admin_form_for [:admin, resource] do |f|
         input :starts_at_time, ignore_date: true
         input :ends_at_time, ignore_date: true
         input :approved_for_api
+        input :platform_meeting
       end
       inputs 'Address', for: [:address, (f.object.address || f.object.build_address)] do |a|
         a.input :street_name

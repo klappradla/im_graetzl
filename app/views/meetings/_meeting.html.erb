@@ -22,7 +22,11 @@
     <% end %>
 
     <div class="categoryicon">
-      <%= icon_tag "users" %>
+      <% if meeting.platform_meeting  %>
+        <%= icon_tag "class" %>
+      <% else %>
+        <%= icon_tag "users" %>
+      <% end %>
     </div>
     <%= graetzl_flag(graetzl) %>
   </div>

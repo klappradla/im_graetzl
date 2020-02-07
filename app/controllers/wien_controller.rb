@@ -38,4 +38,8 @@ class WienController < ApplicationController
   def zuckerls
     @districts = District.order(zip: :asc)
   end
+
+  def platform_meetings
+    
+  end
 end

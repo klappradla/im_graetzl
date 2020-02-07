@@ -88,6 +88,8 @@ class MeetingsController < ApplicationController
     elsif params[:attended_user_id].present?
       user = User.find(params[:attended_user_id])
       user.attended_meetings
+    elsif params[:platform_meeting].present?
+      Meeting.where(platform_meeting: params[:platform_meeting])
     else
       Meeting.all
     end
@@ -115,6 +117,7 @@ class MeetingsController < ApplicationController
         :cover_photo,
         :remove_cover_photo,
         :location_id,
+        :platform_meeting,
         meeting_additional_dates_attributes: [:id, :starts_at_date, :starts_at_time, :ends_at_time, :_destroy],
         address_attributes: [:id, :description, :street_name, :street_number, :zip, :city, :coordinates]
     )

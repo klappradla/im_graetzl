@@ -11,7 +11,7 @@ APP.controllers.meetings = (function() {
     }
 
     function initMeetingDetail() {
-      $('.entryDescription .txt').linkify({
+      $('.entryDescription .bbcode').linkify({
         target: "_blank"
       });
 

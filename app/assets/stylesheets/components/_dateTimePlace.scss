@@ -116,6 +116,28 @@ a.iconMapLink:hover .icon {
 
 }
 
+// Community Meeting List
+.-platform-meetings {
+  .dateTimeItem {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .calendarSheet {
+    margin-right:10px;
+  }
+  a.title {
+    //color: $color-font-primary;
+    //font-style: italic;
+    color: $color-ambient-mint-dark;
+    //font-weight: bold;
+    //text-decoration: none;
+    //@include font-size-primaryFont('large');
+  }
+}
+
 
 .ico-row {
   overflow: hidden;

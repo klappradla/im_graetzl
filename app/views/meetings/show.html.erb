@@ -97,7 +97,7 @@
         <% end %>
       </div>
 
-      <div class="txt"><%= @meeting.description %></div>
+      <div class="bbcode"><%= @meeting.description.bbcode_to_html.html_safe %></div>
 
     </div>
 

@@ -38,13 +38,8 @@
 
   <article class="container -mentoring">
     <div class="txt">
-      <div class="headline -R">
-        <span class="bigicontext-element -large -badge">Neu</span>
-        <div>
-          <h2>Komm in dein Unterstützer-Team!</h2>
-          <h3>Ideen gemeinsam auf den Boden bringen.</h3>
-        </div>
-      </div>
+      <h2>Komm in dein Unterstützer-Team!</h2>
+      <h3>Ideen gemeinsam auf den Boden bringen.</h3>
       <p>
         MacherInnen werden in einem Team aus Gleichgesinnten auf imGrätzl.at verbunden,
         das sie bei der Umsetzung ihrer Ideen oder Aufbau ihrer Unternehmen begleitet,
@@ -89,13 +84,8 @@
 
   <article class="container">
     <div class="txt">
-      <div class="headline -R">
-        <span class="bigicontext-element -large -badge">Neu</span>
-        <div>
-          <h2>Toolteiler</h2>
-          <h3>Arbeitsequipment leihen & Geräte am Standort nutzen <%= render 'shared/questionmarklink', hint_url: info_toolteiler_path %></h3>
-        </div>
-      </div>
+      <h2>Toolteiler</h2>
+      <h3>Arbeitsequipment leihen & Geräte am Standort nutzen</h3>
       <p>
          Ermögliche GründerInnen, Selbstständigen, Kreativen und MacherInnen in Wien
          die Nutzung deines Arbeitsequipments. Du kannst über den Toolteiler Geräte verleihen
@@ -111,6 +101,34 @@
     </div>
     <div class="aside -img">
       <%= link_to(image_tag('info/imGraetzl-Features-Toolteiler.png'), groups_wien_path(:category => 1), class: '-illu -feature') %>
+    </div>
+  </article>
+
+
+
+
+  <article class="container">
+    <div class="txt">
+      <div class="headline -R">
+        <span class="bigicontext-element -large -badge">Neu</span>
+        <div>
+          <h2>Community Treffen</h2>
+          <h3>Für mehr Sichtbarkeit in deinem Stadtteil!</h3>
+        </div>
+      </div>
+      <p>
+        Lokale AkteurInnen bekommen auf imGrätzl.at die kostenlose Möglichkeit ihr Angebot,
+        ihre Events und Workshops im Stadtteil auf einer eigenen interaktiven Seite vorzustellen.
+        Alle Updates, Workshops und Events werden zusätzlich dazu per Stadtteil-Newsletter
+        versendet und in Häusern der Sozialbau AG (Bauträger) und Heimbau (Bauträger)
+        über eine Schnittstelle auf digitalen schwarzen Brettern angezeigt.
+      </p>
+      <p class="link">
+        <%= link_to 'Zu den Community Treffen', platform_meetings_wien_path, :class => 'btn-primary -mint -inlineflex' %>
+      </p>
+    </div>
+    <div class="aside -img">
+      <%= link_to(image_tag('info/imGraetzl-Features-Community-Treffen.png'), platform_meetings_wien_path, class: '-feature') %>
     </div>
   </article>
 

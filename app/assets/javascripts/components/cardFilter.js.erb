@@ -90,7 +90,7 @@ APP.components.cardFilter = (function() {
     filterForm = $(".cards-filter");
     cardGrid = $('.card-grid');
 
-    filterForm.find(".filter-selection-text a").featherlight({
+    filterForm.find(".filter-selection-text a").not( ".plain-link" ).featherlight({
       root: '.card-grid-container',
       targetAttr: 'href',
       persist: true

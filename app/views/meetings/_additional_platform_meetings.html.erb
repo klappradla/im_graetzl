@@ -1,0 +1,10 @@
+<% unless Meeting.platform_meeting.upcoming.empty? %>
+  <div class="more-platform-meetings">
+    <div class="paperCard -cord1RT">
+      <div class="wrp">
+        <%= render "shared/community_meeting_list", listcount: 3, button: true, headline: 'Weitere imGrätzl Community Treffen' %>
+      </div>
+      <div class="card"></div>
+    </div>
+  </div>
+<% end %>

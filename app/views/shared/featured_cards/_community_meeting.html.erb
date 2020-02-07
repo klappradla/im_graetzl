@@ -1,0 +1,18 @@
+<div class="cardBox featuredCard -static -hidden" data-behavior="masonry-card">
+
+  <div class="cardBoxHeader">
+    <%= link_to platform_meetings_wien_path do %>
+      <div class="coverImgWrapper">
+        <%= image_tag('info/header-menschenstrom.png', class: 'coverImg') %>
+      </div>
+    <% end %>
+    <div class="categoryicon">
+      <%= icon_tag "class" %>
+    </div>
+  </div>
+
+  <div class="cardBoxContent">
+    <%= render "shared/community_meeting_list", listcount: 2, button: true, headline: 'imGrätzl Community Treffen - Die nächsten Termine:' %>
+  </div>
+
+</div>

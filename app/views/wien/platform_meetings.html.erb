@@ -1,0 +1,39 @@
+<% meta(
+    title: t('.title'),
+    description: t('.description'),
+    robots: 'index, follow',
+    og_title: t('.title'),
+    og_description: t('.description'),
+    og_image: image_url('meta/og_logo.png')
+  )
+%>
+
+<section class="wien platform-meetings">
+
+  <div class="hl-subtext -cards">
+    <h1><em>imGrätzl Community Treffen</em></h1>
+    <p>Die nächsten Termine im Überblick</p>
+  </div>
+
+  <div class="paperCard -cord1RT -top">
+    <div class="wrp">
+      <p>
+        Hier noch ein kurzer <b>Beschreibungstext</b> über die Community Treffen.
+        Weil die sind so sauber und es macht auch Spass! was sonst. Muss es ja auch!
+      </p>
+    </div>
+    <div class="card"></div>
+  </div>
+
+  <%= form_tag meetings_path(platform_meeting: true), method: :get, remote: true, class: 'cards-filter' do; end %>
+
+  <div class="card-grid-container">
+    <div class="card-grid" data-behavior="meetings-card-container"></div>
+    <div class="action-card-container" data-behavior="meetings-action-card-container">
+      <%= render 'meetings/action_card_platform_meeting' %>
+    </div>
+    <!-- Insert Featured Card -->
+    <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'meetings-paginate-link' }, rel: 'nofollow' %>
+  </div>
+
+</section>

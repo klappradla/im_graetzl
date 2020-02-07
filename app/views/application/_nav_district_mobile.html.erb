@@ -7,12 +7,6 @@
         <%= icon_tag "home" %> <%= district.name %> (<%= district.numeric %>. Bez.)
         <span class="-more"><%= icon_tag "arrow-right-2" %></span>
       <% end %>
-      <!--
-      <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-wien'} do %>
-        <%= icon_tag "map-location" %> Wien
-        <span class="-more"><%= icon_tag "arrow-right-2" %></span>
-      <% end %>
-      -->
       <%= link_to wien_path, class: 'discover' do %>
         <%= icon_tag "map-location" %> Wien Karte
       <% end %>
@@ -31,15 +25,20 @@
       <%= link_to meetings_wien_path do %>
         <%= icon_tag "calendar-2" %> Events & Workshops
       <% end %>
+      <%= link_to platform_meetings_wien_path do %>
+        <%= icon_tag "class" %> Community Treffen
+      <% end %>
       <%= link_to zuckerls_wien_path do %>
         <%= icon_tag "shopping-bag" %> Zuckerl & Angebote
       <% end %>
       <%= link_to info_path do %>
         <%= icon_tag "lightbulb" %> Alle Services
       <% end %>
+      <!--
       <%= link_to unterstuetzer_team_path do %>
         <%= icon_tag "check" %> Unterstützer Team
       <% end %>
+      -->
       <%= link_to "https://blog.imgraetzl.at/", class: 'bloglink', target: '_blank' do %>
         <%= icon_tag "coffee" %>
         Blog

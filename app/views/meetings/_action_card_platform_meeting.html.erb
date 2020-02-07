@@ -1,0 +1,18 @@
+<div class="cardbox-wrp" data-behavior="masonry-card">
+  <div class="paperCard -illuteaser -platform-meeting">
+    <div class="wrp">
+      <div class="user">
+        <% if current_user %>
+          <%= attachment_image_tag current_user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+          <span><%= current_user.username %></span>
+        <% else %>
+          <%= image_tag('avatar/user/default.png', class: 'img-round') %>
+          <span>Dein Name</span>
+        <% end %>
+      </div>
+      <h3>Du hast Interesse selbst einen imGrätzl Community Workshop anzubieten?</h3>
+      <%= mail_to 'wir@imgraetzl.at', 'Mail an wir@imgraetzl.at', class: 'btn-primary -mint' %>
+    </div>
+    <div class="card"></div>
+  </div>
+</div>

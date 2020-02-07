@@ -1,0 +1,25 @@
+<div class="-platform-meetings">
+
+  <% listcount = local_assigns[:listcount] || 3 %>
+
+  <% if local_assigns[:headline].present? %>
+    <h3><%= local_assigns[:headline] %></h3>
+  <% end %>
+
+  <% Meeting.platform_meeting.upcoming.first(listcount).each do |meeting| %>
+    <div class="dateTimeItem -more-platform-meetings">
+      <div class="calendarSheet -mint">
+        <div class="day"><%= meeting.starts_at_date.day %></div>
+        <div class="month"><%= I18n.localize(meeting.starts_at_date, format:'%b') %></div>
+      </div>
+      <div>
+        <%= link_to meeting.name, [Graetzl.memoized(meeting.graetzl_id), meeting], class: 'title' %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if local_assigns[:button] %>
+    <%= link_to 'Zu den Community Treffen', platform_meetings_wien_path, class: 'btn-primary -mint' %>
+  <% end %>
+  
+</div>
