@@ -7,4 +7,12 @@ div.bbcode {
     white-space: normal;
     margin-left: 20px;
   }
+  img {
+    display: block;
+    max-width: 300px;
+    padding: 0.4rem;
+    background-color: #ffffff;
+    background-image: $texture-secondary;
+    box-shadow: $boxShadow-light;
+  }
 }
