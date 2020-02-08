@@ -1,18 +1,41 @@
 div.bbcode {
   white-space: pre-wrap;
-  h3 {
+  h2.bb {
     margin-bottom:0px !important;
+    font-family: $font-primary;
+    font-weight: bold;
+    @include font-size-primaryFont('larger');
+  }
+  h3.bb {
+    font-family: $font-primary;
+    margin-bottom:0px !important;
+    @include font-size-primaryFont('large');
   }
   ul, ol {
     white-space: normal;
     margin-left: 20px;
   }
   img {
-    display: block;
-    max-width: 300px;
-    padding: 0.4rem;
-    background-color: #ffffff;
-    background-image: $texture-secondary;
-    box-shadow: $boxShadow-light;
+    max-width: 250px;
+  }
+  .entryImgUploads {
+    @include cf;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    white-space: normal;
+    img {
+      max-width: 153px;
+    }
+  }
+  .imgtxt {
+    @include cf;
+    white-space: normal;
+    img {
+      float:left;
+      margin-right:20px;
+    }
+    span {
+
+    }
   }
 }

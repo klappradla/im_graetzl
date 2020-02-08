@@ -41,11 +41,11 @@
     <div class="action-card-container" data-behavior="rooms-action-card-container">
       <%= render 'rooms/action_card', district: @district %>
     </div>
-    
-    <!-- Insert Featured Card here -->
-    <%= render "shared/featured_cards/workshop_raumteiler" %>
-    <!-- < %= !Group.where(id: 15).empty? ? (render 'groups/group', group: Group.find(15), featured_card: 'featuredCard -hidden') : '' % > -->
 
+    <!-- Insert Featured Card here -->
+    <% unless Meeting.platform_meeting.upcoming.empty? %>
+      <%= render "shared/featured_cards/community_meeting" %>
+    <% end %>
     <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'rooms-paginate-link' }, rel: 'nofollow' %>
   </div>
 

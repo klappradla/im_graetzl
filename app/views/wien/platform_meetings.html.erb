@@ -4,7 +4,7 @@
     robots: 'index, follow',
     og_title: t('.title'),
     og_description: t('.description'),
-    og_image: image_url('meta/og_logo.png')
+    og_image: image_url('meta/coop-and-share.jpg')
   )
 %>
 
@@ -34,5 +34,21 @@
     <!-- Insert Featured Card -->
     <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'meetings-paginate-link' }, rel: 'nofollow' %>
   </div>
+
+  <% unless current_user %>
+  <div class="paperCard -cord1RT -bottom">
+    <div class="wrp">
+      <div class="logo">
+        <%= link_to image_tag('svg/coopshare-logo-black.svg', class: 'coop-share-logo'), info_path %>
+      </div>
+      <div class="txt">
+        <h3>Noch nicht auf imGrätzl registriert?</h3>
+        <p><strong>Melde dich jetzt an:</strong> Neben Services, die Kosten senken und Ressourcen erhöhen, wirst du mit Gleichgesinnten verbunden: Kooperieren, sharen, tauschen - neue Formen der Zusammenarbeit und Gemeinschaft stehen dabei im Mittelpunkt!</p>
+        <%= link_to 'Kostenlos in deinem Grätzl registrieren', new_user_session_path, class: 'btn-primary -register' %>
+      </div>
+    </div>
+    <div class="card"></div>
+  </div>
+  <% end %>
 
 </section>

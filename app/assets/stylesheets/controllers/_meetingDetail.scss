@@ -38,9 +38,6 @@ section.meeting {
     @include respond-to(">=large") {
       padding-right: 40px;
     }
-    h3 {
-      @include font-size-primaryFont('large');
-    }
   }
 
   .dateTime {
