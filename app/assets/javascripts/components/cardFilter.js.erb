@@ -128,6 +128,7 @@ APP.components.cardFilter = (function() {
     });
 
     $('.link-load').on('ajax:success', function() {
+      removeDuplicates();
       adjustNewCards();
     });
 
@@ -229,12 +230,28 @@ APP.components.cardFilter = (function() {
     });
   } // Infinite Scrolling
 
+  // Remove Duplicate Cards
+  function removeDuplicates() {
+    var items = cardGrid.find('[data-card-id]');
+    var exists = {};
+    console.log(items.length);
+    items.each(function() {
+        var cardId = $(this).attr('data-card-id');
+        if (exists[cardId]) {
+          console.log($(this));
+          $(this).remove();
+        } else {
+          exists[cardId] = true;
+        }
+    });
+  }
 
 
   function adjustNewCards() {
     var newCards = cardGrid.find('[data-behavior="masonry-card"]').not('[data-appended]');
     cardGrid.masonry('appended', newCards);
     newCards.attr("data-appended", true);
+    //console.log(newCards);
     initInfiniteScroll();
   }
 

@@ -16,7 +16,7 @@ div.bbcode {
     margin-left: 20px;
   }
   img {
-    max-width: 250px;
+    max-width: 230px;
   }
   .entryImgUploads {
     @include cf;
@@ -30,12 +30,22 @@ div.bbcode {
   .imgtxt {
     @include cf;
     white-space: normal;
-    img {
-      float:left;
-      margin-right:20px;
-    }
     span {
-
+      display: block;
+      clear: both;
+      margin-top:20px;
+    }
+    @include respond-to(">=medium") {
+      img {
+        float:left;
+        margin-right:15px;
+        margin-top:5px;
+      }
+      span {
+        display: inline;
+        clear: none;
+        margin-top:0px;
+      }
     }
   }
 }

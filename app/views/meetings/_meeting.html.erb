@@ -1,6 +1,6 @@
 <% graetzl = Graetzl.memoized(meeting.graetzl_id) %>
 
-<div class="cardBox -meeting <%= meeting_past_flag(meeting) %>" data-behavior="masonry-card">
+<div class="cardBox -meeting <%= meeting_past_flag(meeting) %>" data-behavior="masonry-card" data-card-id="meeting-<%= meeting.id %>">
 
   <div class="cardBoxHeader">
     <%= link_to [graetzl, meeting] do %>

@@ -1,15 +1,19 @@
 (function() {
   <% if params[:container_namespace] %>
+    console.log("params container_namespace");
     var $cardContainer = $("[data-behavior='<%= params[:container_namespace] %>-container']");
     var $paginateLink = $("[data-behavior='<%= params[:container_namespace] %>-paginate-link']");
   <% else %>
+    console.log("params container_namespace blank");
     var $cardContainer = $("[data-behavior='meetings-card-container']");
     var $paginateLink = $("[data-behavior='meetings-paginate-link']");
   <% end %>
 
   <% if params[:page].blank? %>
+    console.log("params page blank");
     $cardContainer.html("<%= j render @meetings %>")
   <% else %>
+    console.log("params page not blank");
     $cardContainer.append("<%= j render @meetings %>");
   <% end %>
 
