@@ -8,8 +8,21 @@ ActiveAdmin.register User, as: "User Notification Settings" do
   scope :business
   scope :admin
 
+  filter :graetzl, collection: proc { Graetzl.order(:name).pluck(:name, :id) }, include_blank: true, input_html: { class: 'admin-filter-select' }
   filter :id, label: 'User', as: :select, collection: proc { User.admin_select_collection }, include_blank: true, input_html: { class: 'admin-filter-select'}
   filter :email
+
+  filter :user_mail_setting, as: :select, collection: proc {[
+    ['Treffen - Wöchentlich','weekly_NewMeeting'],
+    ['Treffen - Täglich','daily_NewMeeting'],
+    ['Treffen - Sofort','immediate_NewMeeting'],
+    ['Treffen - Aus','off_NewMeeting'],
+
+    ['Location - Wöchentlich','weekly_NewLocation'],
+    ['Location - Täglich','daily_NewLocation'],
+    ['Location - Sofort','immediate_NewLocation'],
+    ['Location - Aus','off_NewLocation'],
+  ]}
 
   index { render 'index', context: self }
 
