@@ -1,6 +1,6 @@
 <% graetzl = Graetzl.memoized(location.graetzl_id) %>
 
-<div class="cardBox -location" data-behavior="masonry-card">
+<div class="cardBox -location" data-behavior="masonry-card" data-card-id="location-<%= location.id %>">
   <div class="cardBoxHeader">
     <%= link_to [graetzl, location] do %>
       <div class="coverImgWrapper">

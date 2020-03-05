@@ -118,13 +118,23 @@
 
   </div>
 
-
   <% if current_user.admin? %>
-  <div class="meet-platform-meeting">
+  <div class="meet-pricing">
+    <p><span>Community</span> Treffen (Admins)</p>
+
     <div class="input-checkbox">
       <%= f.check_box :platform_meeting %>
-      <%= f.label :platform_meeting, "imGrätzl Plattform Treffen (Admin Feature)" %>
+      <%= f.label :platform_meeting, "Treffen als 'Community Treffen' markieren" %>
     </div>
+
+    <div class="input-field">
+      <%= label_tag(:amount) do %>
+        <%= icon_tag "currency-euro" %>
+        <span>Ticket Preis</span>
+      <% end %>
+      <%= f.number_field :amount, placeholder: 'Teilnahmegebühr (brutto)' %>
+    </div>
+
   </div>
   <% end %>
 

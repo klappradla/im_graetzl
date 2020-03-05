@@ -111,6 +111,14 @@ Rails.application.routes.draw do
     post 'leave_rating', on: :member
   end
 
+  resources :going_tos, only: [:new, :create] do
+    get 'choose_payment', on: :collection
+    get 'summary', on: :collection
+    post 'initiate_card_payment', on: :collection
+    post 'initiate_klarna_payment', on: :collection
+    post 'initiate_eps_payment', on: :collection
+  end
+
   resources :groups, except: [:index] do
     resources :discussions, only: [:index, :show, :create, :edit, :update, :destroy] do
       post :toggle_following, on: :member

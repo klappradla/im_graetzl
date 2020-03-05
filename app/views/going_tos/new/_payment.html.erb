@@ -1,0 +1,37 @@
+<div class="payment">
+
+  <div class="hl-subtext">
+    <h1>Wähle deine Zahlungsart</h1>
+  </div>
+
+  <div class="paymentMethods">
+    <% GoingTo::PAYMENT_METHODS.each do |payment_method| %>
+      <div class="input-radio -<%= payment_method %>">
+        <%= radio_button_tag :payment_method, payment_method, payment_method == params[:payment_method] %>
+        <%= label_tag :"payment_method_#{payment_method}", payment_method_label(payment_method) %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="payment-method-container card-container">
+    <%= render 'going_tos/new/payment_credit_card' %>
+  </div>
+
+  <div class="payment-method-container eps-container">
+    <%= render 'going_tos/new/payment_eps' %>
+  </div>
+
+  <%= form_with url: going_tos_path, class: 'next-step-form' do |f| %>
+    <%= hidden_field_tag :meeting_id, params[:meeting_id] %>
+    <%= hidden_field_tag :meeting_additional_date_id, params[:meeting_additional_date_id] %>
+    <%= hidden_field_tag :company, params[:company] %>
+    <%= hidden_field_tag :full_name, params[:full_name] %>
+    <%= hidden_field_tag :street, params[:street] %>
+    <%= hidden_field_tag :zip, params[:zip] %>
+    <%= hidden_field_tag :city, params[:city] %>
+    <%= hidden_field_tag :payment_method, params[:payment_method] %>
+    <%= hidden_field_tag :stripe_payment_intent_id %>
+    <%= hidden_field_tag :stripe_source_id, params[:source] %>
+  <% end %>
+
+</div>

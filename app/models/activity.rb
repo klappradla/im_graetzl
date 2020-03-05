@@ -15,6 +15,8 @@ class Activity < ApplicationRecord
       { comment: trackable.comments.last }
     elsif key.end_with?('.go_to')
       { participant: owner }
+    elsif key.end_with?('.paid_go_to')
+      { paid_go_to: owner }
     else
       {}
     end

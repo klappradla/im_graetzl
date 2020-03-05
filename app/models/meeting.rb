@@ -16,9 +16,9 @@ class Meeting < ApplicationRecord
   has_one :address, as: :addressable, dependent: :destroy
   accepts_nested_attributes_for :address
 
-  has_many :going_tos, dependent: :destroy
+  has_many :going_tos, dependent: :nullify
   accepts_nested_attributes_for :going_tos, allow_destroy: true
-  has_many :users, through: :going_tos
+  has_many :users, -> { distinct }, through: :going_tos
 
   has_many :comments, as: :commentable, dependent: :destroy
 
@@ -67,8 +67,28 @@ class Meeting < ApplicationRecord
     !private?
   end
 
+  def paid?
+    !amount.nil?
+  end
+
+  def amount_netto
+    (amount / 1.20).round(2)
+  end
+
+  def tax
+    (amount_netto * 0.20).round(2)
+  end
+
   def display_address
     address || location.try(:address)
+  end
+
+  def display_starts_at_date
+    if starts_at_time
+      "#{I18n.localize(starts_at_date, format:'%a, %d. %B %Y')}, #{I18n.localize(starts_at_time, format:'%H:%M')} Uhr"
+    else
+      "#{I18n.localize(starts_at_date, format:'%a, %d. %B %Y')}"
+    end
   end
 
   def attending?(user)

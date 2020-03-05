@@ -17,6 +17,7 @@ class User < ApplicationRecord
 
   has_many :initiated_meetings, class_name: 'Meeting'
   has_many :going_tos, dependent: :destroy
+  has_many :meeting_additional_dates, through: :going_tos, source: :meeting
   has_many :attended_meetings, through: :going_tos, source: :meeting
 
   has_many :posts, as: :author, dependent: :destroy, class_name: 'UserPost'
@@ -44,7 +45,9 @@ class User < ApplicationRecord
   has_many :user_message_threads, through: :user_message_thread_members
 
   has_many :wall_comments, as: :commentable, class_name: "Comment", dependent: :destroy
-  accepts_nested_attributes_for :address
+
+  has_one :billing_address, dependent: :destroy
+  accepts_nested_attributes_for :address, :billing_address
 
   validates :graetzl, presence: true
   validates :username, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 50 }

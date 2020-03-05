@@ -1,0 +1,58 @@
+<% meeting = @meeting %>
+<% graetzl = Graetzl.memoized(meeting.graetzl_id) %>
+
+<div class="cardBox -meeting">
+
+  <div class="cardBoxHeader">
+    <%= link_to [graetzl, meeting] do %>
+      <div class="coverImgWrapper">
+        <%= cover_photo_for meeting %>
+      </div>
+    <% end %>
+    <div class="calendarSheet">
+      <div class="day"><%= @starts_at_date.day %></div>
+      <div class="month"><%= I18n.localize(@starts_at_date, format:'%b') %></div>
+    </div>
+    <div class="categoryicon">
+      <%= icon_tag "users" %>
+    </div>
+  </div>
+
+  <div class="cardBoxContent">
+    <h3 class="sidebar">Deine Auswahl</h3>
+
+    <ul class="pricing-summary -duration">
+      <li>
+        <div class="duration">Termin:</div>
+        <div class="title">
+          <%= @display_starts_at_date %>
+        </div>
+      </li>
+    </ul>
+
+    <ul class="pricing-summary">
+      <li>
+        <div class="cost">
+          <%= number_to_currency(@meeting.amount_netto, unit: "€") %>
+        </div>
+        <div class="costname">
+          Ticketpreis
+        </div>
+      </li>
+      <li>
+        <div class="cost">
+          <%= number_to_currency(@meeting.tax, unit: "€") %>
+        </div>
+        <div class="costname">
+          20% Mwst.
+        </div>
+      </li>
+      <li class=sum>
+        <div class="cost"><%= number_to_currency(@meeting.amount, unit: "€") %></div>
+        <div class="costname">Gesamtpreis</div>
+      </li>
+    </ul>
+
+  </div>
+
+</div>

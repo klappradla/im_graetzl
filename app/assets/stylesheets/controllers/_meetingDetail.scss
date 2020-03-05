@@ -84,7 +84,27 @@ section.meeting {
     margin-right: 0;
   }
 
+  .btn-going-to {
+    @include respond-to("<=medium") {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: 999;
+      width: 100%;
+      padding: 10px;
+      background-color: white;
+      border-top: 1px solid $color-ambient-mint-light;
+      .btn-userCallToAction {
+        margin: 0px;
+        justify-content: center;
+        width: 100%;
+      }
+    }
+  }
+
   .btn-userCallToAction {
+    display: inline-flex;
+    max-height: 48px;
     margin: 0 auto 2rem auto;
     @include respond-to(">=medium") {
       margin-left: 0;
@@ -111,5 +131,15 @@ section.meeting {
   margin-top:50px;
   .paperCard {
     padding:20px;
+  }
+}
+
+#jBoxBuyTicket {
+  select {
+    min-width: 215px;
+  }
+  .btn-primary {
+    margin-top:20px;
+    float:right;
   }
 }

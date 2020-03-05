@@ -25,6 +25,13 @@ module MeetingsHelper
     meeting.active? ? content_tag(:h1, meeting.name) : content_tag(:h2, 'ABGESAGT')
   end
 
+  def going_to_params
+    params.permit(
+      :meeting_id, :meeting_additional_date_id,
+      :company, :full_name, :street, :zip, :city
+    )
+  end
+
   private
 
   def map_link(coords)

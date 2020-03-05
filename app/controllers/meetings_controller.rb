@@ -118,6 +118,7 @@ class MeetingsController < ApplicationController
         :remove_cover_photo,
         :location_id,
         :platform_meeting,
+        :amount,
         meeting_additional_dates_attributes: [:id, :starts_at_date, :starts_at_time, :ends_at_time, :_destroy],
         address_attributes: [:id, :description, :street_name, :street_number, :zip, :city, :coordinates]
     )

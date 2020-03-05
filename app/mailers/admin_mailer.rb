@@ -8,6 +8,12 @@ class AdminMailer < ApplicationMailer
     mail(subject: "[ImGrätzl] Buchung Grätzlzuckerl von #{@location.name}")
   end
 
+  def new_paid_going_to(going_to)
+    @going_to = going_to
+    @meeting = @going_to.meeting
+    mail(subject: "[ImGrätzl] Ticket-Kauf für #{@meeting.name}")
+  end
+
   def new_payment(amount, email, description, url, message)
     @amount = amount
     @email = email

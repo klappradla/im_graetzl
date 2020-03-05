@@ -1,16 +1,16 @@
 class BillingAddress < ApplicationRecord
-  belongs_to :location
+  belongs_to :location, optional: true
+  belongs_to :user, optional: true
 
-  validates :location, presence: true
-  validates :first_name, presence: true
-  validates :last_name, presence: true
+  #validates :first_name, presence: true
+  #validates :last_name, presence: true
 
   def full_name
     "#{first_name} #{last_name}"
   end
 
   def full_city
-    "#{first_name} #{last_name}"
+    "#{zip} #{city}"
   end
 
   def full_name=(value)

@@ -54,6 +54,27 @@ APP.controllers.meetings = (function() {
         });
       }
 
+      var buyTicket = new jBox('Modal', {
+        addClass:'jBox',
+        attach: '#buyTicket',
+        content: $('#jBoxBuyTicket'),
+        trigger: 'click',
+        closeOnEsc:true,
+        closeOnClick:'body',
+        blockScroll:true,
+        animation:{open: 'zoomIn', close: 'zoomOut'},
+      });
+
+      var meetingSettings = new jBox('Tooltip', {
+        addClass:'jBox',
+        attach: '#meetingSettings',
+        content: $('#jBoxMeetingSettings'),
+        trigger: 'click',
+        closeOnClick:true,
+        isolateScroll:true,
+        animation:{open: 'zoomIn', close: 'zoomOut'},
+      });
+
     }
 
     function initCreateMeeting() {

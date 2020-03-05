@@ -42,7 +42,17 @@ context.instance_eval do
               column(:id){|g| g.user.id}
               column(:username){|g| g.user.username}
               column(:role){|g| status_tag(g.role)}
+              column(:additional_date){|g| g.meeting_additional_date.starts_at_date if g.meeting_additional_date}
               column(''){|m| link_to 'User Anzeigen', admin_user_path(m.user) }
+            end
+          end
+        end
+      end
+      panel 'Associations' do
+        tabs do
+          tab 'Additional Dates' do
+            table_for meeting.meeting_additional_dates do
+              column(:date){|g| link_to g.starts_at_date, admin_meeting_additional_date_path(g)}
             end
           end
         end

@@ -1,6 +1,7 @@
 ActiveAdmin.register Meeting do
   include ViewInApp
   menu priority: 5
+  menu parent: 'Treffen'
   includes :graetzl, :location
 
   scope :all, default: true
@@ -96,5 +97,6 @@ ActiveAdmin.register Meeting do
       :id,
       :user_id,
       :role,
+      :meeting_additional_date_id,
       :_destroy]
 end

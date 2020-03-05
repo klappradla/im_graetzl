@@ -1,0 +1,36 @@
+<div class="summary" id="tab-summary">
+
+  <div class="hl-subtext">
+    <h1>Dein Ticket</h1>
+    <p>
+      Herzlichen Glückwunsch <%= current_user.first_name %>!<br>
+    </p>
+    <p class="subtext">
+      Wir haben dich erfolgreich auf die Teilnehmerliste gesetzt. Du bekommst dein Ticket auch noch per E-Mail zugesandt.
+    </p>
+  </div>
+
+
+  <div class="paperCard -cord1RT">
+    <div class="wrp summarybox">
+      <div class="avatar">
+        <%= avatar_for current_user %>
+      </div>
+      <div class="details">
+        <h3><%= @meeting.name %></h3>
+        <p><%= @display_starts_at_date %></p>
+        <div><%= meeting_address @meeting %></div>
+      </div>
+    </div>
+    <div class="card"></div>
+  </div>
+
+  <%= form_with url: going_tos_path, id: 'purchase' do |f| %>
+    <%= hidden_field_tag :meeting_id, @meeting.id %>
+    <%= hidden_field_tag :meeting_name, @meeting.name %>
+    <%= hidden_field_tag :going_to_id, @going_to.id %>
+    <%= hidden_field_tag :going_to_amount, @going_to.amount %>
+    <%= hidden_field_tag :going_to_tax, @going_to.tax %>
+  <% end %>
+
+</div>

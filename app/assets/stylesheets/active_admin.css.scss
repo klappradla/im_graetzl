@@ -23,16 +23,18 @@
 
 .status_tag {
 
-  &.non_meetable, &.deleted, &.rejected, &.off {
+  white-space: nowrap;
+
+  &.non_meetable, &.deleted, &.rejected, &.off, &.payment_failed {
     background: red;
   }
-  &.pending, &.nein, &.owner_meetable, &.disabled, &.return_pending, &.cancelled {
+  &.pending, &.nein, &.owner_meetable, &.disabled, &.return_pending, &.cancelled, &.payment_pending {
     background: orange;
   }
-  &.approved, &.ja, &.meetable, &.paid, &.enabled, &.return_confirmed, &.live, &.immediate {
+  &.approved, &.ja, &.meetable, &.paid, &.enabled, &.return_confirmed, &.live, &.immediate, &.payment_success {
     background: green;
   }
-  &.recreation, &.public_space {
+  &.recreation, &.public_space, &.payment_refunded {
     background: LightCoral;
   }
   &.business, &.weekly {

@@ -1,0 +1,19 @@
+<% meta(
+    title: t('.title'),
+    robots: 'noindex, follow'
+  )
+%>
+
+<section class="going-to-page login-screen">
+
+  <div class="col-content">
+    <section class="login">
+      <%= render 'shared/login_panel_content', redirect: request.original_url, origin: 'treffen-ticket' %>
+    </section>
+  </div>
+
+  <div class="col-sidebar">
+    <%= render 'going_tos/new/sidebar' %>
+  </div>
+
+</section>

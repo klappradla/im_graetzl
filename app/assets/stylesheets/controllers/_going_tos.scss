@@ -1,0 +1,38 @@
+.going-to-page {
+
+  .col-content {
+
+  }
+
+  .col-sidebar {
+
+  }
+
+  .hl-subtext .subtext {
+    @include font-size-primaryFont('base');
+  }
+
+  .paperCard {
+    padding:20px;
+    margin:20px;
+  }
+  .summarybox {
+    justify-content:center;
+    .details {
+      margin-left:20px;
+      width: auto;
+      text-align: left;
+      .address {
+        white-space: nowrap;
+        strong {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .payment-method-container {
+
+  }
+
+}

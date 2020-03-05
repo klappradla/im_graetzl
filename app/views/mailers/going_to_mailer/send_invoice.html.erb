@@ -1,0 +1,60 @@
+<% content_for(:above_title, "Hey #{@going_to.user.first_name}") %>
+<% content_for(:title, "Du stehst auf der Teilnehmerliste!") %>
+
+<!-- --------------- BLOCK HEADLINE --------------- -->
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
+   <tr>
+     <td style="height:30px"> </td>
+   </tr>
+   <tr>
+     <td valign="top" class="mcnTextContent" style="padding-top:0;  padding-bottom:9px; padding-left:18px; padding-right:18px;">
+       <h4 style="text-align:left; color:#69a8a7; font-family:Georgia; font-size:125%; font-weight:normal; font-style:italic;">
+         Dein Ticket:
+       </h4>
+     </td>
+   </tr>
+   <tr>
+     <td style="padding-left:9px; padding-right:9px;">
+       <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%">
+         <tr>
+           <td>
+             <span></span>
+           </td>
+         </tr>
+       </table>
+     </td>
+   </tr>
+ </table>
+
+<!-- --------------- CONTENT --------------- -->
+<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #efefef; margin-bottom:18px;" width="100%" class="mcnTextContentContainer">
+  <tbody>
+    <tr>
+      <td valign="center" class="mcnTextContent" width="100%" style="padding-left:18px; padding-right:18px;">
+        <p>
+          <em><strong>TeilnehmerIn:</strong></em><br>
+          <%= @going_to.user.full_name %> (<%= @going_to.user.email %>)
+        </p>
+        <p>
+          <%= link_to @going_to.meeting.name, meeting_url(@going_to.meeting), style: "color:#ec776a;" %>
+        </p>
+        <p>
+          <%= @going_to.display_starts_at_date %>
+        </p>
+        <p>
+          <% unless @going_to.meeting.display_address.description.empty? %>
+            <%= @going_to.meeting.display_address.description %><br>
+          <% end %>
+          <%= @going_to.meeting.display_address.street %><br>
+          <%= @going_to.meeting.display_address.zip %> <%= @going_to.meeting.display_address.city %>
+        </p>
+        <p>
+          <em>Im Anhang findest du deine Mwst-Rechnung.</em>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" style="padding-bottom:20px;"></td>
+    </tr>
+  </tbody>
+</table>

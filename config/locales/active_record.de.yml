@@ -47,6 +47,9 @@ de:
       meeting:
         one: Treffen
         other: Treffen
+      going_to:
+        one: Bezahlte Tickets
+        other: Bezahlte Tickets
       user:
         one: User
         other: User
