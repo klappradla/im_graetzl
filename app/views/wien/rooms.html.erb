@@ -44,9 +44,8 @@
     <div class="action-card-container" data-behavior="rooms-action-card-container">
       <%= render 'rooms/action_card' %>
     </div>
-    <!-- Insert Raumteiler Group Featured Card -->
-    <%= render "shared/featured_cards/workshop_raumteiler" %>
-    <!-- < %= !Group.where(id: 15).empty? ? (render 'groups/group', group: Group.find(15), featured_card: 'featuredCard -hidden') : '' % > -->
+    <!-- Insert Raumteiler-Workshop Meeting Featured Card -->
+    <%= !Meeting.where(id: 6811).empty? ? (render 'meetings/meeting', meeting: Meeting.find(6811), featured_card: 'featuredCard -hidden') : '' %>
 
     <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'rooms-paginate-link' }, rel: 'nofollow' %>
   </div>

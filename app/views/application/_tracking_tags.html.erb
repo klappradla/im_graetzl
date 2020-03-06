@@ -1,16 +1,20 @@
+<script>
+  window.imgraetzl = window.imgraetzl || {};
+</script>
 <% if Rails.env.production? %>
 <!-- Production -->
 
   <!-- GA -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-59844253-2"></script>
   <script>
+    window.imgraetzl.uaid = 'UA-59844253-2';
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     <% if current_user %>
       gtag('set', {'user_id': '<%= current_user.id =%>'});
     <% end %>
-    gtag('config', 'UA-59844253-2', { 'anonymize_ip': true });
+    gtag('config', window.imgraetzl.uaid, { 'anonymize_ip': true });
     gtag('config', 'AW-807401138');
   </script>
   <!-- /GA -->
@@ -40,13 +44,14 @@
   <!-- GA -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-59844253-4"></script>
   <script>
+    window.imgraetzl.uaid = 'UA-59844253-4';
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     <% if current_user %>
         gtag('set', {'user_id': '<%= current_user.id =%>'});
     <% end %>
-    gtag('config', 'UA-59844253-4', { 'anonymize_ip': true });
+    gtag('config', window.imgraetzl.uaid, { 'anonymize_ip': true });
   </script>
   <!-- /GA -->
 

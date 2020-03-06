@@ -43,7 +43,7 @@ APP.controllers.going_tos = (function() {
       setTab('step2');
 
       var screen = $(".going-to-page.payment-screen");
-      screen.find(".paymentMethods input").on("click", function() {
+        screen.find(".paymentMethods input").on("click", function() {
         screen.find(".payment-method-container").hide();
         screen.find("." + $(this).val() + "-container").show();
       });
@@ -212,23 +212,25 @@ APP.controllers.going_tos = (function() {
           {
             id: item_id,
             name: item_name,
+            price: value,
           }
         ]
       });
 
-      fbq('track', 'Purchase',
-        {
-          value: value,
-          currency: 'EUR',
-          contents: [
-            {
-              id: item_id,
-              quantity: 1
-            }
-          ],
-        }
-      );
-
+      if (window.location.hostname == 'www.imgraetzl.at') {
+        fbq('track', 'Purchase',
+          {
+            value: value,
+            currency: 'EUR',
+            contents: [
+              {
+                id: item_id,
+                quantity: 1
+              }
+            ],
+          }
+        );
+      }
     }
 
     function openTab(tab) {

@@ -159,6 +159,16 @@ de:
     index:
       title: 'Messenger'
 
+  going_tos:
+    login:
+      title: 'Dein Ticket - Einloggen'
+    new:
+      title: 'Dein Ticket - Rechnungsadresse'
+    choose_payment:
+      title: 'Dein Ticket - Zahlungsart wählen'
+    summary:
+      title: 'Dein Ticket - Zusammenfassung'
+
   reports:
     index:
       title: 'Admin Reports'

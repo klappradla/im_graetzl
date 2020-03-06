@@ -63,6 +63,14 @@ APP.controllers.meetings = (function() {
         closeOnClick:'body',
         blockScroll:true,
         animation:{open: 'zoomIn', close: 'zoomOut'},
+        onOpen: function() {
+          var page_title = 'Ticket Datum Auswahl - ' + document.title;
+          var page_path = document.location.pathname + '/ticket-datum-auswahl';
+          gtag('config', window.imgraetzl.uaid, {
+            'page_title': page_title,
+            'page_path': page_path
+          });
+        }
       });
 
       var meetingSettings = new jBox('Tooltip', {

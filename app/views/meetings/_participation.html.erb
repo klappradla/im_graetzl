@@ -5,13 +5,13 @@
       <% if !user_signed_in? %>
         <div class="btn-going-to">
           <%= link_to 'javascript:void(0);', class: 'btn-userCallToAction', id: 'buyTicket' do %>
-            <span><%= image_tag 'avatar/user/default.png', class: 'img-round' %> Ticket kaufen</span>
+            <span><%= image_tag 'avatar/user/default.png', class: 'img-round' %> Ticket kaufen: <%= number_to_currency(meeting.amount, unit: "€") %></span>
           <% end %>
         </div>
       <% elsif current_user == meeting.user %>
         <div class="btn-going-to">
           <%= link_to 'javascript:void(0);', class: 'btn-userCallToAction', id: 'meetingSettings' do %>
-            <span><%= avatar_for current_user %> Tickets – ab <%= number_to_currency(meeting.amount, unit: "€") %> <%= icon_tag "arrow-down-2" %></span>
+            <span><%= avatar_for current_user %> Tickets kaufen: <%= number_to_currency(meeting.amount, unit: "€") %> <%= icon_tag "arrow-down-2" %></span>
           <% end %>
         </div>
         <div class="jBoxHidden jBoxDropdown" id="jBoxMeetingSettings">
@@ -27,7 +27,7 @@
       <% else %>
         <div class="btn-going-to">
           <%= button_to 'javascript:void(0);', class: 'btn-userCallToAction', id: 'buyTicket' do %>
-            <span><%= avatar_for current_user %> Tickets – ab <%= number_to_currency(meeting.amount, unit: "€") %></span>
+            <span><%= avatar_for current_user %> Ticket kaufen: <%= number_to_currency(meeting.amount, unit: "€") %></span>
           <% end %>
         </div>
       <% end %>

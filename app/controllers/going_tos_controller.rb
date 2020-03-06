@@ -80,9 +80,19 @@ class GoingTosController < ApplicationController
     if going_to.payment_method.in?(['eps'])
       ChargeGoingToJob.set(wait: 2.minutes).perform_later(going_to)
     end
-    @going_to = going_to
-    render 'summary'
+    #@going_to = going_to
+    #render 'summary'
+    #render action: :summary
+    redirect_to summary_going_tos_url(meeting_id: @meeting.id, going_to_id: going_to.id)
 
+  end
+
+  def summary
+    @meeting = Meeting.find(params[:meeting_id])
+    @going_to = GoingTo.find(params[:going_to_id])
+    @starts_at_date = @going_to.going_to_date
+    @starts_at_time = @going_to.going_to_time
+    @display_starts_at_date = @going_to.display_starts_at_date
   end
 
   private

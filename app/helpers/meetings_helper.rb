@@ -4,7 +4,11 @@ module MeetingsHelper
   end
 
   def meeting_link_text(meeting)
-    meeting.try(:starts_at_date).try(:past?) ? 'Ansehen' : 'Mitmachen'
+    if meeting.paid?
+      'Infos & Tickets'
+    else
+      meeting.try(:starts_at_date).try(:past?) ? 'Ansehen' : 'Mitmachen'
+    end
   end
 
   def address_value(address)
