@@ -16,7 +16,7 @@
           <%= icon_tag "calendar-2" %>
           <span>Wann willst du teilnehmen?</span>
         <% end %>
-        <%= select_tag(:meeting_additional_date_id, ("<option value=''>#{meeting.display_starts_at_date}</option>" + options_from_collection_for_select(meeting.meeting_additional_dates, :id, :display_starts_at_date)).html_safe) %>
+        <%= select_tag(:meeting_additional_date_id, ("<option value=''>#{meeting.display_starts_at_date}</option>" + options_from_collection_for_select(meeting.meeting_additional_dates.order(:starts_at_date), :id, :display_starts_at_date)).html_safe) %>
       </div>
     <% else %>
       <div class="input-select">

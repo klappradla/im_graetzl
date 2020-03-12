@@ -59,7 +59,13 @@ class MeetingsController < ApplicationController
 
   def attend
     @meeting = Meeting.find(params[:id])
-    @meeting.users << current_user
+    #@meeting.users << current_user
+    @meeting.going_tos.new(
+      user_id: current_user.id,
+      going_to_date: @meeting.starts_at_date,
+      going_to_time: @meeting.starts_at_time
+    )
+    @meeting.save
     @meeting.create_activity(:go_to, owner: current_user)
   end
 
