@@ -29,9 +29,9 @@ APP.controllers.room_offers = (function() {
     var click_track = function() {
       // Analytics Tracking
       gtag(
-        'event', 'RoomOffer Contact, id: ' + roomOwner_id, {
-        'event_category': roomOwner_url,
-        'event_label': 'clicked-user-id: ' + roomContact_id
+        'event', 'Contact Click RoomOffer: ' + roomOwner_id, {
+        'event_category': 'Raumteiler',
+        'event_label': 'User: ' + roomContact_id
       });
 
       // Mailchimp Tracking

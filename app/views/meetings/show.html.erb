@@ -46,95 +46,85 @@
     <%= attachment_image_tag @meeting, :cover_photo, :fill, 980, 370, fallback: 'cover_photo/980x370.png', class: 'titleImg' %>
   </div>
 
-  <% if @meeting.active? %>
-    <div class="entryDescription">
+  <div class="entryDescription">
 
-      <div class="dateTime-container">
+    <div class="dateTime-container">
 
-        <div class="dateTime">
+      <div class="dateTime">
 
-          <% if @meeting.starts_at_date %>
-            <%= render 'meetings/datetime', date: @meeting %>
+        <% if @meeting.starts_at_date %>
+          <%= render 'meetings/datetime', date: @meeting %>
+        <% end %>
+
+        <% if @meeting.meeting_additional_dates.present? %>
+          <% @meeting.meeting_additional_dates.sort_by(&:starts_at_date).each do |date| %>
+            <%= render 'meetings/datetime', date: date , additonal_date: 'additonal' %>
           <% end %>
-
-          <% if @meeting.meeting_additional_dates.present? %>
-            <% @meeting.meeting_additional_dates.sort_by(&:starts_at_date).each do |date| %>
-              <%= render 'meetings/datetime', date: date , additonal_date: 'additonal' %>
-            <% end %>
-          <% end %>
-
-        </div>
+        <% end %>
 
       </div>
 
+    </div>
+
+    <div class="ico-row">
+      <%= meeting_place @meeting %>
+    </div>
+
+    <% if @meeting.group.present? %>
       <div class="ico-row">
-        <%= meeting_place @meeting %>
+        <%= attachment_image_tag @meeting.group, :cover_photo, :fill, 100, 100, fallback: 'cover_photo/980x370.png', class: 'location avatar img-square' %>
+        <div class="infotxt">
+          <em class="info">Gruppe:</em><br>
+          <span><%= link_to @meeting.group.title, @meeting.group, class: 'infolink' %></span>
+        </div>
       </div>
+    <% end %>
 
-      <% if @meeting.group.present? %>
-        <div class="ico-row">
-          <%= attachment_image_tag @meeting.group, :cover_photo, :fill, 100, 100, fallback: 'cover_photo/980x370.png', class: 'location avatar img-square' %>
-          <div class="infotxt">
-            <em class="info">Gruppe:</em><br>
-            <span><%= link_to @meeting.group.title, @meeting.group, class: 'infolink' %></span>
-          </div>
+    <div class="ico-row userPortraitName">
+      <% if @meeting.location && @meeting.location.users.include?(@meeting.user) %>
+        <%= avatar_for(@meeting.location, 100) %>
+        <div class="infotxt">
+          <em class="info">Erstellt von:</em><br>
+          <%= link_to @meeting.location.name, [Graetzl.memoized(@meeting.location.graetzl_id), @meeting.location], class: 'infolink' %>
+        </div>
+      <% elsif @meeting.user %>
+        <%= avatar_for(@meeting.user, 100) %>
+        <div class="infotxt">
+          <em class="info">Erstellt von:</em><br>
+          <%= link_to @meeting.user.username, @meeting.user, class: 'infolink' %>
         </div>
       <% end %>
-
-      <div class="ico-row userPortraitName">
-        <% if @meeting.location && @meeting.location.users.include?(@meeting.user) %>
-          <%= avatar_for(@meeting.location, 100) %>
-          <div class="infotxt">
-            <em class="info">Erstellt von:</em><br>
-            <%= link_to @meeting.location.name, [Graetzl.memoized(@meeting.location.graetzl_id), @meeting.location], class: 'infolink' %>
-          </div>
-        <% elsif @meeting.user %>
-          <%= avatar_for(@meeting.user, 100) %>
-          <div class="infotxt">
-            <em class="info">Erstellt von:</em><br>
-            <%= link_to @meeting.user.username, @meeting.user, class: 'infolink' %>
-          </div>
-        <% end %>
-      </div>
-
-      <div class="bbcode"><%= @meeting.description.bbcode_to_html.html_safe %></div>
-
     </div>
 
-    <%= render 'meetings/participation', meeting: @meeting %>
+    <div class="bbcode"><%= @meeting.description.bbcode_to_html.html_safe %></div>
 
-    <div class="stream">
-      <%= render 'comments/form', commentable: @meeting %>
-      <%= render partial: 'comments/stream_comment', collection: @comments, as: 'comment' %>
-    </div>
+  </div>
 
-  <% else %>
-    <div class="entryParticipate">
-      <%= button_to 'Treffen reaktivieren', edit_meeting_path(@meeting),
-                    method: :get,
-                    class: 'btn-destroy' if user_signed_in? && (current_user == @meeting.user) %>
-    </div>
-  <% end %>
+  <%= render 'meetings/participation', meeting: @meeting %>
+
+  <div class="stream">
+    <%= render 'comments/form', commentable: @meeting %>
+    <%= render partial: 'comments/stream_comment', collection: @comments, as: 'comment' %>
+  </div>
 
   <% if @meeting.address.try(:coordinates) %>
-  <div class="map cardBox">
-  <script>
-    function initMaps() {
-      var lat = <%= @meeting.address.try(:coordinates).y %>;
-      var lng = <%= @meeting.address.try(:coordinates).x %>;
-      var zoom = 17;
-      var icon = '<%= image_path('map-marker.png') %>';
-      var infowindow = false;
-      var popup =
-        '<div id="mapsMarker" class="infowindow">'+
-          '<p></p>'+
-        '</div>';
-      APP.components.googleMap.init(lng, lat, zoom, popup, icon, infowindow);
-    }
-  </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=<%= embedded_map_defaults.merge({})[:key] %>&callback=initMaps" async defer></script>
-  <div id="map"></div>
-  </div>
+    <script type="text/javascript">
+      function initMaps() {
+        var lat = <%= @meeting.address.try(:coordinates).y %>;
+        var lng = <%= @meeting.address.try(:coordinates).x %>;
+        var zoom = 17;
+        var icon = '<%= image_path('map-marker.png') %>';
+        var infowindow = false;
+        var popup =
+          '<div id="mapsMarker" class="infowindow">'+
+            '<p></p>'+
+          '</div>';
+        APP.components.googleMap.init(lng, lat, zoom, popup, icon, infowindow);
+      }
+    </script>
+    <div id="google_map" class="map cardBox" data-google-api-key="<%= ENV['GOOGLE_API_KEY'] %>">
+      <div id="map"></div>
+    </div>
   <% end %>
 
 </section>

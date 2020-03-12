@@ -13,15 +13,14 @@ ActiveAdmin.register User, as: "User Notification Settings" do
   filter :email
 
   filter :user_mail_setting, as: :select, collection: proc {[
-    ['Treffen - Wöchentlich','weekly_NewMeeting'],
-    ['Treffen - Täglich','daily_NewMeeting'],
-    ['Treffen - Sofort','immediate_NewMeeting'],
-    ['Treffen - Aus','off_NewMeeting'],
-
-    ['Location - Wöchentlich','weekly_NewLocation'],
-    ['Location - Täglich','daily_NewLocation'],
-    ['Location - Sofort','immediate_NewLocation'],
-    ['Location - Aus','off_NewLocation'],
+    ['Treffen - Wöchentlich','weekly_NewMeeting'],['Treffen - Täglich','daily_NewMeeting'],['Treffen - Sofort','immediate_NewMeeting'],['Treffen - Aus','off_NewMeeting'],
+    ['Location - Wöchentlich','weekly_NewLocation'],['Location - Täglich','daily_NewLocation'],['Location - Sofort','immediate_NewLocation'],['Location - Aus','off_NewLocation'],
+    ['Location Post - Wöchentlich','weekly_NewLocationPost'],['Location Post - Täglich','daily_NewLocationPost'],['Location Post - Sofort','immediate_NewLocationPost'],['Location Post - Aus','off_NewLocationPost'],
+    ['Gruppe - Wöchentlich','weekly_NewGroup'],['Gruppe - Täglich','daily_NewGroup'],['Gruppe - Sofort','immediate_NewGroup'],['Gruppe - Aus','off_NewGroup'],
+    ['Habe Raum - Wöchentlich','weekly_NewRoomOffer'],['Habe Raum - Täglich','daily_NewRoomOffer'],['Habe Raum - Sofort','immediate_NewRoomOffer'],['Habe Raum - Aus','off_NewRoomOffer'],
+    ['Suche Raum - Wöchentlich','weekly_NewRoomDemand'],['Suche Raum - Täglich','daily_NewRoomDemand'],['Suche Raum - Sofort','immediate_NewRoomDemand'],['Suche Raum - Aus','off_NewRoomDemand'],
+    ['Raum Call - Wöchentlich','weekly_NewRoomCall'],['Raum Call - Täglich','daily_NewRoomCall'],['Raum Call - Sofort','immediate_NewRoomCall'],['Raum Call - Aus','off_NewRoomCall'],
+    ['Toolteiler - Wöchentlich','weekly_NewToolOffer'],['Toolteiler - Täglich','daily_NewToolOffer'],['Toolteiler - Sofort','immediate_NewToolOffer'],['Toolteiler - Aus','off_NewToolOffer'],
   ]}
 
   index { render 'index', context: self }

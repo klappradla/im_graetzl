@@ -228,19 +228,20 @@
 
   <!-- Live: 46, 47 / Staging: 2, 41 - Local: 20, 21-->
   <% group1 = Group.find_by_id(46) %>
-  <% group2 = Group.find_by_id(47) %>
-  <% if !group1.nil? && !group2.nil? %>
+  <% if !group1.nil? %>
 
     <div class="cardBox -unterstuetzer">
-      <div class="group-radio-switch" id="group-switch">
+      <div class="group-radio-switch" id="group-switch" style="display:none;">
         <div class="input-radio">
           <input required="required" type="radio" value="<%= request_join_group_path(group1) %>" checked="checked" name="group" id="group1">
           <label for="group1">Unterstützer Team</label>
         </div>
+        <!--
         <div class="input-radio">
-          <input required="required" type="radio" value="<%= request_join_group_path(group2) %>" name="group" id="group2">
+          <input required="required" type="radio" value="<%= request_join_group_path(group1) %>" name="group" id="group2">
           <label for="group2">Unterstützer Team mit Arbeitsplatz</label>
         </div>
+        -->
       </div>
 
       <div class="group-info group1">
