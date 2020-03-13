@@ -12,11 +12,12 @@ namespace :scheduled do
     # Set new startDate for Meeting
     # Delete next Additonal Date
     Meeting.where("starts_at_date = ?", Date.yesterday).find_each do |meeting|
-      @meeting = meeting
       if meeting.meeting_additional_dates.present?
         next_meeting = meeting.meeting_additional_dates.sort_by(&:starts_at_date).first
         meeting.update(starts_at_date: next_meeting.starts_at_date)
-        @meeting.create_activity :create, owner: meeting.user
+        meeting.create_activity :create, owner: meeting.user
+        #activity = (meeting.create_activity :create, owner: meeting.user)
+        #Notification.receive_new_activity(activity)
         next_meeting.destroy
       end
     end

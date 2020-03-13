@@ -32,6 +32,7 @@ APP.controllers.tool_offers = (function() {
     function initToolOfferDetails() {
       $('.request-price-form').find(".date-from, .date-to").pickadate({
         hiddenName: true,
+        min: true,
         formatSubmit: 'yyyy-mm-dd',
         format: 'ddd, dd mmm, yyyy',
       }).off('focus').on("change", function() {
