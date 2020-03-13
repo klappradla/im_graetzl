@@ -10,7 +10,7 @@ namespace :scheduled do
   end
 
   desc 'Send Reminder for Pending Rentals after 2 days / Expire Rentals when date is over'
-  task process_reminder_pending_tool_rentals: :environment do
+  task update_pending_tool_rentals: :environment do
 
     # Send Reminder for pending Rental Requests
     ToolRental.pending.where(created_at: (Time.now.midnight - 2.days)..Time.now.midnight - 1.day).where("rent_from >= ?", Date.today).find_each do |tool_rental|
