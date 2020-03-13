@@ -36,7 +36,7 @@
       <p><%= truncate location.description, length: 100 %></p>
     </div>
 
-    <% if location_post = location.posts.sort_by(&:created_at).last %>
+    <% if location_post = location.actual_newest_post %>
       <%= link_to [graetzl, location, anchor: dom_id(location_post)], class: 'updateteaser' do %>
         <div class="hl">
           Letztes Update:

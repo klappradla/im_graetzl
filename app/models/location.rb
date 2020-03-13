@@ -33,6 +33,10 @@ class Location < ApplicationRecord
 
   before_create { |location| location.last_activity_at = Time.current }
 
+  def actual_newest_post
+    self.posts.where("created_at > ?", 8.weeks.ago).sort_by(&:created_at).last
+  end
+
   def self.include_for_box
     includes(:posts, :live_zuckerls, :address, :location_category, :upcoming_meetings)
   end
