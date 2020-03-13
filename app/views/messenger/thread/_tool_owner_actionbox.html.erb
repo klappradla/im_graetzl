@@ -22,6 +22,12 @@
         <strong><%= tool_rental.renter.full_name %> hat die Anfrage zurückgezogen.</strong>
       </div>
 
+    <% elsif tool_rental.expired? %>
+
+      <div class="note">
+        <strong>Die Anfrage von <%= tool_rental.renter.full_name %> ist bereits abgelaufen.</strong>
+      </div>
+
     <% elsif tool_rental.approved? %>
 
       <div class="note">

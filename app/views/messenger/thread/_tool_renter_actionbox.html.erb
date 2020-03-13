@@ -21,6 +21,12 @@
         Du hast die Anfrage zurückgezogen. Bitte schreib dem Verleiher, warum du den Toolteiler doch nicht ausleihen möchtest.
       </div>
 
+    <% elsif tool_rental.expired? %>
+
+      <div class="note">
+        Deine Anfrage ist bereits abgelaufen.
+      </div>
+
     <% elsif tool_rental.approved? %>
 
       <div class="note">

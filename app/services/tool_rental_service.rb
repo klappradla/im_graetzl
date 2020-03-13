@@ -143,6 +143,15 @@ class ToolRentalService
     ToolOfferMailer.rental_canceled(tool_rental).deliver_later
   end
 
+  def expire(tool_rental)
+    if tool_rental.payment_method == 'card'
+      Stripe::PaymentIntent.cancel(tool_rental.stripe_payment_intent_id)
+    elsif tool_rental.payment_method.in?(['klarna', 'eps'])
+      Stripe::Refund.create(charge: tool_rental.stripe_charge_id)
+    end
+    tool_rental.update(rental_status: :expired, payment_status: :payment_canceled)
+  end
+
   def confirm_return(tool_rental)
     tool_rental.update(rental_status: :return_confirmed)
     ToolOfferMailer.return_confirmed_owner(tool_rental).deliver_later

@@ -8,6 +8,10 @@ class ToolOfferMailerPreview < ActionMailer::Preview
     ToolOfferMailer.new_rental_request(ToolRental.last)
   end
 
+  def new_rental_request_reminder
+    ToolOfferMailer.new_rental_request_reminder(ToolRental.last)
+  end
+
   def rental_approved
     ToolOfferMailer.rental_approved(ToolRental.approved.last || ToolRental.last)
   end

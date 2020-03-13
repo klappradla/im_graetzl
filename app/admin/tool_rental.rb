@@ -10,6 +10,7 @@ ActiveAdmin.register ToolRental do
   scope :return_confirmed
   scope :canceled
   scope :rejected
+  scope :expired
 
   filter :rental_status, as: :select, collection: ToolRental.rental_statuses.keys
   filter :payment_status, as: :select, collection: ToolRental.payment_statuses.keys

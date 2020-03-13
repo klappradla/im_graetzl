@@ -223,6 +223,7 @@ de:
           approved: Anfrage akzeptiert
           return_pending: Rückgabe noch nicht bestätigt
           return_confirmed: Rückgabe bestätigt
+          expired: Anfrage abgelaufen
         payment_statuses:
           payment_pending: Zahlung wartend
           payment_success: Zahlung erfolgreich
