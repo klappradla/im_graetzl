@@ -115,18 +115,19 @@ a.iconMapLink:hover .icon {
   }
 
 }
-
+ 
 // Community Meeting List
 .-platform-meetings {
   .dateTimeItem {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
+    //flex-wrap: wrap;
     margin-top: 20px;
     margin-bottom: 20px;
   }
   .calendarSheet {
     margin-right:10px;
+    min-width: 50px;
   }
   a.title {
     //color: $color-font-primary;

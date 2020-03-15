@@ -22,7 +22,7 @@
   <%= form_tag meetings_path, method: :get, remote: true, class: 'cards-filter' do %>
     <div class="filter-selection-text">
       Zeige mir Einträge in <%= link_to @graetzl.name, '#filter-modal-bezirk', class: 'filter-applied', data: { no_filter_label: 'allen Bezirken'} %>
-      - Zu den <%= link_to 'Community Veranstaltungen', platform_meetings_wien_path, class: 'plain-link' %>
+      - Zur Aktion <%= link_to 'Selbstständige für Selbstständige', platform_meetings_wien_path, class: 'plain-link' %>
     </div>
   <% end %>
 

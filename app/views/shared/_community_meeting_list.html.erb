@@ -13,13 +13,13 @@
         <div class="month"><%= I18n.localize(meeting.starts_at_date, format:'%b') %></div>
       </div>
       <div>
-        <%= link_to meeting.name, [Graetzl.memoized(meeting.graetzl_id), meeting], class: 'title' %>
+        <%= link_to meeting.name.truncate(70), [Graetzl.memoized(meeting.graetzl_id), meeting], class: 'title' %>
       </div>
     </div>
   <% end %>
 
   <% if local_assigns[:button] %>
-    <%= link_to 'Zu den Community Veranstaltungen', platform_meetings_wien_path, class: 'btn-primary -mint' %>
+    <%= link_to 'Alle Termine', platform_meetings_wien_path, class: 'btn-primary -mint' %>
   <% end %>
-  
+
 </div>

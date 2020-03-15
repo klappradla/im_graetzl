@@ -140,6 +140,7 @@ Rails.application.routes.draw do
   post 'messenger/post_message'
   post 'messenger/update_thread'
 
+  get 'wien/community-treffen' => redirect('/wien/selbststaendige-fuer-selbststaendige')
   get 'wien/raumteiler/raumsuche' => redirect('/wien/raumteiler')
   get 'wien/raumteiler/raum' => redirect('/wien/raumteiler')
   get 'raumteiler' => redirect('/wien/raumteiler')
@@ -159,7 +160,7 @@ Rails.application.routes.draw do
     get 'gruppen', action: 'groups', as: 'groups'
     get 'toolteiler', action: 'tool_offers', as: 'tool_offers'
     get 'zuckerl', action: 'zuckerls', as: 'zuckerls'
-    get 'community-treffen', action: 'platform_meetings', as: 'platform_meetings'
+    get 'selbststaendige-fuer-selbststaendige', action: 'platform_meetings', as: 'platform_meetings'
   end
 
   resources :districts, path: 'wien', only: [:show] do
