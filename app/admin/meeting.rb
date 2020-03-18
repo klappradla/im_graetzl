@@ -83,6 +83,7 @@ ActiveAdmin.register Meeting do
     :ends_at_time,
     :location_id,
     :group_id,
+    :user_id,
     :approved_for_api,
     :platform_meeting,
     address_attributes: [
