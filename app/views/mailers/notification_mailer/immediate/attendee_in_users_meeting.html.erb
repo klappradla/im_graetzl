@@ -37,9 +37,11 @@
       <td class="mcnTextContent" style="padding-right:18px; width:100%;">
         <p>
           <em><strong>
-            <%= link_to @notification.activity.owner.username, user_url(@notification.activity.owner), style: "color:#f48a85; font-weight:bold;" %>
+            <%= link_to @notification.activity.owner.full_name, user_url(@notification.activity.owner), style: "color:#f48a85; font-weight:bold;" %>
             ist interessiert.
           </strong></em>
+          <br>
+          <em>Du erreichst <%= @notification.activity.owner.first_name %> unter der E-Mail: <%= @notification.activity.owner.email %></em>
         </p>
       </td>
     </tr>

@@ -63,8 +63,14 @@
         <p class="userCount"><span><%= meeting.users.size %></span> sind interessiert</p>
     <% end %>
     <div class="portraitCollection">
-      <% meeting.users.each do |user| %>
-        <%= link_to avatar_for(user), user %>
+      <% if current_user == meeting.user || current_user.admin? %>
+        <% meeting.users.each do |user| %>
+          <%= render "shared/user_miniprofile", :user => user %>
+        <% end %>
+      <% else %>
+        <% meeting.users.each do |user| %>
+          <%= link_to avatar_for(user), user %>
+        <% end %>
       <% end %>
     </div>
   </div>
