@@ -14,6 +14,7 @@
 
 .portraitCollection {
   //overflow: hidden;
+  display: flex;
   img, .dotdotdot {
     float: left;
     display: block;

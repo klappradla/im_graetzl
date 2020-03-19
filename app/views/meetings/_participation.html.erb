@@ -63,7 +63,11 @@
         <p class="userCount"><span><%= meeting.users.size %></span> sind interessiert</p>
     <% end %>
     <div class="portraitCollection">
-      <% if current_user == meeting.user || current_user.admin? %>
+      <% if !user_signed_in? %>
+        <% meeting.users.each do |user| %>
+          <%= link_to avatar_for(user), user %>
+        <% end %>
+      <% elsif current_user == meeting.user || current_user.admin? %>
         <% meeting.users.each do |user| %>
           <%= render "shared/user_miniprofile", :user => user %>
         <% end %>
