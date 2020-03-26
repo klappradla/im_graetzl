@@ -39,7 +39,7 @@
 
     <div class="input-field <%= 'hide' unless f.object.online_meeting %>" id="online-address-fields">
       <%= address_fields.label :online_meeting_description do %>
-        <%= icon_tag "location" %>
+        <%= icon_tag "globe" %>
         <span>Online Tool</span>
       <% end %>
       <%= address_fields.text_field :online_meeting_description, placeholder: 'z.B.: Zoom, Skype, etc.' %>

@@ -167,6 +167,12 @@ APP.controllers.meetings = (function() {
       // Hide Elements
       $('.hide').hide();
 
+      $('select#admin-user-select').SumoSelect({
+        search: true,
+        searchText: 'Suche nach User.',
+        placeholder: 'User auswählen',
+      });
+
     }
 
     return {

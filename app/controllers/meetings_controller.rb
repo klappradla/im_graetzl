@@ -22,17 +22,24 @@ class MeetingsController < ApplicationController
   def create
     @meeting = initialize_meeting
     @meeting.assign_attributes(meeting_params)
-    @meeting.graetzl = @meeting.address.try(:graetzl) || @meeting.graetzl
-    @meeting.user = current_user
-    @meeting.going_tos.new(user_id: current_user.id, role: :initiator)
+
+    if current_user.admin?
+      meeting_user = User.find(params[:user_id])
+      @meeting.graetzl = @meeting.address.try(:graetzl) || meeting_user.graetzl
+    else
+      meeting_user = current_user
+      @meeting.graetzl = @meeting.address.try(:graetzl) || @meeting.graetzl
+    end
+
+    @meeting.user = meeting_user
+    @meeting.going_tos.new(user_id: meeting_user.id, role: :initiator)
 
     if @meeting.save
       if @meeting.online_meeting
-        @meeting.create_activity :create_visible_to_all, owner: current_user
+        @meeting.create_activity :create_visible_to_all, owner: meeting_user
       else
-        @meeting.create_activity :create, owner: current_user
+        @meeting.create_activity :create, owner: meeting_user
       end
-
       redirect_to [@meeting.graetzl, @meeting]
     else
       render :new

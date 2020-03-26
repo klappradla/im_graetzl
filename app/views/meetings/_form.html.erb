@@ -120,7 +120,7 @@
 
   <% if current_user.admin? %>
   <div class="meet-pricing">
-    <p><span>Community</span> Treffen (Admins)</p>
+    <p><span>Admin</span> Funktionen</p>
 
     <div class="input-checkbox">
       <%= f.check_box :platform_meeting %>
@@ -134,6 +134,16 @@
       <% end %>
       <%= f.number_field :amount, placeholder: 'Teilnahmegebühr (brutto)' %>
     </div>
+
+    <% if f.object.new_record? %>
+      <div class="input-select">
+        <%= f.label :user_id do %>
+          <%= icon_tag "user-avatar" %>
+          <span>Treffen Ersteller</span>
+        <% end %>
+        <%= select_tag :user_id, options_from_collection_for_select(User.all, :id, :full_name_with_email, params[:user_id] || current_user.id), id: 'admin-user-select' %>
+      </div>
+    <% end %>
 
   </div>
   <% end %>
