@@ -18,6 +18,7 @@ ActiveAdmin.register Meeting do
   filter :created_at
   filter :starts_at_date
   filter :platform_meeting
+  filter :online_meeting
 
   index { render 'index', context: self }
   show { render 'show', context: self }
@@ -86,6 +87,7 @@ ActiveAdmin.register Meeting do
     :user_id,
     :approved_for_api,
     :platform_meeting,
+    :online_meeting,
     address_attributes: [
       :id,
       :street_name,
@@ -93,7 +95,8 @@ ActiveAdmin.register Meeting do
       :zip,
       :city,
       :coordinates,
-      :description],
+      :description,
+      :online_meeting_description],
     going_tos_attributes: [
       :id,
       :user_id,

@@ -1,0 +1,27 @@
+<div class="jBoxHidden" id="jBoxAttendMeeting">
+
+  <%= form_tag attend_meeting_path, method: :post do %>
+  <%= hidden_field_tag :meeting_id, meeting.id %>
+
+    <div class="hl-subtext">
+      <h1>Datum auswählen</h1>
+      <p>
+        Wenn du an einem bestimmten Termin interessiert bist, wähle diesen bitte noch aus.
+      </p>
+    </div>
+
+    <div class="input-select">
+      <%= label_tag :meeting_additional_date_id do %>
+        <%= icon_tag "calendar-2" %>
+        <span>Wähle einen Termin</span>
+      <% end %>
+      <%= select_tag(:meeting_additional_date_id, ("
+          <option value=''>auswählen ..</option>
+          <option value='original_date'>#{meeting.display_starts_at_date}</option>" +
+          options_from_collection_for_select(meeting.meeting_additional_dates.order(:starts_at_date), :id, :display_starts_at_date)).html_safe) %>
+    </div>
+
+    <%= submit_tag 'Weiter', class: 'btn-primary' %>
+
+  <% end %>
+</div>

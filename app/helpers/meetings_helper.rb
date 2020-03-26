@@ -22,7 +22,11 @@ module MeetingsHelper
   end
 
   def meeting_place(meeting)
-    meeting_map(meeting) + meeting_address(meeting)
+    if meeting.online_meeting?
+      online_address(meeting)
+    else
+      meeting_address(meeting)
+    end
   end
 
   def meeting_name(meeting)
@@ -53,26 +57,29 @@ module MeetingsHelper
     end
   end
 
+  def online_address(meeting)
+    content_tag(:div, icon_tag("globe"), class: 'iconMapLink') +
+    if meeting.address.online_meeting_description?
+      content_tag(:strong, meeting.address.online_meeting_description)
+    else
+      content_tag(:strong, 'Online Treffen')
+    end
+  end
+
   def meeting_address(meeting)
+    meeting_map(meeting) +
     content_tag(:div, class: 'infotxt address') do
       location = meeting.location
       address = meeting.display_address
-      case
-      when address
-        concat case
-        when address.description.present?
-          content_tag(:strong, address.description)
-        when location
-          link_to(location.name, [location.graetzl, location])
-        end
-        concat address.street
-        concat tag(:br)
-        concat "#{address.zip} #{address.city}"
+      concat case
+      when address.description.present?
+        content_tag(:strong, address.description)
       when location
         link_to(location.name, [location.graetzl, location])
-      else
-        content_tag(:strong, 'Ort steht noch nicht fest...')
       end
+      concat address.street
+      concat tag(:br) if address.street
+      concat "#{address.zip} #{address.city}"
     end
   end
 end

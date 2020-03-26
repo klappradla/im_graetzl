@@ -13,7 +13,12 @@
 <section class="graetzls">
   <%= render 'map' %>
   <%= render 'navigation' %>
-  <%= render 'curator' if @graetzl.curator %>
+  <!--<%= render 'curator' if @graetzl.curator %>-->
+  <div class="cards-filter">
+    <div class="filter-selection-text">
+      Zur Aktion <%= link_to 'Selbstständige für Selbstständige', platform_meetings_wien_path, class: 'plain-link' %>
+    </div>
+  </div>
 
   <% if user_signed_in? %>
 

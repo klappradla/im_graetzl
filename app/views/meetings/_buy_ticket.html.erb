@@ -10,23 +10,15 @@
       </p>
     </div>
 
-    <% if meeting.meeting_additional_dates.present? %>
-      <div class="input-select">
-        <%= label_tag :meeting_additional_date_id do %>
-          <%= icon_tag "calendar-2" %>
-          <span>Wann willst du teilnehmen?</span>
-        <% end %>
-        <%= select_tag(:meeting_additional_date_id, ("<option value=''>#{meeting.display_starts_at_date}</option>" + options_from_collection_for_select(meeting.meeting_additional_dates.order(:starts_at_date), :id, :display_starts_at_date)).html_safe) %>
-      </div>
-    <% else %>
-      <div class="input-select">
-        <%= label_tag :meeting_origin_date do %>
-          <%= icon_tag "calendar-2" %>
-          <span>Wähle deinen Termin</span>
-        <% end %>
-        <%= select_tag(:meeting_origin_date, ("<option value=''>#{meeting.display_starts_at_date}</option>").html_safe)%>
-      </div>
-    <% end %>
+    <div class="input-select">
+      <%= label_tag :meeting_additional_date_id do %>
+        <%= icon_tag "calendar-2" %>
+        <span>Wann willst du teilnehmen?</span>
+      <% end %>
+      <%= select_tag(:meeting_additional_date_id, ("
+        <option value=''>#{meeting.display_starts_at_date}</option>" +
+        options_from_collection_for_select(meeting.meeting_additional_dates.order(:starts_at_date), :id, :display_starts_at_date)).html_safe) %>
+    </div>
 
     <%= submit_tag 'Weiter zum Ticketkauf', class: 'btn-primary' %>
 

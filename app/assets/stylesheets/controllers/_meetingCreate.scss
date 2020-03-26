@@ -37,6 +37,18 @@
   .meet-when {
     margin-bottom: 20px;
   }
+  .meet-where .meeting-switch {
+    margin-bottom: 20px;
+    text-align: center;
+    display: block;
+    div {
+      display: inline-block;
+    }
+    label {
+      min-width: 0px;
+      margin-right: 20px;
+    }
+  }
   .nested-fields {
     position: relative;
     a.remove_fields {

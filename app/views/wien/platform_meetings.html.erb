@@ -24,11 +24,15 @@
       <p>
         Folgende Bereiche versuchen wir abzubilden: Liquiditäts- & Finanzcheck, Coaching-Sprechstunden, Marketing & Entwicklung neuer Geschäftsfelder, nicht zu vergessen Entspannungstechniken. Das Angebot ist kostenlos. 1000 Dank an die Anbieter*innen, die das hier möglich machen!
       </p>
+      <br>
+      <p>
+        <em>Aktuell: <%= link_to 'Infos zur finanziellen Unterstützung', 'https://www.wko.at/service/w/corona-hilfe-wiener-kleinbetriebe.html', target: '_blank' %> für Kleinbetriebe & EPU der Wirtschaftskammer Wien</em>
+      </p>
     </div>
     <div class="card"></div>
   </div>
 
-  <%= form_tag meetings_path(platform_meeting: true), method: :get, remote: true, class: 'cards-filter' do; end %>
+  <%= form_tag meetings_path(platform_meeting: true, per_page: 50), method: :get, remote: true, class: 'cards-filter' do; end %>
 
   <div class="card-grid-container">
     <div class="card-grid" data-behavior="meetings-card-container"></div>

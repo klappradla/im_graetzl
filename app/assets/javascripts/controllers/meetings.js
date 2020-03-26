@@ -74,6 +74,17 @@ APP.controllers.meetings = (function() {
         }
       });
 
+      var attendMeeting = new jBox('Modal', {
+        addClass:'jBox',
+        attach: '#attendMeeting',
+        content: $('#jBoxAttendMeeting'),
+        trigger: 'click',
+        closeOnEsc:true,
+        closeOnClick:'body',
+        blockScroll:true,
+        animation:{open: 'zoomIn', close: 'zoomOut'},
+      });
+
       var meetingSettings = new jBox('Tooltip', {
         addClass:'jBox',
         attach: '#meetingSettings',
@@ -115,8 +126,6 @@ APP.controllers.meetings = (function() {
         });
       });
 
-
-
       $(".meet-what textarea").autogrow({
         onInitialize: true
       });
@@ -134,12 +143,6 @@ APP.controllers.meetings = (function() {
         hiddenSuffix: ''
       });
 
-      $('select.categories').SumoSelect({
-        placeholder: 'Ordne dein Treffen einen oder mehreren Themen zu',
-        csvDispCount: 5,
-        captionFormat: '{0} Kategorien ausgewählt'
-      });
-
       // location field
       $('input:checkbox#location').on('change', function() {
         if (!this.checked) {
@@ -147,6 +150,22 @@ APP.controllers.meetings = (function() {
         }
         $('div#meeting-location-field').toggle();
       });
+
+      // online meeting switch
+      $('.online-meeting-switch').on('change', function() {
+        if ( $(this).val() === "true") {
+          $('#addressSearchAutocomplete').hide();
+          $('#address-fields').hide();
+          $('#online-address-fields').show();
+        } else {
+          $('#addressSearchAutocomplete').show();
+          $('#address-fields').show();
+          $('#online-address-fields').hide();
+        }
+      });
+
+      // Hide Elements
+      $('.hide').hide();
 
     }
 

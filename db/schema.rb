@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_04_193251) do
+ActiveRecord::Schema.define(version: 2020_03_24_141611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2020_03_04_193251) do
     t.integer "addressable_id"
     t.string "addressable_type", limit: 255
     t.string "description", limit: 255
+    t.string "online_meeting_description"
     t.index ["addressable_id", "addressable_type"], name: "index_addresses_on_addressable_id_and_addressable_type"
   end
 
@@ -412,6 +413,7 @@ ActiveRecord::Schema.define(version: 2020_03_04_193251) do
     t.integer "user_id"
     t.boolean "platform_meeting", default: false
     t.decimal "amount", precision: 10, scale: 2
+    t.boolean "online_meeting", default: false
     t.index ["created_at"], name: "index_meetings_on_created_at"
     t.index ["graetzl_id"], name: "index_meetings_on_graetzl_id"
     t.index ["group_id"], name: "index_meetings_on_group_id"

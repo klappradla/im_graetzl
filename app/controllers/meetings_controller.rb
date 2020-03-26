@@ -27,7 +27,12 @@ class MeetingsController < ApplicationController
     @meeting.going_tos.new(user_id: current_user.id, role: :initiator)
 
     if @meeting.save
-      @meeting.create_activity :create, owner: current_user
+      if @meeting.online_meeting
+        @meeting.create_activity :create_visible_to_all, owner: current_user
+      else
+        @meeting.create_activity :create, owner: current_user
+      end
+
       redirect_to [@meeting.graetzl, @meeting]
     else
       render :new
@@ -60,19 +65,37 @@ class MeetingsController < ApplicationController
 
   def attend
     @meeting = Meeting.find(params[:id])
-    #@meeting.users << current_user
-    @meeting.going_tos.new(
-      user_id: current_user.id,
-      going_to_date: @meeting.starts_at_date,
-      going_to_time: @meeting.starts_at_time
-    )
+    if params[:meeting_additional_date_id].present?
+      if params[:meeting_additional_date_id] == 'original_date'
+        @meeting.going_tos.new(
+          user_id: current_user.id,
+          going_to_date: @meeting.starts_at_date,
+          going_to_time: @meeting.starts_at_time,
+        )
+      else
+        @meeting_additional_date = MeetingAdditionalDate.find(params[:meeting_additional_date_id])
+        @meeting.going_tos.new(
+          user_id: current_user.id,
+          going_to_date: @meeting_additional_date.starts_at_date,
+          going_to_time: @meeting_additional_date.starts_at_time,
+          meeting_additional_date_id: @meeting_additional_date.id,
+        )
+      end
+    else
+      @meeting.going_tos.new(
+        user_id: current_user.id,
+      )
+    end
     @meeting.save
     @meeting.create_activity(:go_to, owner: current_user)
+    #flash[:notice] = "Du wurdest als InteressentIn hinzugefügt."
+    redirect_to [@meeting.graetzl, @meeting]
   end
 
   def unattend
     @meeting = Meeting.find(params[:id])
     @meeting.going_tos.find_by(user_id: current_user.id).destroy
+    redirect_to [@meeting.graetzl, @meeting]
   end
 
   def destroy
@@ -131,14 +154,21 @@ class MeetingsController < ApplicationController
         :remove_cover_photo,
         :location_id,
         :platform_meeting,
+        :online_meeting,
         :amount,
         meeting_additional_dates_attributes: [:id, :starts_at_date, :starts_at_time, :ends_at_time, :_destroy],
-        address_attributes: [:id, :description, :street_name, :street_number, :zip, :city, :coordinates]
+        address_attributes: [:id, :description, :online_meeting_description, :street_name, :street_number, :zip, :city, :coordinates]
     )
 
     feature_address = Address.from_feature(params[:feature]) if params[:feature]
     result[:address_attributes].merge!(feature_address.attributes.symbolize_keys.compact) if feature_address
     result
+  end
+
+  def going_to_params
+    params.permit(
+      :meeting_id, :meeting_additional_date_id
+    )
   end
 
   def initialize_meeting

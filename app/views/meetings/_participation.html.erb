@@ -45,14 +45,16 @@
           <span><%= avatar_for current_user %> Treffen bearbeiten</span>
         <% end %>
       <% elsif meeting.attending?(current_user) %>
-        <%= button_to [:unattend, meeting], method: :post, remote: true, class: 'btn-userCallToAction' do %>
+        <%= button_to [:unattend, meeting], method: :post, class: 'btn-userCallToAction' do %>
           <span><%= avatar_for current_user %> Nicht mehr interessiert</span>
         <% end %>
       <% else %>
-        <%= button_to [:attend, meeting], remote: true, class: 'btn-userCallToAction' do %>
+        <%= button_to 'javascript:void(0);', class: 'btn-userCallToAction', id: 'attendMeeting' do %>
           <span><%= avatar_for current_user %> Am Treffen interessiert</span>
         <% end %>
       <% end %>
+
+      <%= render 'meetings/attend_meeting', meeting: meeting %>
 
   <% end %>
 
@@ -69,7 +71,7 @@
         <% end %>
       <% elsif current_user == meeting.user || current_user.admin? %>
         <% meeting.users.each do |user| %>
-          <%= render "shared/user_miniprofile", :user => user %>
+          <%= render "meetings/user_miniprofile", :user => user, :going_to => meeting.going_tos.where(user:user).last %>
         <% end %>
       <% else %>
         <% meeting.users.each do |user| %>

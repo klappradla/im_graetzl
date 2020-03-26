@@ -7,6 +7,9 @@
       <%= link_to user.username, user, class: 'userlink' %>
       <p><%= user.full_name %></p>
       <p><%= mail_to user.email, user.email, class: 'maillink' %></p>
+      <% if going_to.going_to_date %>
+        <p><strong>Termin:</strong> <%= going_to.display_starts_at_date %></p>
+      <% end %>
     </div>
   </div>
 </div>

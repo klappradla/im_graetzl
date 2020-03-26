@@ -1,5 +1,5 @@
 class Notifications::NewMeeting < Notification
-  TRIGGER_KEY = 'meeting.create'
+  TRIGGER_KEY = ['meeting.create','meeting.create_visible_to_all']
   DEFAULT_INTERVAL = :weekly
   BITMASK = 2**0
 
@@ -20,7 +20,7 @@ class Notifications::NewMeeting < Notification
   end
 
   def mail_subject
-    "Neues Treffen im Grätzl #{meeting.graetzl.name}"
+    "Neues Treffen im Grätzl #{self.user.graetzl.name}"
   end
 
   def meeting

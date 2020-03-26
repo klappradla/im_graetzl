@@ -53,11 +53,15 @@ class Notification < ApplicationRecord
       next if !klass.condition(activity)
       users = klass.receivers(activity)
       users.each do |u|
+        #puts '---------BROADCAST NOTIFICATION---------'
+        #puts u.id
         next if notified_user_ids[u.id].present?
         next if u == activity.owner && !klass.notify_owner?
 
         display_on_website = u.enabled_website_notification?(klass) && u != activity.owner
         n = klass.create(activity: activity, user: u, display_on_website: display_on_website)
+        #puts '--CREATED NOTIFICATION:'
+        #puts n
         send_immediate_email = u.enabled_mail_notification?(klass, :immediate)
         NotificationMailer.send_immediate(n).deliver_later if send_immediate_email
         notified_user_ids[u.id] = true if display_on_website || send_immediate_email

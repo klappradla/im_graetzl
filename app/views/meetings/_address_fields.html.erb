@@ -1,7 +1,19 @@
 <div class="meet-where">
   <p><span>Wo</span> soll dein Treffen oder Veranstaltung stattfinden?</p>
 
-  <div id="addressSearchAutocomplete" class="input-field">
+  <div class="meeting-switch">
+    <div class="input-radio">
+      <%= f.radio_button :online_meeting, false, class: 'online-meeting-switch' %>
+      <%= f.label :online_meeting, "Treffen mit Adresse", :value => false %>
+    </div>
+
+    <div class="input-radio">
+      <%= f.radio_button :online_meeting, true, class: 'online-meeting-switch' %>
+      <%= f.label :online_meeting, "Virtuelles online Treffen", :value => true %>
+    </div>
+  </div>
+
+  <div id="addressSearchAutocomplete" class="input-field <%= 'hide' if f.object.online_meeting %>">
     <%= label_tag :address do %>
       <%= icon_tag "map-location" %>
       <span>Adresse</span>
@@ -12,18 +24,25 @@
   </div>
 
   <%= f.fields_for :address do |address_fields| %>
-    <div class="input-field">
+    <div class="input-field <%= 'hide' if f.object.online_meeting %>" id="address-fields">
       <%= address_fields.label :description do %>
         <%= icon_tag "location" %>
         <span>Ortsbeschreibung</span>
       <% end %>
-      <%= address_fields.text_field :description,
-                                    placeholder: 'z.B.: Venediger Au, Gasthaus Hansy, Schikaneder Kino, etc.' %>
+      <%= address_fields.text_field :description, placeholder: 'z.B.: Venediger Au, Gasthaus Hansy, Schikaneder Kino, etc.' %>
       <%= address_fields.hidden_field :street_name %>
       <%= address_fields.hidden_field :street_number %>
       <%= address_fields.hidden_field :zip %>
       <%= address_fields.hidden_field :city %>
       <%= address_fields.hidden_field :coordinates %>
+    </div>
+
+    <div class="input-field <%= 'hide' unless f.object.online_meeting %>" id="online-address-fields">
+      <%= address_fields.label :online_meeting_description do %>
+        <%= icon_tag "location" %>
+        <span>Online Tool</span>
+      <% end %>
+      <%= address_fields.text_field :online_meeting_description, placeholder: 'z.B.: Zoom, Skype, etc.' %>
     </div>
   <% end %>
   <div class="input-checkbox">
