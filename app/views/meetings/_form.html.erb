@@ -141,7 +141,7 @@
           <%= icon_tag "user-avatar" %>
           <span>Treffen Ersteller</span>
         <% end %>
-        <%= select_tag :user_id, options_from_collection_for_select(User.all, :id, :full_name_with_email, params[:user_id] || current_user.id), id: 'admin-user-select' %>
+        <%= select_tag :user_id, options_from_collection_for_select(User.all, :id, :full_name_with_user_and_email, params[:user_id] || current_user.id), id: 'admin-user-select' %>
       </div>
     <% end %>
 
