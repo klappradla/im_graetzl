@@ -38,7 +38,13 @@
   <div class="imgHeader -cloudy">
     <div class="titleHeadline">
       <div class="wrp">
-        <%= link_to content_tag(:h3, @graetzl.name, class: 'district'), @graetzl %>
+        <% if @meeting.online_meeting && @meeting.platform_meeting %>
+          <%= link_to content_tag(:h3, 'Selbstständige für Selbstständige', class: 'district'), platform_meetings_wien_path %>
+        <% elsif @meeting.online_meeting %>
+          <%= link_to content_tag(:h3, 'Online Event', class: 'district'), @graetzl %>
+        <% else %>
+          <%= link_to content_tag(:h3, @graetzl.name, class: 'district'), @graetzl %>
+        <% end %>
         <%= meeting_name @meeting %>
       </div>
       <div class="card"></div>
