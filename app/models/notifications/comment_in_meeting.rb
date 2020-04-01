@@ -1,14 +1,14 @@
 class Notifications::CommentInMeeting < Notification
   TRIGGER_KEY = 'meeting.comment'
   DEFAULT_INTERVAL = :daily
-  BITMASK = 2**4
+  BITMASK = 2**20
 
   def self.receivers(activity)
     activity.trackable.users
   end
 
   def self.description
-    "Meine erstellten Inhalte wurden kommentiert"
+    "Ein Treffen an dem ich interessiert bin wurde kommentiert"
   end
 
   def mail_template

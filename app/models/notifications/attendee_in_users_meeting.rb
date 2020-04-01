@@ -1,6 +1,7 @@
 class Notifications::AttendeeInUsersMeeting < Notification
   TRIGGER_KEY = 'meeting.go_to'
   DEFAULT_INTERVAL = :immediate
+  DEFAULT_WEBSITE_NOTIFICATION = :on
   BITMASK = 2**9
 
   def self.receivers(activity)

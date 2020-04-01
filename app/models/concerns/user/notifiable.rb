@@ -84,6 +84,7 @@ module User::Notifiable
 
   def set_default_notification_settings
     Notification.subclasses.each do |klass|
+
       case klass::DEFAULT_INTERVAL
       when :weekly
         self.weekly_mail_notifications |= klass::BITMASK
@@ -91,8 +92,13 @@ module User::Notifiable
         self.daily_mail_notifications |= klass::BITMASK
       when :immediate
         self.immediate_mail_notifications |= klass::BITMASK
+      end
+
+      case klass::DEFAULT_WEBSITE_NOTIFICATION
+      when :on
         self.enabled_website_notifications |= klass::BITMASK
       end
+
     end
   end
 

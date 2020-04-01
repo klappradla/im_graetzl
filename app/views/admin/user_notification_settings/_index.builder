@@ -16,9 +16,10 @@ context.instance_eval do
   column("Betrifft Mich") { |u|
     [
       "<span class='mailtype'>Commented Content: </span><span class='status_tag #{u.enabled_mail_notification(Notifications::CommentInUsersMeeting)}'>#{u.enabled_mail_notification(Notifications::CommentInUsersMeeting)}</span>",
+      "<span class='mailtype'>Comment in Meeting: </span><span class='status_tag #{u.enabled_mail_notification(Notifications::CommentInMeeting)}'>#{u.enabled_mail_notification(Notifications::CommentInMeeting)}</span>",
       "<span class='mailtype'>Also Commented: </span><span class='status_tag #{u.enabled_mail_notification(Notifications::AlsoCommentedLocationPost)}'>#{u.enabled_mail_notification(Notifications::AlsoCommentedLocationPost)}</span>",
       "<span class='mailtype'>Commented Wall: </span><span class='status_tag #{u.enabled_mail_notification(Notifications::NewWallComment)}'>#{u.enabled_mail_notification(Notifications::NewWallComment)}</span>",
-      "<span class='mailtype'>Meeting Attended: </span><span class='status_tag #{u.enabled_mail_notification(Notifications::AttendeeInUsersMeeting)}'>#{u.enabled_mail_notification(Notifications::AttendeeInUsersMeeting)}</span>",
+      "<span class='mailtype'>Meeting New Attendee: </span><span class='status_tag #{u.enabled_mail_notification(Notifications::AttendeeInUsersMeeting)}'>#{u.enabled_mail_notification(Notifications::AttendeeInUsersMeeting)}</span>",
       "<span class='mailtype'>Meeting Updated: </span><span class='status_tag #{u.enabled_mail_notification(Notifications::MeetingUpdated)}'>#{u.enabled_mail_notification(Notifications::MeetingUpdated)}</span>",
       "<span class='mailtype'>Meeting Cancelled: </span><span class='status_tag #{u.enabled_mail_notification(Notifications::MeetingCancelled)}'>#{u.enabled_mail_notification(Notifications::MeetingCancelled)}</span>",
     ].join("<br>").html_safe
