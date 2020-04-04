@@ -90,11 +90,12 @@
     <% end %>
 
     <% if !@user.meetings.blank? %>
-    <div id="tab-meetings">
-      <%= render 'meetings' %>
-    </div>
+      <div id="tab-meetings">
+        <%= form_tag meetings_path(attended_user_id: @user.id, per_page: 6), method: :get, remote: true, class: 'autosubmit-stream' do; end %>
+        <div class="cardBoxCollection -tripple" data-behavior="meetings-card-container"></div>
+        <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'meetings-paginate-link' }, rel: 'nofollow' %>
+      </div>
     <% end %>
-
   </div>
 
 

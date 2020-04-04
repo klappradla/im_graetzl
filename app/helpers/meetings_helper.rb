@@ -62,7 +62,7 @@ module MeetingsHelper
     if meeting.address.online_meeting_description?
       content_tag(:strong, meeting.address.online_meeting_description)
     else
-      content_tag(:strong, 'Online Treffen')
+      content_tag(:strong, 'Online Event')
     end
   end
 

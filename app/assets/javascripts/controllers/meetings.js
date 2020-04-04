@@ -8,6 +8,54 @@ APP.controllers.meetings = (function() {
       if ($("section.create-meeting").exists()) {
         initCreateMeeting();
       }
+
+      if ($("section.meetings-compose-mail").exists()) {
+        initComposeMailMeeting();
+      }
+
+    }
+
+    function initComposeMailMeeting() {
+
+      $('select#mail-user-select').SumoSelect({
+        search: true,
+        searchText: 'Suche nach User.',
+        placeholder: 'User auswählen',
+        csvDispCount: 2,
+        captionFormat: '{0} Treffenmitglieder',
+        captionFormatAllSelected: 'Alle Treffenmitglieder',
+        //okCancelInMulti: true,
+        selectAll: true,
+        triggerChangeCombined: false,
+        locale: ['OK', 'Abbrechen', 'Alle auswählen']
+      });
+
+      // Highlight Users on Change
+      $('select#mail-user-select').on('change', function(){
+          var selected_users = $(this).val();
+
+
+          if (selected_users == null) {
+
+            $('.user-miniprofile-link').removeClass('active');
+
+          } else {
+
+            console.log(selected_users);
+
+            $('.user-miniprofile-link').removeClass('active');
+
+            for (i = 0; i < selected_users.length; i++) {
+                $user = $('[data-jq-dropdown="#user-dropdown-' + selected_users[i] + '"]');
+                $user.addClass('active');
+            }
+
+          }
+
+
+
+      });
+
     }
 
     function initMeetingDetail() {
@@ -89,6 +137,16 @@ APP.controllers.meetings = (function() {
         addClass:'jBox',
         attach: '#meetingSettings',
         content: $('#jBoxMeetingSettings'),
+        trigger: 'click',
+        closeOnClick:true,
+        isolateScroll:true,
+        animation:{open: 'zoomIn', close: 'zoomOut'},
+      });
+
+      var meetingSettingsPaid = new jBox('Tooltip', {
+        addClass:'jBox',
+        attach: '#meetingSettingsPaid',
+        content: $('#jBoxMeetingSettingsPaid'),
         trigger: 'click',
         closeOnClick:true,
         isolateScroll:true,

@@ -42,6 +42,10 @@ class UsersController < ApplicationController
     @locations = current_user.locations.includes(:location_ownerships)
   end
 
+  def meetings
+    @user = current_user
+  end
+
   def groups
     @groups = current_user.groups.includes(:room_offer, :room_call, :discussion_categories)
   end

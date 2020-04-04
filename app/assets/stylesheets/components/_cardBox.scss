@@ -137,6 +137,21 @@
     margin-bottom: 0px;
   }
 
+  .btn-group {
+    display: flex;
+    margin-left: auto;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .btn-secondary {
+      width: 48%;
+    }
+    .btn-primary, .-invoice {
+      float: left;
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
+
 }
 
 .card-grid .btn-userIcons,
@@ -325,21 +340,6 @@
     .txt {
       font-size: 13px;
       margin-bottom: 15px;
-    }
-  }
-
-  .btn-group {
-    display: flex;
-    margin-left: auto;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    .btn-secondary {
-      width: 48%;
-    }
-    .btn-primary, .-invoice {
-      float: left;
-      width: 100%;
-      margin-top: 10px;
     }
   }
 

@@ -1,0 +1,36 @@
+<section class="usersetup -meetings">
+
+  <% if @user.initiated_meetings.empty? %>
+
+  <div class="introcontainer">
+    <div class="introtxt">
+
+      <div class="hl-subtext" id="teilnahme">
+        <h1><em>Deine Events & Workhops auf imGrätzl.at</em></h1>
+        <p>Wir machen deine Neuigkeiten im Stadtteil bekannt!</p>
+      </div>
+
+      <ul class="list-basic">
+        <li>Deine Events, Workshops und Aktionen werden in das Grätzl Mail aufgenommen und an alle registrierten BewohnerInnen im Stadtteil verschickt.</li>
+        <li><strong>Ganz neu:</strong> ab sofort ist es auch möglich online Beratungen, Kurse, Sprechstunden, Konzerte, aber auch online Lesungen einzutragen. Diese werden auf der ganzen Plattform in allen Grätzln angezeigt. Für maximal Sichtbarkeit auf der imGrätzl Plattform.</li>
+      </ul>
+
+    </div>
+    <%= render 'meetings/action_card', user: @user %>
+  </div>
+
+  <% else %>
+
+    <h2 class="hl-main">Deine <span>Events & Workshops</span> verwalten</h2>
+
+    <%= form_tag meetings_path(initiated_user_id: @user.id, per_page: 9, logged_in: 'owner'), method: :get, remote: true, class: 'autosubmit-stream' do; end %>
+    <div class="cardBoxCollection -tripple" data-behavior="meetings-card-container"></div>
+
+    <div class="action-card-container" data-behavior="meetings-action-card-container">
+      <%= render 'meetings/action_card', user: @user, graetzl: current_user.graetzl %>
+    </div>
+
+    <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'meetings-paginate-link' }, rel: 'nofollow' %>
+  <% end %>
+
+</section>

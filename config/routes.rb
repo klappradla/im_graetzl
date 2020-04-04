@@ -53,6 +53,7 @@ Rails.application.routes.draw do
     get 'toolteiler', action: 'tool_offers', as: 'tool_offers'
     get 'gruppen', action: 'groups', as: 'groups'
     get 'zuckerl', action: 'zuckerls', as: 'zuckerls'
+    get 'treffen', action: 'meetings', as: 'meetings'
   end
 
   concern :graetzl_before_new do
@@ -65,6 +66,9 @@ Rails.application.routes.draw do
   resources :meetings, path: 'treffen', except: [:show] do
     post :attend, on: :member
     post :unattend, on: :member
+    get 'compose_mail', on: :member
+    post 'send_mail', on: :member
+
   end
   resources :zuckerls, only: [:index]
   resources :rooms, only: [:index]

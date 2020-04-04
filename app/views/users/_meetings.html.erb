@@ -1,3 +1,0 @@
-<%= form_tag meetings_path(attended_user_id: @user.id, per_page: 6, container_namespace: "attended"), method: :get, remote: true, class: 'autosubmit-stream' do; end %>
-<div id="attended" class="cardBoxCollection -tripple" data-tabID="two" data-behavior="attended-container"></div>
-<%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'attended-paginate-link' }, rel: 'nofollow' %>

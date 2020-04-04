@@ -144,3 +144,47 @@ section.meeting {
     float:right;
   }
 }
+
+section.meetings-compose-mail {
+  //display: flex;
+  //flex-wrap: wrap;
+  .hl-subtext {
+    margin-bottom: 20px;
+  }
+  .members {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+    .img-round {
+      margin-left: 4px;
+      margin-right: 4px;
+    }
+    img.img-round {
+      filter: grayscale(50%);
+    }
+    .active img {
+      filter: grayscale(0%);
+      border: 2px solid $color-ambient-rosa;
+    }
+  }
+  .col-content {
+    width:100%;
+    margin-bottom:40px;
+    @include respond-to(">=large") {
+      width: 64%;
+      margin-right: 3%;
+    }
+  }
+  .col-sidebar {
+    width:100%;
+    margin-left: auto;
+    margin-right: auto;
+    @include respond-to(">=medium") {
+      width: 50%;
+    }
+    @include respond-to(">=large") {
+      width: 33%;
+    }
+  }
+}

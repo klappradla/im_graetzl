@@ -11,17 +11,21 @@
       <% elsif current_user == meeting.user %>
         <div class="btn-going-to">
           <%= link_to 'javascript:void(0);', class: 'btn-userCallToAction', id: 'meetingSettings' do %>
-            <span><%= avatar_for current_user %> Tickets kaufen: <%= number_to_currency(meeting.amount, unit: "€") %> <%= icon_tag "arrow-down-2" %></span>
+            <span><%= avatar_for current_user %> Treffen Optionen <%= icon_tag "arrow-down-2" %></span>
           <% end %>
         </div>
         <div class="jBoxHidden jBoxDropdown" id="jBoxMeetingSettings">
-          <%= link_to 'javascript:void(0);', id: 'buyTicket' do %>
-            <%= icon_tag "ticket" %>
-            <div class="icontxt">Ticket kaufen</div>
-          <% end %>
           <%= link_to edit_meeting_path(meeting), method: :get do %>
             <%= icon_tag "pencil" %>
             <div class="icontxt">Treffen bearbeiten</div>
+          <% end %>
+          <%= link_to compose_mail_meeting_path(meeting), method: :get do %>
+            <%= icon_tag "at-symbol" %>
+            <div class="icontxt">E-Mail an Mitglieder</div>
+          <% end %>
+          <%= link_to 'javascript:void(0);', id: 'buyTicket' do %>
+            <%= icon_tag "ticket" %>
+            <div class="icontxt">Ticket kaufen: <%= number_to_currency(meeting.amount, unit: "€") %></div>
           <% end %>
         </div>
       <% else %>
@@ -41,9 +45,23 @@
           <span><%= image_tag 'avatar/user/default.png', class: 'img-round' %> Am Treffen interessiert</span>
         <% end %>
       <% elsif current_user == meeting.user %>
-        <%= button_to edit_meeting_path(meeting), method: :get, class: 'btn-userCallToAction' do %>
-          <span><%= avatar_for current_user %> Treffen bearbeiten</span>
-        <% end %>
+
+        <div class="btn-going-to">
+          <%= link_to 'javascript:void(0);', class: 'btn-userCallToAction', id: 'meetingSettingsPaid' do %>
+            <span><%= avatar_for current_user %> Treffen Optionen <%= icon_tag "arrow-down-2" %></span>
+          <% end %>
+        </div>
+        <div class="jBoxHidden jBoxDropdown" id="jBoxMeetingSettingsPaid">
+          <%= link_to edit_meeting_path(meeting), method: :get do %>
+            <%= icon_tag "pencil" %>
+            <div class="icontxt">Treffen bearbeiten</div>
+          <% end %>
+          <%= link_to compose_mail_meeting_path(meeting), method: :get do %>
+            <%= icon_tag "at-symbol" %>
+            <div class="icontxt">E-Mail an Mitglieder</div>
+          <% end %>
+        </div>
+
       <% elsif meeting.attending?(current_user) %>
         <%= button_to [:unattend, meeting], method: :post, class: 'btn-userCallToAction' do %>
           <span><%= avatar_for current_user %> Nicht mehr interessiert</span>

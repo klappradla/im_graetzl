@@ -11,8 +11,18 @@ APP.controllers.users = (function() {
           if (!$(".tabs-nav li").exists()) { $(".tabs-ctrl").hide(); } // Hide Taby if empty
         }
 
-        if ($("section.usersetup").exists()) {
-          addActionCard();
+        if ($("section.usersetup.-location").exists()) { addActionCard(); }
+        if ($("section.usersetup.-toolteiler").exists()) { addActionCard(); }
+        if ($("section.usersetup.-rooms").exists()) { addActionCard(); }
+        if ($("section.usersetup.-groups").exists()) { addActionCard(); }
+        if ($("section.usersetup.-zuckerl").exists()) { addActionCard(); }
+
+
+        if ($("section.usersetup.-meetings").exists()) {
+          $('.autosubmit-stream').submit();
+          $(".autosubmit-stream").bind('ajax:complete', function() {
+            addActionCard();
+          });
         }
 
         function addActionCard() {

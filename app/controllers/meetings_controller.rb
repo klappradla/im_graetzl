@@ -117,6 +117,23 @@ class MeetingsController < ApplicationController
 
   end
 
+  def compose_mail
+    @meeting = find_user_meeting
+    redirect_to [@meeting.graetzl, @meeting] and return unless @meeting.user == current_user
+  end
+
+  def send_mail
+    @meeting = find_user_meeting
+    redirect_to [@meeting.graetzl, @meeting] and return unless @meeting.user == current_user
+
+    User.where(id: params[:user_ids]).find_each do |user|
+      MeetingMailer.message_to_user(
+        @meeting, current_user, user, params[:subject], params[:body], params[:from_email]
+      ).deliver_later
+    end
+    redirect_to [@meeting.graetzl, @meeting], notice: 'Deine E-Mail wurde versendet ..'
+  end
+
   private
 
   def collection_scope
@@ -126,8 +143,9 @@ class MeetingsController < ApplicationController
       district = District.find(params[:district_id])
       Meeting.where(graetzl_id: district.graetzl_ids)
     elsif params[:initiated_user_id].present?
-      user = User.find(params[:initiated_user_id])
-      user.initiated_meetings
+      #user = User.find(params[:initiated_user_id])
+      #user.initiated_meetings
+      Meeting.where(user_id: params[:initiated_user_id])
     elsif params[:attended_user_id].present?
       user = User.find(params[:attended_user_id])
       user.attended_meetings
@@ -141,7 +159,8 @@ class MeetingsController < ApplicationController
   def filter_collection(meetings)
     graetzl_ids = params.dig(:filter, :graetzl_ids)
     if graetzl_ids.present? && graetzl_ids.any?(&:present?)
-      meetings = meetings.where(graetzl_id: graetzl_ids)
+      #meetings = meetings.where(graetzl_id: graetzl_ids)
+      meetings = meetings.where(graetzl_id: graetzl_ids).or(meetings.online_meeting)
     end
     meetings
   end

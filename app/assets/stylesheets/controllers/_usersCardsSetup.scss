@@ -217,4 +217,16 @@ section.usersetup {
     font-style: italic;
   }
 
+  &.-meetings {
+    .cardBox.-meeting {
+
+      .cardBoxContent .btn-primary { display:none;}
+      .btn-group {
+        .-mini { width: 37%; }
+        .-wide { width: 60%; }
+      }
+
+    }
+  }
+
 }

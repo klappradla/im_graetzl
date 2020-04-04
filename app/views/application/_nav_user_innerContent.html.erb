@@ -63,23 +63,26 @@
     <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-locations'} do %>
       <%= icon_tag "arrow-left-2" %> Zurück
     <% end %>
-    <% current_user.locations.approved.first(6).each do |location| %>
-      <%= link_to graetzl_location_path(location.graetzl, location) do %>
-        <%= attachment_image_tag location, :avatar, :fill, 35, 35, fallback: 'avatar/location/35x35.png', class: 'img-square' %>
-        <span><%= location.name %></span>
-      <% end %>
-    <% end %>
     <%= link_to locations_user_path do %>
       <%= icon_tag "location" %> Location verwalten
     <% end %>
     <%= link_to zuckerls_user_path do %>
       <%= icon_tag "shopping-bag" %> Grätzlzuckerl verwalten
     <% end %>
+    <% current_user.locations.approved.first(6).each do |location| %>
+      <%= link_to graetzl_location_path(location.graetzl, location) do %>
+        <%= attachment_image_tag location, :avatar, :fill, 35, 35, fallback: 'avatar/location/35x35.png', class: 'img-square' %>
+        <span><%= location.name %></span>
+      <% end %>
+    <% end %>
   </section>
 
   <section class="second -rooms">
     <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-rooms'} do %>
       <%= icon_tag "arrow-left-2" %> Zurück
+    <% end %>
+    <%= link_to rooms_user_path do %>
+      <%= icon_tag "raumteiler" %> Raumteiler verwalten
     <% end %>
     <% current_user.room_offers.first(3).each do |room| %>
       <%= link_to room do %>
@@ -92,9 +95,6 @@
         <%= attachment_image_tag room, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-square' %>
         <span><%= room.slogan %></span>
       <% end %>
-    <% end %>
-    <%= link_to rooms_user_path do %>
-      <%= icon_tag "raumteiler" %> Raumteiler verwalten
     <% end %>
   </section>
 
@@ -117,13 +117,13 @@
     <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-groups'} do %>
       <%= icon_tag "arrow-left-2" %> Zurück
     <% end %>
+    <%= link_to groups_user_path do %>
+      <%= icon_tag "speech-bubble" %> Gruppen verwalten
+    <% end %>
     <% if current_user.groups.empty? %>
       <div class="info">
-        Du bist in noch keiner Gruppe Mitglied ..
+        Du bist in keiner Gruppe Mitglied ..
       </div>
-      <%= link_to groups_wien_path do %>
-        <%= icon_tag "coop-share" %> Stöbern in Gruppen
-      <% end %>
     <% end %>
     <section class="content">
       <% current_user.groups.last(8).reverse.each do |group| %>
@@ -132,9 +132,6 @@
           <span><%= group.title %></span>
         <% end %>
       <% end %>
-      <%= link_to groups_user_path do %>
-        <%= icon_tag "speech-bubble" %> Gruppen verwalten
-      <% end %>
     </section>
   </section>
 
@@ -142,12 +139,15 @@
     <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-meetings'} do %>
       <%= icon_tag "arrow-left-2" %> Zurück
     <% end %>
+    <%= link_to meetings_user_path do %>
+      <%= icon_tag "calendar-2" %> Events verwalten
+    <% end %>
     <% if current_user.attended_meetings.upcoming.empty? %>
       <div class="info">
         Es gibt keine aktuellen Treffen an denen du interessiert bist ..
       </div>
     <% end %>
-    <% current_user.attended_meetings.upcoming.first(8).each do |meeting| %>
+    <% current_user.attended_meetings.upcoming.first(7).each do |meeting| %>
       <%= link_to [meeting.graetzl, meeting] do %>
         <% if meeting.starts_at_date %>
           <div class="calendarSheet">

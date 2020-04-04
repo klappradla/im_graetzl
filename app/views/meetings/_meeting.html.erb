@@ -22,7 +22,13 @@
     <% end %>
 
     <div class="categoryicon">
-      <%= meeting.paid? ? (icon_tag "ticket") : (icon_tag "users") %>
+      <% if meeting.paid? %>
+        <%= icon_tag "ticket" %>
+      <% elsif meeting.online_meeting %>
+        <%= icon_tag "globe" %>
+      <% else %>
+        <%= icon_tag "users" %>
+      <% end %>
     </div>
     <%= graetzl_flag(graetzl) %>
   </div>
@@ -48,6 +54,16 @@
 
     <% if local_assigns[:appendix].present? %>
       <%= render 'activities/appendix', appendix: local_assigns[:appendix], parent: meeting %>
+    <% end %>
+
+  </div>
+
+  <div class="btn-group">
+    <% if params[:logged_in].present? && params[:logged_in] == 'owner' %>
+      <% if current_user %>
+      <%= link_to 'Bearbeiten', edit_meeting_path(meeting), class: 'btn-secondary -mint -small -mini' %>
+      <%= link_to 'E-Mail an Mitglieder', compose_mail_meeting_path(meeting), class: 'btn-secondary -mint -small -wide' %>
+      <% end %>
     <% end %>
   </div>
 

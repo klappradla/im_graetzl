@@ -18,8 +18,7 @@ namespace :scheduled do
   task daily_summary_mail: :environment do
     puts "Rake daily_summary_mail start at #{Time.now}"
     User.find_each do |user|
-      # PAUSE GRAETZL MAILS
-      #NotificationMailer.summary_graetzl(user, :daily).deliver_now
+      NotificationMailer.summary_graetzl(user, :daily).deliver_now
       NotificationMailer.summary_personal(user, :daily).deliver_now
     end
   end
@@ -28,8 +27,7 @@ namespace :scheduled do
   task weekly_summary_mail: :environment do
     puts "Rake weekly_summary_mail start at #{Time.now}"
     User.find_each do |user|
-      # PAUSE GRAETZL MAILS
-      #NotificationMailer.summary_graetzl(user, :weekly).deliver_now if Date.today.tuesday?
+      NotificationMailer.summary_graetzl(user, :weekly).deliver_now if Date.today.tuesday?
       NotificationMailer.summary_personal(user, :weekly).deliver_now if Date.today.saturday?
     end
   end
@@ -42,8 +40,7 @@ namespace :scheduled do
 
   task test_weekly_summary_mail: :environment do
     user = User.find_by(email: "michael.walchhuetter@gmail.com")
-    # PAUSE GRAETZL MAILS
-    #NotificationMailer.summary_graetzl(user, :weekly).deliver_now
+    NotificationMailer.summary_graetzl(user, :weekly).deliver_now
     NotificationMailer.summary_personal(user, :weekly).deliver_now
   end
 

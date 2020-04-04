@@ -4,54 +4,47 @@
       <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
         Hallo <%= @user.first_name %> - Herzlich willkommen, schön, dass du bei imGrätzl.at dabei bist!
         <p>
-          Mit imGrätzl.at bieten wir dir eine ganze Palette von Services an, die dich dabei unterstützen
-          deine Ressourcen zu erhöhen, Kosten zu senken und die dich vor allem mit spannenden und
-          kooperativen Menschen vernetzen! Weg von der Einzelanstrengung hin zu neuen Formen der
-          Zusammenarbeit. Ganz lokal in Wien.
+          Mit imGrätzl.at bieten wir dir eine ganze Palette von Services an, die dich dabei unterstützen deine Ressourcen zu erhöhen, Kosten zu senken und die dich dabei mit kooperativen Menschen vernetzen! Unser Motto: Weg von der Einzelanstrengung hin zu neuen Formen der Zusammenarbeit.
         </p>
 
         <strong>1.)</strong>
         <em>
-          <strong>Richte dir deine Locationseite ein</strong>, um mit deinen Aktionen und deinem Tun im Stadtteil sichtbar zu werden.
-          Zum Einrichten deiner Locationseite: <%= link_to locations_user_url, locations_user_url, target: '_blank' %>
+          <strong>Corona-Krise: Bei „Selbstständige für Selbstständige & Macher*innen“</strong>, haben sich über 100 Expert*innen zusammengeschlossen und geben ihre Expertise in kostenlosen persönlichen Beratungen weiter: <%= link_to platform_meetings_wien_url, platform_meetings_wien_url, target: '_blank' %>
         </em>
 
         <br><br>
 
         <strong>2.)</strong>
         <em>
-          <strong>Du möchtest deine Gewerbefläche teilen, oder suchst Raum zum Andocken?</strong>
-          Dann stelle jetzt deinen Raumteilerwunsch beim Raumteiler ein. Zum Raumteiler:
-          <%= link_to rooms_wien_url, rooms_wien_url, target: '_blank' %>
+          <strong>Richte dir deine gratis Locationseite ein,</strong> um mit deinen Aktionen und deinem Tun im Stadtteil sichtbar zu werden. Zum Einrichten deiner Locationseite: <%= link_to locations_user_url, locations_user_url, target: '_blank' %>
         </em>
 
         <br><br>
 
         <strong>3.)</strong>
         <em>
-          <strong>Du hast Arbeitsequipment und Geräte, die du nicht rund um die Uhr nutzt?</strong>
-          Dann vermiete sie im Toolteiler an andere MacherInnen und verdiene damit etwas dazu.
-          Du benötigst temporär ein Gerät für ein Projekt? Dann schau im Toolteiler rein,
-          ob du es dir günstig ausleihen kannst. Und keine Sorge: eine Versicherung ist automatisch inkludiert. Zum Toolteiler:
-          <%= link_to tool_offers_wien_url, tool_offers_wien_url, target: '_blank' %>
+          <strong>Du möchtest deine Gewerbefläche teilen, oder suchst Raum zum Andocken?</strong> Dann stelle jetzt deinen Raumteilerwunsch beim Raumteiler ein. Zum Raumteiler: <%= link_to rooms_wien_url, rooms_wien_url, target: '_blank' %>
         </em>
 
         <br><br>
 
         <strong>4.)</strong>
         <em>
-          <strong>Lust auf Vernetzung, neue Formen der Zusammenarbeit</strong> und auf den inspirierenden Austausch mit Gleichgesinnten? 
-          Dann komm zu den imGrätzl Community Veranstaltungen!
-          <%= link_to platform_meetings_wien_url, platform_meetings_wien_url, target: '_blank' %>
+          <strong>Du hast Arbeitsequipment und Geräte, die du nicht rund um die Uhr nutzt?</strong> Dann vermiete sie im <strong>Toolteiler</strong> an andere Macher*innen und verdiene damit etwas dazu. Du benötigst temporär ein Gerät für ein Projekt? Dann schau im Toolteiler rein, ob du es dir günstig ausleihen kannst. Eine Versicherung ist immer automatisch inkludiert. <%= link_to tool_offers_wien_url, tool_offers_wien_url, target: '_blank' %>
         </em>
 
         <br><br>
 
         <strong>5.)</strong>
         <em>
-          <strong>Du hast ein schönes Angebot, ein Rabatt oder Gutschein, den du bekannter machen möchtest?</strong>
-          Dann ist das Grätzlzuckerl dafür das Richtige, das spielt dein Angebot bezirksweise oder in ganz Wien aus, einen ganzen Monat lang:
-          <%= link_to zuckerls_user_url, zuckerls_user_url, target: '_blank' %>
+          <strong>Neu: Du kannst online Workshops und Beratungen über unsere Treffenfunktion bekannt machen.</strong> Die online Workshops, Kurse und Beratungen werden auf der Plattform in ganz Wien ausgespielt. <%= link_to new_meeting_url, new_meeting_url, target: '_blank' %>
+        </em>
+
+        <br><br>
+
+        <strong>6.)</strong>
+        <em>
+          <strong>Hast du gerade ein besonderes Angebot oder einen Rabatt?</strong> Dann ist das Grätzlzuckerl dafür das Richtige, das spielt dein Angebot bezirksweise oder in ganz Wien aus, einen ganzen Monat lang: <%= link_to zuckerls_user_url, zuckerls_user_url, target: '_blank' %>
         </em>
 
         <br><br>
