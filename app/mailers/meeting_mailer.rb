@@ -11,7 +11,7 @@ class MeetingMailer < ApplicationMailer
       "X-MC-GoogleAnalyticsCampaign" => "meeting-user-mail",
     )
     mail(
-      to: to_user.email, from: "#{from_user.full_name} | imGrätzl.at",
+      to: to_user.email, from: "#{from_user.full_name} | über imGrätzl.at <#{from_email}>",
       reply_to: @reply_to, subject: subject
     )
   end
