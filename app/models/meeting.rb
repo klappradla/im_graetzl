@@ -81,7 +81,13 @@ class Meeting < ApplicationRecord
   end
 
   def display_address
-    address || location.try(:address)
+    if address.street_name.present?
+      address
+    elsif location
+      location.address
+    else
+      address
+    end
   end
 
   def display_starts_at_date

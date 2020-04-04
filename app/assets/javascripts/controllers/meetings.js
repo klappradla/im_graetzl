@@ -34,26 +34,19 @@ APP.controllers.meetings = (function() {
       $('select#mail-user-select').on('change', function(){
           var selected_users = $(this).val();
 
-
           if (selected_users == null) {
 
             $('.user-miniprofile-link').removeClass('active');
 
           } else {
 
-            console.log(selected_users);
-
             $('.user-miniprofile-link').removeClass('active');
-
             for (i = 0; i < selected_users.length; i++) {
                 $user = $('[data-jq-dropdown="#user-dropdown-' + selected_users[i] + '"]');
                 $user.addClass('active');
             }
-
+            
           }
-
-
-
       });
 
     }
