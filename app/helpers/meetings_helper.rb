@@ -72,14 +72,16 @@ module MeetingsHelper
       location = meeting.location
       address = meeting.display_address
       concat case
-      when address.description.present?
+      when address && address.description.present?
         content_tag(:strong, address.description)
       when location
         link_to(location.name, [location.graetzl, location])
       end
-      concat address.street
-      concat tag(:br) if address.street
-      concat "#{address.zip} #{address.city}"
-    end
+      if address
+        concat address.street
+        concat tag(:br) if address.street
+        concat "#{address.zip} #{address.city}"
+      end
+      end
   end
 end

@@ -26,28 +26,49 @@ APP.controllers.meetings = (function() {
         captionFormatAllSelected: 'Alle Treffenmitglieder',
         //okCancelInMulti: true,
         selectAll: true,
-        triggerChangeCombined: false,
+        //triggerChangeCombined: false,
+        isClickAwayOk: true,
         locale: ['OK', 'Abbrechen', 'Alle auswählen']
       });
 
-      // Highlight Users on Change
+      // Highlight Users on Select Change
+      /*
       $('select#mail-user-select').on('change', function(){
           var selected_users = $(this).val();
-
+          console.log(selected_users);
           if (selected_users == null) {
-
             $('.user-miniprofile-link').removeClass('active');
-
           } else {
-
             $('.user-miniprofile-link').removeClass('active');
             for (i = 0; i < selected_users.length; i++) {
                 $user = $('[data-jq-dropdown="#user-dropdown-' + selected_users[i] + '"]');
                 $user.addClass('active');
             }
-            
           }
       });
+      */
+
+      // Highlight Users on single Click Options
+      $('.select_users .opt').on('click', function(){
+        var user_index = $(this).index();
+        if ($(this).hasClass('selected')){
+          $('.user-miniprofile-container').eq(user_index).find('.user-miniprofile-link').addClass('active');
+        } else {
+          $('.user-miniprofile-container').eq(user_index).find('.user-miniprofile-link').removeClass('active');
+        }
+      });
+
+      // Highlight correct Users on Cancel Click
+      /*
+      $('.select_users .btnCancel').on('click', function(){
+        $('.user-miniprofile-link').removeClass('active');
+        $('.select_users .options .selected').each(function() {
+            var user_index = $(this).index();
+            console.log(user_index);
+            $('.user-miniprofile-container').eq(user_index).find('.user-miniprofile-link').addClass('active');
+        });
+      });
+      */
 
     }
 

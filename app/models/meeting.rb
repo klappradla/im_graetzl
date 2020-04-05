@@ -81,7 +81,7 @@ class Meeting < ApplicationRecord
   end
 
   def display_address
-    if address.street_name.present?
+    if address && address.street_name.present?
       address
     elsif location
       location.address
