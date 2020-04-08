@@ -11,6 +11,7 @@ APP.controllers.groups = (function() {
         initHeader();
         initInfo();
         initDiscussions();
+        $('.autosubmit-stream').submit();
       }
     }
 

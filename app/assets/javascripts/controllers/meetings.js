@@ -31,6 +31,16 @@ APP.controllers.meetings = (function() {
         locale: ['OK', 'Abbrechen', 'Alle auswählen']
       });
 
+      // Highlight Users on single Click Options
+      $('.select_users .opt').on('click', function(){
+        var user_index = $(this).index();
+        if ($(this).hasClass('selected')){
+          $('.user-miniprofile-container').eq(user_index).find('.user-miniprofile-link').addClass('active');
+        } else {
+          $('.user-miniprofile-container').eq(user_index).find('.user-miniprofile-link').removeClass('active');
+        }
+      });
+
       // Highlight Users on Select Change
       /*
       $('select#mail-user-select').on('change', function(){
@@ -45,28 +55,6 @@ APP.controllers.meetings = (function() {
                 $user.addClass('active');
             }
           }
-      });
-      */
-
-      // Highlight Users on single Click Options
-      $('.select_users .opt').on('click', function(){
-        var user_index = $(this).index();
-        if ($(this).hasClass('selected')){
-          $('.user-miniprofile-container').eq(user_index).find('.user-miniprofile-link').addClass('active');
-        } else {
-          $('.user-miniprofile-container').eq(user_index).find('.user-miniprofile-link').removeClass('active');
-        }
-      });
-
-      // Highlight correct Users on Cancel Click
-      /*
-      $('.select_users .btnCancel').on('click', function(){
-        $('.user-miniprofile-link').removeClass('active');
-        $('.select_users .options .selected').each(function() {
-            var user_index = $(this).index();
-            console.log(user_index);
-            $('.user-miniprofile-container').eq(user_index).find('.user-miniprofile-link').addClass('active');
-        });
       });
       */
 

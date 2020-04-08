@@ -11,10 +11,8 @@
     <% end %>
   </div>
 
-  <div class="cardBoxCollection -tripple">
-    <% @group.meetings.include_for_box.sort_by(&:starts_at_date).reverse_each do |meeting| %>
-      <%= render meeting %>
-    <% end %>
-  </div>
+  <%= form_tag meetings_path(group_id: @group.id, per_page: 9), method: :get, remote: true, class: 'autosubmit-stream' do; end %>
+  <div class="cardBoxCollection -tripple" data-behavior="meetings-card-container"></div>
+  <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'meetings-paginate-link' }, rel: 'nofollow' %>
 
 </div>

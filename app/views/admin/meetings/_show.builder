@@ -44,7 +44,7 @@ context.instance_eval do
               column(:id){|g| g.user.id}
               column(:username){|g| g.user.username}
               column(:role){|g| status_tag(g.role)}
-              column(:additional_date){|g| g.meeting_additional_date.starts_at_date if g.meeting_additional_date}
+              column(:going_to_date){|g| g.going_to_date}
               column(''){|m| link_to 'User Anzeigen', admin_user_path(m.user) }
             end
           end

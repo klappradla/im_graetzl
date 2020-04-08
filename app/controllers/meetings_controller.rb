@@ -143,9 +143,9 @@ class MeetingsController < ApplicationController
       district = District.find(params[:district_id])
       Meeting.where(graetzl_id: district.graetzl_ids)
     elsif params[:initiated_user_id].present?
-      #user = User.find(params[:initiated_user_id])
-      #user.initiated_meetings
       Meeting.where(user_id: params[:initiated_user_id])
+    elsif params[:group_id].present?
+      Meeting.where(group_id: params[:group_id])
     elsif params[:attended_user_id].present?
       user = User.find(params[:attended_user_id])
       user.attended_meetings
