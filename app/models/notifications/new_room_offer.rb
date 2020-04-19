@@ -1,5 +1,5 @@
 class Notifications::NewRoomOffer < Notification
-  TRIGGER_KEY = 'room_offer.create'
+  TRIGGER_KEY = ['room_offer.create', 'room_offer.update']
   DEFAULT_INTERVAL = :weekly
   BITMASK = 2**12
 

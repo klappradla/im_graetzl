@@ -8,8 +8,8 @@
   </div>
 
   <div class="members">
-    <% @meeting.users.each do |user| %>
-      <%= render "meetings/user_miniprofile", :user => user, :going_to => @meeting.going_tos.where(user:user).last %>
+    <% @meeting.going_tos.each do |going_to| %>
+      <%= render "meetings/user_miniprofile", :user => going_to.user, :going_to => going_to %>
     <% end %>
   </div>
 
@@ -22,7 +22,7 @@
           <%= icon_tag "user-avatar" %>
           <span>Empfänger</span>
         <% end %>
-        <%= select_tag :user_ids, options_from_collection_for_select(@meeting.users, :id, :user_width_full_name, params[:user_ids]), id: 'mail-user-select', multiple: true, required: true %>
+        <%= select_tag :user_ids, options_from_collection_for_select(@meeting.going_tos, :user_id, :user_width_full_name_and_going_to_date, params[:user_ids]), id: 'mail-user-select', multiple: true, required: true %>
       </div>
 
       <div class="input-field">

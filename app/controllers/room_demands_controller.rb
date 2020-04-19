@@ -51,8 +51,7 @@ class RoomDemandsController < ApplicationController
   def activate
     @room_demand = RoomDemand.find(params[:id])
     if params[:activation_code].to_i == @room_demand.activation_code
-      @room_demand.update(last_activated_at: @room_demand.set_last_activated_at)
-      @room_demand.update(status: "enabled")
+      @room_demand.update_attributes(:last_activated_at => @room_demand.set_last_activated_at, :status => "enabled")
       flash[:notice] = "Dein Raumteiler wurde erfolgreich verlängert!"
     else
       flash[:notice] = "Der Aktivierungslink ist leider ungültig. Log dich ein um deinen Raumteiler zu aktivieren."

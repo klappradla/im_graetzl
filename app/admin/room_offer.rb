@@ -41,4 +41,40 @@ ActiveAdmin.register RoomOffer do
       chain
     end
   end
+
+  csv do
+    column :id
+    #column :created_at
+    #column :last_activated_at
+    column(:district) { |room_offer| room_offer.district.try(:zip) }
+    column(:graetzl)  { |room_offer| room_offer.graetzl.name }
+
+    column(:room_categories) { |g|
+      g.room_categories.map { |category|
+        category.name
+      }
+    }
+
+    column :slogan
+    column :room_description
+    column :total_area
+    column :rented_area
+    column :wants_collaboration
+    column :owner_description
+    column :tenant_description
+
+    column(:room_offer_prices) { |g|
+      g.room_offer_prices.map { |price|
+        "#{price.amount} - #{price.name}"
+      }
+    }
+
+    column(:keyword_list) { |g|
+      g.keyword_list.map { |keyword|
+        keyword
+      }
+    }
+
+  end
+
 end

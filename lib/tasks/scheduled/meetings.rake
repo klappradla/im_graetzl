@@ -15,9 +15,8 @@ namespace :scheduled do
       if meeting.meeting_additional_dates.present?
         next_meeting = meeting.meeting_additional_dates.sort_by(&:starts_at_date).first
         meeting.update(starts_at_date: next_meeting.starts_at_date)
-        meeting.create_activity :create, owner: meeting.user
-        #activity = (meeting.create_activity :create, owner: meeting.user)
-        #Notification.receive_new_activity(activity)
+        # meeting.create_activity :create, owner: meeting.user
+        # create_activity moved to model before_update
         next_meeting.destroy
       end
     end

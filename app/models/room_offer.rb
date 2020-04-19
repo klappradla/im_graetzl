@@ -39,6 +39,7 @@ class RoomOffer < ApplicationRecord
 
   before_save :set_graetzl_and_district
   before_create :set_last_activated_at
+  before_update :create_update_activity?
   after_destroy { MailchimpRoomDeleteJob.perform_later(user) }
 
   scope :by_currentness, -> { order(created_at: :desc) }
@@ -56,6 +57,13 @@ class RoomOffer < ApplicationRecord
 
   def set_last_activated_at
     self.last_activated_at = Time.now
+  end
+
+  def create_update_activity?
+    # create update activity if last update is at least more then 7 days ago
+    if self.enabled? && self.updated_at_was <= 7.days.ago
+      self.create_activity(:update, owner: self.user)
+    end
   end
 
   private

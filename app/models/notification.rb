@@ -53,6 +53,8 @@ class Notification < ApplicationRecord
     triggered_types.sort{|a,b| a::BITMASK <=> b::BITMASK}.each do |klass|
       next if !klass.condition(activity)
       users = klass.receivers(activity)
+      #puts '------ receivers -----'
+      #puts users
       users.each do |u|
         #puts '---------BROADCAST NOTIFICATION---------'
         #puts u.id
@@ -63,6 +65,7 @@ class Notification < ApplicationRecord
         n = klass.create(activity: activity, user: u, display_on_website: display_on_website)
         #puts '--CREATED NOTIFICATION:'
         #puts n
+        #puts n.activity.trackable
         send_immediate_email = u.enabled_mail_notification?(klass, :immediate)
         NotificationMailer.send_immediate(n).deliver_later if send_immediate_email
         notified_user_ids[u.id] = true if display_on_website || send_immediate_email

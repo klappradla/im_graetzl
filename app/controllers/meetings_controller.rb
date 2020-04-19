@@ -36,7 +36,7 @@ class MeetingsController < ApplicationController
 
     if @meeting.save
       if @meeting.online_meeting
-        @meeting.create_activity :create_visible_to_all, owner: meeting_user
+        @meeting.create_activity :create, owner: meeting_user, parameters: { cross_platform: true }
       else
         @meeting.create_activity :create, owner: meeting_user
       end
@@ -94,7 +94,13 @@ class MeetingsController < ApplicationController
       )
     end
     @meeting.save
-    @meeting.create_activity(:go_to, owner: current_user)
+
+    if @meeting.online_meeting
+      @meeting.create_activity :go_to, owner: current_user, parameters: { cross_platform: true }
+    else
+      @meeting.create_activity :go_to, owner: current_user
+    end
+
     #flash[:notice] = "Du wurdest als InteressentIn hinzugefügt."
     redirect_to [@meeting.graetzl, @meeting]
   end

@@ -1,5 +1,5 @@
 class Notifications::PaidAttendeeInUsersMeeting < Notification
-  TRIGGER_KEY = 'meeting.paid_go_to'
+  TRIGGER_KEY = ['meeting.paid_go_to', 'cross_platform.meeting.paid_go_to']
   BITMASK = 0 # System notification
 
   def self.receivers(activity)

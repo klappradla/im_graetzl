@@ -12,6 +12,12 @@
       <%= icon_tag "tacker" %>
       <div class="icontxt">Neuer Toolteiler</div>
     <% end %>
+    <% if current_user.locations.empty? %>
+      <%= link_to new_location_path do %>
+        <%= icon_tag "location" %>
+        <div class="icontxt">Neue Location erstellen</div>
+      <% end %>
+    <% end %>
     <% if current_user.admin? %>
       <%= link_to new_group_path(graetzl_id: current_user.graetzl_id) do %>
         <%= icon_tag "speech-bubble" %>

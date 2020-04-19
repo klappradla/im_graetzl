@@ -32,6 +32,7 @@ class RoomDemand < ApplicationRecord
   validate :has_one_graetzl_at_least # doesn't work for some reason
 
   before_create :set_last_activated_at
+  before_update :create_update_activity?
   after_destroy { MailchimpRoomDeleteJob.perform_later(user) }
 
   def to_s
@@ -44,6 +45,13 @@ class RoomDemand < ApplicationRecord
 
   def set_last_activated_at
     self.last_activated_at = Time.now
+  end
+
+  def create_update_activity?
+    # create update activity if last update is at least more then 7 days ago
+    if self.enabled? && self.updated_at_was <= 7.days.ago
+      self.create_activity(:update, owner: self.user)
+    end
   end
 
   private

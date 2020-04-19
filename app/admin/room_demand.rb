@@ -34,4 +34,42 @@ ActiveAdmin.register RoomDemand do
       chain
     end
   end
+
+  csv do
+    column :id
+    #column :created_at
+    #column :last_activated_at
+
+    column(:districts) { |g|
+      g.districts.map { |district|
+        district.try(:zip)
+      }
+    }
+
+    column(:graetzls) { |g|
+      g.graetzls.map { |graetzl|
+        graetzl.name
+      }
+    }
+
+    column(:room_categories) { |g|
+      g.room_categories.map { |category|
+        category.name
+      }
+    }
+
+    column :slogan
+    column :demand_description
+    column :needed_area
+    column :wants_collaboration
+    column :personal_description
+
+    column(:keyword_list) { |g|
+      g.keyword_list.map { |keyword|
+        keyword
+      }
+    }
+
+  end
+
 end

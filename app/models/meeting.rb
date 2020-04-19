@@ -47,6 +47,7 @@ class Meeting < ApplicationRecord
 
   before_create :set_privacy
   after_create :update_location_activity
+  before_update :create_update_activity?
 
   def self.visible_to_all
     where(private: false)
@@ -115,6 +116,18 @@ class Meeting < ApplicationRecord
     if approved_for_api?
       update approved_for_api: false
       create_activity(:disapprove_for_api)
+    end
+  end
+
+  def create_update_activity?
+    # Create Update Activity for new StarDate for Rake-Task set new Date.
+    if self.starts_at_date_was.past? && self.starts_at_date > 2.days.from_now
+      #puts '------create activity after update meeting------'
+      if self.online_meeting
+        self.create_activity :create, owner: self.user, parameters: { cross_platform: true }
+      else
+        self.create_activity :create, owner: self.user
+      end
     end
   end
 

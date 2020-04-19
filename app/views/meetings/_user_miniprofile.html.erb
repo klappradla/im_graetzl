@@ -1,8 +1,8 @@
 <div class="user-miniprofile-container">
-  <%= link_to 'javascript:', data: { jq_dropdown: "#user-dropdown-#{user.id}" }, class: 'user-miniprofile-link' do %>
+  <%= link_to 'javascript:', data: { jq_dropdown: "#user-dropdown-#{going_to.id}" }, class: 'user-miniprofile-link' do %>
     <%= avatar_for user %>
   <% end %>
-  <div id="user-dropdown-<%= user.id %>" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-left">
+  <div id="user-dropdown-<%= going_to.id %>" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-left">
     <div class="jq-dropdown-panel">
       <%= link_to user.username, user, class: 'userlink' %>
       <p><%= user.full_name %></p>

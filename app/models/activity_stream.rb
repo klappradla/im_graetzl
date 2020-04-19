@@ -7,13 +7,16 @@ class ActivityStream
   def fetch
     activities = [
       Activity.where(trackable_id: @graetzl.meetings.non_private.pluck(:id), key: ['meeting.comment', 'meeting.create', 'meeting.go_to', 'meeting.paid_go_to']),
-      # Include Online Meetings in Activity Stream for all Greatzls
-      Activity.where(trackable_type: 'Meeting', key: ['meeting.create_visible_to_all']),
+
+      # Include Online Meetings in Activity Stream for all Greatzls:
+      Activity.where(trackable_id: Meeting.non_private.pluck(:id), key: ['cross_platform.meeting.create', 'cross_platform.meeting.go_to', 'cross_platform.meeting.paid_go_to']),
+      #Activity.where(key: ['cross_platform.meeting.create', 'cross_platform.meeting.go_to']),
+
       Activity.where(trackable_id: @graetzl.location_ids, key: ['location.create']),
       Activity.where(trackable_id: @graetzl.post_ids, key: ['user_post.comment', 'user_post.create', 'admin_post.comment', 'admin_post.create', 'location_post.comment', 'location_post.create']),
       Activity.where(trackable_id: @graetzl.admin_post_ids, key: ['admin_post.comment', 'admin_post.create']),
-      Activity.where(trackable_id: @graetzl.room_offer_ids, key: ['room_offer.create', 'room_offer.comment']),
-      Activity.where(trackable_id: @graetzl.room_demand_ids, key: ['room_demand.create']),
+      Activity.where(trackable_id: @graetzl.room_offer_ids, key: ['room_offer.create', 'room_offer.update', 'room_offer.comment']),
+      Activity.where(trackable_id: @graetzl.room_demand_ids, key: ['room_demand.create', 'room_demand.update']),
       Activity.where(trackable_id: @graetzl.room_call_ids, key: ['room_call.create']),
       Activity.where(trackable_id: @graetzl.tool_offers.enabled.pluck(:id), key: ['tool_offer.create', 'tool_offer.comment']),
       Activity.where(trackable_id: @graetzl.groups.non_private.pluck(:id), key: ['group.create']),

@@ -1,5 +1,5 @@
 class Notifications::NewGroupMeeting < Notification
-  TRIGGER_KEY = 'meeting.create'
+  TRIGGER_KEY = ['meeting.create', 'cross_platform.meeting.create']
   DEFAULT_INTERVAL = :daily
   BITMASK = 2**17
 
