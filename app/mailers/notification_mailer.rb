@@ -144,15 +144,19 @@ class NotificationMailer < ApplicationMailer
     #puts group_notifications
     # END CHANGES MICHAEL
 
+    puts '--------- NOTIFICATIONS ----------'
 
     tmp_notifications = {}
     @notifications.each do |notification|
+      puts '---- single notification ----'
+      puts notification
       @notifications.delete(notification) if tmp_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"].present?
       #puts notification.activity.key
       #puts notification.activity.id
       #puts notification.activity.trackable.id
       tmp_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"] = true
     end
+    puts '------- tmp_notifications cleaned:'
     puts tmp_notifications
 
 
