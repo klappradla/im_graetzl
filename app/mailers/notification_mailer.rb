@@ -122,6 +122,9 @@ class NotificationMailer < ApplicationMailer
     @notifications[:groups] = user.pending_notifications(@period).where(
       type: GROUP_SUMMARY_TYPES.map(&:to_s)
     )
+
+    puts @notifications
+
     # BEGIN CHANGES MICHAEL
     # CLEAN PERSONAL NOTIFICATIONS FROM NOT NECESSARY DOUBLES
     personal_notifications = {}
@@ -141,6 +144,9 @@ class NotificationMailer < ApplicationMailer
     puts '--------- GROUP NOTIFICATIONS CLEANED: -------'
     puts group_notifications
     # END CHANGES MICHAEL
+
+    puts @notifications
+
     if @notifications.values.all?(&:empty?)
       return
     end
