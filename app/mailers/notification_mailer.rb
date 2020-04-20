@@ -146,7 +146,9 @@ class NotificationMailer < ApplicationMailer
     puts group_notifications
     # END CHANGES MICHAEL
 
+    puts '--------- @notifications[:groups]: -------'
     puts @notifications[:groups]
+    puts '--------- @notifications: -------'
     puts @notifications
 
     if @notifications.values.all?(&:empty?)
