@@ -145,15 +145,15 @@ class NotificationMailer < ApplicationMailer
     # END CHANGES MICHAEL
 
 
-    notifications = {}
+    tmp_notifications = {}
     @notifications.each do |notification|
-      @notifications.delete(notification) if notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"].present?
+      @notifications.delete(notification) if tmp_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"].present?
       #puts notification.activity.key
       #puts notification.activity.id
       #puts notification.activity.trackable.id
-      notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"] = true
+      tmp_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"] = true
     end
-    puts notifications
+    puts tmp_notifications
 
 
     if @notifications.values.all?(&:empty?)
