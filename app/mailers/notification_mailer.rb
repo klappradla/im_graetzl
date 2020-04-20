@@ -137,6 +137,7 @@ class NotificationMailer < ApplicationMailer
 
     # CLEAN GROUP NOTIFICATIONS FROM NOT NECESSARY DOUBLES
     group_notifications = {}
+    puts @notifications[:groups]
     @notifications[:groups].each do |notification|
       @notifications[:groups].delete(notification) if group_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"].present?
       group_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"] = true
@@ -145,6 +146,7 @@ class NotificationMailer < ApplicationMailer
     puts group_notifications
     # END CHANGES MICHAEL
 
+    puts @notifications[:groups]
     puts @notifications
 
     if @notifications.values.all?(&:empty?)
