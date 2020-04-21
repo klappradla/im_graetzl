@@ -113,40 +113,37 @@ class NotificationMailer < ApplicationMailer
     @user, @period = user, period
 
     @notifications = {}
-    @notifications[:atendees] = user.pending_notifications(@period).where(
+    @notifications_attendees = user.pending_notifications(@period).where(
       type: "Notifications::AttendeeInUsersMeeting"
     )
-    @notifications[:personal] = user.pending_notifications(@period).where(
+    @notifications_personal = user.pending_notifications(@period).where(
       type: PERSONAL_SUMMARY_BLOCKS.values.flatten.map(&:to_s)
     )
-    @notifications[:groups] = user.pending_notifications(@period).where(
+    @notifications_groups = user.pending_notifications(@period).where(
       type: GROUP_SUMMARY_TYPES.map(&:to_s)
     )
 
-    # BEGIN CHANGES MICHAEL
     # CLEAN PERSONAL NOTIFICATIONS FROM NOT NECESSARY DOUBLES
     personal_notifications = {}
-    @notifications[:personal].each do |notification|
-      @notifications[:personal].delete(notification) if personal_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"].present?
+    @notifications_personal.each do |notification|
+      @notifications_personal.delete(notification) if personal_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"].present?
       personal_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"] = true
     end
     puts '--------- PERSONAL NOTIFICATIONS CLEANED: -------'
     puts personal_notifications
-    puts @notifications[:personal]
 
     # CLEAN GROUP NOTIFICATIONS FROM NOT NECESSARY DOUBLES
     group_notifications = {}
-    @notifications[:groups].each do |notification|
-      #@notifications[:groups].delete(notification) if group_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"].present?
-
-      @notifications.update(':groups' => @notifications[:groups].reject{|n| n == notification})
-
+    @notifications_groups.each do |notification|
+      @notifications_groups.delete(notification) if group_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"].present?
       group_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"] = true
     end
     puts '--------- GROUP NOTIFICATIONS CLEANED: -------'
     puts group_notifications
-    # END CHANGES MICHAEL
-    puts @notifications[:groups]
+
+    @notifications[:attendees] = @notifications_attendees
+    @notifications[:personal] = @notifications_personal
+    @notifications[:groups] = @notifications_groups
 
     puts @notifications
 
