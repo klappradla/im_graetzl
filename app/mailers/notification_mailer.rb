@@ -140,6 +140,7 @@ class NotificationMailer < ApplicationMailer
     end
     puts '--------- GROUP NOTIFICATIONS CLEANED: -------'
     puts group_notifications
+    puts @notifications_groups
 
     @notifications[:attendees] = @notifications_attendees
     @notifications[:personal] = @notifications_personal
