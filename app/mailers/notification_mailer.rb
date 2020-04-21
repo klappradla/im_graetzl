@@ -137,7 +137,10 @@ class NotificationMailer < ApplicationMailer
     # CLEAN GROUP NOTIFICATIONS FROM NOT NECESSARY DOUBLES
     group_notifications = {}
     @notifications[:groups].each do |notification|
-      @notifications[:groups].delete(notification) if group_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"].present?
+      #@notifications[:groups].delete(notification) if group_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"].present?
+
+      @notifications.update(':groups' => @notifications[:groups].reject{|n| n == notification})
+
       group_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"] = true
     end
     puts '--------- GROUP NOTIFICATIONS CLEANED: -------'
