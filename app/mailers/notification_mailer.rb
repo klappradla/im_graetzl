@@ -48,22 +48,21 @@ class NotificationMailer < ApplicationMailer
 
   def summary_graetzl(user, period)
     @user, @period = user, period
+
+    # CLEAN NOTIFICATIONS FROM NOT NECESSARY DOUBLES (could be in meetings -> because of rake task set new date)
+    tmp_notifications = {}
+    user.pending_notifications(@period).where(type: GRAETZL_SUMMARY_BLOCKS.values.flatten.map(&:to_s)).each do |notification|
+      next if notification.activity.key != ('meeting.create' || 'cross_platform.meeting.create') # check only for meetings
+      notification.delete if tmp_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"].present?
+      tmp_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"] = true
+    end
+    puts '--------- NOTIFICATIONS CLEANED: -------'
+    puts tmp_notifications
+
     @notifications = user.pending_notifications(@period).where(
       type: GRAETZL_SUMMARY_BLOCKS.values.flatten.map(&:to_s)
     )
-    # BEGIN CHANGES MICHAEL
-    # CLEAN NOTIFICATIONS FROM NOT NECESSARY DOUBLES (could be in meetings -> because of rake task set new date)
-    notifications = {}
-    @notifications.each do |notification|
-      next if notification.activity.key != 'meeting.create' # check only for meeting.create
-      @notifications.delete(notification) if notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"].present?
-      #puts notification.activity.key
-      #puts notification.activity.id
-      #puts notification.activity.trackable.id
-      notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"] = true
-    end
-    #puts notifications
-    # END CHANGES MICHAEL
+
     return if @notifications.empty?
 
     headers(
@@ -113,40 +112,40 @@ class NotificationMailer < ApplicationMailer
     @user, @period = user, period
 
     @notifications = {}
-    @notifications_attendees = user.pending_notifications(@period).where(
+    @notifications[:attendees] = user.pending_notifications(@period).where(
       type: "Notifications::AttendeeInUsersMeeting"
     )
-    @notifications_personal = user.pending_notifications(@period).where(
-      type: PERSONAL_SUMMARY_BLOCKS.values.flatten.map(&:to_s)
-    )
-    @notifications_groups = user.pending_notifications(@period).where(
-      type: GROUP_SUMMARY_TYPES.map(&:to_s)
-    )
+    #@notifications[:personal] = user.pending_notifications(@period).where(
+    #  type: PERSONAL_SUMMARY_BLOCKS.values.flatten.map(&:to_s)
+    #)
+    #@notifications[:groups] = user.pending_notifications(@period).where(
+    #  type: GROUP_SUMMARY_TYPES.map(&:to_s)
+    #)
 
-    # CLEAN PERSONAL NOTIFICATIONS FROM NOT NECESSARY DOUBLES
-    personal_notifications = {}
-    @notifications_personal.each do |notification|
-      @notifications_personal.delete(notification) if personal_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"].present?
-      personal_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"] = true
-    end
-    puts '--------- PERSONAL NOTIFICATIONS CLEANED: -------'
-    puts personal_notifications
-
-    # CLEAN GROUP NOTIFICATIONS FROM NOT NECESSARY DOUBLES
-    group_notifications = {}
-    @notifications_groups.each do |notification|
-      @notifications_groups.delete(notification) if group_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"].present?
-      group_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"] = true
+    # -------- CLEAN GROUP NOTIFICATIONS FROM NOT NECESSARY DOUBLES
+    tmp_group_notifications = {}
+    user.pending_notifications(@period).where(type: GROUP_SUMMARY_TYPES.map(&:to_s)).each do |notification|
+      notification.delete if tmp_group_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"].present?
+      tmp_group_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"] = true
     end
     puts '--------- GROUP NOTIFICATIONS CLEANED: -------'
-    puts group_notifications
-    puts @notifications_groups
+    puts tmp_group_notifications
 
-    @notifications[:attendees] = @notifications_attendees
-    @notifications[:personal] = @notifications_personal
-    @notifications[:groups] = @notifications_groups
+    # -------- CLEAN PERSONAL NOTIFICATIONS FROM NOT NECESSARY DOUBLES
+    tmp_personal_notifications = {}
+    user.pending_notifications(@period).where(type: PERSONAL_SUMMARY_BLOCKS.values.flatten.map(&:to_s)).each do |notification|
+      notification.delete if tmp_personal_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"].present?
+      tmp_personal_notifications["#{notification.activity.key}.#{notification.activity.id}.#{notification.activity.trackable.id}"] = true
+    end
+    puts '--------- PERSONAL NOTIFICATIONS CLEANED: -------'
+    puts tmp_personal_notifications
 
-    puts @notifications
+    @notifications[:personal] = user.pending_notifications(@period).where(
+      type: PERSONAL_SUMMARY_BLOCKS.values.flatten.map(&:to_s)
+    )
+    @notifications[:groups] = user.pending_notifications(@period).where(
+      type: GROUP_SUMMARY_TYPES.map(&:to_s)
+    )
 
     if @notifications.values.all?(&:empty?)
       return
