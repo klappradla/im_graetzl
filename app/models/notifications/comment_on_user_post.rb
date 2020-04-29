@@ -1,6 +1,7 @@
 class Notifications::CommentOnUserPost < Notification
   TRIGGER_KEY = 'user_post.comment'
-  DEFAULT_INTERVAL = :daily
+  DEFAULT_INTERVAL = :immediate
+  DEFAULT_WEBSITE_NOTIFICATION = :on
   BITMASK = 2**4
 
   def self.receivers(activity)

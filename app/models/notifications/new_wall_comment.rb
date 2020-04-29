@@ -1,6 +1,6 @@
 class Notifications::NewWallComment < Notification
   TRIGGER_KEY = 'user.comment'
-  DEFAULT_INTERVAL = :daily
+  DEFAULT_INTERVAL = :immediate
   DEFAULT_WEBSITE_NOTIFICATION = :on
   BITMASK = 2**10
 

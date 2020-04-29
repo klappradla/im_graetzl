@@ -8,11 +8,11 @@ class Notifications::NewGroupPost < Notification
   end
 
   def self.description
-    'Es gibt neue Antworten in Themen denen ich folge'
+    'Es gibt neue Beiträge in Themen denen ich folge'
   end
 
   def mail_subject
-    "Neue Antwort von #{activity.owner.first_name} im Thema #{activity.trackable.discussion.title}."
+    "Neuer Beitrag von #{activity.owner.first_name} im Thema #{activity.trackable.discussion.title}."
   end
 
   def group

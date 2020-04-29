@@ -1,7 +1,9 @@
 class Notifications::CommentOnDiscussionPost < Notification
   TRIGGER_KEY = 'discussion_post.comment'
-  DEFAULT_INTERVAL = :daily
-  BITMASK = 2**4
+  DEFAULT_INTERVAL = :immediate
+  DEFAULT_WEBSITE_NOTIFICATION = :on
+  BITMASK = 2**21
+
 
   def self.receivers(activity)
     User.where(id: activity.trackable.user_id)

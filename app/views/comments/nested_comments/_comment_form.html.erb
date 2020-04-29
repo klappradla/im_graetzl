@@ -1,0 +1,11 @@
+<%= form_for Comment.new(commentable: comment), html: { class: 'entryCommentForm', remote: true, data: { behavior: "comment-form-#{comment.id}" } } do |f| %>
+  <%= f.hidden_field :commentable_id %>
+  <%= f.hidden_field :commentable_type %>
+  <label>
+    <%= attachment_image_tag current_user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+    <%= f.text_area :content, placeholder: ' Kommentieren' %>
+  </label>
+  <div class="hideBlock">
+    <%= f.button 'Antwort senden', data: { disable_with: 'sendet...' } %>
+  </div>
+<% end %>

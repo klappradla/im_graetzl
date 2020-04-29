@@ -22,7 +22,7 @@
 
     <tr>
       <td colspan="2">
-        <%= render 'mailers/shared/button', title: "Zu deiner Pinnwand", url: graetzl_user_url(notification.activity.trackable.graetzl, notification.activity.trackable, anchor: "comment-#{notification.comment.id}") %>
+        <%= render 'mailers/shared/button', title: "Zu deiner Pinnwand", url: graetzl_user_url(notification.activity.trackable.graetzl, notification.activity.trackable, target: "comment_#{notification.comment.id}") %>
       </td>
     </tr>
 

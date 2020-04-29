@@ -1,6 +1,7 @@
 class Notifications::CommentOnRoomOffer < Notification
   TRIGGER_KEY = 'room_offer.comment'
-  DEFAULT_INTERVAL = :daily
+  DEFAULT_INTERVAL = :immediate
+  DEFAULT_WEBSITE_NOTIFICATION = :on
   BITMASK = 2**4
 
   def self.receivers(activity)
@@ -8,7 +9,7 @@ class Notifications::CommentOnRoomOffer < Notification
   end
 
   def self.description
-    "Meine erstellten Inhalte wurden kommentiert"
+    "Mein Raumteiler, Toolteiler bzw. Treffen wurde kommentiert"
   end
 
   def mail_template

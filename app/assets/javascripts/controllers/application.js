@@ -15,6 +15,10 @@ APP.controllers.application = (function() {
       "theme": false
     };
 
+    // Get Target for Mandrill Linking
+    $(window).on("load", function() {
+      setTimeout(scrollToTarget, 250)
+    });
 
     // Set Screen Mode Class
     enquire
@@ -38,7 +42,6 @@ APP.controllers.application = (function() {
               $('body').removeClass('mob');
             }
         });
-
 
     // TODO: this is a hack! stuff should come from DB
     function injectSponsorCard() {
@@ -72,6 +75,23 @@ APP.controllers.application = (function() {
 
         }
       });
+    }
+
+    function scrollToTarget() {
+      var target = getUrlVars()["target"];
+      if (typeof target !== 'undefined') {
+        $('html, body').animate({
+          scrollTop: $('#'+target).offset().top
+        }, 600);
+      }
+    }
+
+    function getUrlVars() {
+      var vars = {};
+      var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+          vars[key] = value;
+      });
+      return vars;
     }
 
   }

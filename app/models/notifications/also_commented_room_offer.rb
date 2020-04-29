@@ -8,7 +8,7 @@ class Notifications::AlsoCommentedRoomOffer < Notification
   end
 
   def self.description
-    'Es gibt neue Antworten auf Inhalte die ich auch kommentiert habe'
+    'Ein Raumteiler, Toolteiler bzw. Treffen welches ich kommentiert habe wurde auch kommentiert'
   end
 
   def mail_template

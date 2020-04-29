@@ -11,7 +11,7 @@
           <em><strong><%= notification.location.name %>:</strong></em>
         </p>
         <p>
-          <%= link_to notification.location_post.title, graetzl_location_url(notification.location.graetzl, notification.location, anchor: dom_id(notification.location_post)), style:"color:#ec776a; font-size:18px;" %>
+          <%= link_to notification.location_post.title, graetzl_location_url(notification.location.graetzl, notification.location, target: dom_id(notification.location_post)), style:"color:#ec776a; font-size:18px;" %>
         </p>
       </td>
     </tr>

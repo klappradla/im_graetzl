@@ -47,7 +47,7 @@
 
     <tr>
       <td colspan="2">
-        <%= render 'mailers/shared/button', title: "Zum Kommentar", url: polymorphic_url(@notification.comment_url_params) %>
+        <%= render 'mailers/shared/button', title: "Zum Kommentar", url: polymorphic_url(@notification.comment_url_params, :target => "comment_#{@notification.activity.recipient_id}") %>
       </td>
     </tr>
 

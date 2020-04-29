@@ -57,7 +57,7 @@
 
     <tr>
       <td colspan="2">
-        <%= render 'mailers/shared/button', title: "Zum Beitrag", url: group_discussion_url(@notification.group, @notification.discussion, anchor: "discussion-post-#{@notification.discussion_post.id}") %>
+        <%= render 'mailers/shared/button', title: "Zum Beitrag", url: group_discussion_url(@notification.group, @notification.discussion, target: "discussion-post-#{@notification.discussion_post.id}") %>
       </td>
     </tr>
 

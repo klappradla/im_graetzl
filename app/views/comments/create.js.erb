@@ -1,11 +1,22 @@
 (function() {
-  <% if @comment.persisted? %>
+  <% if @comment.persisted? && @comment.commentable_type == 'Comment' %>
+
+    var $commentForm = $("[data-behavior='comment-form-<%= @comment.commentable_id %>']");
+    $commentForm.before("<%= j render 'comments/nested_comments/comment', comment: @comment %>")
+    $commentForm.replaceWith("<%= j render 'comments/nested_comments/comment_form', comment: @comment.commentable %>");
+    APP.components.stream.init();
+
+  <% elsif @comment.persisted? %>
+
     var $streamForm = $("[data-behavior='stream-form']");
     $streamForm.after("<%= j render 'comments/stream_comment', comment: @comment %>")
     $streamForm.replaceWith("<%= j render 'form', commentable: @comment.commentable %>");
     APP.components.stream.init();
+
   <% else %>
+
     alert('Es gab ein Problem, bitte versuche es später nochmal.');
+
   <% end %>
 
 })();

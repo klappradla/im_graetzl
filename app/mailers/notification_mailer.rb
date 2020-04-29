@@ -89,13 +89,14 @@ class NotificationMailer < ApplicationMailer
       Notifications::CommentInMeeting, Notifications::CommentInUsersMeeting,
       Notifications::CommentOnAdminPost, Notifications::CommentOnLocationPost,
       Notifications::CommentOnRoomDemand, Notifications::CommentOnRoomOffer,
-      Notifications::CommentOnUserPost, Notifications::AlsoCommentedToolOffer,
+      Notifications::CommentOnUserPost, Notifications::CommentOnToolOffer,
+      Notifications::CommentOnComment,
     ],
     'Ebenfalls kommentiert' => [
       Notifications::AlsoCommentedAdminPost, Notifications::AlsoCommentedLocationPost,
       Notifications::AlsoCommentedMeeting, Notifications::AlsoCommentedRoomDemand,
       Notifications::AlsoCommentedRoomOffer, Notifications::AlsoCommentedUserPost,
-      Notifications::AlsoCommentedToolOffer,
+      Notifications::AlsoCommentedToolOffer, Notifications::AlsoCommentedComment,
     ]
   }
 

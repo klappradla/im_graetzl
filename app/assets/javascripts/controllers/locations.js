@@ -48,11 +48,6 @@ APP.controllers.locations = (function() {
 
         $('.autosubmit-stream').submit();
 
-        $('.show-all-comments-link').on("click", function() {
-          $(this).parents(".post-comments").find(".comment-container").removeClass("hide");
-          $(this).hide();
-        });
-
         // open comments if post hash exists
         var hash = window.location.hash.substr(1);
         if (hash.indexOf("location_post") != -1) {

@@ -3,7 +3,7 @@
   <%= form_for Comment.new(commentable: commentable), html: { class: 'textEditor', remote: true } do |f| %>
     <%= f.hidden_field :commentable_id %>
     <%= f.hidden_field :commentable_type %>
-    <%= f.text_area :content, cols: 80, rows: 5, placeholder: 'Kommentar abgeben', class: 'input-plain' %>
+    <%= f.text_area :content, cols: 80, rows: 5, placeholder: 'Neuen Beitrag schreiben ..', class: 'input-plain' %>
       <div class="hideBlock">
         <div class="upload-streamImgs">
           <%= icon_tag "photo-camera" %>

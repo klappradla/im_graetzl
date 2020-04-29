@@ -5,6 +5,12 @@ APP.components.stream = (function() {
         initCommentForm();
         initImgGallery();
         initLinkify();
+
+        $('.show-all-comments-link').on("click", function() {
+          $(this).parents(".post-comments").find(".comment-container").show();
+          $(this).hide();
+        });
+
     }
 
     function initEntryCreateForm() {
@@ -30,6 +36,7 @@ APP.components.stream = (function() {
 
     function initLinkify() {
         $('.stream .entryInitialContent .txt').linkify({ target: "_blank"});
+        $('.stream .post-comments .txt').linkify({ target: "_blank"});
     }
 
     function initCommentForm() {

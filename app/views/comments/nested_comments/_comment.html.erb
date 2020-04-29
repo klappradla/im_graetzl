@@ -1,4 +1,3 @@
-<!-- used for location post comments -->
 <div id="<%= dom_id(comment) %>" class="comment">
   <div class="entryUserComment">
     <% if comment.edit_permission?(current_user) %>
@@ -12,11 +11,15 @@
     <% end %>
     <a name="comment-<%= comment.id -%>"></a>
     <div class="userCreateInfo">
-      <%= attachment_image_tag comment.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
-      <span class="userAndType">
-        Kommentar von <%= link_to comment.user.username, comment.user %>
-        <span>vor <%= time_ago_in_words(comment.created_at) %></span>
-      </span>
+      <%= link_to comment.user do %>
+        <%= attachment_image_tag comment.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+      <% end %>
+      <div class="infos">
+        <div class="name"><%= link_to comment.user.full_name, comment.user %></div>
+        <div class="date">
+          <%= I18n.localize(comment.created_at, format:'%a, %d. %B %Y, %H:%M') %>
+        </div>
+      </div>
     </div>
     <div class="txt"><%= comment.content %></div>
     <% if comment.images.present? %>

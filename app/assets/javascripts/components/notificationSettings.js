@@ -12,7 +12,7 @@ APP.components.notificationSettings = (function() {
 
         // Get Target for Mandrill Linking
         $(document).ready(function() {
-          scrollToTarget();
+          initTarget();
         });
     }
 
@@ -62,7 +62,7 @@ APP.components.notificationSettings = (function() {
         }
     }
 
-    function scrollToTarget() {
+    function initTarget() {
       var target = getUrlVars()["target"];
       if (typeof target !== 'undefined') {
         var tabLink = $('a[href="#'+target+'"]');

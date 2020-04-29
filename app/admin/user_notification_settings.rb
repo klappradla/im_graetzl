@@ -21,10 +21,15 @@ ActiveAdmin.register User, as: "User Notification Settings" do
     ['New RoomDemand - Weekly','weekly_NewRoomDemand'],['New RoomDemand - Daily','daily_NewRoomDemand'],['New RoomDemand - Immediate','immediate_NewRoomDemand'],['New RoomDemand - Off','off_NewRoomDemand'],
     ['New ToolOffer - Weekly','weekly_NewToolOffer'],['New ToolOffer - Daily','daily_NewToolOffer'],['New ToolOffer - Immediate','immediate_NewToolOffer'],['New ToolOffer - Off','off_NewToolOffer'],
 
-    ['Commented Content - Weekly','weekly_CommentInUsersMeeting'],['Commented Content - Daily','daily_CommentInUsersMeeting'],['Commented Content - Immediate','immediate_CommentInUsersMeeting'],['Commented Content - Off','off_CommentInUsersMeeting'],
     ['Comment in Meeting - Weekly','weekly_CommentInMeeting'],['Comment in Meeting - Daily','daily_CommentInMeeting'],['Comment in Meeting - Immediate','immediate_CommentInMeeting'],['Comment in Meeting - Off','off_CommentInMeeting'],
-    ['Also Commented Content - Weekly','weekly_AlsoCommentedLocationPost'],['Also Commented Content - Daily','daily_AlsoCommentedLocationPost'],['Also Commented Content - Immediate','immediate_AlsoCommentedLocationPost'],['Also Commented Content - Off','off_AlsoCommentedLocationPost'],
     ['New Attendee in Meeting - Weekly','weekly_AttendeeInUsersMeeting'],['New Attendee in Meeting - Daily','daily_AttendeeInUsersMeeting'],['New Attendee in Meeting - Immediate','immediate_AttendeeInUsersMeeting'],['New Attendee in Meeting - Off','off_AttendeeInUsersMeeting'],
+
+    ['Commented Content - Weekly','weekly_CommentOnRoomOffer'],['Commented Content - Daily','daily_CommentOnRoomOffer'],['Commented Content - Immediate','immediate_CommentOnRoomOffer'],['Commented Content - Off','off_CommentOnRoomOffer'],
+    ['Also Commented Content - Weekly','weekly_AlsoCommentedRoomOffer'],['Also Commented Content - Daily','daily_AlsoCommentedRoomOffer'],['Also Commented Content - Immediate','immediate_AlsoCommentedRoomOffer'],['Also Commented Content - Off','off_AlsoCommentedRoomOffer'],
+
+    ['Commented on my Post - Weekly','weekly_CommentOnComment'],['Commented on my Post - Daily','daily_CommentOnComment'],['Commented on my Post - Immediate','immediate_CommentOnComment'],['Commented on my Post - Off','off_CommentOnComment'],
+    ['Also Commented Post - Weekly','weekly_AlsoCommentedComment'],['Also Commented Post - Daily','daily_AlsoCommentedComment'],['Also Commented Post - Immediate','immediate_AlsoCommentedComment'],['Also Commented Post - Off','off_AlsoCommentedComment'],
+
 
   ]}
 
@@ -41,8 +46,8 @@ ActiveAdmin.register User, as: "User Notification Settings" do
     column(:new_room_offer) { |u| u.enabled_mail_notification(Notifications::NewRoomOffer) }
     column(:new_room_demand) { |u| u.enabled_mail_notification(Notifications::NewRoomDemand) }
     column(:new_room_call) { |u| u.enabled_mail_notification(Notifications::NewRoomCall) }
-    column(:commented_content) { |u| u.enabled_mail_notification(Notifications::CommentInUsersMeeting) }
-    column(:also_commented_content) { |u| u.enabled_mail_notification(Notifications::AlsoCommentedLocationPost) }
+    column(:commented_content) { |u| u.enabled_mail_notification(Notifications::CommentOnRoomOffer) }
+    column(:also_commented_content) { |u| u.enabled_mail_notification(Notifications::AlsoCommentedRoomOffer) }
     column(:commented_wall) { |u| u.enabled_mail_notification(Notifications::NewWallComment) }
     column(:meeting_attendee) { |u| u.enabled_mail_notification(Notifications::AttendeeInUsersMeeting) }
     column(:meeting_updated) { |u| u.enabled_mail_notification(Notifications::MeetingUpdated) }

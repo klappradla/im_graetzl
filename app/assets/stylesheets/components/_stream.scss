@@ -59,28 +59,6 @@
     .actions button, .actions input { display: inline-block; margin-right: 15px; }
   }
 
-  .comment-container {
-    display: none;
-  }
-
-  // Show last 3 Comments (if change numer, also change in groups/discussion_posts/posts.html.erb)
-  .comment-container:nth-last-child(-n+3) {
-    display: block;
-  }
-
-
-  .show-all-comments-link {
-    //font-size: 12px;
-    @include font-size-primaryFont('small');
-    font-style: italic;
-    color: #69a8a7;
-    display: block;
-    text-decoration: none;
-    margin-bottom: 20px;
-    @include respond-to(">=medium") {
-      //margin-left: 60px;
-    }
-  }
   .entryCommentForm {
     .img-round {display: none;}
     &.is-focused {
@@ -92,16 +70,6 @@
     .comment-container.hide { display: none; }
   }
   .entryUserComment {
-    .userCreateInfo {
-      .name {
-        a {
-          text-decoration: none;
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-      }
-    }
     .entryImgUploads, .txt {
       margin-left: 50px;
     }
@@ -132,6 +100,44 @@
     }
   } // End User STYLING
 
+  .show-all-comments-link {
+    @include respond-to(">=medium") {
+      margin-left: 0px !important;
+    }
+  }
+
+}
+
+.userCreateInfo {
+  .name {
+    a {
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.post-comments {
+  .comment-container {
+    display: none;
+  }
+  // Show last 3 Comments (if change numer, also change in groups/discussion_posts/posts.html.erb)
+  .comment-container:nth-last-child(-n+3) {
+    display: block;
+  }
+  .show-all-comments-link {
+    @include font-size-primaryFont('small');
+    font-style: italic;
+    color: #69a8a7;
+    display: block;
+    text-decoration: none;
+    margin-bottom: 20px;
+    @include respond-to(">=medium") {
+      margin-left: 60px;
+    }
+  }
 }
 
 
@@ -149,19 +155,6 @@
     span {
       color: $color-ambient-rosa;
     }
-  }
-  .show-all-comments-link {
-    font-size: 12px;
-    color: #69a8a7;
-    display: block;
-    text-decoration: none;
-    margin-bottom: 10px;
-    @include respond-to(">=medium") {
-      margin-left: 60px;
-    }
-  }
-  .post-comments {
-    .comment-container.hide { display: none; }
   }
 }
 

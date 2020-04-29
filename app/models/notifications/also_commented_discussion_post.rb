@@ -1,7 +1,7 @@
 class Notifications::AlsoCommentedDiscussionPost < Notification
   TRIGGER_KEY = 'discussion_post.comment'
-  DEFAULT_INTERVAL = :daily
-  BITMASK = 2**6
+  DEFAULT_INTERVAL = :immediate
+  BITMASK = 2**22
 
   def self.receivers(activity)
     User.where(id: activity.trackable.comments.includes(:user).pluck(:user_id) - [activity.owner_id])

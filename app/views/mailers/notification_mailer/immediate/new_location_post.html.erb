@@ -35,7 +35,7 @@
       <td valign="center" class="mcnTextContent" width="100%">
 
         <h3 style="font-size:18px; font-style:normal; font-weight:normal; line-height:130%; letter-spacing:normal; margin-top:0;margin-right:0; margin-bottom:2px;">
-          <%= link_to @notification.location_post.title, graetzl_location_url(@notification.location.graetzl, @notification.location, anchor: dom_id(@notification.location_post)), style:"color:#f48a85;" %>
+          <%= link_to @notification.location_post.title, graetzl_location_url(@notification.location.graetzl, @notification.location, target: dom_id(@notification.location_post)), style:"color:#f48a85;" %>
         </h3>
 
         <p style="margin-top:12px;">
@@ -50,7 +50,7 @@
     </tr>
     <tr>
       <td colspan="2">
-        <%= render 'mailers/shared/button', title: "Neuigkeit lesen", url: graetzl_location_url(@notification.location.graetzl, @notification.location, anchor: dom_id(@notification.location_post)) %>
+        <%= render 'mailers/shared/button', title: "Neuigkeit lesen", url: graetzl_location_url(@notification.location.graetzl, @notification.location, target: dom_id(@notification.location_post)) %>
       </td>
     </tr>
   </tbody>
