@@ -42,12 +42,16 @@ class Notifications::AlsoCommentedComment < Notification
 
   def content_title
     case content_type
-    when 'Meeting', 'Location'
-      parent_content.name
+    when 'Meeting'
+      "Treffen: #{parent_content.name}"
+    when 'Location'
+      "Location: #{parent_content.name}"
     when 'RoomOffer', 'RoomDemand'
-      parent_content.slogan
+      "Raumteiler: #{parent_content.slogan}"
     when 'User'
       "#{parent_content.username}'s Pinnwand"
+    when 'ToolOffer'
+      "Toolteiler: #{parent_content.title}"
     else
       parent_content.title
     end

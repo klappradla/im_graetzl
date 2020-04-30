@@ -1,6 +1,6 @@
 class Notifications::AlsoCommentedAdminPost < Notification
   TRIGGER_KEY = 'admin_post.comment'
-  DEFAULT_INTERVAL = :daily
+  DEFAULT_INTERVAL = :weekly
   BITMASK = 2**6
 
   def self.receivers(activity)

@@ -1,6 +1,6 @@
 class Notifications::AlsoCommentedToolOffer < Notification
   TRIGGER_KEY = 'tool_offer.comment'
-  DEFAULT_INTERVAL = :daily
+  DEFAULT_INTERVAL = :weekly
   BITMASK = 2**6
 
   def self.receivers(activity)
