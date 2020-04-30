@@ -45,7 +45,9 @@ class Notification < ApplicationRecord
   end
 
   def self.broadcast(activity)
+    Rails.logger.info("[Notifications] #{activity}, creating notifications")
     triggered_types = ::Notification.subclasses.select{ |klass| klass.triggered_by? activity }
+    notification_count = 0
     notified_user_ids = {}
     #sort by bitmask, so that lower order bitmask types are sent first, because
     #higher order bitmask types might not needed to be sent at all, when a user
@@ -53,24 +55,19 @@ class Notification < ApplicationRecord
     triggered_types.sort{|a,b| a::BITMASK <=> b::BITMASK}.each do |klass|
       next if !klass.condition(activity)
       users = klass.receivers(activity)
-      #puts '------ receivers -----'
-      #puts users
       users.each do |u|
-        #puts '---------BROADCAST NOTIFICATION---------'
-        #puts u.id
         next if notified_user_ids[u.id].present?
         next if u == activity.owner && !klass.notify_owner?
 
         display_on_website = u.enabled_website_notification?(klass) && u != activity.owner
         n = klass.create(activity: activity, user: u, display_on_website: display_on_website)
-        #puts '--CREATED NOTIFICATION:'
-        #puts n
-        #puts n.activity.trackable
+        notification_count += 1
         send_immediate_email = u.enabled_mail_notification?(klass, :immediate)
         NotificationMailer.send_immediate(n).deliver_later if send_immediate_email
         notified_user_ids[u.id] = true if display_on_website || send_immediate_email
       end
     end
+    Rails.logger.info("[Notifications] #{activity}, created #{notification_count} notifications")
   end
 
   def to_partial_path

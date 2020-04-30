@@ -99,13 +99,6 @@ ActiveRecord::Schema.define(version: 2020_03_24_141611) do
     t.index ["user_id"], name: "index_business_interests_users_on_user_id"
   end
 
-  create_table "categories_meetings", id: false, force: :cascade do |t|
-    t.integer "category_id"
-    t.integer "meeting_id"
-    t.index ["category_id"], name: "index_categories_meetings_on_category_id"
-    t.index ["meeting_id"], name: "index_categories_meetings_on_meeting_id"
-  end
-
   create_table "comments", id: :serial, force: :cascade do |t|
     t.text "content"
     t.integer "user_id"
@@ -863,6 +856,8 @@ ActiveRecord::Schema.define(version: 2020_03_24_141611) do
     t.boolean "all_districts", default: false
     t.string "invoice_number"
     t.string "link"
+    t.integer "graetzl_id"
+    t.index ["graetzl_id"], name: "index_zuckerls_on_graetzl_id"
     t.index ["initiative_id"], name: "index_zuckerls_on_initiative_id"
     t.index ["location_id"], name: "index_zuckerls_on_location_id"
     t.index ["slug"], name: "index_zuckerls_on_slug"
@@ -878,6 +873,7 @@ ActiveRecord::Schema.define(version: 2020_03_24_141611) do
   add_foreign_key "discussion_posts", "users", on_delete: :nullify
   add_foreign_key "discussions", "discussion_categories", on_delete: :nullify
   add_foreign_key "discussions", "groups", on_delete: :cascade
+  add_foreign_key "discussions", "users", on_delete: :nullify
   add_foreign_key "district_graetzls", "districts", on_delete: :cascade
   add_foreign_key "district_graetzls", "graetzls", on_delete: :cascade
   add_foreign_key "going_tos", "meeting_additional_dates", on_delete: :nullify

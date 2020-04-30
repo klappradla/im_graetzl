@@ -8,6 +8,10 @@ class Activity < ApplicationRecord
     Notification.receive_new_activity(activity)
   end
 
+  def to_s
+    "#{trackable_type} (#{trackable_id}) #{key}"
+  end
+
   def appendix
     if key == 'location.create'
       { message: { title: "Neu auf imGrätzl", content: "Sag gleich Hallo!"}}

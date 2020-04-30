@@ -29,13 +29,13 @@ module MetaTagHelper
   private
 
   def meta_tag(name, content)
-    content_for :"meta_#{name.to_s}" do
+    content_for :"meta_#{name}" do
       tag(:meta, name: name.to_s, content: content)
     end
   end
 
   def og_tag(name, content)
-    content_for :"og_#{name.to_s}" do
+    content_for :"og_#{name}" do
       tag(:meta, property: "og:#{name}", content: content)
     end
   end
