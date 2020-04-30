@@ -36,12 +36,14 @@ namespace :scheduled do
     user = User.find_by(email: "michael.walchhuetter@gmail.com")
     NotificationMailer.summary_graetzl(user, :daily).deliver_now
     NotificationMailer.summary_personal(user, :daily).deliver_now
+    Rails.logger.flush
   end
 
   task test_weekly_summary_mail: :environment do
     user = User.find_by(email: "michael.walchhuetter@gmail.com")
     NotificationMailer.summary_graetzl(user, :weekly).deliver_now
     NotificationMailer.summary_personal(user, :weekly).deliver_now
+    Rails.logger.flush
   end
 
 end

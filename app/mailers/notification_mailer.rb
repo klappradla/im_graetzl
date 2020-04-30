@@ -118,7 +118,6 @@ class NotificationMailer < ApplicationMailer
   ]
 
   def summary_personal(user, period)
-    Rails.logger.info("[Summary Personal Mail] #{user.email} - #{period}")
     @user, @period = user, period
 
     @notifications = {}
