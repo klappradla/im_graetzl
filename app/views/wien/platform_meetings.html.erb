@@ -16,7 +16,7 @@
   </div>
 
   <div class="paperCard -cord1RT -top">
-    <div class="wrp">
+    <div class="wrp -stoerer">
       <p>
          <strong>In den unterschiedlichen Themenbereichen könnt ihr aus den online Sprechstunden und Gruppenrunden das wählen, was euch jetzt stärkt und unterstützt.</strong>
       </p>
@@ -30,6 +30,7 @@
       </p>
     </div>
     <div class="card"></div>
+    <div class="stoererImg"></div>
   </div>
 
   <%= form_tag meetings_path(platform_meeting: true, per_page: 75), method: :get, remote: true, class: 'cards-filter' do; end %>

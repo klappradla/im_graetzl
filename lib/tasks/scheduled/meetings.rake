@@ -15,9 +15,11 @@ namespace :scheduled do
       if meeting.meeting_additional_dates.present?
         next_meeting = meeting.meeting_additional_dates.sort_by(&:starts_at_date).first
         meeting.update(starts_at_date: next_meeting.starts_at_date)
-        # meeting.create_activity :create, owner: meeting.user
-        # create_activity moved to model before_update
         next_meeting.destroy
+        Rails.logger.info("[Meeting] Meeting (#{meeting.id}) updated next meeting date: #{next_meeting.starts_at_date}")
+        # Update notifications
+        meeting.activities.where(key: 'meeting.create').destroy_all
+        meeting.create_activity :create, owner: meeting.user, cross_platform: meeting.online_meeting?
       end
     end
 

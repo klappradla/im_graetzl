@@ -55,6 +55,26 @@ section.wien {
   }
 
   &.platform-meetings {
+
+    .-stoerer {
+      opacity: 0.3;
+    }
+
+    .stoererImg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 99;
+      background-image: url(image_path('stoerer.png'));
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 100%;
+      transform: rotate(-8deg);
+    }
+
     margin-top:40px;
     .-top {
       margin-bottom:50px;

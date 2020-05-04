@@ -64,7 +64,7 @@ class Notification < ApplicationRecord
         notification_count += 1
         send_immediate_email = u.enabled_mail_notification?(klass, :immediate)
         NotificationMailer.send_immediate(n).deliver_later if send_immediate_email
-        notified_user_ids[u.id] = true if display_on_website || send_immediate_email
+        notified_user_ids[u.id] = true
       end
     end
     Rails.logger.info("[Notifications] #{activity}, created #{notification_count} notifications")

@@ -69,11 +69,7 @@ class GoingTosController < ApplicationController
 
     going_to.save!
 
-    if @meeting.online_meeting
-      @meeting.create_activity :paid_go_to, owner: current_user, parameters: { cross_platform: true }
-    else
-      @meeting.create_activity :paid_go_to, owner: current_user
-    end
+    @meeting.create_activity :paid_go_to, owner: current_user, cross_platform: @meeting.online_meeting?
 
     if going_to.payment_method.in?(['card'])
       GoingToService.new.generate_invoice(going_to)
