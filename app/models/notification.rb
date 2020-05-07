@@ -42,8 +42,8 @@ class Notification < ApplicationRecord
 
   def self.broadcast(activity_id)
     activity = Activity.find(activity_id)
-    triggered_types = ::Notification.subclasses.select{ |klass| klass.triggered_by? activity }
-    Rails.logger.info("[Notifications] #{activity}, creating notifications #{::Notification.subclasses.count} types checked, #{triggered_types} found")
+    triggered_types = Notifications::ALL_TYPES.select{ |klass| klass.triggered_by? activity }
+    Rails.logger.info("[Notifications] #{activity}, creating notifications #{Notifications::ALL_TYPES.count} types checked, #{triggered_types} found")
     notification_count = 0
     notified_user_ids = {}
     #sort by bitmask, so that lower order bitmask types are sent first, because

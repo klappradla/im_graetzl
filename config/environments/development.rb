@@ -9,14 +9,6 @@ Rails.application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
-  # Eager load STI classes in order to use '.subclasses' method
-  config.eager_load_paths += Dir["#{Rails.root}/app/models/notifications/*.rb"]
-  config.eager_load_paths += Dir["#{Rails.root}/app/services/notifications/*.rb"]
-  ActiveSupport::Reloader.to_prepare do
-    Dir["#{Rails.root}/app/models/notifications/*.rb"].each {|file| require_dependency file}
-    Dir["#{Rails.root}/app/services/notifications/*.rb"].each {|file| require_dependency file}
-  end
-
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
 

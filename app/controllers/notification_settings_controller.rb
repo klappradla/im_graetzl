@@ -22,7 +22,7 @@ class NotificationSettingsController < ApplicationController
   private
 
   def check_valid_type
-    if !Notification.subclasses.map(&:name).include?(params[:type])
+    if !Notifications::ALL_TYPES.map(&:name).include?(params[:type])
       render body: "unrecognized type: #{params[:type]}", status: :forbidden
     end
   end

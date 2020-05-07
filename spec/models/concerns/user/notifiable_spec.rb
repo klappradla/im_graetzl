@@ -10,7 +10,7 @@ RSpec.describe User::Notifiable do
 
   describe 'website notifications' do
     before do
-      Notification.subclasses.each do |klass|
+      Notifications::ALL_TYPES.each do |klass|
         create(:notification, user: user, bitmask: klass::BITMASK, display_on_website: true)
       end
     end
@@ -80,7 +80,7 @@ RSpec.describe User::Notifiable do
   describe 'mail notifications' do
     describe 'enabling / disabling' do
       before do
-        Notification.subclasses.each do |klass|
+        Notifications::ALL_TYPES.each do |klass|
           create(:notification, user: user, bitmask: klass::BITMASK)
         end
       end

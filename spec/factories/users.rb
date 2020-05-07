@@ -16,7 +16,7 @@ FactoryBot.define do
 
     factory :user_with_enabled_website_notifications do
       after(:create) do |user|
-        user.enabled_website_notifications = Notification.subclasses.inject(0) { |sum, k| k::BITMASK | sum }
+        user.enabled_website_notifications = Notifications::ALL_TYPES.inject(0) { |sum, k| k::BITMASK | sum }
         user.save
       end
     end
