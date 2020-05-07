@@ -136,6 +136,11 @@ GEM
       safe_yaml (~> 1.0.0)
     crass (1.0.5)
     database_cleaner (1.7.0)
+    delayed_job (4.1.8)
+      activesupport (>= 3.0, < 6.1)
+    delayed_job_active_record (4.1.4)
+      activerecord (>= 3.0, < 6.1)
+      delayed_job (>= 3.0, < 5)
     devise (4.7.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -420,8 +425,6 @@ GEM
     stripe (4.23.0)
       faraday (~> 0.13)
       net-http-persistent (~> 3.0)
-    sucker_punch (2.1.1)
-      concurrent-ruby (~> 1.0)
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.9)
@@ -461,6 +464,7 @@ DEPENDENCIES
   capybara
   cocoon
   database_cleaner
+  delayed_job_active_record
   devise
   dotenv-rails
   factory_bot_rails
@@ -507,7 +511,6 @@ DEPENDENCIES
   sitemap_generator
   spring
   stripe
-  sucker_punch
   tzinfo-data
   uglifier
   underscore-rails

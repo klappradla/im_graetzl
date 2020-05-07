@@ -16,10 +16,6 @@ class Notification < ApplicationRecord
     where(sent: false)
   }
 
-  def self.receive_new_activity(activity)
-    CreateNotificationsJob.perform_later activity
-  end
-
   def self.receivers(activity)
     raise NotImplementedError, "receivers method not implemented for #{self.class}"
   end
@@ -44,7 +40,8 @@ class Notification < ApplicationRecord
     self.name.demodulize.underscore.dasherize
   end
 
-  def self.broadcast(activity)
+  def self.broadcast(activity_id)
+    activity = Activity.find(activity_id)
     Rails.logger.info("[Notifications] #{activity}, creating notifications")
     triggered_types = ::Notification.subclasses.select{ |klass| klass.triggered_by? activity }
     notification_count = 0

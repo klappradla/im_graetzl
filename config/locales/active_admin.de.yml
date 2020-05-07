@@ -9,6 +9,8 @@ de:
         approve: Freischalten
         approve_for_api: für API freischalten
         disapprove_for_api: für API ablehnen
+        add_to_platform_meetings: zu Platform Treffen hinzufügen
+        remove_from_platform_meetings: von Platform Treffen entfernen
         reject: Ablehnen
         destroy: Löschen
         mark_as_paid: als bezahlt markieren

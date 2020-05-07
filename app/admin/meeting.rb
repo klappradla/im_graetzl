@@ -6,6 +6,7 @@ ActiveAdmin.register Meeting do
 
   scope :all, default: true
   scope :online_meeting
+  scope :platform_meeting
   scope :active
   scope :cancelled
   scope :upcoming
@@ -28,12 +29,28 @@ ActiveAdmin.register Meeting do
   # batch actions
   batch_action :approve_for_api do |ids|
     batch_action_collection.find(ids).map(&:approve_for_api)
-    redirect_to collection_path, alert: 'Die ausgewählten Treffen wurden für die API genehmigt.'
+    redirect_to collection_path, alert: 'Die gewählten Treffen wurden für die API genehmigt.'
   end
 
   batch_action :disapprove_for_api, confirm: 'Wirklich aus API entfernen?' do |ids|
     batch_action_collection.find(ids).map(&:disapprove_for_api)
     redirect_to collection_path, alert: 'Die gewählten Treffen werden für die API nicht mehr genehmigt.'
+  end
+
+  batch_action :add_to_platform_meetings do |ids|
+    batch_action_collection.find(ids).each do |meeting|
+      meeting.platform_meeting = true
+      meeting.save
+    end
+    redirect_to collection_path, alert: 'Die gewählten Treffen wurden zu den Platform-Treffen hinzugefügt'
+  end
+
+  batch_action :remove_from_platform_meetings do |ids|
+    batch_action_collection.find(ids).each do |meeting|
+      meeting.platform_meeting = false
+      meeting.save
+    end
+    redirect_to collection_path, alert: 'Die gewählten Treffen wurden von den Platform-Treffen entfernt'
   end
 
   # action buttons

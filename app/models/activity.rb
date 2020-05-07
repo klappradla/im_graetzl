@@ -5,7 +5,7 @@ class Activity < ApplicationRecord
   serialize :parameters, Hash
 
   after_commit on: :create do |activity|
-    Notification.receive_new_activity(activity)
+    Notification.delay.broadcast(activity.id)
   end
 
   def to_s

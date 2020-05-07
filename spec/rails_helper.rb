@@ -13,7 +13,6 @@ require 'database_cleaner'
 require 'capybara/poltergeist'
 require 'webmock/rspec'
 require 'aasm/rspec'
-require 'sucker_punch/testing/inline'
 require "refile/file_double"
 
 # require all spec support files

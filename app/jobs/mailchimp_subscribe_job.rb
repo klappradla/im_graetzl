@@ -27,10 +27,10 @@ class MailchimpSubscribeJob < ApplicationJob
         interests: business_user_interests(user)
       })
     rescue Gibbon::MailChimpError => mce
-      SuckerPunch.logger.error("subscribe failed: due to #{mce.message}")
+      Rails.logger.error("subscribe failed: due to #{mce.message}")
       raise mce
     rescue => e
-      SuckerPunch.logger.error("subscribe failed: due to #{e.message}")
+      Rails.logger.error("subscribe failed: due to #{e.message}")
       raise e
     end
   end

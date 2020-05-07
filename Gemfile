@@ -9,7 +9,7 @@ gem 'pg'
 gem 'activerecord-postgis-adapter', '~> 5.0'
 gem 'rgeo'
 gem 'rgeo-geojson'
-gem 'sucker_punch'
+gem 'delayed_job_active_record'
 
 gem 'rack-attack'
 gem 'rack-cors', require: 'rack/cors'
