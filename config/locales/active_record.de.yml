@@ -4,6 +4,44 @@ de:
       messages:
         bad_url: ungültige url
         invalid_content_type: hat nicht unterstütztes Dateiformat
+      models:
+        image:
+          attributes:
+            file:
+              too_large: 'Das Bild ist zu groß. Maximale Filegröße 5mb'
+        location:
+          attributes:
+            avatar:
+              too_large: 'Das Bild ist zu groß. Maximale Filegröße 5mb'
+        meeting:
+          attributes:
+            cover_photo:
+              too_large: 'Das Bild ist zu groß. Maximale Filegröße 5mb'
+        room_demand:
+          attributes:
+            avatar:
+              too_large: 'Das Bild ist zu groß. Maximale Filegröße 5mb'
+        room_offer:
+          attributes:
+            avatar:
+              too_large: 'Das Bild ist zu groß. Maximale Filegröße 5mb'
+            cover_photo:
+              too_large: 'Das Bild ist zu groß. Maximale Filegröße 5mb'
+        tool_offer:
+          attributes:
+            cover_photo:
+              too_large: 'Das Bild ist zu groß. Maximale Filegröße 5mb'
+        user:
+          attributes:
+            avatar:
+              too_large: 'Das Bild ist zu groß. Maximale Filegröße 5mb'
+            cover_photo:
+              too_large: 'Das Bild ist zu groß. Maximale Filegröße 5mb'
+        zuckerl:
+          attributes:
+            image:
+              too_large: 'Das Bild ist zu groß. Maximale Filegröße 5mb'
+
     events:
       zuckerl:
         mark_as_paid: Als bezahlt markieren

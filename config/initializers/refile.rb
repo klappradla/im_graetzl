@@ -8,8 +8,8 @@ if Rails.env.production? || Rails.env.staging?
     region: ENV['AWS_REGION'],
     bucket: ENV['UPLOADS_BUCKET']
   }
-  Refile.cache = Refile::S3.new(prefix: 'refile/cache', **aws)
-  Refile.store = Refile::S3.new(prefix: 'refile/store', **aws)
+  Refile.cache = Refile::S3.new(max_size: 5.megabytes, prefix: 'refile/cache', **aws)
+  Refile.store = Refile::S3.new(max_size: 5.megabytes, prefix: 'refile/store', **aws)
   Refile.cdn_host = ENV['UPLOADS_CDN']
 
 end

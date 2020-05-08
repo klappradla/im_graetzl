@@ -41,7 +41,7 @@ class Group < ApplicationRecord
   scope :featured, -> { where(featured: true) }
 
   def self.include_for_box
-    includes(:group_users, :group_categories)
+    includes(:group_categories, group_users: :user)
   end
 
   def to_s
