@@ -5,20 +5,22 @@ ActiveAdmin.register Meeting do
   includes :graetzl, :location
 
   scope :all, default: true
+  scope :upcoming
   scope :online_meeting
   scope :platform_meeting
-  scope :active
-  scope :cancelled
-  scope :upcoming
+  scope :platform_meeting_pending
+  #scope :active
+  #scope :cancelled
 
+  filter :meeting_category, collection: proc { MeetingCategory.order(:starts_at_date).pluck(:title, :id) }, include_blank: true, input_html: { class: 'admin-filter-select'}
   filter :graetzl, collection: proc { Graetzl.order(:name).pluck(:name, :id) }, include_blank: true, input_html: { class: 'admin-filter-select'}
   filter :users, collection: proc { User.admin_select_collection }, include_blank: true, input_html: { class: 'admin-filter-select'}
   filter :location, collection: proc { Location.order(:name).pluck(:name, :id) }, include_blank: true, input_html: { class: 'admin-filter-select'}
-  filter :state, as: :select, collection: Meeting.states.keys
+  #filter :state, as: :select, collection: Meeting.states.keys, input_html: { class: 'admin-filter-select'}
   filter :name
   filter :description
   filter :created_at
-  filter :starts_at_date
+  #filter :starts_at_date
   filter :platform_meeting
   filter :online_meeting
 
@@ -59,16 +61,31 @@ ActiveAdmin.register Meeting do
   end
 
   action_item :disapprove_for_api, only: :show, if: proc{ meeting.approved_for_api? } do
-    link_to 'Treffen für API nicht genehmigen', disapprove_for_api_admin_meeting_path(meeting), { method: :put }
+    link_to 'Treffen von API entfernen', disapprove_for_api_admin_meeting_path(meeting), { method: :put }
+  end
+
+  # action buttons
+  action_item :mark_as_platform_meeting, only: :show, if: proc{ !meeting.platform_meeting } do
+    link_to 'Als Platform Treffen markieren', mark_as_platform_meeting_admin_meeting_path(meeting), { method: :put }
   end
 
   # member actions
+  member_action :mark_as_platform_meeting, method: :put do
+    if resource.mark_as_platform_meeting
+      flash[:success] = 'Das Treffen wurde als Platform Treffen markiert.'
+      redirect_to admin_meetings_path
+    else
+      flash[:error] = 'Das Treffen kann nicht als Platform Treffen markiert werden.'
+      redirect_to resource_path
+    end
+  end
+
   member_action :approve_for_api, method: :put do
     if resource.approve_for_api
       flash[:success] = 'Das Treffen wurde für die API genehmigt.'
       redirect_to admin_meetings_path
     else
-      flash[:error] = 'Das Treffen kan für die API nicht genehmigt werden.'
+      flash[:error] = 'Das Treffen kann für die API nicht genehmigt werden.'
       redirect_to resource_path
     end
   end
@@ -92,6 +109,10 @@ ActiveAdmin.register Meeting do
       end
   end
 
+  csv do
+    column(:email) {|m| m.user.email }
+  end
+
   permit_params :graetzl_id,
     :name,
     :slug,
@@ -103,6 +124,7 @@ ActiveAdmin.register Meeting do
     :location_id,
     :group_id,
     :user_id,
+    :meeting_category_id,
     :approved_for_api,
     :platform_meeting,
     :online_meeting,

@@ -76,3 +76,11 @@ a.btn-dark {
   font-weight: inherit;
   text-transform:none !important;
 }
+
+.ui-dialog {
+  width:50% !important;
+  height:80% !important;
+  textarea {
+    height:200px;
+  }
+}

@@ -1,0 +1,14 @@
+<% unless @meeting.platform_meeting_join_request.request_message.empty? %>
+  <div class="platform-meeting-user-box">
+    <div class="paperCard -cord1RT">
+      <div class="wrp">
+        <div class="userinfos">
+          <%= avatar_for(@meeting.user, 100) %>
+          <h3>Warum ich bei der Aktion mitmache?</h3>
+        </div>
+        <div class="txt"><%= @meeting.platform_meeting_join_request.request_message %></div>
+      </div>
+      <div class="card"></div>
+    </div>
+  </div>
+<% end %>

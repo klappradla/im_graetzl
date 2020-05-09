@@ -17,6 +17,7 @@ class MeetingsController < ApplicationController
 
   def new
     @meeting = initialize_meeting
+    @meeting.build_platform_meeting_join_request
   end
 
   def create
@@ -51,6 +52,9 @@ class MeetingsController < ApplicationController
     @meeting.assign_attributes(meeting_params)
     @meeting.graetzl = @meeting.address.graetzl if @meeting.address.try(:graetzl)
     @meeting.state = :active
+    unless @meeting.platform_meeting_join_request.wants_platform_meeting
+      @meeting.platform_meeting = false
+    end
 
     #changed_attributes = @meeting.changed_attributes.keys.map(&:to_sym)
     #changed_attributes.push(:address) if @meeting.address.try(:changed?)
@@ -155,11 +159,19 @@ class MeetingsController < ApplicationController
   end
 
   def filter_collection(meetings)
+
     graetzl_ids = params.dig(:filter, :graetzl_ids)
     if graetzl_ids.present? && graetzl_ids.any?(&:present?)
       #meetings = meetings.where(graetzl_id: graetzl_ids)
       meetings = meetings.where(graetzl_id: graetzl_ids).or(meetings.online_meeting)
     end
+
+    if params[:params_category_id].present?
+      meetings = meetings.where(meeting_category_id: params[:params_category_id])
+    elsif params[:meeting_category_id].present?
+      meetings = meetings.where(meeting_category_id: params[:meeting_category_id])
+    end
+
     meetings
   end
 
@@ -171,6 +183,7 @@ class MeetingsController < ApplicationController
         :group_id,
         :name,
         :description,
+        :meeting_category_id,
         :starts_at_date,
         :starts_at_time,
         :ends_at_time,
@@ -181,6 +194,7 @@ class MeetingsController < ApplicationController
         :online_meeting,
         :amount,
         meeting_additional_dates_attributes: [:id, :starts_at_date, :starts_at_time, :ends_at_time, :_destroy],
+        platform_meeting_join_request_attributes: [:id, :wants_platform_meeting, :request_message, :_destroy],
         address_attributes: [:id, :description, :online_meeting_description, :street_name, :street_number, :zip, :city, :coordinates]
     )
 

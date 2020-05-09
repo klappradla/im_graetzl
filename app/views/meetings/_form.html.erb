@@ -118,6 +118,45 @@
 
   </div>
 
+
+
+  <div class="meet-platform_meeting_request">
+    <p>Aktion <span>Selbständige</span> für <span>Selbständige</span></p>
+
+    <div class="checkbox_container">
+      <%= f.fields_for :platform_meeting_join_request do |p| %>
+        <div class="input-checkbox">
+          <%= p.check_box :wants_platform_meeting %>
+          <%= p.label :wants_platform_meeting, "Ja, ich möchte bei der Aktion Selbständige für Selbständige mitmachen." %>
+        </div>
+      <% end %>
+    </div>
+
+    <div id="meeting-platform-meeting-fields">
+      <div class="input-select">
+        <%= f.label :meeting_category_id do %>
+          <%= icon_tag "record" %>
+          <span>Kategorie</span>
+        <% end %>
+        <%= f.collection_select :meeting_category_id, MeetingCategory.all.order(:starts_at_date), :id, :category_width_date_range, { prompt: 'Wähle eine passende Kategorie ..' } %>
+      </div>
+
+      <%= f.fields_for :platform_meeting_join_request do |p| %>
+        <p class="question">Wieso möchtest du bei der Aktion mitmachen?</p>
+        <div class="input-textarea">
+          <%= p.label :request_message do %>
+            <%= icon_tag "layout-document" %>
+            <span>Deine Antwort</span>
+          <% end %>
+          <%= p.text_area :request_message, placeholder: 'Gib hier deine Antwort ein ..' %>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+
+
+
   <% if current_user.admin? %>
   <div class="meet-pricing">
     <p><span>Admin</span> Funktionen</p>

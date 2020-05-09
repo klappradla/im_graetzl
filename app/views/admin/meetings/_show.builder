@@ -8,6 +8,7 @@ context.instance_eval do
           row :online_meeting
           row :name
           row(:state){|m| status_tag(m.state)}
+          row :meeting_category
           row :slug
           row :created_at
           row :graetzl

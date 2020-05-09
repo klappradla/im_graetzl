@@ -1,0 +1,22 @@
+<div class="participants">
+  <% if meeting.attendees.size > 0 && meeting.paid? %>
+      <p class="userCount"><span><%= meeting.attendees.size %></span> nehmen teil</p>
+  <% elsif meeting.attendees.size > 0 %>
+      <p class="userCount"><span><%= meeting.attendees.size %></span> sind interessiert</p>
+  <% end %>
+  <div class="portraitCollection">
+    <% if !user_signed_in? %>
+      <% meeting.users.each do |user| next if user == meeting.user %>
+        <%= link_to avatar_for(user), user %>
+      <% end %>
+    <% elsif current_user == meeting.user || current_user.admin? %>
+      <% meeting.users.each do |user| next if user == meeting.user %>
+        <%= render "meetings/user_miniprofile", :user => user, :going_to => meeting.going_tos.where(user:user).last %>
+      <% end %>
+    <% else %>
+      <% meeting.users.each do |user| next if user == meeting.user %>
+        <%= link_to avatar_for(user), user %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

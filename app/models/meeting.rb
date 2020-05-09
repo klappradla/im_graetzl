@@ -12,6 +12,7 @@ class Meeting < ApplicationRecord
   belongs_to :location, optional: true
   belongs_to :user, optional: true
   belongs_to :group, optional: true
+  belongs_to :meeting_category, optional: true
 
   has_one :address, as: :addressable, dependent: :destroy
   accepts_nested_attributes_for :address
@@ -19,6 +20,9 @@ class Meeting < ApplicationRecord
   has_many :going_tos, dependent: :nullify
   accepts_nested_attributes_for :going_tos, allow_destroy: true
   has_many :users, -> { distinct }, through: :going_tos
+
+  has_one :platform_meeting_join_request
+  accepts_nested_attributes_for :platform_meeting_join_request, allow_destroy: true, reject_if: :all_blank
 
   has_many :comments, as: :commentable, dependent: :destroy
 
@@ -28,6 +32,9 @@ class Meeting < ApplicationRecord
   scope :non_private, -> { where(private: false) }
   scope :platform_meeting, -> { where(platform_meeting: true) }
   scope :online_meeting, -> { where(online_meeting: true) }
+  scope :platform_meeting_pending, -> {
+    where(platform_meeting: false).joins(:platform_meeting_join_request).merge(PlatformMeetingJoinRequest.wants_platform_meeting)
+  }
 
   scope :by_currentness, -> {
     active.
@@ -100,8 +107,16 @@ class Meeting < ApplicationRecord
     end
   end
 
+  def attendees
+    self.going_tos.where.not(role: :initiator)
+  end
+
   def attending?(user)
     user && going_tos.any?{|gt| gt.user_id == user.id}
+  end
+
+  def mark_as_platform_meeting
+    update platform_meeting: true
   end
 
   def approve_for_api

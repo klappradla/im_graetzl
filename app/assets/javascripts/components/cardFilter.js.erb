@@ -87,6 +87,29 @@ APP.components.cardFilter = (function() {
 
     // ----------- Search Suggestion Form - MICHAEL
 
+
+    // ----------- EPU-to-EPU
+
+    $("#meeting-categories").SumoSelect({
+      search: false,
+      searchText: 'Suche..',
+      placeholder: 'Kategorie wählen ..',
+      csvDispCount: 3,
+      captionFormat: 'in {0} Bezirken',
+      captionFormatAllSelected: 'alle Kategorien',
+      okCancelInMulti: true,
+      selectAll: true,
+      locale: ['Übernehmen', 'Abbrechen', 'Alle Kategorien']
+    });
+
+    $("#meeting-categories").on("change", function(){
+      $("#params_category_id").val('');
+      filterForm.submit();
+    });
+
+    // ----------- EPU-to-EPU
+
+
     filterForm = $(".cards-filter");
     cardGrid = $('.card-grid');
 

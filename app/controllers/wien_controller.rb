@@ -40,6 +40,6 @@ class WienController < ApplicationController
   end
 
   def platform_meetings
-    
+    @params_category = MeetingCategory.find_by(id: params[:category])
   end
 end

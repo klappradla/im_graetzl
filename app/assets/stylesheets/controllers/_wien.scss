@@ -56,6 +56,29 @@ section.wien {
 
   &.platform-meetings {
 
+    .sumo_meeting_category_id {
+      .date {
+        font-style: italic;
+        color: $color-ambient-grey;
+        font-weight: normal;
+      }
+      li.selected {
+
+      }
+      .SelectBox {
+        //font-weight: bold;
+      }
+    }
+
+    .cards-filter {
+      margin-bottom:40px;
+      display: flex;
+      justify-content: center;
+      .input-select {
+        min-width: 400px;
+      }
+    }
+
     .-stoerer {
       opacity: 0.3;
     }

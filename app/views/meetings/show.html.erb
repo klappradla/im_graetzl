@@ -38,7 +38,7 @@
   <div class="imgHeader -cloudy">
     <div class="titleHeadline">
       <div class="wrp">
-        <% if @meeting.online_meeting && @meeting.platform_meeting %>
+        <% if @meeting.platform_meeting %>
           <%= link_to content_tag(:h3, 'Selbstständige für Selbstständige', class: 'district'), platform_meetings_wien_path %>
         <% elsif @meeting.online_meeting %>
           <%= link_to content_tag(:h3, 'Online Event', class: 'district'), @graetzl %>
@@ -104,14 +104,24 @@
 
     <div class="bbcode"><%= @meeting.description.bbcode_to_html.html_safe %></div>
 
+    <%= render 'meetings/sidebar/platform_meeting_infos' if @meeting.platform_meeting %>
+
   </div>
 
-  <%= render 'meetings/participation', meeting: @meeting %>
+
+  <div class="entryParticipate" data-behavior="participants-container">
+    <%= render 'meetings/sidebar/participation_button', meeting: @meeting %>
+    <%= render 'meetings/sidebar/participations', meeting: @meeting %>
+    <%= render 'meetings/sidebar/platform_meeting_user_infos' if @meeting.platform_meeting && @meeting.platform_meeting_join_request %>
+  </div>
+
+
 
   <div class="stream">
     <%= render 'comments/form', commentable: @meeting %>
     <%= render partial: 'comments/stream_comment', collection: @comments, as: 'comment' %>
   </div>
+
 
   <% if @meeting.address.try(:coordinates) %>
     <script type="text/javascript">
@@ -132,5 +142,6 @@
       <div id="map"></div>
     </div>
   <% end %>
+
 
 </section>

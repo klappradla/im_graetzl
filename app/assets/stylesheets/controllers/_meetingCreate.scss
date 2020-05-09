@@ -69,7 +69,8 @@
   }
 
   .input-field,
-  .input-textarea {
+  .input-textarea,
+  .input-select {
     margin-bottom: 2.0rem;
   }
   label {
@@ -80,6 +81,24 @@
     float: right;
   }
 
+}
+
+#meeting-platform-meeting-fields {
+
+  .question {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+}
+
+.meet-platform_meeting_request {
+  .checkbox_container {
+    text-align: center;
+    margin-bottom: 10px;
+    .input-checkbox {
+      display: inline-block;
+    }
+  }
 }
 
 .meet-when {
