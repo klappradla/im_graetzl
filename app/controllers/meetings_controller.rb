@@ -45,6 +45,9 @@ class MeetingsController < ApplicationController
 
   def edit
     @meeting = find_user_meeting
+    if @meeting.platform_meeting_join_request.nil?
+      @meeting.build_platform_meeting_join_request
+    end
   end
 
   def update
