@@ -127,7 +127,7 @@
       <%= f.fields_for :platform_meeting_join_request do |p| %>
         <div class="input-checkbox">
           <%= p.check_box :wants_platform_meeting %>
-          <%= p.label :wants_platform_meeting, "Ja, ich möchte bei der Aktion Selbständige für Selbständige mitmachen." %>
+          <%= p.label :wants_platform_meeting, 'Ja, ich möchte bei der Aktion "Selbstständige für Selbstständige & Macher*innen" mitmachen.' %>
         </div>
       <% end %>
     </div>
@@ -142,13 +142,15 @@
       </div>
 
       <%= f.fields_for :platform_meeting_join_request do |p| %>
-        <p class="question">Wieso möchtest du bei der Aktion mitmachen?</p>
+        <p class="question">
+          <strong>Bitte ausfüllen:</strong> Warum engagierst du dich und stärkst mit deinem Angebot andere lokale Anbieter*innen und die lokale Wirtschaft?
+        </p>
         <div class="input-textarea">
           <%= p.label :request_message do %>
             <%= icon_tag "layout-document" %>
             <span>Deine Antwort</span>
           <% end %>
-          <%= p.text_area :request_message, placeholder: 'Gib hier deine Antwort ein ..' %>
+          <%= p.text_area :request_message, placeholder: 'Beschreibe deine Beweggründe in 1-2 Sätzen. (Deine Antwort wird bei deinem Angebot veröffentlicht)' %>
         </div>
       <% end %>
     </div>
