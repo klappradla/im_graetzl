@@ -104,6 +104,15 @@ section.wien {
       .wrp {
         padding:35px 50px 35px 50px;
         @include font-size-primaryFont('large');
+
+        @include respond-to(">=medium") {
+          background-image: url(image_path('illu/eputoepu.png'));
+          background-repeat: no-repeat;
+          background-position: center right;
+          background-size: 25% auto;
+          padding-right: 23%;
+        }
+
       }
     }
     .-bottom {
