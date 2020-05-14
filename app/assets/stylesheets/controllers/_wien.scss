@@ -56,6 +56,18 @@ section.wien {
 
   &.platform-meetings {
 
+    #meeting-categories {
+      background-color: transparent;
+      box-shadow: none;
+      color: #69a8a7;
+      //font-style: italic;
+      border: 1px solid #DBEFEC;
+      padding-right:50px;
+    }
+    select {
+      -webkit-appearance: none;
+    }
+
     .sumo_meeting_category_id {
       .date {
         font-style: italic;
@@ -68,6 +80,9 @@ section.wien {
       .SelectBox {
         //font-weight: bold;
       }
+      .optWrapper {
+        width: fit-content;
+      }
     }
 
     .cards-filter {
@@ -75,7 +90,7 @@ section.wien {
       display: flex;
       justify-content: center;
       .input-select {
-        min-width: 370px;
+        //min-width: 370px;
       }
     }
 
@@ -105,12 +120,28 @@ section.wien {
         padding:35px 50px 35px 50px;
         @include font-size-primaryFont('large');
 
+        .poweredby {
+          margin-top:15px;
+          display: block;
+          text-align: center;
+          img {
+            width: 40%;
+          }
+        }
+
         @include respond-to(">=medium") {
           background-image: url(image_path('illu/eputoepu.png'));
           background-repeat: no-repeat;
-          background-position: center right;
-          background-size: 25% auto;
-          padding-right: 23%;
+          background-position: center right 20px;
+          background-size: auto 95%;
+          padding-right: 30%;
+          .poweredby {
+            display: none;
+          }
+        }
+
+        @include respond-to(">=large") {
+          padding-right: 21%;
         }
 
       }

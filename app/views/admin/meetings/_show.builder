@@ -38,26 +38,23 @@ context.instance_eval do
       end
     end
     column do
-      panel 'Associations' do
-        tabs do
-          tab 'User' do
-            table_for meeting.going_tos do
-              column(:id){|g| g.user.id}
-              column(:username){|g| g.user.username}
-              column(:role){|g| status_tag(g.role)}
-              column(:going_to_date){|g| g.going_to_date}
-              column(''){|m| link_to 'User Anzeigen', admin_user_path(m.user) }
-            end
-          end
+      panel 'TeilnehmerInnen' do
+        table_for meeting.going_tos do
+          column(:id){|g| g.user.id}
+          column(:username){|g| g.user.username}
+          column(:role){|g| status_tag(g.role)}
+          column(:going_to_date){|g| g.going_to_date}
+          column(''){|m| link_to 'User Anzeigen', admin_user_path(m.user) }
         end
       end
-      panel 'Associations' do
-        tabs do
-          tab 'Additional Dates' do
-            table_for meeting.meeting_additional_dates do
-              column(:date){|g| link_to g.starts_at_date, admin_meeting_additional_date_path(g)}
-            end
-          end
+      panel 'Additional Dates' do
+        table_for meeting.meeting_additional_dates do
+          column(:date){|g| link_to g.starts_at_date, admin_meeting_additional_date_path(g)}
+        end
+      end
+      panel 'Aktion Selbstständige für Selbstständige' do
+        table_for meeting.platform_meeting_join_request do
+          column(:request_message){|p| p.request_message if p}
         end
       end
     end
