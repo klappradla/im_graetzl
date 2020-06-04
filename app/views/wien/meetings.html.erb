@@ -35,9 +35,12 @@
       <%= render 'meetings/action_card' %>
     </div>
     <!-- Insert Featured Card -->
-    <% unless Meeting.platform_meeting.upcoming.empty? %>
-      <%= render "shared/featured_cards/community_meeting" %>
-    <% end %>
+    <%= render "shared/featured_cards/gewerbeflaechen_umfrage" %>
+    <!--
+    < % unless Meeting.platform_meeting.upcoming.empty? % >
+      < %= render "shared/featured_cards/community_meeting" % >
+    < % end % >
+    -->
     <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'meetings-paginate-link' }, rel: 'nofollow' %>
   </div>
 

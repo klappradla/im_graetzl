@@ -6,8 +6,8 @@ context.instance_eval do
   column :graetzl
   column :user
   column 'Category',:meeting_category
+  column 'Online Event', :online_meeting
   column 'API', :approved_for_api
-  column 'Online', :online_meeting
-  column 'Platform', :platform_meeting
+  column 'SFS', :platform_meeting
   actions
 end

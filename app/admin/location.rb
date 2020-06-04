@@ -8,6 +8,7 @@ ActiveAdmin.register Location do
   scope :approved
 
   filter :graetzl, collection: proc { Graetzl.order(:name).pluck(:name, :id) }, include_blank: true, input_html: { class: 'admin-filter-select'}
+  filter :districts, collection: proc { District.order(:zip).pluck(:zip, :id) }, include_blank: true, input_html: { class: 'admin-filter-select'}
   filter :users, collection: proc { User.admin_select_collection }, include_blank: true, input_html: { class: 'admin-filter-select'}
   filter :location_category
   filter :state, as: :select, collection: Location.states.keys
@@ -63,6 +64,15 @@ ActiveAdmin.register Location do
     end
   end
 
+  csv do
+    column(:email) {|l| l.boss.email unless l.users.empty?}
+    column(:full_name) {|l| l.boss.full_name unless l.users.empty?}
+    column :id
+    column(:location_category) {|l| l.location_category.name if l.location_category}
+    column :name
+    column(:location_url) { |l| graetzl_location_url(l.graetzl, l)}
+    column :created_at
+  end
 
   # strong parameters
   permit_params :graetzl_id,

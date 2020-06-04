@@ -29,7 +29,7 @@ class MeetingsController < ApplicationController
       @meeting.graetzl = @meeting.address.try(:graetzl) || meeting_user.graetzl
     else
       meeting_user = current_user
-      @meeting.graetzl = @meeting.address.try(:graetzl) || @meeting.graetzl
+      @meeting.graetzl = @meeting.address.try(:graetzl) || @meeting.graetzl || meeting_user.graetzl
     end
 
     @meeting.user = meeting_user
@@ -55,7 +55,7 @@ class MeetingsController < ApplicationController
     @meeting.assign_attributes(meeting_params)
     @meeting.graetzl = @meeting.address.graetzl if @meeting.address.try(:graetzl)
     @meeting.state = :active
-    unless @meeting.platform_meeting_join_request.wants_platform_meeting
+    if @meeting.platform_meeting_join_request.no?
       @meeting.platform_meeting = false
     end
 
@@ -197,7 +197,7 @@ class MeetingsController < ApplicationController
         :online_meeting,
         :amount,
         meeting_additional_dates_attributes: [:id, :starts_at_date, :starts_at_time, :ends_at_time, :_destroy],
-        platform_meeting_join_request_attributes: [:id, :wants_platform_meeting, :request_message, :_destroy],
+        platform_meeting_join_request_attributes: [:id, :status, :request_message, :_destroy],
         address_attributes: [:id, :description, :online_meeting_description, :street_name, :street_number, :zip, :city, :coordinates]
     )
 

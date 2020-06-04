@@ -126,8 +126,8 @@
     <div class="checkbox_container">
       <%= f.fields_for :platform_meeting_join_request do |p| %>
         <div class="input-checkbox">
-          <%= p.check_box :wants_platform_meeting %>
-          <%= p.label :wants_platform_meeting, 'Ja, ich möchte bei der Aktion "Selbstständige für Selbstständige & Macher*innen" mitmachen.' %>
+          <%= p.check_box :status, {}, "#{@meeting.platform_meeting_join_request.status != 'no' ? @meeting.platform_meeting_join_request.status : 'pending'}", "no" %>
+          <%= p.label :status, 'Ja, ich möchte bei der Aktion "Selbstständige für Selbstständige & Macher*innen" mitmachen.' %>
         </div>
       <% end %>
     </div>

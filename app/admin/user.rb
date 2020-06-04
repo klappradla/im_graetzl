@@ -8,6 +8,7 @@ ActiveAdmin.register User do
   scope :admin
 
   filter :graetzl, collection: proc { Graetzl.order(:name).pluck(:name, :id) }, include_blank: true, input_html: { class: 'admin-filter-select' }
+  filter :districts, collection: proc { District.order(:zip).pluck(:zip, :id) }, include_blank: true, input_html: { class: 'admin-filter-select'}
   filter :id, label: 'User', as: :select, collection: proc { User.admin_select_collection }, include_blank: true, input_html: { class: 'admin-filter-select'}
   filter :location_category, collection: proc { LocationCategory.pluck(:name, :id) }, include_blank: true
   filter :business_interests, collection: proc { BusinessInterest.pluck(:title, :id) }, include_blank: true

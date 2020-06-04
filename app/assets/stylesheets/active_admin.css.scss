@@ -25,7 +25,7 @@
 
   white-space: nowrap;
 
-  &.non_meetable, &.deleted, &.rejected, &.off, &.payment_failed {
+  &.non_meetable, &.deleted, &.rejected, &.off, &.payment_failed, &.declined {
     background: red;
   }
   &.pending, &.nein, &.owner_meetable, &.disabled, &.return_pending, &.cancelled, &.payment_pending {
@@ -37,7 +37,7 @@
   &.recreation, &.public_space, &.payment_refunded {
     background: LightCoral;
   }
-  &.business, &.weekly {
+  &.business, &.weekly, &.processing {
     background: LightBlue;
   }
   &.vacancy, &.daily {

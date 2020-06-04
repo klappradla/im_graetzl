@@ -32,8 +32,15 @@ class Meeting < ApplicationRecord
   scope :non_private, -> { where(private: false) }
   scope :platform_meeting, -> { where(platform_meeting: true) }
   scope :online_meeting, -> { where(online_meeting: true) }
+
   scope :platform_meeting_pending, -> {
-    where(platform_meeting: false).joins(:platform_meeting_join_request).merge(PlatformMeetingJoinRequest.wants_platform_meeting)
+    where(platform_meeting: false).joins(:platform_meeting_join_request).merge(PlatformMeetingJoinRequest.pending)
+  }
+  scope :platform_meeting_processing, -> {
+    where(platform_meeting: false).joins(:platform_meeting_join_request).merge(PlatformMeetingJoinRequest.processing)
+  }
+  scope :platform_meeting_declined, -> {
+    where(platform_meeting: false).joins(:platform_meeting_join_request).merge(PlatformMeetingJoinRequest.declined)
   }
 
   scope :by_currentness, -> {
@@ -69,6 +76,10 @@ class Meeting < ApplicationRecord
 
   def self.include_for_box
     includes(:going_tos, :user, location: :users)
+  end
+
+  def platform_meeting_pending?
+    !self.platform_meeting? && (self.platform_meeting_join_request.pending? || self.platform_meeting_join_request.processing?)
   end
 
   def public?
@@ -115,8 +126,14 @@ class Meeting < ApplicationRecord
     user && going_tos.any?{|gt| gt.user_id == user.id}
   end
 
-  def mark_as_platform_meeting
+  def approve_for_platform_meeting
     update platform_meeting: true
+    self.platform_meeting_join_request.assign_attributes(status: :approved)
+  end
+
+  def decline_for_platform_meeting
+    update platform_meeting: false
+    self.platform_meeting_join_request.assign_attributes(status: :declined)
   end
 
   def approve_for_api

@@ -12,6 +12,7 @@ class User < ApplicationRecord
   enum role: { admin: 0 }
 
   belongs_to :graetzl, counter_cache: true
+  has_many :districts, through: :graetzl
   has_one :curator, dependent: :destroy
   has_one :address, as: :addressable, dependent: :destroy
 

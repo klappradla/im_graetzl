@@ -213,11 +213,11 @@ APP.controllers.meetings = (function() {
 
 
       // platform_meeting toggle
-      var $wants_platform_meeting_checkbox = $('input:checkbox#meeting_platform_meeting_join_request_attributes_wants_platform_meeting');
-      if(!document.getElementById('meeting_platform_meeting_join_request_attributes_wants_platform_meeting').checked) {
+      var $platform_join_checkbox = $('input:checkbox#meeting_platform_meeting_join_request_attributes_status');
+      if(!document.getElementById('meeting_platform_meeting_join_request_attributes_status').checked) {
         $('div#meeting-platform-meeting-fields').hide();
       }
-      $wants_platform_meeting_checkbox.on('change', function() {
+      $platform_join_checkbox.on('change', function() {
         $('div#meeting-platform-meeting-fields').slideToggle();
       });
 
