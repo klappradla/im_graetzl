@@ -150,10 +150,10 @@ section.meeting {
   }
 
   .userinfos {
-    img {
-      width:95px;
-      height:95px;
-      float:left;
+    img.avatar {
+      min-width:95px !important;
+      min-height:95px !important;
+      //float:left;
       margin-right: 16px;
     }
     display: flex;

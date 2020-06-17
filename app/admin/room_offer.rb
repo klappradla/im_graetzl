@@ -44,10 +44,14 @@ ActiveAdmin.register RoomOffer do
 
   csv do
     column :id
+    column(:email) {|r| r.user.email if r.user }
+    column(:full_name) {|r| r.user.full_name if r.user }
+    column :user_id
+
     #column :created_at
     #column :last_activated_at
     column(:district) { |room_offer| room_offer.district.try(:zip) }
-    column(:graetzl)  { |room_offer| room_offer.graetzl.name }
+    #column(:graetzl)  { |room_offer| room_offer.graetzl.name }
 
     column(:room_categories) { |g|
       g.room_categories.map { |category|
@@ -56,24 +60,24 @@ ActiveAdmin.register RoomOffer do
     }
 
     column :slogan
-    column :room_description
-    column :total_area
-    column :rented_area
+    #column :room_description
+    #column :total_area
+    #column :rented_area
     column :wants_collaboration
-    column :owner_description
-    column :tenant_description
+    #column :owner_description
+    #column :tenant_description
 
-    column(:room_offer_prices) { |g|
-      g.room_offer_prices.map { |price|
-        "#{price.amount} - #{price.name}"
-      }
-    }
+    #column(:room_offer_prices) { |g|
+    #  g.room_offer_prices.map { |price|
+    #    "#{price.amount} - #{price.name}"
+    #  }
+    #}
 
-    column(:keyword_list) { |g|
-      g.keyword_list.map { |keyword|
-        keyword
-      }
-    }
+    #column(:keyword_list) { |g|
+    #  g.keyword_list.map { |keyword|
+    #    keyword
+    #  }
+    #}
 
   end
 
