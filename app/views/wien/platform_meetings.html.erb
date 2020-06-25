@@ -17,16 +17,21 @@
 
   <div class="paperCard -cord1RT -top">
     <div class="wrp">
-      <p>
-         <strong>Wählt aus den Angeboten das aus, was euch jetzt stärkt und weiterbringt. Alle zwei Wochen gibt es einen neuen Themenbereich. Alle Angebote sind im Rahmen der Aktion kostenlos.</strong>
-      </p>
-      <br>
-      <p>
-        Die Aktion wird ermöglicht durch die Expert*innen, die damit die lokalen Anbieter*innen & die lokale Vernetzung stärken. 1000 Dank! Wie man als Expert*in mitmachen kann, bitte <%= link_to 'hier entlang', 'https://blog.imgraetzl.at/allgemein/so-kannst-du-als-expertin-bei-selbststaendige-fuer-selbststaendige-macherinnen-mitmachen/', target: 'blank' %>.
-      </p>
+      <div class="illu-wrp">
+        <%= image_tag('illu/eputoepu.png', class: 'illu') %>
+      </div>
+      <div class="txt">
+        <p>
+           <strong>Wählt aus den Angeboten das aus, was euch jetzt stärkt und weiterbringt. Alle zwei Wochen gibt es einen neuen Themenbereich. Alle Angebote sind im Rahmen der Aktion kostenlos.</strong>
+        </p>
+        <br>
+        <p>
+          Die Aktion wird ermöglicht durch die Expert*innen, die damit die lokalen Anbieter*innen & die lokale Vernetzung stärken. 1000 Dank! Wie man als Expert*in mitmachen kann, bitte <%= link_to 'hier entlang', 'https://blog.imgraetzl.at/allgemein/so-kannst-du-als-expertin-bei-selbststaendige-fuer-selbststaendige-macherinnen-mitmachen/', target: 'blank' %>.
+        </p>
+      </div>
       <div class="poweredby-wrp">
-        <%= link_to(image_tag('logo-klimafonds-poweredby.png'), 'https://www.klimafonds.gv.at', target: '_blank', class: 'poweredby') %>
-        <%= link_to(image_tag('logo-bz.jpg'), 'https://www.meinbezirk.at/wien', target: '_blank', class: 'poweredby') %>
+        <%= link_to(image_tag('logo-klimafonds.png'), 'https://www.klimafonds.gv.at', target: '_blank', class: 'poweredby') %>
+        <%= link_to(image_tag('logo-bz.jpg'), 'https://www.meinbezirk.at/wien', target: '_blank', class: 'poweredby -bz') %>
       </div>
     </div>
     <div class="card"></div>

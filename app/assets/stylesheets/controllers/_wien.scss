@@ -117,13 +117,41 @@ section.wien {
     .-top {
       margin-bottom:50px;
       .wrp {
-        padding:35px 50px 35px 50px;
+        padding:30px 30px 30px 30px;
         @include font-size-primaryFont('large');
+        display: flex;
+        flex-wrap: wrap;
+        justify-content:center;
 
         .poweredby-wrp {
           display: flex;
-          justify-content: center;
+          flex-wrap: wrap;
+          justify-content:center;
           align-content: center;
+          width:30%;
+        }
+
+        .illu-wrp {
+          display: none;
+          align-self: center;
+          padding-right: 20px;
+          width:40%;
+          .illu {
+            width:100%;
+          }
+        }
+
+        @include respond-to(">=medium") {
+          flex-wrap:nowrap;
+          .poweredby-wrp {
+            justify-content:flex-start;
+            padding-left:10px;
+            //border-left: 1px solid #f0f0f0;
+            //margin-left: 10px;
+          }
+          .illu-wrp {
+            display: block;
+          }
         }
 
         .poweredby {
@@ -137,22 +165,13 @@ section.wien {
             height: 50px;
             width: auto;
           }
-        }
-
-        @include respond-to(">=medium") {
-          background-image: url(image_path('illu/eputoepu-bz.png'));
-          background-repeat: no-repeat;
-          background-position: center right 20px;
-          background-size: auto 95%;
-          padding-right: 30%;
-          .poweredby, .poweredby-wrp {
-            display: none;
+          &.-bz {
+            img {
+              height: 45px;
+            }
           }
         }
 
-        @include respond-to(">=large") {
-          padding-right: 21%;
-        }
 
       }
     }

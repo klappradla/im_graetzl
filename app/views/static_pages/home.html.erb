@@ -27,6 +27,17 @@
     <%= select_tag :select, options_for_select(district_url_options), prompt: 'Bezirk wählen', onchange: 'location.href = $(this).val()' %>
   </div>
 
+  <div class="block-meetings">
+    <div class="hl-subtext">
+      <h1>Entdecke — <span>Events &amp; Workhops</span> im Grätzl</h1>
+      <p>Organisiert von Selbstständigen, kl. Unternehmen, Vereinen & Macher*innen.</p>
+    </div>
+    <div class="cardBoxCollection -tripple -morelink">
+      <%= render @activity_sample.meetings %>
+      <%= render 'meetings/action_card', view_all: true %>
+    </div>
+  </div>
+
   <div class="block-locations">
     <div class="hl-subtext">
       <h1>Entdecke — <span>Anbieter &amp; Locations</span> im Grätzl</h1>
@@ -68,17 +79,6 @@
     <div class="cardBoxCollection -tripple -morelink">
       <%= render @activity_sample.groups %>
       <%= render 'groups/action_card', view_all: true, create_link: true %>
-    </div>
-  </div>
-
-  <div class="block-meetings">
-    <div class="hl-subtext">
-      <h1>Entdecke — <span>Events &amp; Workhops</span> im Grätzl</h1>
-      <p>Organisiert von Anbietern, Bewohnern &amp; Initiativen aus dem Grätzl.</p>
-    </div>
-    <div class="cardBoxCollection -tripple -morelink">
-      <%= render @activity_sample.meetings %>
-      <%= render 'meetings/action_card', view_all: true %>
     </div>
   </div>
 

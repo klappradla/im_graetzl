@@ -412,7 +412,7 @@ APP.controllers.reports = (function() {
                 url:
                   "/admin/" +
                   type +
-                  ".json?" +
+                  ".json??scope=all&" +
                   ajaxStartDate +
                   startDate +
                   ajaxEndDate +
