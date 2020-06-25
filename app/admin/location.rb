@@ -68,7 +68,7 @@ ActiveAdmin.register Location do
     column :id
     column(:email) {|l| l.boss.email unless l.users.empty?}
     column(:full_name) {|l| l.boss.full_name unless l.users.empty?}
-    column(:location_category) {|l| l.location_category.name unless l.location_category.empty?}
+    column(:location_category) {|l| l.location_category.name if l.location_category}
     column :name
     #column(:location_url) { |l| graetzl_location_url(l.graetzl, l)}
     #column :created_at
