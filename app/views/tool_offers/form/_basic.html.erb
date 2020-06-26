@@ -89,6 +89,7 @@
     <% end %>
     <div class="field-wrp">
       <%= f.fields_for :images do |ff| %>
+        <% next if !ff.object.valid? %>
         <div class="preview-wrp">
           <%= image_tag attachment_url(ff.object, :file, :fill, 159, 60) %>
           <div class="input-checkbox">

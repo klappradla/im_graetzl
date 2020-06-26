@@ -135,6 +135,10 @@ class User < ApplicationRecord
     self.locations.first
   end
 
+  def district
+    self.districts.first
+  end
+
   def rooms
     self.room_offers.enabled + self.room_demands.enabled
   end

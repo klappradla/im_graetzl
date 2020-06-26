@@ -128,7 +128,6 @@ section.wien {
           flex-wrap: wrap;
           justify-content:center;
           align-content: center;
-          width:30%;
         }
 
         .illu-wrp {
@@ -145,6 +144,7 @@ section.wien {
           flex-wrap:nowrap;
           .poweredby-wrp {
             justify-content:flex-start;
+            width:30%;
             padding-left:10px;
             //border-left: 1px solid #f0f0f0;
             //margin-left: 10px;
