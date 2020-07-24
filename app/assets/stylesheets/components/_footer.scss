@@ -124,29 +124,22 @@ footer {
     transform: rotate(5deg);
     position: absolute;
     color: $color-ambient-grey;
-    top:-100px;
+    top:-68px;
+    right: 10px;
     width:120px;
     text-align: center;
     font-size: 12px;
     color: #565759;
     img {
-      width:100%;
+      width:50px;
+    }
+    .img-video {
+      display: block;
     }
 
     @include respond-to("<medium") {
-      left: 0;
-      right: 0;
-      margin: auto;
-    }
-
-    @include respond-to(">=medium") {
-      top:-120px;
-      width:150px;
-      right:10px;
-    }
-
-    @include respond-to(">=large") {
-      right:-20px;
+      //left: 0;
+      //margin: auto;
     }
 
   }
