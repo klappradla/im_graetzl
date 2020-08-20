@@ -1,0 +1,6 @@
+<% filter_meeting_types.each do |label, filterlabel, value| %>
+  <div class="input-radio filter-input filter-meeting-type">
+    <%= radio_button :filter, :meeting_type, value, data: { label: filterlabel } %>
+    <%= label_tag "filter_meeting_type_#{value}", label %>
+  </div>
+<% end %>

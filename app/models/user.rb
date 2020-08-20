@@ -50,7 +50,7 @@ class User < ApplicationRecord
   has_many :wall_comments, as: :commentable, class_name: "Comment", dependent: :destroy
 
   has_one :billing_address, dependent: :destroy
-  accepts_nested_attributes_for :address, :billing_address
+  accepts_nested_attributes_for :address, :billing_address, reject_if: :all_blank
 
   validates :graetzl, presence: true
   validates :username, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 50 }

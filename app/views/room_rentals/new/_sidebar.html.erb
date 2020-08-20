@@ -1,0 +1,26 @@
+<% graetzl = Graetzl.memoized(@room_offer.graetzl_id) %>
+
+<div class="cardBox -roomoffer">
+
+  <div class="cardBoxHeader">
+    <div class="coverImgWrapper">
+      <%= link_to cover_photo_for(@room_offer), @room_offer %>
+    </div>
+    <% if graetzl %>
+      <div class="categoryicon">
+        <%= "#{graetzl.district.zip}, #{graetzl.name}" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="cardBoxContent">
+
+    <!-- Show default this Partail if no Date is choosen ...
+    < %= render 'room_rentals/new/package_pricing' % >
+    -->
+
+    <!-- Insert this Partial for Price Calculation when a Date is choosen -->
+    <%= render 'room_rentals/new/calculated_price' %>
+
+  </div>
+</div>

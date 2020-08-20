@@ -84,36 +84,158 @@ APP.components.cardFilter = (function() {
     var setValue = function(value) {
       suggestionForm.val(value);
     }
-
     // ----------- Search Suggestion Form - MICHAEL
 
 
+
     // ----------- EPU-to-EPU
-
-    /*
-    $("#meeting-categories").SumoSelect({
-      search: false,
-      searchText: 'Suche..',
-      placeholder: 'Kategorie wählen ..',
-      csvDispCount: 3,
-      captionFormat: 'in {0} Bezirken',
-      captionFormatAllSelected: 'alle Kategorien',
-      okCancelInMulti: true,
-      selectAll: true,
-      locale: ['Übernehmen', 'Abbrechen', 'Alle Kategorien']
-    });
-    */
-
     $("#meeting-categories").on("change", function(){
       $("#params_category_id").val('');
       filterForm.submit();
     });
-
     // ----------- EPU-to-EPU
+
 
 
     filterForm = $(".cards-filter");
     cardGrid = $('.card-grid');
+
+    // ---------- USE VOR NEW JBOX MODALS
+    var modals = []
+
+    // Use new jBox Modals
+    $(".filter-selection-text-jbox a").not( ".plain-link, .filter-modal-district" ).each(function(index, value) {
+
+        var modal = $(this).attr('href');
+        var $attach = $('[href="'+modal+'"]');
+        var $content = $(''+modal+'');
+
+        modals[modal] = new jBox('Confirm', {
+          addClass:'jBox',
+          attach: $attach,
+          getTitle: 'data-jbox-title',
+          confirmButton: 'Do it!',
+          cancelButton: 'Nope',
+          content: $content,
+          trigger: 'click',
+          closeOnEsc:true,
+          closeOnClick:'body',
+          blockScroll:true,
+          animation:{open: 'zoomIn', close: 'zoomOut'},
+          confirmButton: 'Anwenden',
+          cancelButton: 'Zurücksetzen',
+          confirm: function() {
+            updateFilterInputs(this.content);
+            updateFilterLabels(this.content);
+            filterForm.submit();
+          },
+          cancel: function() {
+            this.content.find('input:checked').removeAttr('checked');
+            updateFilterInputs(this.content);
+            updateFilterLabels(this.content);
+            filterForm.submit();
+          }
+
+        });
+
+    });
+
+    // jBox District Filter MODAL with Modal Buttons
+
+    var districtModal = new jBox('Confirm', {
+      addClass:'jBox',
+      attach: '.filter-modal-district',
+      getTitle: 'data-jbox-title',
+      confirmButton: 'Anwenden',
+      cancelButton: 'Zurücksetzen',
+      content: $('.filter-modal-jbox-district'),
+      trigger: 'click',
+      closeOnEsc:true,
+      closeOnClick:'body',
+      blockScroll:true,
+      animation:{open: 'zoomIn', close: 'zoomOut'},
+      confirm: function() {
+        selectAllGraetzlsIn(this.content);
+        updateFilterInputs(this.content);
+        updateFilterLabels(this.content);
+        filterForm.submit();
+      },
+      cancel: function() {
+        unSelectAllDistricts(this.content);
+        selectAllGraetzlsIn(this.content);
+        updateFilterInputs(this.content);
+        updateFilterLabels(this.content);
+        filterForm.submit();
+      }
+    });
+
+
+    // Check on Init Load -> Auslagern in Funktion
+    if ($('#select-home-graetzl').prop('checked') == true) {
+      unSelectAllDistricts($(".filter-modal-jbox-district"));
+      $('.filter-modal-jbox-district #select-all').prop("checked", false); // deselect Wien
+    }
+
+    $(".filter-modal-jbox-district").on("click", "#select-home-graetzl", function() {
+      //console.log($(this));
+      // Obige ausgelagerte Funktion aufrufen, sttt untig nochmals
+
+      if ($(this).prop('checked') == true) {
+        unSelectAllDistricts($(".filter-modal-jbox-district"));
+        $('.filter-modal-jbox-district #select-all').prop("checked", false); // deselect Wien
+
+      }
+    });
+
+    // District Filter - Select Ganz Wien Checkbox
+    $(".filter-modal-jbox-district").on("click", ".select-all", function() {
+      if ($(".select-all input:checkbox").prop('checked') == true) {
+        selectAllDistricts($(".filter-modal-jbox-district"));
+        $('.filter-modal-jbox-district #select-home-graetzl').prop("checked", false); // deselect HomeGraetzl
+      } else {
+        unSelectAllDistricts($(".filter-modal-jbox-district"));
+      }
+    });
+
+    // Toggle ganz Wien Checkbox wenn alle Bezirke gewählt
+    $(".filter-modal-jbox-district .filter-input").on("change", function() {
+
+      $('.filter-modal-jbox-district #select-home-graetzl').prop("checked", false); // deselect HomeGraetzl
+
+      var countDistricts = $(".filter-modal-jbox-district .filter-input").length;
+      var countCheckedDistricts = $(".filter-modal-jbox-district .filter-input").find('input:checked').length;
+
+      if (countDistricts == countCheckedDistricts) {
+        $(".select-all input:checkbox").prop("checked", true);
+      } else {
+        $(".select-all input:checkbox").prop("checked", false);
+      }
+    });
+
+    // Use for Buttons inside Modal, not Confirm Modals which already has Buttons
+    $(".filter-modal-jbox").on("click", ".filter-button", function() {
+      var currentModalContent = $(this).closest( ".filter-modal-jbox" );
+      var currentModalId = '#' + currentModalContent.attr('id');
+      updateFilterInputs(currentModalContent);
+      updateFilterLabels(currentModalContent);
+      filterForm.submit();
+      modals[currentModalId].close();
+    });
+
+    // Use for OneClick Modals
+    $(".filter-modal-jbox.oneclick .filter-input").on("change", function() {
+      var currentModalContent = $(this).closest( ".filter-modal-jbox" );
+      var currentModalId = '#' + currentModalContent.attr('id');
+      updateFilterInputs(currentModalContent);
+      updateFilterLabels(currentModalContent);
+      filterForm.submit();
+      modals[currentModalId].close();
+    });
+
+    // ---------- USE FOR NEW JBOX MODALS
+
+
+    // ---------- USE FOR OLD featherlight MODALS
 
     filterForm.find(".filter-selection-text a").not( ".plain-link" ).featherlight({
       root: '.card-grid-container',
@@ -136,6 +258,10 @@ APP.components.cardFilter = (function() {
       filterForm.submit();
       currentModal.close();
     });
+
+    // ---------- USE FOR OLD featherlight MODALS
+
+    // HELPER FUNCTIONS
 
     $(".filter-modal").each(function() {
       updateFilterInputs($(this));
@@ -160,6 +286,43 @@ APP.components.cardFilter = (function() {
     filterForm.submit();
   }
 
+  function selectAllDistricts(modal) {
+    modal.find(".filter-input input:checkbox").each(function(){
+      $(this).prop("checked", true);
+    });
+  }
+
+  function unSelectAllDistricts(modal) {
+    modal.find(".filter-input input:checkbox").each(function(){
+      $(this).prop("checked", false);
+    });
+  }
+
+  function selectAllGraetzlsIn(modal) {
+
+    var districtIds = [];
+    modal.find(".filter-input input:checkbox:checked").each(function(){
+      districtIds = districtIds.concat($(this).val());
+    });
+
+    if (districtIds.length == 23) {
+      unSelectAllDistricts(modal);
+      districtIds = []; // Reset for better Rails Performance
+    }
+
+    $('.graetzl-ids').find('option').each(function() {
+      $(this).prop("selected", false);
+      var inSelectedDistrict = districtIds && districtIds.indexOf($(this).data('districtId').toString()) > -1;
+      if (inSelectedDistrict) $(this).prop("selected", true);
+    });
+
+    var $homeGraetzl = modal.find('#select-home-graetzl'); // Set Home Graetzl
+    if ($homeGraetzl.prop('checked') == true) {
+      $('.graetzl-ids').val($homeGraetzl.val());
+    }
+
+  }
+
   function updateFilterInputs(modal) {
     filterForm.find('[id^="' + modal.prop("id") + '"]').remove();
     modal.find("input, select").each(function() {
@@ -175,13 +338,23 @@ APP.components.cardFilter = (function() {
     if (modal.find(".filter-input select").data("select-all")) {
       link.text(link.data("no-filter-label"));
       link.removeClass('filter-applied');
+    } else if (modal.find('#select-home-graetzl').prop('checked') == true) {
+        link.text(modal.find('#select-home-graetzl').data('label'));
+        link.addClass('filter-applied');
+    } else if (selectedInputs.length > 2) {
+        var selectedCount = selectedInputs.length;
+        var shownCount = selectedInputs.length - 2;
+        selectedInputs.length = 2; // Cut for too much labels and show more info
+        var label = selectedInputs.map(function() { return $(this).data("label"); }).get().join(", ");
+        link.text(label +', + ' + shownCount + ' weitere');
+        link.addClass('filter-applied');
     } else if (selectedInputs.length > 0) {
-      var label = selectedInputs.map(function() { return $(this).data("label"); }).get().join(", ");
-      link.text(label);
-      link.addClass('filter-applied');
+        var label = selectedInputs.map(function() { return $(this).data("label"); }).get().join(", ");
+        link.text(label);
+        link.addClass('filter-applied');
     } else {
-      link.text(link.data("no-filter-label"));
-      link.removeClass('filter-applied');
+        link.text(link.data("no-filter-label"));
+        link.removeClass('filter-applied');
     }
   }
 
@@ -270,7 +443,6 @@ APP.components.cardFilter = (function() {
         }
     });
   }
-
 
   function adjustNewCards() {
     var newCards = cardGrid.find('[data-behavior="masonry-card"]').not('[data-appended]');

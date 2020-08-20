@@ -88,6 +88,7 @@ Rails.application.routes.draw do
   resources :room_offers, path: 'wien/raumteiler/raum', except: [:index] do
     get 'select', on: :collection
     get 'activate/:activation_code' => 'room_offers#activate', on: :member
+    get 'calculate_price', on: :member
     patch 'update_status', on: :member
     post 'toggle_waitlist', on: :member
     post 'remove_from_waitlist', on: :member
@@ -113,6 +114,15 @@ Rails.application.routes.draw do
     post 'reject', on: :member
     post 'confirm_return', on: :member
     post 'leave_rating', on: :member
+  end
+
+  resources :room_rentals, only: [:new, :create] do
+    get 'address', on: :collection
+    get 'choose_payment', on: :collection
+    get 'summary', on: :collection
+    post 'initiate_card_payment', on: :collection
+    post 'initiate_klarna_payment', on: :collection
+    post 'initiate_eps_payment', on: :collection
   end
 
   resources :going_tos, only: [:new, :create] do

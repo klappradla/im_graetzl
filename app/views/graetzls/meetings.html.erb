@@ -20,15 +20,18 @@
   <% end %>
 
   <%= form_tag meetings_path, method: :get, remote: true, class: 'cards-filter' do %>
-    <div class="filter-selection-text">
-      Zeige mir Einträge in <%= link_to @graetzl.name, '#filter-modal-bezirk', class: 'filter-applied', data: { no_filter_label: 'allen Bezirken'} %>
+    <div class="filter-selection-text-jbox">
+      Zeige mir <%= link_to 'alle Events', '#filter-modal-type', data: { no_filter_label: 'alle Events'} %>,
+      in <%= link_to @graetzl.name, '#filter-modal-district', data: { no_filter_label: 'ganz Wien'}, class: 'filter-modal-district filter-applied' %>
       - Zur Aktion <%= link_to 'Selbstständige für Selbstständige', platform_meetings_wien_path, class: 'plain-link' %>
     </div>
+    <div id="filter-modal-type" class="filter-modal-jbox">
+      <%= render 'filters/meeting_type' %>
+    </div>
+    <div id="filter-modal-district" class="filter-modal-jbox-district">
+      <%= render 'filters/district', graetzl_ids: @graetzl.id, district_ids: @graetzl.district.id, graetzl: @graetzl  %>
+    </div>
   <% end %>
-
-  <div id="filter-modal-bezirk" class="filter-modal">
-    <%= render 'filters/district_graetzl', graetzl_ids: @graetzl.id, district_ids: @graetzl.district.id %>
-  </div>
 
   <div class="card-grid-container">
     <div class="card-grid" data-behavior="meetings-card-container"></div>

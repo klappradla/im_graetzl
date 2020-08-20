@@ -215,7 +215,13 @@
 
 // Out of focus days.
 .picker__day--outfocus {
-    color: $disabled-things-text;
+    color: $outfocus-things-text;
+    opacity: 0.5;
+}
+
+// In focus days.
+.picker__day--infocus {
+    color: $infocus-things-text;
 }
 
 // Hovered date picker items.
@@ -330,5 +336,28 @@
     border-top-color: $disabled-tag;
 }
 
-
-
+.picker__legend {
+  padding:10px;
+  font-style: italic;
+  text-align: center;
+  .legend_not_availiable, .legend_availiable {
+    display: inline-block;
+    width:20px;
+    height:20px;
+    margin-right: 5px;
+    margin-left: 20px;
+  }
+  .legend_not_availiable:first-of-type {
+    margin-left: 0px;
+  }
+  .legend_not_availiable {
+    background-color: $disabled-things-bg;
+  }
+  .legend_availiable {
+    border: 1px solid $color-font-primary;
+  }
+  .legend_availiable_text {
+    font-size: .75em;
+    color: $disabled-things-text;
+  }
+}

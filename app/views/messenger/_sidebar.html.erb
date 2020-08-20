@@ -12,12 +12,23 @@
         <div class="jBoxHidden jBoxDropdown" id="jBoxFilterMessages">
           <%= link_to 'Alle Nachrichten', 'javascript:', data: { filter: 'active' } %>
           <%= link_to 'Toolteiler', 'javascript:', data: { filter: 'tool_rental' } %>
-          <!--<%= link_to 'Raumteiler', 'javascript:', data: { filter: 'room_offer' } %>-->
+          <%= link_to 'Raumteiler', 'javascript:', data: { filter: 'room_offer' } %>
           <%= link_to 'Archiv', 'javascript:', data: { filter: 'archived' } %>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Write new MSG - Open Modal -->
+  <div class="new-msg message-thread single-user">
+    <div class="img-round avatar new-msg-img">
+      <%= icon_tag "pencil" %>
+    </div>
+    <div class="wrp">
+      <div class="user">Neue Nachricht an ...</div>
+    </div>
+  </div>
+  <!-- Write new MSG - Open Modal -->
 
   <div class="threads-list" data-thread="<%= params[:thread_id] %>" data-filter="<%= params[:filter] %>">
     <% @threads.each do |thread| %>

@@ -1,0 +1,37 @@
+<%= f.fields_for :address do |address_fields| %>
+
+  <div class="input-field">
+    <%= address_fields.label :street_name do %>
+      <%= icon_tag "map-location" %>
+      <span>Straße</span>
+    <% end %>
+    <%= address_fields.text_field :street_name %>
+  </div>
+
+  <div class="input-field">
+    <%= address_fields.label :street_number do %>
+      <%= icon_tag "map-location" %>
+      <span>Hausnummer</span>
+    <% end %>
+    <%= address_fields.text_field :street_number %>
+  </div>
+
+  <div class="form-columns">
+    <div class="input-field">
+      <%= address_fields.label :zip do %>
+        <%= icon_tag "map-location" %>
+        <span>Postleitzahl</span>
+      <% end %>
+      <%= address_fields.text_field :zip %>
+    </div>
+
+    <div class="input-field">
+      <%= address_fields.label :city do %>
+        <%= icon_tag "map-location" %>
+        <span>Ort</span>
+      <% end %>
+      <%= address_fields.text_field :city %>
+    </div>
+  </div>
+
+<% end %>

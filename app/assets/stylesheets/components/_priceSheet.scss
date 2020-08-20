@@ -67,3 +67,25 @@
   }
 
 }
+
+pie {
+  width: 28px;
+  height: 28px;
+  display: block;
+  border-radius: 50%;
+  background-color: $color-ambient-mint;
+  border: 1px solid $color-ambient-mint;
+  margin: auto;
+
+  &.pie-hour {
+    background-image:
+      linear-gradient(130deg, transparent 50%, white 50%),
+      linear-gradient(90deg, white 50%, transparent 50%);
+  }
+  &.pie-day {
+    background-image:
+      linear-gradient(180deg, transparent 50%, $color-ambient-mint 50%),
+      linear-gradient(90deg, white 50%, transparent 50%);
+  }
+
+}

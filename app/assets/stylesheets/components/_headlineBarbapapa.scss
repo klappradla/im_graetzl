@@ -33,7 +33,7 @@
 .headlineBarbapapa {
   @include headlineBarbapapa();
 }
-.toolteiler-headline {
+.toolteiler-headline, .raumteiler-headline {
   width: 340px;
   max-width: 70%;
   display: block;

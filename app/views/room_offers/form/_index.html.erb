@@ -1,0 +1,11 @@
+<%= form_for(@room_offer) do |f| %>
+<%= form_errors_for @room_offer %>
+
+  <div class="tabs-ctrl">
+    <%= render "room_offers/form/tabs_nav" %>
+    <%= render 'room_offers/form/basic', f: f %>
+    <%= render 'room_offers/form/facts', f: f %>
+    <%= render 'room_offers/form/contact', f: f %>
+    <%= render 'room_offers/form/price', f: f %>
+  </div>
+<% end %>

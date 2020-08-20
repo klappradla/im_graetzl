@@ -85,11 +85,15 @@ $blue-tag: $color-ambient-rosa !default;
 $disabled-tag: #aaa !default;
 
 // Disabled things.. such as days, month nav, etc.
-$disabled-things-bg: #f5f5f5 !default;
-$disabled-things-text: #ddd !default;
+$disabled-things-bg: #f4e6e4 !default;
+$disabled-things-text: #999 !default;
 $disabled-highlighted-things-bg: #bbb !default;
 
+// Disabled things.. such as days, month nav, etc.
+$outfocus-things-text: #999 !default;
 
+// In Focus
+$infocus-things-text: $color-font-primary !default;
 
 
 

@@ -263,7 +263,7 @@ section.location-page {
     }
 
     .btn-userCallToAction {
-      display: table;
+      //display: table;
       @include respond-to(">=medium") {
         float: right;
       }

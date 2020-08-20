@@ -1,0 +1,89 @@
+<div class="form-block" id="tab-facts">
+
+  <div class="hl-subtext">
+    <h2><span>Ausstattung</span> - kurz das wichtigste</h2>
+    <p>Hier kannst du stichwortartig noch besondere Ausstattungsmermale festlegen.</p>
+  </div>
+  <div class="room-tags">
+    <%= collection_check_boxes nil, :suggested_keywords, RoomSuggestedTag.pluck(:name), :downcase, :to_s do |b| %>
+    <div class="input-checkbox">
+      <%= b.check_box(checked: f.object.keyword_list.include?(b.value)) %>
+      <%= b.label %>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="input-tags">
+    <%= label_tag :custom_keywords do %>
+    <%= icon_tag "label-tag" %>
+    <span>Ausstattung<br/><small>(mit Komma getrennt)</small></span>
+    <% end %>
+    <%= text_field_tag :custom_keywords, (f.object.keyword_list - RoomSuggestedTag.all_tags).join(', '), id: 'custom-keywords' %>
+  </div>
+
+
+  <h2 class="hl-main">Raum<span>größe</span></h2>
+
+  <div class="room-columns">
+    <div class="input-field column-left">
+      <%= f.label :rented_area do %>
+        <%= icon_tag "resize-maximize" %>
+        <span>Fläche die du vermietest</span>
+      <% end %>
+      <%= f.number_field :rented_area, placeholder: 'm2' %>
+    </div>
+    <div class="input-field column-right">
+      <%= f.label :total_area do %>
+        <%= icon_tag "resize-maximize" %>
+        <span>Größe des gesamten Objektes</span>
+      <% end %>
+      <%= f.number_field :total_area, placeholder: 'm2' %>
+    </div>
+  </div>
+
+  <h2 class="hl-main"><span>Fotos</span> vom Raum</h2>
+
+  <div class="upload-oldschool">
+    <%= f.label :cover_photo do %>
+      <%= icon_tag "photo-camera" %>
+      <span>Coverfoto</span>
+    <% end %>
+    <div class="field-wrp">
+      <% if f.object.cover_photo %>
+      <div class="preview-wrp">
+        <%= image_tag attachment_url(f.object, :cover_photo, :fill, 159, 60) %>
+        <div class="input-checkbox">
+          <%= f.check_box :remove_cover_photo, { class: 'deleteCheckbox' } %>
+          <%= f.label :remove_cover_photo, 'Löschen' %>
+        </div>
+      </div>
+      <% end %>
+      <%= f.attachment_field :cover_photo, direct: true, presigned: true %>
+    </div>
+  </div>
+
+  <div class="upload-oldschool">
+    <%= f.label :images do %>
+      <%= icon_tag "photo-camera" %>
+      <span>Weitere Fotos</span>
+    <% end %>
+    <div class="field-wrp">
+      <%= f.fields_for :images do |ff| %>
+        <% next if !ff.object.valid? %>
+        <div class="preview-wrp">
+          <%= image_tag attachment_url(ff.object, :file, :fill, 159, 60) %>
+          <div class="input-checkbox">
+            <%= ff.check_box :_destroy, { class: 'deleteCheckbox' } %>
+            <%= ff.label :_destroy, 'Löschen' %>
+          </div>
+        </div>
+      <% end %>
+      <%= f.attachment_field :images_files, multiple: true, direct: true, presigned: true %>
+    </div>
+  </div>
+
+  <div class="input-button">
+    <%= button_tag "Weiter", type: 'button', class: 'btn-primary next-screen', data: { tab: 'tab-contact' } %>
+  </div>
+
+</div>

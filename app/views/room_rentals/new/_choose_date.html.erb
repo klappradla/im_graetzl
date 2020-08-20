@@ -1,0 +1,52 @@
+<div class="date-container">
+
+  <div class="hl-subtext">
+    <h1>Deine Miete</h1>
+    <p>
+      Klicke auf "Weiter" oder füge weitere Tage zu deiner Miete hinzu.
+    </p>
+  </div>
+
+  <%= form_tag address_room_rentals_url, method: :get do %>
+
+    <%= hidden_field_tag :room_offer_id, params[:room_offer_id] %>
+
+    <div class="date-fields">
+
+      <div class="input-field">
+        <%= label_tag :starts_at_date do %>
+          <%= icon_tag "calendar-2" %>
+          <span>Tag</span>
+        <% end %>
+        <%= text_field_tag :starts_at_date, nil, class: 'datepicker', placeholder: 'wählen' %>
+      </div>
+
+      <div class="input-field">
+        <%= label_tag :starts_at_time do %>
+          <%= icon_tag "time-clock" %>
+          <span>Von</span>
+        <% end %>
+        <%= text_field_tag :starts_at_time, nil, class: 'timepicker', placeholder: 'wählen' %>
+      </div>
+
+      <div class="input-field">
+        <%= label_tag :ends_at_time do %>
+          <%= icon_tag "time-clock" %>
+          <span>Bis</span>
+        <% end %>
+        <%= text_field_tag :ends_at_time, nil, class: 'timepicker', placeholder: 'wählen' %>
+      </div>
+
+    </div>
+
+
+    <div class="additional-dates">
+      <div class="additional-dates-links">
+        <%= link_to 'Weiteres Datum hinzufügen', '' %>
+      </div>
+    </div>
+
+    <%= submit_tag "Weiter", class: 'btn-primary' %>
+
+  <% end %>
+</div>

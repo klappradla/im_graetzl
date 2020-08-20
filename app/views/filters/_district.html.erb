@@ -1,0 +1,25 @@
+<% district_ids ||= nil %>
+<% graetzl_ids ||= nil %>
+<% graetzl ||= nil %>
+
+<div class="filter-districts">
+  <% if graetzl %>
+    <div class="input-checkbox filter-input-graetzl">
+      <input type="checkbox" value="<%= graetzl.id %>" id="select-home-graetzl" name="select-home-graetzl" data-label="<%= graetzl.name %>" checked>
+      <label for="select-home-graetzl"><%= graetzl.name %></label>
+    </div>
+  <% end %>
+  <div class="input-checkbox select-all">
+    <input type="checkbox" value="" id="select-all" name="select-all" <%= 'checked' unless district_ids %>>
+    <label for="select-all">Ganz Wien</label>
+  </div>
+  <div class="district-list">
+    <%= collection_check_boxes :filter, :district_ids, District.sorted_by_zip, :id, :zip_name, { checked: district_ids } do |b| %>
+      <div class="input-checkbox filter-input">
+        <%= b.check_box("data-label": b.object.zip, "data-graetzls": b.object.graetzls.ids.to_s) %>
+        <%= b.label %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<%= select :filter, :graetzl_ids, options_for_select(graetzl_select_options, graetzl_ids), {}, { multiple: true, class: 'graetzl-ids' } %>

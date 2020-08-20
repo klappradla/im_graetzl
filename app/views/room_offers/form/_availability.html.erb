@@ -1,0 +1,43 @@
+<div class="hl-subtext">
+  <h2>Raum <span>Verfügbarkeit</span></h2>
+  <p>
+    Definiere für die einzelnen Wochentage die Uhrzeiten an denen dein Raum grundsätzlich verfügbar ist und eine Buchungsanfrage gestellt werden kann.
+  </p>
+</div>
+
+<% f.object.room_offer_availability ||= RoomOfferAvailability.fully_available %>
+<%= f.fields_for :room_offer_availability do |fa| %>
+  <div class="availability form-columns -three">
+    <% [1, 2, 3, 4, 5, 6, 0].each do |weekday| %>
+      <div class="input-select day">
+        <%= label_tag :"availability_#{weekday}" do %>
+          <%= icon_tag "calendar-2" %>
+          <span><%= I18n.t('date.day_names')[weekday] %></span>
+        <% end %>
+        <%= select_tag :"availability_#{weekday}", options_for_select([["verfügbar", 1], ["nicht verfügbar", 0]],
+            fa.object.day_enabled?(weekday) ? '1' : '0'), data: {weekday: weekday}, class: 'availability-select' %>
+      </div>
+
+      <div class="input-field time">
+        <%= fa.label :"day_#{weekday}_from" do %>
+          <%= icon_tag "time-clock" %>
+          <span>Von</span>
+        <% end %>
+        <%= fa.hidden_field  :"day_#{weekday}_from", value: nil, class: "unavailable-input-#{weekday}" %>
+        <%= fa.text_field  :"day_#{weekday}_from", class: "timepicker availability-input-#{weekday}",
+            placeholder: 'wählen' %>
+      </div>
+
+      <div class="input-field time">
+        <%= fa.label :"day_#{weekday}_to" do %>
+          <%= icon_tag "time-clock" %>
+          <span>Bis</span>
+        <% end %>
+        <%= fa.hidden_field  :"day_#{weekday}_to", value: nil, class: "unavailable-input-#{weekday}" %>
+        <%= fa.text_field :"day_#{weekday}_to", class: "timepicker availability-input-#{weekday}",
+            placeholder: 'wählen' %>
+      </div>
+    <% end %>
+
+  </div>
+<% end %>

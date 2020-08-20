@@ -8,7 +8,7 @@
   )
 %>
 
-<section class="districts">
+<section class="districts rooms">
   <%= render 'map' %>
   <%= render 'navigation' %>
 
@@ -16,25 +16,23 @@
     Entdecke Raumteiler <span>im <%= @district.numeric %>. Bezirk</span>
   </h1>
 
+  <%= render 'filters/room_categories_slider' %>
+
   <%= form_tag rooms_path, method: :get, remote: true, class: 'cards-filter' do %>
-    <div class="filter-selection-text">
-      Zeige mir <%= link_to 'alle Raumteiler', '#filter-modal-type', data: { no_filter_label: 'alle Raumteiler'} %>,
-      aus <%= link_to 'allen Kategorien', '#filter-modal-categories', data: { no_filter_label: 'allen Kategorien'} %>,
-      in <%= link_to @district.zip_name, '#filter-modal-bezirk', class: 'filter-applied', data: { no_filter_label: 'allen Bezirken'} %>
+    <%= hidden_field_tag :category_id %>
+    <%= hidden_field_tag :special_category_id %>
+    <div class="filter-selection-text-jbox">
+      Zeig mir <%= link_to 'alle Raumteiler', '#filter-modal-type', data: { no_filter_label: 'alle Raumteiler', jbox_title: 'Filtern nach ...'} %>,
+      aus <%= link_to 'allen Kategorien', 'javascript:', data: { no_filter_label: 'allen Kategorien'}, class: 'plain-link category-slider-label' %>,
+      in <%= link_to @district.zip_name, '#filter-modal-district', data: { no_filter_label: 'ganz Wien'}, class: 'filter-modal-district filter-applied' %>
+    </div>
+    <div id="filter-modal-type" class="filter-modal-jbox">
+      <%= render 'filters/room_type' %>
+    </div>
+    <div id="filter-modal-district" class="filter-modal-jbox-district">
+      <%= render 'filters/district', graetzl_ids: @district.graetzl_ids, district_ids: @district.id %>
     </div>
   <% end %>
-
-  <div id="filter-modal-type" class="filter-modal">
-    <%= render 'filters/room_type' %>
-  </div>
-
-  <div id="filter-modal-categories" class="filter-modal">
-    <%= render 'filters/room_categories' %>
-  </div>
-
-  <div id="filter-modal-bezirk" class="filter-modal">
-    <%= render 'filters/district_graetzl', graetzl_ids: @district.graetzl_ids, district_ids: @district.id %>
-  </div>
 
   <div class="card-grid-container">
     <div class="card-grid" data-behavior="rooms-card-container"></div>

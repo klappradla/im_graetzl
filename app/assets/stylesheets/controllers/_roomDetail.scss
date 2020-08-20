@@ -151,9 +151,80 @@ section.roomDetail {
     }
 
     .sideBarbox {
+
+      &.-top {
+        padding-top:15px;
+        //margin-bottom:70px;
+      }
+
+      border: 1px solid $color-ambient-grey-light;
+      background-color: #ffffff;
+      border-radius: 8px;
+
+      h3.sidebar {
+        text-align: center;
+        padding-bottom:15px;
+      }
+
+      a.btn-primary {
+        color: white;
+      }
+
       &.waiting-list {
+        margin-top:60px;
         padding-bottom:20px;
       }
+
+      &.-pricing {
+        h3.sidebar {
+          padding-top:15px;
+        }
+        .pricing-list {
+          border-top: 1px solid $color-ambient-grey-light;
+          padding-top:20px;
+        }
+      }
+
+      &.contact {
+        margin-top:60px;
+      }
+      &.contact:first-child {
+        margin-top:0px;
+      }
+    }
+
+    .pricingForm {
+      padding: 15px;
+      padding-top:0px;
+    }
+
+    #rental-form-container {
+      .btn-primary {width:100%;}
+    }
+
+    .request-price-form {
+      border-top: 1px solid $color-ambient-grey-light;
+      padding-top:15px;
+      margin-bottom: 10px;
+      padding-left: 15px;
+      padding-right: 15px;
+
+      .input-field, .input-select {
+        margin-bottom: 15px;
+      }
+
+      .input-field {
+        overflow: hidden;
+        @include respond-to("<medium") {
+          @include field-HorizontalLayout;
+        }
+      }
+      .input-field label, .input-select label {
+        min-width:50px !important;
+        max-width:50px !important;
+      }
+      .hidden {display: none;}
+
     }
 
     .waiting-list {
@@ -351,9 +422,19 @@ section.roomDetail {
 
   .iconlist {
     padding: 15px;
+    padding-top:0px;
     > * {
       margin-bottom: 20px;
     }
+
+    div:last-child {
+      margin-bottom: 0px;
+    }
+
+  }
+
+  .btn-group + .btn-group {
+    margin-bottom: 10px;
   }
 
   .sideBar {
@@ -440,7 +521,7 @@ section.roomDetail {
       margin-top: -28px;
       margin-bottom: 0;
       width: calc(100% - 295px);
-      z-index: 10;
+      z-index: 9;
     }
     @include respond-to(">=large") {
       width: calc(100% - 280px);

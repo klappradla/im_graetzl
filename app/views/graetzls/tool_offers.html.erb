@@ -21,15 +21,17 @@
 
   <%= form_tag tool_offers_path, method: :get, remote: true, class: 'cards-filter' do %>
     <%= hidden_field_tag :category_id %>
+    <!--
     <div class="input-field search-filter">
       <div class="input-field">
         <%= text_field_tag :query, nil, placeholder: 'Suche..', class: 'search-suggestion-trigger' %>
       </div>
       <div class="input-select label-select">
-        <!-- Default Vienna for Start - Later set to "@graetzl.district.id" instead of "District.all_memoized.keys" -->
         <%= select_tag :district_ids, options_for_select(district_select_options, District.all_memoized.keys), id: 'graetzl-suggestion', multiple: true %>
       </div>
     </div>
+    -->
+    <!-- Default Vienna for Start - Later set to "@graetzl.district.id" instead of "District.all_memoized.keys" -->
   <% end %>
 
   <div class="card-grid-container">

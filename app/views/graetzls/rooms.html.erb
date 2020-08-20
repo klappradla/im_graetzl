@@ -8,36 +8,36 @@
   )
 %>
 
-<section class="graetzls">
+<section class="graetzls rooms">
   <%= render 'map' %>
   <%= render 'navigation' %>
 
   <% if !user_signed_in? %>
-    <div class="hl-subtext -cards">
-      <h1><span>Raumteiler</span> - Für neue Raumpartnerschaften</h1>
-      <p>Gewerbeflächen teilen - Kosten teilen.</p>
-    </div>
+    <!-- only logged in -->
   <% end %>
+  <div class="hl-subtext -cards">
+    <%= image_tag 'svg/raumteiler-headline.svg', class: 'raumteiler-headline' %>
+    <p>Gewerbeflächen teilen - Kosten teilen.</p>
+  </div>
+
+  <%= render 'filters/room_categories_slider' %>
 
   <%= form_tag rooms_path, method: :get, remote: true, class: 'cards-filter' do %>
-    <div class="filter-selection-text">
-      Zeige mir <%= link_to 'alle Raumteiler', '#filter-modal-type', data: { no_filter_label: 'alle Raumteiler'} %>,
-      aus <%= link_to 'allen Kategorien', '#filter-modal-categories', data: { no_filter_label: 'allen Kategorien'} %>,
-      in <%= link_to @graetzl.name, '#filter-modal-bezirk', class: 'filter-applied', data: { no_filter_label: 'allen Bezirken'} %>
+    <%= hidden_field_tag :category_id %>
+    <%= hidden_field_tag :special_category_id %>
+    <div class="filter-selection-text-jbox">
+      Zeig mir <%= link_to 'alle Raumteiler', '#filter-modal-type', data: { no_filter_label: 'alle Raumteiler'} %>,
+      aus <%= link_to 'allen Kategorien', 'javascript:', data: { no_filter_label: 'allen Kategorien'}, class: 'plain-link category-slider-label' %>,
+      in <%= link_to @graetzl.name, '#filter-modal-district', data: { no_filter_label: 'ganz Wien'}, class: 'filter-modal-district filter-applied' %>
+    </div>
+    <div id="filter-modal-type" class="filter-modal-jbox">
+      <%= render 'filters/room_type' %>
+    </div>
+    <div id="filter-modal-district" class="filter-modal-jbox-district">
+      <%= render 'filters/district', graetzl_ids: @graetzl.id, district_ids: @graetzl.district.id, graetzl: @graetzl  %>
     </div>
   <% end %>
 
-  <div id="filter-modal-type" class="filter-modal">
-    <%= render 'filters/room_type' %>
-  </div>
-
-  <div id="filter-modal-categories" class="filter-modal">
-    <%= render 'filters/room_categories' %>
-  </div>
-
-  <div id="filter-modal-bezirk" class="filter-modal">
-    <%= render 'filters/district_graetzl', graetzl_ids: @graetzl.id, district_ids: @graetzl.district.id %>
-  </div>
 
   <div class="card-grid-container">
     <div class="card-grid" data-behavior="rooms-card-container"></div>

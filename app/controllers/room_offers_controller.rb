@@ -6,6 +6,17 @@ class RoomOffersController < ApplicationController
     @comments = @room_offer.comments.includes(:user, :images).order(created_at: :desc)
   end
 
+  def calculate_price
+    @room_offer = RoomOffer.find(params[:id])
+    if params[:rent_date].present?
+      rent_date = Date.parse(params[:rent_date])
+      @available_hours = @room_offer.available_hours(rent_date)
+    end
+    if params[:rent_hour_from].present? && params[:rent_hour_to].present?
+      @calculator = RoomPriceCalculator.new(@room_offer, rent_date, params[:rent_hour_from], params[:rent_hour_to])
+    end
+  end
+
   def select
   end
 
@@ -20,6 +31,7 @@ class RoomOffersController < ApplicationController
     @room_offer.user_id = current_user.admin? ? params[:user_id] : current_user.id
     @room_offer.address = Address.from_feature(params[:feature])
     if @room_offer.save
+      current_user.update(iban: params[:iban]) if params[:iban].present?
       MailchimpRoomOfferUpdateJob.perform_later(@room_offer)
       RoomMailer.room_offer_published(@room_offer).deliver_later
       @room_offer.create_activity(:create, owner: @room_offer.user)
@@ -36,6 +48,7 @@ class RoomOffersController < ApplicationController
   def update
     @room_offer = current_user.room_offers.find(params[:id])
     if @room_offer.update(room_offer_params)
+      current_user.update(iban: params[:iban]) if params[:iban].present?
       MailchimpRoomOfferUpdateJob.perform_later(@room_offer)
       redirect_to @room_offer
     else
@@ -117,6 +130,7 @@ class RoomOffersController < ApplicationController
         :avatar,
         :activation_code,
         :remove_avatar,
+        :general_availability,
         :first_name, :last_name, :website, :email, :phone, :location_id,
         images_files: [],
         images_attributes: [:id, :_destroy],
@@ -126,6 +140,11 @@ class RoomOffersController < ApplicationController
         room_offer_prices_attributes: [
           :id, :name, :amount, :_destroy
         ],
+        room_rental_price_attributes: [
+          :id, :name, :price_per_hour, :minimum_rental_hours, :four_hour_discount, :eight_hour_discount,
+          :_destroy
+        ],
+        room_offer_availability_attributes: (0..6).map{ |i| [:"day_#{i}_from", :"day_#{i}_to"] }.flatten,
         room_category_ids: []
     ).merge(
       keyword_list: [params[:suggested_keywords], params[:custom_keywords]].join(", ")

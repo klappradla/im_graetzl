@@ -270,6 +270,55 @@
   }
 }
 
-.search-filter, .filter-selection-text {
+.search-filter, .filter-selection-text, .filter-selection-text-jbox {
   margin-bottom:30px;
+}
+
+// FILTER jBox
+
+.jBox-wrapper .jBox-container {
+  margin-top:10px !important;
+  label {cursor: pointer;}
+}
+
+.jBox-Confirm {
+
+  .jBox-content {
+    text-align: left !important;
+    padding-top:10px !important;
+    padding-bottom:10px !important;
+  }
+
+  .jBox-Confirm-footer {
+    margin:10px;
+    display: flex;
+    height:55px;
+  }
+
+  .jBox-Confirm-button {
+
+    @extend .btn-primary;
+    white-space: nowrap;
+
+    &.jBox-Confirm-button-cancel {
+      @extend .btn-primary.-grey;
+      &:hover {
+        @extend .btn-primary.-grey;
+        background-image: $texture-primary;
+        opacity: 0.9;
+      }
+      margin-right: 5px;
+    }
+    &.jBox-Confirm-button-submit {
+      &:hover {
+        @extend .btn-primary;
+        opacity: 0.9;
+      }
+      margin-left: 5px;
+    }
+  }
+
+}
+.graetzl-ids {
+  display: none;
 }

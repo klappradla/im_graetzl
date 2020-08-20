@@ -111,35 +111,84 @@
           width: 100px;
           height: 100px;
         }
-        &.category-1 {
+
+        // Tools Categories
+        &.category-1.-tools {
           background-image: url(image_path('svg/icon-kringel-gesundheit-active.svg'));
         }
-        &.category-2 {
+        &.category-2.-tools {
           background-image: url(image_path('svg/icon-kringel-handwerk-active.svg'));
         }
-        &.category-3 {
+        &.category-3.-tools {
           background-image: url(image_path('svg/icon-kringel-grafik-design-active.svg'));
         }
-        &.category-4 {
+        &.category-4.-tools {
           background-image: url(image_path('svg/icon-kringel-event-active.svg'));
         }
-        &.category-5 {
+        &.category-5.-tools {
           background-image: url(image_path('svg/icon-kringel-gastronomie-active.svg'));
         }
-        &.category-6 {
+        &.category-6.-tools {
           background-image: url(image_path('svg/icon-kringel-technik-foto-active.svg'));
         }
-        &.category-7 {
+        &.category-7.-tools {
           background-image: url(image_path('svg/icon-kringel-instrumente-active.svg'));
         }
-        &.category-8 {
+        &.category-8.-tools {
           background-image: url(image_path('svg/icon-kringel-kunst-active.svg'));
         }
-        &.category-9 {
+        &.category-9.-tools {
           background-image: url(image_path('svg/icon-kringel-deko-active.svg'));
         }
-        &.category-10 {
+        &.category-10.-tools {
           background-image: url(image_path('svg/icon-kringel-transport-active.svg'));
+        }
+
+        // Rooms Categories
+        &.-booking {
+          background-image: url(image_path('svg/icon-kringel-kurzzeitmiete-active.svg'));
+        }
+        &.-arbeitsplatz.-rooms {
+          background-image: url(image_path('svg/icon-kringel-arbeitsplatz-active.svg'));
+        }
+        &.-atelier.-rooms {
+          background-image: url(image_path('svg/icon-kringel-atelier-active.svg'));
+        }
+        &.-bueroraum.-rooms {
+          background-image: url(image_path('svg/icon-kringel-bueroraum-active.svg'));
+        }
+        &.-coaching.-rooms {
+          background-image: url(image_path('svg/icon-kringel-coaching-active.svg'));
+        }
+        &.-coworking.-rooms {
+          background-image: url(image_path('svg/icon-kringel-coworking-active.svg'));
+        }
+        &.-gastro.-rooms {
+          background-image: url(image_path('svg/icon-kringel-gastro-active.svg'));
+        }
+        &.-geschaeftslokal.-rooms {
+          background-image: url(image_path('svg/icon-kringel-geschaeftslokal-active.svg'));
+        }
+        &.-popup.-rooms {
+          background-image: url(image_path('svg/icon-kringel-popup-active.svg'));
+        }
+        &.-praxis.-rooms {
+          background-image: url(image_path('svg/icon-kringel-praxis-active.svg'));
+        }
+        &.-proberaum.-rooms {
+          background-image: url(image_path('svg/icon-kringel-proberaum-active.svg'));
+        }
+        &.-seminarraum.-rooms {
+          background-image: url(image_path('svg/icon-kringel-seminarraum-active.svg'));
+        }
+        &.-veranstaltung.-rooms {
+          background-image: url(image_path('svg/icon-kringel-veranstaltung-active.svg'));
+        }
+        &.-werkstatt.-rooms {
+          background-image: url(image_path('svg/icon-kringel-werkstatt-active.svg'));
+        }
+        &.-yoga.-rooms {
+          background-image: url(image_path('svg/icon-kringel-yoga-active.svg'));
         }
       }
     }
@@ -181,35 +230,85 @@
       margin-bottom: auto;
       margin-left: auto;
       margin-right: auto;
-      &.category-1 {
+
+      // Tools Categories
+      &.category-1.-tools {
         background-image: url(image_path('svg/icon-kringel-gesundheit.svg'));
       }
-      &.category-2 {
+      &.category-2.-tools {
         background-image: url(image_path('svg/icon-kringel-handwerk.svg'));
       }
-      &.category-3 {
+      &.category-3.-tools {
         background-image: url(image_path('svg/icon-kringel-grafik-design.svg'));
       }
-      &.category-4 {
+      &.category-4.-tools {
         background-image: url(image_path('svg/icon-kringel-event.svg'));
       }
-      &.category-5 {
+      &.category-5.-tools {
         background-image: url(image_path('svg/icon-kringel-gastronomie.svg'));
       }
-      &.category-6 {
+      &.category-6.-tools {
         background-image: url(image_path('svg/icon-kringel-technik-foto.svg'));
       }
-      &.category-7 {
+      &.category-7.-tools {
         background-image: url(image_path('svg/icon-kringel-instrumente.svg'));
       }
-      &.category-8 {
+      &.category-8.-tools {
         background-image: url(image_path('svg/icon-kringel-kunst.svg'));
       }
-      &.category-9 {
+      &.category-9.-tools {
         background-image: url(image_path('svg/icon-kringel-deko.svg'));
       }
-      &.category-10 {
+      &.category-10.-tools {
         background-image: url(image_path('svg/icon-kringel-transport.svg'));
+      }
+
+      // Rooms Categories
+      // Rooms Categories
+      &.-booking {
+        background-image: url(image_path('svg/icon-kringel-kurzzeitmiete.svg'));
+      }
+      &.-arbeitsplatz.-rooms {
+        background-image: url(image_path('svg/icon-kringel-arbeitsplatz.svg'));
+      }
+      &.-atelier.-rooms {
+        background-image: url(image_path('svg/icon-kringel-atelier.svg'));
+      }
+      &.-bueroraum.-rooms {
+        background-image: url(image_path('svg/icon-kringel-bueroraum.svg'));
+      }
+      &.-coaching.-rooms {
+        background-image: url(image_path('svg/icon-kringel-coaching.svg'));
+      }
+      &.-coworking.-rooms {
+        background-image: url(image_path('svg/icon-kringel-coworking.svg'));
+      }
+      &.-gastro.-rooms {
+        background-image: url(image_path('svg/icon-kringel-gastro.svg'));
+      }
+      &.-geschaeftslokal.-rooms {
+        background-image: url(image_path('svg/icon-kringel-geschaeftslokal.svg'));
+      }
+      &.-popup.-rooms {
+        background-image: url(image_path('svg/icon-kringel-popup.svg'));
+      }
+      &.-praxis.-rooms {
+        background-image: url(image_path('svg/icon-kringel-praxis.svg'));
+      }
+      &.-proberaum.-rooms {
+        background-image: url(image_path('svg/icon-kringel-proberaum.svg'));
+      }
+      &.-seminarraum.-rooms {
+        background-image: url(image_path('svg/icon-kringel-seminarraum.svg'));
+      }
+      &.-veranstaltung.-rooms {
+        background-image: url(image_path('svg/icon-kringel-veranstaltung.svg'));
+      }
+      &.-werkstatt.-rooms {
+        background-image: url(image_path('svg/icon-kringel-werkstatt.svg'));
+      }
+      &.-yoga.-rooms {
+        background-image: url(image_path('svg/icon-kringel-yoga.svg'));
       }
     }
   }
@@ -276,7 +375,7 @@
 
 }
 
-.cards-filter .filter-selection-text {
+.cards-filter .filter-selection-text, .cards-filter .filter-selection-text-jbox {
   text-align: center;
   font-style: italic;
   position: relative;
@@ -292,14 +391,25 @@
     padding: 0 10px;
   }
 
-  a:hover {
+  a:hover:not(.category-slider-label) {
     color: $color-ambient-grey-light;
     background-color: $color-ambient-rosa;
   }
+
+  a.category-slider-label {
+    cursor:default;
+  }
+
 }
 
-.filter-modal {
+.filter-modal, .filter-modal-jbox, .filter-modal-jbox-district {
+
   display: none;
+
+  .filter-input-graetzl, .select-all {
+    border-bottom: 1px solid $color-ambient-mint-light;
+    font-style: italic;
+  }
 
   .filter-button { margin-top: 20px; }
   .district-select-input { margin-bottom: 15px; margin-top:10px;}
@@ -321,12 +431,12 @@
 
   .filter-categories {
     @include respond-to(">=medium") {
-      display: flex;
-      flex-wrap: wrap;
-      max-width: 600px;
-      .input-checkbox {
-        width:50%;
-      }
+      //display: flex;
+      //flex-wrap: wrap;
+      //max-width: 600px;
+      //.input-checkbox {
+        //width:50%;
+      //}
     }
   }
 
@@ -379,4 +489,21 @@
     }
   }
 
+}
+
+.filter-districts {
+  @include respond-to(">=medium") {
+    .district-list {
+      columns: 2;
+      -webkit-columns: 2;
+      -moz-columns: 2;
+      .filter-input {
+        display: inline-block;
+        width: 100%;
+        label {
+          @include ellipsis();
+        }
+      }
+    }
+  }
 }

@@ -152,6 +152,18 @@ section.messenger-page {
           display: block;
         }
       }
+
+      &.new-msg {
+        border-bottom: 1px solid $color-ambient-mint-light;
+      }
+
+      .new-msg-img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $color-ambient-mint-dark;
+      }
+
       .avatar {
         margin-right: 10px;
         width:50px;
@@ -193,16 +205,21 @@ section.messenger-page {
     display: none;
     width: 100%;
     height: 61px;
-    line-height: 58px;
     z-index: 999;
     position: fixed;
     top:0; left:0;
     background-color: #fbfbfb;
     border-bottom: 1px solid $color-ambient-mint-light;
     padding: 10px 10px 10px 10px;
-    a { display: inline-block; }
     svg {
       color: $color-ambient-mint-dark; transform: rotate(90deg);
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      line-height: 40px;
+      color: $color-ambient-mint-dark;
+      text-decoration: none;
     }
   }
 

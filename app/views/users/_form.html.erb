@@ -84,6 +84,7 @@
     <h2>Ergänzungen zur <span>Profilseite</span></h2>
     <div class="formRow -double">
       <div class="col1">
+
         <div class="input-field">
           <%= f.label :website do %>
             <%= icon_tag "globe" %>
@@ -91,7 +92,6 @@
           <% end %>
           <%= f.url_field :website, placeholder: 'Deine Web-, FB- oder Blog Url eintragen' %>
         </div>
-
         <div class="upload-oldschool">
           <%= f.label :cover_photo do %>
             <%= icon_tag "photo-camera" %>
@@ -110,22 +110,33 @@
             <%= f.attachment_field :cover_photo, direct: true, presigned: true %>
           </div>
         </div>
+
       </div>
       <div class="col2">
-        <div class="input-checkbox">
-          <%= f.check_box :business %>
-          <%= f.label :business, 'Ich bin wirtschaftlich und/oder kreativ tätig' %>
-        </div>
+
         <div class="input-checkbox">
           <%= f.check_box :newsletter %>
           <%= f.label :newsletter, 'Newsletter abonnieren' %>
         </div>
+        <div class="input-checkbox">
+          <%= f.check_box :business %>
+          <%= f.label :business, 'Ich bin wirtschaftlich und/oder kreativ tätig' %>
+        </div>
       </div>
+
     </div>
   </div>
+
+  
+
+
+
+
+
+
+
   <%= f.submit 'Speichern', data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
 <% end %>
-<%= button_to 'Account löschen', registration_path,
-              data: { confirm: 'Bist du dir sicher?' },
-              method: :delete,
-              class: 'btn-destroy' %>
+
+<%= button_to 'Account löschen', registration_path, data: { confirm: 'Bist du dir sicher?' },
+    method: :delete, class: 'btn-destroy' %>

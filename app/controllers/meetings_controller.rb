@@ -163,6 +163,15 @@ class MeetingsController < ApplicationController
 
   def filter_collection(meetings)
 
+    meeting_type = params.dig(:filter, :meeting_type)
+    if meeting_type.present?
+      if meeting_type == 'online'
+        meetings = meetings.online_meeting
+      elsif meeting_type == 'offline'
+        meetings = meetings.offline_meeting
+      end
+    end
+
     graetzl_ids = params.dig(:filter, :graetzl_ids)
     if graetzl_ids.present? && graetzl_ids.any?(&:present?)
       #meetings = meetings.where(graetzl_id: graetzl_ids)

@@ -35,6 +35,9 @@ APP.controllers.tool_offers = (function() {
         min: true,
         formatSubmit: 'yyyy-mm-dd',
         format: 'ddd, dd mmm, yyyy',
+        onClose: function() {
+          $(document.activeElement).blur();
+        },
       }).off('focus').on("change", function() {
         if ($('.request-price-form .date-from').val() && $('.request-price-form .date-to').val()) {
           $('.request-price-form').submit();

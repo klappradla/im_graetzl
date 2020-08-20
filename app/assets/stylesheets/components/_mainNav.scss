@@ -313,6 +313,12 @@
       .badgeNumber {
         right: 12px;
       }
+      .half-left, .half-right {
+        width:50%;
+      }
+      .half-right {
+        border-left: 1px solid $color-ambient-mint-light;
+      }
     }
     section.second {
       height: 100%;

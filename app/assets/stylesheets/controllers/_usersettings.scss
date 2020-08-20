@@ -14,6 +14,23 @@ section.user-settings, section.usersetup.-toolteiler {
     margin-bottom: 50px;
   }
 }
+section.user-settings {
+
+  .tabs-nav {
+    @include respond-to(">=medium") {
+      display: flex;
+      justify-content: center;
+    }
+
+
+    li {
+      width:100%;
+      text-align: center;
+      white-space: nowrap;
+    }
+  }
+
+}
 
 // ---------------------------------------------------------------------- personal settings
 
@@ -53,6 +70,24 @@ div.personal-settings {
 
 }
 
+// ---------------------------------------------------------------------- billing settings
+
+div.billing-settings {
+
+  label {min-width:150px;}
+
+  .btn-primary {
+    width: 100%;
+    margin-bottom: 50px;
+    @include respond-to(">=medium") {
+      width: auto;
+      margin-bottom: 0;
+      display: table;
+      float: right;
+    }
+  }
+
+}
 
 
 
@@ -164,6 +199,7 @@ div.notification-settings {
       }
     }
   }
+
 }
 
 .btnCollection {

@@ -1,0 +1,19 @@
+<% meta(
+    title: t('.title'),
+    robots: 'noindex, follow'
+  )
+%>
+
+<section class="room-rental-page login-screen">
+
+  <div class="col-content">
+    <section class="login">
+      <%= render 'shared/login_panel_content', redirect: request.original_url, origin: 'raumbuchung' %>
+    </section>
+  </div>
+
+  <div class="col-sidebar">
+    <%= render 'room_rentals/new/sidebar' %>
+  </div>
+
+</section>

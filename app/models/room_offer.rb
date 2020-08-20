@@ -15,6 +15,12 @@ class RoomOffer < ApplicationRecord
   has_many :room_categories, through: :room_offer_categories
   has_many :room_offer_prices
   accepts_nested_attributes_for :room_offer_prices, allow_destroy: true, reject_if: :all_blank
+  has_one :room_rental_price
+  accepts_nested_attributes_for :room_rental_price, allow_destroy: true,
+    reject_if: proc { |attrs| attrs['price_per_hour'].blank? }
+
+  has_one :room_offer_availability
+  accepts_nested_attributes_for :room_offer_availability, reject_if: :all_blank
 
   has_many :room_offer_waiting_users
   has_many :waiting_users, through: :room_offer_waiting_users, source: :user
@@ -44,6 +50,7 @@ class RoomOffer < ApplicationRecord
 
   scope :by_currentness, -> { order(created_at: :desc) }
   scope :reactivated, -> { enabled.where("last_activated_at > created_at") }
+  scope :rentable, -> { joins(:room_rental_price) }
 
   LIFETIME_MONTHS = 6
 
@@ -53,6 +60,16 @@ class RoomOffer < ApplicationRecord
 
   def activation_code
     return self.created_at.to_i
+  end
+
+  def available_days
+    return [] if room_offer_availability.nil?
+    (0..6).select{ |d| room_offer_availability.day_enabled?(d) }
+  end
+
+  def available_hours(date)
+    return [] if room_offer_availability.nil?
+    (room_offer_availability.from(date.wday)..room_offer_availability.to(date.wday)).to_a
   end
 
   def set_last_activated_at

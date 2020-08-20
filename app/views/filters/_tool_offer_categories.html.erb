@@ -1,10 +1,10 @@
 <!-- SLIDER -->
 <div class="category-slider-container">
   <div id="category-slider">
-    <% ToolCategory.top.each do |category| %>
+    <% ToolCategory.top.sort_by(&:position).each do |category| %>
       <div class="-category" data-id="<%= category.id %>">
         <%= category_photo_for(category) %>
-        <div class="cat category-<%= category.id %>"></div>
+        <div class="cat category-<%= category.id %> -tools"></div>
         <h3><%= category.name %></h3>
         <%= button_tag '', class: 'close-ico' do %>
           <%= icon_tag "cross" %>

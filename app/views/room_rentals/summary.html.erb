@@ -1,0 +1,18 @@
+<% meta(
+    title: t('.title'),
+    robots: 'noindex, follow'
+  )
+%>
+
+<section class="room-rental-page summary-screen">
+
+  <div class="col-content">
+    <%= render "room_rentals/new/tabs_nav" %>
+    <%= render 'room_rentals/new/summary' %>
+  </div>
+
+  <div class="col-sidebar">
+    <%= render 'room_rentals/new/sidebar' %>
+  </div>
+
+</section>

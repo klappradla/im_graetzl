@@ -24,7 +24,7 @@
       <div class="category-tags">
         <% if @room_offer.room_categories.present? %>
           <ul class="tag-list -mint">
-            <% @room_offer.room_categories.each do |category| %>
+            <% @room_offer.room_categories.first(4).each do |category| %>
               <li><%= category.name %></li>
             <% end %>
           </ul>
@@ -33,14 +33,10 @@
     </div>
   </div>
 
-
-
   <div class="mainContent">
-
     <div class="introtxt">
       <h3><%= @room_offer.slogan %></h3>
     </div>
-
     <div class="txt"><%= @room_offer.room_description %></div>
 
     <div class="entryImgUploads">
@@ -49,7 +45,11 @@
         <%= link_to attachment_image_tag(image, :file, :fill, 200, 200), attachment_url(image, :file, :limit, 800, 800), data: { jbox_image: "gallery1" } %>
       <% end %>
     </div>
+  </div>
 
+  <%= render 'room_offers/show/sidebar_booking' %>
+
+  <div class="mainContent">
     <% if @room_offer.keyword_list.present? %>
       <section>
         <div class="bigicontext-element">
@@ -175,5 +175,5 @@
 
   </div>
 
-  <%= render 'sidebar' %>
+
 </section>

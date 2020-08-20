@@ -19,19 +19,17 @@
   </div>
 
   <%= form_tag locations_path, method: :get, remote: true, class: 'cards-filter' do %>
-    <div class="filter-selection-text">
+    <div class="filter-selection-text-jbox">
       Zeige mir aus <%= link_to 'allen Kategorien', '#filter-modal-categories', data: { no_filter_label: 'allen Kategorien'} %>
-      in <%= link_to 'allen Bezirken', '#filter-modal-bezirk', data: { no_filter_label: 'allen Bezirken'} %>
+      in <%= link_to 'ganz Wien', '#filter-modal-district', data: { no_filter_label: 'ganz Wien'}, class: 'filter-modal-district' %>
+    </div>
+    <div id="filter-modal-district" class="filter-modal-jbox-district">
+      <%= render 'filters/district' %>
+    </div>
+    <div id="filter-modal-categories" class="filter-modal-jbox">
+      <%= render 'filters/location_categories' %>
     </div>
   <% end %>
-
-  <div id="filter-modal-categories" class="filter-modal">
-    <%= render 'filters/location_categories' %>
-  </div>
-
-  <div id="filter-modal-bezirk" class="filter-modal">
-    <%= render 'filters/district_graetzl' %>
-  </div>
 
   <div class="card-grid-container">
     <div class="card-grid" data-behavior="locations-card-container"></div>

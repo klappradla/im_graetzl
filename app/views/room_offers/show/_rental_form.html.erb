@@ -1,0 +1,15 @@
+<%= form_tag [:calculate_price, @room_offer], remote: true, method: :get, class: 'request-price-form' do %>
+  <div class="input-field">
+    <%= label_tag :rent_date do %>
+      <%= icon_tag "calendar-2" %>
+    <% end %>
+    <%= text_field_tag :rent_date, params[:rent_date], class: 'rent-date',
+        placeholder: 'Mietdatum auswählen', data: { days: @room_offer.available_days } %>
+  </div>
+
+  <div id="rental-hours-container"></div>
+<% end %>
+
+<div id="rental-price-container">
+  <%= button_tag "Wähle zuerst dein Mietdatum", class: "btn-primary -disabled", disabled: true %>
+</div>

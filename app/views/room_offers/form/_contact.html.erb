@@ -1,0 +1,88 @@
+<div class="form-block" id="tab-contact">
+
+  <h2 class="hl-main">Ein paar Worte <span>über dich</span> / über euch</h2>
+  <div class="input-field">
+    <%= f.label :owner_description do %>
+      <%= icon_tag "layout-document" %>
+      <span>Über mich</span>
+    <% end %>
+    <%= f.text_area :owner_description, placeholder: 'Ein paar Worte uber dich / euch. In welchem Bereich bist du tätig?' %>
+  </div>
+
+  <div class="input-checkbox">
+    <%= f.check_box :wants_collaboration %>
+    <%= f.label :wants_collaboration, 'Mehr als nur Raum teilen - Ich bin auch an Kooperationen interessiert!' %>
+  </div>
+
+  <h2 class="hl-main"><span>Kontakt</span> & Infos</h2>
+
+  <div class="upload-oldschool">
+    <%= f.label :avatar do %>
+      <%= icon_tag "photo-camera" %>
+      <span>Foto von dir</span>
+    <% end %>
+    <div class="field-wrp">
+      <% if f.object.avatar %>
+          <div class="preview-wrp">
+            <%= image_tag attachment_url(f.object, :avatar, :fill, 100, 100), class: 'img-round' %>
+            <div class="input-checkbox">
+              <%= f.check_box :remove_avatar, { class: 'deleteCheckbox' } %>
+              <%= f.label :remove_avatar, 'Löschen' %>
+            </div>
+          </div>
+      <% end %>
+      <%= f.attachment_field :avatar, direct: true, presigned: true %>
+    </div>
+  </div>
+
+  <div class="form-columns">
+    <div class="input-field">
+      <%= f.label :first_name do %>
+        <%= icon_tag "user-avatar" %>
+        <span>Vorname</span>
+      <% end %>
+      <%= f.text_field :first_name, placeholder: 'Vorname' %>
+    </div>
+
+    <div class="input-field">
+      <%= f.label :last_name do %>
+        <%= icon_tag "user-avatar" %>
+        <span>Nachname</span>
+      <% end %>
+      <%= f.text_field :last_name, placeholder: 'Nachname' %>
+    </div>
+  </div>
+  <div class="input-field">
+    <%= f.label :email do %>
+      <%= icon_tag "at-symbol" %>
+      <span>Email</span>
+    <% end %>
+    <%= f.email_field :email %>
+  </div>
+  <div class="input-field">
+    <%= f.label :website do %>
+      <%= icon_tag "globe" %>
+      <span>Website</span>
+    <% end %>
+    <%= f.url_field :website, placeholder: 'http:// oder https://' %><em></em>
+  </div>
+  <div class="input-field">
+    <%= f.label :phone do %>
+      <%= icon_tag "phone" %>
+      <span>Telefonnummer</span>
+    <% end %>
+    <%= f.text_field :phone, placeholder: '0664 1234567' %>
+  </div>
+  <div class="input-select">
+    <%= f.label :location_id do %>
+      <%= icon_tag "location" %>
+      <span>Location</span>
+    <% end %>
+    <%= f.collection_select(:location_id, current_user.locations, :id, :name, {:include_blank => 'Location verknüpfen..'}) %>
+  </div>
+
+  <div class="input-button">
+    <%= button_tag "Weiter", type: 'button', class: 'btn-primary next-screen', data: { tab: 'tab-price' } %>
+  </div>
+
+</div>

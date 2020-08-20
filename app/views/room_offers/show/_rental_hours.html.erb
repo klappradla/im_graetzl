@@ -1,0 +1,17 @@
+<div class="input-select">
+  <%= label_tag :rent_hour_from do %>
+    <%= icon_tag "time-clock" %>
+  <% end %>
+  <%= select_tag :rent_hour_from,
+      options_for_select(@available_hours.map{|h| ["#{h}:00", h]}, params[:rent_hour_from]),
+      include_blank: 'Check-in', class: 'hour-input' %>
+</div>
+
+<div class="input-select">
+  <%= label_tag :rent_hour_to do %>
+    <%= icon_tag "time-clock" %>
+  <% end %>
+  <%= select_tag :rent_hour_to,
+      options_for_select(@available_hours.map{|h| ["#{h+1}:00", h+1]}, params[:rent_hour_to]),
+      include_blank: 'Check-out', class: 'hour-input' %>
+</div>

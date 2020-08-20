@@ -64,6 +64,14 @@ class RoomsController < ApplicationController
       offers = offers.joins(:room_offer_categories).where(room_offer_categories: {room_category_id: room_category_ids}).distinct
     end
 
+    if params[:special_category_id].present? && params[:special_category_id] == 'room_rental'
+      offers = offers.rentable
+    end
+
+    if params[:category_id].present?
+      offers = offers.joins(:room_offer_categories).where(room_offer_categories: {room_category_id: params[:category_id]}).distinct
+    end
+
     graetzl_ids = params.dig(:filter, :graetzl_ids)
     if graetzl_ids.present? && graetzl_ids.any?(&:present?)
       offers = offers.where(graetzl_id: graetzl_ids)
@@ -78,11 +86,19 @@ class RoomsController < ApplicationController
       return RoomDemand.none
     end
 
+    if params[:special_category_id].present? && params[:special_category_id] == 'room_rental'
+      return RoomDemand.none
+    end
+
     demands = demands.enabled
 
     room_category_ids = params.dig(:filter, :room_category_ids)&.select(&:present?)
     if room_category_ids.present?
       demands = demands.joins(:room_demand_categories).where(room_demand_categories: {room_category_id: room_category_ids}).distinct
+    end
+
+    if params[:category_id].present?
+      demands = demands.joins(:room_demand_categories).where(room_demand_categories: {room_category_id: params[:category_id]}).distinct
     end
 
     graetzl_ids = params.dig(:filter, :graetzl_ids)&.select(&:present?)

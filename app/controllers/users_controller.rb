@@ -58,20 +58,20 @@ class UsersController < ApplicationController
 
   def user_params
     params[:user].delete(:password) if params[:user][:password].blank?
-    params.
-      require(:user).
-      permit(:email,
-        :password,
-        :first_name,
-        :last_name,
-        :website,
-        :bio,
-        :newsletter,
-        :business,
-        :avatar, :remove_avatar,
-        :cover_photo, :remove_cover_photo,
-        :location_category_id,
-        business_interest_ids: [],
+    params.require(:user).permit(:email,
+      :password,
+      :first_name,
+      :last_name,
+      :website,
+      :bio,
+      :newsletter,
+      :business,
+      :avatar, :remove_avatar,
+      :cover_photo, :remove_cover_photo,
+      :location_category_id,
+      :iban,
+      billing_address_attributes: [:first_name, :last_name, :street, :zip, :city, :country, :company],
+      business_interest_ids: [],
     )
   end
 end

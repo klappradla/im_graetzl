@@ -23,6 +23,10 @@ APP.controllers.wien = (function() {
           APP.components.graetzlSelectFilter.init($("#filter-modal-bezirk"));
         }
 
+        if ($("#filter-modal-district").exists()) {
+          APP.components.districtSelectFilter.init($("#filter-modal-district"));
+        }
+
         if ($('.cards-filter').exists()) {
           APP.components.cardFilter.init();
         }
@@ -32,7 +36,11 @@ APP.controllers.wien = (function() {
         }
 
         if ($("section.toolteiler").exists()) {
-          APP.components.toolCategorySlider.init($('#category-slider'));
+          APP.components.categorySlider.init($('#category-slider'));
+        }
+
+        if ($("section.rooms").exists()) {
+          APP.components.categorySlider.init($('#category-slider'));
         }
 
         initMobileNav();
@@ -69,12 +77,6 @@ APP.controllers.wien = (function() {
       $('[data-behavior=createTrigger]').jqDropdown('attach', '[data-behavior=createContainer]');
     }
 
-    function initToolTeiler() {
-
-
-
-
-    }
 
     return {
       init: init

@@ -33,3 +33,49 @@
     margin-bottom: 20px;
   }
 }
+
+.package-pricing {
+
+  border-top: 1px solid $color-ambient-grey-light;
+  padding-top:10px;
+  margin: 0;
+  list-style: none;
+  width:100%;
+
+  .desc {
+    padding-bottom: 10px;
+    //text-align: center;
+  }
+
+  ul {
+    margin-bottom: 20px;
+  }
+  ul:last-child {
+    margin-bottom: 0px;
+  }
+
+  li {
+    display: flex;
+    clear:both;
+    margin-bottom: 10px;
+    align-items: center;
+    div.cost {
+      min-width: 30px;
+      margin-right:9px;
+    }
+    div.costname {
+      color: $color-ambient-mint-dark;
+    }
+    small.discount {
+      color: $color-ambient-grey;
+      //color: $color-ambient-orange;
+    }
+  }
+  li:last-child {
+    margin-bottom: 0px;
+  }
+}
+
+.package-pricing:last-child {
+  margin-bottom: 0px;
+}

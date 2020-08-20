@@ -64,6 +64,9 @@
     &:not(:first-child) {
       border-top: 1px solid $color-ambient-mint-light;
     }
+    &.half-left, &.half-right {
+      border-top: none;
+    }
     .icon {
       margin-right: 20px;
       color: $color-ambient-rosa;
