@@ -88,6 +88,8 @@ Rails.application.routes.draw do
   resources :room_offers, path: 'wien/raumteiler/raum', except: [:index] do
     get 'select', on: :collection
     get 'activate/:activation_code' => 'room_offers#activate', on: :member
+    get 'rental_timetable', on: :member
+    get 'available_hours', on: :member
     get 'calculate_price', on: :member
     patch 'update_status', on: :member
     post 'toggle_waitlist', on: :member
@@ -96,6 +98,20 @@ Rails.application.routes.draw do
   resources :room_calls, path: 'wien/raumteiler/open-calls', except: [:index] do
     get 'submission', on: :member
     post 'add_submission', on: :member
+  end
+
+  resources :room_rentals, only: [:new, :create] do
+    get 'calculate_price', on: :collection
+    get 'address', on: :collection
+    get 'choose_payment', on: :member
+    post 'initiate_card_payment', on: :member
+    post 'initiate_klarna_payment', on: :member
+    post 'initiate_eps_payment', on: :member
+    get 'summary', on: :member
+    post 'cancel', on: :member
+    post 'approve', on: :member
+    post 'reject', on: :member
+    post 'leave_rating', on: :member
   end
 
   resources :tool_offers, path: 'toolteiler' do
@@ -114,15 +130,6 @@ Rails.application.routes.draw do
     post 'reject', on: :member
     post 'confirm_return', on: :member
     post 'leave_rating', on: :member
-  end
-
-  resources :room_rentals, only: [:new, :create] do
-    get 'address', on: :collection
-    get 'choose_payment', on: :collection
-    get 'summary', on: :collection
-    post 'initiate_card_payment', on: :collection
-    post 'initiate_klarna_payment', on: :collection
-    post 'initiate_eps_payment', on: :collection
   end
 
   resources :going_tos, only: [:new, :create] do

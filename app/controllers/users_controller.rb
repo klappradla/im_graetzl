@@ -25,6 +25,8 @@ class UsersController < ApplicationController
   def rooms
     @user = current_user
     @rooms = RoomOffer.where(user_id: @user) + RoomDemand.where(user_id: @user)
+    @owned_room_rentals = current_user.owned_room_rentals.submitted.includes(:room_offer, :user, :user_message_thread )
+    @room_rentals = current_user.room_rentals.submitted.includes(:user_message_thread, room_offer: :user)
   end
 
   def tool_offers

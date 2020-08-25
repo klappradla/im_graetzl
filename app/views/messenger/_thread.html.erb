@@ -7,10 +7,10 @@
 
     <div class="thread-info">
       <%= render 'messenger/thread/user_info' %>
-      <% if @thread.tool_rental && current_user == @thread.tool_rental.owner %>
-        <%= render 'messenger/thread/tool_owner_info', tool_rental: @thread.tool_rental %>
-      <% elsif @thread.tool_rental && current_user == @thread.tool_rental.renter %>
-        <%= render 'messenger/thread/tool_renter_info', tool_rental: @thread.tool_rental %>
+      <% if @thread.room_rental %>
+        <%= render 'messenger/thread/room_rental_info', room_rental: @thread.room_rental %>
+      <% elsif @thread.tool_rental %>
+        <%= render 'messenger/thread/tool_rental_info', tool_rental: @thread.tool_rental %>
       <% end %>
     </div>
 
@@ -27,7 +27,11 @@
   </div>
 
   <div class="thread-info">
-    <% if @thread.tool_rental && current_user == @thread.tool_rental.owner %>
+    <% if @thread.room_rental && current_user == @thread.room_rental.owner %>
+      <%= render 'messenger/thread/room_owner_actionbox', room_rental: @thread.room_rental %>
+    <% elsif @thread.room_rental && current_user == @thread.room_rental.owner %>
+      <%= render 'messenger/thread/room_owner_actionbox', room_rental: @thread.room_rental %>
+    <% elsif @thread.tool_rental && current_user == @thread.tool_rental.owner %>
       <%= render 'messenger/thread/tool_owner_actionbox', tool_rental: @thread.tool_rental %>
     <% elsif @thread.tool_rental && current_user == @thread.tool_rental.renter %>
       <%= render 'messenger/thread/tool_renter_actionbox', tool_rental: @thread.tool_rental %>

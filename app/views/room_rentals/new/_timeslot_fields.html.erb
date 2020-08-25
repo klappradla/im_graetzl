@@ -1,0 +1,33 @@
+<div class="nested-fields">
+  <div class="date-fields">
+    <div class="input-field">
+      <%= f.label :rent_date do %>
+        <%= icon_tag "calendar-2" %>
+        <span>Datum</span>
+      <% end %>
+      <%= f.text_field :rent_date, class: 'datepicker', placeholder: 'wählen',
+          data: { url: available_hours_room_offer_url(@room_rental.room_offer) } %>
+    </div>
+
+    <div class="input-field">
+      <%= f.label :hour_from do %>
+        <%= icon_tag "time-clock" %>
+      <% end %>
+      <%= f.select :hour_from, room_rental_default_hours_from, { include_blank: 'Check-in' }, { class: 'hour-input hour-from' } %>
+    </div>
+
+    <div class="input-field">
+      <%= f.label :hour_to do %>
+        <%= icon_tag "time-clock" %>
+      <% end %>
+      <%= f.select :hour_to, room_rental_default_hours_to, { include_blank: 'Check-out' }, { class: 'hour-input hour-to' } %>
+    </div>
+  </div>
+
+  <%= link_to_remove_association f do %>
+    <div class="btn-delete">
+      <%= icon_tag "trash-delete-remove" %>
+    </div>
+  <% end %>
+
+</div>

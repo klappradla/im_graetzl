@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_20_094148) do
+ActiveRecord::Schema.define(version: 2020_08_24_185941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2020_08_20_094148) do
     t.string "recipient_type", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean "cross_platform", default: false
+    t.boolean "cross_platform", default: true
     t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
     t.index ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type"
     t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
@@ -98,13 +98,6 @@ ActiveRecord::Schema.define(version: 2020_08_20_094148) do
     t.integer "user_id"
     t.index ["business_interest_id"], name: "index_business_interests_users_on_business_interest_id"
     t.index ["user_id"], name: "index_business_interests_users_on_user_id"
-  end
-
-  create_table "categories_meetings", id: false, force: :cascade do |t|
-    t.integer "category_id"
-    t.integer "meeting_id"
-    t.index ["category_id"], name: "index_categories_meetings_on_category_id"
-    t.index ["meeting_id"], name: "index_categories_meetings_on_meeting_id"
   end
 
   create_table "comments", id: :serial, force: :cascade do |t|
@@ -479,7 +472,6 @@ ActiveRecord::Schema.define(version: 2020_08_20_094148) do
   create_table "platform_meeting_join_requests", force: :cascade do |t|
     t.bigint "meeting_id"
     t.text "request_message"
-    t.boolean "wants_platform_meeting", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
@@ -741,6 +733,45 @@ ActiveRecord::Schema.define(version: 2020_08_20_094148) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "room_rental_slots", force: :cascade do |t|
+    t.bigint "room_rental_id"
+    t.date "rent_date"
+    t.integer "hour_from", null: false
+    t.integer "hour_to", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_rental_id"], name: "index_room_rental_slots_on_room_rental_id"
+  end
+
+  create_table "room_rentals", force: :cascade do |t|
+    t.bigint "room_offer_id"
+    t.bigint "user_id"
+    t.string "renter_company"
+    t.string "renter_name"
+    t.string "renter_address"
+    t.string "renter_zip"
+    t.string "renter_city"
+    t.integer "rental_status", default: 0
+    t.integer "payment_status", default: 0
+    t.string "payment_method"
+    t.decimal "hourly_price", precision: 10, scale: 2, default: "0.0"
+    t.decimal "basic_price", precision: 10, scale: 2, default: "0.0"
+    t.decimal "discount", precision: 10, scale: 2, default: "0.0"
+    t.decimal "service_fee", precision: 10, scale: 2, default: "0.0"
+    t.decimal "tax", precision: 10, scale: 2, default: "0.0"
+    t.string "stripe_source_id"
+    t.string "stripe_charge_id"
+    t.string "stripe_payment_intent_id"
+    t.string "invoice_number"
+    t.integer "owner_rating"
+    t.integer "renter_rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_offer_id"], name: "index_room_rentals_on_room_offer_id"
+    t.index ["stripe_payment_intent_id"], name: "index_room_rentals_on_stripe_payment_intent_id"
+    t.index ["user_id"], name: "index_room_rentals_on_user_id"
+  end
+
   create_table "room_suggested_tags", id: :serial, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -857,7 +888,9 @@ ActiveRecord::Schema.define(version: 2020_08_20_094148) do
     t.text "last_message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "room_rental_id"
     t.index ["last_message"], name: "index_user_message_threads_on_last_message"
+    t.index ["room_rental_id"], name: "index_user_message_threads_on_room_rental_id"
     t.index ["tool_rental_id"], name: "index_user_message_threads_on_tool_rental_id"
   end
 
@@ -938,6 +971,8 @@ ActiveRecord::Schema.define(version: 2020_08_20_094148) do
     t.boolean "all_districts", default: false
     t.string "invoice_number"
     t.string "link"
+    t.integer "graetzl_id"
+    t.index ["graetzl_id"], name: "index_zuckerls_on_graetzl_id"
     t.index ["initiative_id"], name: "index_zuckerls_on_initiative_id"
     t.index ["location_id"], name: "index_zuckerls_on_location_id"
     t.index ["slug"], name: "index_zuckerls_on_slug"
@@ -953,6 +988,7 @@ ActiveRecord::Schema.define(version: 2020_08_20_094148) do
   add_foreign_key "discussion_posts", "users", on_delete: :nullify
   add_foreign_key "discussions", "discussion_categories", on_delete: :nullify
   add_foreign_key "discussions", "groups", on_delete: :cascade
+  add_foreign_key "discussions", "users", on_delete: :nullify
   add_foreign_key "district_graetzls", "districts", on_delete: :cascade
   add_foreign_key "district_graetzls", "graetzls", on_delete: :cascade
   add_foreign_key "going_tos", "meeting_additional_dates", on_delete: :nullify
@@ -1004,6 +1040,9 @@ ActiveRecord::Schema.define(version: 2020_08_20_094148) do
   add_foreign_key "room_offers", "graetzls", on_delete: :nullify
   add_foreign_key "room_offers", "locations", on_delete: :nullify
   add_foreign_key "room_offers", "users", on_delete: :cascade
+  add_foreign_key "room_rental_slots", "room_rentals", on_delete: :cascade
+  add_foreign_key "room_rentals", "room_offers", on_delete: :nullify
+  add_foreign_key "room_rentals", "users", on_delete: :nullify
   add_foreign_key "tool_offers", "graetzls", on_delete: :nullify
   add_foreign_key "tool_offers", "locations", on_delete: :nullify
   add_foreign_key "tool_offers", "tool_categories", on_delete: :nullify
@@ -1012,6 +1051,7 @@ ActiveRecord::Schema.define(version: 2020_08_20_094148) do
   add_foreign_key "tool_rentals", "users", on_delete: :nullify
   add_foreign_key "user_message_thread_members", "user_message_threads", on_delete: :cascade
   add_foreign_key "user_message_thread_members", "users", on_delete: :cascade
+  add_foreign_key "user_message_threads", "room_rentals", on_delete: :nullify
   add_foreign_key "user_message_threads", "tool_rentals", on_delete: :nullify
   add_foreign_key "user_messages", "user_message_threads", on_delete: :cascade
   add_foreign_key "user_messages", "users", on_delete: :cascade

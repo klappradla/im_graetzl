@@ -6,6 +6,10 @@ class RoomOfferAvailability < ApplicationRecord
     new(attrs)
   end
 
+  def disabled?(wday, hour)
+    hour < from(wday) || hour > to(wday)
+  end
+
   def from(wday)
     read_attribute(:"day_#{wday}_from")
   end

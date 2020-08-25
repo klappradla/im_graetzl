@@ -315,12 +315,17 @@ section.form-new-toolteiler {
   }
 
   .input-button {
+    display: flex;
+    justify-content: flex-end;
     margin-top:15px;
-    text-align: right;
-    @include cf;
     .btn-primary {
       display: inline-block;
-      //max-width: 50%;
+    }
+    .btn-secondary {
+      margin-right:15px;
+    }
+    .btn-primary:only-child {
+      margin-left: auto;
     }
   }
 

@@ -85,7 +85,7 @@ $blue-tag: $color-ambient-rosa !default;
 $disabled-tag: #aaa !default;
 
 // Disabled things.. such as days, month nav, etc.
-$disabled-things-bg: #f4e6e4 !default;
+$disabled-things-bg: $color-ambient-bright !default;
 $disabled-things-text: #999 !default;
 $disabled-highlighted-things-bg: #bbb !default;
 

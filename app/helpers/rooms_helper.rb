@@ -10,6 +10,14 @@ module RoomsHelper
     ]
   end
 
+  def room_rental_default_hours_from
+    (8..23).map{ |h| ["#{h}:00", h] }
+  end
+
+  def room_rental_default_hours_to
+    (9..24).map{ |h| ["#{h}:00", h] }
+  end
+
   def room_discount_values
     [5, 10, 15, 20, 25, 30, 40, 50].map do |value|
       ["#{value} %", value]

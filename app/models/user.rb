@@ -29,6 +29,8 @@ class User < ApplicationRecord
   has_many :room_calls
   has_many :room_offers
   has_many :room_demands
+  has_many :room_rentals
+  has_many :owned_room_rentals, through: :room_offers, source: :room_rentals
   has_many :tool_offers
   has_many :owned_tool_rentals, through: :tool_offers, source: :tool_rentals
   has_many :tool_rentals

@@ -26,39 +26,57 @@ APP.controllers.room_rentals = (function() {
     }
 
     function initDateScreen() {
-
       setTab('step1');
 
-      $('.room-rental-page').on('cocoon:after-insert', function(e, insertedItem, originalEvent) {
-        $('.datepicker').pickadate({
+      $('.date-screen').on('cocoon:after-insert', function(e, insertedItem) {
+        $(insertedItem).find('.datepicker').pickadate({
+          format: 'ddd, dd mmm, yyyy',
           formatSubmit: 'yyyy-mm-dd',
           hiddenName: true,
-          min: true
-        });
-
-        $('.timepicker').pickatime({
-          interval: 15,
-          format: 'HH:i',
-          formatSubmit: 'HH:i',
-          hiddenSuffix: '',
+          min: true,
         });
       });
 
-      $("textarea").autogrow({
-        onInitialize: true
+      $('.date-screen .datepicker').each(function(i, input) {
+        $(input).pickadate({
+          format: 'ddd, dd mmm, yyyy',
+          formatSubmit: 'yyyy-mm-dd',
+          hiddenName: true,
+          min: true,
+        });
+        // pickadate needs help with setting initial value
+        $(input).pickadate('picker').set('select', $(input).val(), { format: 'yyyy-mm-dd' });
       });
 
-      $('.datepicker').pickadate({
-        formatSubmit: 'yyyy-mm-dd',
-        hiddenName: true,
-        min: true
+      $('.date-screen').on('change', '.datepicker', function() {
+        var hoursUrl = $(this).data('url');
+        var fieldRow = $(this).parents(".date-fields");
+        var currentDate = $(this).pickadate('picker').get('select', 'yyyy-mm-dd');
+        $.get(hoursUrl, {rent_date: currentDate}, function(data) {
+          fieldRow.find(".hour-input.hour-from option").not(':empty').each(function(i, o) {
+            var hour = +$(o).val();
+            $(o).attr("disabled", data.indexOf(hour) == -1);
+          });
+          fieldRow.find(".hour-input.hour-to option").not(':empty').each(function(i, o) {
+            var hour = $(o).val() - 1;
+            $(o).attr("disabled", data.indexOf(hour) == -1);
+          });
+        });
       });
 
-      $('.timepicker').pickatime({
-        interval: 15,
-        format: 'HH:i',
-        formatSubmit: 'HH:i',
-        hiddenSuffix: ''
+      $('.date-screen .datepicker').change();
+
+      $('.date-screen').on('change', '.hour-input', function() {
+        $(this).parents('form').submit();
+      });
+
+      $('.date-screen').on('cocoon:after-remove', function() {
+        $('.rental-date-form').submit();
+      });
+
+      $('.date-screen .next-page').on('click', function() {
+        location.href = $(this).attr("href") + "?" + $(".rental-date-form").serialize();
+        return false;
       });
 
       // Change Wording of Notice Message for RoomRental Registrations
@@ -73,13 +91,10 @@ APP.controllers.room_rentals = (function() {
     }
 
     function initAddressScreen() {
-
       setTab('step2');
-
     }
 
     function initPaymentScreen() {
-
       setTab('step3');
 
       var screen = $(".room-rental-page.payment-screen");
@@ -104,100 +119,11 @@ APP.controllers.room_rentals = (function() {
     }
 
     function initCardPayment() {
-      var container = $(".card-container");
-      var nextButton = container.find(".next-screen");
-      var nameInput = container.find('#cardholder-name');
-      var card = initCardInput();
-      var cardReady = false;
-
-      card.mount('#card-element');
-      card.addEventListener('change', function(event) {
-        if (event.error) {
-          showFormError(container, event.error.message);
-        } else {
-          hideFormError(container);
-        }
-        cardReady = event.complete;
-        checkCreditCard();
+      var cardForm = $(".card-container .payment-intent-form");
+      APP.components.paymentCard.init(cardForm);
+      cardForm.on('payment:complete', function() {
+        location.href = $(this).data('success-url');
       });
-
-      nameInput.on('input', function() {
-        checkCreditCard();
-      });
-
-      function checkCreditCard() {
-        if (cardReady && nameInput.val()) {
-          nextButton.removeAttr("disabled");
-        } else {
-          nextButton.attr("disabled", true);
-        }
-      }
-
-      var paymentIntentFrom = container.find(".payment-intent-form");
-
-      nextButton.on("click", function() {
-        nextButton.attr("disabled", true);
-        hideFormError(container);
-        stripe.createPaymentMethod('card', card, {
-          billing_details: { name: nameInput.val() }
-        }).then(function(result) {
-          if (result.error) {
-            showFormError(container, result.error.message);
-            nextButton.removeAttr("disabled");
-          } else {
-            paymentIntentFrom.find("[name=payment_method_id]").val(result.paymentMethod.id);
-            paymentIntentFrom.submit();
-          }
-        });
-      });
-
-      paymentIntentFrom.on("ajax:success", function(e, data) {
-        if (data.success) {
-          paymentConfirmed(data.payment_intent_id);
-        } else {
-          stripe.handleCardAction(data.payment_intent_client_secret).then(function(result) {
-            if (result.error) {
-              showFormError(container, result.error.message);
-            } else {
-              paymentConfirmed(result.paymentIntent.id);
-            }
-          });
-        }
-      }).on('ajax:complete', function() {
-        nextButton.removeAttr("disabled");
-      });
-
-      function paymentConfirmed(intentId) {
-        var nextForm = $(".next-step-form");
-        nextForm.find("[name=stripe_payment_intent_id]").val(intentId);
-        nextForm.find("[name=payment_method]").val('card');
-        nextForm.submit();
-      }
-    }
-
-    function initCardInput() {
-      var elements = stripe.elements({
-        fonts: [
-          { cssSrc: 'https://fonts.googleapis.com/css?family=Lato:400,400i,300' }
-        ]
-      });
-
-      var style = {
-        base: {
-          fontFamily: '"Lato", sans-serif',
-          fontWeight: 400,
-          fontSmoothing: 'antialiased',
-          fontSize: '16px',
-          color:'#615454',
-          '::placeholder': {
-            color: '#83C7BD',
-            fontStyle:'italic'
-          },
-          iconColor:'#69a8a7'
-        }
-      };
-
-      return elements.create('card', {style: style, hidePostalCode: true, classes: {base: 'input-plain'}});
     }
 
     function initKlarnaPayment() {

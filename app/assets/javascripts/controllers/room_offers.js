@@ -9,26 +9,37 @@ APP.controllers.room_offers = (function() {
   }
 
   function initRoomOfferBookingForm() {
-    var dateInput = $('.request-price-form').find(".rent-date");
+    var dateInput = $('.request-price-form .rent-date');
     var days = dateInput.data("days");
     var disabledDays = [true].concat(days);
 
-    $('.request-price-form').find(".rent-date").pickadate({
+    $('.request-price-form .rent-date').pickadate({
       hiddenName: true,
       min: true,
       formatSubmit: 'yyyy-mm-dd',
       format: 'ddd, dd mmm, yyyy',
-      //disable: days.map(function(v, i) { return v ? null : i; }),
       disable: disabledDays,
       onClose: function() {
         $(document.activeElement).blur();
       },
       // Insert Legend (improve ...)
       onRender: function() {
-        $(".request-price-form .picker__box").append( "<div class='picker__legend'><div class='legend_not_availiable'></div><small class='legend_availiable_text'> ... Nicht verfügbar</small><div class='legend_availiable'></div><small class='legend_availiable_text'> ... Verfügbar</small></div>" );
+        $(".request-price-form .picker__box").append( "<div class='picker__legend'><div class='legend_not_availiable'></div><small class='legend_text'> ... an diesen Tagen nicht verfügbar</small></div>" );
+        $(".request-price-form .picker__box .picker__header").append( "<div class='picker__header_info'><small class='legend_headline'>Wann möchtest du anmieten?</small><small class='legend_text'>(Du kannst im nächsten Schritt auch noch weitere Tage hinzufügen)</small></div>" );
       }
     }).on("change", function() {
-      $(this).parents(".request-price-form").submit();
+      var hoursUrl = $(this).data('url');
+      var currentDate = $(this).pickadate('picker').get('select', 'yyyy-mm-dd');
+      $.get(hoursUrl, {rent_date: currentDate}, function(data) {
+        $(".request-price-form .hour-input.hour-from option").not(':empty').each(function(i, o) {
+          var hour = +$(o).val();
+          $(o).attr("disabled", data.indexOf(hour) == -1);
+        });
+        $(".request-price-form .hour-input.hour-to option").not(':empty').each(function(i, o) {
+          var hour = $(o).val() - 1;
+          $(o).attr("disabled", data.indexOf(hour) == -1);
+        });
+      });
     });
 
     $('.request-price-form').on("change", '.hour-input', function() {
@@ -100,7 +111,7 @@ APP.controllers.room_offers = (function() {
     APP.components.tabs.initTabs(".tabs-ctrl");
     APP.components.addressSearchAutocomplete();
 
-    $(".next-screen").on("click", function() {
+    $(".next-screen, .prev-screen").on("click", function() {
       $('.tabs-ctrl').trigger('show', '#' + $(this).data("tab"));
       $('.tabs-ctrl').get(0).scrollIntoView();
     });

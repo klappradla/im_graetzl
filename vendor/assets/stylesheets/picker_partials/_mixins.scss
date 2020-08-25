@@ -32,9 +32,11 @@
 %picker-item-disabled{
     background: $disabled-things-bg;
     border-color: $disabled-things-bg;
-    color: $disabled-things-text;
+    color: $outfocus-things-text;
+    opacity: 0.3;
+    //color: $disabled-things-text;
     cursor: default;
-    opacity: 0.5;
+    //opacity: 0.3;
 }
 
 

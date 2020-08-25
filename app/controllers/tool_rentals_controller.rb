@@ -85,6 +85,10 @@ class ToolRentalsController < ApplicationController
     @tool_rental.save!
     @tool_rental.create_activity(:create, owner: current_user)
 
+    if current_user.billing_address.nil?
+      current_user.create_billing_address(@tool_rental.renter_billing_address)
+    end
+
     ToolRentalService.new.confirm_rental(@tool_rental)
 
     thread = UserMessageThread.create_for_tool_rental(@tool_rental)
@@ -134,6 +138,7 @@ class ToolRentalsController < ApplicationController
 
     redirect_to messenger_url(thread_id: @tool_rental.user_message_thread.id)
   end
+
   private
 
   def tool_rental_params

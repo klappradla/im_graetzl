@@ -22,6 +22,12 @@ class RoomOffer < ApplicationRecord
   has_one :room_offer_availability
   accepts_nested_attributes_for :room_offer_availability, reject_if: :all_blank
 
+  has_many :room_rentals
+  has_many :room_rental_slots, through: :room_rentals
+
+  has_many :active_room_rentals, -> { where(rental_status: [:pending, :approved]) }, class_name: 'RoomRental'
+  has_many :active_rental_slots, through: :active_room_rentals, source: :room_rental_slots
+
   has_many :room_offer_waiting_users
   has_many :waiting_users, through: :room_offer_waiting_users, source: :user
 

@@ -36,9 +36,9 @@
     margin-right: .25em;
 }
 .picker__year {
-    color: $year-weekday-label;
-    font-size: .8em;
-    font-style: italic;
+    //color: $year-weekday-label;
+    //font-size: .8em;
+    //font-style: italic;
 }
 
 
@@ -215,8 +215,9 @@
 
 // Out of focus days.
 .picker__day--outfocus {
+    //display: none;
     color: $outfocus-things-text;
-    opacity: 0.5;
+    opacity: 0.3;
 }
 
 // In focus days.
@@ -336,8 +337,30 @@
     border-top-color: $disabled-tag;
 }
 
-.picker__legend {
+.picker__header_info {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   padding:10px;
+  margin-top:10px;
+  border-top: 1px solid $color-ambient-grey-light;
+  border-bottom: 1px solid $color-ambient-grey-light;
+  .legend_text {
+    font-size: .75em;
+    color: $disabled-things-text;
+    font-style: italic;
+  }
+  .legend_headline {
+    font-size: .75em;
+    display: block;
+    width:100%;
+    //color: $disabled-things-text;
+    //font-style: italic;
+  }
+}
+
+.picker__legend {
+  padding-bottom:10px;
   font-style: italic;
   text-align: center;
   .legend_not_availiable, .legend_availiable {
@@ -351,13 +374,31 @@
     margin-left: 0px;
   }
   .legend_not_availiable {
-    background-color: $disabled-things-bg;
+    //background-color: $disabled-things-bg;
+    border: 1px solid $color-ambient-rosa-light;
+    position: relative;
+  }
+  .legend_not_availiable::after{
+    top: 0;
+    left: 0;
+    width: 1px;
+    right: 0;
+    height: 80%;
+    bottom: 0;
+    margin: auto;
+    content: '';
+    display: block;
+    position: absolute;
+    transform: rotate(45deg);
+    background: $color-ambient-rosa-light;
   }
   .legend_availiable {
     border: 1px solid $color-font-primary;
   }
-  .legend_availiable_text {
+  .legend_text {
     font-size: .75em;
+    line-height: 1.0 !important;
     color: $disabled-things-text;
+    font-style: italic;
   }
 }

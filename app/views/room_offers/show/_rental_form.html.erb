@@ -3,11 +3,27 @@
     <%= label_tag :rent_date do %>
       <%= icon_tag "calendar-2" %>
     <% end %>
-    <%= text_field_tag :rent_date, params[:rent_date], class: 'rent-date',
-        placeholder: 'Mietdatum auswählen', data: { days: @room_offer.available_days } %>
+    <%= text_field_tag :rent_date, nil, class: 'rent-date', placeholder: 'Mietdatum auswählen',
+        data: { url: available_hours_room_offer_url(@room_offer), days: @room_offer.available_days } %>
   </div>
 
-  <div id="rental-hours-container"></div>
+  <div class="input-select">
+    <%= label_tag :hour_from do %>
+      <%= icon_tag "time-clock" %>
+    <% end %>
+    <%= select_tag :hour_from,
+        options_for_select(room_rental_default_hours_from),
+        include_blank: 'Check-in', class: 'hour-input hour-from' %>
+  </div>
+
+  <div class="input-select">
+    <%= label_tag :hour_to do %>
+      <%= icon_tag "time-clock" %>
+    <% end %>
+    <%= select_tag :hour_to,
+        options_for_select(room_rental_default_hours_to),
+        include_blank: 'Check-out', class: 'hour-input hour-to' %>
+  </div>
 <% end %>
 
 <div id="rental-price-container">

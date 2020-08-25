@@ -1,5 +1,16 @@
-
 .room-rental-page {
+
+  .rental-date-form {
+    .nested-fields { margin-bottom: 20px; }
+
+    .nested-fields:first-of-type .remove_fields { display: none; }
+
+    .additional-dates-links {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+  }
 
   .date-fields {
     @include respond-to(">medium") {
@@ -20,10 +31,27 @@
       }
     }
   }
+}
 
-  .additional-dates-links {
-    margin-top: 20px;
-    margin-bottom: 20px;
+.room-rental-timetable-page {
+  .rental-timetable {
+    position: relative;
+    thead {
+    }
+    th {
+      background: white;
+      min-width: 30px;
+      border: 1px solid #777;
+      position: sticky;
+      top: 0;
+      box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+    }
+    td {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #777;
+      &.disabled { color: #aaa; }
+    }
+
   }
-
 }

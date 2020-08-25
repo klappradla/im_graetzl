@@ -1,0 +1,25 @@
+<div class="rental-info room-rental-info">
+
+  <% if current_user == room_rental.renter %>
+    <div class="title">
+      Du hast nach dem Raumteiler
+      „<%= link_to_if room_rental.room_offer.enabled?, "#{room_rental.room_offer.slogan}", room_rental.room_offer %>“
+      bei <%= room_rental.owner.full_name %> angefragt.
+    </div>
+  <% elsif current_user == room_rental.owner %>
+    <div class="title">
+      <%= room_rental.renter.full_name %> möchte deinen Raumteiler
+      „<%= link_to_if room_rental.room_offer.enabled?, "#{room_rental.room_offer.slogan}", room_rental.room_offer %>“
+      mieten.
+    </div>
+  <% end %>
+
+  <div class="time">
+    <%= room_rental.total_hours %> Tage <br>
+    <% room_rental.room_rental_slots.each do |slot| %>
+      <%= l(slot.rent_date, format: :short) %>, <%= slot.hour_from %> bis <%= slot.hour_to %> Uhr
+      <br>
+    <% end %>
+  </div>
+
+</div>

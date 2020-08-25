@@ -2,28 +2,28 @@
 
 <ul class="pricing-summary">
   <li>
-    <div class="cost"><%= number_to_currency(@calculator.basic_price, unit: "€") %></div>
-    <div class="costname"><%= @calculator.hours %> Stunden x <%= number_to_currency(@calculator.hourly_price, unit: "€") %></div>
+    <div class="cost"><%= number_to_currency(@room_rental.basic_price, unit: "€") %></div>
+    <div class="costname"><%= @room_rental.total_hours %> Stunden x <%= number_to_currency(@room_rental.hourly_price, unit: "€") %></div>
   </li>
 
-  <% if @calculator.discount > 0 %>
+  <% if @room_rental.discount > 0 %>
     <li>
-      <div class="cost"> <%= number_to_currency(-@calculator.discount, unit: "€") %></div>
-      <div class="costname">Rabatt ab <%= @calculator.hours %> Stunden</div>
+      <div class="cost"> <%= number_to_currency(-@room_rental.discount, unit: "€") %></div>
+      <div class="costname">Rabatt ab <%= @room_rental.total_hours %> Stunden</div>
     </li>
   <% end %>
 
   <li>
-    <div class="cost"><%= number_to_currency(@calculator.tax, unit: "€") %></div>
+    <div class="cost"><%= number_to_currency(@room_rental.tax, unit: "€") %></div>
     <div class="costname">20% MwSt.</div>
   </li>
 
   <li class="sum">
-    <div class="cost"><%= number_to_currency(@calculator.total, unit: "€") %></div>
+    <div class="cost"><%= number_to_currency(@room_rental.total_price, unit: "€") %></div>
     <div class="costname">Gesamtpreis</div>
   </li>
 </ul>
 
 <%= link_to "Weiter zur Buchung", new_room_rental_path(room_offer_id: @room_offer.id,
-    date: params[:rent_date], hour_from: params[:rent_hour_from], hour_to: params[:rent_hour_to]),
+    rent_date: params[:rent_date], hour_from: params[:hour_from], hour_to: params[:hour_to]),
     class: "btn-primary" %>

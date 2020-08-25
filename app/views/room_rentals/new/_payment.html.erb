@@ -21,23 +21,10 @@
   </div>
 
   <div class="payment-method-container klarna-container">
-    <%= render 'room_rentals/new/payment_klarna' %>
+    <%#= render 'room_rentals/new/payment_klarna' %>
   </div>
 
   <div class="payment-method-container eps-container">
-    <%= render 'room_rentals/new/payment_eps' %>
+    <%#= render 'room_rentals/new/payment_eps' %>
   </div>
-
-  <%= form_tag summary_room_rentals_url, method: :get, class: 'next-step-form' do %>
-    <%= hidden_field_tag :room_offer_id, params[:room_offer_id] %>
-    <%= hidden_field_tag :renter_company, params[:renter_company] %>
-    <%= hidden_field_tag :renter_name, params[:renter_name] %>
-    <%= hidden_field_tag :renter_address, params[:renter_address] %>
-    <%= hidden_field_tag :renter_zip, params[:renter_zip] %>
-    <%= hidden_field_tag :renter_city, params[:renter_city] %>
-    <%= hidden_field_tag :payment_method, params[:payment_method] %>
-    <%= hidden_field_tag :stripe_payment_intent_id %>
-    <%= hidden_field_tag :stripe_source_id, params[:source] %>
-  <% end %>
-
 </div>

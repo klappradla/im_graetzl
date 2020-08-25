@@ -7,49 +7,54 @@
     </p>
   </div>
 
-  <%= form_tag choose_payment_room_rentals_url, method: :get do %>
-    <%= hidden_field_tag :room_offer_id, params[:room_offer_id] %>
+  <%= form_for @room_rental do |f| %>
+    <%= f.hidden_field :room_offer_id %>
+    <%= f.fields_for :room_rental_slots do |fs| %>
+      <%= fs.hidden_field :rent_date %>
+      <%= fs.hidden_field :hour_from %>
+      <%= fs.hidden_field :hour_to %>
+    <% end %>
 
     <div class="input-field">
-      <%= label_tag :renter_company do %>
+      <%= f.label :renter_company do %>
         <%= icon_tag "user-avatar" %>
         <span>Firma</span>
       <% end %>
-      <%= text_field_tag :renter_company, nil, placeholder: 'Firma (optional)', class: 'renter-input', data: { field: 'renter-company' } %>
+      <%= f.text_field :renter_company, placeholder: 'Firma (optional)', class: 'renter-input', data: { field: 'renter-company' } %>
     </div>
 
     <div class="input-field">
-      <%= label_tag :renter_name do %>
+      <%= f.label :renter_name do %>
         <%= icon_tag "user-avatar" %>
         <span>Name</span>
       <% end %>
-      <%= text_field_tag :renter_name, current_user.full_name, placeholder: 'Vor- & Nachname', class: 'renter-input', data: { field: 'renter-name' } %>
+      <%= f.text_field :renter_name, placeholder: 'Vor- & Nachname', class: 'renter-input', data: { field: 'renter-name' } %>
     </div>
 
     <div class="input-field">
-      <%= label_tag :renter_address do %>
+      <%= f.label :renter_address do %>
         <%= icon_tag "map-location" %>
         <span>Strasse & Nr.</span>
       <% end %>
-      <%= text_field_tag :renter_address, current_user.address.try(:street), placeholder: 'Strasse & Nr.', class: 'renter-input', data: { field: 'renter-address' } %>
+      <%= f.text_field :renter_address, placeholder: 'Strasse & Nr.', class: 'renter-input', data: { field: 'renter-address' } %>
     </div>
 
     <div class="form-columns">
 
       <div class="input-field">
-        <%= label_tag :renter_zip do %>
+        <%= f.label :renter_zip do %>
           <%= icon_tag "map-location" %>
           <span>Postleitzahl</span>
         <% end %>
-        <%= text_field_tag :renter_zip, current_user.address.try(:zip), placeholder: 'PLZ', class: 'renter-input', data: { field: 'renter-zip' } %>
+        <%= f.text_field :renter_zip, placeholder: 'PLZ', class: 'renter-input', data: { field: 'renter-zip' } %>
       </div>
 
       <div class="input-field">
-        <%= label_tag :renter_city do %>
+        <%= f.label :renter_city do %>
           <%= icon_tag "map-location" %>
           <span>Ort/Stadt</span>
         <% end %>
-        <%= text_field_tag :renter_city, current_user.address.try(:city), placeholder: 'Stadt', class: 'renter-input', data: { field: 'renter-city' } %>
+        <%= f.text_field :renter_city, placeholder: 'Stadt', class: 'renter-input', data: { field: 'renter-city' } %>
       </div>
     </div>
 

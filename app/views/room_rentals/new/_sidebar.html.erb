@@ -1,10 +1,10 @@
-<% graetzl = Graetzl.memoized(@room_offer.graetzl_id) %>
+<% graetzl = Graetzl.memoized(@room_rental.room_offer.graetzl_id) %>
 
 <div class="cardBox -roomoffer">
 
   <div class="cardBoxHeader">
     <div class="coverImgWrapper">
-      <%= link_to cover_photo_for(@room_offer), @room_offer %>
+      <%= link_to cover_photo_for(@room_rental.room_offer), @room_rental.room_offer %>
     </div>
     <% if graetzl %>
       <div class="categoryicon">
@@ -13,14 +13,46 @@
     <% end %>
   </div>
 
+  <% if @room_rental.room_rental_slots.present? %>
   <div class="cardBoxContent">
+    <h3 class="sidebar"><%= @room_rental.room_offer.slogan %></h3>
+    <h3 class="sidebar">Deine Auswahl</h3>
 
-    <!-- Show default this Partail if no Date is choosen ...
-    < %= render 'room_rentals/new/package_pricing' % >
-    -->
+    <ul class="pricing-summary -duration">
+      <li>
+        <div class="duration">Miete:</div>
+        <div class="title">
+          <% @room_rental.room_rental_slots.each do |slot| %>
+            <%= l(slot.rent_date, format: :short) %>, <%= slot.hour_from %> bis <%= slot.hour_to %> Uhr
+            <br>
+          <% end %>
+        </div>
+      </li>
+    </ul>
 
-    <!-- Insert this Partial for Price Calculation when a Date is choosen -->
-    <%= render 'room_rentals/new/calculated_price' %>
+    <ul class="pricing-summary">
+      <li>
+        <div class="cost"><%= number_to_currency(@room_rental.basic_price, unit: "€") %></div>
+        <div class="costname"><%= @room_rental.total_hours %> Stunden x <%= number_to_currency(@room_rental.hourly_price, unit: "€") %></div>
+      </li>
+      <% if @room_rental.discount > 0 %>
+        <li>
+          <div class="cost"> <%= number_to_currency(-@room_rental.discount, unit: "€") %></div>
+          <div class="costname">Rabatt ab <%= @room_rental.total_hours %> Stunden</div>
+        </li>
+      <% end %>
 
+      <li>
+        <div class="cost"><%= number_to_currency(@room_rental.tax, unit: "€") %></div>
+        <div class="costname">20% MwSt.</div>
+      </li>
+
+      <li class="sum">
+        <div class="cost"><%= number_to_currency(@room_rental.total_price, unit: "€") %></div>
+        <div class="costname">Gesamtpreis</div>
+      </li>
+    </ul>
   </div>
+  <% end %>
+
 </div>

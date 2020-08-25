@@ -11,6 +11,8 @@ module MessengerHelper
       "archived hidden"
     elsif thread.tool_rental_id
       "active tool_rental"
+    elsif thread.room_rental_id
+      "active room_rental"
     else
       'active'
     end

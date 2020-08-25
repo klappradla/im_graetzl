@@ -42,6 +42,10 @@
           <%= link_to 'Bearbeiten', edit_room_offer_path(@room_offer),
             class: 'btn-secondary -mint -small'  %>
         </div>
+        <% if @room_offer.room_rental_price.present? %>
+          <%= link_to 'Timetable', rental_timetable_room_offer_path(@room_offer),
+            class: 'btn-secondary -mint -small'  %>
+        <% end %>
         <div class="btn-group">
           <%= link_to "javascript:", data: { jq_dropdown: "#room-state-update-dropdown" }, class: "btn-secondary -mint -small -state-#{@room_offer.status}" do %>
             Status: <span><%= t("activerecord.attributes.room_offer.statuses.#{@room_offer.status}") %></span>

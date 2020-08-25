@@ -6,17 +6,6 @@ class RoomOffersController < ApplicationController
     @comments = @room_offer.comments.includes(:user, :images).order(created_at: :desc)
   end
 
-  def calculate_price
-    @room_offer = RoomOffer.find(params[:id])
-    if params[:rent_date].present?
-      rent_date = Date.parse(params[:rent_date])
-      @available_hours = @room_offer.available_hours(rent_date)
-    end
-    if params[:rent_hour_from].present? && params[:rent_hour_to].present?
-      @calculator = RoomPriceCalculator.new(@room_offer, rent_date, params[:rent_hour_from], params[:rent_hour_to])
-    end
-  end
-
   def select
   end
 
@@ -74,6 +63,27 @@ class RoomOffersController < ApplicationController
       flash[:notice] = "Der Aktivierungslink ist leider ungültig. Log dich ein um deinen Raumteiler zu aktivieren."
     end
     redirect_to @room_offer
+  end
+
+  def rental_timetable
+    @room_offer = current_user.room_offers.find(params[:id])
+    @timetable = RoomRentalTimetable.new(@room_offer)
+    month = params[:month].present? ? Date.parse(params[:month]) : Date.today
+    @date_range = month.beginning_of_month..month.end_of_month
+  end
+
+  def available_hours
+    @room_offer = RoomOffer.find(params[:id])
+    rent_date = Date.parse(params[:rent_date])
+    render json: @room_offer.available_hours(rent_date)
+  end
+
+  def calculate_price
+    @room_offer = RoomOffer.find(params[:id])
+    head :ok if params[:hour_from].blank? || params[:hour_to].blank?
+    @room_rental = RoomRental.new(room_offer: @room_offer)
+    @room_rental.room_rental_slots.build(rental_slot_params)
+    @room_rental.calculate_price
   end
 
   def toggle_waitlist
@@ -149,5 +159,9 @@ class RoomOffersController < ApplicationController
     ).merge(
       keyword_list: [params[:suggested_keywords], params[:custom_keywords]].join(", ")
     )
+  end
+
+  def rental_slot_params
+    params.permit(:rent_date, :hour_from, :hour_to)
   end
 end

@@ -101,17 +101,17 @@ de:
         one: Zuckerl
         other: Zuckerln
       room_offer:
-        one: Raumteiler | Habe Raum
-        other: Raumteiler | Habe Raum
+        one: Raumangebot
+        other: Raumangebote
       room_demand:
-        one: Raumteiler | Suche Raum
-        other: Raumteiler | Suche Raum
+        one: Raumsuche
+        other: Raumsuchen
       room_category:
-        one: Raumteiler | Kategorie
-        other: Raumteiler | Kategorien
+        one: Kategorie
+        other: Kategorien
       room_suggested_tag:
-        one: Raumteiler | Tag
-        other: Raumteiler | Tags
+        one: Tag
+        other: Tags
       room_call:
         one: Call
         other: Calls
@@ -238,6 +238,12 @@ de:
         status_message:
           enabled: Deine Raumsuche ist nun aktiv und sichtbar.
           disabled: Dein Raumsuche ist nun deaktiviert und scheint nicht mehr auf den Raumteilerseiten auf.
+      room_rental:
+        rental_statuses:
+          pending: Noch nicht akzeptiert
+          canceled: Anfrage zurückgezogen
+          rejected: Anfrage abgelehnt
+          approved: Anfrage akzeptiert
       tool_offer:
         address: Adresse
         title: Titel

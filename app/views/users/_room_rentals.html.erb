@@ -1,0 +1,52 @@
+<% if !@owned_room_rentals.present? && !@room_rentals.present? %>
+  <div class="cardBox no-rentals-box">
+    <h3>Noch keine Buchungsanfragen ...</h3>
+    <p>
+      Sobald jemand deinen Raumteiler anfragt, oder du selbst einen Raumteiler ausleihen möchtest
+      siehst du hier eine Übersicht über deine aktuellen Buchungen.
+    </p>
+  </div>
+<% end %>
+
+<% if @owned_room_rentals.present? %>
+
+  <div class="hl-subtext">
+    <h1><em>Als Vermieter</em></h1>
+  </div>
+
+  <div class="table-container" role="table" aria-label="Destinations">
+    <div class="flex-table header" role="rowgroup">
+      <div class="flex-row large first" role="columnheader">Mieter</div>
+      <div class="flex-row large" role="columnheader">Raumteiler</div>
+      <div class="flex-row medium" role="columnheader">Mietdatum</div>
+      <div class="flex-row small" role="columnheader">Auszahlung</div>
+      <div class="flex-row large" role="columnheader">Status</div>
+      <div class="flex-row medium" role="columnheader">Messenger</div>
+    </div>
+
+    <% @owned_room_rentals.order("id DESC").each do |rental| %>
+      <%= render 'users/owned_room_rental', room_rental: rental %>
+    <% end %>
+  </div>
+<% end %>
+
+<% if @room_rentals.present? %>
+<div class="hl-subtext">
+  <h1><em>Als Mieter</em></h1>
+</div>
+
+  <div class="table-container" role="table" aria-label="Destinations">
+    <div class="flex-table header" role="rowgroup">
+      <div class="flex-row large first" role="columnheader">Vermieter</div>
+      <div class="flex-row large" role="columnheader">Raumteiler</div>
+      <div class="flex-row medium" role="columnheader">Mietdatum</div>
+      <div class="flex-row small" role="columnheader">Kosten</div>
+      <div class="flex-row large" role="columnheader">Status</div>
+      <div class="flex-row medium" role="columnheader">Messenger</div>
+    </div>
+
+    <% @room_rentals.order("id DESC").each do |rental| %>
+      <%= render 'users/rented_room_rental', room_rental: rental %>
+    <% end %>
+  </div>
+<% end %>

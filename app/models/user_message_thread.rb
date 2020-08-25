@@ -4,10 +4,18 @@ class UserMessageThread < ApplicationRecord
   has_many :user_messages
 
   belongs_to :tool_rental, optional: true
+  belongs_to :room_rental, optional: true
 
   before_create :set_last_message_at
 
   attr_accessor :status
+
+  def self.create_for_room_rental(room_rental)
+    thread = create(room_rental: room_rental)
+    thread.users << room_rental.renter
+    thread.users << room_rental.owner
+    thread
+  end
 
   def self.create_for_tool_rental(tool_rental)
     thread = create(tool_rental: tool_rental)

@@ -36,7 +36,7 @@
   <div class="hl-subtext">
     <h2>Dein <span>Auszahlungskonto</span></h2>
     <p>
-      Deine Kontoangaben benötigen wir für die Auszahlung deiner Mieteinnahmen.
+      Deine Kontoangaben benötigen wir für die Auszahlung deiner Mieteinnahmen. (<%= link_to 'bearbeiten', edit_user_path, target: '_blank' %>)
     </p>
   </div>
 
@@ -64,11 +64,11 @@
       <% end %>
       <%= text_field_tag :iban, current_user.iban, placeholder: 'IBAN', disabled: true %>
     </div>
-    <%= link_to 'Bearbeiten', edit_user_path, target: '_blank' %>
   <% end %>
 
   <div class="input-button">
-    <%= f.submit 'Raumteiler erstellen', data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
+    <%= button_tag "Zurück", type: 'button', class: 'btn-secondary prev-screen', data: { tab: 'tab-contact' } %>
+    <%= f.button data: { disable_with: 'speichert...' }, class: 'btn-primary' %>
   </div>
 
 </div>

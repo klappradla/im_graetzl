@@ -11,18 +11,18 @@
     <div>
       <h3>Raumteiler</h3>
       <p>
-        „<%= @room_offer.slogan %>“
+        „<%= @room_rental.room_offer.slogan %>“
       </p>
     </div>
     <div class="avatar">
-      <%= avatar_for @room_offer.user %>
+      <%= avatar_for @room_rental.owner %>
     </div>
     <div>
       <h3>Vermieter</h3>
       <p>
-        <%= @room_offer.user.full_name %><br>
-        <%= @room_offer.address.street %><br>
-        <%= @room_offer.address.zip %> <%= @room_offer.address.city %>
+        <%= @room_rental.owner.full_name %><br>
+        <%= @room_rental.room_offer.address.street %><br>
+        <%= @room_rental.room_offer.address.zip %> <%= @room_rental.room_offer.address.city %>
       </p>
     </div>
   </div>
@@ -40,7 +40,7 @@
       <h3>Zahlungsart</h3>
       <p>
         <span class="payment-method block">
-          <%= payment_method_label(params[:payment_method]) %> <br>
+          <%= payment_method_label(@room_rental.payment_method) %> <br>
           <% if @card %> endet auf <%= @card.last4 %> <span class="card-last4"></span> <% end %>
         </span>
       </p>
@@ -52,33 +52,18 @@
     <div class="renter-summary">
       <h3>Mieter</h3>
       <p>
-        <span class="renter-company block"><%= params[:renter_company] %></span>
-        <span class="renter-name block"><%= params[:renter_name] %></span>
-        <span class="renter-address block"><%= params[:renter_address] %></span>
-        <span class="renter-zip"><%= params[:renter_zip] %></span> <span class="renter-city"><%= params[:renter_city] %></span>
+        <span class="renter-company block"><%= @room_rental.renter_company %></span>
+        <span class="renter-name block"><%= @room_rental.renter_name %></span>
+        <span class="renter-address block"><%= @room_rental.renter_address %></span>
+        <span class="renter-zip"><%= @room_rental.renter_zip %></span>
+        <span class="renter-city"><%= @room_rental.renter_city %></span>
       </p>
     </div>
   </div>
 
   <div class="footer-txt">
-    <strong>Deine Anfrage wurde erfolgreich an <%= @room_offer.user.first_name %> versendet.</strong>
-    Sobald <%= @room_offer.user.first_name %> deine Anfrage bearbeitet, erhältst du eine Nachricht im Messenger (und per E-Mail).
+    <strong>Deine Anfrage wurde erfolgreich an <%= @room_rental.owner.first_name %> versendet.</strong>
+    Sobald <%= @room_rental.owner.first_name %> deine Anfrage bearbeitet, erhältst du eine Nachricht im Messenger (und per E-Mail).
   </div>
-
-  <%= form_tag room_rentals_path, html: { class: 'rental-form' } do |f| %>
-    <%= hidden_field_tag :room_offer_id, params[:room_offer_id] %>
-    <%= hidden_field_tag :renter_company, params[:renter_company] %>
-    <%= hidden_field_tag :renter_name, params[:renter_name] %>
-    <%= hidden_field_tag :renter_address, params[:renter_address] %>
-    <%= hidden_field_tag :renter_zip, params[:renter_zip] %>
-    <%= hidden_field_tag :renter_city, params[:renter_city] %>
-    <%= hidden_field_tag :payment_method, params[:payment_method] %>
-    <%= hidden_field_tag :stripe_payment_intent_id, params[:stripe_payment_intent_id] %>
-    <%= hidden_field_tag :stripe_source_id, params[:stripe_source_id] %>
-
-    <%= submit_tag "Weiter zum Messenger", class: 'btn-primary submit-form' %>
-  <% end %>
-
-
 
 </div>

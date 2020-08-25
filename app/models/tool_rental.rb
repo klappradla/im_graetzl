@@ -11,7 +11,7 @@ class ToolRental < ApplicationRecord
   PAYMENT_METHODS = ['card'].freeze
 
   def self.next_invoice_number
-    ToolRental.where("invoice_number IS NOT NULL").count + 1
+    where("invoice_number IS NOT NULL").count + 1
   end
 
   def owner
@@ -20,6 +20,17 @@ class ToolRental < ApplicationRecord
 
   def renter
     user
+  end
+
+  def renter_billing_address
+    {
+      first_name: renter_name & renter_name.split(' ', 2).first,
+      last_name: renter_name & renter_name.split(' ', 2).last,
+      company: renter_company,
+      street: renter_address,
+      zip: renter_zip,
+      city: renter_city,
+    }
   end
 
   def days
