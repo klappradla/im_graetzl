@@ -1,5 +1,5 @@
-<%= form_tag [:initiate_card_payment, @room_rental], class: 'payment-intent-form remote-form',
-  remote: true, data: {type: 'json', with_credentials: true, success_url: summary_room_rental_url(@room_rental)} do %>
+<%= form_tag [:initiate_card_payment, @room_rental], class: 'card-form', remote: true,
+    data: {type: 'json', with_credentials: true, success_url: summary_room_rental_url(@room_rental)} do %>
   <%= hidden_field_tag :payment_method_id %>
   <%= hidden_field_tag :payment_intent_id %>
 
@@ -24,9 +24,3 @@
 
   <%= button_tag "Buchungsanfrage abschicken", type: 'button', disabled: true, class: "btn-primary", id: 'card-submit' %>
 <% end %>
-
-<div class="footer-txt">
-  <strong>Bist du noch unschlüssig und möchtest <%= @room_rental.owner.first_name %>
-  zuerst eine Frage stellen</strong>, so gehe direkt <%= link_to 'zum Messenger', messenger_path(thread_id: @room_rental.user_message_thread.id) %>.
-  Du kannst deine Buchung auch nachher im Messenger starten.
-</div>

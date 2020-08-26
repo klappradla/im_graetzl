@@ -105,8 +105,9 @@ Rails.application.routes.draw do
     get 'address', on: :collection
     get 'choose_payment', on: :member
     post 'initiate_card_payment', on: :member
-    post 'initiate_klarna_payment', on: :member
     post 'initiate_eps_payment', on: :member
+    get 'complete_eps_payment', on: :member
+    post 'initiate_klarna_payment', on: :member
     get 'summary', on: :member
     post 'cancel', on: :member
     post 'approve', on: :member
@@ -209,6 +210,9 @@ Rails.application.routes.draw do
   get 'info/infos-zur-graetzlmarie', to: 'static_pages#graetzlmarie'
   get 'info/code-of-conduct', to: 'static_pages#code-of-conduct'
   get 'info/versicherung', to: 'static_pages#insurance'
+
+  get 'webhooks/stripe'
+
   get '/robots.txt' => 'static_pages#robots'
 
   root 'static_pages#home'

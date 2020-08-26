@@ -13,14 +13,16 @@
       <%= f.label :hour_from do %>
         <%= icon_tag "time-clock" %>
       <% end %>
-      <%= f.select :hour_from, room_rental_default_hours_from, { include_blank: 'Check-in' }, { class: 'hour-input hour-from' } %>
+      <%= f.select :hour_from, room_rental_default_hours_from, { include_blank: 'Check-in' },
+          { class: 'hour-input hour-from', disabled: true } %>
     </div>
 
     <div class="input-field">
       <%= f.label :hour_to do %>
         <%= icon_tag "time-clock" %>
       <% end %>
-      <%= f.select :hour_to, room_rental_default_hours_to, { include_blank: 'Check-out' }, { class: 'hour-input hour-to' } %>
+      <%= f.select :hour_to, room_rental_default_hours_to, { include_blank: 'Check-out' },
+          { class: 'hour-input hour-to', disabled: true } %>
     </div>
   </div>
 

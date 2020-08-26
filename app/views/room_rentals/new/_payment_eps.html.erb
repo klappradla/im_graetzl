@@ -1,24 +1,16 @@
-<%= form_tag initiate_eps_payment_room_rentals_url, class: 'eps-source-form remote-form', remote: true, data: {type: 'json', with_credentials: true} do %>
-  <%= hidden_field_tag :room_offer_id, params[:room_offer_id] %>
-  <%= hidden_field_tag :redirect_url, choose_payment_room_rentals_url(room_rental_params.merge(payment_method: 'eps')) %>
-
-  <div class="error-message">
-    <% if params[:payment_method] == 'eps' && @source_status == 'failed' %>
-      EPS Überweisung gescheitert.
-    <% end %>
-  </div>
+<%= form_tag [:initiate_eps_payment, @room_rental], class: 'eps-form', remote: true, data: {
+  type: 'json', with_credentials: true, complete_url: complete_eps_payment_room_rental_url(@room_rental)
+} do %>
 
   <div class="input-field">
     <%= label_tag :full_name do %>
-    <%= icon_tag "user-avatar" %>
+      <%= icon_tag "user-avatar" %>
       <span>Name</span>
     <% end %>
-    <%= text_field_tag :full_name, current_user.full_name  %>
+    <%= text_field_tag :full_name, current_user.full_name, id: 'eps-name' %>
   </div>
 
-  <%= submit_tag "Buchungsanfrage abschicken", class: 'btn-primary next-screen' %>
-<% end %>
+  <div class="error-message"></div>
 
-<% if params[:payment_method] == 'eps' && @source_status == 'chargeable' %>
-  <div id="eps-payment-success"></div>
+  <%= submit_tag "Buchungsanfrage abschicken", class: 'btn-primary', id: 'eps-submit' %>
 <% end %>

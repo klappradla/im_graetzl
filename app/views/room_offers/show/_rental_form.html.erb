@@ -14,7 +14,7 @@
     <% end %>
     <%= select_tag :hour_from,
         options_for_select(room_rental_default_hours_from),
-        include_blank: 'Check-in', class: 'hour-input hour-from' %>
+        include_blank: 'Check-in', disabled: true, class: 'hour-input hour-from' %>
   </div>
 
   <div class="input-select">
@@ -23,7 +23,7 @@
     <% end %>
     <%= select_tag :hour_to,
         options_for_select(room_rental_default_hours_to),
-        include_blank: 'Check-out', class: 'hour-input hour-to' %>
+        include_blank: 'Check-out', disabled: true, class: 'hour-input hour-to' %>
   </div>
 <% end %>
 

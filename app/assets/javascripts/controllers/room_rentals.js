@@ -48,6 +48,10 @@ APP.controllers.room_rentals = (function() {
         $(input).pickadate('picker').set('select', $(input).val(), { format: 'yyyy-mm-dd' });
       });
 
+      $('.date-screen').on('change', '.datepicker', function() {
+        $(this).parents(".date-fields").find('.hour-input').attr("disabled", !$(this).val());
+      });
+
       $('.date-screen').on('change', '.datepicker, .hour-from', function() {
         var fieldRow = $(this).parents(".date-fields");
         var hoursUrl = fieldRow.data('hours-url');
@@ -107,25 +111,22 @@ APP.controllers.room_rentals = (function() {
 
       screen.find(".paymentMethods input:checked").click();
 
-      screen.find(".remote-form").on('ajax:before', function() {
-        hideFormError($(this));
-      }).on('ajax:error', function(e, xhr) {
-        var error = xhr.responseJSON && xhr.responseJSON.error;
-        error = error || "An error occurred. Please check your connection and try again."
-        showFormError($(this), error);
-      });
-
       initCardPayment();
-      initKlarnaPayment();
       initEpsPayment();
+      initKlarnaPayment();
     }
 
     function initCardPayment() {
-      var cardForm = $(".card-container .payment-intent-form");
+      var cardForm = $(".card-container .card-form");
       APP.components.paymentCard.init(cardForm);
       cardForm.on('payment:complete', function() {
         location.href = $(this).data('success-url');
       });
+    }
+
+    function initEpsPayment() {
+      var epsForm = $(".eps-container .eps-form");
+      APP.components.paymentEps.init(epsForm);
     }
 
     function initKlarnaPayment() {
@@ -137,19 +138,6 @@ APP.controllers.room_rentals = (function() {
       });
 
       if ($('#klarna-payment-success').exists()) {
-        $(".next-step-form").submit();
-      }
-    }
-
-    function initEpsPayment() {
-      var container = $(".eps-container");
-      var nextButton = container.find(".next-screen");
-
-      container.find(".eps-source-form").on("ajax:success", function(e, data) {
-        location.href = data.redirect_url;
-      });
-
-      if ($('#eps-payment-success').exists()) {
         $(".next-step-form").submit();
       }
     }

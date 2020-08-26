@@ -43,10 +43,20 @@ class RoomRentalsController < ApplicationController
     render json: result, status: result[:error].present? ? :bad_request : :ok
   end
 
-  def initiate_klarna_payment
+  def initiate_eps_payment
+    @room_rental = current_user.room_rentals.incomplete.find(params[:id])
+    result = RoomRentalService.new.initiate_eps_payment(@room_rental)
+    render json: result, status: result[:error].present? ? :bad_request : :ok
   end
 
-  def initiate_eps_payment
+  def complete_eps_payment
+    @room_rental = current_user.room_rentals.find(params[:id])
+    if params[:redirect_status] == 'succeeded'
+      redirect_to [:summary, @room_rental]
+    else
+      flash[:error] = "EPS Überweisung gescheitert."
+      redirect_to [:choose_payment, @room_rental]
+    end
   end
 
   def summary
@@ -125,12 +135,12 @@ class RoomRentalsController < ApplicationController
     params.permit(:payment_method_id, :payment_intent_id)
   end
 
-  def klarna_params
-    params.permit(:first_name, :last_name, :email, :address, :zip, :city)
+  def eps_params
+    params.permit(:payment_intent)
   end
 
-  def eps_params
-    params.permit(:full_name)
+  def klarna_params
+    params.permit(:first_name, :last_name, :email, :address, :zip, :city)
   end
 
 end

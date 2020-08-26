@@ -27,7 +27,11 @@ APP.controllers.room_offers = (function() {
         $(".request-price-form .picker__box").append( "<div class='picker__legend'><div class='legend_not_availiable'></div><small class='legend_text'> ... an diesen Tagen nicht verfügbar</small></div>" );
         $(".request-price-form .picker__box .picker__header").append( "<div class='picker__header_info'><small class='legend_headline'>Wann möchtest du anmieten?</small><small class='legend_text'>(Du kannst im nächsten Schritt auch noch weitere Tage hinzufügen)</small></div>" );
       }
-    })
+    });
+
+    $('.request-price-form .rent-date').on("change", function() {
+      $('.request-price-form .hour-input').attr("disabled", !$(this).val());
+    });
 
     $('.request-price-form').find(".rent-date, .hour-from").on("change", function() {
       var form = $(this).parents(".request-price-form");
