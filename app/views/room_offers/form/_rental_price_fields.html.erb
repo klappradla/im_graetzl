@@ -5,7 +5,7 @@
         <%= icon_tag "currency-euro" %>
         <span>Preis / Stunde</span>
       <% end %>
-      <%= f.number_field :price_per_hour, placeholder: 'Stundenpreis in €' %>
+      <%= f.number_field :price_per_hour, placeholder: 'Stundenpreis in €', class: 'price-per-hour-input' %>
     </div>
     <div class="input-select">
       <%= label_tag :minimum_rental_hours do %>

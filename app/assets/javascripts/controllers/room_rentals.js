@@ -48,18 +48,20 @@ APP.controllers.room_rentals = (function() {
         $(input).pickadate('picker').set('select', $(input).val(), { format: 'yyyy-mm-dd' });
       });
 
-      $('.date-screen').on('change', '.datepicker', function() {
-        var hoursUrl = $(this).data('url');
+      $('.date-screen').on('change', '.datepicker, .hour-from', function() {
         var fieldRow = $(this).parents(".date-fields");
-        var currentDate = $(this).pickadate('picker').get('select', 'yyyy-mm-dd');
-        $.get(hoursUrl, {rent_date: currentDate}, function(data) {
+        var hoursUrl = fieldRow.data('hours-url');
+        var currentDate = fieldRow.find(".datepicker").pickadate('picker').get('select', 'yyyy-mm-dd');
+        var hourFrom = fieldRow.find(".hour-input.hour-from").val();
+
+        $.get(hoursUrl, {rent_date: currentDate, hour_from: hourFrom}, function(data) {
           fieldRow.find(".hour-input.hour-from option").not(':empty').each(function(i, o) {
             var hour = +$(o).val();
-            $(o).attr("disabled", data.indexOf(hour) == -1);
+            $(o).attr("disabled", data.from.indexOf(hour) == -1);
           });
           fieldRow.find(".hour-input.hour-to option").not(':empty').each(function(i, o) {
-            var hour = $(o).val() - 1;
-            $(o).attr("disabled", data.indexOf(hour) == -1);
+            var hour = +$(o).val();
+            $(o).attr("disabled", data.to.indexOf(hour) == -1);
           });
         });
       });

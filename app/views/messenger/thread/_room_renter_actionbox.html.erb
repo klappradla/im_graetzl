@@ -18,7 +18,7 @@
     <% elsif room_rental.canceled? %>
 
       <div class="note">
-        Du hast die Anfrage zurückgezogen. Bitte schreib dem Verleiher, warum du den Raumteiler doch nicht ausleihen möchtest.
+        Du hast die Anfrage zurückgezogen. Bitte schreib dem Vermieter, warum du den Raumteiler doch nicht buchen möchtest.
       </div>
 
     <% elsif room_rental.approved? %>
@@ -31,14 +31,14 @@
           <%= room_rental.room_offer.address.street_number %>,
           <%= room_rental.room_offer.address.zip %> <%= room_rental.room_offer.address.city %>
         </p>
-        Macht euch am besten gleich hier im Chat eine genaue Uhrzeit und einen Treffpunkt aus.
+        Offene Fragen zur Miete könnt ihr am besten gleich hier im Chat besprechen.
       </div>
 
     <% elsif room_rental.rejected? %>
 
       <div class="note">
         Leider hat der Vermieter deine Anfrage abgelehnt.
-        Probiere es mit einem anderen <%= link_to "Raumteiler", room_offers_wien_path %>.
+        Probiere es mit einem anderen <%= link_to "Raumteiler", rooms_wien_path %>.
       </div>
 
     <% end %>

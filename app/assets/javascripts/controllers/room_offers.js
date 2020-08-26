@@ -27,17 +27,22 @@ APP.controllers.room_offers = (function() {
         $(".request-price-form .picker__box").append( "<div class='picker__legend'><div class='legend_not_availiable'></div><small class='legend_text'> ... an diesen Tagen nicht verfügbar</small></div>" );
         $(".request-price-form .picker__box .picker__header").append( "<div class='picker__header_info'><small class='legend_headline'>Wann möchtest du anmieten?</small><small class='legend_text'>(Du kannst im nächsten Schritt auch noch weitere Tage hinzufügen)</small></div>" );
       }
-    }).on("change", function() {
-      var hoursUrl = $(this).data('url');
-      var currentDate = $(this).pickadate('picker').get('select', 'yyyy-mm-dd');
-      $.get(hoursUrl, {rent_date: currentDate}, function(data) {
-        $(".request-price-form .hour-input.hour-from option").not(':empty').each(function(i, o) {
+    })
+
+    $('.request-price-form').find(".rent-date, .hour-from").on("change", function() {
+      var form = $(this).parents(".request-price-form");
+      var hoursUrl = form.data('hours-url');
+      var currentDate = form.find(".rent-date").pickadate('picker').get('select', 'yyyy-mm-dd');
+      var hourFrom = form.find(".hour-from").val();
+
+      $.get(hoursUrl, {rent_date: currentDate, hour_from: hourFrom}, function(data) {
+        form.find(".hour-from option").not(':empty').each(function(i, o) {
           var hour = +$(o).val();
-          $(o).attr("disabled", data.indexOf(hour) == -1);
+          $(o).attr("disabled", data.from.indexOf(hour) == -1);
         });
-        $(".request-price-form .hour-input.hour-to option").not(':empty').each(function(i, o) {
-          var hour = $(o).val() - 1;
-          $(o).attr("disabled", data.indexOf(hour) == -1);
+        form.find(".hour-to option").not(':empty').each(function(i, o) {
+          var hour = +$(o).val();
+          $(o).attr("disabled", data.to.indexOf(hour) == -1);
         });
       });
     });
@@ -128,6 +133,10 @@ APP.controllers.room_offers = (function() {
         $(".availability-input-" + day).removeProp("disabled");
       }
     }).change();
+
+    $(".price-per-hour-input").on("change", function() {
+      $(".iban-input").attr("required", !!$(this).val());
+    })
 
     $('select#admin-user-select').SumoSelect({
       search: true,

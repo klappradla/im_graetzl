@@ -15,7 +15,6 @@
   <% end %>
 
   <div class="time">
-    <%= room_rental.total_hours %> Tage <br>
     <% room_rental.room_rental_slots.each do |slot| %>
       <%= l(slot.rent_date, format: :short) %>, <%= slot.hour_from %> bis <%= slot.hour_to %> Uhr
       <br>

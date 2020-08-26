@@ -1,29 +1,31 @@
-<h3 class="sidebar">Deine Auswahl</h3>
+<% if @room_rental.room_rental_slots.present? %>
+  <h3 class="sidebar">Deine Auswahl</h3>
 
-<ul class="pricing-summary">
-  <li>
-    <div class="cost"><%= number_to_currency(@room_rental.basic_price, unit: "€") %></div>
-    <div class="costname"><%= @room_rental.total_hours %> Stunden x <%= number_to_currency(@room_rental.hourly_price, unit: "€") %></div>
-  </li>
-
-  <% if @room_rental.discount > 0 %>
+  <ul class="pricing-summary">
     <li>
-      <div class="cost"> <%= number_to_currency(-@room_rental.discount, unit: "€") %></div>
-      <div class="costname">Rabatt ab <%= @room_rental.total_hours %> Stunden</div>
+      <div class="cost"><%= number_to_currency(@room_rental.basic_price, unit: "€") %></div>
+      <div class="costname"><%= @room_rental.total_hours %> Stunden x <%= number_to_currency(@room_rental.hourly_price, unit: "€") %></div>
     </li>
-  <% end %>
 
-  <li>
-    <div class="cost"><%= number_to_currency(@room_rental.tax, unit: "€") %></div>
-    <div class="costname">20% MwSt.</div>
-  </li>
+    <% if @room_rental.discount > 0 %>
+      <li>
+        <div class="cost"> <%= number_to_currency(-@room_rental.discount, unit: "€") %></div>
+        <div class="costname">Rabatt ab <%= @room_rental.total_hours %> Stunden</div>
+      </li>
+    <% end %>
 
-  <li class="sum">
-    <div class="cost"><%= number_to_currency(@room_rental.total_price, unit: "€") %></div>
-    <div class="costname">Gesamtpreis</div>
-  </li>
-</ul>
+    <li>
+      <div class="cost"><%= number_to_currency(@room_rental.tax, unit: "€") %></div>
+      <div class="costname">20% MwSt.</div>
+    </li>
 
-<%= link_to "Weiter zur Buchung", new_room_rental_path(room_offer_id: @room_offer.id,
-    rent_date: params[:rent_date], hour_from: params[:hour_from], hour_to: params[:hour_to]),
-    class: "btn-primary" %>
+    <li class="sum">
+      <div class="cost"><%= number_to_currency(@room_rental.total_price, unit: "€") %></div>
+      <div class="costname">Gesamtpreis</div>
+    </li>
+  </ul>
+
+  <%= link_to "Weiter zur Buchung", new_room_rental_path(room_offer_id: @room_offer.id,
+      rent_date: params[:rent_date], hour_from: params[:hour_from], hour_to: params[:hour_to]),
+      class: "btn-primary" %>
+<% end %>

@@ -18,6 +18,10 @@ class RoomOfferAvailability < ApplicationRecord
     read_attribute(:"day_#{wday}_to")
   end
 
+  def available_hour_list(wday)
+    (from(wday)...to(wday)).to_a
+  end
+
   def day_enabled?(wday)
     from(wday).present? && to(wday).present?
   end

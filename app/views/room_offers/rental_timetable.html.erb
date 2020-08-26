@@ -22,7 +22,7 @@
       <% @date_range.each do |date| %>
         <tr>
           <td><%= date %></td>
-          <% @timetable.schedule(date).each do |status, length| %>
+          <% @availability.timetable(date).each do |status, length| %>
             <% if status == :disabled %>
               <td class="disabled" colspan="<%= length %>"> Disabled </td>
             <% elsif status == :available %>

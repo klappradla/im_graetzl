@@ -6,7 +6,7 @@
       „<%= link_to_if tool_rental.tool_offer.enabled?, "#{tool_rental.tool_offer.title}", tool_rental.tool_offer %>“
       bei <%= tool_rental.owner.full_name %> angefragt.
     </div>
-  <% elsif current_user == room_rental.owner %>
+  <% elsif current_user == tool_rental.owner %>
     <div class="title">
       <%= tool_rental.renter.full_name %> möchte deinen Toolteiler
       „<%= link_to_if tool_rental.tool_offer.enabled?, "#{tool_rental.tool_offer.title}", tool_rental.tool_offer %>“

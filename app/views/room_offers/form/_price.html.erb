@@ -41,11 +41,11 @@
   </div>
 
   <div class="input-field">
-    <%= f.label :first_name do %>
+    <%= f.label :name do %>
       <%= icon_tag "user-avatar" %>
       <span>Name</span>
     <% end %>
-    <%= text_field_tag :name, current_user.full_name, placeholder: 'IBAN', disabled: true %>
+    <%= text_field_tag :name, current_user.full_name, placeholder: 'Name', disabled: true %>
   </div>
 
   <% if current_user.iban.blank? %>
@@ -54,7 +54,7 @@
         <%= icon_tag "profile-vcard" %>
         <span>Kontoverbindung</span>
       <% end %>
-      <%= text_field_tag :iban, nil, placeholder: 'IBAN' %>
+      <%= text_field_tag :iban, nil, placeholder: 'IBAN', class: 'iban-input' %>
     </div>
   <% else %>
     <div class="input-field">

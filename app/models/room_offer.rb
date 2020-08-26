@@ -25,9 +25,6 @@ class RoomOffer < ApplicationRecord
   has_many :room_rentals
   has_many :room_rental_slots, through: :room_rentals
 
-  has_many :active_room_rentals, -> { where(rental_status: [:pending, :approved]) }, class_name: 'RoomRental'
-  has_many :active_rental_slots, through: :active_room_rentals, source: :room_rental_slots
-
   has_many :room_offer_waiting_users
   has_many :waiting_users, through: :room_offer_waiting_users, source: :user
 
@@ -46,7 +43,8 @@ class RoomOffer < ApplicationRecord
   accepts_attachments_for :images, attachment: :file, append: true
   accepts_nested_attributes_for :images, allow_destroy: true, reject_if: :all_blank
 
-  validates_presence_of :address, :slogan, :room_description, :owner_description, :tenant_description, :cover_photo, :first_name, :last_name, :email
+  validates_presence_of :address, :slogan, :room_description, :owner_description, :tenant_description
+  validates_presence_of :cover_photo, :first_name, :last_name, :email
   validate :has_one_category_at_least
 
   before_save :set_graetzl_and_district
@@ -71,11 +69,6 @@ class RoomOffer < ApplicationRecord
   def available_days
     return [] if room_offer_availability.nil?
     (0..6).select{ |d| room_offer_availability.day_enabled?(d) }
-  end
-
-  def available_hours(date)
-    return [] if room_offer_availability.nil?
-    (room_offer_availability.from(date.wday)..room_offer_availability.to(date.wday)).to_a
   end
 
   def set_last_activated_at

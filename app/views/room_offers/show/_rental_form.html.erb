@@ -1,10 +1,11 @@
-<%= form_tag [:calculate_price, @room_offer], remote: true, method: :get, class: 'request-price-form' do %>
+<%= form_tag [:calculate_price, @room_offer], remote: true, method: :get, class: 'request-price-form',
+    data: { hours_url: available_hours_room_offer_url(@room_offer) } do %>
   <div class="input-field">
     <%= label_tag :rent_date do %>
       <%= icon_tag "calendar-2" %>
     <% end %>
     <%= text_field_tag :rent_date, nil, class: 'rent-date', placeholder: 'Mietdatum auswählen',
-        data: { url: available_hours_room_offer_url(@room_offer), days: @room_offer.available_days } %>
+        data: { days: @room_offer.available_days } %>
   </div>
 
   <div class="input-select">

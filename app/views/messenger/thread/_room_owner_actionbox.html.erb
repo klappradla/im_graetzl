@@ -33,13 +33,13 @@
           <%= room_rental.renter.address.street_number %>,
           <%= room_rental.renter.address.zip %>  <%= room_rental.renter.address.city %>
         </p>
-        Macht euch am besten gleich hier im Chat eine genaue Uhrzeit und einen Treffpunkt aus.
+        Offene Fragen zur Miete könnt ihr am besten gleich hier im Chat besprechen.
       </div>
 
     <% elsif room_rental.rejected? %>
 
       <div class="note">
-        Du hast die Anfrage abgelehnt. Bitte schreibe dem Mieter warum du ihm den Raumteiler nicht vermieten konntest.
+        Du hast die Anfrage abgelehnt. Bitte schreibe dem Mieter warum du den Raumteiler nicht vermieten konntest.
       </div>
 
     <% end %>

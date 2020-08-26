@@ -67,22 +67,23 @@ class RoomOffersController < ApplicationController
 
   def rental_timetable
     @room_offer = current_user.room_offers.find(params[:id])
-    @timetable = RoomRentalTimetable.new(@room_offer)
+    @availability = RoomRentalAvailability.new(@room_offer)
     month = params[:month].present? ? Date.parse(params[:month]) : Date.today
     @date_range = month.beginning_of_month..month.end_of_month
   end
 
   def available_hours
     @room_offer = RoomOffer.find(params[:id])
-    rent_date = Date.parse(params[:rent_date])
-    render json: @room_offer.available_hours(rent_date)
+    @availability = RoomRentalAvailability.new(@room_offer)
+    render json: @availability.available_hours(params[:rent_date], params[:hour_from])
   end
 
   def calculate_price
     @room_offer = RoomOffer.find(params[:id])
-    head :ok if params[:hour_from].blank? || params[:hour_to].blank?
-    @room_rental = RoomRental.new(room_offer: @room_offer)
-    @room_rental.room_rental_slots.build(rental_slot_params)
+    @room_rental = RoomRental.new(
+      room_offer: @room_offer,
+      room_rental_slots_attributes: [params.permit(:rent_date, :hour_from, :hour_to)],
+    )
     @room_rental.calculate_price
   end
 
@@ -159,9 +160,5 @@ class RoomOffersController < ApplicationController
     ).merge(
       keyword_list: [params[:suggested_keywords], params[:custom_keywords]].join(", ")
     )
-  end
-
-  def rental_slot_params
-    params.permit(:rent_date, :hour_from, :hour_to)
   end
 end

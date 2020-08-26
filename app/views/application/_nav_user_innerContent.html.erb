@@ -87,13 +87,19 @@
     <%= link_to rooms_user_path do %>
       <%= icon_tag "raumteiler" %> Raumteiler verwalten
     <% end %>
-    <% current_user.room_offers.first(3).each do |room| %>
+    <%= link_to messenger_path(filter: "room_rental") do %>
+      <%= icon_tag "speech-bubbles" %> Anfragen Messenger
+    <% end %>
+    <%= link_to rooms_user_path(:target => "tab-buchungsarchiv") do %>
+      <%= icon_tag "archive-storage" %> Buchungsarchiv
+    <% end %>
+    <% current_user.room_offers.first(2).each do |room| %>
       <%= link_to room do %>
         <%= attachment_image_tag room, :cover_photo, :fill, 100, 100, fallback: 'avatar/room_offer/100x100.png', class: 'img-square' %>
         <span><%= room.slogan %></span>
       <% end %>
     <% end %>
-    <% current_user.room_demands.first(3).each do |room| %>
+    <% current_user.room_demands.first(2).each do |room| %>
       <%= link_to room do %>
         <%= attachment_image_tag room, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-square' %>
         <span><%= room.slogan %></span>
@@ -108,11 +114,17 @@
     <%= link_to tool_offers_user_path do %>
       <%= icon_tag "tacker" %> Toolteiler verwalten
     <% end %>
-    <%= link_to messenger_path do %>
+    <%= link_to messenger_path(filter: "tool_rental") do %>
       <%= icon_tag "speech-bubbles" %> Anfragen Messenger
     <% end %>
     <%= link_to tool_offers_user_path(:target => "tab-buchungsarchiv") do %>
       <%= icon_tag "archive-storage" %> Buchungsarchiv
+    <% end %>
+    <% current_user.tool_offers.first(4).each do |tool_offer| %>
+      <%= link_to tool_offer do %>
+        <%= attachment_image_tag tool_offer, :cover_photo, :fill, 100, 100, fallback: 'avatar/tool_offer/100x100.png', class: 'img-square' %>
+        <span><%= tool_offer.title %></span>
+      <% end %>
     <% end %>
   </section>
 

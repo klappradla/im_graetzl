@@ -24,8 +24,8 @@ class ToolRental < ApplicationRecord
 
   def renter_billing_address
     {
-      first_name: renter_name & renter_name.split(' ', 2).first,
-      last_name: renter_name & renter_name.split(' ', 2).last,
+      first_name: renter_name && renter_name.split(' ', 2).first,
+      last_name: renter_name && renter_name.split(' ', 2).last,
       company: renter_company,
       street: renter_address,
       zip: renter_zip,

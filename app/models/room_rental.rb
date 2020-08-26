@@ -4,8 +4,9 @@ class RoomRental < ApplicationRecord
   belongs_to :room_offer
 
   has_many :room_rental_slots
-  accepts_nested_attributes_for :room_rental_slots, reject_if:
-    proc { |attrs| attrs['hour_from'].blank? || attrs['hour_to'].blank? }
+  accepts_nested_attributes_for :room_rental_slots, reject_if: proc { |attrs|
+    attrs['hour_from'].blank? || attrs['hour_to'].blank? || attrs['hour_to'].to_i <= attrs['hour_from'].to_i
+  }
 
   has_one :user_message_thread
 
@@ -30,8 +31,8 @@ class RoomRental < ApplicationRecord
 
   def renter_billing_address
     {
-      first_name: renter_name & renter_name.split(' ', 2).first,
-      last_name: renter_name & renter_name.split(' ', 2).last,
+      first_name: renter_name && renter_name.split(' ', 2).first,
+      last_name: renter_name && renter_name.split(' ', 2).last,
       company: renter_company,
       street: renter_address,
       zip: renter_zip,

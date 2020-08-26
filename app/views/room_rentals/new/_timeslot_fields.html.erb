@@ -1,12 +1,12 @@
 <div class="nested-fields">
-  <div class="date-fields">
+  <div class="date-fields" data-hours-url="<%= available_hours_room_offer_url(@room_rental.room_offer) %>">
+
     <div class="input-field">
       <%= f.label :rent_date do %>
         <%= icon_tag "calendar-2" %>
         <span>Datum</span>
       <% end %>
-      <%= f.text_field :rent_date, class: 'datepicker', placeholder: 'wählen',
-          data: { url: available_hours_room_offer_url(@room_rental.room_offer) } %>
+      <%= f.text_field :rent_date, class: 'datepicker', placeholder: 'wählen' %>
     </div>
 
     <div class="input-field">
