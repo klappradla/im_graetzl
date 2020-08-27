@@ -213,7 +213,7 @@ section.roomDetail {
         margin-bottom: 15px;
       }
 
-      .input-field {
+      .input-field, .input-select {
         overflow: hidden;
         @include respond-to("<medium") {
           @include field-HorizontalLayout;

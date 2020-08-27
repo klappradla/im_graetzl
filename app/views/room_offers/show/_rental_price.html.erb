@@ -10,7 +10,7 @@
     <% if @room_rental.discount > 0 %>
       <li>
         <div class="cost"> <%= number_to_currency(-@room_rental.discount, unit: "€") %></div>
-        <div class="costname">Rabatt ab <%= @room_rental.total_hours %> Stunden</div>
+        <div class="costname"><%= @room_offer.room_rental_price.eight_hour_discount %>% Rabatt ab 8h</div>
       </li>
     <% end %>
 

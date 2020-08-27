@@ -1,9 +1,24 @@
 .room-rental-page {
 
   .rental-date-form {
-    .nested-fields { margin-bottom: 20px; }
+    .nested-fields {
+      margin-bottom:20px;
+      position: relative;
+      //border-bottom: 1px solid $color-ambient-mint-light;
+      //padding-bottom:20px;
+      a.remove_fields {
+        position: absolute;
+        top:5px;
+        right:10px;
+        @include respond-to(">=medium") {
+          top:15px;
+        }
+      }
+    }
 
-    .nested-fields:first-of-type .remove_fields { display: none; }
+    .nested-fields:first-of-type {
+      .remove_fields { display: none; }
+    }
 
     .additional-dates-links {
       margin-top: 20px;
@@ -15,7 +30,7 @@
   .date-fields {
     @include respond-to(">medium") {
       @include cf();
-      .input-field {
+      .input-field, .input-select {
         &:nth-of-type(1) { @include col(4/4); }
         &:nth-of-type(2) {
           @include col(2/4);

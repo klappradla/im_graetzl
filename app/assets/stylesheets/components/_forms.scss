@@ -746,7 +746,7 @@ input[type=url]:invalid + em::after {
 #card-element {width:100%;}
 
 // DATE PICKER OVERRIDES
-.request-price-form {
+.request-price-form, .rental-date-form {
   .picker__day {
     position: relative;
   }

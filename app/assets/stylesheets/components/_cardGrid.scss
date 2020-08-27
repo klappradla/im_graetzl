@@ -190,6 +190,9 @@
         &.-yoga.-rooms {
           background-image: url(image_path('svg/icon-kringel-yoga-active.svg'));
         }
+        &.-sonstiges.-rooms {
+          background-image: url(image_path('svg/icon-kringel-sonstiges-active.svg'));
+        }
       }
     }
 
@@ -309,6 +312,9 @@
       }
       &.-yoga.-rooms {
         background-image: url(image_path('svg/icon-kringel-yoga.svg'));
+      }
+      &.-sonstiges.-rooms {
+        background-image: url(image_path('svg/icon-kringel-sonstiges.svg'));
       }
     }
   }

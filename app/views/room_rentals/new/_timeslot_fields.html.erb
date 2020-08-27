@@ -6,20 +6,22 @@
         <%= icon_tag "calendar-2" %>
         <span>Datum</span>
       <% end %>
-      <%= f.text_field :rent_date, class: 'datepicker', placeholder: 'wählen' %>
+      <%= f.text_field :rent_date, class: 'datepicker', placeholder: 'Mietdatum auswählen' %>
     </div>
 
-    <div class="input-field">
+    <div class="input-select">
       <%= f.label :hour_from do %>
         <%= icon_tag "time-clock" %>
+        <span>Check-in</span>
       <% end %>
       <%= f.select :hour_from, room_rental_default_hours_from, { include_blank: 'Check-in' },
           { class: 'hour-input hour-from', disabled: true } %>
     </div>
 
-    <div class="input-field">
+    <div class="input-select">
       <%= f.label :hour_to do %>
         <%= icon_tag "time-clock" %>
+        <span>Check-out</span>
       <% end %>
       <%= f.select :hour_to, room_rental_default_hours_to, { include_blank: 'Check-out' },
           { class: 'hour-input hour-to', disabled: true } %>

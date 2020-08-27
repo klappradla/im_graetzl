@@ -28,21 +28,41 @@ APP.controllers.room_rentals = (function() {
     function initDateScreen() {
       setTab('step1');
 
+      var dateInput = $('.rental-date-form');
+      var days = dateInput.data("days");
+      var disabledDays = [true].concat(days);
+
       $('.date-screen').on('cocoon:after-insert', function(e, insertedItem) {
         $(insertedItem).find('.datepicker').pickadate({
-          format: 'ddd, dd mmm, yyyy',
-          formatSubmit: 'yyyy-mm-dd',
           hiddenName: true,
           min: true,
+          formatSubmit: 'yyyy-mm-dd',
+          format: 'ddd, dd mmm, yyyy',
+          disable: disabledDays,
+          onClose: function() {
+            $(document.activeElement).blur();
+          },
+          // Insert Legend (improve ...)
+          onRender: function() {
+            $(".rental-date-form .picker__box").append( "<div class='picker__legend'><div class='legend_not_availiable'></div><small class='legend_text'> ... an diesen Tagen nicht verfügbar</small></div>" );
+          }
         });
       });
 
       $('.date-screen .datepicker').each(function(i, input) {
         $(input).pickadate({
-          format: 'ddd, dd mmm, yyyy',
-          formatSubmit: 'yyyy-mm-dd',
           hiddenName: true,
           min: true,
+          formatSubmit: 'yyyy-mm-dd',
+          format: 'ddd, dd mmm, yyyy',
+          disable: disabledDays,
+          onClose: function() {
+            $(document.activeElement).blur();
+          },
+          // Insert Legend (improve ...)
+          onRender: function() {
+            $(".rental-date-form .picker__box").append( "<div class='picker__legend'><div class='legend_not_availiable'></div><small class='legend_text'> ... an diesen Tagen nicht verfügbar</small></div>" );
+          }
         });
         // pickadate needs help with setting initial value
         $(input).pickadate('picker').set('select', $(input).val(), { format: 'yyyy-mm-dd' });

@@ -41,7 +41,7 @@ class RoomRental < ApplicationRecord
   end
 
   def rental_period
-    room_rental_slots.map{|s| "#{I18n.l(s.rent_date, format: :short)} #{s.hour_from}:00-#{s.hour_to}:00"}.join(", ")
+    room_rental_slots.map{|s| "#{I18n.l(s.rent_date, format: :short)}, #{s.hour_from}-#{s.hour_to} Uhr"}.join(", ")
   end
 
   def calculate_price
