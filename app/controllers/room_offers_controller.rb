@@ -1,5 +1,5 @@
 class RoomOffersController < ApplicationController
-  before_action :authenticate_user!, except: [:show, :activate]
+  before_action :authenticate_user!, except: [:show, :activate, :calculate_price, :available_hours]
 
   def show
     @room_offer = RoomOffer.find(params[:id])

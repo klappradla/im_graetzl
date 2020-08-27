@@ -189,7 +189,9 @@ section.roomDetail {
         margin-top:60px;
       }
       &.contact:first-child {
-        margin-top:0px;
+        @include respond-to(">=medium") {
+          margin-top:0px;
+        }
       }
     }
 

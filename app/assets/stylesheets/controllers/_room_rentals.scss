@@ -49,24 +49,58 @@
 }
 
 .room-rental-timetable-page {
+  text-align: center;
   .rental-timetable {
     position: relative;
+    border-collapse: collapse;
+    @include font-size-primaryFont('small');
     thead {
     }
     th {
-      background: white;
-      min-width: 30px;
-      border: 1px solid #777;
+      background: $color-ambient-bright;
+      width: 40px;
+      height:30px;
+      border: 1px solid $color-ambient-grey;
       position: sticky;
       top: 0;
-      box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+      color: $color-font-primary;
+      border-top:none;
+    }
+    th:first-child {
+      border-top:none;
+      border-left:none;
+      border-bottom:none;
+    }
+    td:first-child {
+      white-space: nowrap;
+      background-color: $color-ambient-bright;
+      border:none;
+      text-align: right;
+      padding-right:5px;
+      color: $color-font-primary;
+      font-style: normal;
     }
     td {
-      padding: 10px;
+      height:50px;
+      padding: 3px;
       text-align: center;
-      border: 1px solid #777;
-      &.disabled { color: #aaa; }
+      border: 1px solid rgba($color-ambient-grey, 0.3);
+      background-color: $color-ambient-mint-light-lowsaturation;
+      color: $color-ambient-mint-dark;
+      font-style: italic;
+      &.disabled {
+        color: $color-ambient-grey;
+        background-color: $color-ambient-grey-light;
+        opacity: 0.6;
+        font-style: italic;
+      }
+      &.rented {
+        //background-color: $color-ambient-rosa-light;
+        background-color: rgba($color-ambient-rosa-light, 0.6);
+        font-style: italic;
+        color: $color-font-primary;
+      }
     }
-
+    tr:hover {background-color: $color-ambient-grey-light;}
   }
 }
