@@ -6,7 +6,13 @@ APP.controllers.room_offers = (function() {
     if ($("#hide-contact-link").exists()) inithideContactLink();
     if ($("section.roomDetail").exists()) { initRoomDetail(); }
     if ($(".request-price-form").exists()) initRoomOfferBookingForm();
+    if ($(".room-rental-timetable-page").exists()) initTimeTable();
   }
+
+  function initTimeTable() {
+    
+  }
+
 
   function initRoomOfferBookingForm() {
     var dateInput = $('.request-price-form .rent-date');

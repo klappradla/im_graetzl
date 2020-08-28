@@ -1,40 +1,62 @@
 <section class="room-rental-timetable-page">
-  <h1><%= @room_offer.slogan %></h1>
 
-  <%= link_to "Zurück", rental_timetable_room_offer_path(month: @date_range.first - 1.day) %>
+  <div class="hl-subtext">
+    <h2>Verfügbarkeits<span>kalender</span></h2>
+    <p>Raumteiler: <%= link_to @room_offer.slogan, @room_offer %></p>
+  </div>
 
-  <span><%= l(@date_range.first, format: "%B %Y") %></span>
+  <div class="rental-timetable-wrapper">
 
-  <%= link_to "Weiter", rental_timetable_room_offer_path(month: @date_range.last + 1.day) %>
-
-  <br><br>
-
-  <table class="rental-timetable">
-    <thead>
-      <tr>
-        <th></th>
-        <% (0..23).each do |hour| %>
-          <th><%= hour %></th>
-        <% end %>
-      </tr>
-    </thead>
-    <tbody>
-      <% @date_range.each do |date| %>
-        <tr>
-          <td><%= l(date, format: "%a, %d.") %></td>
-          <% @availability.timetable(date).each do |status, length| %>
-            <% if status == :disabled %>
-              <td class="disabled" colspan="<%= length %>"> Nicht verfügbar </td>
-            <% elsif status == :available %>
-              <td class="available" colspan="<%= length %>"> Verfügbar </td>
-            <% else %>
-              <td class="rented" colspan="<%= length %>">
-                Vermietet <%= link_to status.owner.first_name, messenger_path(thread_id: status.user_message_thread.id) %>
-            <% end %>
+    <table class="rental-timetable">
+      <thead>
+        <tr class="tabnav">
+          <th></th>
+          <th colspan="24">
+            <div class="tabs-ctrl">
+              <ul class="tabs-nav -small">
+                <li>
+                  <%= link_to rental_timetable_room_offer_path(month: @date_range.first - 1.day) do %>
+                    <%= icon_tag "arrow-left-2" %>
+                  <% end %>
+                </li>
+                <li class="active">
+                  <a><%= l(@date_range.first, format: "%B %Y") %></a>
+                </li>
+                <li>
+                  <%= link_to rental_timetable_room_offer_path(month: @date_range.last + 1.day) do %>
+                    <%= icon_tag "arrow-right-2" %>
+                  <% end %>
+                </li>
+              </ul>
+            </div>
+          </th>
+        <tr class="slots">
+          <th></th>
+          <% (0..23).each do |hour| %>
+            <th><%= hour %></th>
           <% end %>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @date_range.each do |date| %>
+          <tr class="day-<%= date.wday %>">
+            <td><%= l(date, format: "%a, %d.") %></td>
+            <% @availability.timetable(date).each do |status, length| %>
+              <% if status == :disabled %>
+                <td class="disabled" colspan="<%= length %>"> Nicht verfügbar </td>
+              <% elsif status == :available %>
+                <td class="available" colspan="<%= length %>"> Verfügbar </td>
+              <% else %>
+                <td class="rented" colspan="<%= length %>">
+                  <%= link_to messenger_path(thread_id: status.user_message_thread.id) do %>
+                    <%= avatar_for status.renter %>
+                  <% end %>
+              <% end %>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
 </section>

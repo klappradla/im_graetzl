@@ -50,27 +50,72 @@
 
 .room-rental-timetable-page {
   text-align: center;
+
+  // TABS
+  .tabs-ctrl { margin-bottom: 20px; }
+  .tabs-nav {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    li {
+      text-align: center;
+      white-space: nowrap;
+      width:100%;
+      svg {
+        margin: auto;
+      }
+    }
+  }
+  // HEADLINEs
+  div.hl-subtext {
+    margin: 40px 0 15px;
+    h1 { margin: 0px 0 15px; }
+    h2 { margin: 0px 0 5px; }
+    p {
+      @include font-size-primaryFont('large');
+    }
+  }
+
+  .rental-timetable-wrapper {
+    //width: 100%;
+    //overflow: scroll;
+  }
+
+  // TABLE
   .rental-timetable {
     position: relative;
     border-collapse: collapse;
     @include font-size-primaryFont('small');
+
     thead {
+      .tabnav th {
+        border:none;
+        background: none;
+      }
     }
+    // Slots
     th {
       background: $color-ambient-bright;
       width: 40px;
       height:30px;
-      border: 1px solid $color-ambient-grey;
+      border: 1px solid #dadada;
+      color: $color-font-primary;
+      opacity: 1;
+      color: $color-ambient-mint-dark;
+      font-weight: normal;
+    }
+    thead tr.slots th, thead tr.slots td {
       position: sticky;
       top: 0;
-      color: $color-font-primary;
-      border-top:none;
+      background: $color-ambient-bright;
+      z-index: 2;
     }
     th:first-child {
       border-top:none;
       border-left:none;
       border-bottom:none;
     }
+    // Dates
     td:first-child {
       white-space: nowrap;
       background-color: $color-ambient-bright;
@@ -84,23 +129,50 @@
       height:50px;
       padding: 3px;
       text-align: center;
-      border: 1px solid rgba($color-ambient-grey, 0.3);
+      border: 1px solid rgba(#dadada, 1);
       background-color: $color-ambient-mint-light-lowsaturation;
       color: $color-ambient-mint-dark;
       font-style: italic;
       &.disabled {
         color: $color-ambient-grey;
-        background-color: $color-ambient-grey-light;
         opacity: 0.6;
         font-style: italic;
+        background: lighten($color-ambient-grey-light, 0.1) repeating-linear-gradient(
+                        45deg,
+                        rgba(0, 0, 0, 0),
+                        rgba(0, 0, 0, 0) 10px,
+                        rgba(0, 0, 0, 0.03) 10px,
+                        rgba(0, 0, 0, 0.03) 20px
+        );
       }
       &.rented {
         //background-color: $color-ambient-rosa-light;
-        background-color: rgba($color-ambient-rosa-light, 0.6);
+        //background-color: rgba($color-ambient-rosa-light, 0.3);
         font-style: italic;
-        color: $color-font-primary;
+        color: $color-ambient-grey;
+        background: lighten($color-ambient-rosa-light, 0.5) repeating-linear-gradient(
+                        45deg,
+                        rgba(0, 0, 0, 0),
+                        rgba(0, 0, 0, 0) 10px,
+                        rgba(0, 0, 0, 0.02) 10px,
+                        rgba(0, 0, 0, 0.02) 20px
+        );
+      }
+      .img-round {
+        width: 35px;
+        height: 35px;
+        display: flex;
+        margin: auto;
+        border-color: $color-ambient-grey;
       }
     }
-    tr:hover {background-color: $color-ambient-grey-light;}
+    // Weekends
+    tr.day-6 td:not(:first-child), tr.day-0 td:not(:first-child) {
+
+    }
+    tr.day-6 td:first-child, tr.day-0 td:first-child {
+      font-weight: bold;
+    }
+    //td:hover {background-color: $color-ambient-grey-light;}
   }
 }

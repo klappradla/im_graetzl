@@ -60,6 +60,7 @@
         <%= link_to "javascript:", data: { jq_dropdown: "#room-update-dropdown-#{room_offer.id}" }, class: "btn-secondary -mint -small -state-#{room_offer.status}" do %>
           Status: <span><%= t("activerecord.attributes.room_offer.statuses.#{room_offer.status}") %></span>
         <% end %>
+        <%= link_to 'Verfügbarkeitskalender', rental_timetable_room_offer_path(room_offer), class: 'btn-primary -mint -small' if room_offer.room_rental_price.present? %>
       </div>
 
       <div id="room-update-dropdown-<%= room_offer.id %>" class="jq-dropdown jq-dropdown-tip jq-dropdown-relative jq-dropdown-anchor-right dropdown-container">
