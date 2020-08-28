@@ -9,7 +9,11 @@
       <%= link_to(image_tag('svg/logo.svg'), root_path, class: 'logo_main') %>
       <%= link_to(image_tag('svg/logo_reduced.svg'), root_path, class: 'logo_reduced') %>
     </div>
-    <%= personal_navigation_for current_user %>
+    <% if current_user %>
+      <%= render 'nav_user' %>
+    <% else %>
+      <%= render 'nav_guest' %>
+    <% end %>
   </div>
   <div class="mobileNavHolder">
     <%= main_navigation :mobile %>

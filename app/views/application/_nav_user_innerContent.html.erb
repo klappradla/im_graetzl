@@ -7,27 +7,27 @@
     <%= link_to messenger_path, class: 'half-right' do %>
       <%= icon_tag "speech-bubbles" %> Messenger
     <% end %>
-    <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-settings'} do %>
+    <%= link_to 'javascript:void(0);', class: '-trigger', data: {type: '-settings'} do %>
       <%= icon_tag "gears" %> Einstellungen
       <span class="-more"><%= icon_tag "arrow-right-2" %></span>
     <% end %>
-    <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-locations'} do %>
+    <%= link_to 'javascript:void(0);', class: '-trigger', data: {type: '-locations'} do %>
       <%= icon_tag "location" %> Locations
       <span class="-more"><%= icon_tag "arrow-right-2" %></span>
     <% end %>
-    <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-rooms'} do %>
+    <%= link_to 'javascript:void(0);', class: '-trigger', data: {type: '-rooms'} do %>
       <%= icon_tag "raumteiler" %> Raumteiler
       <span class="-more"><%= icon_tag "arrow-right-2" %></span>
     <% end %>
-    <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-tools'} do %>
+    <%= link_to 'javascript:void(0);', class: '-trigger', data: {type: '-tools'} do %>
       <%= icon_tag "tacker" %> Toolteiler
       <span class="-more"><%= icon_tag "arrow-right-2" %></span>
     <% end %>
-    <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-groups'} do %>
+    <%= link_to 'javascript:void(0);', class: '-trigger', data: {type: '-groups'} do %>
       <%= icon_tag "coop-share" %> Gruppen
       <span class="-more"><%= icon_tag "arrow-right-2" %></span>
     <% end %>
-    <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-meetings'} do %>
+    <%= link_to 'javascript:void(0);', class: '-trigger', data: {type: '-meetings'} do %>
       <div class="iconWithBadge">
         <%= icon_tag "calendar-2" %>
         <% if current_user.attended_meetings.upcoming.size > 0 %>
@@ -51,7 +51,7 @@
   </section>
 
   <section class="second -settings">
-    <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-settings'} do %>
+    <%= link_to 'javascript:void(0);', class: '-trigger', data: {type: '-settings'} do %>
       <%= icon_tag "arrow-left-2" %> Zurück
     <% end %>
     <%= link_to edit_user_path do %>
@@ -63,7 +63,7 @@
   </section>
 
   <section class="second -locations">
-    <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-locations'} do %>
+    <%= link_to 'javascript:void(0);', class: '-trigger', data: {type: '-locations'} do %>
       <%= icon_tag "arrow-left-2" %> Zurück
     <% end %>
     <%= link_to locations_user_path do %>
@@ -72,16 +72,11 @@
     <%= link_to zuckerls_user_path do %>
       <%= icon_tag "shopping-bag" %> Grätzlzuckerl verwalten
     <% end %>
-    <% current_user.locations.approved.first(6).each do |location| %>
-      <%= link_to graetzl_location_path(location.graetzl, location) do %>
-        <%= attachment_image_tag location, :avatar, :fill, 35, 35, fallback: 'avatar/location/35x35.png', class: 'img-square' %>
-        <span><%= location.name %></span>
-      <% end %>
-    <% end %>
+    <%= nav_lazy_load_form('locations') %>
   </section>
 
   <section class="second -rooms">
-    <%= link_to 'javascript:void(0);', class: '-trigger', :data => {:type => '-rooms'} do %>
+    <%= link_to 'javascript:void(0);', class: '-trigger', data: {type: '-rooms'} do %>
       <%= icon_tag "arrow-left-2" %> Zurück
     <% end %>
     <%= link_to rooms_user_path do %>
@@ -90,21 +85,10 @@
     <%= link_to messenger_path(filter: "room_rental") do %>
       <%= icon_tag "speech-bubbles" %> Anfragen Messenger
     <% end %>
-    <%= link_to rooms_user_path(:target => "tab-buchungsarchiv") do %>
+    <%= link_to rooms_user_path(target: "tab-buchungsarchiv") do %>
       <%= icon_tag "archive-storage" %> Buchungsarchiv
     <% end %>
-    <% current_user.room_offers.first(2).each do |room| %>
-      <%= link_to room do %>
-        <%= attachment_image_tag room, :cover_photo, :fill, 100, 100, fallback: 'avatar/room_offer/100x100.png', class: 'img-square' %>
-        <span><%= room.slogan %></span>
-      <% end %>
-    <% end %>
-    <% current_user.room_demands.first(2).each do |room| %>
-      <%= link_to room do %>
-        <%= attachment_image_tag room, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-square' %>
-        <span><%= room.slogan %></span>
-      <% end %>
-    <% end %>
+    <%= nav_lazy_load_form('rooms') %>
   </section>
 
   <section class="second -tools">
@@ -120,12 +104,7 @@
     <%= link_to tool_offers_user_path(:target => "tab-buchungsarchiv") do %>
       <%= icon_tag "archive-storage" %> Buchungsarchiv
     <% end %>
-    <% current_user.tool_offers.first(4).each do |tool_offer| %>
-      <%= link_to tool_offer do %>
-        <%= attachment_image_tag tool_offer, :cover_photo, :fill, 100, 100, fallback: 'avatar/tool_offer/100x100.png', class: 'img-square' %>
-        <span><%= tool_offer.title %></span>
-      <% end %>
-    <% end %>
+    <%= nav_lazy_load_form('tools') %>
   </section>
 
   <section class="second -groups">
@@ -135,19 +114,7 @@
     <%= link_to groups_user_path do %>
       <%= icon_tag "speech-bubble" %> Gruppen verwalten
     <% end %>
-    <% if current_user.groups.empty? %>
-      <div class="info">
-        Du bist in keiner Gruppe Mitglied ..
-      </div>
-    <% end %>
-    <section class="content">
-      <% current_user.groups.last(8).reverse.each do |group| %>
-        <%= link_to group do %>
-          <%= icon_tag "coop-share" %>
-          <span><%= group.title %></span>
-        <% end %>
-      <% end %>
-    </section>
+    <%= nav_lazy_load_form('groups') %>
   </section>
 
   <section class="second -meetings">
@@ -157,24 +124,7 @@
     <%= link_to meetings_user_path do %>
       <%= icon_tag "calendar-2" %> Events verwalten
     <% end %>
-    <% if current_user.attended_meetings.upcoming.empty? %>
-      <div class="info">
-        Es gibt keine aktuellen Treffen an denen du interessiert bist ..
-      </div>
-    <% end %>
-    <% current_user.attended_meetings.upcoming.first(7).each do |meeting| %>
-      <%= link_to [meeting.graetzl, meeting] do %>
-        <% if meeting.starts_at_date %>
-          <div class="calendarSheet">
-            <div class="day"><%= meeting.starts_at_date.day %></div>
-            <div class="month"><%= I18n.localize(meeting.starts_at_date, format:'%b') %></div>
-          </div>
-        <% else %>
-          <%= icon_tag "calendar-2" %>
-        <% end %>
-        <span><%= meeting.name %></span>
-      <% end %>
-    <% end %>
+    <%= nav_lazy_load_form('meetings') %>
   </section>
 
 </section>

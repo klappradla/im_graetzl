@@ -41,28 +41,14 @@
         <%= icon_tag "tacker" %>
         <div class="icontxt">Neuer Toolteiler</div>
       <% end %>
-      <% if current_user.locations.empty? %>
-        <%= link_to new_location_path do %>
-          <%= icon_tag "location" %>
-          <div class="icontxt">Neue Location erstellen</div>
-        <% end %>
+      <%= link_to new_location_path do %>
+        <%= icon_tag "location" %>
+        <div class="icontxt">Neue Location erstellen</div>
       <% end %>
       <% if current_user.admin? %>
         <%= link_to new_group_path(graetzl_id: current_user.graetzl_id) do %>
           <%= icon_tag "speech-bubble" %>
           <div class="icontxt">Neue Gruppe gründen</div>
-        <% end %>
-      <% end %>
-      <% current_user.locations.approved.each do |location| %>
-        <%= link_to graetzl_location_path(location.graetzl, location, anchor: 'location-post-form') do %>
-          <%= icon_tag "location" %>
-          <div class="icontxt">Neuigkeit meiner Location</div>
-          <%= attachment_image_tag location, :avatar, :fill, 35, 35, fallback: 'avatar/location/35x35.png', class: 'img-square' %>
-        <% end %>
-        <%= link_to new_location_zuckerl_path(location) do %>
-          <%= icon_tag "shopping-bag" %>
-          <div class="icontxt">Grätzlzuckerl meiner Location</div>
-          <%= attachment_image_tag location, :avatar, :fill, 35, 35, fallback: 'avatar/location/35x35.png', class: 'img-square' %>
         <% end %>
       <% end %>
     </div>

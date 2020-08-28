@@ -92,7 +92,6 @@ class User < ApplicationRecord
     [:user_mail_setting_eq]
   end
 
-
   # overwrite devise authentication method to allow username OR email
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup

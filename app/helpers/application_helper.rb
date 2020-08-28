@@ -10,8 +10,10 @@ module ApplicationHelper
     end
   end
 
-  def personal_navigation_for(user)
-    render user ? 'nav_user' : 'nav_guest'
+  def nav_lazy_load_form(type)
+    form_tag([:navigation, :load_content, type: type], remote: true, method: :get,
+      id: "nav-load-#{type}", class: 'nav-load-form') do
+    end
   end
 
   def link_to_more_info

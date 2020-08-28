@@ -1,0 +1,12 @@
+<% @room_offers.each do |room| %>
+  <%= link_to room do %>
+    <%= attachment_image_tag room, :cover_photo, :fill, 100, 100, fallback: 'avatar/room_offer/100x100.png', class: 'img-square' %>
+    <span><%= room.slogan %></span>
+  <% end %>
+<% end %>
+<% @room_demands.each do |room| %>
+  <%= link_to room do %>
+    <%= attachment_image_tag room, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-square' %>
+    <span><%= room.slogan %></span>
+  <% end %>
+<% end %>

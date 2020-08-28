@@ -232,6 +232,8 @@ Rails.application.routes.draw do
   end
   resources :admin_posts, path: 'ideen', only: [:show, :destroy]
 
+  get 'navigation/load_content'
+
   namespace :api do
     resources :meetings, only: [:index]
   end

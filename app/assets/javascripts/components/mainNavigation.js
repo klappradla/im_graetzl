@@ -74,31 +74,36 @@ APP.components.mainNavigation = (function() {
 
         //Desktop
         $('.usersettingsContainer .main a.-trigger').on('click', function(){
-          var personalNavType = 'section.' + $(this).data("type");
-          $('.usersettingsContainer ' + personalNavType ).animate({ "left": "0px" }, 250 );
+          var section = $('.usersettingsContainer section.second.' + $(this).data("type"));
+          section.animate({ "left": "0px" }, 250);
+          lazyLoadContent(section);
         });
         //Mobile
         $('.mobileNavHolder .main a.-trigger').on('click', function(){
-          var navType = 'section.' + $(this).data("type");
+          var section = $('.mobileNavHolder section.second.' + $(this).data("type"));
           var navTypeHeight = $('.mobileNavHolder ' + navType).height();
-          $('.mobileNavHolder ' + navType ).animate({ "left": "0px" }, 250 );
-          $(this).closest('.-wrapper').animate({ "height": navTypeHeight }, 250 );
+          section.animate({ "left": "0px" }, 250);
+          $(this).closest('.-wrapper').animate({ "height": navTypeHeight }, 250);
+          lazyLoadContent(section);
         });
 
         // Close Desktop
-        $('.usersettingsContainer .second a.-trigger').on('click', function(){
-          var personalNavType = 'section.' + $(this).data("type");
-          $('.usersettingsContainer ' + personalNavType ).animate({ "left": personalNavWidth }, 200 );
+        $('.usersettingsContainer .second a.-trigger').on('click', function() {
+          var section = $('.usersettingsContainer section.second.' + $(this).data("type"));
+          section.animate({ "left": personalNavWidth }, 200);
         });
         // Close Mobile
         $('.mobileNavHolder .second a.-trigger').on('click', function(){
-          var personalNavType = 'section.' + $(this).data("type");
-          $('.mobileNavHolder ' + personalNavType ).animate({ "left": '100%' }, 200 );
+          var section = $('.mobileNavHolder section.second.' + $(this).data("type"));
+          section.animate({ "left": '100%' }, 200);
           var parentMainHeight = $(this).closest('div').find('.main').height();
-          $(this).closest('.-wrapper').animate({ "height": parentMainHeight }, 250 );
+          $(this).closest('.-wrapper').animate({ "height": parentMainHeight }, 250);
         });
         // End
+    }
 
+    function lazyLoadContent(section) {
+      section.find(".nav-load-form").submit();
     }
 
     function createMobileNav() {
@@ -111,7 +116,6 @@ APP.components.mainNavigation = (function() {
         if ($scrollableIconNav.find('.active').exists()) {
           scrollableIconNav();
         }
-
     }
 
     function openMobileNav() {
@@ -155,7 +159,7 @@ APP.components.mainNavigation = (function() {
 
     // Scroll to Active Icon if needed
     function scrollableIconNav() {
-      
+
       var clickedIcon = $scrollableIconNav.find('.active');
       var clickedIconPosition = clickedIcon.position();
       var clickedIconWidth = clickedIconPosition.left + clickedIcon.width();

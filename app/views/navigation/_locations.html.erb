@@ -1,0 +1,6 @@
+<% @locations.each do |location| %>
+  <%= link_to graetzl_location_path(location.graetzl, location) do %>
+    <%= attachment_image_tag location, :avatar, :fill, 35, 35, fallback: 'avatar/location/35x35.png', class: 'img-square' %>
+    <span><%= location.name %></span>
+  <% end %>
+<% end %>

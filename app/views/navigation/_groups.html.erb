@@ -1,0 +1,13 @@
+<% if @groups.empty? %>
+  <div class="info">
+    Du bist in keiner Gruppe Mitglied ..
+  </div>
+<% end %>
+<section class="content">
+  <% @groups.each do |group| %>
+    <%= link_to group do %>
+      <%= icon_tag "coop-share" %>
+      <span><%= group.title %></span>
+    <% end %>
+  <% end %>
+</section>
