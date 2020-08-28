@@ -53,7 +53,7 @@ class RoomRental < ApplicationRecord
       self.discount = 0
     end
     self.tax = ((basic_price - discount) * 0.20).round(2)
-    self.service_fee = (total_price * 0.06).round(2) # 5% Imgraetzl fee + 20% tax
+    self.service_fee = basic_service_fee + service_fee_tax
   end
 
   def total_hours
@@ -62,6 +62,14 @@ class RoomRental < ApplicationRecord
 
   def total_price
     basic_price - discount + tax
+  end
+
+  def basic_service_fee
+    (total_price * 0.05).round(2)
+  end
+
+  def service_fee_tax
+    (basic_service_fee * 0.2).round(2)
   end
 
   def owner_payout_amount

@@ -144,9 +144,20 @@ APP.controllers.room_offers = (function() {
       }
     }).change();
 
+    var formSections = null;
     $(".price-per-hour-input").on("change", function() {
-      $(".iban-input").attr("required", !!$(this).val());
-    })
+      if ($(this).val() && formSections) {
+        $('.rental-availability-container').replaceWith(formSections['availability']);
+        $('.user-billing-container').replaceWith(formSections['userBilling']);
+        formSections = null;
+      } else if (!$(this).val() && !formSections) {
+        formSections = {
+          'availability': $('.rental-availability-container').clone(),
+          'userBilling': $('.user-billing-container').clone(),
+        };
+        $('.rental-availability-container, .user-billing-container').empty();
+      }
+    });
 
     $('select#admin-user-select').SumoSelect({
       search: true,
