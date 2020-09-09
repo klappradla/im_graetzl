@@ -1,0 +1,19 @@
+var list = $("#notification-list");
+
+<% if @notifications.empty? %>
+  list.html('<li class="notifications-empty">Aktuell gibt es keine Neuigkeiten für dich</li>');
+<% else %>
+  list.find('.notifications-empty').remove();
+  list.append('<%= j render partial: @notifications, as: :notification %>');
+<% end %>
+
+<% if !@notifications.last_page? %>
+  list.find(".btn-paginate").remove();
+  list.append(
+    '<li class="btn-paginate" data-behavior="notifications-paginate">' +
+      '<%= j(link_to "mehr...", notifications_fetch_path(page: @notifications.next_page), remote: true) %>' +
+    '</li>'
+  );
+<% end %>
+
+$("#notifications-count .icon-badge").text('');

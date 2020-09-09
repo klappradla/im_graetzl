@@ -1,10 +1,3 @@
-<div class="hl-subtext">
-  <h2>Dein <span>Auszahlungskonto</span></h2>
-  <p>
-    Deine Kontoangaben benötigen wir für die Auszahlung deiner Mieteinnahmen. (<%= link_to 'bearbeiten', edit_user_path, target: '_blank' %>)
-  </p>
-</div>
-
 <%= fields_for :user, current_user do |f| %>
 
   <% f.object.build_billing_address(
@@ -15,7 +8,13 @@
 
   <%= f.fields_for :billing_address do |bf| %>
     <div class="formBlock">
-      <h2><span>Rechnungs</span> Adresse</h2>
+
+      <div class="hl-subtext">
+        <h2><span>Rechnungs</span> Anschrift</h2>
+        <p>
+          Gib deine Rechnungsanschrift bekannt unter welcher du deinen Raum vermietest. (Steht auf der Rechnung des Mieters, wenn dein Raum angemietet wird.)
+        </p>
+      </div>
 
       <div class="form-columns">
         <div class="input-field">
@@ -42,6 +41,15 @@
         <% end %>
         <%= bf.text_field :company, placeholder: 'Firma' %>
       </div>
+
+      <div class="input-field">
+        <%= f.label :vat_id do %>
+          <%= icon_tag "profile-vcard" %>
+          <span>UID-Nr.</span>
+        <% end %>
+        <%= f.text_field :vat_id, placeholder: 'Umsatz-Steuer-Identifikations-Nummer (falls vorhanden).' %>
+      </div>
+
 
       <div class="input-field">
         <%= bf.label :street do %>
@@ -72,13 +80,20 @@
       <div class="input-field">
         <%= label_tag :country do %>
           <%= icon_tag "map-location" %>
-          <span>Country</span>
+          <span>Land</span>
         <% end %>
         <%= bf.text_field :country, placeholder: 'Österreich' %>
       </div>
 
     </div>
   <% end %>
+
+  <div class="hl-subtext">
+    <h2>Dein <span>Auszahlungskonto</span></h2>
+    <p>
+      Deinen IBAN benötigen wir für die Auszahlung deiner Mieteinnahmen.
+    </p>
+  </div>
 
   <div class="input-field">
     <%= f.label :iban do %>
@@ -88,12 +103,5 @@
     <%= f.text_field :iban, placeholder: 'IBAN', required: true %>
   </div>
 
-  <div class="input-field">
-    <%= f.label :vat_id do %>
-      <%= icon_tag "profile-vcard" %>
-      <span>UID Number</span>
-    <% end %>
-    <%= f.text_field :vat_id, placeholder: 'UID', required: true %>
-  </div>
 
 <% end %>

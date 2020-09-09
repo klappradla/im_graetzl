@@ -1,0 +1,11 @@
+<% if @groups.empty? %>
+  <em class="nav-menu-item">
+    Du bist in keiner Gruppe Mitglied ..
+  </em>
+<% end %>
+<% @groups.each do |group| %>
+  <%= link_to group, class: 'nav-menu-item' do %>
+    <%= icon_tag "coop-share" %>
+    <span><%= group.title %></span>
+  <% end %>
+<% end %>

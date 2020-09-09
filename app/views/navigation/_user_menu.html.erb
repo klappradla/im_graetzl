@@ -1,0 +1,108 @@
+<div class="nav-user">
+  <%= link_to 'javascript:', class: 'nav-top-link nav-user-create-link flare', data: { dropdown: "nav-user-create", anchor: 'right' } do %>
+    <%= icon_tag "pencil" %>
+    <span class="nav-create-label"> Neu erstellen </span>
+  <% end %>
+
+  <div class="nav-dropdown-menu" id="nav-user-create">
+    <%= nav_menu_item("calendar-2", 'Neues Treffen', new_meeting_path(graetzl_id: current_user.graetzl_id)) %>
+    <%= nav_menu_item("raumteiler", 'Neuer Raumteiler', select_room_offers_path) %>
+    <%= nav_menu_item("tacker", 'Neuer Toolteiler', new_tool_offer_path) %>
+
+    <%= nav_menu_item("location", 'Neue Location erstellen', new_location_path) %>
+    <% if current_user.admin? %>
+      <%= nav_menu_item("speech-bubble", 'Neue Gruppe gründen', new_group_path(graetzl_id: current_user.graetzl_id)) %>
+    <% end %>
+  </div>
+
+  <%= link_to 'javascript:', class: 'nav-top-link nav-user-notification-link', data: { dropdown: "nav-user-notifications", anchor: 'right' } do %>
+    <%= icon_with_badge "bell", current_user.new_website_notifications_count,
+        id: 'notifications-count', data: { url: notifications_unseen_count_url } %>
+  <% end %>
+
+  <div class="nav-dropdown-menu" id="nav-user-notifications">
+    <%= form_tag notifications_fetch_path, remote: true, method: :get, id: "notifications-fetch", class: 'active' do; end %>
+    <ul id="notification-list"></ul>
+  </div>
+
+  <%= link_to 'javascript:', class: 'nav-top-link nav-current-user-link', data: { dropdown: "nav-current-user", anchor: 'right' } do %>
+    <%= avatar_for current_user %>
+    <div class="icon-wrap"><%= icon_tag "gear" %></div>
+  <% end %>
+
+  <div class="nav-dropdown-menu" id="nav-current-user">
+    <div class="nav-dropdown-submenu shown" id="nav-submenu-user-main">
+      <%= nav_menu_item("user-avatar", 'Profil', user_path(current_user), class: 'half') %>
+      <%= nav_menu_item("speech-bubbles", 'Messenger', messenger_path, class: 'half') %>
+      <%= nav_submenu_link("gears", 'Einstellungen', 'nav-submenu-user-settings') %>
+      <%= nav_submenu_link("location", 'Locations', 'nav-submenu-user-locations') %>
+      <%= nav_submenu_link("raumteiler", 'Raumteiler', 'nav-submenu-user-rooms') %>
+      <%= nav_submenu_link("tacker", 'Toolteiler', 'nav-submenu-user-tools') %>
+      <%= nav_submenu_link("coop-share", 'Gruppen', 'nav-submenu-user-groups') %>
+      <%= nav_submenu_link("calendar-2", 'Events & Workshops', 'nav-submenu-user-meetings',
+          badge: current_user.attended_meetings.upcoming.size) %>
+      <% if current_user.admin? %>
+        <%= nav_menu_item("magic-wand", 'Admin', admin_root_path) %>
+        <%= nav_menu_item("bar-chart-growth", 'Reports', "/reports") %>
+      <% end %>
+      <%= nav_menu_item("power", 'Abmelden', destroy_user_session_path, method: :delete) %>
+    </div>
+
+    <div class="nav-dropdown-submenu" id="nav-submenu-user-settings">
+      <%= nav_submenu_back('nav-submenu-user-main') %>
+      <%= nav_menu_item("user-avatar", 'Profil Einstellungen', edit_user_path) %>
+      <%= nav_menu_item("mail-1", 'E-Mail Benachrichtigungen', edit_user_path(target: "tab-2")) %>
+    </div>
+
+    <div class="nav-dropdown-submenu" id="nav-submenu-user-locations">
+      <%= nav_submenu_back('nav-submenu-user-main') %>
+      <%= nav_menu_item("location", 'Location verwalten', locations_user_path) %>
+      <%= nav_menu_item("shopping-bag", 'Grätzlzuckerl verwalten', zuckerls_user_path) %>
+      <%= nav_lazy_load_form('locations') %>
+    </div>
+
+    <div class="nav-dropdown-submenu" id="nav-submenu-user-rooms">
+      <%= nav_submenu_back('nav-submenu-user-main') %>
+      <%= nav_menu_item("raumteiler", 'Raumteiler verwalten', rooms_user_path) %>
+      <%= nav_menu_item("speech-bubbles", 'Anfragen Messenger', messenger_path(filter: "room_rental")) %>
+      <%= nav_menu_item("archive-storage", 'Buchungsarchiv', rooms_user_path(target: "tab-buchungsarchiv")) %>
+      <%= nav_lazy_load_form('rooms') %>
+    </div>
+
+    <div class="nav-dropdown-submenu" id="nav-submenu-user-tools">
+      <%= nav_submenu_back('nav-submenu-user-main') %>
+      <%= nav_menu_item("tacker", 'Toolteiler verwalten', tool_offers_user_path) %>
+      <%= nav_menu_item("speech-bubbles", 'Anfragen Messenger', messenger_path(filter: "tool_rental")) %>
+      <%= nav_menu_item("archive-storage", 'Buchungsarchiv', tool_offers_user_path(target: "tab-buchungsarchiv")) %>
+      <%= nav_lazy_load_form('tools') %>
+    </div>
+
+    <div class="nav-dropdown-submenu" id="nav-submenu-user-groups">
+      <%= nav_submenu_back('nav-submenu-user-main') %>
+      <%= nav_menu_item("speech-bubble", 'Gruppen verwalten', groups_user_path) %>
+      <%= nav_lazy_load_form('groups') %>
+    </div>
+
+    <div class="nav-dropdown-submenu" id="nav-submenu-user-meetings">
+      <%= nav_submenu_back('nav-submenu-user-main') %>
+      <%= nav_menu_item("calendar-2", 'Events verwalten', meetings_user_path) %>
+      <%= nav_lazy_load_form('meetings') %>
+    </div>
+  </div>
+
+  <%= link_to 'javascript:', class: 'nav-top-link', data: { dropdown: "nav-user-search", anchor: 'right' } do %>
+    <%= icon_tag "search" %>
+  <% end %>
+
+  <div class="nav-dropdown-menu" id="nav-user-search">
+    <%= form_tag search_path, method: :get do |f| %>
+      <%= hidden_field_tag :label, 'all' %>
+      <%= hidden_field_tag :page, 1 %>
+      <div class="input-field search-form">
+        <%= text_field_tag :q, params[:q], placeholder: 'Suchbegriff ...' %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>

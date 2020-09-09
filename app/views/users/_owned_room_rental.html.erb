@@ -27,7 +27,8 @@
     </span>
     <% if room_rental.invoice_ready? %>
     <span>
-      <%= link_to "Download Gutschrift", room_rental.owner_invoice.presigned_url(:get), class: 'invoice-link' %>
+      <%= link_to "Rechnung Mieter", room_rental.renter_invoice.presigned_url(:get), class: 'invoice-link' %><br>
+      <%= link_to "Rechnung Vermieter", room_rental.owner_invoice.presigned_url(:get), class: 'invoice-link' %>
     </span>
     <% end %>
   </div>

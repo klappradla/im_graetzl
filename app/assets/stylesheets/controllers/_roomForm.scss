@@ -142,6 +142,19 @@ section.room-offer-form {
     }
   }
 
+
+  #slot-fields {display: none;}
+  .slot-radios {
+    display: flex;
+    justify-content: center;
+    label {
+      min-width: 0px;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+  }
+
+
 }
 
 section.room-call-form {

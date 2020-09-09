@@ -14,13 +14,9 @@
   <%= render 'tracking_tags' %>
 </head>
 
-<body data-controller=<%= controller_name %>>
+<body data-controller=<%= controller_name %> class=<%= user_signed_in? ? 'signed-in' : ''%>>
   <%= render "icons" %>
-
-  <header>
-    <%= render 'nav' %>
-  </header>
-
+  <%= render 'navigation/header' %>
   <%= render 'flashes' %>
 
   <main>

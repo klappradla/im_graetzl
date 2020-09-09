@@ -8,8 +8,8 @@
     <% if room_rental.pending? %>
 
       <div class="note">
-        <%= room_rental.owner.full_name %> wurde über deine Anfrage benachrichtigt. Ihr könnt jetzt im Chat noch offene Fragen klären.
-        Eine zahlungspflichtige Buchung erfolgt erst nach Bestätigung der Anfrage durch den Vermieter. Du kannst deine Anfrage auch noch zurückziehen.
+        <strong><%= room_rental.owner.full_name %> wurde über deine Anfrage benachrichtigt.</strong> Ihr könnt jetzt im Chat noch offene Fragen klären.
+        Eine zahlungspflichtige Buchung erfolgt erst nach Bestätigung deiner Anfrage durch den Vermieter. Du kannst deine Anfrage auch noch zurückziehen.
       </div>
       <div class="buttons">
         <%= link_to "Anfrage zurückziehen", cancel_room_rental_path(room_rental), method: :post, class: "btn-primary -small -grey" %>

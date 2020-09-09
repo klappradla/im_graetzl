@@ -5,17 +5,6 @@
   display: block;
 }
 
-.iconWithBadge {
-  position: relative;
-  .badgeNumber {
-    position: absolute;
-    font-family: $font-primary;
-    font-size: 12px;
-    top: -4px;
-    right: -5px;
-  }
-}
-
 .icontxt {
   display: flex;
   align-items: center;
@@ -27,6 +16,23 @@
     @include ellipsis;
   }
 }
+
+.icon-with-badge {
+  position: relative;
+  .icon-badge {
+    &:empty { display: none; }
+    position: absolute;
+    top: -4px; left: 21px;
+    font-family: $font-primary;
+    background-color: $color-ambient-rosa;
+    color: $color-ambient-bright;
+    border-radius: 3px;
+    line-height: 1;
+    font-size: 12px;
+    padding: 1px 3px;
+  }
+}
+
 
 .loading-spinner {
   margin: 0 auto;

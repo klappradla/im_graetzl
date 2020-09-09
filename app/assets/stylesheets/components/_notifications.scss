@@ -1,0 +1,59 @@
+#notification-list {
+  .notifications-empty {
+    padding: 15px;
+    color: $color-ambient-grey;
+    text-align: center;
+  }
+
+  .notification-item {
+    border-bottom: 1px solid $color-ambient-mint-light;
+    padding: 15px;
+    color: $color-font-primary;
+    a {
+      color: $color-font-primary;
+      display: block;
+      text-decoration: none;
+      margin: -15px;
+      padding: 15px;
+      display: flex;
+    }
+    .img-round, .img-square {
+      flex: none;
+      margin-right: 10px;
+      svg {
+        height:100%;
+        margin:auto;
+        fill: $color-ambient-rosa;
+      }
+    }
+    .msg {
+      font-size: 13px;
+    }
+    .timeago {
+      font-style: italic;
+      color: $color-ambient-grey;
+      display: block;
+    }
+    .username, .matter {
+      font-weight: 600;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+    &:hover {
+      background-color: $color-ambient-mint-light;
+    }
+  }
+
+  .btn-paginate a {
+    border: solid 1px $color-ambient-grey;
+    padding: 8px;
+    margin: 5px;
+    border-radius: 4px;
+    color: $color-ambient-grey;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+  }
+}

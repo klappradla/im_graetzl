@@ -3,18 +3,14 @@ class NotificationsController < ApplicationController
 
   NOTIFICATIONS_PER_PAGE = 6
 
-  def index
-    @page = (params[:page] || '1').to_i
-    scope = current_user.website_notifications.order("notifications.created_at DESC")
-    @notifications = scope.page(@page).per(NOTIFICATIONS_PER_PAGE)
-    @notifications.each{|n| n.update_attributes(seen: true)} if @page > 1
-    @more_notifications = @page < @notifications.total_pages
+  def unseen_count
+    render json: { count: current_user.new_website_notifications_count }
   end
 
-  def mark_as_seen
-    ids = JSON.parse params[:ids]
-    unless Notification.where(id: ids).update_all(seen: true)
-      render json: {error: true}
-    end
+  def fetch
+    @notifications = current_user.website_notifications.order("notifications.created_at DESC")
+    @notifications = @notifications.page(params[:page]).per(NOTIFICATIONS_PER_PAGE)
+    @notifications.update_all(seen: true)
   end
+
 end

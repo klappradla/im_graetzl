@@ -1,0 +1,20 @@
+<header class="navigation">
+  <div class="inner">
+    <div class="nav-body">
+      <%= render "navigation/site_menu" %>
+
+      <div class="nav-logo">
+        <%= link_to root_path do %>
+          <%= image_tag('svg/logo.svg', class: 'logo-desktop') %>
+          <%= image_tag('svg/logo_reduced.svg', class: 'logo-mobile') %>
+        <% end %>
+      </div>
+
+      <% if current_user %>
+        <%= render "navigation/user_menu" %>
+      <% else %>
+        <%= render "navigation/guest_menu" %>
+      <% end %>
+    </div>
+  </div>
+</header>

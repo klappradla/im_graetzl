@@ -65,7 +65,7 @@ class RoomRental < ApplicationRecord
   end
 
   def basic_service_fee
-    (total_price * 0.05).round(2)
+    (basic_price * 0.05).round(2)
   end
 
   def service_fee_tax

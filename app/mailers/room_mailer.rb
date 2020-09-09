@@ -32,11 +32,31 @@ class RoomMailer < ApplicationMailer
     mail(to: @room_demand.user.email, subject: "Dein Raumteiler wurde deaktiviert. Möchtest du diesen reaktivieren?")
   end
 
-  def rental_approved(room_rental)
+  def new_rental_request(room_rental)
+    @room_rental = room_rental
+    headers("X-MC-Tags" => "room-rental-request")
+    mail(to: @room_rental.owner.email, subject: "Neue Raumteiler Buchungsanfrage")
+  end
+
+  def new_rental_request_reminder(room_rental)
+    @room_rental = room_rental
+    headers("X-MC-Tags" => "room-rental-request-reminder")
+    mail(to: @room_rental.owner.email, subject: "Erinnerung: #{@room_rental.renter.first_name} möchte deinen Raum mieten.")
+  end
+
+  def rental_approved_renter(room_rental)
     @room_rental = room_rental
     attachments["#{@room_rental.invoice_number}.pdf"] = @room_rental.renter_invoice.get.body.read
     headers("X-MC-Tags" => "room-rental-approved")
     mail(to: @room_rental.renter.email, subject: "Deine Raumteiler Buchung wurde bestätigt")
+  end
+
+  def rental_approved_owner(room_rental)
+    @room_rental = room_rental
+    attachments["#{@room_rental.invoice_number}_owner.pdf"] = @room_rental.owner_invoice.get.body.read
+    attachments["#{@room_rental.invoice_number}_renter.pdf"] = @room_rental.renter_invoice.get.body.read
+    headers("X-MC-Tags" => "room-rental-approved")
+    mail(to: @room_rental.owner.email, subject: "Bestätigung deiner Raumteiler Vermietung")
   end
 
   def rental_rejected(room_rental)

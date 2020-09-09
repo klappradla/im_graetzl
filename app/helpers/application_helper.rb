@@ -1,20 +1,4 @@
 module ApplicationHelper
-  def main_navigation(mobile=nil)
-    case
-    when @district
-      render "nav_district#{'_mobile' if mobile}", district: @district
-    when @graetzl || current_user.try(:graetzl)
-      render "nav_graetzl#{'_mobile' if mobile}", graetzl: (@graetzl || current_user.graetzl)
-    else
-      render "nav_home#{'_mobile' if mobile}"
-    end
-  end
-
-  def nav_lazy_load_form(type)
-    form_tag([:navigation, :load_content, type: type], remote: true, method: :get,
-      id: "nav-load-#{type}", class: 'nav-load-form') do
-    end
-  end
 
   def link_to_more_info
     blog_url = 'https://blog.imgraetzl.at/services/'
@@ -51,6 +35,14 @@ module ApplicationHelper
 
   def icon_tag(name)
     "<svg class='icon-#{name} icon'><use xlink:href='#icon-#{name}'></use></svg>".html_safe
+  end
+
+  def icon_with_badge(icon_name, number, options = {})
+    options[:class] = [options[:class], 'icon-with-badge']
+    content_tag(:div, options) do
+      icon_tag(icon_name) +
+      content_tag(:div, number > 0 ? number : nil, class: 'icon-badge')
+    end
   end
 
 end

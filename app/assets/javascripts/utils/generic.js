@@ -16,7 +16,7 @@ APP.utils = (function() {
     }
 
     function isLoggedIn() {
-        return $(".mainNavHolder .notificationsTrigger").exists();
+        return $("body").hasClass("signed-in");
     }
 
     return {

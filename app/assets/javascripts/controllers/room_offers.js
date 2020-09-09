@@ -10,7 +10,7 @@ APP.controllers.room_offers = (function() {
   }
 
   function initTimeTable() {
-    
+
   }
 
 
@@ -163,6 +163,18 @@ APP.controllers.room_offers = (function() {
       search: true,
       csvDispCount: 5
     });
+
+    // Slot Fields Toogle
+    $('.slot-radios input:radio').on('change', function() {
+      $('div#slot-fields').slideToggle();
+    });
+
+    // Set Slot Fields Init State
+    if ($(".price-per-hour-input").val().length > 0) {
+      $('.slot-radios input:radio#slots_true').prop('checked',true);
+      $('div#slot-fields').show();
+    }
+
 
     $(".room-categories input").on("change", function() {
       maxCategories(); // init on Change

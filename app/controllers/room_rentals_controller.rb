@@ -61,6 +61,7 @@ class RoomRentalsController < ApplicationController
 
   def summary
     @room_rental = current_user.room_rentals.find(params[:id])
+    RoomMailer.new_rental_request(@room_rental).deliver_later
   end
 
   def cancel

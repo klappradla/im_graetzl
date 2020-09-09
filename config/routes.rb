@@ -217,9 +217,8 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
 
-  resources :notifications, only: [:index] do
-    post :mark_as_seen, on: :collection
-  end
+  get 'notifications/unseen_count'
+  get 'notifications/fetch'
 
   resources :zuckerls, path: 'zuckerl', only: [:new] do
     resource :billing_address, only: [:show, :create, :update]

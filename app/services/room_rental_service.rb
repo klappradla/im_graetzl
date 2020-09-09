@@ -82,7 +82,8 @@ class RoomRentalService
     )
 
     generate_invoices(room_rental)
-    RoomMailer.rental_approved(room_rental).deliver_later
+    RoomMailer.rental_approved_renter(room_rental).deliver_later
+    RoomMailer.rental_approved_owner(room_rental).deliver_later
   rescue Stripe::InvalidRequestError => e
     room_rental.update(rental_status: :rejected, payment_status: :payment_failed)
   end

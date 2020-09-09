@@ -20,4 +20,30 @@ class RoomMailerPreview < ActionMailer::Preview
     RoomMailer.room_demand_activate_reminder(RoomDemand.last)
   end
 
+  # RENTALS
+
+  def new_rental_request
+    RoomMailer.new_rental_request(RoomRental.last)
+  end
+
+  def new_rental_request_reminder
+    RoomMailer.new_rental_request_reminder(RoomRental.last)
+  end
+
+  def rental_approved_renter
+    RoomMailer.rental_approved_renter(RoomRental.approved.last || RoomRental.last)
+  end
+
+  def rental_approved_owner
+    RoomMailer.rental_approved_owner(RoomRental.approved.last || RoomRental.last)
+  end
+
+  def rental_rejected
+    RoomMailer.rental_rejected(RoomRental.rejected.last || RoomRental.last)
+  end
+
+  def rental_canceled
+    RoomMailer.rental_canceled(RoomRental.canceled.last || RoomRental.last)
+  end
+
 end

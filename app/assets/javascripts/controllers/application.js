@@ -2,9 +2,8 @@ APP.controllers.application = (function() {
 
   function init() {
 
-    APP.components.mainNavigation.init();
+    APP.components.headerNavigation.init();
     APP.components.stream.init();
-    APP.components.notificatonCenter.init();
 
     FastClick.attach(document.body);
 

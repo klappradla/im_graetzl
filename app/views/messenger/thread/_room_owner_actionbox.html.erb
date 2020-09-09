@@ -26,14 +26,8 @@
 
       <div class="note">
         <strong>Glückwunsch, du hast die Anfrage akzeptiert und damit die Buchung bestätigt.</strong>
-        Wir haben dir eine Buchungsbestätigung per E-Mail gesendet.
-        Die Kontaktdaten des Mieters sind wie folgt:
-        <p class="contact">
-          <%= room_rental.renter.full_name %>, <%= room_rental.renter.address.street_name %>
-          <%= room_rental.renter.address.street_number %>,
-          <%= room_rental.renter.address.zip %>  <%= room_rental.renter.address.city %>
-        </p>
-        Offene Fragen zur Miete könnt ihr am besten gleich hier im Chat besprechen.
+        Wir haben <%= room_rental.renter.first_name %> eine Buchungsbestätigung per E-Mail gesendet.
+        Weitere Infos zur Miete kannst du mit <%= room_rental.renter.first_name %> am besten gleich hier im Chat besprechen.
       </div>
 
     <% elsif room_rental.rejected? %>

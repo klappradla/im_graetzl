@@ -180,6 +180,15 @@ div.notification-settings {
       color: $color-ambient-rosa;
     }
   }
+  // HEADLINEs
+  .hl-subtext {
+    margin: 40px 0 15px;
+    h1 { margin: 0px 0 15px; }
+    h2 { margin: 0px 0 5px; }
+    p {
+      @include font-size-primaryFont('large');
+    }
+  }
 }
 
 .formRow  {
