@@ -19,10 +19,11 @@ APP.components.jBox = (function() {
           y: 'bottom'
         },
         ajax: {
-            reload: false,
-            setContent: true,
+            reload: true,
+            setContent: false,
             spinner:true,
             spinnerReposition:false,
+            spinnerDelay:0,
             success: function (response) {
               this.setContent(response);
             }
