@@ -55,7 +55,7 @@ class UsersController < ApplicationController
   def tooltip
     head :ok and return if browser.bot? && !request.format.js?
     @user = User.find(params[:id])
-    #sleep 1
+    #sleep 2
     render :layout => false
   end
 
