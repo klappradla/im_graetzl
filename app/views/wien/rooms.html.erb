@@ -15,7 +15,7 @@
 
   <div class="hl-subtext -cards">
     <%= image_tag 'svg/raumteiler-headline.svg', class: 'raumteiler-headline' %>
-    <p>Gewerbeflächen teilen - Kosten teilen.</p>
+    <p>Gewerbeflächen teilen - Kosten teilen. <%= render 'shared/questionmarklink', hint_url: info_raumteiler_path %></p>
   </div>
 
   <%= render 'filters/room_categories_slider' %>
