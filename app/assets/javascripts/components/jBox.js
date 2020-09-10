@@ -1,11 +1,34 @@
 APP.components.jBox = (function() {
 
-    function init() {
-      // jBox inits here ..
-    }
+  // jBox Tooltips for Users
+  var user_tooltips = []
 
-    return {
-        init : init
-    }
+  // Desktop Hover Tooltips
+  // selector eingrenzen auf .signed-in wenn nur eingeloggt
+  $(".no-touch .signed-in .user-tooltip-trigger").each(function(index, value) {
+
+      var tooltip = $(this).data('tooltip-id');
+      user_tooltips[tooltip] = new jBox('Tooltip', {
+        addClass:'jBox',
+        attach: $(this),
+        closeOnMouseleave: true,
+        delayOpen: 500,
+        delayClose: 250,
+        position: {
+          x: 'center',
+          y: 'bottom'
+        },
+        ajax: {
+            reload: false,
+            setContent: false,
+            spinner:true,
+            spinnerReposition:false,
+            success: function (response) {
+              this.setContent(response);
+            }
+        },
+      });
+
+  });
 
 })();

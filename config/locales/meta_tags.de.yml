@@ -155,6 +155,18 @@ de:
     summary:
       title: 'Toolteiler anfragen - Zusammenfassung'
 
+  room_rentals:
+    login:
+      title: 'Raumteiler anfragen - Einloggen'
+    new:
+      title: 'Raumteiler anfragen - Mietdauer'
+    address:
+      title: 'Raumteiler anfragen - Rechnungsadresse'
+    choose_payment:
+      title: 'Raumteiler anfragen - Zahlungsart wählen'
+    summary:
+      title: 'Raumteiler anfragen - Zusammenfassung'
+
   messenger:
     index:
       title: 'Messenger'

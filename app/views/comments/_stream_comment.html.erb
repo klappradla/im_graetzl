@@ -11,10 +11,7 @@
     <% end %>
     <a name="comment-<%= comment.id -%>"></a>
     <div class="userCreateInfo -parentComment">
-
-      <%= link_to comment.user do %>
-        <%= attachment_image_tag comment.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
-      <% end %>
+      <%= render 'shared/user_avatar_tooltip', user: comment.user %>
       <div class="infos">
         <div class="name"><%= link_to comment.user.full_name, comment.user %></div>
         <div class="date">

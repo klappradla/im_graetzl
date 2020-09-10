@@ -49,6 +49,7 @@ Rails.application.routes.draw do
 
   resource :user, only: [:edit], path_names: { edit: 'einstellungen' } do
     get 'locations'
+    get 'tooltip'
     get 'raumteiler', action: 'rooms', as: 'rooms'
     get 'toolteiler', action: 'tool_offers', as: 'tool_offers'
     get 'gruppen', action: 'groups', as: 'groups'

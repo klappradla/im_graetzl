@@ -76,3 +76,35 @@
     }
   }
 }
+
+.user-tooltip-wrp {
+  display:flex;
+  .img-round {
+    width:80px;
+    height:80px;
+    margin-right: 10px;
+  }
+  a.username {
+    font-weight: bold;
+    text-decoration: none;
+    color:$color-font-primary;
+  }
+  .tt-line {
+    display: flex;
+    align-items: center;
+    @include font-size-primaryFont('small');
+    padding-top:3px;
+    svg {
+      color: $color-ambient-mint;
+      height:25px;
+      padding-right:5px;
+    }
+    a {
+      color: $color-ambient-mint;
+      text-decoration: none;
+    }
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+}

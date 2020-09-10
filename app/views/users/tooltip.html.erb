@@ -1,0 +1,33 @@
+<div class="user-tooltip-wrp">
+
+  <div class="tt-img">
+    <%= link_to @user do %>
+      <%= attachment_image_tag @user, :avatar, :fill, 200, 200, fallback: 'avatar/user/200x200.png', class: 'img-round' %>
+    <% end %>
+  </div>
+
+  <div class="tt-content">
+
+    <%= link_to @user.full_name, @user, class:'username' %>
+
+    <div class="tt-line -messenger">
+      <%= icon_tag "speech-bubble" %>
+      <%= link_to "Nachricht senden", 'javascript' %>
+
+    </div>
+
+    <div class="tt-line -graetzl">
+      <%= icon_tag "map-location" %>
+      <%= link_to "#{@user.district.zip} - #{@user.graetzl.name}", @user.graetzl %>
+    </div>
+
+    <% if @user.locations.exists? %>
+      <div class="tt-line -location">
+        <%= icon_tag "location" %>
+        <%= link_to @user.locations.first.name, graetzl_location_url(@user.locations.first.graetzl, @user.locations.first) %>
+      </div>
+    <% end %>
+    
+  </div>
+
+</div>
