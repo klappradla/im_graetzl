@@ -167,8 +167,9 @@ class RoomOffersController < ApplicationController
   def user_params
     params.require(:user).permit(
       :iban,
-      :vat_id,
-      billing_address_attributes: [:id, :first_name, :last_name, :street, :zip, :city, :country, :company],
+      billing_address_attributes: [
+        :id, :first_name, :last_name, :street, :zip, :city, :country, :company, :vat_id,
+      ],
     )
   end
 

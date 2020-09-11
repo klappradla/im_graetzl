@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_28_133353) do
+ActiveRecord::Schema.define(version: 2020_09_11_141815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 2020_08_28_133353) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.string "vat_id"
     t.index ["location_id"], name: "index_billing_addresses_on_location_id"
     t.index ["user_id"], name: "index_billing_addresses_on_user_id"
   end
@@ -945,7 +946,6 @@ ActiveRecord::Schema.define(version: 2020_08_28_133353) do
     t.string "iban"
     t.decimal "rating", precision: 3, scale: 2
     t.integer "ratings_count", default: 0
-    t.string "vat_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["created_at"], name: "index_users_on_created_at"
     t.index ["email"], name: "index_users_on_email", unique: true
