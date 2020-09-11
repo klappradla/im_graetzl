@@ -21,7 +21,7 @@
       <%= nav_menu_item("coffee", "Blog", "https://blog.imgraetzl.at/", class: 'discover', target: '_blank') %>
     </div>
 
-    <div class="nav-dropdown-menu nav-dropdown-submenu shown" id="nav-submenu-site-location">
+    <div class="nav-dropdown-menu nav-dropdown-submenu" id="nav-submenu-site-location">
       <% if graetzl %>
         <%= nav_submenu_back('nav-submenu-site-city') %>
         <%= nav_menu_item("home", " Home | #{graetzl.name}", graetzl_path(graetzl)) %>
