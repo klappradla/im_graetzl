@@ -9,12 +9,12 @@
 
   <div class="slot-radios">
     <div class="input-radio">
-      <%= radio_button_tag 'slots', false, checked: true %>
-      <%= label_tag "slots_false", "Nein" %>
+      <%= f.radio_button :rental_enabled, false, class: 'rental-toggle-input' %>
+      <%= f.label :rental_enabled, "Nein", value: false %>
     </div>
     <div class="input-radio">
-      <%= radio_button_tag 'slots', true %>
-      <%= label_tag "slots_true", "Ja" %>
+      <%= f.radio_button :rental_enabled, true, class: 'rental-toggle-input' %>
+      <%= f.label :rental_enabled, "Ja", value: true %>
     </div>
   </div>
 

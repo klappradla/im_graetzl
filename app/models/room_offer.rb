@@ -45,6 +45,7 @@ class RoomOffer < ApplicationRecord
 
   validates_presence_of :address, :slogan, :room_description, :owner_description, :tenant_description
   validates_presence_of :cover_photo, :first_name, :last_name, :email
+  validates_presence_of :room_rental_price, if: :rental_enabled?
   validate :has_one_category_at_least
 
   before_save :set_graetzl_and_district

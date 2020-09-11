@@ -142,6 +142,7 @@ class RoomOffersController < ApplicationController
         :activation_code,
         :remove_avatar,
         :general_availability,
+        :rental_enabled,
         :first_name, :last_name, :website, :email, :phone, :location_id,
         images_files: [],
         images_attributes: [:id, :_destroy],

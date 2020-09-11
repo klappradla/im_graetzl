@@ -167,15 +167,13 @@ APP.controllers.room_offers = (function() {
     });
 
     // Slot Fields Toogle
-    $('.slot-radios input:radio').on('change', function() {
-      $('div#slot-fields').slideToggle();
-    });
-
-    // Set Slot Fields Init State
-    if ($(".price-per-hour-input").val().length > 0) {
-      $('.slot-radios input:radio#slots_true').prop('checked',true);
-      $('div#slot-fields').show();
-    }
+    $('.slot-radios .rental-toggle-input').on('change', function() {
+      if ($('.slot-radios .rental-toggle-input:checked').val() == 'true') {
+        $('#slot-fields').slideDown();
+      } else {
+        $('#slot-fields').hide();
+      }
+    }).change();
 
 
     $(".room-categories input").on("change", function() {

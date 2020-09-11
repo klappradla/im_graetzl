@@ -71,7 +71,7 @@
   </div>
 
   <!-- ONLINE BOOKING -->
-  <% if @room_offer.room_rental_price.present? %>
+  <% if @room_offer.rental_enabled? %>
     <div class="sideBarbox -top">
 
       <div class="headline-slots">
