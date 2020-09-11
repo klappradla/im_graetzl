@@ -1,4 +1,5 @@
 class WebhooksController < ApplicationController
+  skip_forgery_protection
 
   def stripe
     head :bad_request and return if params[:type].blank? || params[:id].blank?

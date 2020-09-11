@@ -219,17 +219,17 @@ section.roomDetail {
     }
 
     .rental-information {
-      @include font-size-primaryFont('small');
       margin-bottom: 20px;
       h3 {
+        //@include font-size-primaryFont('small');
         text-align: center;
         border-top: 1px solid $color-ambient-grey-light;
         padding-top:15px;
-        margin-top: 5px;
+        margin-top: 10px;
       }
       ol {
         margin-left:35px;
-        padding-right:5px;
+        padding-right:15px;
         list-style: none; /* Remove default bullets */
       }
       ol li::before {
@@ -247,7 +247,7 @@ section.roomDetail {
         content: "3.";
       }
       li {
-        padding-top:10px;
+        padding-top:15px;
         font-style: italic;
         //color:$color-ambient-grey;
       }

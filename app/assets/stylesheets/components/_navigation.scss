@@ -155,7 +155,7 @@
       width: 30px; height: 30px;
       flex: none;
     }
-    .arrow { position: absolute; right: -15px; }
+    .arrow { position: absolute; right: 0px; }
     .arrow svg { fill: $color-ambient-mint-light; }
     &:hover .arrow svg { fill: $color-ambient-mint-dark; }
 
