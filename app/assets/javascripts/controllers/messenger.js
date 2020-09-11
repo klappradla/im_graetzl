@@ -51,6 +51,7 @@ APP.controllers.messenger = (function() {
       $("#chat-container").addClass("show-messages");
       scrollToLastMessage();
       history && history.replaceState({}, '', location.pathname + "?thread_id=" + $(".chat-panel").data("thread-id"));
+      APP.components.initUserTooltip();
     });
 
     var preselectedThread = $("#side-bar .threads-list").data("thread");

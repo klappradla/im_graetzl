@@ -1,7 +1,7 @@
 <% user = thread_other_user(@thread) %>
 <div class="user-info">
   <%= link_to user do %>
-    <%= avatar_for user %>
+    <%= user_tooltip_avatar user %>
   <% end %>
   <div>
     <strong><%= user.full_name %></strong><br>

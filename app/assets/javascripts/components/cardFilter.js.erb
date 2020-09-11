@@ -449,6 +449,7 @@ APP.components.cardFilter = (function() {
     cardGrid.masonry('appended', newCards);
     newCards.attr("data-appended", true);
     //console.log(newCards);
+    APP.components.initUserTooltip();
     initInfiniteScroll();
   }
 

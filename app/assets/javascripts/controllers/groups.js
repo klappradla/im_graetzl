@@ -78,6 +78,7 @@ APP.controllers.groups = (function() {
         showSpinner();
       }).on('ajax:complete', function() {
         hideSpinner();
+        APP.components.initUserTooltip();
       });
 
       // Fade in new content

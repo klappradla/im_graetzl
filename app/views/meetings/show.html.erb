@@ -94,7 +94,7 @@
           <%= link_to @meeting.location.name, [Graetzl.memoized(@meeting.location.graetzl_id), @meeting.location], class: 'infolink' %>
         </div>
       <% elsif @meeting.user %>
-        <%= avatar_for(@meeting.user, 100) %>
+        <%= user_tooltip_avatar @meeting.user, 100 %>
         <div class="infotxt">
           <em class="info">Erstellt von:</em><br>
           <%= link_to @meeting.user.username, @meeting.user, class: 'infolink' %>

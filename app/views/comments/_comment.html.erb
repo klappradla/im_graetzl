@@ -12,7 +12,9 @@
     <% end %>
     <a name="comment-<%= comment.id -%>"></a>
     <div class="userCreateInfo">
-      <%= attachment_image_tag comment.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+      <%= link_to comment.user do %>
+        <%= user_tooltip_avatar comment.user, 100 %>
+      <% end %>
       <span class="userAndType">
         Kommentar von <%= link_to comment.user.username, comment.user %>
         <span>vor <%= time_ago_in_words(comment.created_at) %></span>

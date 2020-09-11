@@ -19,7 +19,7 @@
       <% unless @location.users.empty? %>
         <% @location.users.each do |user| %>
           <%= link_to user, class: 'user-wrp' do %>
-            <%= avatar_for user %>
+            <%= user_tooltip_avatar user %>
             <span class="name"><%= user.username %></span>
           <% end %>
         <% end %>

@@ -79,6 +79,10 @@
 
 .user-tooltip-wrp {
   display:flex;
+  flex-wrap: wrap;
+  max-width: 280px;
+  padding-top:5px;
+  justify-content: center;
   .img-round {
     width:80px;
     height:80px;
@@ -88,6 +92,10 @@
     font-weight: bold;
     text-decoration: none;
     color:$color-font-primary;
+  }
+  .tt-content {
+    max-width: 180px;
+    @include ellipsis;
   }
   .tt-line {
     display: flex;
@@ -106,5 +114,11 @@
   }
   a:hover {
     text-decoration: underline;
+  }
+  .tt-bio {
+    border-top: 1px solid $color-ambient-mint-light-lowsaturation;
+    padding-top:7px;
+    margin-top:7px;
+    font-style: italic;
   }
 }

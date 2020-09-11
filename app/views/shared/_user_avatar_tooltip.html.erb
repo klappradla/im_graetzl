@@ -1,7 +1,0 @@
-<% user = local_assigns[:user] %>
-<% tooltip_id = "user-tooltip-#{user.id}-#{rand(1000)}" %>
-<% tooltip_url = "/user/tooltip?id=#{user.id}" %>
-
-<%= link_to user do %>
-  <%= attachment_image_tag user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round user-tooltip-trigger', data: { tooltip_id: tooltip_id, url: tooltip_url } %>
-<% end %>

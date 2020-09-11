@@ -1,4 +1,4 @@
-APP.components.jBox = (function() {
+APP.components.initUserTooltip = function() {
 
   // jBox Tooltips for Users
   var user_tooltips = []
@@ -32,4 +32,6 @@ APP.components.jBox = (function() {
 
   });
 
-})();
+};
+
+APP.components.initUserTooltip();

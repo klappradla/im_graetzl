@@ -11,7 +11,9 @@
     <% end %>
     <a name="comment-<%= comment.id -%>"></a>
     <div class="userCreateInfo -parentComment">
-      <%= render 'shared/user_avatar_tooltip', user: comment.user %>
+      <%= link_to comment.user do %>
+        <%= user_tooltip_avatar comment.user %>
+      <% end %>
       <div class="infos">
         <div class="name"><%= link_to comment.user.full_name, comment.user %></div>
         <div class="date">

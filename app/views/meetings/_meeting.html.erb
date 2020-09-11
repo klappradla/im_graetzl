@@ -41,7 +41,7 @@
       <% end %>
     <% elsif meeting.user %>
       <%= link_to meeting.user, class: 'initiator' do %>
-        <%= avatar_for(meeting.user) %>
+        <%= user_tooltip_avatar meeting.user %>
         <span><%= meeting.user.username %></span>
       <% end %>
     <% end %>
