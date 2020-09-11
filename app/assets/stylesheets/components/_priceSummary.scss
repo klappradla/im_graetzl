@@ -41,6 +41,7 @@
   margin: 0;
   list-style: none;
   width:100%;
+  text-align: left;
 
   .desc {
     padding-bottom: 10px;
@@ -69,6 +70,11 @@
     small.discount {
       color: $color-ambient-grey;
       //color: $color-ambient-orange;
+    }
+    .icon {
+      margin-left: 12px;
+      margin-right:12px;
+      color:$color-ambient-mint-dark;
     }
   }
   li:last-child {

@@ -154,12 +154,20 @@ section.roomDetail {
 
       &.-top {
         padding-top:15px;
-        //margin-bottom:70px;
+        background-color: $color-ambient-orange-light;
       }
 
       border: 1px solid $color-ambient-grey-light;
       background-color: #ffffff;
       border-radius: 8px;
+
+      .headline-slots {
+        display: flex;
+        justify-content: center;
+        h3 {
+          padding-right: 20px;
+        }
+      }
 
       h3.sidebar {
         text-align: center;
@@ -183,6 +191,10 @@ section.roomDetail {
           border-top: 1px solid $color-ambient-grey-light;
           padding-top:20px;
         }
+        .iconlist {
+          background-color: white;
+        }
+        background-color: $color-ambient-mint-light;
       }
 
       &.contact {
@@ -198,10 +210,47 @@ section.roomDetail {
     .pricingForm {
       padding: 15px;
       padding-top:0px;
+      background-color: white;
     }
 
     #rental-form-container {
+      background-color: white;
       .btn-primary {width:100%;}
+    }
+
+    .rental-information {
+      @include font-size-primaryFont('small');
+      margin-bottom: 20px;
+      h3 {
+        text-align: center;
+        border-top: 1px solid $color-ambient-grey-light;
+        padding-top:15px;
+        margin-top: 5px;
+      }
+      ol {
+        margin-left:35px;
+        padding-right:5px;
+        list-style: none; /* Remove default bullets */
+      }
+      ol li::before {
+        content: "1.";
+        color: $color-ambient-mint-dark;
+        display: inline-block;
+        font-weight: bold;
+        width:20px;
+        margin-left:-20px;
+      }
+      ol li:nth-child(2)::before {
+        content: "2.";
+      }
+      ol li:nth-child(3)::before {
+        content: "3.";
+      }
+      li {
+        padding-top:10px;
+        font-style: italic;
+        //color:$color-ambient-grey;
+      }
     }
 
     .request-price-form {

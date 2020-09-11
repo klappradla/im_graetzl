@@ -58,7 +58,9 @@ APP.controllers.room_offers = (function() {
     });
 
     $('.request-price-form').on("change", '.hour-input', function() {
-      $(this).parents(".request-price-form").submit();
+      if ($('.hour-from').val().length > 0 && $('.hour-to').val().length > 0) {
+        $(this).parents(".request-price-form").submit();
+      }
     });
   }
 

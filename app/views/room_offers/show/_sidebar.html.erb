@@ -70,26 +70,32 @@
 
   </div>
 
-
   <!-- ONLINE BOOKING -->
   <% if @room_offer.room_rental_price.present? %>
     <div class="sideBarbox -top">
-      <h3 class="sidebar">Jetzt Slot buchen</h3>
+
+      <div class="headline-slots">
+        <%= icon_tag "slots" %>
+        <h3 class="sidebar">Kurzzeitmiete</h3>
+      </div>
+
 
       <div class="pricingForm">
         <div class="package-pricing">
           <ul>
             <li>
-              <div class="cost"><pie class="pie-hour"></pie></div>
+              <!--<div class="cost"><pie class="pie-hour"></pie></div>-->
+              <%= icon_tag "label-tag" %>
               <div class="costname">
                 <%= @room_offer.room_rental_price.price_per_hour.to_i %> € / Stunde
               </div>
             </li>
             <% if @room_offer.room_rental_price.eight_hour_discount.to_i > 0 %>
             <li>
-              <div class="cost"><pie class="pie-day"></pie></div>
+              <!--<div class="cost"><pie class="pie-day"></pie></div>-->
+              <%= icon_tag "label-tag" %>
               <div class="costname">
-                <%= @room_offer.room_rental_price.daily_price %> € / Tag (8h)<br>
+                <%= @room_offer.room_rental_price.daily_price.to_i %> € / Tag (8h)<br>
                 <small class="discount"><%= @room_offer.room_rental_price.eight_hour_discount %>% Rabatt</small>
               </div>
             </li>
@@ -107,7 +113,7 @@
   <!-- OTHER PRICING -->
   <% if @room_offer.room_offer_prices.present? %>
     <div class="sideBarbox -pricing">
-      <h3 class="sidebar">Raumteiler Pakete</h3>
+      <h3 class="sidebar -pakete">Raumteiler Pakete</h3>
 
       <div class="iconlist">
         <div class="pricing icontxt">
