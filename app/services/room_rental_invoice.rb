@@ -34,6 +34,7 @@ class RoomRentalInvoice
     pdf.move_down 30
     pdf.text "Rechnungssteller", size: 14, style: :bold
     pdf.text room_rental.owner.billing_address.company if room_rental.owner.billing_address.company.present?
+    pdf.text "UID: #{room_rental.owner.billing_address.vat_id}" if room_rental.owner.billing_address.vat_id.present?
     pdf.text "#{room_rental.owner.billing_address.first_name} #{room_rental.owner.billing_address.last_name}"
     pdf.text room_rental.owner.billing_address.street
     pdf.text "#{room_rental.owner.billing_address.zip} #{room_rental.owner.billing_address.city}"
@@ -72,6 +73,7 @@ class RoomRentalInvoice
   def add_owner_info(pdf, owner)
     pdf.text "Rechnungsempfänger", size: 14, style: :bold
     pdf.text owner.billing_address.company if owner.billing_address.company.present?
+    pdf.text "UID: #{owner.billing_address.vat_id}" if owner.billing_address.vat_id.present?
     pdf.text owner.billing_address.full_name
     pdf.text owner.billing_address.street
     pdf.text "#{owner.billing_address.zip} #{owner.billing_address.city}"

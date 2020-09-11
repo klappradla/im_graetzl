@@ -1,12 +1,12 @@
 <div class="cardBox -toolteiler">
   <div class="cardBoxHeader">
     <div class="coverImgWrapper">
-      <%= link_to cover_photo_for(@tool_offer), @tool_offer %>
+      <%= link_to cover_photo_for(@tool_rental.tool_offer), @tool_rental.tool_offer %>
     </div>
     <div class="priceSheet">
       <div class="price">
         <small>ab</small>
-        <%= @tool_offer.daily_price(7).to_i %><sup>€</sup>
+        <%= @tool_rental.tool_offer.daily_price(7).to_i %><sup>€</sup>
       </div>
     </div>
     <div class="categoryicon">
@@ -21,7 +21,7 @@
       <li>
         <div class="duration">Miete:</div>
         <div class="title">
-          <%= l(@calculator.rent_from, format: :short) %> - <%= l(@calculator.rent_to, format: :short) %>
+          <%= l(@tool_rental.rent_from, format: :short) %> - <%= l(@tool_rental.rent_to, format: :short) %>
         </div>
       </li>
     </ul>
@@ -29,25 +29,25 @@
     <ul class="pricing-summary">
       <li>
         <div class="cost">
-          <%= number_to_currency(@calculator.basic_price, unit: "€") %>
+          <%= number_to_currency(@tool_rental.basic_price, unit: "€") %>
         </div>
         <div class="costname">
-          <%= @calculator.days %> Tage x <%= number_to_currency(@calculator.daily_price, unit: "€") %>
+          <%= @tool_rental.days %> Tage x <%= number_to_currency(@tool_rental.daily_price, unit: "€") %>
           <%= render 'shared/questionmark', hint_id: "1", hint_message: 'Das ist der Tagespreis für die Anzahl der Tage die du den Toolteiler mieten möchtest.' %>
         </div>
       </li>
       <li>
         <div class="cost">
-          <%= number_to_currency(-@calculator.discount, unit: "€") %>
+          <%= number_to_currency(-@tool_rental.discount, unit: "€") %>
         </div>
         <div class="costname">
-          Rabatt <%= @calculator.days %> Tage
-          <% if @tool_offer.two_day_discount? && @tool_offer.weekly_discount? %>
-            <%= render 'shared/questionmark', hint_id: "2", hint_message: "Dieser Toolteiler hat #{@tool_offer.two_day_discount}% Rabatt ab einer Miete von 2 Tagen und #{@tool_offer.weekly_discount}% ab einer Miete von einer Woche." %>
-          <% elsif @tool_offer.two_day_discount? %>
-            <%= render 'shared/questionmark', hint_id: "2", hint_message: "Dieser Toolteiler hat #{@tool_offer.two_day_discount}% Rabatt ab einer Miete von 2 Tagen." %>
-          <% elsif @tool_offer.weekly_discount? %>
-            <%= render 'shared/questionmark', hint_id: "2", hint_message: "Dieser Toolteiler hat #{@tool_offer.weekly_discount}% Rabatt ab einer Miete von einer Woche." %>
+          Rabatt <%= @tool_rental.days %> Tage
+          <% if @tool_rental.tool_offer.two_day_discount? && @tool_rental.tool_offer.weekly_discount? %>
+            <%= render 'shared/questionmark', hint_id: "2", hint_message: "Dieser Toolteiler hat #{@tool_rental.tool_offer.two_day_discount}% Rabatt ab einer Miete von 2 Tagen und #{@tool_rental.tool_offer.weekly_discount}% ab einer Miete von einer Woche." %>
+          <% elsif @tool_rental.tool_offer.two_day_discount? %>
+            <%= render 'shared/questionmark', hint_id: "2", hint_message: "Dieser Toolteiler hat #{@tool_rental.tool_offer.two_day_discount}% Rabatt ab einer Miete von 2 Tagen." %>
+          <% elsif @tool_rental.tool_offer.weekly_discount? %>
+            <%= render 'shared/questionmark', hint_id: "2", hint_message: "Dieser Toolteiler hat #{@tool_rental.tool_offer.weekly_discount}% Rabatt ab einer Miete von einer Woche." %>
           <% else %>
             <%= render 'shared/questionmark', hint_id: "2", hint_message: "Dieser Toolteiler hat keinen Tages oder Wochenrabatt." %>
           <% end %>
@@ -55,7 +55,7 @@
       </li>
       <li>
         <div class="cost">
-          <%= number_to_currency(@calculator.total_fee, unit: "€") %>
+          <%= number_to_currency(@tool_rental.total_fee, unit: "€") %>
         </div>
         <div class="costname">
           Servicegebühr inkl. Versicherung
@@ -63,7 +63,7 @@
         </div>
       </li>
       <li class=sum>
-        <div class="cost"><%= number_to_currency(@calculator.total, unit: "€") %></div>
+        <div class="cost"><%= number_to_currency(@tool_rental.total_price, unit: "€") %></div>
         <div class="costname">Gesamtpreis</div>
       </li>
     </ul>

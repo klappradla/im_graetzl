@@ -5,10 +5,10 @@ class ToolRental < ApplicationRecord
 
   has_one :user_message_thread
 
-  enum rental_status: { pending: 0, canceled: 1, rejected: 2, approved: 3, return_pending: 4, return_confirmed: 5, expired: 6 }
+  enum rental_status: { incomplete: 0, pending: 1, canceled: 2, rejected: 3, approved: 4, return_pending: 5, return_confirmed: 6, expired: 7 }
   enum payment_status: { payment_pending: 0, payment_success: 1, payment_failed: 2, payment_transfered: 3, payment_canceled: 4 }
 
-  PAYMENT_METHODS = ['card'].freeze
+  PAYMENT_METHODS = ['card', 'eps'].freeze
 
   def self.next_invoice_number
     where("invoice_number IS NOT NULL").count + 1
@@ -35,6 +35,21 @@ class ToolRental < ApplicationRecord
 
   def days
     (rent_to - rent_from).to_i + 1
+  end
+
+  def calculate_price
+    self.daily_price = tool_offer.price_per_day
+    self.basic_price = (daily_price * days).round(2)
+    if days >= 7
+      self.discount = (basic_price * tool_offer.weekly_discount.to_i / 100).round(2)
+    elsif days >= 2
+      self.discount = (basic_price * tool_offer.two_day_discount.to_i / 100).round(2)
+    else
+      self.discount = 0
+    end
+    self.service_fee = ((basic_price - discount) * 0.065).round(2)
+    self.insurance_fee = ((basic_price - discount) * 0.08).round(2)
+    self.tax = (service_fee * 0.20).round(2)
   end
 
   def total_price

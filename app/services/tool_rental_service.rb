@@ -1,122 +1,93 @@
 class ToolRentalService
 
-  def initiate_card_payment(user, tool_offer, amount, payment_method_id)
-    if user.stripe_customer_id.blank?
-      stripe_customer = Stripe::Customer.create(email: user.email)
-      user.update(stripe_customer_id: stripe_customer.id)
+  def initiate_card_payment(tool_rental, payment_params)
+    if payment_params[:payment_method_id].blank?
+      return { error: "Missing payment method ID." }
     end
 
-    intent = Stripe::PaymentIntent.create(
-      customer: user.stripe_customer_id,
-      description: tool_offer.title,
-      amount: (amount * 100).to_i,
-      currency: 'eur',
-      payment_method: payment_method_id,
-      capture_method: 'manual',
-      confirmation_method: 'manual',
-      confirm: true,
-    )
+    stripe_customer_id = get_stripe_customer_id(tool_rental.renter)
 
-    if intent.status == 'requires_action'
-      return { requires_action: true, payment_intent_client_secret: intent.client_secret }
-    elsif intent.status == 'requires_capture'
-      return { success: true, payment_intent_id: intent.id }
-    elsif intent.status == 'succeeded'
-      # Already paid?
-      return { success: true, payment_intent_id: intent.id }
-    else
-      return { error: "Invalid Payment intent" }
-    end
-  end
-
-  def initiate_klarna_payment(user, tool_offer, amount, klarna_info, redirect_url)
-    if user.stripe_customer_id.blank?
-      stripe_customer = Stripe::Customer.create(email: user.email)
-      user.update(stripe_customer_id: stripe_customer.id)
-    end
-
-    stripe_source = Stripe::Source.create(
-      type: 'klarna',
-      amount: (amount * 100).to_i,
-      currency: 'eur',
-      owner: {
-        email: klarna_info[:email],
-        address: {
-          line1: klarna_info[:address], postal_code: klarna_info[:zip],
-          city: klarna_info[:city], country: 'AT'
-        },
-      },
-      klarna: {
-        product: 'payment',
-        purchase_country: 'AT',
-        first_name: klarna_info[:first_name],
-        last_name: klarna_info[:last_name],
-      },
-      source_order: {
-        items: [{
-          type: 'sku',
-          description: tool_offer.description,
-          quantity: 1,
-          amount: (amount * 100).to_i,
-          currency: 'eur',
-        }]
-      },
-      flow: 'redirect',
-      redirect: { return_url: redirect_url },
-    )
-
-    Stripe::Customer.create_source(user.stripe_customer_id, source: stripe_source)
-    { success: true, redirect_url: stripe_source.redirect.url }
-  rescue Stripe::InvalidRequestError => e
-    return { success: false, error: e.json_body[:error][:message] }
-  end
-
-  def initiate_eps_payment(user, tool_offer, amount, eps_info, redirect_url)
-    if user.stripe_customer_id.blank?
-      stripe_customer = Stripe::Customer.create(email: user.email)
-      user.update(stripe_customer_id: stripe_customer.id)
-    end
-
-    stripe_source = Stripe::Source.create(
-      type: 'eps',
-      amount: (amount * 100).to_i,
-      currency: 'eur',
-      statement_descriptor: tool_offer.title,
-      owner: {
-        name: eps_info[:full_name],
-      },
-      redirect: { return_url: redirect_url },
-    )
-
-    Stripe::Customer.create_source(user.stripe_customer_id, source: stripe_source)
-    { success: true, redirect_url: stripe_source.redirect.url }
-  rescue Stripe::InvalidRequestError => e
-    return { success: false, error: e.json_body[:error][:message] }
-  end
-
-  def confirm_rental(tool_rental)
-    if tool_rental.payment_method.in?(['klarna', 'eps'])
-      capture_immediately = tool_rental.payment_method == 'eps' ? true : false
-      stripe_charge = Stripe::Charge.create(
-        customer: tool_rental.renter.stripe_customer_id,
+    if payment_params[:payment_intent_id].blank?
+      intent = Stripe::PaymentIntent.create(
+        customer: stripe_customer_id,
         amount: (tool_rental.total_price * 100).to_i,
         currency: 'eur',
-        source: tool_rental.stripe_source_id,
-        capture: capture_immediately,
+        description: tool_rental.tool_offer.title,
+        payment_method: payment_params[:payment_method_id],
+        capture_method: 'manual',
+        confirmation_method: 'manual',
+        confirm: true,
       )
-      tool_rental.update(stripe_charge_id: stripe_charge.id)
+
+      if intent.status == 'requires_action'
+        return { requires_action: true, payment_intent_client_secret: intent.client_secret }
+      end
+
+      payment_params[:payment_intent_id] = intent.id
+    end
+
+    card = Stripe::PaymentIntent.retrieve(
+      id: payment_params[:payment_intent_id], expand: ['payment_method']
+    ).payment_method.card
+
+    tool_rental.update(
+      stripe_payment_intent_id: payment_params[:payment_intent_id],
+      payment_method: 'card',
+      payment_card_last4: card.last4,
+      rental_status: :pending,
+    )
+
+    ToolOfferMailer.new_rental_request(tool_rental).deliver_later
+    return { success: true }
+  end
+
+  def initiate_eps_payment(tool_rental)
+    stripe_customer_id = get_stripe_customer_id(tool_rental.renter)
+
+    intent = Stripe::PaymentIntent.create(
+      customer: stripe_customer_id,
+      amount: (tool_rental.total_price * 100).to_i,
+      currency: 'eur',
+      payment_method_types: ['eps'],
+      description: tool_rental.tool_offer.title,
+    )
+
+    tool_rental.update(
+      stripe_payment_intent_id: intent.id,
+    )
+
+    return { payment_intent_client_secret: intent.client_secret }
+  rescue Stripe::InvalidRequestError => e
+    return { error: e.json_body[:error][:message] }
+  end
+
+  def confirm_eps_payment(tool_rental, payment_intent)
+    if payment_intent.status == 'succeeded'
+      tool_rental.update(
+        payment_method: 'eps',
+        rental_status: :pending,
+      )
+      ToolOfferMailer.new_rental_request(tool_rental).deliver_later
     end
   end
 
   def approve(tool_rental)
-    if tool_rental.payment_method == 'card'
+    case tool_rental.payment_method
+    when 'card'
       Stripe::PaymentIntent.capture(tool_rental.stripe_payment_intent_id)
-    elsif tool_rental.payment_method == 'klarna'
+    when 'eps'
+      # Doesn't support delayed capture, we already charged the user.
+    when 'klarna'
       Stripe::Charge.capture(tool_rental.stripe_charge_id)
     end
 
     invoice_number = "#{Date.current.year}_ToolRental-#{tool_rental.id}_Nr-#{ToolRental.next_invoice_number}"
-    tool_rental.update(rental_status: :approved, payment_status: :payment_success, invoice_number: invoice_number)
+    tool_rental.update(
+      rental_status: :approved,
+      payment_status: :payment_success,
+      invoice_number: invoice_number
+    )
+
     generate_invoices(tool_rental)
     ToolOfferMailer.rental_approved(tool_rental).deliver_later
   rescue Stripe::InvalidRequestError => e
@@ -124,32 +95,47 @@ class ToolRentalService
   end
 
   def reject(tool_rental)
-    if tool_rental.payment_method == 'card'
+    case tool_rental.payment_method
+    when 'card'
       Stripe::PaymentIntent.cancel(tool_rental.stripe_payment_intent_id)
-    elsif tool_rental.payment_method.in?(['klarna', 'eps'])
+    when 'eps'
+      Stripe::Refund.create(payment_intent: tool_rental.stripe_payment_intent_id)
+    when 'klarna'
       Stripe::Refund.create(charge: tool_rental.stripe_charge_id)
     end
+
     tool_rental.rejected!
     ToolOfferMailer.rental_rejected(tool_rental).deliver_later
   end
 
   def cancel(tool_rental)
-    if tool_rental.payment_method == 'card'
+    case tool_rental.payment_method
+    when 'card'
       Stripe::PaymentIntent.cancel(tool_rental.stripe_payment_intent_id)
-    elsif tool_rental.payment_method.in?(['klarna', 'eps'])
+    when 'eps'
+      Stripe::Refund.create(payment_intent: tool_rental.stripe_payment_intent_id)
+    when 'klarna'
       Stripe::Refund.create(charge: tool_rental.stripe_charge_id)
     end
+
     tool_rental.canceled!
     ToolOfferMailer.rental_canceled(tool_rental).deliver_later
   end
 
   def expire(tool_rental)
-    if tool_rental.payment_method == 'card'
+    case tool_rental.payment_method
+    when 'card'
       Stripe::PaymentIntent.cancel(tool_rental.stripe_payment_intent_id)
-    elsif tool_rental.payment_method.in?(['klarna', 'eps'])
+    when 'eps'
+      Stripe::Refund.create(payment_intent: tool_rental.stripe_payment_intent_id)
+    when 'klarna'
       Stripe::Refund.create(charge: tool_rental.stripe_charge_id)
     end
-    tool_rental.update(rental_status: :expired, payment_status: :payment_canceled)
+
+    tool_rental.update(
+      rental_status: :expired,
+      payment_status: :payment_canceled
+    )
   end
 
   def confirm_return(tool_rental)
@@ -159,6 +145,14 @@ class ToolRentalService
   end
 
   private
+
+  def get_stripe_customer_id(user)
+    if user.stripe_customer_id.blank?
+      stripe_customer = Stripe::Customer.create(email: user.email)
+      user.update(stripe_customer_id: stripe_customer.id)
+    end
+    user.stripe_customer_id
+  end
 
   def generate_invoices(tool_rental)
     renter_invoice = ToolRentalInvoice.new.generate_for_renter(tool_rental)

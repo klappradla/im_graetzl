@@ -61,7 +61,6 @@ class RoomRentalsController < ApplicationController
 
   def summary
     @room_rental = current_user.room_rentals.find(params[:id])
-    RoomMailer.new_rental_request(@room_rental).deliver_later
   end
 
   def cancel
@@ -138,10 +137,6 @@ class RoomRentalsController < ApplicationController
 
   def eps_params
     params.permit(:payment_intent)
-  end
-
-  def klarna_params
-    params.permit(:first_name, :last_name, :email, :address, :zip, :city)
   end
 
 end

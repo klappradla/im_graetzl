@@ -133,7 +133,6 @@ APP.controllers.room_rentals = (function() {
 
       initCardPayment();
       initEpsPayment();
-      initKlarnaPayment();
     }
 
     function initCardPayment() {
@@ -149,34 +148,9 @@ APP.controllers.room_rentals = (function() {
       APP.components.paymentEps.init(epsForm);
     }
 
-    function initKlarnaPayment() {
-      var container = $(".klarna-container");
-      var nextButton = container.find(".next-screen");
-
-      container.find(".klarna-source-form").on("ajax:success", function(e, data) {
-        location.href = data.redirect_url;
-      });
-
-      if ($('#klarna-payment-success').exists()) {
-        $(".next-step-form").submit();
-      }
-    }
-
-    function showFormError(container, error) {
-      container.find(".error-message").text(error);
-    }
-
-    function hideFormError(container) {
-      container.find(".error-message").text("");
-    }
-
-
     function initSummaryScreen() {
-
       setTab('step4');
-
     }
-
 
     function openTab(tab) {
       $('.tabs-ctrl').trigger('show', '#tab-' + tab);

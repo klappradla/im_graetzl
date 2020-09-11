@@ -26,12 +26,18 @@ class RoomRentalService
       payment_params[:payment_intent_id] = intent.id
     end
 
+    card = Stripe::PaymentIntent.retrieve(
+      id: payment_params[:payment_intent_id], expand: ['payment_method']
+    ).payment_method.card
+
     room_rental.update(
       stripe_payment_intent_id: payment_params[:payment_intent_id],
       payment_method: 'card',
+      payment_card_last4: card.last4,
       rental_status: :pending,
     )
 
+    RoomMailer.new_rental_request(room_rental).deliver_later
     return { success: true }
   end
 
@@ -61,6 +67,7 @@ class RoomRentalService
         payment_method: 'eps',
         rental_status: :pending,
       )
+      RoomMailer.new_rental_request(room_rental).deliver_later
     end
   end
 
@@ -84,7 +91,7 @@ class RoomRentalService
     generate_invoices(room_rental)
     RoomMailer.rental_approved_renter(room_rental).deliver_later
     RoomMailer.rental_approved_owner(room_rental).deliver_later
-  rescue Stripe::InvalidRequestError => e
+  rescue Stripe::InvalidRequestError
     room_rental.update(rental_status: :rejected, payment_status: :payment_failed)
   end
 

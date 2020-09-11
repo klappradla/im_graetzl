@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_11_145647) do
+ActiveRecord::Schema.define(version: 2020_09_11_192343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -777,6 +777,7 @@ ActiveRecord::Schema.define(version: 2020_09_11_145647) do
     t.integer "renter_rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "payment_card_last4"
     t.index ["room_offer_id"], name: "index_room_rentals_on_room_offer_id"
     t.index ["stripe_payment_intent_id"], name: "index_room_rentals_on_stripe_payment_intent_id"
     t.index ["user_id"], name: "index_room_rentals_on_user_id"
@@ -876,6 +877,8 @@ ActiveRecord::Schema.define(version: 2020_09_11_145647) do
     t.string "stripe_charge_id"
     t.decimal "tax", precision: 10, scale: 2, default: "0.0"
     t.string "invoice_number"
+    t.decimal "daily_price", precision: 10, scale: 2, default: "0.0"
+    t.string "payment_card_last4"
     t.index ["stripe_payment_intent_id"], name: "index_tool_rentals_on_stripe_payment_intent_id"
     t.index ["tool_offer_id"], name: "index_tool_rentals_on_tool_offer_id"
     t.index ["user_id"], name: "index_tool_rentals_on_user_id"

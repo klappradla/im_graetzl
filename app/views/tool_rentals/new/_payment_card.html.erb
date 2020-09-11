@@ -1,0 +1,26 @@
+<%= form_tag [:initiate_card_payment, @tool_rental], class: 'card-form', remote: true,
+    data: {type: 'json', with_credentials: true, success_url: summary_tool_rental_url(@tool_rental)} do %>
+  <%= hidden_field_tag :payment_method_id %>
+  <%= hidden_field_tag :payment_intent_id %>
+
+  <div class="input-field">
+    <%= label_tag :card_info do %>
+      <%= icon_tag "credit-card" %>
+      <span>Kreditkarte</span>
+    <% end %>
+    <div id="card-element"></div>
+  </div>
+
+  <div class="input-field">
+    <%= label_tag :cardholder_name do %>
+      <%= icon_tag "user-avatar" %>
+      <span>Karteninhaber</span>
+    <% end %>
+    <%= text_field_tag :cardholder_name, current_user.full_name, placeholder: 'Karte laufend auf ...',
+        class: 'input-plain', id: 'cardholder-name' %>
+  </div>
+
+  <div class="error-message"></div>
+
+  <%= button_tag "Buchungsanfrage abschicken", type: 'button', disabled: true, class: "btn-primary", id: 'card-submit' %>
+<% end %>

@@ -1,0 +1,25 @@
+<h3 class="sidebar">Deine Auswahl</h3>
+
+<ul class="pricing-summary">
+  <li>
+    <div class="cost"><%= number_to_currency(@tool_rental.basic_price, unit: "€") %></div>
+    <div class="costname"><%= @tool_rental.days %> Tage x <%= number_to_currency(@tool_rental.daily_price, unit: "€") %> </div>
+  </li>
+  <% if @tool_rental.discount > 0 %>
+    <li>
+      <div class="cost"> <%= number_to_currency(-@tool_rental.discount, unit: "€") %></div>
+      <div class="costname">Rabatt <%= @tool_rental.days %> Tage</div>
+    </li>
+  <% end %>
+  <li>
+    <div class="cost"><%= number_to_currency(@tool_rental.total_fee, unit: "€") %></div>
+    <div class="costname">Servicegebühr inkl. Versicherung</div>
+  </li>
+  <li class="sum">
+    <div class="cost"><%= number_to_currency(@tool_rental.total_price, unit: "€") %></div>
+    <div class="costname">Gesamtpreis</div>
+  </li>
+</ul>
+
+<%= link_to "Jetzt anfragen", new_tool_rental_path(tool_offer_id: @tool_offer.id,
+    rent_from: @tool_rental.rent_from, rent_to: @tool_rental.rent_to), class: "btn-primary" %>

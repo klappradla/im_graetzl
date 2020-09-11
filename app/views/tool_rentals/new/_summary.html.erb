@@ -11,18 +11,18 @@
     <div>
       <h3>Toolteiler</h3>
       <p>
-        „<%= @tool_offer.title %>“
+        „<%= @tool_rental.tool_offer.title %>“
       </p>
     </div>
     <div class="avatar">
-      <%= avatar_for @tool_offer.user %>
+      <%= avatar_for @tool_rental.owner %>
     </div>
     <div>
       <h3>Vermieter</h3>
       <p>
-        <%= @tool_offer.user.full_name %><br>
-        <%= @tool_offer.address.street %><br>
-        <%= @tool_offer.address.zip %> <%= @tool_offer.address.city %>
+        <%= @tool_rental.owner.full_name %><br>
+        <%= @tool_rental.tool_offer.address.street %><br>
+        <%= @tool_rental.tool_offer.address.zip %> <%= @tool_rental.tool_offer.address.city %>
       </p>
     </div>
   </div>
@@ -40,10 +40,11 @@
       <h3>Zahlungsart</h3>
       <p>
         <span class="payment-method block">
-          <%= payment_method_label(params[:payment_method]) %> <br>
-          <% if @card %> endet auf <%= @card.last4 %> <span class="card-last4"></span> <% end %>
+          <%= payment_method_label(@tool_rental.payment_method) %> <br>
+          <% if @tool_rental.payment_method == 'card' %>
+            endet auf <%= @tool_rental.payment_card_last4 %> <span class="card-last4"></span>
+          <% end %>
         </span>
-        <%= link_to "ändern", choose_payment_tool_rentals_url(tool_rental_params) %>
       </p>
     </div>
 
@@ -53,28 +54,20 @@
     <div class="renter-summary">
       <h3>Mieter</h3>
       <p>
-        <span class="renter-company block"><%= params[:renter_company] %></span>
-        <span class="renter-name block"><%= params[:renter_name] %></span>
-        <span class="renter-address block"><%= params[:renter_address] %></span>
-        <span class="renter-zip"><%= params[:renter_zip] %></span> <span class="renter-city"><%= params[:renter_city] %></span>
+        <span class="renter-company block"><%= @tool_rental.renter_company %></span>
+        <span class="renter-name block"><%= @tool_rental.renter_name %></span>
+        <span class="renter-address block"><%= @tool_rental.renter_address %></span>
+        <span class="renter-zip"><%= @tool_rental.renter_zip %></span>
+        <span class="renter-city"><%= @tool_rental.renter_city %></span>
       </p>
     </div>
   </div>
 
-  <%= form_tag tool_rentals_path, html: { class: 'rental-form' } do |f| %>
-    <%= hidden_field_tag :tool_offer_id, params[:tool_offer_id] %>
-    <%= hidden_field_tag :rent_from, params[:rent_from] %>
-    <%= hidden_field_tag :rent_to, params[:rent_to] %>
-    <%= hidden_field_tag :renter_company, params[:renter_company] %>
-    <%= hidden_field_tag :renter_name, params[:renter_name] %>
-    <%= hidden_field_tag :renter_address, params[:renter_address] %>
-    <%= hidden_field_tag :renter_zip, params[:renter_zip] %>
-    <%= hidden_field_tag :renter_city, params[:renter_city] %>
-    <%= hidden_field_tag :payment_method, params[:payment_method] %>
-    <%= hidden_field_tag :stripe_payment_intent_id, params[:stripe_payment_intent_id] %>
-    <%= hidden_field_tag :stripe_source_id, params[:stripe_source_id] %>
+  <div class="footer-txt">
+    <strong>Deine Anfrage wurde erfolgreich an <%= @tool_rental.owner.first_name %> versendet.</strong>
+    Sobald <%= @tool_rental.owner.first_name %> deine Anfrage bearbeitet, erhältst du eine Nachricht im Messenger (und per E-Mail).
+  </div>
 
-    <%= submit_tag "Weiter", class: 'btn-primary submit-form' %>
-  <% end %>
+  <%= link_to 'Zum Messenger', messenger_path(thread_id: @tool_rental.user_message_thread.id), class: "btn-primary" %>
 
 </div>

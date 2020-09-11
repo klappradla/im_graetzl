@@ -108,7 +108,6 @@ Rails.application.routes.draw do
     post 'initiate_card_payment', on: :member
     post 'initiate_eps_payment', on: :member
     get 'complete_eps_payment', on: :member
-    post 'initiate_klarna_payment', on: :member
     get 'summary', on: :member
     post 'cancel', on: :member
     post 'approve', on: :member
@@ -122,11 +121,11 @@ Rails.application.routes.draw do
   end
 
   resources :tool_rentals, only: [:new, :create] do
-    get 'choose_payment', on: :collection
-    get 'summary', on: :collection
-    post 'initiate_card_payment', on: :collection
-    post 'initiate_klarna_payment', on: :collection
-    post 'initiate_eps_payment', on: :collection
+    get 'choose_payment', on: :member
+    get 'summary', on: :member
+    post 'initiate_card_payment', on: :member
+    post 'initiate_eps_payment', on: :member
+    get 'complete_eps_payment', on: :member
     post 'cancel', on: :member
     post 'approve', on: :member
     post 'reject', on: :member
