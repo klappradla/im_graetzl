@@ -1,7 +1,7 @@
 <header class="navigation">
   <div class="inner">
     <div class="nav-body">
-      <%= render "navigation/site_menu" %>
+      <%= render "navigation/site_menu", graetzl: @graetzl || current_user&.graetzl, district: @district %>
 
       <div class="nav-logo">
         <%= link_to root_path do %>
