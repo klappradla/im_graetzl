@@ -36,7 +36,7 @@
       <p><%= truncate room_offer.room_description, length: 100 %></p>
     </div>
 
-    <% if room_offer.room_rental_price.present? %>
+    <% if room_offer.rental_enabled? %>
       <div class="slot-booking icontxt">
         <%= image_tag 'svg/icon-kringel-kurzzeitmiete.svg', class: 'icon' %>
         Kurzzeitmiete ab <%= room_offer.room_rental_price.price_per_hour.to_i %> € / Stunde
