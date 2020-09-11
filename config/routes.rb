@@ -212,7 +212,7 @@ Rails.application.routes.draw do
   get 'info/code-of-conduct', to: 'static_pages#code-of-conduct'
   get 'info/versicherung', to: 'static_pages#insurance'
 
-  get 'webhooks/stripe'
+  post 'webhooks/stripe'
 
   get '/robots.txt' => 'static_pages#robots'
 
