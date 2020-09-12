@@ -3,8 +3,7 @@ context.instance_eval do
   id_column
   column :owner
   column :renter
-  column :rent_from
-  column :rent_to
+  column :rental_period
   column :total_price
   column :owner_payout_amount
   column(:rental_status){|r| status_tag(r.rental_status)}

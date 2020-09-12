@@ -31,8 +31,8 @@ class UsersController < ApplicationController
 
   def tool_offers
     @tool_offers = current_user.tool_offers.non_deleted
-    @owned_tool_rentals = current_user.owned_tool_rentals.includes(:tool_offer, :user, :user_message_thread )
-    @tool_rentals = current_user.tool_rentals.includes(:user_message_thread, tool_offer: :user)
+    @owned_tool_rentals = current_user.owned_tool_rentals.submitted.includes(:tool_offer, :user, :user_message_thread )
+    @tool_rentals = current_user.tool_rentals.submitted.includes(:user_message_thread, tool_offer: :user)
   end
 
   def zuckerls

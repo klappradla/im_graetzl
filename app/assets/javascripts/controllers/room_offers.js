@@ -58,10 +58,20 @@ APP.controllers.room_offers = (function() {
     });
 
     $('.request-price-form').on("change", '.hour-input', function() {
-      if ($('.hour-from').val().length > 0 && $('.hour-to').val().length > 0) {
+      if ($('.hour-from').val() > 0 && $('.hour-to').val() > 0) {
         $(this).parents(".request-price-form").submit();
       }
     });
+
+    $(".request-price-form").on("ajax:complete", function() {
+      new jBox('Tooltip', {
+        attach: '.tooltip-trigger',
+        trigger: 'click',
+        closeOnClick: true,
+        closeOnMouseleave: true,
+      });
+    });
+
   }
 
   function initRoomDetail() {
@@ -185,7 +195,7 @@ APP.controllers.room_offers = (function() {
   }
 
   function maxCategories() {
-    if ($(".room-categories input:checked").length >= 3) {
+    if ($(".room-categories input:checked").length >= 5) {
       $(".room-categories input:not(:checked)").each(function() {
         $(this).prop("disabled", true);
         $(this).parents(".input-checkbox").addClass("disabled");

@@ -16,6 +16,7 @@ context.instance_eval do
           row :total_area
           row :rented_area
           row :wants_collaboration
+          row :rental_enabled
           row :keyword_list
 
           row :room_categories do |g|
@@ -87,6 +88,14 @@ context.instance_eval do
             end
           end
 
+        end
+      end
+      panel 'Rent Requests' do
+        table_for room_offer.room_rentals do
+          column :id
+          column :renter
+          column(:rental_status){|r| status_tag(r.rental_status)}
+          column(''){|l| link_to 'Anzeigen', admin_room_rental_path(l) }
         end
       end
     end

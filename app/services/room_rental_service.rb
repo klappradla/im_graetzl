@@ -96,31 +96,23 @@ class RoomRentalService
   end
 
   def reject(room_rental)
-    case room_rental.payment_method
-    when 'card'
-      Stripe::PaymentIntent.cancel(room_rental.stripe_payment_intent_id)
-    when 'eps'
-      Stripe::Refund.create(payment_intent: room_rental.stripe_payment_intent_id)
-    when 'klarna'
-      Stripe::Refund.create(charge: room_rental.stripe_charge_id)
-    end
-
+    undo_payment(room_rental)
     room_rental.rejected!
     RoomMailer.rental_rejected(room_rental).deliver_later
   end
 
   def cancel(room_rental)
-    case room_rental.payment_method
-    when 'card'
-      Stripe::PaymentIntent.cancel(room_rental.stripe_payment_intent_id)
-    when 'eps'
-      Stripe::Refund.create(payment_intent: room_rental.stripe_payment_intent_id)
-    when 'klarna'
-      Stripe::Refund.create(charge: room_rental.stripe_charge_id)
-    end
-
+    undo_payment(room_rental)
     room_rental.canceled!
     RoomMailer.rental_canceled(room_rental).deliver_later
+  end
+
+  def expire(room_rental)
+    undo_payment(room_rental)
+    room_rental.update(
+      rental_status: :expired,
+      payment_status: :payment_canceled
+    )
   end
 
   private
@@ -140,4 +132,14 @@ class RoomRentalService
     room_rental.owner_invoice.put(body: owner_invoice)
   end
 
+  def undo_payment(room_rental)
+    case room_rental.payment_method
+    when 'card'
+      Stripe::PaymentIntent.cancel(room_rental.stripe_payment_intent_id)
+    when 'eps'
+      Stripe::Refund.create(payment_intent: room_rental.stripe_payment_intent_id)
+    when 'klarna'
+      Stripe::Refund.create(charge: room_rental.stripe_charge_id)
+    end
+  end
 end

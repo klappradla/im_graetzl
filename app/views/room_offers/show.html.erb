@@ -24,7 +24,7 @@
       <div class="category-tags">
         <% if @room_offer.room_categories.present? %>
           <ul class="tag-list -mint">
-            <% @room_offer.room_categories.first(4).each do |category| %>
+            <% @room_offer.room_categories.first(5).each do |category| %>
               <li><%= category.name %></li>
             <% end %>
           </ul>

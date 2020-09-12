@@ -42,19 +42,6 @@ APP.controllers.application = (function() {
             }
         });
 
-    // TODO: this is a hack! stuff should come from DB
-    function injectSponsorCard() {
-
-      var $markup = $('<div class="cardBox"></div>');
-
-      if(APP.utils.URLendsWith('/stuwerviertel') && APP.utils.isLoggedIn()) {
-        $('.card-grid .cardBox').eq(2).after($markup);
-      }
-      if(APP.utils.URLendsWith('/stuwerviertel') && !APP.utils.isLoggedIn()) {
-        $('main').append($markup);
-      }
-    }
-
     // Conversion Tracking
     if (window.location.hostname == 'www.imgraetzl.at') {
       $(document).ready(function() {
@@ -91,7 +78,7 @@ APP.controllers.application = (function() {
           vars[key] = value;
       });
       return vars;
-    }
+    }    
 
   }
 

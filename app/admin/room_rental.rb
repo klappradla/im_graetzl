@@ -1,21 +1,19 @@
-ActiveAdmin.register ToolRental do
-  menu parent: 'Toolteiler'
-  includes :tool_offer, :user
+ActiveAdmin.register RoomRental do
+  menu parent: 'Raumteiler'
+  includes :room_offer, :user
   actions :all, except: [:new, :create, :destroy]
 
   scope :all, default: true
   scope :incomplete
   scope :pending
   scope :approved
-  scope :return_pending
-  scope :return_confirmed
   scope :canceled
   scope :rejected
   scope :expired
 
-  filter :rental_status, as: :select, collection: ToolRental.rental_statuses.keys
-  filter :payment_status, as: :select, collection: ToolRental.payment_statuses.keys
-  filter :tool_offer, collection: proc { ToolOffer.order(:title).pluck(:title, :id) }, include_blank: true, input_html: { class: 'admin-filter-select'}
+  filter :rental_status, as: :select, collection: RoomRental.rental_statuses.keys
+  filter :payment_status, as: :select, collection: RoomRental.payment_statuses.keys
+  filter :room_offer, collection: proc { RoomOffer.order(:slogan).pluck(:slogan, :id) }, include_blank: true, input_html: { class: 'admin-filter-select'}
   filter :user, collection: proc { User.admin_select_collection }, include_blank: true, input_html: { class: 'admin-filter-select'}
   filter :created_at
   filter :updated_at

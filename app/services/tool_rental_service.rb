@@ -95,43 +95,19 @@ class ToolRentalService
   end
 
   def reject(tool_rental)
-    case tool_rental.payment_method
-    when 'card'
-      Stripe::PaymentIntent.cancel(tool_rental.stripe_payment_intent_id)
-    when 'eps'
-      Stripe::Refund.create(payment_intent: tool_rental.stripe_payment_intent_id)
-    when 'klarna'
-      Stripe::Refund.create(charge: tool_rental.stripe_charge_id)
-    end
-
+    undo_payment(tool_rental)
     tool_rental.rejected!
     ToolOfferMailer.rental_rejected(tool_rental).deliver_later
   end
 
   def cancel(tool_rental)
-    case tool_rental.payment_method
-    when 'card'
-      Stripe::PaymentIntent.cancel(tool_rental.stripe_payment_intent_id)
-    when 'eps'
-      Stripe::Refund.create(payment_intent: tool_rental.stripe_payment_intent_id)
-    when 'klarna'
-      Stripe::Refund.create(charge: tool_rental.stripe_charge_id)
-    end
-
+    undo_payment(tool_rental)
     tool_rental.canceled!
     ToolOfferMailer.rental_canceled(tool_rental).deliver_later
   end
 
   def expire(tool_rental)
-    case tool_rental.payment_method
-    when 'card'
-      Stripe::PaymentIntent.cancel(tool_rental.stripe_payment_intent_id)
-    when 'eps'
-      Stripe::Refund.create(payment_intent: tool_rental.stripe_payment_intent_id)
-    when 'klarna'
-      Stripe::Refund.create(charge: tool_rental.stripe_charge_id)
-    end
-
+    undo_payment(tool_rental)
     tool_rental.update(
       rental_status: :expired,
       payment_status: :payment_canceled
@@ -159,6 +135,17 @@ class ToolRentalService
     tool_rental.renter_invoice.put(body: renter_invoice)
     owner_invoice = ToolRentalInvoice.new.generate_for_owner(tool_rental)
     tool_rental.owner_invoice.put(body: owner_invoice)
+  end
+
+  def undo_payment(tool_rental)
+    case tool_rental.payment_method
+    when 'card'
+      Stripe::PaymentIntent.cancel(tool_rental.stripe_payment_intent_id)
+    when 'eps'
+      Stripe::Refund.create(payment_intent: tool_rental.stripe_payment_intent_id)
+    when 'klarna'
+      Stripe::Refund.create(charge: tool_rental.stripe_charge_id)
+    end
   end
 
 end

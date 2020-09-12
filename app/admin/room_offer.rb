@@ -5,6 +5,7 @@ ActiveAdmin.register RoomOffer do
   actions :all, except: [:new, :create]
 
   scope :enabled, default: true
+  scope :rentable
   scope :reactivated
   scope :disabled
   scope :occupied
