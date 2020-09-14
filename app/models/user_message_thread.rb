@@ -31,10 +31,10 @@ class UserMessageThread < ApplicationRecord
   end
 
   def self.create_general(*users)
-    user_ids = users.map(&:id).sort.join(":")
-    thread = find_by(user_ids: user_ids)
+    user_key = users.map(&:id).sort.join(":")
+    thread = find_by(user_key: user_key)
     return thread if thread
-    thread = create(user_ids: user_ids, thread_type: :general)
+    thread = create(user_key: user_key, thread_type: :general)
     thread.users = users
     thread
   end

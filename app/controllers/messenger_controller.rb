@@ -13,9 +13,11 @@ class MessengerController < ApplicationController
     elsif params[:tool_rental_id].present?
       tool_rental = ToolRental.find(params[:tool_rental_id])
       thread = UserMessageThread.create_for_tool_rental(tool_rental)
-    elsif params[:user_id].present?
+    elsif params[:user_id].present? && params[:user_id] != current_user.id
       user = User.find(params[:user_id])
       thread = UserMessageThread.create_general(current_user, user)
+    else
+      redirect_to root_path, notice: 'No thread found.' and return
     end
 
     redirect_to messenger_url(thread_id: thread.id)

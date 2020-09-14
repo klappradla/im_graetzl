@@ -8,10 +8,12 @@
 
   <div class="tt-content">
     <%= link_to @user.full_name, @user, class:'username' %>
-    <div class="tt-line -messenger">
-      <%= icon_tag "mail-1" %>
-      <%= link_to "Nachricht senden", messenger_start_thread_path(user_id: @user.id) %>
-    </div>
+    <% if current_user != @user %>
+      <div class="tt-line -messenger">
+        <%= icon_tag "mail-1" %>
+        <%= link_to "Nachricht senden", messenger_start_thread_path(user_id: @user.id) %>
+      </div>
+    <% end %>
     <div class="tt-line -graetzl">
       <%= icon_tag "map-location" %>
       <%= link_to "#{@user.district.zip} - #{@user.graetzl.name}", @user.graetzl %>
