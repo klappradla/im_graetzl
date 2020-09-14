@@ -4,6 +4,22 @@ APP.controllers.room_demands = (function() {
     if ($("section.room-offer-form").exists()) initRoomForm();
     if ($("#GAinfos").exists()) initshowContact();
     if ($("#hide-contact-link").exists()) inithideContactLink();
+    if ($("section.roomDetail").exists()) { initRoomDetail(); }
+  }
+
+  function initRoomDetail() {
+    // Sidebar Button Click
+    $('#requestRoomBtn').on('click', function(event){
+      event.preventDefault();
+      var href = $(this).attr('href');
+      gtag(
+        'event', 'Raumsuche :: Click :: Kontaktieren', {
+        'event_category': 'Raumteiler',
+        'event_callback': function() {
+          location.href = href;
+        }
+      });
+    });
   }
 
   function initshowContact(){
@@ -14,9 +30,9 @@ APP.controllers.room_demands = (function() {
     var roomContact_id = $('#roomContactClick_id').attr('data-id');
 
     var click_track = function() {
-      // Analytics Tracking
-      gtag(
-          'event', 'Contact Click', {
+        // Analytics Tracking
+        gtag(
+          'event', 'Raumsuche :: Click :: Kontaktinformationen einblenden', {
           'event_category': 'Raumteiler',
           'event_label': 'User: ' + roomContact_id
         });
@@ -40,10 +56,7 @@ APP.controllers.room_demands = (function() {
         $(this).hide();
         click_track();
       });
-      // Sidebar Button Click
-      $('#room-contact-btn').on('click', function(event){
-        click_track();
-      });
+
     }
 
     function inithideContactLink(){

@@ -26,11 +26,46 @@ APP.components.initUserTooltip = function() {
             spinnerDelay:0,
             success: function (response) {
               this.setContent(response);
+              initTrackingLinks();
+              // Analytics
+              gtag(
+                'event', 'Open', {
+                'event_category': 'User Tooltip',
+                //'event_label': 'User: ' + roomContact_id
+              });
             }
         },
       });
 
   });
+
+  // Init Click Links to be ready after Tooltip is open
+  function initTrackingLinks() {
+    // Link - Messenger
+    $('.user-tooltip-wrp .-messenger a').on('click', function(event){
+      event.preventDefault();
+      var href = $(this).attr('href');
+      gtag(
+        'event', 'Click :: Nachricht senden', {
+        'event_category': 'User Tooltip',
+        'event_callback': function() {
+          location.href = href;
+        }
+      });
+    });
+    // Link - Profile
+    $('.user-tooltip-wrp .tt-img a, .user-tooltip-wrp a.username').on('click', function(event){
+      event.preventDefault();
+      var href = $(this).attr('href');
+      gtag(
+        'event', 'Click :: Profil anzeigen', {
+        'event_category': 'User Tooltip',
+        'event_callback': function() {
+          location.href = href;
+        }
+      });
+    });
+  }
 
 };
 

@@ -128,7 +128,7 @@
         </div>
       </div>
 
-      <%= link_to "Allgemeine Anfrage stellen", 'javascript:void(0);', class: "btn-primary -mint", id: 'requestRoom' %>
+      <%= link_to "Allgemeine Anfrage stellen", messenger_start_thread_path(user_id: @room_offer.user.id), class: "btn-primary -mint", id: 'requestRoomBtn' %>
     </div>
   <% end %>
 

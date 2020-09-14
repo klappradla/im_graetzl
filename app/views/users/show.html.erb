@@ -34,10 +34,13 @@
           </div>
         </div>
 
-
         <div class="icontxt">
           <%= icon_tag "calendar-2" %>
           Beigetreten: <%= l(@user.created_at, format: "%b, %Y") %>
+        </div>
+        <div class="icontxt">
+          <%= icon_tag "mail-1" %>
+          <%= link_to "Nachricht senden", messenger_start_thread_path(user_id: @user.id) %>
         </div>
         <% if !@user.website.blank? %>
           <%= link_to @user.website, class: 'icontxt', target: '_blank' do %>

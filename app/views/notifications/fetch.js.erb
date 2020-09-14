@@ -7,8 +7,9 @@ var list = $("#notification-list");
   list.append('<%= j render partial: @notifications, as: :notification %>');
 <% end %>
 
+list.find(".btn-paginate").remove();
+
 <% if @notifications.next_page %>
-  list.find(".btn-paginate").remove();
   list.append(
     '<li class="btn-paginate">' +
       '<%= j(link_to "mehr...", notifications_fetch_path(page: @notifications.next_page), remote: true) %>' +

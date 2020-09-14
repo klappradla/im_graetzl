@@ -62,9 +62,9 @@ APP.controllers.room_offers = (function() {
         $(this).parents(".request-price-form").submit();
         // Analytics Tracking
         gtag(
-          'event', 'Kurzzeitmiete', {
+          'event', 'Raumangebot :: Kurzzeitmiete Buchungsbox', {
           'event_category': 'Raumteiler',
-          'event_label': 'Auswahl Zeitraum'
+          'event_label': 'Auswahl :: Zeitraum'
         });
       }
     });
@@ -91,6 +91,19 @@ APP.controllers.room_offers = (function() {
       animation:{open: 'zoomIn', close: 'zoomOut'},
     });
 
+    // Sidebar Button Click
+    $('#requestRoomBtn').on('click', function(event){
+      event.preventDefault();
+      var href = $(this).attr('href');
+      gtag(
+        'event', 'Raumangebot :: Click :: Allgemeine Anfrage stellen', {
+        'event_category': 'Raumteiler',
+        'event_callback': function() {
+          location.href = href;
+        }
+      });
+    });
+
   }
 
   function initshowContact(){
@@ -103,7 +116,7 @@ APP.controllers.room_offers = (function() {
     var click_track = function() {
       // Analytics Tracking
       gtag(
-        'event', 'Contact Click', {
+        'event', 'Raumangebot :: Click :: Kontaktinformationen einblenden', {
         'event_category': 'Raumteiler',
         'event_label': 'User: ' + roomContact_id
       });
@@ -128,10 +141,6 @@ APP.controllers.room_offers = (function() {
       click_track();
     });
 
-    // Sidebar Button Click
-    $('#room-contact-btn').on('click', function(event){
-      click_track();
-    });
   }
 
   function inithideContactLink(){

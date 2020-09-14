@@ -17,7 +17,7 @@ class RoomMailer < ApplicationMailer
     @room_offer = room_offer
     @user = user
     headers("X-MC-Tags" => "notification-room-waitinglist")
-    mail(to: @room_offer.user.email, subject: "Neuer User auf deiner Warteliste")
+    mail(to: @room_offer.user.email, subject: "Neuer User auf deiner Raumteiler Warteliste")
   end
 
   def room_offer_activate_reminder(room_offer)
@@ -35,7 +35,7 @@ class RoomMailer < ApplicationMailer
   def new_rental_request(room_rental)
     @room_rental = room_rental
     headers("X-MC-Tags" => "room-rental-request")
-    mail(to: @room_rental.owner.email, subject: "Neue Raumteiler Buchungsanfrage")
+    mail(to: @room_rental.owner.email, subject: "Neue Raumteiler Buchungsanfrage von #{@room_rental.renter.first_name}")
   end
 
   def new_rental_request_reminder(room_rental)
@@ -48,7 +48,7 @@ class RoomMailer < ApplicationMailer
     @room_rental = room_rental
     attachments["#{@room_rental.invoice_number}.pdf"] = @room_rental.renter_invoice.get.body.read
     headers("X-MC-Tags" => "room-rental-approved")
-    mail(to: @room_rental.renter.email, subject: "Deine Raumteiler Buchung wurde bestätigt")
+    mail(to: @room_rental.renter.email, subject: "#{@room_rental.owner.first_name} hat deine Raumteiler Buchung bestätigt")
   end
 
   def rental_approved_owner(room_rental)
@@ -62,13 +62,13 @@ class RoomMailer < ApplicationMailer
   def rental_rejected(room_rental)
     @room_rental = room_rental
     headers("X-MC-Tags" => "room-rental-rejected")
-    mail(to: @room_rental.renter.email, subject: "Deine Raumteiler Anfrage wurde leider abgelehnt.")
+    mail(to: @room_rental.renter.email, subject: "#{@room_rental.owner.first_name} hat deine Raumteiler Buchungsanfrage abgelehnt.")
   end
 
   def rental_canceled(room_rental)
     @room_rental = room_rental
     headers("X-MC-Tags" => "room-rental-canceled")
-    mail(to: @room_rental.owner.email, subject: "#{@room_rental.renter.first_name} hat die Raumteiler Anfrage zurückgezogen")
+    mail(to: @room_rental.owner.email, subject: "#{@room_rental.renter.first_name} hat die Raumteiler Buchungsanfrage zurückgezogen")
   end
 
 end
