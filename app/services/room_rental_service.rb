@@ -38,6 +38,7 @@ class RoomRentalService
     )
 
     room_rental.create_activity(:create, owner: room_rental.renter)
+    UserMessageThread.create_for_room_rental(room_rental)
     RoomMailer.new_rental_request(room_rental).deliver_later
     return { success: true }
   end
@@ -69,6 +70,7 @@ class RoomRentalService
         rental_status: :pending,
       )
       room_rental.create_activity(:create, owner: room_rental.renter)
+      UserMessageThread.create_for_room_rental(room_rental)
       RoomMailer.new_rental_request(room_rental).deliver_later
     end
   end

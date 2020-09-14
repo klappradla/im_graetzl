@@ -37,6 +37,7 @@ class ToolRentalService
       rental_status: :pending,
     )
 
+    UserMessageThread.create_for_tool_rental(tool_rental)
     ToolOfferMailer.new_rental_request(tool_rental).deliver_later
     return { success: true }
   end
@@ -67,6 +68,7 @@ class ToolRentalService
         payment_method: 'eps',
         rental_status: :pending,
       )
+      UserMessageThread.create_for_tool_rental(tool_rental)
       ToolOfferMailer.new_rental_request(tool_rental).deliver_later
     end
   end

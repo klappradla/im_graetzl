@@ -29,7 +29,6 @@ class RoomRentalsController < ApplicationController
     if current_user.billing_address.nil?
       current_user.create_billing_address(@room_rental.renter_billing_address)
     end
-    UserMessageThread.create_for_room_rental(@room_rental)
     redirect_to [:choose_payment, @room_rental]
   end
 

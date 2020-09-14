@@ -18,9 +18,7 @@ class ToolRentalsController < ApplicationController
       current_user.create_billing_address(@tool_rental.renter_billing_address)
     end
 
-    UserMessageThread.create_for_tool_rental(@tool_rental)
-
-    redirect_to [:choose_payment, @tool_rental]   
+    redirect_to [:choose_payment, @tool_rental]
   end
 
   def choose_payment

@@ -6,6 +6,21 @@ class MessengerController < ApplicationController
     set_threads_statuses(@threads)
   end
 
+  def start_thread
+    if params[:room_rental_id].present?
+      room_rental = RoomRental.find(params[:room_rental_id])
+      thread = UserMessageThread.create_for_room_rental(room_rental)
+    elsif params[:tool_rental_id].present?
+      tool_rental = ToolRental.find(params[:tool_rental_id])
+      thread = UserMessageThread.create_for_tool_rental(tool_rental)
+    elsif params[:user_id].present?
+      user = User.find(params[:user_id])
+      thread = UserMessageThread.create_general(current_user, user)
+    end
+
+    redirect_to messenger_url(thread_id: thread.id)
+  end
+
   def update_thread
     @user_thread = current_user.user_message_thread_members.find_by(user_message_thread_id: params[:thread_id])
     @user_thread.update(status: params[:status])
