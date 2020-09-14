@@ -7,7 +7,7 @@ var list = $("#notification-list");
   list.append('<%= j render partial: @notifications, as: :notification %>');
 <% end %>
 
-<% if !@notifications.last_page? %>
+<% if @notifications.next_page %>
   list.find(".btn-paginate").remove();
   list.append(
     '<li class="btn-paginate">' +
