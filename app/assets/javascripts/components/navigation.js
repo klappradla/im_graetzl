@@ -57,7 +57,16 @@ APP.components.headerNavigation = (function() {
 
     container.find(".nav-user-notification-link").on("click", function() {
       if (!notificationFetch.hasClass('active')) return;
-      notificationFetch.submit().removeClass("active");
+      notificationFetch.submit();
+    });
+
+    notificationFetch.on("ajax:beforeSend", function() {
+      createSpinner().insertBefore(notificationFetch);
+      notificationFetch.removeClass("active");
+    }).on('ajax:complete', function() {
+      container.find("#nav-user-notifications .loading-spinner").remove();
+    }).on('ajax:error', function() {
+      notificationFetch.addClass("active");
     });
 
     function fetchNotificationCount() {
@@ -74,6 +83,10 @@ APP.components.headerNavigation = (function() {
 
   function isDesktop() {
     return window.innerWidth >= 980;
+  }
+
+  function createSpinner() {
+    return $('footer .loading-spinner').clone().removeClass('-hidden');
   }
 
   return {

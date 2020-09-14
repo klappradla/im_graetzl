@@ -16,7 +16,7 @@ APP.controllers.room_demands = (function() {
     var click_track = function() {
       // Analytics Tracking
       gtag(
-        'event', 'Contact Click RoomDemand: ' + roomOwner_id, {
+          'event', 'Contact Click', {
           'event_category': 'Raumteiler',
           'event_label': 'User: ' + roomContact_id
         });

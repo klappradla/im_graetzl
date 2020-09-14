@@ -101,7 +101,7 @@ Rails.application.routes.draw do
     post 'add_submission', on: :member
   end
 
-  resources :room_rentals, only: [:new, :create] do
+  resources :room_rentals, only: [:new, :create, :edit] do
     get 'calculate_price', on: :collection
     get 'address', on: :collection
     get 'choose_payment', on: :member

@@ -5,7 +5,14 @@
       <%= icon_tag "horn-promote" %>
     </div>
 
-    <% if room_rental.pending? %>
+    <% if room_rental.incomplete? %>
+
+      <div class="note">
+        <strong><%= room_rental.renter.full_name %> möchte deinen Raum mieten, hat aber noch offene Fragen.</strong>
+        Sofern <%= room_rental.renter.first_name %> nach Klärung der Fragen deinen Raum mieten möchte, bekommst du hier die Möglichkeit die Miete zu bestätigen oder abzulehnen.
+      </div>
+
+    <% elsif room_rental.pending? %>
 
       <div class="note">
         Bitte klicke auf Akzeptieren um die Buchung anzunehmen oder auf Ablehnen, wenn eine Vermietung

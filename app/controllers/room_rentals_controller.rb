@@ -18,11 +18,14 @@ class RoomRentalsController < ApplicationController
     @room_rental.calculate_price
   end
 
+  def edit
+    @room_rental = current_user.room_rentals.find(params[:id])
+  end
+
   def create
     @room_rental = current_user.room_rentals.build(room_rental_params)
     @room_rental.calculate_price
     @room_rental.save!
-    @room_rental.create_activity(:create, owner: current_user)
     if current_user.billing_address.nil?
       current_user.create_billing_address(@room_rental.renter_billing_address)
     end
@@ -65,29 +68,19 @@ class RoomRentalsController < ApplicationController
 
   def cancel
     @room_rental = current_user.room_rentals.pending.find(params[:id])
-    @room_rental.create_activity(:cancel, owner: current_user)
     RoomRentalService.new.cancel(@room_rental)
     redirect_to messenger_url(thread_id: @room_rental.user_message_thread.id)
   end
 
   def approve
     @room_rental = current_user.owned_room_rentals.pending.find(params[:id])
-    @room_rental.create_activity(:approve, owner: current_user)
     RoomRentalService.new.approve(@room_rental)
     redirect_to messenger_url(thread_id: @room_rental.user_message_thread.id)
   end
 
   def reject
     @room_rental = current_user.owned_room_rentals.pending.find(params[:id])
-    @room_rental.create_activity(:reject, owner: current_user)
     RoomRentalService.new.reject(@room_rental)
-    redirect_to messenger_url(thread_id: @room_rental.user_message_thread.id)
-  end
-
-  def confirm_return
-    @room_rental = current_user.owned_room_rentals.return_pending.find(params[:id])
-    @room_rental.create_activity(:return_confirmed, owner: current_user)
-    RoomRentalService.new.confirm_return(@room_rental)
     redirect_to messenger_url(thread_id: @room_rental.user_message_thread.id)
   end
 

@@ -10,7 +10,7 @@ var list = $("#notification-list");
 <% if !@notifications.last_page? %>
   list.find(".btn-paginate").remove();
   list.append(
-    '<li class="btn-paginate" data-behavior="notifications-paginate">' +
+    '<li class="btn-paginate">' +
       '<%= j(link_to "mehr...", notifications_fetch_path(page: @notifications.next_page), remote: true) %>' +
     '</li>'
   );

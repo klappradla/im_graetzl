@@ -1,4 +1,7 @@
 #notification-list {
+  max-height: 300px;
+  overflow-y: auto;
+
   .notifications-empty {
     padding: 15px;
     color: $color-ambient-grey;
@@ -6,7 +9,8 @@
   }
 
   .notification-item {
-    border-bottom: 1px solid $color-ambient-mint-light;
+    border-top: 1px solid $color-ambient-mint-light;
+    &:first-child { border-top: none; }
     padding: 15px;
     color: $color-font-primary;
     a {
@@ -39,9 +43,6 @@
       font-weight: 600;
     }
 
-    &:last-child {
-      border-bottom: none;
-    }
     &:hover {
       background-color: $color-ambient-mint-light;
     }

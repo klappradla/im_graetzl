@@ -1,0 +1,18 @@
+<% meta(
+    title: t('.title'),
+    robots: 'noindex, follow'
+  )
+%>
+
+<section class="room-rental-page date-screen">
+
+  <div class="col-content">
+    <%= render "room_rentals/new/tabs_nav" %>
+    <%= render 'room_rentals/new/choose_date' %>
+  </div>
+
+  <div class="col-sidebar" id="rental-sidebar">
+    <%= render 'room_rentals/new/sidebar' %>
+  </div>
+
+</section>

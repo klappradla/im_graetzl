@@ -60,6 +60,12 @@ APP.controllers.room_offers = (function() {
     $('.request-price-form').on("change", '.hour-input', function() {
       if ($('.hour-from').val() > 0 && $('.hour-to').val() > 0) {
         $(this).parents(".request-price-form").submit();
+        // Analytics Tracking
+        gtag(
+          'event', 'Kurzzeitmiete', {
+          'event_category': 'Raumteiler',
+          'event_label': 'Auswahl Zeitraum'
+        });
       }
     });
 
@@ -97,7 +103,7 @@ APP.controllers.room_offers = (function() {
     var click_track = function() {
       // Analytics Tracking
       gtag(
-        'event', 'Contact Click RoomOffer: ' + roomOwner_id, {
+        'event', 'Contact Click', {
         'event_category': 'Raumteiler',
         'event_label': 'User: ' + roomContact_id
       });

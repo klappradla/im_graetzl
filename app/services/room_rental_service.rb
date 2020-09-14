@@ -37,6 +37,7 @@ class RoomRentalService
       rental_status: :pending,
     )
 
+    room_rental.create_activity(:create, owner: room_rental.renter)
     RoomMailer.new_rental_request(room_rental).deliver_later
     return { success: true }
   end
@@ -67,6 +68,7 @@ class RoomRentalService
         payment_method: 'eps',
         rental_status: :pending,
       )
+      room_rental.create_activity(:create, owner: room_rental.renter)
       RoomMailer.new_rental_request(room_rental).deliver_later
     end
   end
@@ -89,6 +91,7 @@ class RoomRentalService
     )
 
     generate_invoices(room_rental)
+    room_rental.create_activity(:approve, owner: room_rental.owner)
     RoomMailer.rental_approved_renter(room_rental).deliver_later
     RoomMailer.rental_approved_owner(room_rental).deliver_later
   rescue Stripe::InvalidRequestError
@@ -98,12 +101,14 @@ class RoomRentalService
   def reject(room_rental)
     undo_payment(room_rental)
     room_rental.rejected!
+    room_rental.create_activity(:reject, owner: room_rental.owner)
     RoomMailer.rental_rejected(room_rental).deliver_later
   end
 
   def cancel(room_rental)
     undo_payment(room_rental)
     room_rental.canceled!
+    room_rental.create_activity(:cancel, owner: room_rental.renter)
     RoomMailer.rental_canceled(room_rental).deliver_later
   end
 
