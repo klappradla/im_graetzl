@@ -4,7 +4,7 @@ class RoomRental < ApplicationRecord
   belongs_to :room_offer
 
   has_many :room_rental_slots
-  accepts_nested_attributes_for :room_rental_slots, reject_if: proc { |attrs|
+  accepts_nested_attributes_for :room_rental_slots, allow_destroy: true, reject_if: proc { |attrs|
     attrs['hour_from'].blank? || attrs['hour_to'].blank? || attrs['hour_to'].to_i <= attrs['hour_from'].to_i
   }
 

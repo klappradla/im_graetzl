@@ -7,9 +7,10 @@
     </p>
   </div>
 
-  <%= form_for @room_rental, url: calculate_price_room_rentals_url, method: :get, remote: true, html: { class: 'rental-date-form', data: { days: @room_rental.room_offer.available_days } } do |f| %>
+  <%= form_for @room_rental, url: calculate_price_room_rentals_url, method: :get, remote: true,
+      html: { class: 'rental-date-form', data: { days: @room_rental.room_offer.available_days } } do |f| %>
+    <%= hidden_field_tag :id, @room_rental.id %>
     <%= f.hidden_field :room_offer_id %>
-
     <%= f.fields_for :room_rental_slots do |slot_form| %>
       <%= render 'room_rentals/new/timeslot_fields', f: slot_form %>
     <% end %>

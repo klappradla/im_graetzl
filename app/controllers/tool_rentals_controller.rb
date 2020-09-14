@@ -21,6 +21,21 @@ class ToolRentalsController < ApplicationController
     redirect_to [:choose_payment, @tool_rental]
   end
 
+  def edit
+    @tool_rental = current_user.tool_rentals.find(params[:id])
+    if !@tool_rental.incomplete?
+      redirect_to messenger_url(thread_id: @tool_rental.user_message_thread.id) and return
+    end
+  end
+
+  def update
+    @tool_rental = current_user.tool_rentals.incomplete.find(params[:id])
+    @tool_rental.assign_attributes(tool_rental_params)
+    @tool_rental.calculate_price
+    @tool_rental.save!
+    redirect_to [:choose_payment, @tool_rental]
+  end
+
   def choose_payment
     @tool_rental = current_user.tool_rentals.find(params[:id])
     if !@tool_rental.incomplete?

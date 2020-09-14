@@ -27,14 +27,14 @@
   </div>
 
   <div class="thread-info">
-    <% if @thread.room_rental && current_user == @thread.room_rental.owner %>
-      <%= render 'messenger/thread/room_owner_actionbox', room_rental: @thread.room_rental %>
-    <% elsif @thread.room_rental && current_user == @thread.room_rental.renter %>
+    <% if @thread.room_rental && current_user == @thread.room_rental.renter %>
       <%= render 'messenger/thread/room_renter_actionbox', room_rental: @thread.room_rental %>
-    <% elsif @thread.tool_rental && current_user == @thread.tool_rental.owner %>
-      <%= render 'messenger/thread/tool_owner_actionbox', tool_rental: @thread.tool_rental %>
+    <% elsif @thread.room_rental && current_user == @thread.room_rental.owner %>
+      <%= render 'messenger/thread/room_owner_actionbox', room_rental: @thread.room_rental %>
     <% elsif @thread.tool_rental && current_user == @thread.tool_rental.renter %>
       <%= render 'messenger/thread/tool_renter_actionbox', tool_rental: @thread.tool_rental %>
+    <% elsif @thread.tool_rental && current_user == @thread.tool_rental.owner %>
+      <%= render 'messenger/thread/tool_owner_actionbox', tool_rental: @thread.tool_rental %>
     <% end %>
     <%= form_tag messenger_post_message_path(thread_id: @thread.id), remote: true, class: 'message-control post-message-form', id: 'msg-control' do %>
       <div class="input">

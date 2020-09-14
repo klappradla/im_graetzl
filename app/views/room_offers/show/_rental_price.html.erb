@@ -25,7 +25,7 @@
     </li>
   </ul>
 
-  <% unless @room_rental.owner == current_user %>
+  <% if @room_rental.owner != current_user %>
     <%= link_to "Weiter zur Buchung", new_room_rental_path(room_offer_id: @room_offer.id,
         rent_date: params[:rent_date], hour_from: params[:hour_from], hour_to: params[:hour_to]),
         class: "btn-primary" %>

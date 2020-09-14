@@ -8,18 +8,19 @@ class RoomRentalsController < ApplicationController
   end
 
   def calculate_price
-    @room_rental = RoomRental.new(room_rental_params)
+    @room_rental = RoomRental.new(calculate_price_params)
     @room_rental.calculate_price
   end
 
   def address
-    @room_rental = RoomRental.new(room_rental_params)
-    @room_rental.assign_attributes(current_user_address_params)
+    if params[:id].present?
+      @room_rental = current_user.room_rentals.incomplete.find(params[:id])
+      @room_rental.update(room_rental_params)
+    else
+      @room_rental = RoomRental.new(current_user_address_params)
+      @room_rental.assign_attributes(room_rental_params)
+    end
     @room_rental.calculate_price
-  end
-
-  def edit
-    @room_rental = current_user.room_rentals.find(params[:id])
   end
 
   def create
@@ -29,6 +30,21 @@ class RoomRentalsController < ApplicationController
     if current_user.billing_address.nil?
       current_user.create_billing_address(@room_rental.renter_billing_address)
     end
+    redirect_to [:choose_payment, @room_rental]
+  end
+
+  def edit
+    @room_rental = current_user.room_rentals.find(params[:id])
+    if !@room_rental.incomplete?
+      redirect_to messenger_url(thread_id: @room_rental.user_message_thread.id) and return
+    end
+  end
+
+  def update
+    @room_rental = current_user.room_rentals.incomplete.find(params[:id])
+    @room_rental.assign_attributes(room_rental_params)
+    @room_rental.calculate_price
+    @room_rental.save!
     redirect_to [:choose_payment, @room_rental]
   end
 
@@ -115,11 +131,18 @@ class RoomRentalsController < ApplicationController
     }
   end
 
+  def calculate_price_params
+    params.require(:room_rental).permit(
+      :room_offer_id,
+      room_rental_slots_attributes: [:rent_date, :hour_from, :hour_to, :_destroy],
+    )
+  end
+
   def room_rental_params
     params.require(:room_rental).permit(
       :room_offer_id,
       :renter_name, :renter_address, :renter_zip, :renter_city,
-      room_rental_slots_attributes: [:rent_date, :hour_from, :hour_to],
+      room_rental_slots_attributes: [:id, :rent_date, :hour_from, :hour_to, :_destroy],
     )
   end
 

@@ -12,7 +12,7 @@
         Wenn ihr alles geklärt habt, dann klicke auf <strong>Buchung vervollständigen</strong> um deine Buchung zu fixieren und die Miete zu hinterlegen.
       </div>
       <div class="buttons">
-        <%= link_to "Buchung vervollständigen", edit_room_rental_path(room_rental), method: :post, class: "btn-primary -small" %>
+        <%= link_to "Buchung vervollständigen", edit_room_rental_path(room_rental), class: "btn-primary -small" %>
       </div>
 
     <% elsif room_rental.pending? %>
