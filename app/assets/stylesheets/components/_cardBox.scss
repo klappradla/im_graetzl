@@ -612,6 +612,9 @@ main > .sponsorstuwerviertel {
     .coverImg {object-fit: contain;}
     a.btn-primary {background-color: #f2dd39; color: $color-font-primary}
   }
+  &.-voting {
+    a.btn-primary {background-color: #e9c741;}
+  }
 }
 .homeOut {
   .cardBox.featuredCard {

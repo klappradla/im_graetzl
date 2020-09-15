@@ -12,7 +12,6 @@ class ToolRentalsController < ApplicationController
     @tool_rental = current_user.tool_rentals.build(tool_rental_params)
     @tool_rental.calculate_price
     @tool_rental.save!
-    @tool_rental.create_activity(:create, owner: current_user)
 
     if current_user.billing_address.nil?
       current_user.create_billing_address(@tool_rental.renter_billing_address)
@@ -71,28 +70,24 @@ class ToolRentalsController < ApplicationController
 
   def cancel
     @tool_rental = current_user.tool_rentals.pending.find(params[:id])
-    @tool_rental.create_activity(:cancel, owner: current_user)
     ToolRentalService.new.cancel(@tool_rental)
     redirect_to messenger_url(thread_id: @tool_rental.user_message_thread.id)
   end
 
   def approve
     @tool_rental = current_user.owned_tool_rentals.pending.find(params[:id])
-    @tool_rental.create_activity(:approve, owner: current_user)
     ToolRentalService.new.approve(@tool_rental)
     redirect_to messenger_url(thread_id: @tool_rental.user_message_thread.id)
   end
 
   def reject
     @tool_rental = current_user.owned_tool_rentals.pending.find(params[:id])
-    @tool_rental.create_activity(:reject, owner: current_user)
     ToolRentalService.new.reject(@tool_rental)
     redirect_to messenger_url(thread_id: @tool_rental.user_message_thread.id)
   end
 
   def confirm_return
     @tool_rental = current_user.owned_tool_rentals.return_pending.find(params[:id])
-    @tool_rental.create_activity(:return_confirmed, owner: current_user)
     ToolRentalService.new.confirm_return(@tool_rental)
     redirect_to messenger_url(thread_id: @tool_rental.user_message_thread.id)
   end

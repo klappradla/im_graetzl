@@ -46,6 +46,7 @@
     </div>
 
     <!-- Insert Raumteiler-Workshop Meeting Featured Card -->
+    <%= render "shared/featured_cards/umfrage_frauen" %>
     <!--<%= !Meeting.where(id: 6811).empty? ? (render 'meetings/meeting', meeting: Meeting.find(6811), featured_card: 'featuredCard -hidden') : '' %>-->
 
     <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'rooms-paginate-link' }, rel: 'nofollow' %>

@@ -38,6 +38,7 @@ class ToolRentalService
     )
 
     UserMessageThread.create_for_tool_rental(tool_rental)
+    tool_rental.create_activity(:create, owner: tool_rental.renter)
     ToolOfferMailer.new_rental_request(tool_rental).deliver_later
     return { success: true }
   end
@@ -69,6 +70,7 @@ class ToolRentalService
         rental_status: :pending,
       )
       UserMessageThread.create_for_tool_rental(tool_rental)
+      tool_rental.create_activity(:create, owner: tool_rental.renter)
       ToolOfferMailer.new_rental_request(tool_rental).deliver_later
     end
   end
@@ -91,6 +93,7 @@ class ToolRentalService
     )
 
     generate_invoices(tool_rental)
+    tool_rental.create_activity(:approve, owner: tool_rental.owner)
     ToolOfferMailer.rental_approved(tool_rental).deliver_later
   rescue Stripe::InvalidRequestError => e
     tool_rental.update(rental_status: :rejected, payment_status: :payment_failed)
@@ -99,12 +102,14 @@ class ToolRentalService
   def reject(tool_rental)
     undo_payment(tool_rental)
     tool_rental.rejected!
+    tool_rental.create_activity(:reject, owner: tool_rental.owner)
     ToolOfferMailer.rental_rejected(tool_rental).deliver_later
   end
 
   def cancel(tool_rental)
     undo_payment(tool_rental)
     tool_rental.canceled!
+    tool_rental.create_activity(:cancel, owner: tool_rental.renter)
     ToolOfferMailer.rental_canceled(tool_rental).deliver_later
   end
 
@@ -118,6 +123,8 @@ class ToolRentalService
 
   def confirm_return(tool_rental)
     tool_rental.update(rental_status: :return_confirmed)
+    tool_rental.create_activity(:return_confirmed, owner: tool_rental.owner)
+
     ToolOfferMailer.return_confirmed_owner(tool_rental).deliver_later
     ToolOfferMailer.return_confirmed_renter(tool_rental).deliver_later
   end

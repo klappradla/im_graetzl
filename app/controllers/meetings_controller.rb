@@ -106,7 +106,7 @@ class MeetingsController < ApplicationController
 
   def unattend
     @meeting = Meeting.find(params[:id])
-    @meeting.going_tos.find_by(user_id: current_user.id).destroy
+    @meeting.going_tos.where(user_id: current_user.id).destroy_all
     redirect_to [@meeting.graetzl, @meeting]
   end
 

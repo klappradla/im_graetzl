@@ -5,7 +5,17 @@
       <%= icon_tag "horn-promote" %>
     </div>
 
-    <% if tool_rental.pending? %>
+    <% if tool_rental.incomplete? %>
+
+      <div class="note">
+        <strong>Stelle <%= tool_rental.owner.full_name %> deinen offenen Fragen zum Toolteiler.</strong>
+        Wenn ihr alles geklärt habt, dann klicke auf <strong>Buchung vervollständigen</strong> um die Buchung zu fixieren.
+      </div>
+      <div class="buttons">
+        <%= link_to "Buchung vervollständigen", edit_tool_rental_path(toolrental), class: "btn-primary -small" %>
+      </div>
+
+    <% elsif tool_rental.pending? %>
 
       <div class="note">
         <%= tool_rental.owner.full_name %> wurde über deine Anfrage benachrichtigt. Ihr könnt jetzt im Chat noch offene Fragen klären.

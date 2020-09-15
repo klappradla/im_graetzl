@@ -54,6 +54,7 @@ class User < ApplicationRecord
   has_one :billing_address, dependent: :destroy
   accepts_nested_attributes_for :address, :billing_address, reject_if: :all_blank
 
+  validates :email, presence: true, format: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
   validates :graetzl, presence: true
   validates :username, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 50 }
   validates :first_name, presence: true, length: { maximum: 50 }

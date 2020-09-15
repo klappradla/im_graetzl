@@ -5,7 +5,14 @@
       <%= icon_tag "horn-promote" %>
     </div>
 
-    <% if tool_rental.pending? %>
+    <% if tool_rental.incomplete? %>
+
+      <div class="note">
+        <strong><%= tool_rental.renter.full_name %> möchte deinen Toolteiler ausleihen, hat aber noch offene Fragen.</strong>
+        Sofern <%= tool_rental.renter.first_name %> nach Klärung der Fragen deinen Toolteiler weiterhin ausleihen möchte, bekommst du hier die Möglichkeit dies zu bestätigen oder abzulehnen.
+      </div>
+
+    <% elsif tool_rental.pending? %>
 
       <div class="note">
         Bitte klicke auf Akzeptieren um die Buchung anzunehmen oder auf Ablehnen, wenn eine Vermietung
