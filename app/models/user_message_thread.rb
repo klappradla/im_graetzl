@@ -22,7 +22,7 @@ class UserMessageThread < ApplicationRecord
   end
 
   def self.create_for_tool_rental(tool_rental)
-    thread = find_by(tool_rental_id: room_rental.id)
+    thread = find_by(tool_rental_id: tool_rental.id)
     return thread if thread
     thread = create(tool_rental: tool_rental, thread_type: :tool_rental)
     thread.users << tool_rental.renter

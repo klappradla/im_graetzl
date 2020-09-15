@@ -52,7 +52,7 @@ class ToolOffersController < ApplicationController
   def calculate_price
     @tool_offer = ToolOffer.find(params[:id])
     @tool_rental = @tool_offer.tool_rentals.build(params.permit(:rent_from, :rent_to))
-    head :bad_request if @tool_rental.rent_from.blank? || @tool_rental.rent_to.blank?
+    head :bad_request and return if @tool_rental.rent_from.blank? || @tool_rental.rent_to.blank?
     @tool_rental.calculate_price
   end
 

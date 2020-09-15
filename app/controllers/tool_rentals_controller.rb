@@ -3,9 +3,12 @@ class ToolRentalsController < ApplicationController
 
   def new
     @tool_rental = ToolRental.new(initial_rental_params)
-    @tool_rental.assign_attributes(current_user_address_params)
     @tool_rental.calculate_price
-    render 'login' and return if !user_signed_in?
+    if user_signed_in?
+      @tool_rental.assign_attributes(current_user_address_params)
+    else
+      render 'login'
+    end
   end
 
   def create
