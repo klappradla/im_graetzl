@@ -171,32 +171,22 @@ APP.controllers.room_offers = (function() {
       }
     }).change();
 
-    var formSections = null;
-    $(".price-per-hour-input").on("change", function() {
-      if ($(this).val() && formSections) {
-        $('.rental-availability-container').replaceWith(formSections['availability']);
-        $('.user-billing-container').replaceWith(formSections['userBilling']);
-        formSections = null;
-      } else if (!$(this).val() && !formSections) {
-        formSections = {
-          'availability': $('.rental-availability-container').clone(),
-          'userBilling': $('.user-billing-container').clone(),
-        };
-        $('.rental-availability-container, .user-billing-container').empty();
-      }
-    });
-
     $('select#admin-user-select').SumoSelect({
       search: true,
       csvDispCount: 5
     });
 
     // Slot Fields Toogle
+    var slotsSection = null;
     $('.slot-radios .rental-toggle-input').on('change', function() {
-      if ($('.slot-radios .rental-toggle-input:checked').val() == 'true') {
-        $('#slot-fields').slideDown();
-      } else {
-        $('#slot-fields').hide();
+      var rentalEnabled = $('.slot-radios .rental-toggle-input:checked').val() == 'true';
+      if (rentalEnabled && slotsSection) {
+        $('#slot-fields').replaceWith(slotsSection);
+        $('#slot-fields').hide().slideDown();
+        slotsSection = null;
+      } else if (!rentalEnabled && !slotsSection){
+        slotsSection = $('#slot-fields').clone();
+        $('#slot-fields').empty();
       }
     }).change();
 

@@ -23,8 +23,8 @@
   <%= render 'filters/room_categories_slider' %>
 
   <%= form_tag rooms_path, method: :get, remote: true, class: 'cards-filter' do %>
-    <%= hidden_field_tag :category_id %>
-    <%= hidden_field_tag :special_category_id %>
+    <%= hidden_field_tag :category_id, @category.try(:id) %>
+    <%= hidden_field_tag :special_category_id, @special_category %>
     <div class="filter-selection-text-jbox">
       Zeig mir <%= link_to 'alle Raumteiler', '#filter-modal-type', data: { no_filter_label: 'alle Raumteiler'} %>,
       aus <%= link_to 'allen Kategorien', 'javascript:', data: { no_filter_label: 'allen Kategorien'}, class: 'plain-link category-slider-label' %>,
@@ -46,7 +46,6 @@
     </div>
 
     <!-- Insert Raumteiler-Workshop Meeting Featured Card -->
-    <%= render "shared/featured_cards/umfrage_frauen" %>
     <!--<%= !Meeting.where(id: 6811).empty? ? (render 'meetings/meeting', meeting: Meeting.find(6811), featured_card: 'featuredCard -hidden') : '' %>-->
 
     <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'rooms-paginate-link' }, rel: 'nofollow' %>

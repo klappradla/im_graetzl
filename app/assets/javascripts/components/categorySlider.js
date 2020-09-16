@@ -79,6 +79,8 @@ APP.components.categorySlider = (function() {
        filterForm.find("[name=special_category_id]").val("");
        updateFilterLabels($(this));
        filterForm.submit();
+       history && history.replaceState({}, '', location.pathname);
+
        //filterForm.slideUp("fast");
        //filterForm.removeClass("-open");
        //filterLine.slideUp();
@@ -89,10 +91,12 @@ APP.components.categorySlider = (function() {
          // Special Filter Selected
          filterForm.find("[name=category_id]").val("");
          filterForm.find("[name=special_category_id]").val($(this).attr("data-id"));
+         history && history.replaceState({}, '', location.pathname + "?special_category=" + $(this).attr("data-id"));
        } else {
          // Normal Filter Selected
          filterForm.find("[name=special_category_id]").val("");
          filterForm.find("[name=category_id]").val($(this).attr("data-id"));
+         history && history.replaceState({}, '', location.pathname + "?category=" + $(this).attr("data-id"));
        }
 
        element.find('.-category').removeClass('activated');
@@ -118,6 +122,21 @@ APP.components.categorySlider = (function() {
      }
    }
    // Update Text Label if exists on Page
+
+   // Init selected Category if Param present on Load
+   function initSelectedCategory() {
+     
+     var selected_category = filterForm.find("[name=category_id]").val();
+     var selected_special_category = filterForm.find("[name=special_category_id]").val();
+     element.find('.-category[data-id="' + selected_category + '"]').addClass('activated');
+     element.find('.-category[data-id="' + selected_special_category + '"]').addClass('activated');
+
+     updateFilterLabels(element.find('.activated'));
+
+   }
+
+   initSelectedCategory();
+   // Init selected Category if Param present on Load
 
   }
 

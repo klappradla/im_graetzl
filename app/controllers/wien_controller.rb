@@ -23,6 +23,8 @@ class WienController < ApplicationController
 
   def rooms
     @districts = District.order(zip: :asc)
+    @category = RoomCategory.find_by(id: params[:category]) if params[:category].present?
+    @special_category = params[:special_category] if params[:special_category].present?
   end
 
   def groups
@@ -33,6 +35,7 @@ class WienController < ApplicationController
 
   def tool_offers
     @districts = District.order(zip: :asc)
+    @category = ToolCategory.find_by(id: params[:category]) if params[:category].present?
   end
 
   def zuckerls

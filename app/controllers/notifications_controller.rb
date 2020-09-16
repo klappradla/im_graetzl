@@ -9,8 +9,8 @@ class NotificationsController < ApplicationController
 
   def fetch
     @notifications = current_user.website_notifications.order("notifications.created_at DESC")
-    @notifications = @notifications.page(params[:page]).per(NOTIFICATIONS_PER_PAGE)
     @notifications.update_all(seen: true)
+    @notifications = @notifications.page(params[:page]).per(NOTIFICATIONS_PER_PAGE)
   end
 
 end

@@ -19,8 +19,8 @@
   <%= render 'filters/room_categories_slider' %>
 
   <%= form_tag rooms_path, method: :get, remote: true, class: 'cards-filter' do %>
-    <%= hidden_field_tag :category_id %>
-    <%= hidden_field_tag :special_category_id %>
+    <%= hidden_field_tag :category_id, @category.try(:id) %>
+    <%= hidden_field_tag :special_category_id, @special_category %>
     <div class="filter-selection-text-jbox">
       Zeig mir <%= link_to 'alle Raumteiler', '#filter-modal-type', data: { no_filter_label: 'alle Raumteiler', jbox_title: 'Filtern nach ...'} %>,
       aus <%= link_to 'allen Kategorien', 'javascript:', data: { no_filter_label: 'allen Kategorien'}, class: 'plain-link category-slider-label' %>,
