@@ -46,7 +46,7 @@ section.roomDetail {
         margin-right: 10px;
         margin-bottom: 10px;
         @include respond-to(">=medium") {
-          float: right;
+          //float: right;
         }
       }
 
@@ -123,15 +123,18 @@ section.roomDetail {
         text-align: right;
 
         h1 {
-          max-width: 450px;
-          display: inline-block;
-          color:white;
-          padding:10px 0px;
-          background: rgba(236, 119, 106, 0.6);
-          box-shadow: 20px 0 0 rgba(236, 119, 106, 0.6), -20px 0 0 rgba(236, 119, 106, 0.6);
-          //margin-bottom: 0px;
-          padding-right:10px;
-          text-shadow: 1px 1px #ba564d;
+          background-size: 100% 100%;
+          background-image: url(image_path('svg/headline-bubble-bg.svg'));
+          background-repeat: no-repeat;
+          padding:12px;
+          padding-left:20px;
+          padding-bottom:20px;
+          min-width: 470px;
+          margin-right:-1px;
+          //text-shadow: 1px 1px #ba564d;
+        }
+        .category-tags {
+          text-align: left;
         }
       }
       .mainContent {
@@ -146,7 +149,7 @@ section.roomDetail {
         top:45px;
       }
       .headContent {
-        max-width: 675px;
+        max-width: 515px;
       }
     }
 
