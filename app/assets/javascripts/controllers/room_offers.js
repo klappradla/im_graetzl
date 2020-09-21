@@ -152,6 +152,7 @@ APP.controllers.room_offers = (function() {
   function initRoomForm() {
     APP.components.tabs.initTabs(".tabs-ctrl");
     APP.components.addressSearchAutocomplete();
+    APP.components.formValidation.init();
 
     $(".next-screen, .prev-screen").on("click", function() {
       $('.tabs-ctrl').trigger('show', '#' + $(this).data("tab"));

@@ -37,9 +37,14 @@ section.roomDetail {
       }
 
       .category-tags ul {
-        display: inline-block;
+        display: flex;
+        flex-wrap: wrap;
         margin-right: 10px;
         margin-left: 20px;
+        justify-content: center;
+        @include respond-to(">=medium") {
+          justify-content: flex-start;
+        }
       }
 
       .category-tags li {
@@ -126,9 +131,7 @@ section.roomDetail {
           background-size: 100% 100%;
           background-image: url(image_path('svg/headline-bubble-bg.svg'));
           background-repeat: no-repeat;
-          padding:12px;
-          padding-left:20px;
-          padding-bottom:20px;
+          padding: 6px 12px 17px 30px;
           min-width: 470px;
           margin-right:-1px;
           //text-shadow: 1px 1px #ba564d;

@@ -200,6 +200,11 @@ section.messenger-page {
     .message-thread.hidden {
       display: none;
     }
+
+    .message-thread.empty {
+      display: none;
+    }
+
   }
 
   .back-ctrl {

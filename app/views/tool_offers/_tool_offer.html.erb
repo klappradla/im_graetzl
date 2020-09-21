@@ -20,7 +20,7 @@
 
   <div class="cardBoxContent">
     <%= link_to tool_offer.user, class: 'initiator' do %>
-      <%= avatar_for(tool_offer.user) %>
+      <%= user_tooltip_avatar tool_offer.user %>
       <span><%= tool_offer.user.full_name %></span>
     <% end %>
 

@@ -212,7 +212,7 @@ de:
           disabled: Inaktiv
           occupied: Warteliste
         status_message:
-          enabled: Dein Raumteiler ist aktiv und sichtbar.
+          enabled: Dein Raumteiler ist nun aktiv und sichtbar.
           disabled: Dein Raumteiler ist nun deaktiviert und scheint nicht mehr auf den Raumteilerseiten auf.
           occupied: Deine Raumteiler hat nun eine Warteliste und ist weiterhin sichtbar! Interessenten können sich in die Liste eintragen und du wirst darüber per E-Mail informiert.
       room_demand:

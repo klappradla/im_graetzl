@@ -27,9 +27,9 @@
   position: relative;
 
   // CardBox States
-  &.-disabled {
-    //filter: grayscale(50%);
-    //opacity: 0.8;
+  &.-disabled .cardBoxHeader {
+    filter: grayscale(70%);
+    opacity: 0.3;
   }
   &.-disabled:hover {
     //filter: grayscale(0%);
