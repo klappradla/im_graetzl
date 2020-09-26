@@ -34,6 +34,11 @@
   </div>
 
   <div class="mainContent">
+    <% if @room_offer.disabled? && current_user == @room_offer.user %>
+      <div class="owner-inactive-msg">
+          Dein Raumteiler ist aktuell auf inaktiv gesetzt. Raumteiler jetzt <%= link_to 'wieder aktivieren', [:update_status, @room_offer, status: "enabled"], method: :patch %>.
+      </div>
+    <% end %>
     <div class="introtxt">
       <h3><%= @room_offer.slogan %></h3>
     </div>
@@ -156,7 +161,7 @@
         <div class="contact-login-msg">
             Du musst eingeloggt sein, um die vollständigen Kontaktinformationen zu sehen.<br />
             <%= link_to 'Zum Login', new_user_session_path %> |
-            <%= link_to 'Zur Registrierung', new_registration_path %>
+            <%= link_to 'Zur Registrierung', new_registration_path(origin: request.path) %>
         </div>
       <% end %>
 

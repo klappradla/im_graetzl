@@ -18,6 +18,10 @@
   }
 }
 
+.usersetup .cardBox.-disabled .cardBoxHeader {
+  filter: grayscale(70%);
+  opacity: 0.3;
+}
 
 .cardBox {
   border: 1px solid $color-ambient-grey-light;
@@ -28,8 +32,8 @@
 
   // CardBox States
   &.-disabled .cardBoxHeader {
-    filter: grayscale(70%);
-    opacity: 0.3;
+    //filter: grayscale(70%);
+    //opacity: 0.3;
   }
   &.-disabled:hover {
     //filter: grayscale(0%);

@@ -291,6 +291,7 @@ de:
         location_category: Kategorie
         business_interests: Interessen
         role: Admin
+        origin: Registriert über URL
       zuckerl:
         active_admin_requested_event: Status ändern
         aasm_state: Status

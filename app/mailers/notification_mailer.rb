@@ -6,8 +6,9 @@ class NotificationMailer < ApplicationMailer
     @user = @notification.user
 
     headers(
+      "X-MC-Tags" => "notification-immediate",
       "X-MC-GoogleAnalytics" => 'staging.imgraetzl.at, www.imgraetzl.at',
-      "X-MC-GoogleAnalyticsCampaign" => "notification-mail",
+      "X-MC-GoogleAnalyticsCampaign" => "notification-immediate-#{@notification.mail_template}",
     )
 
     Rails.logger.info("[Immediate Mail] #{@user.email} - #{@notification.mail_subject}")
@@ -66,7 +67,7 @@ class NotificationMailer < ApplicationMailer
     headers(
       "X-MC-Tags" => "summary-graetzl-mail",
       "X-MC-GoogleAnalytics" => 'staging.imgraetzl.at, www.imgraetzl.at',
-      "X-MC-GoogleAnalyticsCampaign" => "notification-mail",
+      "X-MC-GoogleAnalyticsCampaign" => "summary-graetzl-mail",
     )
     mail(
       to: @user.email,
@@ -131,7 +132,7 @@ class NotificationMailer < ApplicationMailer
     headers(
       "X-MC-Tags" => "summary-personal-mail",
       "X-MC-GoogleAnalytics" => 'staging.imgraetzl.at, www.imgraetzl.at',
-      "X-MC-GoogleAnalyticsCampaign" => "summary-mail",
+      "X-MC-GoogleAnalyticsCampaign" => "summary-personal-mail",
     )
     mail(
       to: @user.email,

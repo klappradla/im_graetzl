@@ -648,7 +648,11 @@ section.roomDetail {
     }
   }
 
-  .contact-login-msg {
+  .owner-inactive-msg {
+    margin-bottom:20px;
+  }
+
+  .contact-login-msg, .owner-inactive-msg {
     @include font-size-primaryFont('large');
     border: 1px solid $color-ambient-grey-light;
     border-radius: 8px;

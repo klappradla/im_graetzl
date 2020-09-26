@@ -1,5 +1,5 @@
 <div class="user cardBox">
-  <% if group_user.member? && @group.admins.include?(current_user) %>
+  <% if !group_user.user.admin? && @group.admins.include?(current_user) %>
     <%= link_to 'javascript:', data: { jq_dropdown: "#group-user-dropdown-#{group_user.user.id}" }, class: 'group-user-dropdown-link' do %>
       <%= icon_tag "dot-3" %>
     <% end %>
@@ -9,6 +9,10 @@
         <%= link_to remove_user_group_path(user_id: group_user.user_id), method: :post, data: { confirm: 'Bist du dir sicher?' } do %>
           <%= icon_tag "trash-delete-remove" %>
           <div class="icontxt">Aus Gruppe entfernen</div>
+        <% end %>
+        <%= link_to toggle_user_status_group_path(user_id: group_user.user_id), method: :post, data: { confirm: 'Bist du dir sicher?' } do %>
+          <%= icon_tag "magic-wand" %>
+          <div class="icontxt"><%== group_user.admin? ? 'Adminrechte entziehen' : 'Adminrechte geben' %></div>
         <% end %>
       </div>
     </div>

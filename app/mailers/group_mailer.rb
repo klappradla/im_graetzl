@@ -10,13 +10,13 @@ class GroupMailer < ApplicationMailer
   def new_join_request(join_request, user)
     @join_request = join_request
     @user = user
+    headers("X-MC-Tags" => "group-new-join-request")
     mail(to: user.email, subject: "Neue Beitrittsanfrage für deine Gruppe.")
   end
 
   def join_request_accepted(group, user)
     @group = group
     @user = user
-
     headers("X-MC-Tags" => "group-new-member")
     mail(to: user.email, subject: "Deine Beitrittsanfrage zur Gruppe wurde bestätigt.")
   end

@@ -37,6 +37,7 @@ context.instance_eval do
           row :confirmed_at
           row :updated_at
           row :last_sign_in_at
+          row :origin
         end
       end
       if user.address

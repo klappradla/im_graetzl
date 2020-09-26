@@ -15,6 +15,7 @@ ActiveAdmin.register User do
   filter :first_name
   filter :last_name
   filter :email
+  filter :origin
   filter :created_at
   filter :last_sign_in_at
 
