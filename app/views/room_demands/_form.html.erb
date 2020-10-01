@@ -1,5 +1,6 @@
 <%= form_for(@room_demand) do |f| %>
   <%= form_errors_for @room_demand %>
+  <%= hidden_field_tag :last_activated_at, @room_demand.last_activated_at %>
   <div class="form-block">
 
     <div class="room-offer-type-selection">

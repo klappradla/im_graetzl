@@ -107,7 +107,31 @@ APP.controllers.room_offers = (function() {
     // Reactivate Raumteiler
     if ( $("#flash .notice").text().indexOf('Dein Raumteiler wurde erfolgreich verlängert!') >= 0 ){
       gtag(
-        'event', 'Raumangebot :: Click :: Aktivierungslink', {
+        'event', 'Raumangebot :: Click :: E-Mail Aktivierungslink', {
+        'event_category': 'Raumteiler'
+      });
+    }
+
+    // Activate Raumteiler
+    if ( $("#flash .notice").text().indexOf('Dein Raumteiler ist nun aktiv') >= 0 ){
+      gtag(
+        'event', 'Raumangebot :: Click :: Status Aktiv', {
+        'event_category': 'Raumteiler'
+      });
+    }
+
+    // Deactivate Raumteiler
+    if ( $("#flash .notice").text().indexOf('Dein Raumteiler ist nun deaktiviert') >= 0 ){
+      gtag(
+        'event', 'Raumangebot :: Click :: Status Inaktiv', {
+        'event_category': 'Raumteiler'
+      });
+    }
+
+    // Warteliste Raumteiler
+    if ( $("#flash .notice").text().indexOf('Deine Raumteiler hat nun eine Warteliste') >= 0 ){
+      gtag(
+        'event', 'Raumangebot :: Click :: Status Warteliste', {
         'event_category': 'Raumteiler'
       });
     }

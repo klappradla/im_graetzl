@@ -20,6 +20,31 @@ APP.controllers.room_demands = (function() {
         }
       });
     });
+
+    // Reactivate Raumteiler
+    if ( $("#flash .notice").text().indexOf('Dein Raumteiler wurde erfolgreich verlängert!') >= 0 ){
+      gtag(
+        'event', 'Raumsuche :: Click :: E-Mail Aktivierungslink', {
+        'event_category': 'Raumteiler'
+      });
+    }
+
+    // Activate Raumteiler
+    if ( $("#flash .notice").text().indexOf('Deine Raumsuche ist nun aktiv') >= 0 ){
+      gtag(
+        'event', 'Raumsuche :: Click :: Status Aktiv', {
+        'event_category': 'Raumteiler'
+      });
+    }
+
+    // Deactivate Raumteiler
+    if ( $("#flash .notice").text().indexOf('Dein Raumsuche ist nun deaktiviert') >= 0 ){
+      gtag(
+        'event', 'Raumsuche :: Click :: Status Inaktiv', {
+        'event_category': 'Raumteiler'
+      });
+    }
+
   }
 
   function initshowContact(){

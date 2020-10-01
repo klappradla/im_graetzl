@@ -48,11 +48,11 @@ class RoomDemand < ApplicationRecord
   end
 
   def create_update_activity?
-    # create update activity ->
-    # if last_activated_at = today (set via activationlink or status update)
-    # and if last update is at least more then 7 days ago
-    # and if enabled
-    if self.enabled? && self.last_activated_at.today? && self.updated_at_was <= 7.days.ago
+    # create update activity if ->
+    # enabled & last_activated_at = today
+    # and last_activated_at is more then 15 days ago
+    # and cerated_at is more then 30 days ago
+    if self.enabled? && self.last_activated_at.today? && self.last_activated_at_was <= 15.days.ago && self.created_at <= 30.days.ago
       self.create_activity(:update, owner: self.user)
     end
   end
