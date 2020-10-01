@@ -10,7 +10,7 @@ namespace :scheduled do
     RoomOffer.enabled.where("last_activated_at < ?", room_offer_lifetime_months.months.ago).find_each do |room_offer|
       room_offer.update_attribute(:status, "disabled")
       if room_offer.valid?
-        RoomMailer.room_offer_activate_reminder(room_offer).deliver_later
+        RoomMailer.room_offer_activate_reminder(room_offer).deliver_now
       end
     end
 
@@ -22,7 +22,7 @@ namespace :scheduled do
     RoomDemand.enabled.where("last_activated_at < ?", room_demand_lifetime_months.months.ago).find_each do |room_demand|
       room_demand.update_attribute(:status, "disabled")
       if room_demand.valid?
-        RoomMailer.room_demand_activate_reminder(room_demand).deliver_later
+        RoomMailer.room_demand_activate_reminder(room_demand).deliver_now
       end
     end
 
