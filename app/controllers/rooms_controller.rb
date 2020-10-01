@@ -16,7 +16,8 @@ class RoomsController < ApplicationController
 
     @rooms = []
     @rooms += room_calls.sort_by(&:ends_at).reverse if params[:page].blank?
-    @rooms += (room_offers + room_demands).sort_by(&:updated_at).reverse
+    @rooms += (room_offers + room_demands)
+    #@rooms += (room_offers + room_demands).sort_by(&:updated_at).reverse
     @next_page = room_offers.next_page.present? || room_demands.next_page.present?
   end
 

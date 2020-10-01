@@ -104,6 +104,14 @@ APP.controllers.room_offers = (function() {
       });
     });
 
+    // Reactivate Raumteiler
+    if ( $("#flash .notice").text().indexOf('Dein Raumteiler wurde erfolgreich verlängert!') >= 0 ){
+      gtag(
+        'event', 'Raumangebot :: Click :: Aktivierungslink', {
+        'event_category': 'Raumteiler'
+      });
+    }
+
   }
 
   function initshowContact(){
