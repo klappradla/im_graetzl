@@ -39,7 +39,7 @@ ActiveAdmin.register RoomDemand do
     column :id
     column(:email) {|r| r.user.email if r.user }
     column(:full_name) {|r| r.user.full_name if r.user }
-    column :user_id
+    #column :user_id
     #column :created_at
     #column :last_activated_at
 
@@ -55,16 +55,16 @@ ActiveAdmin.register RoomDemand do
     #  }
     #}
 
-    column(:room_categories) { |g|
-      g.room_categories.map { |category|
-        category.name
-      }
-    }
+    #column(:room_categories) { |g|
+    #  g.room_categories.map { |category|
+    #    category.name
+    #  }
+    #}
 
     column :slogan
     #column :demand_description
     #column :needed_area
-    column :wants_collaboration
+    #column :wants_collaboration
     #column :personal_description
 
     #column(:keyword_list) { |g|

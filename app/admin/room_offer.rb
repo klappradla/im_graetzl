@@ -48,24 +48,23 @@ ActiveAdmin.register RoomOffer do
     column :id
     column(:email) {|r| r.user.email if r.user }
     column(:full_name) {|r| r.user.full_name if r.user }
-    column :user_id
-
+    #column :user_id
     #column :created_at
     #column :last_activated_at
+    #column :rental_enabled
     column(:district) { |room_offer| room_offer.district.try(:zip) }
     #column(:graetzl)  { |room_offer| room_offer.graetzl.name }
 
-    column(:room_categories) { |g|
-      g.room_categories.map { |category|
-        category.name
-      }
-    }
+    #column(:room_categories) { |g|
+    #  g.room_categories.map { |category|
+    #    category.name
+    #  }
+    #}
 
     column :slogan
     #column :room_description
     #column :total_area
-    #column :rented_area
-    column :wants_collaboration
+    #column :wants_collaboration
     #column :owner_description
     #column :tenant_description
 

@@ -22,8 +22,8 @@ class RoomDemand < ApplicationRecord
 
   attachment :avatar, type: :image
 
-  scope :by_currentness, -> { order(created_at: :desc) }
-  scope :reactivated, -> { enabled.where("last_activated_at > created_at") }
+  scope :by_currentness, -> { order(last_activated_at: :desc) }
+  scope :reactivated, -> { enabled.where("last_activated_at > created_at").where("created_at < ?", LIFETIME_MONTHS.months.ago) }
 
   LIFETIME_MONTHS = 6
 
@@ -48,8 +48,11 @@ class RoomDemand < ApplicationRecord
   end
 
   def create_update_activity?
-    # create update activity if last update is at least more then 7 days ago
-    if self.enabled? && self.updated_at_was <= 7.days.ago
+    # create update activity if ->
+    # enabled & last_activated_at = today
+    # and last_activated_at is more then 15 days ago
+    # and cerated_at is more then 30 days ago
+    if self.enabled? && self.last_activated_at.today? && self.last_activated_at_was <= 30.days.ago && self.created_at <= LIFETIME_MONTHS.months.ago
       self.create_activity(:update, owner: self.user)
     end
   end

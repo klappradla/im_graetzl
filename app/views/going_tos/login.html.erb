@@ -8,7 +8,7 @@
 
   <div class="col-content">
     <section class="login">
-      <%= render 'shared/login_panel_content', redirect: request.original_url, origin: 'treffen-ticket' %>
+      <%= render 'shared/login_panel_content', redirect: request.original_url, origin: request.path %>
     </section>
   </div>
 

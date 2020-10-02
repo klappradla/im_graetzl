@@ -42,7 +42,7 @@
   <div class="paperCard -illuteaser -cord1RT">
     <div class="wrp">
       <h3>Noch nicht bei imGrätzl registriert?</h3>
-      <%= link_to 'Hier kostenlos registrieren', new_registration_path, class: 'btn-primary -rose' %>
+      <%= link_to 'Hier kostenlos registrieren', new_registration_path(origin: @origin_path_from_referer), class: 'btn-primary -rose' %>
     </div>
     <div class="card"></div>
   </div>

@@ -42,6 +42,12 @@ APP.controllers.tool_offers = (function() {
         if ($('.request-price-form .date-from').val() && $('.request-price-form .date-to').val()) {
           $('.request-price-form').submit();
           $('.-disabled').hide();
+          // Analytics Tracking
+          gtag(
+            'event', 'Toolteiler :: Buchungsbox', {
+            'event_category': 'Toolteiler',
+            'event_label': 'Auswahl :: Zeitraum'
+          });
         }
       });
 

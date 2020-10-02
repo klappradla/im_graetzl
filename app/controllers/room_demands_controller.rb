@@ -31,6 +31,14 @@ class RoomDemandsController < ApplicationController
 
   def update
     @room_demand = current_user.room_demands.find(params[:id])
+
+    ########
+    # Set new last_activated_at date if edit and last_activated_at is more then 7 days ago
+    if params[:last_activated_at] <= 7.days.ago && @room_demand.enabled?
+      @room_demand.last_activated_at = Time.now
+    end
+    #########
+
     if @room_demand.update(room_demand_params)
       MailchimpRoomDemandUpdateJob.perform_later(@room_demand)
       redirect_to @room_demand
@@ -82,6 +90,7 @@ class RoomDemandsController < ApplicationController
         :avatar,
         :activation_code,
         :remove_avatar,
+        :last_activated_at,
         :first_name, :last_name, :website, :email, :phone, :location_id,
         room_category_ids: [],
         graetzl_ids: [],

@@ -32,7 +32,7 @@
       <div class="user">
         <div class="avatar">
           <%= link_to user_path(user) do %>
-            <%= attachment_image_tag user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
+            <%= user_tooltip_avatar user, 100 %>
           <% end %>
         </div>
         <div class="infos">

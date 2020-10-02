@@ -1,8 +1,8 @@
 <!-- SLIDER -->
 <div class="category-slider-container">
-  <div id="category-slider">
+  <div id="category-slider" data-label="Toolteiler">
     <% ToolCategory.top.sort_by(&:position).each do |category| %>
-      <div class="-category" data-id="<%= category.id %>">
+      <div class="-category" data-id="<%= category.id %>" data-label="<%= category.name %>">
         <%= category_photo_for(category) %>
         <div class="cat category-<%= category.id %> -tools"></div>
         <h3><%= category.name %></h3>

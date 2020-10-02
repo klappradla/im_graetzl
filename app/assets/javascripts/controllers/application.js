@@ -78,7 +78,7 @@ APP.controllers.application = (function() {
           vars[key] = value;
       });
       return vars;
-    }    
+    }
 
   }
 

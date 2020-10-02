@@ -57,14 +57,14 @@
       <%= icon_tag "at-symbol" %>
       <span>Email</span>
     <% end %>
-    <%= f.email_field :email %>
+    <%= f.email_field :email, placeholder: 'E-Mail Adresse', class: '-validate' %>
   </div>
   <div class="input-field">
     <%= f.label :website do %>
       <%= icon_tag "globe" %>
       <span>Website</span>
     <% end %>
-    <%= f.url_field :website, placeholder: 'http:// oder https://' %><em></em>
+    <%= f.url_field :website, placeholder: 'http:// oder https://', class: '-validate' %><em></em>
   </div>
   <div class="input-field">
     <%= f.label :phone do %>

@@ -13,6 +13,8 @@ module MessengerHelper
       "active tool_rental"
     elsif thread.room_rental_id
       "active room_rental"
+    elsif thread.last_message.nil? && params[:thread_id].to_i != thread.id
+      "active empty"
     else
       'active'
     end

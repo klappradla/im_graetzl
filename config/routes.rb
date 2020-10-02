@@ -154,6 +154,7 @@ Rails.application.routes.draw do
     post 'remove_user', on: :member
     get 'compose_mail', on: :member
     post 'send_mail', on: :member
+    post :toggle_user_status, on: :member
   end
 
   get 'messenger' => 'messenger#index'

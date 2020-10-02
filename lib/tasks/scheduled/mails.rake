@@ -8,7 +8,7 @@ namespace :scheduled do
         unseen_messages = thread.user_messages.select{ |m| m.id > user_thread.last_message_seen_id }
         next if unseen_messages.empty?
         p "#{user_thread.user.email} #{unseen_messages.count} unseen messages."
-        MessengerMailer.unseen_messages(user_thread.user, unseen_messages).deliver_now
+        MessengerMailer.unseen_messages(user_thread.user, unseen_messages).deliver_later
         user_thread.update(last_message_seen_id: unseen_messages.last.id)
       end
     end
@@ -18,8 +18,8 @@ namespace :scheduled do
   task daily_summary_mail: :environment do
     puts "Rake daily_summary_mail start at #{Time.now}"
     User.find_each do |user|
-      NotificationMailer.summary_graetzl(user, :daily).deliver_now
-      NotificationMailer.summary_personal(user, :daily).deliver_now
+      NotificationMailer.summary_graetzl(user, :daily).deliver_later
+      NotificationMailer.summary_personal(user, :daily).deliver_later
     end
   end
 
@@ -27,8 +27,8 @@ namespace :scheduled do
   task weekly_summary_mail: :environment do
     puts "Rake weekly_summary_mail start at #{Time.now}"
     User.find_each do |user|
-      NotificationMailer.summary_graetzl(user, :weekly).deliver_now if Date.today.tuesday?
-      NotificationMailer.summary_personal(user, :weekly).deliver_now if Date.today.saturday?
+      NotificationMailer.summary_graetzl(user, :weekly).deliver_later if Date.today.tuesday?
+      NotificationMailer.summary_personal(user, :weekly).deliver_later if Date.today.saturday?
     end
   end
 

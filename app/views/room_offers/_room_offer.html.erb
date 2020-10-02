@@ -1,6 +1,6 @@
 <% graetzl = Graetzl.memoized(room_offer.graetzl_id) %>
 
-<div class="cardBox -roomoffer -<%= room_offer.status %>" data-behavior="masonry-card">
+<div class="cardBox -roomoffer -<%= room_offer.status %>" data-behavior="masonry-card" data-card-id="room_offer-<%= room_offer.id %>">
 
   <div class="cardBoxHeader">
     <div class="coverImgWrapper">

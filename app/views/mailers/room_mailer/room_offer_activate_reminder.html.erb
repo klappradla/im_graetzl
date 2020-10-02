@@ -1,7 +1,7 @@
 <% content_for(:above_title, "Hallo #{@room_offer.user.first_name},") %>
 <% content_for(:title, "Dein Raumteiler wurde deaktiviert.") %>
 
-<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
+<table border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
   <tr>
     <td style="height:30px"> </td>
   </tr>
@@ -28,7 +28,7 @@
 
 <!-- --------------- ITEM ACTION BOX --------------- -->
 
-<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
+<table border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
   <tbody>
     <tr>
       <td valign="top" class="mcnTextContent" style="padding-top:0; padding-left:18px; padding-bottom:18px; padding-right:18px;">
@@ -48,7 +48,7 @@
 
 
 
-<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
+<table border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
   <tr>
     <td style="height:30px"> </td>
   </tr>
@@ -76,10 +76,10 @@
 
 <!-- --------------- ITEM ROOM OFFER --------------- -->
 
-<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:300px;" width="100%" class="mcnTextContentContainer">
+<table border="0" cellpadding="0" cellspacing="0" style="float:left; max-width:300px;" width="100%" class="mcnTextContentContainer">
   <tbody>
     <tr>
-      <td valign="top" class="mcnTextContent" style="padding-top:0; padding-left:18px; padding-right:18px;">
+      <td valign="top" class="mcnTextContent" style="padding-top:0; padding-left:18px; padding-right:15px;">
 
         <%= link_to room_offer_url(@room_offer), target: 'blank' do %>
           <%= image_tag Notifications::ImageService.new.cover_photo_url(@room_offer), style: "width:100%; padding-bottom:5px;", class: "mcnImage" %>
@@ -88,6 +88,29 @@
         <p>
           <%= link_to @room_offer.slogan, room_offer_url(@room_offer), style: "color:#ec776a; font-size:18px;" %>
         </p>
+
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+<!-- --------------- FEATURING SLOT BOOKING if NOT Activated --------------- -->
+
+<table border="0" cellpadding="0" cellspacing="0" style="max-width:300px;" width="100%" class="mcnTextContentContainer">
+  <tbody>
+    <tr>
+      <td valign="top" class="mcnTextContent" style="padding-top:0; padding-left:15px; padding-right:18px;">
+
+        <% if !@room_offer.rental_enabled? %>
+        <strong>Neu: Aktiviere das Kurzzeitmieten Buchungstool für deinen Raumteiler!</strong>
+        <p>
+          Falls du deinen Raum stundenweise, tageweise oder am Wochenende vermieten möchtest, dann ermöglicht das Tool eine einfache online Buchung inkl. Zahlungsabwicklung.
+        </p>
+        <p>
+          Einfach Raumteiler bearbeiten und "<strong>Kurzzeitmieten</strong>" aktivieren.
+        </p>
+        <% end %>
 
       </td>
     </tr>
