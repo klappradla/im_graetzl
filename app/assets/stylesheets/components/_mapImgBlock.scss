@@ -194,7 +194,7 @@
   filter: hue-rotate(-1100deg) saturate(50%);
   opacity: 0.8;
 }
-
+.leaflet-pane         { z-index: auto !important; }
 .leaflet-control-attribution,
 .leaflet-control-container {
   display: none;

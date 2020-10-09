@@ -1,8 +1,7 @@
 APP.components.graetzlMap = (function() {
     var map,
         //mainLayer =  L.tileLayer.provider('Stamen.Watercolor'),
-        mainLayer = L.tileLayer.provider('MapBox', { id: 'peckomingo.lb8m2cga', accessToken: 'pk.eyJ1IjoicGVja29taW5nbyIsImEiOiJoVHNQM29zIn0.AVmpyDYApR5mryMCJB1ryw'}),
-
+        mainLayer = L.tileLayer.provider('MapBox', { id: 'malano78/ckg259qku0e8919mkhbs4aze3', accessToken: 'pk.eyJ1IjoibWFsYW5vNzgiLCJhIjoiY2tnMjBmcWpwMG1sNjJ4cXdoZW9iMWM5NyJ9.z-AgKIQ_Op1P4aeRh_lGJw'}),
         styles = {
             mint: {
                 color: '#93CFC6',
@@ -118,7 +117,7 @@ APP.components.graetzlMap = (function() {
         }
         return this;
     }
-    
+
     function showMapAddress(addresses, graetzls, options) { // Array or String
         var config = $.extend({}, defaults, options);
         var addressesMap = L.geoJson(addresses, {
@@ -187,5 +186,3 @@ APP.components.graetzlMap = (function() {
 
 
 })();
-
-

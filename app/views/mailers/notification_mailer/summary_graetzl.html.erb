@@ -1,7 +1,7 @@
 <% content_for(:above_title, "Hey #{@user.first_name},") %>
-<% if @period == :daily %>
+<% if @period == 'daily' %>
   <% content_for(:title, "Neuigkeiten von Heute") %>
-<% elsif @period == :weekly %>
+<% elsif @period == 'weekly' %>
   <% content_for(:title, "Neuigkeiten der Woche") %>
 <% end %>
 <% content_for(:subtitle, "aus dem Grätzl #{@user.graetzl.name}") %>
@@ -20,7 +20,7 @@
 
 <!-- Insert Featured Content in all Notification Mails -->
 
-<% if @period == :weekly %>
+<% if @period == 'weekly' %>
   <!-- Insert 2 Random District Zuckerls in Weekly Mail if any exists -->
   <%= render "summary/new_zuckerl" %>
 <% end %>

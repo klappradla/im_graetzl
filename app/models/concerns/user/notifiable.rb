@@ -71,12 +71,12 @@ module User::Notifiable
   end
 
   def pending_notifications(period)
-    if period == :daily
+    if period == 'daily'
       notifications.ready_to_be_sent.where(["bitmask & ? > 0", daily_mail_notifications])
-    elsif period == :weekly
+    elsif period == 'weekly'
       notifications.ready_to_be_sent.where(["bitmask & ? > 0", weekly_mail_notifications])
     else
-      notification.none
+      notifications.none
     end
   end
 
