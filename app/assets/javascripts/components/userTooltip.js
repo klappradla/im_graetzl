@@ -12,7 +12,7 @@ APP.components.initUserTooltip = function() {
       var delayOpen = 500;
       var delayClose = 250;
   } else {
-      var trigger = "touchclick";
+      var trigger = "click";
       var preventDefault = true;
       var delayOpen = 0;
       var delayClose = 0;
