@@ -30,14 +30,14 @@
         <%= icon_tag "resize-maximize" %>
         <span>Fläche die du vermietest</span>
       <% end %>
-      <%= f.number_field :rented_area, placeholder: 'm2' %>
+      <%= f.number_field :rented_area, placeholder: 'm2', class: '-validate' %>
     </div>
     <div class="input-field column-right">
       <%= f.label :total_area do %>
         <%= icon_tag "resize-maximize" %>
         <span>Größe des gesamten Objektes</span>
       <% end %>
-      <%= f.number_field :total_area, placeholder: 'm2' %>
+      <%= f.number_field :total_area, placeholder: 'm2', class: '-validate' %>
     </div>
   </div>
 

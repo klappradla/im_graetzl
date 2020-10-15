@@ -35,28 +35,11 @@ APP.controllers.meetings = (function() {
       $('.select_users .opt').on('click', function(){
         var user_index = $(this).index();
         if ($(this).hasClass('selected')){
-          $('.user-miniprofile-container').eq(user_index).find('.user-miniprofile-link').addClass('active');
+          $('.meetings-compose-mail .members a').eq(user_index).find('.avatar').addClass('active');
         } else {
-          $('.user-miniprofile-container').eq(user_index).find('.user-miniprofile-link').removeClass('active');
+          $('.meetings-compose-mail .members a').eq(user_index).find('.avatar').removeClass('active');
         }
       });
-
-      // Highlight Users on Select Change
-      /*
-      $('select#mail-user-select').on('change', function(){
-          var selected_users = $(this).val();
-          console.log(selected_users);
-          if (selected_users == null) {
-            $('.user-miniprofile-link').removeClass('active');
-          } else {
-            $('.user-miniprofile-link').removeClass('active');
-            for (i = 0; i < selected_users.length; i++) {
-                $user = $('[data-jq-dropdown="#user-dropdown-' + selected_users[i] + '"]');
-                $user.addClass('active');
-            }
-          }
-      });
-      */
 
     }
 

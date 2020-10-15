@@ -5,15 +5,31 @@ APP.components.initUserTooltip = function() {
 
   // Desktop Hover Tooltips
   // selector eingrenzen auf .signed-in wenn nur eingeloggt
-  $(".no-touch .signed-in .user-tooltip-trigger").each(function(index, value) {
+
+  if ($('html').hasClass('no-touch')) {
+      var trigger = "mouseenter";
+      var preventDefault = false;
+      var delayOpen = 500;
+      var delayClose = 250;
+  } else {
+      var trigger = "touchclick";
+      var preventDefault = true;
+      var delayOpen = 0;
+      var delayClose = 0;
+  }
+
+  $(".signed-in .user-tooltip-trigger").each(function(index, value) {
 
       var tooltip = $(this).data('tooltip-id');
       user_tooltips[tooltip] = new jBox('Tooltip', {
         addClass:'jBox',
         attach: $(this),
         closeOnMouseleave: true,
-        delayOpen: 500,
-        delayClose: 250,
+        trigger:trigger,
+        preventDefault:preventDefault,
+        delayOpen: delayOpen,
+        delayClose: delayClose,
+        closeOnClick:'body',
         position: {
           x: 'center',
           y: 'bottom'

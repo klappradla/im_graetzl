@@ -115,10 +115,14 @@
   a:hover {
     text-decoration: underline;
   }
-  .tt-bio {
+  .tt-bio, .tt-additional {
     border-top: 1px solid $color-ambient-mint-light-lowsaturation;
     padding-top:7px;
     margin-top:7px;
     font-style: italic;
+    width:100%;
+  }
+  .tt-additional {
+    text-align: center;
   }
 }

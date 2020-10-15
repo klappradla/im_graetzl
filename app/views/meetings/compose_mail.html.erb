@@ -9,7 +9,10 @@
 
   <div class="members">
     <% @meeting.going_tos.each do |going_to| %>
-      <%= render "meetings/user_miniprofile", :user => going_to.user, :going_to => going_to %>
+      <%= link_to user_path(going_to.user) do %>
+        <% going_to.going_to_date ? additional = "<strong>Termin:</strong> #{going_to.display_starts_at_date}" : nil %>
+        <%= user_tooltip_avatar going_to.user, 100, nil , additional %>
+      <% end %>
     <% end %>
   </div>
 

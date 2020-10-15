@@ -14,15 +14,20 @@ module AttachmentsHelper
   end
 
   # User Avatar with Tooltip
-  def user_tooltip_avatar(user, size=200, css=nil)
+  def user_tooltip_avatar(user, size=200, css=nil, additionalInfo=nil)
     if css.nil?
       css_class = 'img-round user-tooltip-trigger'
     else
       css_class = css
     end
+    if additionalInfo.nil?
+      additional = ''
+    else
+      additional = "&additional=#{additionalInfo}"
+    end
     fallback = "avatar/user/200x200.png"
     tooltip_id = "user-tooltip-#{user.id}-#{rand(1000)}"
-    tooltip_url = "/user/tooltip?id=#{user.id}"
+    tooltip_url = "/user/tooltip?id=#{user.id}#{additional}"
     attachment_image_tag(user, :avatar, :fill, size, size, class: css_class, fallback: fallback, data: { tooltip_id: tooltip_id, url: tooltip_url })
   end
 

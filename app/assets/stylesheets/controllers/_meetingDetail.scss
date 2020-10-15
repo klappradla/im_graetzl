@@ -198,7 +198,7 @@ section.meetings-compose-mail {
     img.img-round {
       filter: grayscale(50%);
     }
-    .active img {
+    img.active {
       filter: grayscale(0%);
       border: 2px solid $color-ambient-rosa;
     }
