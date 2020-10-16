@@ -3,33 +3,16 @@ APP.components.initUserTooltip = function() {
   // jBox Tooltips for Users
   var user_tooltips = []
 
-  // Desktop Hover Tooltips
-  // selector eingrenzen auf .signed-in wenn nur eingeloggt
-
-  if ($('html').hasClass('no-touch')) {
-      var trigger = "mouseenter";
-      var preventDefault = false;
-      var delayOpen = 500;
-      var delayClose = 250;
-  } else {
-      var trigger = "click";
-      var preventDefault = true;
-      var delayOpen = 0;
-      var delayClose = 0;
-  }
-
-  $(".signed-in .user-tooltip-trigger").each(function(index, value) {
-
+  // ------- DESKTOP Hover Tooltips -------
+  $(".no-touch .signed-in .user-tooltip-trigger").each(function(index, value) {
       var tooltip = $(this).data('tooltip-id');
       user_tooltips[tooltip] = new jBox('Tooltip', {
         addClass:'jBox',
         attach: $(this),
         closeOnMouseleave: true,
-        trigger:trigger,
-        preventDefault:preventDefault,
-        delayOpen: delayOpen,
-        delayClose: delayClose,
-        closeOnClick:'body',
+        trigger:'mouseenter',
+        delayOpen: 500,
+        delayClose: 250,
         position: {
           x: 'center',
           y: 'bottom'
@@ -47,13 +30,42 @@ APP.components.initUserTooltip = function() {
               gtag(
                 'event', 'Open', {
                 'event_category': 'User Tooltip',
-                //'event_label': 'User: ' + roomContact_id
+                'event_label': 'Desktop'
               });
             }
         },
       });
-
   });
+
+  // ------- MOBILE Click Modals -------
+  $(".touch .signed-in .user-tooltip-trigger").each(function(index, value) {
+      var tooltip = $(this).data('tooltip-id');
+      user_tooltips[tooltip] = new jBox('Modal', {
+        addClass:'jBox',
+        attach: $(this),
+        trigger:'click',
+        preventDefault:true,
+        closeButton:true,
+        ajax: {
+            reload: true,
+            setContent: false,
+            spinner:true,
+            spinnerReposition:false,
+            spinnerDelay:0,
+            success: function (response) {
+              this.setContent(response);
+              initTrackingLinks();
+              // Analytics
+              gtag(
+                'event', 'Open', {
+                'event_category': 'User Tooltip',
+                'event_label': 'Mobile'
+              });
+            }
+        },
+      });
+  });
+
 
   // Init Click Links to be ready after Tooltip is open
   function initTrackingLinks() {

@@ -29,7 +29,7 @@ APP.components.formValidation = (function() {
     });
 
 
-    // ************ BROWSER VALIDATION URL/MAIL ***************** //
+    // ************ BROWSER VALIDATION URL/MAIL/NUMBER ***************** //
 
 
     // Browser Validation Form Fields with class "-validate"

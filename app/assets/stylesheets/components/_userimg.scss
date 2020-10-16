@@ -55,28 +55,6 @@
   }
 }
 
-.user-miniprofile-container {
-  position: relative;
-  display: inline-flex;
-  .jq-dropdown {
-    margin-top:5px !important;
-    margin-left: 15px;
-  }
-  .jq-dropdown-panel {
-    a.userlink {
-      font-weight: bold;
-      display: block;
-    }
-    p {
-      white-space: nowrap;
-      font-style: italic;
-    }
-    a.maillink {
-      color:$color-font-primary;
-    }
-  }
-}
-
 .user-tooltip-wrp {
   display:flex;
   flex-wrap: wrap;
