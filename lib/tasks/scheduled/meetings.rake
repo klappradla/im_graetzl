@@ -11,15 +11,20 @@ namespace :scheduled do
     # Look if they have Additonal Dates in Future
     # Set new startDate for Meeting
     # Delete next Additonal Date
+    # Update Activity if previous Activity of this Meeting is more then 1 Week ago
     Meeting.where("starts_at_date = ?", Date.yesterday).find_each do |meeting|
       if meeting.meeting_additional_dates.present?
         next_meeting = meeting.meeting_additional_dates.sort_by(&:starts_at_date).first
         meeting.update(starts_at_date: next_meeting.starts_at_date)
         next_meeting.destroy
         Rails.logger.info("[Meeting] Meeting (#{meeting.id}) updated next meeting date: #{next_meeting.starts_at_date}")
-        # Update notifications
-        meeting.activities.where(key: 'meeting.create').destroy_all
-        meeting.create_activity :create, owner: meeting.user, cross_platform: meeting.online_meeting?
+
+        # Update Activity for this Meeting if last Activity is greather then 1 week ago
+        if meeting.activities.where(key: 'meeting.create').present? && meeting.activities.where(key: 'meeting.create').last.created_at < 1.weeks.ago
+          meeting.activities.where(key: 'meeting.create').destroy_all
+          meeting.create_activity :create, owner: meeting.user, cross_platform: meeting.online_meeting?
+        end
+
       end
     end
 

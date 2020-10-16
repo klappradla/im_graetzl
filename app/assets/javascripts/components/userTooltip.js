@@ -82,7 +82,7 @@ APP.components.initUserTooltip = function() {
       });
     });
     // Link - Profile
-    $('.user-tooltip-wrp .tt-img a, .user-tooltip-wrp a.username').on('click', function(event){
+    $('.user-tooltip-wrp .tt-img a, .user-tooltip-wrp a.username, .user-tooltip-wrp .-profile a').on('click', function(event){
       event.preventDefault();
       var href = $(this).attr('href');
       gtag(
