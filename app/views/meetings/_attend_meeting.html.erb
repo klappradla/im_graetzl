@@ -21,7 +21,7 @@
           options_from_collection_for_select(meeting.meeting_additional_dates.order(:starts_at_date), :id, :display_starts_at_date)).html_safe) %>
     </div>
 
-    <%= submit_tag 'Weiter', class: 'btn-primary' %>
+    <%= submit_tag 'Weiter', class: 'btn-primary meeting-attend-btn' %>
 
   <% end %>
 </div>

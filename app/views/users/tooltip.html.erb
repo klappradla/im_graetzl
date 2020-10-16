@@ -14,6 +14,10 @@
         <%= link_to "Nachricht senden", messenger_start_thread_path(user_id: @user.id) %>
       </div>
     <% end %>
+    <div class="tt-line -profile">
+      <%= icon_tag "user-avatar" %>
+      <%= link_to "Zum Profil", @user %>
+    </div>
     <div class="tt-line -graetzl">
       <%= icon_tag "map-location" %>
       <%= link_to "#{@user.district.zip} - #{@user.graetzl.name}", @user.graetzl %>

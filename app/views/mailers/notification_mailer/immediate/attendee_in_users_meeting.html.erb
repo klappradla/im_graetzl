@@ -1,6 +1,6 @@
 <% content_for(:above_title, "Hallo #{@user.first_name},") %>
 <% content_for(:title, "Neuer Interessent an deinem Treffen.") %>
-<% going_to = @notification.meeting.going_tos.where(user: @notification.activity.owner).first %>
+<% going_to = @notification.meeting.going_tos.where(user: @notification.activity.owner).last %>
 
 
 <table border="0" cellpadding="0" cellspacing="0" style="max-width:600px; margin-bottom:20px;" width="100%" class="mcnTextContentContainer">
@@ -45,21 +45,24 @@
             </strong>
           </em>
           <% if going_to.going_to_date %>
-            <em>(<%= going_to.display_starts_at_date %>)</em>
+            <em>(Termin: <%= going_to.display_starts_at_date %>)</em>
           <% end %>
-          <br>
-          <em>Du erreichst <%= @notification.activity.owner.first_name %> unter der E-Mail: <%= @notification.activity.owner.email %></em>
         </p>
       </td>
     </tr>
 
     <tr>
-      <td colspan="3" style="padding-bottom:9px;"></td>
+      <td colspan="3" style="padding-bottom:19px;"></td>
     </tr>
 
     <tr>
-      <td colspan="3">
-        <%= render 'mailers/shared/button', title: "Zum Treffen", url: graetzl_meeting_url(@notification.meeting.graetzl, @notification.meeting) %>
+      <td colspan="3" align="center">
+        <table>
+          <tr>
+            <td><%= render 'mailers/shared/button', title: "Zum Treffen", url: graetzl_meeting_url(@notification.meeting.graetzl, @notification.meeting) %></td>
+            <td><%= render 'mailers/shared/button', title: "#{@notification.activity.owner.first_name} im Messenger antworten", url: messenger_start_thread_url(user_id: @notification.activity.owner.id) %></td>
+          </tr>
+        </table>
       </td>
     </tr>
 

@@ -64,7 +64,7 @@
 
     <% elsif meeting.attending?(current_user) %>
       <div class="btn-going-to">
-        <%= button_to [:unattend, meeting], method: :post, class: 'btn-userCallToAction' do %>
+        <%= button_to [:unattend, meeting], method: :post, class: 'btn-userCallToAction meeting-unattend-btn' do %>
           <span><%= avatar_for current_user %> Nicht mehr interessiert</span>
         <% end %>
       </div>

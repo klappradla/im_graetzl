@@ -149,6 +149,22 @@ APP.controllers.meetings = (function() {
         document.body.appendChild(google_maps_script_tag);
       }
 
+      // Analytics
+      $('.meeting-attend-btn').on('click', function() {
+        gtag(
+          'event', 'Click :: Interessiert', {
+          'event_category': 'Meeting'
+        });
+      });
+
+      $('.meeting-unattend-btn').on('click', function() {
+        gtag(
+          'event', 'Click :: Nicht mehr Interessiert', {
+          'event_category': 'Meeting'
+        });
+      });
+
+
     }
 
     function initCreateMeeting() {
