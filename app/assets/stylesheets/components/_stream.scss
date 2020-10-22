@@ -306,6 +306,9 @@
     .entryCommentForm.is-focused {
       .img-round { display: block; }
     }
+    .entryInitialContent .txt {
+      white-space: pre-wrap;
+    }
   }
 }
 

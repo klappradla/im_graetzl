@@ -1,7 +1,7 @@
 APP.components.graetzlMap = (function() {
     var map,
         //mainLayer =  L.tileLayer.provider('Stamen.Watercolor'),
-        mainLayer = L.tileLayer.provider('MapBox', { id: 'malano78/ckg259qku0e8919mkhbs4aze3', accessToken: 'pk.eyJ1IjoibWFsYW5vNzgiLCJhIjoiY2tnMjBmcWpwMG1sNjJ4cXdoZW9iMWM5NyJ9.z-AgKIQ_Op1P4aeRh_lGJw'}),
+        mainLayer = L.tileLayer.provider('MapBox', { id: 'malano78/ckgcmiv6v0irv19paa4aoexz3', accessToken: 'pk.eyJ1IjoibWFsYW5vNzgiLCJhIjoiY2tnMjBmcWpwMG1sNjJ4cXdoZW9iMWM5NyJ9.z-AgKIQ_Op1P4aeRh_lGJw'}),
         styles = {
             mint: {
                 color: '#93CFC6',

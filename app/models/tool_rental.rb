@@ -10,7 +10,7 @@ class ToolRental < ApplicationRecord
 
   scope :submitted, -> { where.not(rental_status: :incomplete) }
 
-  PAYMENT_METHODS = ['card', 'eps'].freeze
+  PAYMENT_METHODS = ['card'].freeze
 
   def self.next_invoice_number
     where("invoice_number IS NOT NULL").count + 1
