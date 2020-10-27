@@ -119,6 +119,18 @@
   </div>
 
 
+  <div class="meet-event-category">
+    <p>Event <span>Kategorien</span> - Welche treffen zu?</p>
+    <div class="event-categories">
+      <%= f.collection_check_boxes :event_category_ids, EventCategory.all, :id, :title do |b| %>
+      <div class="input-checkbox">
+        <%= b.check_box %>
+        <%= b.label %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
 
   <div class="meet-platform_meeting_request">
     <p>Aktion <span>Selbstständige</span> für <span>Selbstständige</span></p>
@@ -133,13 +145,6 @@
     </div>
 
     <div id="meeting-platform-meeting-fields">
-      <div class="input-select">
-        <%= f.label :meeting_category_id do %>
-          <%= icon_tag "record" %>
-          <span>Kategorie</span>
-        <% end %>
-        <%= f.collection_select :meeting_category_id, MeetingCategory.all.order(:starts_at_date), :id, :category_width_date_range, { prompt: 'Wähle eine passende Kategorie ..' } %>
-      </div>
 
       <%= f.fields_for :platform_meeting_join_request do |p| %>
         <p class="question">
@@ -153,6 +158,16 @@
           <%= p.text_area :request_message, placeholder: 'Beschreibe deine Beweggründe in 1-2 Sätzen. (Deine Antwort wird bei deinem Angebot veröffentlicht)' %>
         </div>
       <% end %>
+      <div class="input-select">
+        <%= f.label :meeting_category_id do %>
+          <%= icon_tag "record" %>
+          <span>Themenfeld</span>
+        <% end %>
+        <%= f.collection_select :meeting_category_id, MeetingCategory.all.order(:starts_at_date), :id, :category_width_date_range, { prompt: 'Wähle ein passendes Themenfeld ..' } %>
+      </div>
+      <p class="hint">
+        <strong>Bitte beachte, dass es sich um ein kostenloses Angebot handeln muss um in der Ruprik Selbständige für Selbständige gelistet zu werden.</strong> (Eine Listung erfolgt erst nach Freischaltung)
+      </p>
     </div>
 
   </div>
@@ -163,10 +178,10 @@
   <div class="meet-pricing">
     <p><span>Admin</span> Funktionen</p>
 
-    <div class="input-checkbox">
+    <!--<div class="input-checkbox">
       <%= f.check_box :platform_meeting %>
-      <%= f.label :platform_meeting, "Treffen als 'Community Veranstaltung' markieren" %>
-    </div>
+      <%= f.label :platform_meeting, "Treffen unter 'Selbstständige für Selbstständige' listen" %>
+    </div>-->
 
     <div class="input-field">
       <%= label_tag(:amount) do %>

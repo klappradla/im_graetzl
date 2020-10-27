@@ -4,11 +4,16 @@ context.instance_eval do
       panel 'Meeting Details' do
         attributes_table_for meeting do
           row :id
-          row :platform_meeting
-          row :online_meeting
           row :name
+          row :online_meeting
           row(:state){|m| status_tag(m.state)}
-          row :meeting_category
+          row :event_categories do |e|
+            safe_join(
+              e.event_categories.map do |category|
+                content_tag(:span, link_to(category.title, admin_room_category_path(category))) + ', '
+              end
+            )
+          end
           row :slug
           row :created_at
           row :graetzl
@@ -53,8 +58,12 @@ context.instance_eval do
         end
       end
       panel 'Aktion Selbstständige für Selbstständige' do
-        table_for meeting.platform_meeting_join_request do
-          column(:request_message){|p| p.request_message if p}
+        attributes_table_for meeting do
+          row :platform_meeting
+          row :meeting_category
+        end
+        attributes_table_for meeting.platform_meeting_join_request do
+          row(:request_message){|p| p.request_message if p}
         end
       end
     end

@@ -37,6 +37,11 @@ APP.controllers.graetzls = (function() {
       if ($("section.rooms").exists()) {
         APP.components.categorySlider.init($('#category-slider'));
       }
+      
+      if ($("section.meetings").exists()) {
+        APP.components.categorySlider.init($('#category-slider'));
+      }
+
     }
 
     function initJBox() {

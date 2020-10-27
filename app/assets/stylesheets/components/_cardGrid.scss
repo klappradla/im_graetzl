@@ -148,50 +148,85 @@
         &.-booking {
           background-image: url(image_path('svg/icon-kringel-kurzzeitmiete-active.svg'));
         }
-        &.-arbeitsplatz.-rooms {
+        &.-arbeitsplatz {
           background-image: url(image_path('svg/icon-kringel-arbeitsplatz-active.svg'));
         }
-        &.-atelier.-rooms {
+        &.-atelier {
           background-image: url(image_path('svg/icon-kringel-atelier-active.svg'));
         }
-        &.-bueroraum.-rooms {
+        &.-bueroraum {
           background-image: url(image_path('svg/icon-kringel-bueroraum-active.svg'));
         }
-        &.-coaching.-rooms {
+        &.-coaching {
           background-image: url(image_path('svg/icon-kringel-coaching-active.svg'));
         }
-        &.-coworking.-rooms {
+        &.-coworking {
           background-image: url(image_path('svg/icon-kringel-coworking-active.svg'));
         }
-        &.-gastro.-rooms {
+        &.-gastro {
           background-image: url(image_path('svg/icon-kringel-gastro-active.svg'));
         }
-        &.-geschaeftslokal.-rooms {
+        &.-geschaeftslokal {
           background-image: url(image_path('svg/icon-kringel-geschaeftslokal-active.svg'));
         }
-        &.-popup.-rooms {
+        &.-popup {
           background-image: url(image_path('svg/icon-kringel-popup-active.svg'));
         }
-        &.-praxis.-rooms {
+        &.-praxis {
           background-image: url(image_path('svg/icon-kringel-praxis-active.svg'));
         }
-        &.-proberaum.-rooms {
+        &.-proberaum {
           background-image: url(image_path('svg/icon-kringel-proberaum-active.svg'));
         }
-        &.-seminarraum.-rooms {
+        &.-seminarraum {
           background-image: url(image_path('svg/icon-kringel-seminarraum-active.svg'));
         }
-        &.-veranstaltung.-rooms {
+        &.-veranstaltung {
           background-image: url(image_path('svg/icon-kringel-veranstaltung-active.svg'));
         }
-        &.-werkstatt.-rooms {
+        &.-werkstatt {
           background-image: url(image_path('svg/icon-kringel-werkstatt-active.svg'));
         }
-        &.-yoga.-rooms {
+        &.-yoga {
           background-image: url(image_path('svg/icon-kringel-yoga-active.svg'));
         }
-        &.-sonstiges.-rooms {
+        &.-sonstiges {
           background-image: url(image_path('svg/icon-kringel-sonstiges-active.svg'));
+        }
+
+        // Meetings Categories
+        &.-sfs {
+          background-image: url(image_path('svg/icon-kringel-sfs-active.svg'));
+        }
+        &.-feste {
+          background-image: url(image_path('svg/icon-kringel-feste-active.svg'));
+        }
+        &.-tickets {
+          background-image: url(image_path('svg/icon-kringel-tickets-active.svg'));
+        }
+        &.-markt {
+          background-image: url(image_path('svg/icon-kringel-markt-active.svg'));
+        }
+        &.-essentrinken {
+          background-image: url(image_path('svg/icon-kringel-essentrinken-active.svg'));
+        }
+        &.-nachbarschaft {
+          background-image: url(image_path('svg/icon-kringel-nachbarschaft-active.svg'));
+        }
+        &.-klima {
+          background-image: url(image_path('svg/icon-kringel-klima-active.svg'));
+        }
+        &.-kultur {
+          background-image: url(image_path('svg/icon-kringel-kultur-active.svg'));
+        }
+        &.-weiterbildung {
+          background-image: url(image_path('svg/icon-kringel-weiterbildung-active.svg'));
+        }
+        &.-wohlbefinden {
+          background-image: url(image_path('svg/icon-kringel-wohlbefinden-active.svg'));
+        }
+        &.-hobby {
+          background-image: url(image_path('svg/icon-kringel-hobby-active.svg'));
         }
       }
     }
@@ -267,54 +302,88 @@
       }
 
       // Rooms Categories
-      // Rooms Categories
       &.-booking {
         background-image: url(image_path('svg/icon-kringel-kurzzeitmiete.svg'));
       }
-      &.-arbeitsplatz.-rooms {
+      &.-arbeitsplatz {
         background-image: url(image_path('svg/icon-kringel-arbeitsplatz.svg'));
       }
-      &.-atelier.-rooms {
+      &.-atelier {
         background-image: url(image_path('svg/icon-kringel-atelier.svg'));
       }
-      &.-bueroraum.-rooms {
+      &.-bueroraum {
         background-image: url(image_path('svg/icon-kringel-bueroraum.svg'));
       }
-      &.-coaching.-rooms {
+      &.-coaching {
         background-image: url(image_path('svg/icon-kringel-coaching.svg'));
       }
-      &.-coworking.-rooms {
+      &.-coworking {
         background-image: url(image_path('svg/icon-kringel-coworking.svg'));
       }
-      &.-gastro.-rooms {
+      &.-gastro {
         background-image: url(image_path('svg/icon-kringel-gastro.svg'));
       }
-      &.-geschaeftslokal.-rooms {
+      &.-geschaeftslokal {
         background-image: url(image_path('svg/icon-kringel-geschaeftslokal.svg'));
       }
-      &.-popup.-rooms {
+      &.-popup {
         background-image: url(image_path('svg/icon-kringel-popup.svg'));
       }
-      &.-praxis.-rooms {
+      &.-praxis {
         background-image: url(image_path('svg/icon-kringel-praxis.svg'));
       }
-      &.-proberaum.-rooms {
+      &.-proberaum {
         background-image: url(image_path('svg/icon-kringel-proberaum.svg'));
       }
-      &.-seminarraum.-rooms {
+      &.-seminarraum {
         background-image: url(image_path('svg/icon-kringel-seminarraum.svg'));
       }
-      &.-veranstaltung.-rooms {
+      &.-veranstaltung {
         background-image: url(image_path('svg/icon-kringel-veranstaltung.svg'));
       }
-      &.-werkstatt.-rooms {
+      &.-werkstatt {
         background-image: url(image_path('svg/icon-kringel-werkstatt.svg'));
       }
-      &.-yoga.-rooms {
+      &.-yoga {
         background-image: url(image_path('svg/icon-kringel-yoga.svg'));
       }
-      &.-sonstiges.-rooms {
+      &.-sonstiges {
         background-image: url(image_path('svg/icon-kringel-sonstiges.svg'));
+      }
+
+      // Meetings Categories
+      &.-sfs {
+        background-image: url(image_path('svg/icon-kringel-sfs.svg'));
+      }
+      &.-feste {
+        background-image: url(image_path('svg/icon-kringel-feste.svg'));
+      }
+      &.-tickets {
+        background-image: url(image_path('svg/icon-kringel-tickets.svg'));
+      }
+      &.-markt {
+        background-image: url(image_path('svg/icon-kringel-markt.svg'));
+      }
+      &.-essentrinken {
+        background-image: url(image_path('svg/icon-kringel-essentrinken.svg'));
+      }
+      &.-nachbarschaft {
+        background-image: url(image_path('svg/icon-kringel-nachbarschaft.svg'));
+      }
+      &.-klima {
+        background-image: url(image_path('svg/icon-kringel-klima.svg'));
+      }
+      &.-kultur {
+        background-image: url(image_path('svg/icon-kringel-kultur.svg'));
+      }
+      &.-weiterbildung {
+        background-image: url(image_path('svg/icon-kringel-weiterbildung.svg'));
+      }
+      &.-wohlbefinden {
+        background-image: url(image_path('svg/icon-kringel-wohlbefinden.svg'));
+      }
+      &.-hobby {
+        background-image: url(image_path('svg/icon-kringel-hobby.svg'));
       }
     }
   }

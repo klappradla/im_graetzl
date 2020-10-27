@@ -1,0 +1,26 @@
+<!-- SLIDER -->
+<div class="category-slider-container">
+  <div id="category-slider" data-label="Events & Workshops">
+    <!-- RoomOffers with Rental Option-->
+      <div class="-category -special-category" data-id="sfs" data-label="Selbstständige für Selbstständige">
+        <%= image_tag('rt-kurzzeitmieten.jpg', class: 'attachment event_category main_photo categoryImg') %>
+        <div class="cat -sfs"></div>
+        <h3>Selbstständige für Selbstständige</h3>
+        <%= button_tag '', class: 'close-ico' do %>
+          <%= icon_tag "cross" %>
+        <% end %>
+      </div>
+    <!-- /RoomOffers with Rental Option-->
+    <% EventCategory.all.sort_by(&:position).each do |category| %>
+      <div class="-category" data-id="<%= category.id %>" data-label="<%= category.title %>">
+        <%= category_photo_for(category) %>
+        <div class="cat category-<%= category.id %> -<%= category.css_ico_class %> -events"></div>
+        <h3><%= category.title %></h3>
+        <%= button_tag '', class: 'close-ico' do %>
+          <%= icon_tag "cross" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="filter-line"></div>
+</div>

@@ -57,6 +57,12 @@ de:
       location_category:
         one: Kategorie
         other: Kategorien
+      meeting_category:
+        one: SFS Kategorie
+        other: SFS Kategorien
+      event_category:
+        one: Event Kategorie
+        other: Event Kategorien
       contact: Kontakt
       curator:
         one: Grätzlbotschafter
@@ -186,6 +192,9 @@ de:
         ends_at_date: Ende (Datum)
         starts_at_time: Beginn (Zeit)
         ends_at_time: Ende (Zeit)
+        event_categories: Kategorien
+        meeting_category: SFS Kategorie
+        platform_meeting: SFS
       post:
         title: Titel
         content: Text

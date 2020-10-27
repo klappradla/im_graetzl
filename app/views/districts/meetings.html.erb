@@ -8,7 +8,7 @@
   )
 %>
 
-<section class="districts">
+<section class="districts meetings">
   <%= render 'map' %>
   <%= render 'navigation' %>
 
@@ -16,11 +16,16 @@
     Events, Workshops & Veranstaltungen <span>im <%= @district.numeric %>. Bezirk</span>
   </h1>
 
+  <%= render 'filters/event_categories_slider' %>
+
   <%= form_tag meetings_path, method: :get, remote: true, class: 'cards-filter' do %>
+    <%= hidden_field_tag :category_id, @category.try(:id) %>
+    <%= hidden_field_tag :special_category_id, @special_category %>
     <div class="filter-selection-text-jbox">
-      Zeige mir <%= link_to 'alle Events', '#filter-modal-type', data: { no_filter_label: 'alle Events'} %>,
+      Zeige mir <%= link_to 'online & offline Events', '#filter-modal-type', data: { no_filter_label: 'online & offline Events'} %>,
+      aus <%= link_to 'allen Kategorien', 'javascript:', data: { no_filter_label: 'allen Kategorien'}, class: 'plain-link category-slider-label' %>,
       in <%= link_to @district.zip_name, '#filter-modal-district', data: { no_filter_label: 'ganz Wien'}, class: 'filter-modal-district filter-applied' %>
-      - Zur Aktion <%= link_to 'Selbstständige für Selbstständige', platform_meetings_wien_path, class: 'plain-link' %>
+      <!-- - Zur Aktion <%= link_to 'Selbstständige für Selbstständige', platform_meetings_wien_path, class: 'plain-link' %>-->
     </div>
     <div id="filter-modal-type" class="filter-modal-jbox">
       <%= render 'filters/meeting_type' %>

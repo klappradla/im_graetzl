@@ -178,9 +178,15 @@ class MeetingsController < ApplicationController
       meetings = meetings.where(graetzl_id: graetzl_ids).or(meetings.online_meeting)
     end
 
-    if params[:params_category_id].present?
-      meetings = meetings.where(meeting_category_id: params[:params_category_id])
-    elsif params[:meeting_category_id].present?
+    if params[:special_category_id].present? && params[:special_category_id] == 'sfs'
+      meetings = meetings.platform_meeting
+    end
+
+    if params[:category_id].present?
+      meetings = meetings.joins(:event_categories).where(event_categories: {id: params[:category_id]})
+    end
+
+    if params[:meeting_category_id].present?
       meetings = meetings.where(meeting_category_id: params[:meeting_category_id])
     end
 
@@ -205,6 +211,7 @@ class MeetingsController < ApplicationController
         :platform_meeting,
         :online_meeting,
         :amount,
+        event_category_ids: [],
         meeting_additional_dates_attributes: [:id, :starts_at_date, :starts_at_time, :ends_at_time, :_destroy],
         platform_meeting_join_request_attributes: [:id, :status, :request_message, :_destroy],
         address_attributes: [:id, :description, :online_meeting_description, :street_name, :street_number, :zip, :city, :coordinates]

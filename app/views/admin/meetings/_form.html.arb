@@ -5,10 +5,10 @@ active_admin_form_for [:admin, resource] do |f|
       inputs 'Basic Info' do
         input :graetzl, collection: Graetzl.order(:name), include_blank: false, input_html: { :class => 'admin-filter-select'}
         input :name
-        input :meeting_category, include_blank: true
         input :state, as: :select, collection: Meeting.states.keys, include_blank: false
         input :slug unless f.object.new_record?
         input :user, collection: User.admin_select_collection, include_blank: "Select User", input_html: { class: 'admin-filter-select'}
+        input :event_categories, collection: EventCategory.all, input_html: { :class => 'admin-filter-select'}
         input :location, collection: Location.order(:name), include_blank: true, input_html: { :class => 'admin-filter-select'}
         input :group, collection: Group.order(:title), include_blank: true, input_html: { :class => 'admin-filter-select'}
         input :description
@@ -19,8 +19,9 @@ active_admin_form_for [:admin, resource] do |f|
         input :starts_at_time, ignore_date: true
         input :ends_at_time, ignore_date: true
         input :approved_for_api
-        input :platform_meeting
         input :online_meeting
+        input :platform_meeting
+        input :meeting_category, include_blank: true
       end
       inputs 'Address', for: [:address, (f.object.address || f.object.build_address)] do |a|
         a.input :street_name

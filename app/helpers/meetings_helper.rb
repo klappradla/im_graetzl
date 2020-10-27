@@ -2,7 +2,7 @@ module MeetingsHelper
 
   def filter_meeting_types
     [
-      ['Alle Events', 'alle Events', ''],
+      ['Alle Events', 'online & offline Events', ''],
       ['Online Events', 'online Events', 'online'],
       ['Offline Events', 'offline Events', 'offline'],
     ]

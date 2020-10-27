@@ -84,6 +84,11 @@
     }
     .nav-city-link, .nav-location-link {
       @include respond-to("<large") { display: none; }
+      span {
+        @include ellipsis;
+        max-width: 160px;
+      }
+
     }
   }
 

@@ -48,16 +48,6 @@
     <%= render 'groups/action_card', graetzl: @graetzl, view_all: true, create_link: true %>
   </div>
 </div>
-<div class="block-ideas">
-  <div class="hl-subtext">
-    <h1>Mach mit - <span>Ideen &amp; Initiativen</span> im Grätzl</h1>
-    <p>Entdecke, was sich BewohnerInnen fürs Grätzl <%= @graetzl.name %> wünschen und welche Ideen im Raum stehen</p>
-  </div>
-  <div class="cardBoxCollection -tripple -morelink">
-    <%= render @activity_sample.posts %>
-    <%= render 'user_posts/action_card', graetzl: @graetzl, view_all: true %>
-  </div>
-</div>
 <div class="block-zuckerls">
   <div class="hl-subtext">
     <h1>Jeden Monat neu - <span>Zuckerl &amp; Angebote</span> im Grätzl</h1>

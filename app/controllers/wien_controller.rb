@@ -19,6 +19,8 @@ class WienController < ApplicationController
 
   def meetings
     @districts = District.order(zip: :asc)
+    @category = EventCategory.find_by(id: params[:category]) if params[:category].present?
+    @special_category = params[:special_category] if params[:special_category].present?
   end
 
   def rooms
@@ -43,6 +45,6 @@ class WienController < ApplicationController
   end
 
   def platform_meetings
-    @params_category = MeetingCategory.find_by(id: params[:category])
+    @meeting_category = MeetingCategory.find_by(id: params[:category])
   end
 end

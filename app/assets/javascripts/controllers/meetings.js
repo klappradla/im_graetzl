@@ -243,6 +243,24 @@ APP.controllers.meetings = (function() {
         placeholder: 'User auswählen',
       });
 
+      $(".event-categories input").on("change", function() {
+        maxCategories(); // init on Change
+      });
+
+      maxCategories(); // init on Load
+
+    }
+
+    function maxCategories() {
+      if ($(".event-categories input:checked").length >= 3) {
+        $(".event-categories input:not(:checked)").each(function() {
+          $(this).prop("disabled", true);
+          $(this).parents(".input-checkbox").addClass("disabled");
+        });
+      } else {
+        $(".event-categories input").prop("disabled", false);
+        $(".event-categories .input-checkbox").removeClass("disabled");
+      }
     }
 
     return {

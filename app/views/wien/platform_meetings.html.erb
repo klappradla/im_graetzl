@@ -42,11 +42,11 @@
   </div>
 
   <%= form_tag meetings_path(platform_meeting: true, per_page: 75), method: :get, remote: true, class: 'cards-filter' do %>
-    <%= hidden_field_tag :params_category_id, @params_category.try(:id) %>
+    <%= hidden_field_tag :meeting_category_id, @meeting_category.try(:id) %>
     <div class="input-select label-select">
       <%= select_tag(:meeting_category_id, ("
           <option value=''>Alle anzeigen</option>" +
-          options_from_collection_for_select(MeetingCategory.all.order(:starts_at_date), :id, :category_width_date_range, (@params_category.try(:id) ? @params_category.try(:id) : actual_meeting_category))).html_safe, id: 'meeting-categories', multiple: false) %>
+          options_from_collection_for_select(MeetingCategory.all.order(:starts_at_date), :id, :category_width_date_range, (@meeting_category.try(:id) ? @meeting_category.try(:id) : actual_meeting_category))).html_safe, id: 'meeting-categories', multiple: false) %>
     </div>
   <% end %>
 
@@ -56,7 +56,7 @@
       <%= render 'meetings/action_card_platform_meeting' %>
     </div>
     <!-- Insert Featured Card -->
-    
+
     <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'meetings-paginate-link' }, rel: 'nofollow' %>
   </div>
 

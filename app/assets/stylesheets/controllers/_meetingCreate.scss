@@ -84,10 +84,13 @@
 }
 
 #meeting-platform-meeting-fields {
-
   .question {
     text-align: center;
     margin-bottom: 10px;
+  }
+  .hint {
+    text-align: center;
+    margin-top: 10px;
   }
 }
 
@@ -132,5 +135,20 @@
   .imgCrop {
     width: 450px;
     height: 250px;
+  }
+}
+
+.event-categories {
+  overflow: hidden;
+  margin: 2rem 0 2rem;
+  .input-checkbox {
+    float: left;
+    width: 100%;
+    @include respond-to(">=small") {
+      width: 50%;
+    }
+    @include respond-to(">=medium") {
+      width: 33%;
+    }
   }
 }

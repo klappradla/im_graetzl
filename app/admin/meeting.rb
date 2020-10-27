@@ -6,7 +6,7 @@ ActiveAdmin.register Meeting do
 
   scope :all, default: true
   scope :upcoming
-  scope 'Online Event', :online_meeting
+  #scope 'Online Event', :online_meeting
   scope 'SFS approved', :platform_meeting
   scope 'SFS pending', :platform_meeting_pending
   scope 'SFS processing', :platform_meeting_processing
@@ -14,6 +14,7 @@ ActiveAdmin.register Meeting do
   #scope :active
   #scope :cancelled
 
+  filter :event_categories
   filter :meeting_category, collection: proc { MeetingCategory.order(:starts_at_date).pluck(:title, :id) }, include_blank: true, input_html: { class: 'admin-filter-select'}
   filter :graetzl, collection: proc { Graetzl.order(:name).pluck(:name, :id) }, include_blank: true, input_html: { class: 'admin-filter-select'}
   filter :users, collection: proc { User.admin_select_collection }, include_blank: true, input_html: { class: 'admin-filter-select'}
@@ -176,6 +177,7 @@ ActiveAdmin.register Meeting do
     :approved_for_api,
     :platform_meeting,
     :online_meeting,
+    event_category_ids: [],
     address_attributes: [
       :id,
       :street_name,

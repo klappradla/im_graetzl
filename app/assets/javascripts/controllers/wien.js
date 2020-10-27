@@ -43,6 +43,10 @@ APP.controllers.wien = (function() {
           APP.components.categorySlider.init($('#category-slider'));
         }
 
+        if ($("section.meetings").exists()) {
+          APP.components.categorySlider.init($('#category-slider'));
+        }
+
         initMobileNav();
     }
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_14_211829) do
+ActiveRecord::Schema.define(version: 2020_10_08_100635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -220,6 +220,23 @@ ActiveRecord::Schema.define(version: 2020_09_14_211829) do
     t.geometry "area", limit: {:srid=>0, :type=>"st_polygon"}
     t.string "slug", limit: 255
     t.index ["slug"], name: "index_districts_on_slug"
+  end
+
+  create_table "event_categories", force: :cascade do |t|
+    t.string "title"
+    t.string "css_ico_class"
+    t.string "main_photo_id"
+    t.string "main_photo_content_type"
+    t.integer "position", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "event_categories_meetings", id: false, force: :cascade do |t|
+    t.bigint "event_category_id", null: false
+    t.bigint "meeting_id", null: false
+    t.index ["event_category_id"], name: "index_event_categories_meetings_on_event_category_id"
+    t.index ["meeting_id"], name: "index_event_categories_meetings_on_meeting_id"
   end
 
   create_table "friendly_id_slugs", id: :serial, force: :cascade do |t|

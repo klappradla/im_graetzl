@@ -6,6 +6,8 @@ class GraetzlsController < ApplicationController
   end
 
   def meetings
+    @category = EventCategory.find_by(id: params[:category]) if params[:category].present?
+    @special_category = params[:special_category] if params[:special_category].present?
   end
 
   def locations
