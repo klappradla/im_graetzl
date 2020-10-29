@@ -29,4 +29,14 @@ namespace :scheduled do
     end
 
   end
+
+  desc 'Send Info Mail to Upcoming Meetings without Category'
+  task info_mail_missing_meeting_category: :environment do
+
+      Meeting.upcoming.includes(:event_categories).where(event_categories: {id: nil}).find_each do |meeting|
+        MeetingMailer.missing_meeting_category(meeting).deliver_now
+      end
+
+  end
+
 end

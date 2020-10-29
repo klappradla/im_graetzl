@@ -16,4 +16,14 @@ class MeetingMailer < ApplicationMailer
     )
   end
 
+  def missing_meeting_category(meeting)
+    @meeting = meeting
+    headers(
+      "X-MC-Tags" => "info-mail-missing-meeting-category",
+      "X-MC-GoogleAnalytics" => 'staging.imgraetzl.at, www.imgraetzl.at',
+      "X-MC-GoogleAnalyticsCampaign" => "info-mail-missing-meeting-category",
+    )
+    mail(to: @meeting.user.email, subject: "Kategorie zuweisen für '#{@meeting.name}'")
+  end
+
 end
