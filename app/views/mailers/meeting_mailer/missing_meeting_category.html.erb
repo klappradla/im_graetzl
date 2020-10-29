@@ -31,12 +31,12 @@
   <tbody>
     <tr>
       <td valign="top" class="mcnTextContent" style="padding-top:0; padding-left:18px; padding-bottom:18px; padding-right:18px;">
-        Dein Treffen "<%= link_to @meeting.name, graetzl_meeting_url(@meeting.graetzl, @meeting), target:'_blank', style: "color:#ec776a;" %>" ist noch keiner Kategorie zugewiesen. Folgende Kategorien stehen dir ab sofort zur Auswahl - Einfach Treffen bearbeiten und Kategorie(n) zuweisen.
+        Dein Treffen "<%= link_to @meeting.name, graetzl_meeting_url(@meeting.graetzl, @meeting), target:'_blank', style: "color:#ec776a;" %>" ist noch keiner Kategorie zugewiesen. Folgende Kategorien stehen dir ab sofort zur Auswahl - Einfach einloggen, Treffen bearbeiten und Kategorie(n) zuweisen.
       </td>
     </tr>
     <tr>
       <td align="center" style="text-align:center;">
-        <%= link_to edit_meeting_url(@meeting), target:'_blank' do %>
+        <%= link_to meetings_wien_url, target:'_blank' do %>
           <%= image_tag 'https://mcusercontent.com/3accfa3feb5f05b82bd1fddc6/images/5be552a3-b8b4-4d89-95c9-044b18369648.jpg', style: "width:564px; margin-bottom:25px;", class: "mcnImage" %>
         <% end %>
       </td>
