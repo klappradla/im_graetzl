@@ -23,7 +23,7 @@ class MeetingMailer < ApplicationMailer
       "X-MC-GoogleAnalytics" => 'staging.imgraetzl.at, www.imgraetzl.at',
       "X-MC-GoogleAnalyticsCampaign" => "info-mail-missing-meeting-category",
     )
-    mail(to: @meeting.user.email, subject: "Kategorie zuweisen für '#{@meeting.name}'")
+    mail(to: @meeting.user.email, subject: "Neu: Kategorie zuweisen für '#{@meeting.name}'")
   end
 
 end
