@@ -2,7 +2,7 @@
   <tbody>
 
     <tr>
-      <td valign="top" class="mcnTextContent" style="padding-top:0; padding-left:18px; padding-bottom:18px; padding-right:18px;">
+      <td valign="top" class="mcnTextContent" style="padding-top:0; padding-left:18px; padding-right:18px;">
         <table>
           <tr>
             <td>
@@ -14,7 +14,7 @@
               <br>
               <%= I18n.localize(notification.meeting.starts_at_date, format:'%A %d. %B') if notification.meeting.starts_at_date.present? %>
               <% if notification.meeting.meeting_additional_dates.present? %>
-              <br><em>+ <%= notification.meeting.meeting_additional_dates.count %> weitere Termine</em>
+              <em>+ <%= notification.meeting.meeting_additional_dates.count %> weitere</em>
               <% end %>
             </td>
           </tr>
@@ -24,7 +24,7 @@
           <%= image_tag Notifications::ImageService.new.cover_photo_url(notification.meeting), style: "width:100%; padding-bottom:10px; padding-top:10px;", class: "mcnImage" %>
         <% end %>
 
-        <p><%= notification.meeting.name.truncate(70, separator: ' ') %></p>
+        <p style="min-height:55px;"><%= notification.meeting.name.truncate(70, separator: ' ') %></p>
       </td>
     </tr>
 
