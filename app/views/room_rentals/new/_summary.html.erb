@@ -42,7 +42,7 @@
         <span class="payment-method block">
           <%= payment_method_label(@room_rental.payment_method) %> <br>
           <% if @room_rental.payment_method == 'card' %>
-            endet auf <%= @room_rental.payment_card_last4 %> <span class="card-last4"></span> 
+            endet auf <%= @room_rental.payment_card_last4 %> <span class="card-last4"></span>
           <% end %>
         </span>
       </p>
@@ -68,5 +68,7 @@
     Sobald <%= @room_rental.owner.first_name %> deine Anfrage bearbeitet, erhältst du eine Nachricht im Messenger (und per E-Mail).
   </div>
 
-  <%= link_to 'Zum Messenger', messenger_path(thread_id: @room_rental.user_message_thread.id), class: "btn-primary" %>
+  <% if @room_rental.user_message_thread %>
+    <%= link_to 'Zum Messenger', messenger_path(thread_id: @room_rental.user_message_thread.id), class: "btn-primary" %>
+  <% end %>
 </div>

@@ -68,6 +68,7 @@
     Sobald <%= @tool_rental.owner.first_name %> deine Anfrage bearbeitet, erhältst du eine Nachricht im Messenger (und per E-Mail).
   </div>
 
-  <%= link_to 'Zum Messenger', messenger_path(thread_id: @tool_rental.user_message_thread.id), class: "btn-primary" %>
-
+  <% if @tool_rental.user_message_thread %>
+    <%= link_to 'Zum Messenger', messenger_path(thread_id: @tool_rental.user_message_thread.id), class: "btn-primary" %>
+  <% end %>
 </div>

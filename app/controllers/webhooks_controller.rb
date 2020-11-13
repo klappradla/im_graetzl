@@ -21,6 +21,12 @@ class WebhooksController < ApplicationController
       RoomRentalService.new.confirm_eps_payment(room_rental, payment_intent)
       return
     end
+
+    tool_rental = ToolRental.find_by(stripe_payment_intent_id: payment_intent.id)
+    if tool_rental && payment_intent.payment_method_types.include?('eps')
+      ToolRentalService.new.confirm_eps_payment(tool_rental, payment_intent)
+      return
+    end
   end
 
 end
