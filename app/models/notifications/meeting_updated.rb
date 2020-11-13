@@ -8,11 +8,11 @@ class Notifications::MeetingUpdated < Notification
   end
 
   def self.description
-    'Änderungen eines Treffens an dem ich interessiert bin'
+    'Änderungen eines Treffens an dem ich teilnehme'
   end
 
   def mail_subject
-    'Es gibt Änderungen bei einem Treffen an dem du interessiert bist'
+    'Es gibt Änderungen bei einem Treffen an dem du teilnimmst'
   end
 
   def meeting

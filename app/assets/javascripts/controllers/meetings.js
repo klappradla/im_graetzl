@@ -152,14 +152,14 @@ APP.controllers.meetings = (function() {
       // Analytics
       $('.meeting-attend-btn').on('click', function() {
         gtag(
-          'event', 'Click :: Interessiert', {
+          'event', 'Click :: Teilnehmen', {
           'event_category': 'Meeting'
         });
       });
 
       $('.meeting-unattend-btn').on('click', function() {
         gtag(
-          'event', 'Click :: Nicht mehr Interessiert', {
+          'event', 'Click :: Nicht mehr teilnehmen', {
           'event_category': 'Meeting'
         });
       });

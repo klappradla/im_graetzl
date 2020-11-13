@@ -21,7 +21,7 @@ namespace :scheduled do
 
         # Update Activity for this Meeting if last Activity is greather then 1 week ago
         if meeting.activities.where(key: 'meeting.create').present? && meeting.activities.where(key: 'meeting.create').last.created_at < 1.weeks.ago
-          meeting.activities.where(key: 'meeting.create').destroy_all
+          # meeting.activities.where(key: 'meeting.create').destroy_all
           meeting.create_activity :create, owner: meeting.user, cross_platform: meeting.online_meeting?
         end
 

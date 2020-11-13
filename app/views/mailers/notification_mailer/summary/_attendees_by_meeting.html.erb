@@ -3,7 +3,7 @@
     <tr>
       <td valign="top" class="mcnTextContent" style="padding-top:0; padding-left:18px; padding-bottom:9px; padding-right:18px;">
         <p>
-          <em>Interessiert am Treffen:</em><br>
+          <em>Teilnehmer am Treffen:</em><br>
           <%= link_to meeting.name.truncate(70, separator: ' '), graetzl_meeting_url(meeting.graetzl, meeting), style:"color:#f48a85;" %>
         </p>
       </td>
@@ -20,8 +20,6 @@
               <td>&nbsp;</td>
               <td style="font-size:12px; line-height:16px;">
                 <%= link_to notification.activity.owner.full_name, user_url(notification.activity.owner), style: "color:#ec776a; font-size:12px;" %>
-                <br>
-                <%= notification.activity.owner.email %>
               </td>
             </tr>
           </table>

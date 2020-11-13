@@ -1,5 +1,5 @@
 <% content_for(:above_title, "Hallo #{@user.first_name},") %>
-<% content_for(:title, "Neuer Interessent an deinem Treffen.") %>
+<% content_for(:title, "Neuer Teilnehmer an deinem Treffen.") %>
 <% going_to = @notification.meeting.going_tos.where(user: @notification.activity.owner).last %>
 
 
@@ -41,7 +41,7 @@
           <em>
             <strong>
             <%= link_to @notification.activity.owner.full_name, user_url(@notification.activity.owner), style: "color:#f48a85; font-weight:bold;" %>
-            ist interessiert.
+            nimmt teil.
             </strong>
           </em>
           <% if going_to.going_to_date %>

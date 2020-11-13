@@ -41,7 +41,7 @@
     <% if !user_signed_in? %>
       <div class="btn-going-to">
         <%= button_to new_user_session_path, method: :get, class: 'btn-userCallToAction' do %>
-          <span><%= image_tag 'avatar/user/default.png', class: 'img-round' %> Am Treffen interessiert</span>
+          <span><%= image_tag 'avatar/user/default.png', class: 'img-round' %> Am Treffen teilnehmen</span>
         <% end %>
       </div>
     <% elsif current_user == meeting.user %>
@@ -65,13 +65,13 @@
     <% elsif meeting.attending?(current_user) %>
       <div class="btn-going-to">
         <%= button_to [:unattend, meeting], method: :post, class: 'btn-userCallToAction meeting-unattend-btn' do %>
-          <span><%= avatar_for current_user %> Nicht mehr interessiert</span>
+          <span><%= avatar_for current_user %> Nicht mehr teilnehmen</span>
         <% end %>
       </div>
     <% else %>
       <div class="btn-going-to">
         <%= button_to 'javascript:void(0);', class: 'btn-userCallToAction', id: 'attendMeeting' do %>
-          <span><%= avatar_for current_user %> Am Treffen interessiert</span>
+          <span><%= avatar_for current_user %> Am Treffen teilnehmen</span>
         <% end %>
       </div>
     <% end %>

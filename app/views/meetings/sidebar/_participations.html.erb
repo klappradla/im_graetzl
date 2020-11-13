@@ -1,8 +1,6 @@
 <div class="participants">
-  <% if meeting.attendees.size > 0 && meeting.paid? %>
-      <p class="userCount"><span><%= meeting.attendees.size %></span> nehmen teil</p>
-  <% elsif meeting.attendees.size > 0 %>
-      <p class="userCount"><span><%= meeting.attendees.size %></span> sind interessiert</p>
+  <% if meeting.attendees.size > 0 %>
+    <p class="userCount"><span><%= meeting.attendees.size %></span> nehmen teil</p>
   <% end %>
   <div class="portraitCollection">
 

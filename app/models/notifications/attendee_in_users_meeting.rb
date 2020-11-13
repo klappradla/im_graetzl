@@ -13,11 +13,11 @@ class Notifications::AttendeeInUsersMeeting < Notification
   end
 
   def self.description
-    'Mein erstelltes Treffen hat einen neuen Interessenten'
+    'Mein erstelltes Treffen hat einen neuen Teilnehmer'
   end
 
   def mail_subject
-    "#{activity.owner.username} ist an deinem Treffen interessiert."
+    "#{activity.owner.username} nimmt an deinem Treffen teil."
   end
 
   def meeting

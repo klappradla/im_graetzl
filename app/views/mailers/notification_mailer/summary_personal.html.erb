@@ -3,7 +3,7 @@
 <% content_for(:subtitle, "für dich zusammengefasst:") %>
 
 <% if @notifications[:attendees].present? %>
-  <%= render 'summary/block_header', title: 'An deinem Treffen interessiert' %>
+  <%= render 'summary/block_header', title: 'Teilnehmer an deinem Treffen' %>
   <% @notifications[:attendees].group_by(&:meeting).each do |meeting, notifications| %>
     <%= render "summary/attendees_by_meeting", meeting: meeting, notifications: notifications %>
   <% end %>
@@ -32,3 +32,6 @@
 <% end %>
 
 <!-- Insert Featured Content in all Notification Mails -->
+<% if @period == 'weekly' %>
+  <%= render 'featured/gewerbeflaechen_umfrage' %>
+<% end %>
