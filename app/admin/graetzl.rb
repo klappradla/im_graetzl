@@ -2,6 +2,7 @@ ActiveAdmin.register Graetzl do
   include ViewInApp
   menu parent: 'Grätzl', priority: 2
   includes :districts
+  actions :all, except: [:destroy]
 
   filter :name
   filter :users_count

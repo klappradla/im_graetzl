@@ -24,7 +24,7 @@ ActiveAdmin.register RoomDemand do
 
   permit_params :user_id, :slogan, :location_id, :needed_area, :demand_description,
     :personal_description, :wants_collaboration, :demand_type, :slug, :avatar, :remove_avatar,
-    :first_name, :last_name, :website, :email, :phone, :status,
+    :first_name, :last_name, :website, :email, :phone, :status, graetzl_ids: [],
     room_category_ids: []
   # Within app/admin/resource_name.rb
   # Controller pagination overrides

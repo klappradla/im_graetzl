@@ -28,6 +28,11 @@ active_admin_form_for [:admin, resource] do |f|
       input :email
       input :phone
     end
+
+    inputs "Graetzls" do
+      input :graetzls, as: :select, input_html: { class: 'admin-filter-select'}
+    end
+
   end
   actions
 end
