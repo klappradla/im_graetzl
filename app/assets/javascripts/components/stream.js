@@ -66,9 +66,11 @@ APP.components.stream = (function() {
         $('.stream .formBlocker').remove();
 
         var $markup = $('<div class="formBlocker">' +
-            'Du musst eingeloggt sein, um einen Kommentar zu verfassen.<br />' +
-            '<a href="/users/login">Zum Login</a> | <a href="/users/registrierung">Zur Registrierung</a>' +
+            '<div class="wrp">' +
+            '<div>Du musst eingeloggt sein, um einen Kommentar zu verfassen.</div>' +
+            '<div><a href="/users/login">Zum Login</a> | <a href="/users/registrierung">Zur Registrierung</a></div>' +
             '<span class="close"></span>' +
+            '</div>' +
             '</div>');
 
         $container.find('textarea').prop('disabled', true);
