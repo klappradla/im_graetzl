@@ -57,7 +57,7 @@ APP.components.stream = (function() {
             .addClass('js-initialized')
             .find('textarea')
             .autogrow()
-            .on("focusin", function(){
+            .on("focusin touchstart", function(){
                 (APP.utils.isLoggedIn()) ? $parent.addClass("is-focused") : injectFormBlocker($parent);
             });
     }
