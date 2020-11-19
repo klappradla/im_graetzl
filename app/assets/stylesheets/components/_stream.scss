@@ -470,28 +470,34 @@
 
 .stream .formBlocker {
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  padding: 10px;
-  background-color: rgba($color-ambient-bright,0.75);
   z-index: 10;
-  h5 {
-    @include font-size-secondaryFont('small');
-    font-family: $font-secondary;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  .ctrl {
-    display: flex;
-    justify-content: center;
+  @include font-size-primaryFont('large');
+  border: 1px solid $color-ambient-grey-light;
+  border-radius: 8px;
+  padding:20px;
+  font-style: italic;
+  background-color: rgba(#FEF6DF,0.90);
+  color: #cd891b;
+  a {
+    color: #cd891b;
   }
   .close {
-    margin-left: 20px;
-    border-color: $color-ambient-grey;
-    color: $color-ambient-grey;
+    cursor: pointer;
+    &::after {
+      content: '';
+      background-image: url(image_path('svg/icon-close.svg'));
+      width: 28px;
+      height: 28px;
+      top: 5px;
+      right: 5px;
+      position: absolute;
+      z-index: 11;
+    }
   }
+
 }
 
 // ---------------------------------------------------------------------- plain entry page

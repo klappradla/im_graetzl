@@ -54,6 +54,15 @@ APP.controllers.locations = (function() {
           $( "#" + hash + " .show-all-comments-link" ).click();
         }
 
+        var roomGallery = new jBox('Image', {
+          addClass:'jBoxGallery',
+          imageCounter:true,
+          preloadFirstImage:true,
+          closeOnEsc:true,
+          createOnInit:true,
+          animation:{open: 'zoomIn', close: 'zoomOut'},
+        });
+
         enquire
             //mobile mode
             .register("screen and (max-width:" + APP.config.majorBreakpoints.large + "px)", {
