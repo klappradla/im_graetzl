@@ -1,6 +1,6 @@
 ActiveAdmin.register Graetzl do
   include ViewInApp
-  menu priority: 2
+  menu parent: 'Grätzl', priority: 2
   includes :districts
 
   filter :name

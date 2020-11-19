@@ -5,9 +5,9 @@ namespace :db do
   task update_graetzls: :environment do
 
     def query_api
-      access_token = 'pk.eyJ1IjoicGVja29taW5nbyIsImEiOiJoVHNQM29zIn0.AVmpyDYApR5mryMCJB1ryw'
-      map_id = 'peckomingo.pgi7pcmh'
-      query = "http://api.tiles.mapbox.com/v4/#{map_id}/features.json?access_token=#{access_token}"
+      access_token = 'pk.eyJ1IjoibWFsYW5vNzgiLCJhIjoiY2tnMjBmcWpwMG1sNjJ4cXdoZW9iMWM5NyJ9.z-AgKIQ_Op1P4aeRh_lGJw'
+      map_id = 'ckh0g7hga08kl26o5b1tu57nz'
+      query = "https://api.mapbox.com/datasets/v1/malano78/#{map_id}/features?access_token=#{access_token}"
       uri = URI.parse(URI.encode(query))
       HTTParty.get uri
     rescue HTTParty::Error
@@ -15,7 +15,7 @@ namespace :db do
     end
 
     def parse_features(geojson)
-      features = JSON.parse(geojson)['features']
+      features = JSON.parse(geojson.body)['features']
       features.each do |feature|
         if feature['geometry'].present?
           area = RGeo::GeoJSON.decode(feature['geometry'], json_parser: :json)

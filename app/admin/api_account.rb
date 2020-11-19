@@ -1,5 +1,5 @@
 ActiveAdmin.register ApiAccount do
-  menu parent: 'Weitere Einstellungen'
+  menu parent: 'Einstellungen'
 
   config.filters = false
 
