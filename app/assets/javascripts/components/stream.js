@@ -74,6 +74,7 @@ APP.components.stream = (function() {
             '</div>');
 
         $container.find('textarea').prop('disabled', true);
+        $container.find('textarea').blur();
         $container.append($markup);
         $markup.hide().fadeIn();
         $markup.on('click', function(e) { e.stopPropagation(); });

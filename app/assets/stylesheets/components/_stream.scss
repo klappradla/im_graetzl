@@ -474,7 +474,9 @@
     height:100%;
     align-content: flex-end;
     flex-wrap:wrap;
-    justify-content: center;
+    @include respond-to(">=medium") {
+      //justify-content: center;
+    }
   }
   position: absolute;
   bottom: 5px;
@@ -487,7 +489,7 @@
   border-radius: 8px;
   padding:20px;
   font-style: italic;
-  background-color: rgba(#FEF6DF,0.90);
+  background-color: rgba(#FEF6DF,1.0);
   color: #cd891b;
   a {
     color: #cd891b;
