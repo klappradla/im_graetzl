@@ -27,9 +27,12 @@ section.location-form {
     }
   }
 
+  .-description textarea {
+    min-height: 150px;
+  }
+
   .ctrl-graetzlselect {
     margin-bottom: 30px;
   }
 
 }
-

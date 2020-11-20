@@ -4,33 +4,38 @@
 
     <div class="input-field">
       <%= address_fields.label :street_name do %>
+          <%= icon_tag "map-location" %>
           <span>Straße</span>
       <% end %>
-      <%= address_fields.text_field :street_name %>
+      <%= address_fields.text_field :street_name, placeholder: 'Straße' %>
     </div>
 
     <div class="input-field">
       <%= address_fields.label :street_number do %>
+          <%= icon_tag "map-location" %>
           <span>Hausnummer</span>
       <% end %>
-      <%= address_fields.text_field :street_number %>
+      <%= address_fields.text_field :street_number, placeholder: 'Nummer' %>
     </div>
 
-    <div class="input-field">
-      <%= address_fields.label :zip do %>
-          <span>Postleitzahl</span>
-      <% end %>
-      <%= address_fields.text_field :zip %>
-    </div>
+    <div class="form-columns">
 
-    <div class="input-field">
-      <%= address_fields.label :city do %>
-          <span>Ort</span>
-      <% end %>
-      <%= address_fields.text_field :city %>
-    </div>
+      <div class="input-field">
+        <%= address_fields.label :zip do %>
+            <%= icon_tag "map-location" %>
+            <span>Postleitzahl</span>
+        <% end %>
+        <%= address_fields.text_field :zip, placeholder: 'PLZ' %>
+      </div>
 
-    <%= address_fields.hidden_field :_destroy %>
-    <%= link_to 'Adresse entfernen', '#', class: 'remove_address_fields btn-secondary -grey'%>
+      <div class="input-field">
+        <%= address_fields.label :city do %>
+            <%= icon_tag "map-location" %>
+            <span>Stadt</span>
+        <% end %>
+        <%= address_fields.text_field :city, placeholder: 'Wien' %>
+      </div>
+
+    </div>
 
 <% end %>

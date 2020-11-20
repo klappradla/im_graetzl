@@ -1,0 +1,45 @@
+<% graetzl = Graetzl.memoized(@location.graetzl_id) %>
+<div class="user-tooltip-wrp">
+
+  <div class="tt-img">
+    <%= link_to [graetzl, @location] do %>
+      <%= attachment_image_tag @location, :avatar, :fill, 200, 200, fallback: 'avatar/location/200x200.png', class: 'img-square' %>
+    <% end %>
+  </div>
+
+  <div class="tt-content">
+    <%= link_to @location.name, [graetzl, @location], class:'username' %>
+    <div class="tt-line -category">
+      <%= @location.location_category.name %>
+    </div>
+    <% if @user %>
+      <div class="tt-line -boss">
+        <%= avatar_for @user %>
+        <%= link_to @user.full_name, @user %>
+      </div>
+      <% if current_user != @user %>
+        <div class="tt-line -messenger">
+          <%= icon_tag "mail-1" %>
+          <%= link_to "Nachricht senden", messenger_start_thread_path(user_id: @user.id) %>
+        </div>
+      <% end %>
+      <div class="tt-line -profile">
+        <%= icon_tag "user-avatar" %>
+        <%= link_to "Zum Profil", @user %>
+      </div>
+    <% end %>
+  </div>
+
+  <% if !@location.slogan.blank? %>
+    <div class="tt-bio">
+      <%= @location.slogan.truncate(120) %>
+    </div>
+  <% end %>
+
+  <% if params[:additional].present? %>
+    <div class="tt-additional">
+      <%= params[:additional].html_safe %>
+    </div>
+  <% end %>
+
+</div>

@@ -15,7 +15,7 @@
 
   <div class="hl-subtext -cards">
     <h1><em>Grätzlzuckerl</em> im <%= I18n.localize Time.now.end_of_month, format: '%B' %></h1>
-    <p>Tolle Angebote, Gutscheine & Rabatte von Selbständigen & Geschäften ums Eck</p>
+    <p>Tolle Angebote, Gutscheine & Rabatte von Selbständigen & Geschäften ums Eck <%= render 'shared/questionmarklink', hint_url: info_infos_zum_graetzlzuckerl_path %></p>
   </div>
 
   <%= form_tag zuckerls_path, method: :get, remote: true, class: 'cards-filter' do %>

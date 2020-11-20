@@ -36,7 +36,7 @@
   <div class="cardBoxContent">
     <% if meeting.location && meeting.location.users.include?(meeting.user) %>
       <%= link_to [Graetzl.memoized(meeting.location.graetzl_id), meeting.location], class: 'initiator' do %>
-        <%= avatar_for(meeting.location) %>
+        <%= location_tooltip_avatar meeting.location %>
         <span><%= meeting.location.name %></span>
       <% end %>
     <% elsif meeting.user %>

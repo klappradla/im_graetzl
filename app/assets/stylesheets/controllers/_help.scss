@@ -420,6 +420,59 @@ section.help {
         display: block;
       }
     }
+
+    &.-zuckerl .-top {
+      .zuckerlwrp {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      @include respond-to(">=medium") {
+        .left {
+          width:68%;
+          padding-right: 10px;
+        }
+        .right {
+          width:32%;
+          padding-left:10px;
+        }
+      }
+
+      .zuckerlcard {
+        transform: rotate(1.3deg);
+        border:1px solid rgba($color-ambient-mint-light, 1);
+        padding: 12px;
+        background-color: rgba($color-ambient-mint-light, 0.3);
+        border-radius: 5px;
+        @include respond-to(">=medium") {
+          margin-right: -20px;
+        }
+        .wrp  {
+          padding: 150px 0px 0px 0px;
+          background-position: center top 0px;
+          background-size: auto 180px;
+          background-image: url(image_path('illu/illu-zuckerl-transparent.png'));
+          background-repeat: no-repeat;
+        }
+        button {
+          width: 100%;
+        }
+        h3 {
+          @include font-size-primaryFont('larger');
+          line-height: 1.4;
+          margin-top: 5px;
+          margin-bottom: 5px;
+          color: $color-ambient-mint-dark;
+        }
+      }
+    }
+
+    .-bookzuckerl {
+      display: table;
+      margin: auto;
+    }
+
   }
   // ----- HELP Detailpage END ------ //
 

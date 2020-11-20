@@ -7,10 +7,10 @@
 
     <div class="input-field">
       <%= f.label :name do %>
-        <%= icon_tag "home" %>
+        <%= icon_tag "location" %>
         <span>Name</span>
       <% end %>
-      <%= f.text_field :name, placeholder: 'Benenne deine Tätigkeit' %>
+      <%= f.text_field :name, placeholder: 'Name deiner Location / Benenne deine Tätigkeit' %>
     </div>
 
     <div class="input-field">
@@ -21,7 +21,7 @@
       <%= f.text_field :slogan, placeholder: 'Kurzer Slogan bzw. Beschreibung' %>
     </div>
 
-    <div class="input-textarea">
+    <div class="input-textarea -description">
       <%= f.label :description do %>
         <%= icon_tag "layout-document" %>
         <span>Beschreibung</span>
@@ -36,7 +36,7 @@
       <% end %>
       <%= f.collection_select :location_category_id,
                               LocationCategory.business.all, :id, :name,
-                              { prompt: 'Wähle aus um welche Art von Location es sich handelt...' } %>
+                              { prompt: 'Um welche Art von Location handelt es sich..' } %>
     </div>
 
     <div class="input-tags">
@@ -89,7 +89,7 @@
   <%= render 'contact_fields', f: f %>
 
   <div class="form-block">
-    <%= f.object.address ? render('address_fields', f: f) : link_to_add_address_fields('Addresse hinzufügen', f) %>
+    <%= f.object.address ? render('address_fields', f: f) : link_to_add_address_fields('Adresse hinzufügen', f) %>
   </div>
 
   <div class="form-block">

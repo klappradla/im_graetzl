@@ -3,7 +3,7 @@
     <%= form_for [@location, @zuckerl], data: { behavior: 'zuckerlform' } do |f| %>
       <div class="booking-block">
         <div class="form-block">
-          <p class="txt">Neues <span>Grätzlzuckerl</span> für den <span>Monat <%= zuckerl_month(@zuckerl) %></span> buchen</p>
+          <p class="txt">Neues <span>Grätzlzuckerl</span> für den <span>Monat <%= zuckerl_month(@zuckerl) %></span></p>
           <%= render 'fields', f: f %>
           <button class="btn-secondary" data-behavior="btn-confirm" type="button">Weiter</button>
           <div class="btn-container" data-behavior="btn-send">

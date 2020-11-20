@@ -59,6 +59,13 @@ class LocationsController < ApplicationController
     redirect_to locations_user_path, notice: 'Location entfernt'
   end
 
+  def tooltip
+    head :ok and return if browser.bot? && !request.format.js?
+    @location = Location.find(params[:id])
+    @user = @location.boss unless @location.users.empty?
+    render layout: false
+  end
+
   private
 
   def collection_scope

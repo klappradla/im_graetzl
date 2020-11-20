@@ -7,7 +7,7 @@
           <%= icon_tag "globe" %>
           <span><%= Contact.human_attribute_name(:website) %></span>
       <% end %>
-      <%= contact_fields.url_field :website, placeholder: 'http:// oder https://' %><em></em>
+      <%= contact_fields.url_field :website, placeholder: 'http:// oder https://', class: '-validate' %><em></em>
     </div>
 
     <div class="input-field">
@@ -15,7 +15,7 @@
         <%= icon_tag "at-symbol" %>
         <span><%= Contact.human_attribute_name(:email) %></span>
       <% end %>
-      <%= contact_fields.email_field :email, placeholder: 'E-Mail' %>
+      <%= contact_fields.email_field :email, placeholder: 'E-Mail', class: '-validate' %>
     </div>
 
     <div class="input-field">

@@ -8,97 +8,99 @@
   )
 %>
 
-<section class="help -detail">
+<section class="help -detail -zuckerl">
 
   <div class="hl-subtext">
     <h1><em>Zuckerl & Angebote</em></h1>
     <p>Einen Monat lang die volle Aufmerksamkeit auf dich gerichtet.</p>
   </div>
 
-  <div class="paperCard -cord1RT container -top" id="zero">
-    <div class="wrp">
-      <p>
-        <strong>Das Grätzlzuckerl</strong> erscheint jeden Monat neu und enthält besondere Angebote,
-        Gutscheine & Rabattaktionen von grätzlansässigen Kreativen, Selbständigen und
-        kleinen Unternehmen.
-      </p>
-      <p>
-        Mit dem Grätzlzuckerl wollen wir besonders Angebote der
-        lokalen Unternehmen bei den Bewohnern ins Scheinwerferlicht rücken und
-        gleichzeitig mithelfen, die lokalen Wirtschaftskreisläufe im Grätzl zu beleben.
-        <strong>Kurz gesagt:</strong> mit dem Grätzlzuckerl kannst du Werbung für dich und deine Angebote
-        gezielt in deinem Bezirk schalten und die Bewohner in deinem Einzugsgebiet erreichen.
-      </p>
-      <p>
-        <strong>Seit Kurzem gibt es auch das Wien Zuckerl.</strong> Dieses läuft dann in allen Bezirken und Grätzln auf der Plattform - Also 1 Monat die volle Sichtbarkeit für dich auf imGrätzl :)
-      </p>
+  <div class="paperCard -cord1RT container -top">
+    <div class="wrp zuckerlwrp">
+      <div class="left">
+        <p>
+          <strong>Das Grätzlzuckerl</strong> erscheint jeden Monat neu und enthält besondere Angebote,
+          Gutscheine & Rabattaktionen von grätzlansässigen Kreativen, Selbständigen und
+          kleinen Unternehmen.
+        </p>
+        <p>
+          Mit dem Grätzlzuckerl wollen wir besonders Angebote der
+          lokalen Unternehmen bei den Bewohnern ins Scheinwerferlicht rücken und
+          gleichzeitig mithelfen, die lokalen Wirtschaftskreisläufe im Grätzl zu beleben.
+          <strong>Kurz gesagt:</strong> mit dem Grätzlzuckerl kannst du Werbung für dich und deine Angebote
+          gezielt in deinem Bezirk schalten und die Bewohner in deinem Einzugsgebiet erreichen.
+        </p>
+        <p>
+          <strong>Seit Kurzem gibt es auch das Wien Zuckerl.</strong> Dieses läuft dann in allen Bezirken und Grätzln auf der Plattform - Also 1 Monat die volle Sichtbarkeit für dich auf imGrätzl :)
+        </p>
+      </div>
+      <div class="right">
+
+        <div class="zuckerlcard">
+          <div class="wrp">
+            <h3>Mit dem Grätzlzuckerl kannst Du Werbung für dein Angebot in deinem Grätzl & Bezirk schalten</h3>
+            <%= link_to 'Jetzt Grätzlzuckerl buchen', new_zuckerl_path, class: 'btn-primary -rose' %>
+          </div>
+        </div>
+      </div>
+
     </div>
     <div class="card"></div>
   </div>
 
-  <!--<aside>
-    <div id="help_nav">
-      <a href="#one" class="btn-primary -mint" id="nav-one">Locationseite einrichten</a>
-      <a href="#two" class="btn-primary -mint" id="nav-two">Neuigkeiten veröffentlichen</a>
-    </div>
-  </aside>-->
 
-  <!--<div class="mainContent">-->
+  <div class="wrp">
+    <h3>Wo erscheint das Grätzlzuckerl?</h3>
+    <p>
+      Je nach eingestellter Sichtbarkeit deines Grätzlzuckerls (Bezirk oder Wien), erscheint dein Angebot in deinem Bezirk und allen zugehörigen Grätzln, oder sogar in ganz Wien.
+      Ausserdem werden Grätzlzuckerln in die jeweiligen Grätzl-Streams gestreut und erscheinen auch in den wöchentlichen Grätzl-Mails an die NutzerInnen.
+    </p>
+  </div>
 
-    <div class="wrp">
-      <h3>Wo erscheint das Grätzlzuckerl?</h3>
-      <p>
-        Je nach eingestellter Sichtbarkeit deines Grätzlzuckerls (Bezirk oder Wien), erscheint dein Angebot in deinem Bezirk und allen zugehörigen Grätzln, oder sogar in ganz Wien.
-        Ausserdem werden Grätzlzuckerln in die jeweiligen Grätzl-Streams gestreut und erscheinen auch in den wöchentlichen Grätzl-Mails an die NutzerInnen.
-      </p>
-    </div>
+  <div class="wrp">
+    <h3>Was kostet das Grätzlzuckerl?</h3>
+    <p>
+      Ein Grätzlzuckerl mit der Sichtbarkeit <strong>"Bezirk" kostet <%= zuckerl_price('graetzl') %></strong> (inkl. 20% USt.).<br>
+      Ein Grätzlzuckerl mit der Sichtbarkeit <strong>"ganz Wien" kostet <%= zuckerl_price('all_districts') %></strong> (inkl. 20% USt.).
+    </p>
+  </div>
 
-    <div class="wrp">
-      <h3>Wie kann ich mein gebuchtes Grätzlzuckerl bearbeiten?</h3>
-      <p>Du findest deine gebuchten Grätzlzuckerl im Grätzlzuckerl-Setup. Solange dein Zuckerl noch nicht aktiv läuft, kannst du dieses dort auch bearbeiten. Wenn dein Zuckerl einmal im gebuchten Monat aktiv ist, kann es nicht mehr bearbeitet werden. Solltest du unbedingt noch etwas ändern müssen, so kontaktiere uns unter: <a href="mailto:&#119;&#105;&#114;&#064;&#105;&#109;&#103;&#114;&#097;&#101;&#116;&#122;&#108;&#046;&#097;&#116;">&#119;&#105;&#114;&#064;&#105;&#109;&#103;&#114;&#097;&#101;&#116;&#122;&#108;&#046;&#097;&#116;</a>. Löschen kannst du dein Zuckerl natürlich jederzeit.</p>
-    </div>
+  <div class="wrp">
+    <h3>Kann ich das Grätzlzuckerl nur für einen Monat schalten?</h3>
+    <p>Ja, Grätzlzuckerl sind aktuelle Angebote, die immer für einen Monat gebucht werden. Alle Grätzlzuckerl für den Monat erscheinen immer am 01. des Monats und laufen dann den ganzen Monat. Möchtest du dein Angebot für einen bestimmten Monat schalten, dann buche das Grätzlzuckerl einfach im Monat davor ein. Möchtest du ein Grätzlzuckerl länger schalten, dann buche es einfach im Folgemonat erneut ein.</p>
+  </div>
 
-    <div class="wrp">
-      <h3>Was kostet das Grätzlzuckerl?</h3>
-      <p>
-        Ein Grätzlzuckerl mit der Sichtbarkeit "Bezirk" kostet <%= zuckerl_price('graetzl') %> (inkl. 20% USt.).<br>
-        Ein Grätzlzuckerl mit der Sichtbarkeit "ganz Wien" kostet <%= zuckerl_price('all_districts') %> (inkl. 20% USt.).
-      </p>
-    </div>
+  <div class="wrp">
+    <h3>Wie kann ich mein gebuchtes Grätzlzuckerl bearbeiten?</h3>
+    <p>Du findest deine gebuchten Grätzlzuckerl im Grätzlzuckerl-Setup. Solange dein Zuckerl noch nicht aktiv läuft, kannst du dieses dort auch bearbeiten. Wenn dein Zuckerl einmal im gebuchten Monat aktiv ist, kann es nicht mehr bearbeitet werden. Solltest du unbedingt noch etwas ändern müssen, so kontaktiere uns unter: <a href="mailto:&#119;&#105;&#114;&#064;&#105;&#109;&#103;&#114;&#097;&#101;&#116;&#122;&#108;&#046;&#097;&#116;">&#119;&#105;&#114;&#064;&#105;&#109;&#103;&#114;&#097;&#101;&#116;&#122;&#108;&#046;&#097;&#116;</a>. Löschen kannst du dein Zuckerl natürlich jederzeit.</p>
+  </div>
 
-    <div class="wrp">
-      <h3>Wo finde ich eine Mwst Rechnung für mein Grätzlzuckerl?</h3>
-      <p>
-        Nachdem dein Grätzlzuckerl bezahlt wurde, senden wir dir eine Rechnung per E-Mail zu.
-        Du kannst aber auch nachträglich eingeloggt im Bereich "<%= link_to 'Grätzlzuckerl verwalten', zuckerls_user_path %>" deine Grätzlzuckerl Rechnungen downloaden. (Dies geht für alle Zuckerl, die nach dem 01.11.2019 erstellt wurden.)
-      </p>
-    </div>
+  <div class="wrp">
+    <h3>Warum brauche ich eine Locationseite zum schalten eines Grätzlzuckerls?</h3>
+    <p>Deine Locationseite ist dein persönliches Schaufenster für dich und deine Angebote im Grätzl und somit auch der Absender deines Grätzlzuckerls. Das virtuelle Schaufenster ist kostenlos und geht ganz easy einzurichten - Einfach Name, Beschreibung und Bild hochladen, danach schalten wir deine Seite frei und du kannst dein Grätzlzuckerl schon buchen.</p>
+    <p>Über deine Locationseite kannst du aber nicht nur Grätzlzuckerl schalten, sondern hast darüber hinaus noch weitere Werkzeuge um Sichtbarkeit in deinem Grätzl zu bekommen. Du kannst Treffen oder Termine kundtun, Neuigkeiten einstellen und vieles mehr. Richte dir <%= link_to 'gleich hier', new_location_path %> deine Seite ein.</p>
+  </div>
 
-    <div class="wrp">
-      <h3>Kann ich das Grätzlzuckerl nur für einen Monat schalten?</h3>
-      <p>Ja, Grätzlzuckerl sind aktuelle Angebote, die immer für einen Monat gebucht werden. Alle Grätzlzuckerl für den Monat erscheinen immer am 01. des Monats und laufen dann den ganzen Monat. Möchtest du dein Angebot für einen bestimmten Monat schalten, dann buche das Grätzlzuckerl einfach im Monat davor ein. Möchtest du ein Grätzlzuckerl länger schalten, dann buche es einfach im Folgemonat erneut ein.</p>
-    </div>
+  <div class="wrp">
+    <h3>Wo finde ich eine Mwst Rechnung für mein Grätzlzuckerl?</h3>
+    <p>
+      Nachdem dein Grätzlzuckerl bezahlt wurde, senden wir dir eine Rechnung per E-Mail zu.
+      Du kannst aber auch nachträglich eingeloggt im Bereich "<%= link_to 'Grätzlzuckerl verwalten', zuckerls_user_path %>" deine Grätzlzuckerl Rechnungen downloaden. (Dies geht für alle Zuckerl, die nach dem 01.11.2019 erstellt wurden.)
+    </p>
+  </div>
 
-    <div class="wrp">
-      <h3>Kann ich auch mehrere Grätzlzuckerl schalten?</h3>
-      <p>Wenn du möchtest, ja! Solltest du mehrere unterschiedliche Angebote in einem Monat kundtun, dann kannst du natürlich auch parallel mehrere Grätzlzuckerl einbuchen. Aus Erfahrung wissen wir aber, das nicht die Masse den Erfolg ausmacht, sondern die Kontinuität. Also bringe dich und deine Angebote lieber immer wieder über Monate verteilt in den Vordergrund und die Köpfe der Bewohner, als viele Zuckerln parallel auf einmal.</p>
-    </div>
+  <div class="wrp">
+    <h3>Kann ich auch mehrere Grätzlzuckerl schalten?</h3>
+    <p>Wenn du möchtest, ja! Solltest du mehrere unterschiedliche Angebote in einem Monat kundtun, dann kannst du natürlich auch parallel mehrere Grätzlzuckerl einbuchen. Aus Erfahrung wissen wir aber, das nicht die Masse den Erfolg ausmacht, sondern die Kontinuität. Also bringe dich und deine Angebote lieber immer wieder über Monate verteilt in den Vordergrund und die Köpfe der Bewohner, als viele Zuckerln parallel auf einmal.</p>
+  </div>
 
-    <div class="wrp">
-      <h3>Warum brauche ich eine Locationseite zum schalten eines Grätzlzuckerls?</h3>
-      <p>Deine Locationseite ist dein persönliches Schaufenster für dich und deine Angebote im Grätzl und somit auch der Absender deines Grätzlzuckerls. Das virtuelle Schaufenster ist kostenlos und geht ganz easy einzurichten - Einfach Name, Beschreibung und Bild hochladen, danach schalten wir deine Seite frei und du kannst dein Grätzlzuckerl schon buchen.</p>
-      <p>Über deine Locationseite kannst du aber nicht nur Grätzlzuckerl schalten, sondern hast darüber hinaus noch weitere Werkzeuge um Sichtbarkeit in deinem Grätzl zu bekommen. Du kannst Treffen oder Termine kundtun, Neuigkeiten einstellen und vieles mehr. Richte dir <%= link_to 'gleich hier', new_location_path %> deine Seite ein.</p>
-    </div>
+  <div class="wrp">
+    <h3>Interesse, aber keine Idee für ein Grätzlzuckerl?</h3>
+    <p>Wir helfen euch gerne dabei herauszufinden, welches eurer Angebote oder Aktionen ein schönes Grätzlzuckerl für die Bewohner sein könnte. Wir unterstützen euch auch beim Texten und beim Aussuchen von Bildmaterial.<br>
+    Schreib uns einfach, wir würden uns freuen, unsere Erfahrung in diesem Bereich an euch weitergeben zu dürfen. (<a href="mailto:&#119;&#105;&#114;&#064;&#105;&#109;&#103;&#114;&#097;&#101;&#116;&#122;&#108;&#046;&#097;&#116;">&#119;&#105;&#114;&#064;&#105;&#109;&#103;&#114;&#097;&#101;&#116;&#122;&#108;&#046;&#097;&#116;</a>)</p>
+  </div>
 
-    <div class="wrp">
-      <h3>Interesse, aber keine Idee für ein Grätzlzuckerl?</h3>
-      <p>Wir helfen euch gerne dabei herauszufinden, welches eurer Angebote oder Aktionen ein schönes Grätzlzuckerl für die Bewohner sein könnte. Wir unterstützen euch auch beim Texten und beim Aussuchen von Bildmaterial.<br>
-      Schreib uns einfach, wir würden uns freuen, unsere Erfahrung in diesem Bereich an euch weitergeben zu dürfen. (<a href="mailto:&#119;&#105;&#114;&#064;&#105;&#109;&#103;&#114;&#097;&#101;&#116;&#122;&#108;&#046;&#097;&#116;">&#119;&#105;&#114;&#064;&#105;&#109;&#103;&#114;&#097;&#101;&#116;&#122;&#108;&#046;&#097;&#116;</a>)</p>
-    </div>
-
-  <!--</div>-->
-
-
+  <%= link_to 'Jetzt Grätzlzuckerl buchen', new_zuckerl_path, class: 'btn-primary -rose -large -shadow -bookzuckerl' %>
 
   <div style="clear:both;"></div>
 

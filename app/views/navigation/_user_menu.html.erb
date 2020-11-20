@@ -8,8 +8,8 @@
     <%= nav_menu_item("calendar-2", 'Neues Treffen', new_meeting_path(graetzl_id: current_user.graetzl_id)) %>
     <%= nav_menu_item("raumteiler", 'Neuer Raumteiler', select_room_offers_path) %>
     <%= nav_menu_item("tacker", 'Neuer Toolteiler', new_tool_offer_path) %>
-
     <%= nav_menu_item("location", 'Neue Location erstellen', new_location_path) %>
+    <%= nav_menu_item("shopping-bag", 'Neues Grätzlzuckerl buchen', new_zuckerl_path) %>
     <% if current_user.admin? %>
       <%= nav_menu_item("speech-bubble", 'Neue Gruppe gründen', new_group_path(graetzl_id: current_user.graetzl_id)) %>
     <% end %>

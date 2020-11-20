@@ -80,6 +80,10 @@ section.usersetup {
 
   }
 
+  &.-location {
+    .cardbox-wrp .-location .btn-primary {display: none;}
+  }
+
   &.-toolteiler, &.-rooms {
     // REMOVE TMP CLASS AFTER WE CAN USE AXA LOGO
     .paperCard.-tmp .wrp {
@@ -107,7 +111,7 @@ section.usersetup {
   &.-zuckerl {
     .paperCard .wrp {
       padding-top: 180px;
-      background-image: url(image_path('illu/illu-zuckerlbag.jpg'));
+      background-image: url(image_path('illu/illu-zuckerl-transparent.png'));
     }
     .btn-primary {
       margin-bottom: 20px;
@@ -125,7 +129,7 @@ section.usersetup {
     margin-bottom: 40px;
     h2 {
       font-family: $font-tertiary;
-      color: $color-ambient-rosa;
+      color: $color-ambient-mint-dark;
       margin-bottom: 10px;
       font-size: 28px;
       @include respond-to(">=medium") {
@@ -143,7 +147,7 @@ section.usersetup {
         height: 80px;
         width: 80px;
         background-size: 80px 80px;
-        background-image: url(image_path('svg/kringel-rosa.svg'));
+        background-image: url(image_path('svg/kringel.svg'));
         font-size: 42px;
       }
     }
@@ -158,7 +162,7 @@ section.usersetup {
     }
 
     &:nth-child(even) {
-      h2 { color: $color-ambient-mint-dark; }
+      //h2 { color: $color-ambient-mint-dark; }
     }
 
   }

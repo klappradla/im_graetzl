@@ -6,6 +6,7 @@ APP.components.initUserTooltip = function() {
   // ------- DESKTOP Hover Tooltips -------
   $(".no-touch .signed-in .user-tooltip-trigger").each(function(index, value) {
       var tooltip = $(this).data('tooltip-id');
+      var type = $(this).data('tooltip-type');
       user_tooltips[tooltip] = new jBox('Tooltip', {
         addClass:'jBox',
         attach: $(this),
@@ -29,7 +30,7 @@ APP.components.initUserTooltip = function() {
               // Analytics
               gtag(
                 'event', 'Open', {
-                'event_category': 'User Tooltip',
+                'event_category': type + ' Tooltip',
                 'event_label': 'Desktop'
               });
             }
@@ -40,6 +41,7 @@ APP.components.initUserTooltip = function() {
   // ------- MOBILE Click Modals -------
   $(".touch .signed-in .user-tooltip-trigger").each(function(index, value) {
       var tooltip = $(this).data('tooltip-id');
+      var type = $(this).data('tooltip-type');
       user_tooltips[tooltip] = new jBox('Modal', {
         addClass:'jBox',
         attach: $(this),
@@ -58,7 +60,7 @@ APP.components.initUserTooltip = function() {
               // Analytics
               gtag(
                 'event', 'Open', {
-                'event_category': 'User Tooltip',
+                'event_category': type + ' Tooltip',
                 'event_label': 'Mobile'
               });
             }

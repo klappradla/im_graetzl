@@ -12,6 +12,9 @@ APP.controllers.locations = (function() {
     }
 
     function initLocationForm() {
+
+        APP.components.formValidation.init();
+
         $("#location_description, #location_contact_attributes_hours").autogrow({
             onInitialize: true
         });
@@ -19,12 +22,6 @@ APP.controllers.locations = (function() {
         $('form').on('click', '.add_address_fields', function(event) {
             var fields = $(this).data('fields');
             $(this).replaceWith(fields);
-            event.preventDefault();
-        });
-
-        $('form').on('click', '.remove_address_fields', function(event) {
-            $(this).prev('input[type=hidden]').val('1');
-            $(this).closest('div.form-block').hide();
             event.preventDefault();
         });
 
