@@ -1,9 +1,26 @@
-<div class="filter-categories">
-  <%= collection_check_boxes :filter, :room_category_ids, RoomCategory.all, :id, :name do |b| %>
-    <div class="input-checkbox filter-input">
-      <%= b.check_box("data-label": b.text) %>
-      <%= b.label %>
-    </div>
-  <% end %>
+<!-- SLIDER -->
+<div class="category-slider-container">
+  <div id="category-slider" data-label="Raumteiler">
+    <!-- RoomOffers with Rental Option-->
+      <div class="-category -special-category" data-id="room_rental" data-label="Kurzzeitmiete">
+        <%= image_tag('rt-kurzzeitmieten.jpg', class: 'attachment room_category main_photo categoryImg') %>
+        <div class="cat -booking"></div>
+        <h3>Kurzzeitmiete</h3>
+        <%= button_tag '', class: 'close-ico' do %>
+          <%= icon_tag "cross" %>
+        <% end %>
+      </div>
+    <!-- /RoomOffers with Rental Option-->
+    <% RoomCategory.all.sort_by(&:position).each do |category| %>
+      <div class="-category" data-id="<%= category.id %>" data-label="<%= category.name %>">
+        <%= category_photo_for(category) %>
+        <div class="cat category-<%= category.id %> -<%= category.css_ico_class %> -rooms"></div>
+        <h3><%= category.name %></h3>
+        <%= button_tag '', class: 'close-ico' do %>
+          <%= icon_tag "cross" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="filter-line"></div>
 </div>
-<%= button_tag "Auswahl übernehmen", class: 'btn-primary filter-button' %>

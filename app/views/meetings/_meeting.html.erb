@@ -24,6 +24,8 @@
     <div class="categoryicon">
       <% if meeting.paid? %>
         <%= icon_tag "ticket" %>
+      <% elsif meeting.platform_meeting %>
+        <%= icon_tag "handshake" %>
       <% elsif meeting.online_meeting %>
         <%= icon_tag "globe" %>
       <% else %>

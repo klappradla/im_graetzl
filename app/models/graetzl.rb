@@ -6,6 +6,8 @@ class Graetzl < ApplicationRecord
   has_many :users
   has_many :meetings, dependent: :destroy
   has_many :posts, dependent: :destroy
+  has_many :location_posts
+  has_many :user_posts
   has_many :locations, dependent: :destroy
   has_many :room_offers
   has_many :room_demand_graetzls

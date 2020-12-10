@@ -1,0 +1,10 @@
+<div class="filter-area" data-filter-label="Activity Steam :: Area">
+  <div class="input-radio filter-input">
+    <input type="radio" value="<%= graetzl.id %>" id="graetzl_id" name="graetzl_id" data-label="<%= graetzl.name %>" checked>
+    <label for="graetzl_id"><%= graetzl.district.zip %> - <%= graetzl.name %></label>
+  </div>
+  <div class="input-radio filter-input">
+    <input type="radio" value="<%= graetzl.district.id %>" id="district_id" name="district_id" data-label="<%= graetzl.district.zip %>">
+    <label for="district_id"><%= graetzl.district.zip %> - Ganzer Bezirk</label>
+  </div>
+</div>

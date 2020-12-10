@@ -2,7 +2,7 @@
 <% graetzl_ids ||= nil %>
 <% graetzl ||= nil %>
 
-<div class="filter-districts">
+<div class="filter-districts" data-filter-label="Grätzl / Bezirk">
   <% if graetzl %>
     <div class="input-checkbox filter-input-graetzl">
       <input type="checkbox" value="<%= graetzl.id %>" id="select-home-graetzl" name="select-home-graetzl" data-label="<%= graetzl.name %>" checked>

@@ -13,20 +13,21 @@
 <section class="graetzls">
   <%= render 'map' %>
   <%= render 'navigation' %>
-  <!--<%= render 'curator' if @graetzl.curator %>-->
-  <div class="cards-filter">
-    <div class="filter-selection-text">
-      Zur Aktion <%= link_to 'Selbstständige für Selbstständige', platform_meetings_wien_path, class: 'plain-link' %>
-    </div>
-  </div>
 
   <% if user_signed_in? %>
 
-    <%= form_tag activities_path(graetzl_id: @graetzl), method: :get, remote: true, class: 'cards-filter' do; end %>
+    <%= form_tag activities_path, method: :get, remote: true, class: 'cards-filter' do %>
+      <div class="filter-selection-text-jbox">
+        Neues aus <%= link_to "#{@graetzl.name}", '#filter-modal-activity', data: { no_filter_label: @graetzl.name} %>,
+        Zur Aktion <%= link_to 'Selbstständige für Selbstständige', platform_meetings_wien_path, class: 'plain-link' %>
+      </div>
+      <div id="filter-modal-activity" class="filter-modal-jbox oneclick">
+        <%= render 'filters/graetzl', graetzl_ids: @graetzl.id, district_ids: @graetzl.district.id, graetzl: @graetzl %>
+      </div>
+    <% end %>
     <div class="card-grid-container">
       <div class="card-grid" data-behavior="activities-card-container"></div>
       <!-- Insert Featured Card -->
-      <%= render 'shared/featured_cards/gewerbeflaechen_umfrage' %>
 
       <%= link_to 'Mehr anzeigen', 'javascript:', remote: true, class: 'link-load hide', data: { disable_with: 'lädt...', behavior: 'activities-paginate-link' }, rel: 'nofollow' %>
     </div>

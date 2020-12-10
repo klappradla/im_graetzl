@@ -81,7 +81,7 @@ class Meeting < ApplicationRecord
   end
 
   def platform_meeting_pending?
-    !self.platform_meeting? && (self.platform_meeting_join_request.pending? || self.platform_meeting_join_request.processing?)
+    !self.platform_meeting? && !self.platform_meeting_join_request.nil? && (self.platform_meeting_join_request.pending? || self.platform_meeting_join_request.processing?)
   end
 
   def public?

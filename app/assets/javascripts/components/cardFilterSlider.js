@@ -1,4 +1,4 @@
-APP.components.categorySlider = (function() {
+APP.components.cardFilterSlider = (function() {
 
   function init(element) {
     var item_desk = 5;
@@ -61,55 +61,49 @@ APP.components.categorySlider = (function() {
       ]
     });
 
+
     // Hover Slide
     element.find('.-category').hover(
      function(){ $(this).addClass('hover') },
      function(){ $(this).removeClass('hover')}
    );
 
-   //filterForm.hide(); // Hide per default - Show on Category Click
-   //filterLine.hide(); // Hide per default - Show on Category Click
 
    // Click Slide
    element.find('.-category').on('click', function(){
+
      if ($(this).hasClass("activated")) {
 
-       $(this).removeClass('activated');
-       filterForm.find("[name=category_id]").val("");
-       filterForm.find("[name=special_category_id]").val("");
-       updateFilterLabels($(this));
-       filterForm.submit();
-       history && history.replaceState({}, '', location.pathname);
-
-       //filterForm.slideUp("fast");
-       //filterForm.removeClass("-open");
-       //filterLine.slideUp();
+         $(this).removeClass('activated');
+         filterForm.find("[name=category_id]").val("");
+         filterForm.find("[name=special_category_id]").val("");
+         updateFilterLabels($(this));
+         APP.components.cardFilter.submitForm();
+         history && history.replaceState({}, '', location.pathname);
 
      } else {
 
-       if ($(this).hasClass("-special-category")) {
-         // Special Filter Selected
-         filterForm.find("[name=category_id]").val("");
-         filterForm.find("[name=special_category_id]").val($(this).attr("data-id"));
-         history && history.replaceState({}, '', location.pathname + "?special_category=" + $(this).attr("data-id"));
-       } else {
-         // Normal Filter Selected
-         filterForm.find("[name=special_category_id]").val("");
-         filterForm.find("[name=category_id]").val($(this).attr("data-id"));
-         history && history.replaceState({}, '', location.pathname + "?category=" + $(this).attr("data-id"));
-       }
+         if ($(this).hasClass("-special-category")) {
+             // Special Filter Selected
+             filterForm.find("[name=category_id]").val("");
+             filterForm.find("[name=special_category_id]").val($(this).attr("data-id"));
+             history && history.replaceState({}, '', location.pathname + "?special_category=" + $(this).attr("data-id"));
+         } else {
+             // Normal Filter Selected
+             filterForm.find("[name=special_category_id]").val("");
+             filterForm.find("[name=category_id]").val($(this).attr("data-id"));
+             history && history.replaceState({}, '', location.pathname + "?category=" + $(this).attr("data-id"));
+         }
 
-       element.find('.-category').removeClass('activated');
-       $(this).addClass('activated');
-       updateFilterLabels($(this));
-       filterForm.submit();
-       categoryClickTracking($(this))
-       //filterLine.slideDown();
-       //filterForm.addClass("-open"); // Search and District Filter vorübergehend deaktiviert
-       //filterForm.slideDown("fast"); // Search and District Filter vorübergehend deaktiviert
+         element.find('.-category').removeClass('activated');
+         $(this).addClass('activated');
+         updateFilterLabels($(this));
+         APP.components.cardFilter.submitForm();
+         categoryClickTracking($(this))
 
      }
    });
+
 
    // Analytics Tracking
    function categoryClickTracking(category) {
@@ -117,13 +111,12 @@ APP.components.categorySlider = (function() {
        var label_item = category.attr("data-label");
        var label_type = $('#category-slider').attr("data-label");
        gtag(
-         'event', 'Click :: ' + label_type + ' :: Slider', {
+         'event', label_type + ' :: Category Slider', {
          'event_category': 'Filter',
          'event_label': label_item
        });
      }
    }
-  // Analytics Tracking
 
 
    // Update Text Label if exists on Page
@@ -137,7 +130,7 @@ APP.components.categorySlider = (function() {
          }
      }
    }
-   // Update Text Label if exists on Page
+
 
    // Init selected Category if Param present on Load
    function initSelectedCategory() {
@@ -153,11 +146,11 @@ APP.components.categorySlider = (function() {
    }
 
    initSelectedCategory();
-   // Init selected Category if Param present on Load
 
   }
 
   return {
     init: init
   };
+
 })();

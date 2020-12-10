@@ -16,7 +16,7 @@
     Events, Workshops & Veranstaltungen <span>im <%= @district.numeric %>. Bezirk</span>
   </h1>
 
-  <%= render 'filters/event_categories_slider' %>
+  <%= render 'filters/meeting_categories' %>
 
   <%= form_tag meetings_path, method: :get, remote: true, class: 'cards-filter' do %>
     <%= hidden_field_tag :category_id, @category.try(:id) %>

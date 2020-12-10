@@ -19,8 +19,8 @@ namespace :scheduled do
         next_meeting.destroy
         Rails.logger.info("[Meeting] Meeting (#{meeting.id}) updated next meeting date: #{next_meeting.starts_at_date}")
 
-        # Update Activity for this Meeting if last Activity is greather then 1 week ago
-        if meeting.activities.where(key: 'meeting.create').present? && meeting.activities.where(key: 'meeting.create').last.created_at < 1.weeks.ago
+        # Update Activity for this Meeting if last Activity is greather then 1 week ago or if there is no Activity
+        if !meeting.activities.where(key: 'meeting.create').present? || (meeting.activities.where(key: 'meeting.create').present? && meeting.activities.where(key: 'meeting.create').last.created_at < 6.days.ago)
           # meeting.activities.where(key: 'meeting.create').destroy_all
           meeting.create_activity :create, owner: meeting.user, cross_platform: meeting.online_meeting?
         end

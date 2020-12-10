@@ -38,7 +38,7 @@
     <% end %>
   <% end %>
 
-  <% if @group.admins.include?(current_user) %>
+  <% if @group.admins.include?(current_user) || current_user.admin? %>
     <div class="input-checkbox">
       <%= f.check_box :sticky %>
       <%= f.label :sticky, "Sticky Thema / Oben halten." %>

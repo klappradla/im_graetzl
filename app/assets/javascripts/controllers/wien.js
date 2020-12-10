@@ -15,7 +15,7 @@ APP.controllers.wien = (function() {
 
         APP.components.addressSearchAutocomplete();
 
-        if ($("#graetzlMapWidget").exists()) {
+        if($('#graetzlMapWidget:visible').length > 0) {
           initMap();
         }
 
@@ -36,15 +36,15 @@ APP.controllers.wien = (function() {
         }
 
         if ($("section.toolteiler").exists()) {
-          APP.components.categorySlider.init($('#category-slider'));
+          APP.components.cardFilterSlider.init($('#category-slider'));
         }
 
         if ($("section.rooms").exists()) {
-          APP.components.categorySlider.init($('#category-slider'));
+          APP.components.cardFilterSlider.init($('#category-slider'));
         }
 
         if ($("section.meetings").exists()) {
-          APP.components.categorySlider.init($('#category-slider'));
+          APP.components.cardFilterSlider.init($('#category-slider'));
         }
 
         initMobileNav();

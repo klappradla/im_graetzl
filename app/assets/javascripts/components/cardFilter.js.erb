@@ -1,12 +1,14 @@
 APP.components.cardFilter = (function() {
 
-  var filterForm;
-  var cardGrid;
+  var filterForm = $(".cards-filter");
+  var cardGrid = $('.card-grid');
+  var formXhr;
   var masonrySetup = false;
+  var modals = []
 
   function init() {
 
-    // ----------- Search Suggestion Form - MICHAEL
+    // ----------- Search Suggestion Form for Groups
     suggestionForm = $(".search-suggestion-trigger");
     suggestionBox = $(".search-suggestion");
     suggestionLink = $(".search-suggestion a");
@@ -40,13 +42,15 @@ APP.components.cardFilter = (function() {
         setValue(suggestionValue);
       }
       suggestionBox.slideUp("fast");
-      filterForm.submit();
+      submitForm();
     });
+
     suggestionForm.on("click", function(){
       $(this).focus().select();
       $(this).val("");
       suggestionBox.slideDown("fast");
     });
+
     suggestionForm.keypress(function (e) {
       filterForm.find("[name=group_category_id]").val(null);
       if (e.which == 13) {
@@ -55,7 +59,7 @@ APP.components.cardFilter = (function() {
         suggestionValue = $(this).val();
         suggestionTitle.text($(this).val());
         setValue(suggestionValue);
-        filterForm.submit();
+        submitForm();
       }
     });
 
@@ -72,7 +76,7 @@ APP.components.cardFilter = (function() {
     });
 
     $("#graetzl-suggestion").on("change", function(){
-      filterForm.submit();
+      submitForm();
     });
 
     $(".label-select .select-all").on("click", function(){
@@ -84,64 +88,61 @@ APP.components.cardFilter = (function() {
     var setValue = function(value) {
       suggestionForm.val(value);
     }
-    // ----------- Search Suggestion Form - MICHAEL
-
 
 
     // ----------- EPU-to-EPU
     $("#meeting-categories").on("change", function(){
       $("#meeting_category_id").val('');
-      filterForm.submit();
+      submitForm();
+      var label_item = $(this).find('option:selected').text();
+      gtag(
+        'event', 'SFS :: Category Select', {
+        'event_category': 'Filter',
+        'event_label': label_item
+      });
     });
-    // ----------- EPU-to-EPU
 
 
-
-    filterForm = $(".cards-filter");
-    cardGrid = $('.card-grid');
-
-    // ---------- USE VOR NEW JBOX MODALS
-    var modals = []
-
-    // Use new jBox Modals
+    // JBOX Standard Filter MODAL
     $(".filter-selection-text-jbox a").not( ".plain-link, .filter-modal-district" ).each(function(index, value) {
 
         var modal = $(this).attr('href');
         var $attach = $('[href="'+modal+'"]');
         var $content = $(''+modal+'');
+        var modal_type = 'Confirm';
 
-        modals[modal] = new jBox('Confirm', {
+        $content.hasClass('oneclick') ? modal_type = 'Modal' : modal_type = 'Confirm';
+
+        //console.log($content.hasClass('oneclick'));
+
+        modals[modal] = new jBox(modal_type, {
           addClass:'jBox',
           attach: $attach,
           getTitle: 'data-jbox-title',
-          confirmButton: 'Do it!',
-          cancelButton: 'Nope',
           content: $content,
           trigger: 'click',
           closeOnEsc:true,
           closeOnClick:'body',
           blockScroll:true,
           animation:{open: 'zoomIn', close: 'zoomOut'},
-          confirmButton: 'Anwenden',
-          cancelButton: 'Zurücksetzen',
+          confirmButton: 'Filter anwenden',
+          cancelButton: 'Abbrechen',
           confirm: function() {
             updateFilterInputs(this.content);
             updateFilterLabels(this.content);
-            filterForm.submit();
+            submitForm();
           },
           cancel: function() {
-            this.content.find('input:checked').removeAttr('checked');
-            updateFilterInputs(this.content);
-            updateFilterLabels(this.content);
-            filterForm.submit();
+            //this.content.find('input:checked').removeAttr('checked');
+            //updateFilterInputs(this.content);
+            //updateFilterLabels(this.content);
+            //submitForm();
           }
-
         });
-
     });
 
-    // jBox District Filter MODAL with Modal Buttons
 
+    // JBOX District Filter MODAL
     var districtModal = new jBox('Confirm', {
       addClass:'jBox',
       attach: '.filter-modal-district',
@@ -158,34 +159,30 @@ APP.components.cardFilter = (function() {
         selectAllGraetzlsIn(this.content);
         updateFilterInputs(this.content);
         updateFilterLabels(this.content);
-        filterForm.submit();
+        submitForm();
       },
       cancel: function() {
         unSelectAllDistricts(this.content);
         selectAllGraetzlsIn(this.content);
         updateFilterInputs(this.content);
         updateFilterLabels(this.content);
-        filterForm.submit();
+        submitForm();
       }
     });
 
 
-    // Check on Init Load -> Auslagern in Funktion
-    if ($('#select-home-graetzl').prop('checked') == true) {
-      unSelectAllDistricts($(".filter-modal-jbox-district"));
-      $('.filter-modal-jbox-district #select-all').prop("checked", false); // deselect Wien
-    }
+    // Activity Stream Graetzl District Modal Radios Select on Click
+    $(".filter-area input").on("change", function(){
+      $(".filter-area input").prop("checked", false);
+      $(this).prop("checked", true);
+    });
+
+
 
     $(".filter-modal-jbox-district").on("click", "#select-home-graetzl", function() {
-      //console.log($(this));
-      // Obige ausgelagerte Funktion aufrufen, sttt untig nochmals
-
-      if ($(this).prop('checked') == true) {
-        unSelectAllDistricts($(".filter-modal-jbox-district"));
-        $('.filter-modal-jbox-district #select-all').prop("checked", false); // deselect Wien
-
-      }
+      selectHomeGraetzl();
     });
+
 
     // District Filter - Select Ganz Wien Checkbox
     $(".filter-modal-jbox-district").on("click", ".select-all", function() {
@@ -196,6 +193,7 @@ APP.components.cardFilter = (function() {
         unSelectAllDistricts($(".filter-modal-jbox-district"));
       }
     });
+
 
     // Toggle ganz Wien Checkbox wenn alle Bezirke gewählt
     $(".filter-modal-jbox-district .filter-input").on("change", function() {
@@ -210,17 +208,9 @@ APP.components.cardFilter = (function() {
       } else {
         $(".select-all input:checkbox").prop("checked", false);
       }
+
     });
 
-    // Use for Buttons inside Modal, not Confirm Modals which already has Buttons
-    $(".filter-modal-jbox").on("click", ".filter-button", function() {
-      var currentModalContent = $(this).closest( ".filter-modal-jbox" );
-      var currentModalId = '#' + currentModalContent.attr('id');
-      updateFilterInputs(currentModalContent);
-      updateFilterLabels(currentModalContent);
-      filterForm.submit();
-      modals[currentModalId].close();
-    });
 
     // Use for OneClick Modals
     $(".filter-modal-jbox.oneclick .filter-input").on("change", function() {
@@ -228,63 +218,65 @@ APP.components.cardFilter = (function() {
       var currentModalId = '#' + currentModalContent.attr('id');
       updateFilterInputs(currentModalContent);
       updateFilterLabels(currentModalContent);
-      filterForm.submit();
+      submitForm();
       modals[currentModalId].close();
     });
 
-    // ---------- USE FOR NEW JBOX MODALS
 
-
-    // ---------- USE FOR OLD featherlight MODALS
-
-    filterForm.find(".filter-selection-text a").not( ".plain-link" ).featherlight({
-      root: '.card-grid-container',
-      targetAttr: 'href',
-      persist: true
-    });
-
-    $(".filter-modal").on("click", ".reset-button", function() {
-      $('input:checkbox').prop('checked', false);
-      var currentModal = $.featherlight.current();
-      updateFilterLabels(currentModal.$content);
-      filterForm.submit();
-      currentModal.close();
-    });
-
-    $(".filter-modal").on("click", ".filter-button", function() {
-      var currentModal = $.featherlight.current();
-      updateFilterInputs(currentModal.$content);
-      updateFilterLabels(currentModal.$content);
-      filterForm.submit();
-      currentModal.close();
-    });
-
-    // ---------- USE FOR OLD featherlight MODALS
-
-    // HELPER FUNCTIONS
+    // HELPER FUNCTIONS & INIT ------------
 
     $(".filter-modal").each(function() {
       updateFilterInputs($(this));
     });
 
-    filterForm.on('ajax:beforeSend', function() {
-      clearandInitGrid();
-      showSpinner();
-    });
-
-    filterForm.on('ajax:success', function() {
-      addActionCard();
-      addFeaturedCard();
-      adjustNewCards();
-    });
 
     $('.link-load').on('ajax:success', function() {
-      removeDuplicates();
+      removeDuplicateCards();
       adjustNewCards();
     });
 
-    filterForm.submit();
+
+    selectHomeGraetzl();
+    submitForm();
+
   }
+
+
+  // ---- AJAX FORM SUBMIT ----
+  function submitForm() {
+
+    var submit_url = filterForm.attr('action');
+    var submit_params = filterForm.serialize();
+
+    if (typeof formXhr !== 'undefined') {
+        formXhr.abort();
+    }
+
+    formXhr = $.ajax({
+        type: "GET",
+        url: submit_url,
+        data: submit_params,
+        beforeSend: function(){
+          clearandInitGrid();
+          showSpinner();
+        },
+        success: function(){
+          addActionCard();
+          addFeaturedCard();
+          adjustNewCards();
+        }
+    });
+
+  }
+
+
+  function selectHomeGraetzl() {
+    if ($('#select-home-graetzl').prop('checked') == true) {
+      unSelectAllDistricts($(".filter-modal-jbox-district"));
+      $('.filter-modal-jbox-district #select-all').prop("checked", false); // deselect Wien
+    }
+  }
+
 
   function selectAllDistricts(modal) {
     modal.find(".filter-input input:checkbox").each(function(){
@@ -292,11 +284,13 @@ APP.components.cardFilter = (function() {
     });
   }
 
+
   function unSelectAllDistricts(modal) {
     modal.find(".filter-input input:checkbox").each(function(){
       $(this).prop("checked", false);
     });
   }
+
 
   function selectAllGraetzlsIn(modal) {
 
@@ -323,6 +317,7 @@ APP.components.cardFilter = (function() {
 
   }
 
+
   function updateFilterInputs(modal) {
     filterForm.find('[id^="' + modal.prop("id") + '"]').remove();
     modal.find("input, select").each(function() {
@@ -331,6 +326,7 @@ APP.components.cardFilter = (function() {
       $(this).clone().prop("id", cloneId).val($(this).val()).appendTo(filterForm).hide();
     });
   }
+
 
   function updateFilterLabels(modal) {
     var selectedInputs = modal.find(".filter-input :selected, .filter-input :checked");
@@ -356,16 +352,28 @@ APP.components.cardFilter = (function() {
         link.text(link.data("no-filter-label"));
         link.removeClass('filter-applied');
     }
+    gtag_tracking(modal, link);
   }
 
+
+  function gtag_tracking(modal, link) {
+    var label_type = modal.find("[data-filter-label]").data("filter-label");
+    var label_item = link.text();
+    gtag(
+      'event', label_type + ' :: Modal', {
+      'event_category': 'Filter',
+      'event_label': label_item
+    });
+  }
+
+
   function clearandInitGrid() {
+
     var allItems = cardGrid.find('[data-behavior="masonry-card"]');
     allItems.remove();
     $('.link-load').addClass("hide");
 
-    if (masonrySetup) {
-      cardGrid.masonry("destroy");
-    }
+    if ( masonrySetup ) { cardGrid.masonry("destroy"); }
 
     cardGrid.masonry({
       columnWidth: 310,
@@ -373,14 +381,18 @@ APP.components.cardFilter = (function() {
       itemSelector: '[data-behavior="masonry-card"]',
       fitWidth : true
     });
-
     masonrySetup = true;
+
   }
+
 
   function showSpinner() {
     var spinner = $('footer .loading-spinner').clone().removeClass('-hidden');
-    cardGrid.append(spinner);
+    if (!cardGrid.find('.loading-spinner').exists()) {
+      cardGrid.append(spinner);
+    }
   }
+
 
   function addActionCard() {
     if ($(".action-card-container").exists()) {
@@ -393,7 +405,7 @@ APP.components.cardFilter = (function() {
     }
   }
 
-  // TODO: Hack for Adding Feature Card
+
   function addFeaturedCard() {
     if ($('.featuredCard').exists()) {
       var featuredCard = $('.featuredCard').clone().removeClass('-hidden');
@@ -404,12 +416,8 @@ APP.components.cardFilter = (function() {
   }
 
 
-  // Infinite Scrolling - Load More Data if Scrolling to Bottom
   function initInfiniteScroll() {
-
-    // Click Btn only once - Set to true if clicked.
     var btn_link_load_clicked = false;
-
     $(window).scroll(function() {
       // Click Btn on bottom Scroll via JS if Btn & more Data exists (is not hidden)
       if (cardGrid.exists() && !$('.link-load').hasClass('hide')) {
@@ -421,15 +429,14 @@ APP.components.cardFilter = (function() {
         // if the scroll is more than 70% from the top, load more content.
         if(scrollPercentage > 0.7 && btn_link_load_clicked == false) {
           $('.link-load').click();
-          //console.log('scrolled and clicked');
           btn_link_load_clicked = true;
         }
       }
     });
-  } // Infinite Scrolling
+  }
 
-  // Remove Duplicate Cards
-  function removeDuplicates() {
+
+  function removeDuplicateCards() {
     var items = cardGrid.find('[data-card-id]');
     var exists = {};
     console.log(items.length);
@@ -444,16 +451,19 @@ APP.components.cardFilter = (function() {
     });
   }
 
+
   function adjustNewCards() {
     var newCards = cardGrid.find('[data-behavior="masonry-card"]').not('[data-appended]');
     cardGrid.masonry('appended', newCards);
     newCards.attr("data-appended", true);
-    //console.log(newCards);
     APP.components.initUserTooltip();
     initInfiniteScroll();
   }
 
+
   return {
-    init: init
+    init: init,
+    submitForm : submitForm,
   };
+
 })();

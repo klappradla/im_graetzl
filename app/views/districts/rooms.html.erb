@@ -16,7 +16,7 @@
     Entdecke Raumteiler <span>im <%= @district.numeric %>. Bezirk</span>
   </h1>
 
-  <%= render 'filters/room_categories_slider' %>
+  <%= render 'filters/room_categories' %>
 
   <%= form_tag rooms_path, method: :get, remote: true, class: 'cards-filter' do %>
     <%= hidden_field_tag :category_id, @category.try(:id) %>
