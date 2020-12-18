@@ -225,8 +225,9 @@ APP.components.cardFilter = (function() {
 
     // HELPER FUNCTIONS & INIT ------------
 
-    $(".filter-modal").each(function() {
-      updateFilterInputs($(this));
+    // Update Filter Labels on Load
+    $("[class^='filter-modal-']").each(function() {
+      updateFilterLabels($(this));
     });
 
 
@@ -234,7 +235,6 @@ APP.components.cardFilter = (function() {
       removeDuplicateCards();
       adjustNewCards();
     });
-
 
     selectHomeGraetzl();
     submitForm();
@@ -352,7 +352,21 @@ APP.components.cardFilter = (function() {
         link.text(link.data("no-filter-label"));
         link.removeClass('filter-applied');
     }
+
     gtag_tracking(modal, link);
+
+    // ----- Select Label in SidebarBox if Exists
+    if ($('.updateFromFilter').exists()) {
+      selectedInputsID = selectedInputs.attr('id');
+      $('.updateFromFilter li').removeClass("active");
+      var matchedLabel = $('.updateFromFilter').find('[data-id='+selectedInputsID+']');
+      matchedLabel.closest("li").addClass("active");
+      // Set Browser Address Bar:
+      var matchedLabelId = matchedLabel.data('cat-id');
+      history && history.pushState({}, '', location.pathname + '?category=' + matchedLabelId);
+    }
+
+
   }
 
 
@@ -379,7 +393,8 @@ APP.components.cardFilter = (function() {
       columnWidth: 310,
       gutter: 24,
       itemSelector: '[data-behavior="masonry-card"]',
-      fitWidth : true
+      fitWidth : true,
+      horizontalOrder: true
     });
     masonrySetup = true;
 
@@ -464,6 +479,7 @@ APP.components.cardFilter = (function() {
   return {
     init: init,
     submitForm : submitForm,
+    updateFilterLabels : updateFilterLabels
   };
 
 })();

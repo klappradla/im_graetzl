@@ -1,5 +1,21 @@
 <div class="btn-ctrl" id="groups-btn-ctrl">
 
+  <% if @group.postable_by?(current_user) %>
+    <%= link_to 'javascript:void(0);', class: 'newtopic', id: 'createTopic' do %>
+      <%= icon_tag "pencil" %>
+    <% end %>
+    <div class="jBoxHidden jBoxDropdown" id="jBoxCreateTopic">
+      <%= link_to new_group_discussion_path(@group, anchor: "newtopic") do %>
+        <%= icon_tag "layout-document" %>
+        <div class="icontxt">Neues Thema erstellen</div>
+      <% end %>
+      <%= link_to new_meeting_path(group_id: @group.id) do %>
+        <%= icon_tag "calendar-2" %>
+        <div class="icontxt">Neues Gruppentreffen</div>
+      <% end %>
+    </div>
+  <% end %>
+
   <% if !user_signed_in? %> <!-- Logged Out -->
 
     <%= link_to new_user_session_path(redirect: request.original_url), class: 'btn-userIcons' do %>
@@ -52,11 +68,11 @@
 
   <% else %> <!-- Join Request -->
 
-    <%= link_to '#join-request-modal', class: 'join-request-button btn-userIcons' do %>
+    <%= link_to 'javascript:void(0);', class: 'btn-userIcons', id: 'joinRequest' do %>
       <span><%= avatar_for current_user %> Gruppe beitreten</span>
     <% end %>
 
-    <div id="join-request-modal" class="join-request-modal">
+    <div id="jBoxRoinRequest" class="jBoxHidden jBoxDropdown">
       <%= render 'groups/join_request_form', group: group %>
     </div>
 

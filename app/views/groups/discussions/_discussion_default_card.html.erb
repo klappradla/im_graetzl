@@ -1,0 +1,26 @@
+<div class="cardbox-wrp" data-behavior="masonry-card">
+  <div class="paperCard -cord1RT -illuteaser -discussions">
+    <div class="wrp">
+
+      <div class="categories-list updateFromFilter">
+        <h3>Kategorien</h3>
+        <ul>
+            <li>
+              <%= icon_tag('record') %>
+              <%= link_to "Alle", 'javascript:APP.controllers.groups.selectDiscussion();', data: { cat_id: '' ,id: "all-topics-radio"} %>
+            </li>
+          <% @group.discussion_categories.each do |discussion_category| %>
+            <li>
+              <%= icon_tag('record') %>
+              <%= link_to discussion_category.title, "javascript:APP.controllers.groups.selectDiscussion('#{discussion_category.id}');", data: { cat_id: discussion_category.id ,id: "filter_discussion_category_#{discussion_category.id}"} %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+
+      <%= link_to 'Neues Thema starten', new_group_discussion_path(@group), class: 'btn-primary' %>
+
+    </div>
+    <div class="card"></div>
+  </div>
+</div>

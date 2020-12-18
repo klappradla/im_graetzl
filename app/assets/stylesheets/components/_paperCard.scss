@@ -159,10 +159,13 @@
 .paperCard.-platform-meeting .wrp {
   background-image: url(image_path('illu/illu-ideen-weissbg.png'));
 }
-.paperCard.-groups .wrp {
+.paperCard.-groups .wrp, .paperCard.-discussions .wrp {
   background-image: url(image_path('illu/illu-sitzendeAmTisch@2x.png'));
   background-position-x: 40px;
   background-position-y: 25px;
+}
+.paperCard.-discussions .wrp {
+  padding-top:190px;
 }
 .paperCard.-insurance .wrp {
   background:none;

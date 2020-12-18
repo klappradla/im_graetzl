@@ -63,19 +63,11 @@ APP.components.notificationSettings = (function() {
     }
 
     function initTarget() {
-      var target = getUrlVars()["target"];
+      var target = APP.controllers.application.getUrlVars()["target"];
       if (typeof target !== 'undefined') {
         var tabLink = $('a[href="#'+target+'"]');
         tabLink.click();
       }
-    }
-
-    function getUrlVars() {
-      var vars = {};
-      var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-          vars[key] = value;
-      });
-      return vars;
     }
 
     return {

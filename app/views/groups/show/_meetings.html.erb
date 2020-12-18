@@ -1,5 +1,6 @@
 <div class="meetings-section -page">
 
+  <!--
   <div class="header">
     <% if @group.postable_by?(current_user) %>
       <%= link_to new_meeting_path(group_id: @group.id), class: 'btn-userIcons' do %>
@@ -10,6 +11,7 @@
       <% end %>
     <% end %>
   </div>
+  -->
 
   <%= form_tag meetings_path(group_id: @group.id, per_page: 9), method: :get, remote: true, class: 'autosubmit-stream' do; end %>
   <div class="cardBoxCollection -tripple" data-behavior="meetings-card-container"></div>

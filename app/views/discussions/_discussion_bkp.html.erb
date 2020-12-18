@@ -3,13 +3,15 @@
 <div class="cardBox -discussion" data-behavior="masonry-card">
   <div class="cardBoxHeader">
     <div class="coverImgWrapper">
-      <%= link_to attachment_image_tag(discussion.first_post.images.first, :file, :fill, 300, 180, class: 'coverImg', fallback: 'cover_photo/600x300-speech-bubble.png'), [discussion.group, discussion, anchor: "topic"] %>
+      <%= link_to attachment_image_tag(discussion.first_post.images.first, :file, :fill, 300, 180, class: 'coverImg', fallback: 'cover_photo/600x360-speech-bubble.png'), [discussion.group, discussion, anchor: "topic"] %>
     </div>
-    <% if discussion.sticky %>
-      <div class="categoryicon sticky"><%= icon_tag "pin" %><sup><%= discussion.discussion_posts.size %></sup></div>
-    <% else %>
-      <div class="categoryicon"><%= icon_tag "layout-document" %><sup><%= discussion.discussion_posts.size %></sup></div>
-    <% end %>
+    <div class="categoryicon">
+      <% if discussion.sticky %>
+        <%= icon_tag "pin" %>
+      <% else %>
+        <%= icon_tag "layout-document" %>
+      <% end %>
+    </div>
   </div>
   <div class="cardBoxContent">
     <div class="avatar-block">
@@ -30,14 +32,17 @@
             Gelöschtes Mitglied
           <% end %>
         </div>
-        <div class="infos">
+        <div class="category">
           <%= discussion.discussion_category ? discussion.discussion_category.title : 'Allgemein'.html_safe %>
+        </div>
+        <div class="infos">
+          <%= discussion.discussion_posts.size  %> <%= discussion.discussion_posts.size > 1 ? 'Beiträge' : 'Beitrag'  %>
         </div>
       </div>
     </div>
     <div class="txt">
       <h3><%= link_to discussion.title, [discussion.group, discussion, anchor: "topic"] %></h3>
-      <% if !discussion.first_post.deleted? %>
+      <% if !last_post && !discussion.first_post.deleted? %>
         <p><%= truncate discussion.first_post.content, length: 150 %></p>
       <% end %>
     </div>
@@ -47,7 +52,7 @@
       <div class="entryInitialContent">
         <div class="userCreateInfo">
           <%= attachment_image_tag last_post.user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
-          <span class="userAndType"><%= link_to last_post.user.full_name, last_post.user %> am <%= I18n.localize(last_post.created_at, format:'%d. %b %Y') %></span>
+          <span class="userAndType"><%= link_to last_post.user.full_name, last_post.user %> hat geantwortet</span>
         </div>
         <div class="txt">
           <%= link_to [discussion.group, discussion, anchor: "discussion-post-#{last_post.id}"], class: 'commentslink' do %>

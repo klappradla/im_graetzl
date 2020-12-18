@@ -18,7 +18,7 @@
 
     <%= form_tag activities_path, method: :get, remote: true, class: 'cards-filter' do %>
       <div class="filter-selection-text-jbox">
-        Neues aus <%= link_to "#{@graetzl.name}", '#filter-modal-activity', data: { no_filter_label: @graetzl.name} %>,
+        Neues aus <%= link_to "#{@graetzl.name}", '#filter-modal-activity', data: { no_filter_label: @graetzl.name} %> -
         Zur Aktion <%= link_to 'Selbstständige für Selbstständige', platform_meetings_wien_path, class: 'plain-link' %>
       </div>
       <div id="filter-modal-activity" class="filter-modal-jbox oneclick">

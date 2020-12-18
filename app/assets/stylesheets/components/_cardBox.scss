@@ -44,7 +44,7 @@
     //opacity: 1.0;
   }
 
-  // Zuckerl Crdbox
+  // --------- Zuckerl Crdbox
   &.-zuckerl {
     .btn-userIcons {
       width:100%;
@@ -63,7 +63,7 @@
     }
   }
 
-  // Room Demand Cardbox
+  // --------- Room Demand Cardbox
   &.-roomdemand {
     @supports (object-fit: cover) {
       img.room_demand {
@@ -79,7 +79,7 @@
     }
   }
 
-  // Group Cardbox
+  // --------- Group Cardbox
   &.-group {
     a.title {
       font-weight: bold;
@@ -110,7 +110,7 @@
     }
   } // Group Cardbox
 
-  // Group Discussion CardBox
+  // --------- Group Discussion CardBox
   &.-discussion {
     .avatarImg {
       .img-round {
@@ -213,6 +213,9 @@
     .count {
       text-align: center;
       font-size: 13px;
+    }
+    &.sticky {
+      color:$color-ambient-rosa;
     }
     &.-call {
       &.-open {
@@ -510,7 +513,33 @@
 }
 
 
-
+.-discussion .cardBoxHeader {
+  .coverImgWrapper {
+    height:180px;
+  }
+  .categoryicon {
+    display: flex;
+    //align-items: center;
+    sup {
+      font-style: italic;
+    }
+  }
+}
+.-discussion .cardBoxContent {
+  .avatar-block {
+    align-items: flex-end;
+    margin-top: -62px;
+    background: none;
+  }
+  > .txt {
+    margin-left:5px;
+  }
+  .userAndType {
+    a {
+      color: $color-ambient-mint-dark;
+    }
+  }
+}
 
 
 // TODO: we should not need this -illustuff after new versions of startpages
@@ -527,50 +556,6 @@
 .cardBox.-illuteasersmall {
   padding-top: 177px;
   background-size: auto 170px;
-}
-
-// temp sponsorcard should come from DB, remove after proper implementation
-.sponsorstuwerviertel {
-  .cardBoxContent {
-
-    .txt {
-      float: left;
-      width: calc(100% - 130px);
-      p {
-        font-size: 12px;
-        margin-bottom: 8px;
-      }
-      p:last-child {
-        margin-bottom: 0;
-      }
-    }
-    .eks {
-      float: left;
-      display: block;
-      margin-right: 10px;
-    }
-    .wko {
-      display: block;
-      clear: both;
-    }
-  }
-}
-
-main > .sponsorstuwerviertel {
-  max-width: 320px;
-  margin: 70px auto 0 auto;
-  @include respond-to(">=large") {
-    @include cardBox-horizontal();
-    max-width: none;
-    width: 700px;
-    .cardBoxContent {
-      padding-top: 70px;
-      padding-right: 50px;
-    }
-    .sideflag {
-      right: -368px;
-    }
-  }
 }
 
 .cardBox.-zuckerl .sideflag,

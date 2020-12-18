@@ -5,7 +5,7 @@
     <%= icon_tag "speech-bubble" %>
     <span>Neues Thema</span>
     <% end %>
-    <%= f.text_field :title, placeholder: 'Gib deinem Thema einen kurzen Titel ..', required: true %>
+    <%= f.text_field :title, placeholder: 'Gib deinem Thema einen kurzen Titel ..', required: true, class: '-validate' %>
   </div>
 
   <div class="input-select">
@@ -23,7 +23,7 @@
           <%= attachment_image_tag current_user, :avatar, :fill, 100, 100, fallback: 'avatar/user/100x100.png', class: 'img-round' %>
           <span>Dein Beitrag</span>
         <% end %>
-        <%= pf.text_area :content, cols: 80, rows: 3, placeholder: 'Dein erster Beitrag im Thema ..', required: true %>
+        <%= pf.text_area :content, cols: 100, rows: 5, placeholder: 'Dein erster Beitrag im Thema ..', required: true, class: '-validate' %>
       </div>
 
       <div class="upload-oldschool">

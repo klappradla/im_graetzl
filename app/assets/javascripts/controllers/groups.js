@@ -1,44 +1,90 @@
 APP.controllers.groups = (function() {
 
     function init() {
-      if ($(".group-form-page").exists()) {
-        initGroupForm();
-      }
-      if ($(".group-page .categories-list").exists()) {
-        initMobileNav();
-      }
-      if ($(".group-page").exists()) {
-        initHeader();
-        initInfo();
-        initDiscussions();
-        $('.autosubmit-stream').submit();
-      }
+      if ($(".group-page").exists()) { initGroupPage(); }
+      if ($(".group-form-page").exists()) { initGroupForm(); }
     }
 
-    function initGroupForm() {
 
-      $(".group-categories input").on("change", function() {
-        if ($(".group-categories input:checked").length >= 3) {
-          $(".group-categories input:not(:checked)").each(function() {
-            $(this).prop("disabled", true);
-            $(this).parents(".input-checkbox").addClass("disabled");
-          });
-        } else {
-          $(".group-categories input").prop("disabled", false);
-          $(".group-categories .input-checkbox").removeClass("disabled");
+    function initGroupPage() {
+
+      $('.autosubmit-stream').submit(); // Used for Meetings Tabs - Make like Discussions
+
+      APP.components.tabs.initTabs(".tabs-ctrl");
+
+      var target = APP.controllers.application.getUrlVars()["category"];
+      if (typeof target !== 'undefined') {
+        $('.tabs-ctrl').trigger('show', '#tab-discussions');
+      }
+
+      // Load on Pageload if Tab is selected
+      if($("#tab-discussions").is(":visible")){
+        initDiscussions();
+      }
+
+      // Load on Tab Change
+      $('.tabs-ctrl').on("_after", function() {
+          if($("#tab-discussions").is(":visible")){
+            initDiscussions();
+          }
+      });
+
+      var mobCreate = new jBox('Modal', {
+        addClass:'jBox',
+        attach: '.mob #createTopic',
+        content: $('#jBoxCreateTopic'),
+        trigger: 'click',
+        closeOnClick:true,
+        blockScroll:true,
+        animation:{open: 'zoomIn', close: 'zoomOut'},
+      });
+      var deskCreate = new jBox('Tooltip', {
+        addClass:'jBox',
+        attach: '.desk #createTopic',
+        content: $('#jBoxCreateTopic'),
+        trigger: 'click',
+        closeOnClick:true,
+        pointer:'right',
+        adjustTracker:true,
+        isolateScroll:true,
+        adjustDistance: {top: 25, right: 25, bottom: 25, left: 25},
+        animation:{open: 'zoomIn', close: 'zoomOut'},
+        maxHeight:500,
+      });
+
+      var joinRequest = new jBox('Modal', {
+        addClass:'jBox',
+        attach: '#joinRequest',
+        content: $('#jBoxRoinRequest'),
+        trigger: 'click',
+        blockScroll:true,
+        animation:{open: 'zoomIn', close: 'zoomOut'},
+      });
+
+      /*
+      var newTopic = new jBox('Confirm', {
+        addClass:'jBox',
+        attach: '.newTopicTrigger',
+        content: $('#newTopic'),
+        trigger: 'click',
+        closeOnEsc:true,
+        closeOnClick:'body',
+        closeOnConfirm:false,
+        blockScroll:true,
+        animation:{open: 'zoomIn', close: 'zoomOut'},
+        confirmButton: 'Thema erstellen',
+        cancelButton: 'Abbrechen',
+        minWidth: 900,
+        confirm: function() {
+          $('.jBox-Confirm .discussion-form').find('.btn-primary').trigger('click');
         }
       });
 
-      APP.components.graetzlSelectFilter.init($('#district-graetzl-select'));
-    }
 
-    function initHeader() {
-      APP.components.tabs.initTabs(".tabs-ctrl");
-
-      $(".join-request-button").featherlight({
-        root: '#groups-btn-ctrl',
-        targetAttr: 'href'
+      $('#tab-discussions .btn-new-topic').on('click', function() {
+        $('#new-topic').slideToggle();
       });
+      */
 
       $(".request-message-opener").featherlight({
         root: '#groups-btn-ctrl',
@@ -58,69 +104,56 @@ APP.controllers.groups = (function() {
       });
 
     }
+    
 
-    function initInfo() {
-      $(".all-discussions-link").on("click", function() {
-        $(".tabs-ctrl").trigger('show', '#tab-discussions');
+    function selectDiscussion(category) {
+
+      $('input:radio.filter-radio-category').each(function () {
+        $(this).prop('checked', false);
       });
+
+      if (typeof category !== "undefined") {
+        $('input:radio.filter-radio-category[value='+category+']').prop("checked",true);
+      }
+      else {
+        $('input:radio.filter-radio-category.-all').prop("checked",true);
+      }
+
+      APP.components.cardFilter.updateFilterLabels($('#filter-modal-category'));
+      APP.components.cardFilter.submitForm();
+
     }
+
 
     function initDiscussions() {
-      $('#tab-discussions .btn-new-topic').on('click', function() {
-        $('#new-topic').slideToggle();
-      });
-
-      $("#tab-discussions .categories-list a").on("click", function() {
-        $(this).parents("li").addClass("selected").siblings("li").removeClass("selected");
-      });
-
-      $("#tab-discussions .categories-list a").on('ajax:beforeSend', function() {
-        showSpinner();
-      }).on('ajax:complete', function() {
-        hideSpinner();
-        APP.components.initUserTooltip();
-      });
-
-      // Fade in new content
-      $("#tab-discussions .categories-list a").on('ajax:success', function() {
-        $(".discussions-container").hide().fadeIn(100);
-      });
-
-      $("#tab-discussions .autoload-link").click();
+      if ($('*[data-behavior="discussions-card-container"]').is(':empty')){
+        APP.components.cardFilter.init();
+      } else {
+        APP.components.cardFilter.submitForm();
+      }
     }
 
-    function showSpinner() {
-      var spinner = $('footer .loading-spinner').clone().removeClass('-hidden');
-      $(".discussions-container").append(spinner);
-    }
 
-    function hideSpinner() {
-      $(".discussions-container .loading-spinner").remove();
-    }
-
-    function initMobileNav() {
-      var $dropdown = $(".categories-list-mobile select");
-      $(".categories-list li a").each(function() {
-              var $this = $(this),
-              link = $this.attr('href'),
-              txt = $this.text();
-
-          $dropdown.append(getOption());
-
-          function getOption() {
-              if($this.hasClass('autoload-link'))
-                  return '<option selected value="'+ link +'" data-remote="true">'+ txt +'</option>';
-              return '<option value="'+ link +'" data-remote="true">'+ txt +'</option>';
-          }
+    function initGroupForm() {
+      $(".group-categories input").on("change", function() {
+        if ($(".group-categories input:checked").length >= 3) {
+          $(".group-categories input:not(:checked)").each(function() {
+            $(this).prop("disabled", true);
+            $(this).parents(".input-checkbox").addClass("disabled");
+          });
+        } else {
+          $(".group-categories input").prop("disabled", false);
+          $(".group-categories .input-checkbox").removeClass("disabled");
+        }
       });
-      $dropdown.on('change', function() {
-        var getLink = $('.categories-list li a[href="'+$dropdown.val()+'"]');
-        getLink.click();
-      });
+      APP.components.graetzlSelectFilter.init($('#district-graetzl-select'));
     }
+
 
     return {
-      init: init
+      init: init,
+      selectDiscussion: selectDiscussion
     };
+
 
 })();

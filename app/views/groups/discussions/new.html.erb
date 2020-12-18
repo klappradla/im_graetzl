@@ -1,0 +1,11 @@
+<div class="group-page">
+  <%= render 'groups/header' %>
+  <%= render 'groups/btn_ctrl', group: @group %>
+  <%= render 'groups/tab_navigation' %>
+
+  <div class="hl-subtext" id="newtopic">
+    <h1>Neues <span>Thema</span> in der Gruppe erstellen</h1>
+  </div>
+
+  <%= render 'groups/discussions/form', discussion: Discussion.new %>
+</div>

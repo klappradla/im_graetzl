@@ -64,7 +64,7 @@ APP.controllers.application = (function() {
     }
 
     function scrollToTarget() {
-      var target = getUrlVars()["target"];
+      var target = APP.controllers.application.getUrlVars()["target"];
       if (typeof target !== 'undefined') {
         $('html, body').animate({
           scrollTop: $('#'+target).offset().top
@@ -72,20 +72,21 @@ APP.controllers.application = (function() {
       }
     }
 
-    function getUrlVars() {
-      var vars = {};
-      var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-          vars[key] = value;
-      });
-      return vars;
-    }
+  }
 
+  function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
   }
 
   // ---------------------------------------------------------------------- Returns
 
   return {
-    init: init
+    init: init,
+    getUrlVars: getUrlVars
   }
 
 })();
