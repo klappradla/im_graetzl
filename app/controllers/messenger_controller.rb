@@ -2,8 +2,8 @@ class MessengerController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @threads = current_user.user_message_threads.includes(:users).order("last_message_at DESC")
-    set_threads_statuses(@threads)
+    #@threads = current_user.user_message_threads.includes(:users).order("last_message_at DESC")
+    #set_threads_statuses(@threads)
   end
 
   def start_thread
@@ -33,6 +33,20 @@ class MessengerController < ApplicationController
     @thread = current_user.user_message_threads.find(params[:thread_id])
   end
 
+  def fetch_thread_list
+
+    deleted_ids = current_user.user_message_thread_members.where(status: "deleted").pluck(:user_message_thread_id)
+    @threads = current_user.user_message_threads.where.not(id: deleted_ids).includes(:users).page(params[:page]).per(params[:per_page]).order("last_message_at DESC")
+    @threads = filter_collection(@threads)
+
+    if params[:thread_id].present?
+      # Load Sidebar Thread from Url-Param and Attach to Thread-List
+      @threads = (current_user.user_message_threads.where(id: params[:thread_id]) + @threads)
+      @threads = @threads.uniq{|t| t.id }
+    end
+
+  end
+
   def fetch_new_messages
     @thread = current_user.user_message_threads.find(params[:thread_id])
     @user_messages = @thread.user_messages.includes(:user)
@@ -54,6 +68,22 @@ class MessengerController < ApplicationController
   end
 
   private
+
+  def filter_collection(threads)
+
+    if params[:filter].present? && UserMessageThread.thread_types[params[:filter]]
+      archived_ids = current_user.user_message_thread_members.where(status: "archived").pluck(:user_message_thread_id)
+      threads = threads.where.not(id: archived_ids).where(thread_type: params[:filter])
+    elsif params[:filter].present? && UserMessageThreadMember.statuses[params[:filter]]
+      filtered_ids = current_user.user_message_thread_members.where(status: params[:filter]).pluck(:user_message_thread_id)
+      threads = threads.where(id: filtered_ids)
+    else
+      active_ids = current_user.user_message_thread_members.where(status: "active").pluck(:user_message_thread_id)
+      threads = threads.where(id: active_ids)
+    end
+
+    threads
+  end
 
   def set_threads_statuses(threads)
     statuses = current_user.user_message_thread_members.pluck(:user_message_thread_id, :status).to_h

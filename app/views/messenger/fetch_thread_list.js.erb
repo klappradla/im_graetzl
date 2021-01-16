@@ -1,0 +1,17 @@
+(function() {
+    var $cardContainer = $("[data-behavior='thread-list-container']");
+    var $paginateLink = $("[data-behavior='thread-paginate-link']");
+
+  <% if params[:page].blank? %>
+    $cardContainer.html("<%= j render partial: 'messenger/thread_list', collection: @threads, as: 'thread' %>")
+  <% else %>
+    $cardContainer.append("<%= j render partial: 'messenger/thread_list', collection: @threads, as: 'thread' %>");
+  <% end %>
+
+  <% if params[:thread_id].blank? && @threads.next_page.present? %>
+    $paginateLink.attr('href', "<%= j next_page_url %>").addClass("more-data");
+  <% else %>
+    $paginateLink.addClass("hide").removeClass("more-data");;
+  <% end %>
+
+})();

@@ -21,7 +21,7 @@ class Discussion < ApplicationRecord
   end
 
   def edit_permission?(by_user)
-    by_user && user_id == by_user.id || by_user.admin?
+    by_user && (user_id == by_user.id || by_user.admin?)
   end
 
   def delete_permission?(by_user)

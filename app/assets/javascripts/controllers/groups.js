@@ -5,7 +5,6 @@ APP.controllers.groups = (function() {
       if ($(".group-form-page").exists()) { initGroupForm(); }
     }
 
-
     function initGroupPage() {
 
       $('.autosubmit-stream').submit(); // Used for Meetings Tabs - Make like Discussions
@@ -38,6 +37,7 @@ APP.controllers.groups = (function() {
         blockScroll:true,
         animation:{open: 'zoomIn', close: 'zoomOut'},
       });
+
       var deskCreate = new jBox('Tooltip', {
         addClass:'jBox',
         attach: '.desk #createTopic',
@@ -80,7 +80,6 @@ APP.controllers.groups = (function() {
         }
       });
 
-
       $('#tab-discussions .btn-new-topic').on('click', function() {
         $('#new-topic').slideToggle();
       });
@@ -104,7 +103,7 @@ APP.controllers.groups = (function() {
       });
 
     }
-    
+
 
     function selectDiscussion(category) {
 
@@ -121,6 +120,7 @@ APP.controllers.groups = (function() {
 
       APP.components.cardFilter.updateFilterLabels($('#filter-modal-category'));
       APP.components.cardFilter.submitForm();
+      APP.components.cardFilter.gtag_tracking($('#filter-modal-category'));
 
     }
 

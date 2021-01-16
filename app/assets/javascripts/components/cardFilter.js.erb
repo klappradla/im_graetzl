@@ -131,6 +131,7 @@ APP.components.cardFilter = (function() {
             updateFilterInputs(this.content);
             updateFilterLabels(this.content);
             submitForm();
+            gtag_tracking(this.content);
           },
           cancel: function() {
             //this.content.find('input:checked').removeAttr('checked');
@@ -160,6 +161,7 @@ APP.components.cardFilter = (function() {
         updateFilterInputs(this.content);
         updateFilterLabels(this.content);
         submitForm();
+        gtag_tracking(this.content);
       },
       cancel: function() {
         unSelectAllDistricts(this.content);
@@ -353,8 +355,6 @@ APP.components.cardFilter = (function() {
         link.removeClass('filter-applied');
     }
 
-    gtag_tracking(modal, link);
-
     // ----- Select Label in SidebarBox if Exists
     if ($('.updateFromFilter').exists()) {
       selectedInputsID = selectedInputs.attr('id');
@@ -370,14 +370,24 @@ APP.components.cardFilter = (function() {
   }
 
 
-  function gtag_tracking(modal, link) {
+  function gtag_tracking(modal) {
+
+    var label_category = "Filter";
     var label_type = modal.find("[data-filter-label]").data("filter-label");
-    var label_item = link.text();
+    var label_item = filterForm.find('a[href="#' + modal.prop("id") + '"]').text();
+
+    if ( typeof modal.data("category-label") !== "undefined") {
+      label_category = modal.data("category-label");
+    }
     gtag(
       'event', label_type + ' :: Modal', {
-      'event_category': 'Filter',
+      'event_category': label_category,
       'event_label': label_item
     });
+    //console.log(label_category);
+    //console.log(label_type);
+    //console.log(label_item);
+    
   }
 
 
@@ -479,7 +489,8 @@ APP.components.cardFilter = (function() {
   return {
     init: init,
     submitForm : submitForm,
-    updateFilterLabels : updateFilterLabels
+    updateFilterLabels : updateFilterLabels,
+    gtag_tracking : gtag_tracking
   };
 
 })();

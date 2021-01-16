@@ -162,6 +162,7 @@ Rails.application.routes.draw do
   get 'messenger' => 'messenger#index'
   get 'messenger/start_thread'
   get 'messenger/fetch_thread'
+  get 'messenger/fetch_thread_list'
   get 'messenger/fetch_new_messages'
   post 'messenger/post_message'
   post 'messenger/update_thread'

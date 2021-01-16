@@ -4,7 +4,7 @@
     <div class="filter-selection-text-jbox">
       Zeige mir Themen aus <%= link_to 'allen Kategorien', '#filter-modal-category', data: { no_filter_label: 'allen Kategoren'} %>
     </div>
-    <div id="filter-modal-category" class="filter-modal-jbox">
+    <div id="filter-modal-category" class="filter-modal-jbox" data-category-label="Groups">
       <%= render 'filters/discussion_categories' %>
     </div>
   <% end %>

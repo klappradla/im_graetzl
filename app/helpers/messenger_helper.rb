@@ -5,11 +5,11 @@ module MessengerHelper
   end
 
   def message_thread_class(thread)
-    if thread.status == "deleted"
-      "deleted hidden"
-    elsif thread.status ==  "archived"
-      "archived hidden"
-    elsif thread.tool_rental_id
+    #if thread.status == "deleted"
+    #  "deleted hidden"
+    #elsif thread.status ==  "archived"
+    #  "archived hidden"
+    if thread.tool_rental_id
       "active tool_rental"
     elsif thread.room_rental_id
       "active room_rental"

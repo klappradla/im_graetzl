@@ -27,7 +27,7 @@ namespace :scheduled do
   task weekly_summary_mail: :environment do
     puts "Rake weekly_summary_mail start at #{Time.now}"
     User.find_each do |user|
-      NotificationMailer.summary_graetzl(user, 'weekly').deliver_now if Date.today.tuesday?
+      NotificationMailer.summary_graetzl(user, 'weekly').deliver_now if Date.today.wednesday?
       NotificationMailer.summary_personal(user, 'weekly').deliver_now if Date.today.saturday?
     end
   end
