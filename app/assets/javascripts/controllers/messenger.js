@@ -94,6 +94,7 @@ APP.controllers.messenger = (function() {
       scrollToLastMessage();
       history && history.replaceState({}, '', location.pathname + "?thread_id=" + $(".chat-panel").data("thread-id"));
       APP.components.initUserTooltip();
+      $('#message-list .chat-message').linkify({target: "_blank"});
     });
 
   }
