@@ -72,6 +72,7 @@ APP.controllers.messenger = (function() {
     $("#side-bar .filter .jBoxDropdown a").on("click", function() {
       $("#side-bar #filter").val($(this).data("filter")); // Set HiddenField Filter Value
       $("#side-bar #thread_id").val($(this).data("")); // Remove Hidden Field Value for Thread-ID
+      $("#side-bar .threads-list").data('thread', ''); // Remove Thread-ID
       $("#filterMessages .selected-filter").text($(this).text());
       fetchThreadList();
     });
