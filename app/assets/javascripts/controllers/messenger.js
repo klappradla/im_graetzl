@@ -92,9 +92,16 @@ APP.controllers.messenger = (function() {
     $("#side-bar .fetch-form").on("ajax:complete", function() {
       $("#chat-container").addClass("show-messages");
       scrollToLastMessage();
-      history && history.replaceState({}, '', location.pathname + "?thread_id=" + $(".chat-panel").data("thread-id"));
+      var thread_id = $(".chat-panel").data("thread-id");
+      history && history.replaceState({}, '', location.pathname + "?thread_id=" + thread_id);
       APP.components.initUserTooltip();
       $('#message-list .chat-message').linkify({target: "_blank"});
+
+      gtag(
+        'event', 'Open Thread', {
+        'event_category': 'Messenger',
+        'event_label': thread_id
+      });
     });
 
   }
@@ -102,6 +109,16 @@ APP.controllers.messenger = (function() {
 
   function initThread() {
     $("#main-content").on("ajax:complete", ".post-message-form", function() {
+
+      if( $(this).find(".chat-message-input").val() ) {
+        var thread_id = $(".chat-panel").data("thread-id");
+        gtag(
+          'event', 'Post Message', {
+          'event_category': 'Messenger',
+          'event_label': thread_id
+        });
+      }
+
       $(this).find(".chat-message-input").val("");
       scrollToLastMessage();
     });

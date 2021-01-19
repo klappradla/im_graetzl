@@ -605,7 +605,8 @@
     a.btn-primary {background-color: #f8eb64; color: $color-font-primary;}
   }
   &.-crowdfunding {
-    a.btn-primary {background-color: #65a2a1; color: #feff4c;}
+    .coverImgWrapper { height: 240px; }
+    a.btn-primary {background-color: #f37164; color: #fff;}
   }
 }
 .homeOut {
