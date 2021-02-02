@@ -6,11 +6,12 @@ namespace :scheduled do
     #ARGV.each { |a| task a.to_sym do ; end }
 
     # Rake::Task['scheduled:create_messenger_post 1 4'].invoke
-    #user_range_start = ARGV[1].to_i
-    #user_range_end = ARGV[2].to_i
+    # heroku run rake scheduled:create_messenger_post 60 100 -a imgraetzl-staging
+    user_range_start = ARGV[1].to_i
+    user_range_end = ARGV[2].to_i
 
-    user_range_start = 1
-    user_range_end = 100
+    #user_range_start = 1
+    #user_range_end = 100
 
     sender = User.where("username" => "Michael").last
 
