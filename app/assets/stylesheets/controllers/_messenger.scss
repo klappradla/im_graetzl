@@ -340,7 +340,7 @@ section.messenger-page {
       position: relative;
       animation: fadeIn 1s ease-in;
       white-space: pre-line;
-      word-break: break-all;
+      word-break: break-word;
 
       small.time {
         display: none;
