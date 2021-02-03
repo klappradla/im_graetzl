@@ -34,10 +34,10 @@
      </td>
      <td class="mcnTextContent" style="padding-right:18px; width:100%;">
        <p>
-         <em><strong><%= message.user.full_name %></strong></em>
+         <em><strong><%= message.user.full_name %></strong> schreibt:</em>
        </p>
        <p>
-         <%= message.message %>
+         <%= message.message.truncate(2000, separator: ' ').gsub("\r\n", "<br/>").html_safe %>
        </p>
      </td>
    </tr>
@@ -47,7 +47,7 @@
    <% end %>
    <tr>
      <td colspan="2">
-       <%= render 'mailers/shared/button', title: "Jetzt antworten", url: messenger_url(thread_id: @thread.id) %>
+       <%= render 'mailers/shared/button', title: "Zum Messenger und Antworten", url: messenger_url(thread_id: @thread.id) %>
      </td>
    </tr>
  </tbody>
