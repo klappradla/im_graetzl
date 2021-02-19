@@ -11,10 +11,23 @@
 <section class="homeOut">
   <div class="buehne">
     <h1><span>Was ist los </span><span>in deinem Grätzl?</span></h1>
-    <%= link_to 'https://www.startnext.com/imgraetzl-kommt-zu-euch', class: 'registerlink', target: '_blank' do %>
+    <%= link_to info_path, class: 'registerlink' do %>
       <div class="coop-share-logo"></div>
-      <div class="txt">Zum Crowdfunding</div>
+      <div class="txt">Alle Infos</div>
     <% end %>
+  </div>
+
+  <div class="supporterBox">
+    <div class="inner">
+      <div class="txt">imGrätzl<br>unterstützt von</div>
+      <%= link_to(image_tag('supporter/Logo-Kolarik.png'), 'https://www.kolarik.at', target: '_blank', :class => '-logo') %>
+      <%= link_to(image_tag('supporter/Logo-Imkerei.png'), 'https://www.wiener-bezirksimkerei.at', target: '_blank', :class => '-logo') %>
+      <%= link_to(image_tag('supporter/Logo-ElifHakcobani.png'), 'https://www.geldmachtwas.com', target: '_blank', :class => '-logo') %>
+      <%= link_to 'alle ansehen', new_zuckerl_path, class: 'btn-viewall' %>
+      <%= button_tag '', class: 'close-ico' do %>
+        <%= icon_tag "cross" %>
+      <% end %>
+    </div>
   </div>
 
   <%= render "navigation" %>

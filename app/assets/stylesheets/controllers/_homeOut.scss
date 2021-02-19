@@ -23,10 +23,106 @@ section.homeOut {
     }
   }
 
+  .supporterBox {
+
+    position: relative;
+    width:130px;
+    display: none;
+
+    .inner {
+      padding:20px;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      width:100%;
+      height:100%;
+      background-image: url(image_path('supporter/boxBorder.svg'));
+      background-size: contain;
+      background-repeat: no-repeat;
+      z-index: -1;
+    }
+
+    @include respond-to("<medium") {
+
+      display: none;
+
+    }
+
+    @include respond-to(">=medium") {
+      display: block;
+      position: absolute;
+      top: -20px;
+      right:10px;
+      margin-right:0px;
+      z-index:9999999;
+
+      .txt {
+        text-align: center;
+        margin-bottom: 20px;
+        font-family: $font-tertiary;
+      }
+
+      .-logo img {
+        width:97%;
+        margin-bottom:20px;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+
+
+    }
+
+    @include respond-to(">=large") {
+      display: block;
+      position: absolute;
+      top: 30px;
+      right:10px;
+      margin-right:0px;
+      z-index:9999999;
+    }
+
+    @include respond-to(">=xlarge") {
+      display: block;
+      position: fixed;
+      top: 100px;
+      left:50%;
+      margin-left:520px;
+      z-index:9999999;
+      margin-right:0px;
+    }
+
+    .btn-viewall {
+      @include headlineBarbapapaMint();
+      font-family: $font-tertiary;
+      text-decoration: none;
+      white-space: nowrap;
+      transform: rotate(-5deg);
+      position: absolute;
+      bottom:-10px;
+      left:0px;
+      width:100%;
+      text-align: center;
+      font-size: 25px;
+      &:hover {
+        @include headlineBarbapapa();
+        font-family: $font-tertiary;
+      }
+    }
+
+    .close-ico {
+      top: -7px;
+      right: -2px;
+    }
+
+  }
+
 }
 
 .buehne {
-  overflow: hidden;
+  //overflow: hidden;
   background-image: url(image_path('illu/illu-sitzendeAmTisch@2x.png')), url(image_path('illu/illu-karte@2x.jpg'));
   background-repeat: no-repeat;
   background-size: 270px auto, 700px auto;
@@ -110,6 +206,7 @@ section.homeOut {
     transform: translate(-50%, 0);
     margin-top: 200px;
     margin-bottom: 40px;
+    margin-left: 0;
     @include respond-to(">=medium") {
       transform: translate(0, 0);
       left: 400px;
@@ -121,24 +218,27 @@ section.homeOut {
     @include respond-to(">=large") {
       position: absolute;
       top: 300px;
-      left: auto;
-      right: 140px;
-      margin-bottom: 0;
+      margin-left: 100px;
+      //left: auto;
+      //right: 140px;
+      //margin-bottom: 0;
     }
     .coop-share-logo {
-      width: 150px;
-      height: 150px; // 130
-      background-size: 150px 150px; // 130
+      width: 130px;
+      height: 130px;
+      background-size: 130px 130px;
       display: block;
-      //background-image: url(image_path('svg/coopshare-logo-white.svg'));
-      background-image: url(image_path('support-us-badge.png'));
+      background-image: url(image_path('svg/coopshare-logo-white.svg'));
+      //background-image: url(image_path('support-us-badge.png'));
       background-repeat: no-repeat;
     }
     .txt {
       @include headlineBarbapapaMint();
       font-size: 30px;
-      margin-left: 10px;
-      margin-top:-10px;
+      left: 20px;
+      bottom: -30px;
+      position: absolute;
+      transform: rotate(-10deg);
     }
     &::before {
       content: '';
@@ -148,17 +248,17 @@ section.homeOut {
       background-image: url(image_path('svg/icon-arrow-right-blinky-rosa'));
       background-repeat: no-repeat;
       position: absolute;
-      bottom: -15px;
-      left: 145px; // 115
-      transform: rotate(-45deg);
+      bottom: -10px;
+      left: -30px;
+      transform: rotate(30deg);
     }
     &:hover {
       .txt {
         @include headlineBarbapapa();
       }
       &::before {
-        bottom: -10px;
-        left: 150px; // 120
+        bottom: -15px;
+        left: -25px;
       }
       .coop-share-logo {
         transform: rotate(-5deg);
