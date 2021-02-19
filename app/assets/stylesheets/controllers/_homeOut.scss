@@ -26,11 +26,12 @@ section.homeOut {
   .supporterBox {
 
     position: relative;
-    width:130px;
+    width:150px;
     display: none;
 
     .inner {
       padding:20px;
+      text-align: center;
     }
 
     &::before {
@@ -44,13 +45,67 @@ section.homeOut {
       z-index: -1;
     }
 
-    @include respond-to("<medium") {
+    @include respond-to("<large") {
 
-      display: none;
+      display: block;
+      width:100%;
+
+      .inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        padding:10px;
+        padding-bottom:20px;
+      }
+
+      margin-top:50px;
+      .txt {
+        text-align: center;
+        width:100%;
+        font-family: $font-tertiary;
+        margin-top:-50px;
+      }
+
+      margin-bottom: 40px;
+      .btn-viewall {
+        @include headlineBarbapapa();
+        font-family: $font-tertiary;
+        text-decoration: none;
+        transform: rotate(-3deg);
+        position: absolute;
+        bottom:-15px;
+        left:auto;
+        text-align: center;
+        font-size: 25px;
+        &:hover {
+          @include headlineBarbapapaMint();
+          font-family: $font-tertiary;
+        }
+      }
+
+      &::before {
+        background-image: url(image_path('supporter/boxBorder-quer.svg'));
+      }
+
+      .-logo {
+        width:30%;
+        img {
+          width:95%;
+          max-width: 130px;
+          &:hover {
+            transform: scale(1.1);
+          }
+        }
+      }
+
+      .close-ico {
+        display: none;
+      }
 
     }
 
-    @include respond-to(">=medium") {
+    @include respond-to(">=large") {
       display: block;
       position: absolute;
       top: -20px;
@@ -62,6 +117,10 @@ section.homeOut {
         text-align: center;
         margin-bottom: 20px;
         font-family: $font-tertiary;
+        span {
+          display: block;
+          width:100%;
+        }
       }
 
       .-logo img {
@@ -72,6 +131,23 @@ section.homeOut {
         }
       }
 
+      .btn-viewall {
+        @include headlineBarbapapa();
+        font-family: $font-tertiary;
+        text-decoration: none;
+        white-space: nowrap;
+        transform: rotate(-5deg);
+        position: absolute;
+        bottom:-10px;
+        left:0px;
+        width:100%;
+        text-align: center;
+        font-size: 25px;
+        &:hover {
+          @include headlineBarbapapaMint();
+          font-family: $font-tertiary;
+        }
+      }
 
     }
 
@@ -85,31 +161,13 @@ section.homeOut {
     }
 
     @include respond-to(">=xlarge") {
-      display: block;
-      position: fixed;
-      top: 100px;
-      left:50%;
-      margin-left:520px;
-      z-index:9999999;
-      margin-right:0px;
-    }
-
-    .btn-viewall {
-      @include headlineBarbapapaMint();
-      font-family: $font-tertiary;
-      text-decoration: none;
-      white-space: nowrap;
-      transform: rotate(-5deg);
-      position: absolute;
-      bottom:-10px;
-      left:0px;
-      width:100%;
-      text-align: center;
-      font-size: 25px;
-      &:hover {
-        @include headlineBarbapapa();
-        font-family: $font-tertiary;
-      }
+      //display: block;
+      //position: fixed;
+      //top: 100px;
+      //left:50%;
+      //margin-left:520px;
+      //z-index:9999999;
+      //margin-right:0px;
     }
 
     .close-ico {
