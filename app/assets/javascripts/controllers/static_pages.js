@@ -3,6 +3,7 @@ APP.controllers.static_pages = (function() {
     function init() {
       if($("#help_nav").exists()) initHelpScroller();
       if($("section.homeOut").exists()) initMobileNav();
+      if($("section.homeOut").exists()) initSupporterBox();
       if($(".-mentoring-page").exists()) initMentoring();
       if($("#guide-download").exists()) initGuideDownload();
     }
@@ -128,6 +129,14 @@ function initGuideDownload() {
     });
   });
 }
+
+
+function initSupporterBox() {
+  $('.close-ico').on('click', function(event){
+    $(this).parent().fadeOut('fast');
+  });
+}
+
 
 function initMobileNav() {
   var $dropdown = $(".filter-stream .input-select select");
