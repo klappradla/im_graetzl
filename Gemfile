@@ -30,7 +30,6 @@ gem 'prawn'
 gem 'prawn-table'
 gem 'google_custom_search_api'
 
-gem 'mandrill-api', '~> 1.0.53', require: "mandrill"
 gem 'gibbon', '~> 3.0', '>= 3.0.2'
 gem 'newrelic_rpm'
 gem 'rollbar'
@@ -44,7 +43,7 @@ gem 'aws-sdk', '~> 2'
 
 gem 'sass-rails'
 gem 'uglifier'
-gem 'mini_racer', platforms: :ruby
+gem 'mini_racer', github: 'rubyjs/mini_racer', branch: 'refs/pull/186/head'
 gem 'jquery-rails'
 gem 'underscore-rails'
 gem 'autoprefixer-rails'
