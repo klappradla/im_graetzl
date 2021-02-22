@@ -460,7 +460,7 @@ DEPENDENCIES
   activerecord-postgis-adapter (~> 5.0)
   acts-as-taggable-on
   autoprefixer-rails
-  aws-sdk (~> 2)
+  aws-sdk (~> 2.0)
   bb-ruby
   browser
   capybara
@@ -518,7 +518,7 @@ DEPENDENCIES
   webmock
 
 RUBY VERSION
-   ruby 2.7.1p83
+   ruby 2.7.2p137
 
 BUNDLED WITH
    2.2.11

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.7.1'
+ruby '2.7.2'
 
 gem 'rails', '~> 5.2'
 gem 'puma'
@@ -17,6 +17,7 @@ gem 'rack-rewrite'
 
 gem 'aasm'
 gem 'acts-as-taggable-on'
+gem 'aws-sdk', '~> 2.0'
 gem 'browser'
 gem 'cocoon'
 gem 'devise'
@@ -35,15 +36,20 @@ gem 'newrelic_rpm'
 gem 'rollbar'
 gem 'scout_apm'
 
+# Refile is pretty much abandoned and we have to jump through hoops to make it work
+# It should be replaced with active-storage or shrine in the next upgrade
 gem 'refile', github: 'refile/refile', require: 'refile/rails', ref: '6803d83f0764558932de6880728672326211b018'
 gem 'refile-mini_magick', github: 'refile/refile-mini_magick', ref: '466e30cf5878844b0e0bc4588f766bb18dabdd2b'
 gem 'sinatra', github: 'sinatra/sinatra', ref: '6f15fba2790ebdf4d1215cebf425dea2ea3130ea'
 gem 'refile-s3'
-gem 'aws-sdk', '~> 2'
+
+# Lib V8does not support Macbook M1 for the moment, so for development on M1, use the commented gem
+# Just make sure to comment it back and run bundle install before commiting changes
+gem 'mini_racer' # For deployment
+# gem 'mini_racer', github: 'rubyjs/mini_racer', branch: 'refs/pull/186/head' # For M1
 
 gem 'sass-rails'
 gem 'uglifier'
-gem 'mini_racer', platforms: :ruby
 gem 'jquery-rails'
 gem 'underscore-rails'
 gem 'autoprefixer-rails'
