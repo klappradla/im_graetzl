@@ -35,9 +35,9 @@ gem 'newrelic_rpm'
 gem 'rollbar'
 gem 'scout_apm'
 
-gem 'refile', github: 'refile/refile', require: 'refile/rails'
-gem 'refile-mini_magick', github: 'refile/refile-mini_magick'
-gem 'sinatra', github: 'sinatra/sinatra'
+gem 'refile', github: 'refile/refile', require: 'refile/rails', ref: '6803d83f0764558932de6880728672326211b018'
+gem 'refile-mini_magick', github: 'refile/refile-mini_magick', ref: '466e30cf5878844b0e0bc4588f766bb18dabdd2b'
+gem 'sinatra', github: 'sinatra/sinatra', ref: '6f15fba2790ebdf4d1215cebf425dea2ea3130ea'
 gem 'refile-s3'
 gem 'aws-sdk', '~> 2'
 
