@@ -43,7 +43,7 @@ gem 'aws-sdk', '~> 2'
 
 gem 'sass-rails'
 gem 'uglifier'
-gem 'mini_racer', github: 'rubyjs/mini_racer', branch: 'refs/pull/186/head'
+gem 'mini_racer', platforms: :ruby
 gem 'jquery-rails'
 gem 'underscore-rails'
 gem 'autoprefixer-rails'
