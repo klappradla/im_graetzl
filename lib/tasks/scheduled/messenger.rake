@@ -12,11 +12,7 @@ namespace :scheduled do
     user_range_start = ARGV[1].to_i
     user_range_end = ARGV[2].to_i
 
-    puts "----------"
-    puts user_range_start
-    puts user_range_end
-
-    sender = User.where("username" => "Michael").last
+    sender = User.where("email" => "wir@imgraetzl.at").last
 
     User.where(id: user_range_start..user_range_end).each do |user|
       next if user.id == sender.id
