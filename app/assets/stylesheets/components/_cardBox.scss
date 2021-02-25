@@ -571,6 +571,12 @@
   }
 }
 
+.cardBox.-meeting.-online {
+  .graetzl-sideflag {
+    //display: none;
+  }
+}
+
 // Featured CardBoxes
 .cardBox.featuredCard {
   &.-hidden {

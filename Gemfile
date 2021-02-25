@@ -46,7 +46,7 @@ gem 'refile-s3'
 # Lib V8does not support Macbook M1 for the moment, so for development on M1, use the commented gem
 # Just make sure to comment it back and run bundle install before commiting changes
 gem 'mini_racer' # For deployment
-# gem 'mini_racer', github: 'rubyjs/mini_racer', branch: 'refs/pull/186/head' # For M1
+#gem 'mini_racer', github: 'rubyjs/mini_racer', branch: 'refs/pull/186/head' # For M1
 
 gem 'sass-rails'
 gem 'uglifier'

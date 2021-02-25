@@ -1,6 +1,6 @@
 <% graetzl = Graetzl.memoized(meeting.graetzl_id) %>
 
-<div class="cardBox -meeting <%= meeting_past_flag(meeting) %> <%= local_assigns[:featured_card] if local_assigns[:featured_card].present? %>" data-behavior="masonry-card" data-card-id="meeting-<%= meeting.id %>">
+<div class="cardBox -meeting <%= meeting_past_flag(meeting) %> <%= local_assigns[:featured_card] if local_assigns[:featured_card].present? %> <%= '-online' if meeting.online_meeting %>" data-behavior="masonry-card" data-card-id="meeting-<%= meeting.id %>">
 
   <div class="cardBoxHeader">
     <%= link_to [graetzl, meeting] do %>
@@ -32,7 +32,13 @@
         <%= icon_tag "users" %>
       <% end %>
     </div>
-    <%= graetzl_flag(graetzl) %>
+
+    <% if meeting.online_meeting %>
+      <div class="graetzl-sideflag sideflag -R">Online Event</div>
+    <% else %>
+      <%= graetzl_flag(graetzl) %>
+    <% end %>
+
   </div>
 
   <div class="cardBoxContent">
