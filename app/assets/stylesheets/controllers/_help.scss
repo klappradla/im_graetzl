@@ -207,6 +207,36 @@ section.help {
     }
   }
 
+
+  // ----- SUPPORTER PAGE ------ //
+  &.-supporter {
+    padding-bottom:0px;
+    margin-bottom:-80px;
+    .imgHeader::after {
+      // Insert Background Image here:
+      //background-image: url(image_path('info/header-menschenstrom.png'));
+      display:none;
+    }
+    .imgHeader {
+      background-color: #1e2c29;
+      .wrp {
+        height:80%;
+        max-width: 900px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-end;
+      }
+      span {
+        color: #ffe16f;
+        text-transform: uppercase;
+        line-height: 2;
+        text-shadow: black 0 1px;
+      }
+    }
+  }
+
+
   // ----- HELP STARTPAGE ------ //
   &.-startpage {
 

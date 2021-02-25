@@ -23,6 +23,7 @@ section.homeOut {
     }
   }
 
+  // SUPPORTER BOX
   .supporterBox {
 
     position: relative;
@@ -45,6 +46,7 @@ section.homeOut {
       z-index: -1;
     }
 
+    // MOBILE VERSION
     @include respond-to("<large") {
 
       display: block;
@@ -102,16 +104,21 @@ section.homeOut {
       .close-ico {
         display: none;
       }
-
     }
 
+    // DESKTOP VERSION
     @include respond-to(">=large") {
+
       display: block;
       position: absolute;
-      top: -20px;
-      right:10px;
-      margin-right:0px;
-      z-index:9999999;
+      top: 45px;
+      left:0px;
+      z-index:9;
+
+      .close-ico {
+        top: -7px;
+        right: -2px;
+      }
 
       .txt {
         text-align: center;
@@ -148,43 +155,17 @@ section.homeOut {
           font-family: $font-tertiary;
         }
       }
-
     }
-
-    @include respond-to(">=large") {
-      display: block;
-      position: absolute;
-      top: 30px;
-      right:10px;
-      margin-right:0px;
-      z-index:9999999;
-    }
-
-    @include respond-to(">=xlarge") {
-      //display: block;
-      //position: fixed;
-      //top: 100px;
-      //left:50%;
-      //margin-left:520px;
-      //z-index:9999999;
-      //margin-right:0px;
-    }
-
-    .close-ico {
-      top: -7px;
-      right: -2px;
-    }
-
   }
-
 }
 
 .buehne {
   //overflow: hidden;
   background-image: url(image_path('illu/illu-sitzendeAmTisch@2x.png')), url(image_path('illu/illu-karte@2x.jpg'));
   background-repeat: no-repeat;
+  min-height: 320px;
   background-size: 270px auto, 700px auto;
-  background-position: center 75px, -140px -90px;
+  background-position: 45px 75px, -95px -90px;
   position: relative;
   margin-left: -18px;
   margin-right: -18px;
@@ -194,7 +175,7 @@ section.homeOut {
   @include respond-to(">=medium") {
     background-size: 400px auto, 1000px auto;
     background-position: 40px 75px, -30px -160px;
-    min-height: 360px;
+    min-height: 380px;
     margin-bottom: 30px;
     margin-left: -20px;
     margin-right: -25px;
@@ -204,10 +185,9 @@ section.homeOut {
 
   @include respond-to(">=large") {
     background-size: 507px auto, 936px auto;
-    background-position: 10px 88px, 90px -31px;
-    min-height: 460px;
+    background-position: 120px 88px, 90px -31px;
+    min-height: 480px;
     margin-top: -8.0rem;
-    //margin-bottom: 4.0rem;
     margin-left: 0;
     margin-right: 0;
     padding-left: 0;
@@ -229,9 +209,10 @@ section.homeOut {
     @include respond-to(">=medium") {
       transform: translate(80px, 0);
     }
+
     @include respond-to(">=large") {
       position: absolute;
-      left: 340px;
+      left: 430px;
       top: 100px;
       text-align: left;
       margin-left: 0;
@@ -244,6 +225,7 @@ section.homeOut {
         @include headlineBarbapapa();
       }
     }
+
     span:first-child {
       @include respond-to(">=medium") {
         margin-left: 35px;
@@ -255,32 +237,36 @@ section.homeOut {
 
   .registerlink {
     position: relative;
-    height: 90px;
-    background-size: 90px 90px;
     display: inline-flex;
     align-items: center;
     text-decoration: none;
     left: 50%;
     transform: translate(-50%, 0);
-    margin-top: 200px;
+    margin-top: 150px;
     margin-bottom: 40px;
-    margin-left: 0;
+    margin-left: 0px;
+
+    @include respond-to(">small") {
+      margin-top: 90px;
+      margin-left: 65px;
+    }
+
     @include respond-to(">=medium") {
       transform: translate(0, 0);
-      left: 400px;
+      left: 450px;
       position: absolute;
       top: 190px;
       margin-top: 0;
       margin-bottom: 0;
+      margin-left: 0;
     }
+
     @include respond-to(">=large") {
       position: absolute;
       top: 300px;
-      margin-left: 100px;
-      //left: auto;
-      //right: 140px;
-      //margin-bottom: 0;
+      left: 600px;
     }
+
     .coop-share-logo {
       width: 130px;
       height: 130px;

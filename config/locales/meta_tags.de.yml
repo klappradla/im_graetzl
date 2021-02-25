@@ -40,6 +40,9 @@ de:
     mentoring:
       title: 'imGrätzl Mentoring Programm - Komm in dein Unterstützer Team'
       description: 'Die imGrätzl.at Unterstützer-Teams werden ins Leben gerufen, um Selbständige, GründerInnen und MacherInnen darin zu bestärken ihre Ideen auf den Boden zu bringen und sie gleichzeitig in ein lokales Netzwerk aus Gleichgesinnten einzubinden.'
+    supporter:
+      title: 'DANKE an unsere MöglichmacherInnen'
+      description: 'Der Betrieb und die Weiterentwicklung von imGrätzl wird ermöglicht durch diese großartigen Menschen und Unternehmen.'
 
   wien:
     show:
