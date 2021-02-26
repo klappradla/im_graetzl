@@ -44,13 +44,12 @@
 
   &.-quart {
     > * {
-      margin-bottom: 30px;
+      //margin-bottom: 30px;
       @include respond-to(">=medium") {
-        @include col(1/2, $cycle: 2);
+        @include col(1/2, $cycle: 2, $gutter: 2);
       }
       @include respond-to(">=large") {
-        @include col(1/4, $gutter: 1, $uncycle: 2);
-        margin-bottom: 0;
+        @include col(1/4, $gutter: 2, $cycle: 4, $uncycle: 2);
       }
     }
 
