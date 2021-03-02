@@ -12,15 +12,28 @@
 
   <div class="imgHeader -fullwidth">
     <div class="wrp">
-      <span>Der Betrieb und die Weiterentwicklung von imGrätzl wird ermöglicht durch diese großartigen Menschen und Unternehmen.</span>
+      <%= image_tag('supporter/bg-title.png', class: 'title-img') %>
+      <div class="txt">Der Betrieb und die Weiterentwicklung von imGrätzl wird ermöglicht durch diese großartigen Menschen und Unternehmen.</div>
     </div>
   </div>
 
 
   <div class="topBoxes cardBoxCollection -tripple">
-    <div class="sponsorBox">1</div>
-    <div class="sponsorBox">2</div>
-    <div class="sponsorBox">3</div>
+    <div class="sponsorBox">
+      <%= link_to(image_tag('supporter/logos/kolarik.png'), 'https://www.kolarik.at', target: '_blank') %>
+      <span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</span>
+      <%= link_to 'Familie Kolarik', 'https://www.kolarik.at', target: '_blank' %>
+    </div>
+    <div class="sponsorBox">
+      <%= link_to(image_tag('supporter/logos/geldmachtwas.png'), 'https://www.geldmachtwas.com', target: '_blank') %>
+      <span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</span>
+      <%= link_to 'Elif Hakecobani', 'https://www.geldmachtwas.com', target: '_blank' %>
+    </div>
+    <div class="sponsorBox">
+      <%= link_to(image_tag('supporter/logos/bezirksimkerei.png'), 'https://www.wiener-bezirksimkerei.at', target: '_blank') %>
+      <span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</span>
+      <%= link_to 'Wiener Bezirksimkerei', 'https://www.wiener-bezirksimkerei.at', target: '_blank' %>
+    </div>
   </div>
 
   <div class="allBoxes">

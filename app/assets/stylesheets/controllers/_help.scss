@@ -214,30 +214,51 @@ section.help {
     margin-bottom:-80px;
     .imgHeader::after {
       // Insert Background Image here:
-      //background-image: url(image_path('info/header-menschenstrom.png'));
-      display:none;
+      background-image: url(image_path('supporter/bg-header.jpg'));
+      //display:none;
     }
     .imgHeader {
       background-color: #1e2c29;
       .wrp {
-        height:80%;
+        height:90%;
         max-width: 900px;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        align-items: flex-end;
+        align-items: center;
       }
-      span {
+      .txt {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
         color: #ffe16f;
         text-transform: uppercase;
-        line-height: 2;
         text-shadow: black 0 1px;
+        @include font-size-primaryFont('large');
+        line-height: 1.8;
+        margin-top:-50px;
+        height:30%;
+      }
+      .title-img {
+        height:70%;
+      }
+      @include respond-to(">medium") {
+        .wrp {
+          height:80%;
+          align-items: flex-end;
+        }
+        .txt {
+          height:20%;
+        }
+        .title-img {
+          height:80%;
+        }
       }
     }
 
     .topBoxes, .allBoxes {
-      padding-top:75px;
-      padding-bottom:50px;
+      padding-top:175px;
+      padding-bottom:75px;
       position: relative;
 
       &::before {
@@ -245,12 +266,12 @@ section.help {
         content:'';
         position: absolute;
         text-align: center;
-        top:-50px;
+        top:40px;
         width:100%;
         height:100px;
         background-position: center top 0px;
         background-size: auto 100px;
-        background-image: url(image_path('illu/illu-zuckerl-transparent.png'));
+        background-image: url(image_path('supporter/danke-top.png'));
         background-repeat: no-repeat;
         z-index: 999;
       }
@@ -258,6 +279,12 @@ section.help {
     }
 
     .allBoxes {
+
+      padding-top:100px;
+      &::before {
+        top:-45px;
+        background-image: url(image_path('supporter/danke-small.png'));
+      }
 
       .-quart {
         // Small: 1 Column
@@ -308,7 +335,26 @@ section.help {
 
     .sponsorBox {
       margin-bottom:25px;
-      background-color: white;
+      text-align: center;
+      img {
+        height:100px;
+      }
+      span {
+        display: block;
+        margin-top:30px;
+        padding-top:25px;
+        padding-bottom:15px;
+        color: $color-ambient-grey;
+        @include font-size-primaryFont('medium');
+        background: url(image_path('supporter/ico-apostroph.svg')) no-repeat center top;
+        background-size: 20px;
+      }
+      a {
+        text-transform: uppercase;
+        color: $color-ambient-grey;
+        font-weight: bold;
+        @include font-size-primaryFont('medium');
+      }
     }
 
   }
