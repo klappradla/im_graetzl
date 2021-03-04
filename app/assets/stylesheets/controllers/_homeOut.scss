@@ -66,12 +66,13 @@ section.homeOut {
         text-align: center;
         width:100%;
         font-family: $font-tertiary;
+        font-size: 1.8rem;
         margin-top:-50px;
       }
 
       margin-bottom: 40px;
       .btn-viewall {
-        @include headlineBarbapapa();
+        @include headlineBarbapapaMint();
         font-family: $font-tertiary;
         text-decoration: none;
         transform: rotate(-3deg);
@@ -81,7 +82,7 @@ section.homeOut {
         text-align: center;
         font-size: 25px;
         &:hover {
-          @include headlineBarbapapaMint();
+          @include headlineBarbapapa();
           font-family: $font-tertiary;
         }
       }
@@ -124,6 +125,8 @@ section.homeOut {
         text-align: center;
         margin-bottom: 20px;
         font-family: $font-tertiary;
+        font-size: 1.8rem;
+        //color: $color-ambient-mint-dark;
         span {
           display: block;
           width:100%;
@@ -132,14 +135,14 @@ section.homeOut {
 
       .-logo img {
         width:97%;
-        margin-bottom:20px;
+        margin-bottom:30px;
         &:hover {
           transform: scale(1.1);
         }
       }
 
       .btn-viewall {
-        @include headlineBarbapapa();
+        @include headlineBarbapapaMint();
         font-family: $font-tertiary;
         text-decoration: none;
         white-space: nowrap;
@@ -151,7 +154,7 @@ section.homeOut {
         text-align: center;
         font-size: 25px;
         &:hover {
-          @include headlineBarbapapaMint();
+          @include headlineBarbapapa();
           font-family: $font-tertiary;
         }
       }
