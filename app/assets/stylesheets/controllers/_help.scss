@@ -213,9 +213,7 @@ section.help {
     padding-bottom:0px;
     margin-bottom:-80px;
     .imgHeader::after {
-      // Insert Background Image here:
       background-image: url(image_path('supporter/bg-header.jpg'));
-      //display:none;
     }
     .imgHeader {
       background-color: #1e2c29;
@@ -241,7 +239,7 @@ section.help {
         height:30%;
       }
       .title-img {
-        height:70%;
+        width:100%;
       }
       @include respond-to(">medium") {
         .wrp {
@@ -253,6 +251,14 @@ section.help {
         }
         .title-img {
           height:80%;
+        }
+      }
+      @include respond-to("<=medium") {
+        height:300px;
+      }
+      @include respond-to("<=small") {
+        .txt {
+          font-size: 1.4rem;
         }
       }
     }
@@ -337,8 +343,10 @@ section.help {
     .sponsorBox {
       margin-bottom:25px;
       text-align: center;
+      padding:10px;
       img {
-        height:100px;
+        width:80%;
+        max-width: 200px;
       }
       span {
         display: block;
@@ -356,6 +364,51 @@ section.help {
         font-weight: bold;
         @include font-size-primaryFont('medium');
       }
+      div[class^='logo'] {
+        width:100%;
+        height:160px;
+        padding:15px;
+        background-color: white;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-origin: content-box;
+        border: 8px solid #ffffff;
+        background-color: #ffffff;
+        border-radius: 8px;
+
+      }
+      div[class^='logo-top'] {
+        border:none;
+        background-color: transparent;
+        height:220px;
+        @include respond-to("<=medium") {
+          height:160px;
+        }
+      }
+      // Main Sponsors
+      .logo-top-1 {background: url(image_path('supporter/logos/kolarik.png'))}
+      .logo-top-2 {background: url(image_path('supporter/logos/geldmachtwas.png'))}
+      .logo-top-3 {background: url(image_path('supporter/logos/bezirksimkerei.png'))}
+      // All Sponsors
+      .logo-1 {background: url(image_path('supporter/logos/cermak.png'))}
+      .logo-2 {background: url(image_path('supporter/logos/business_moms.jpg'))}
+      .logo-3 {background: url(image_path('supporter/logos/healthconsult.png'))}
+      .logo-4 {background: url(image_path('supporter/logos/corona-gsteu.jpg'))}
+      .logo-5 {background: url(image_path('supporter/logos/der_achte.jpg'))}
+      .logo-6 {background: url(image_path('supporter/logos/dirmhirn.png'))}
+      .logo-7 {background: url(image_path('supporter/logos/elisabeth-walter.png'))}
+      .logo-8 {background: url(image_path('supporter/logos/manhartsberger.png'))}
+      .logo-9 {background: url(image_path('supporter/logos/rani-yoga.jpg'))}
+      .logo-10 {background: url(image_path('supporter/logos/pohnitzer.png'))}
+      .logo-11 {background: url(image_path('supporter/logos/raumen.png'))}
+      .logo-12 {background: url(image_path('supporter/logos/schrenk.jpg'))}
+      .logo-13 {background: url(image_path('supporter/logos/corona-gsteu.jpg'))}
+      .logo-14 {background: url(image_path('supporter/logos/corona-gsteu.jpg'))}
+      .logo-15 {background: url(image_path('supporter/logos/corona-gsteu.jpg'))}
+      .logo-16 {background: url(image_path('supporter/logos/corona-gsteu.jpg'))}
+      .logo-17 {background: url(image_path('supporter/logos/corona-gsteu.jpg'))}
+      .logo-18 {background: url(image_path('supporter/logos/corona-gsteu.jpg'))}
     }
 
   }

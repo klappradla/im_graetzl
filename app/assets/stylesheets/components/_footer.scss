@@ -5,6 +5,24 @@ footer {
   padding-top: 50px;
   padding-bottom: 60px;
 
+  a.supporter {
+    display: flex;
+    justify-content: center;
+    margin-top:-20px;
+    padding-bottom:30px;
+    color: $color-ambient-grey;
+    font-style: italic;
+    text-decoration: none;
+    svg {
+      color: $color-ambient-rosa;
+      width:40px;
+      height:25px;
+    }
+    &:hover {
+      color: $color-ambient-rosa;
+    }
+  }
+
   .row {
     @include respond-to(">=large") {
       display: flex;
