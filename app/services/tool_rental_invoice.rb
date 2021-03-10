@@ -96,8 +96,8 @@ class ToolRentalInvoice
   def add_company_info(pdf)
     pdf.text "imGrätzl.at wird betrieben von:"
     pdf.text "morgenjungs GmbH"
-    pdf.text "Ausstellungsstrasse 9/9"
-    pdf.text "A-1020 Wien"
+    pdf.text "Breitenfeldergasse 14/2A"
+    pdf.text "A-1080 Wien"
     pdf.text "wir@imgraetzl.at"
   end
 

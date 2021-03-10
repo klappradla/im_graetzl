@@ -31,8 +31,8 @@ class ZuckerlInvoice
     pdf.text "Rechnungssteller", style: :bold
     pdf.text "imGrätzl.at wird betrieben von:"
     pdf.text "morgenjungs GmbH"
-    pdf.text "Ausstellungsstrasse 9/9"
-    pdf.text "A-1020 Wien"
+    pdf.text "Breitenfeldergasse 14/2A"
+    pdf.text "A-1080 Wien"
     pdf.text "UID: ATU 69461502"
     pdf.text "wir@imgraetzl.at"
     pdf.move_down 40
