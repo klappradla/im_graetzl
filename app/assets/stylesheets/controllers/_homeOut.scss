@@ -61,7 +61,7 @@ section.homeOut {
         //padding-bottom:20px;
       }
 
-      margin-top:50px;
+      margin-top:40px;
       .txt {
         //text-align: center;
         //width:100%;
@@ -107,18 +107,22 @@ section.homeOut {
       }
     }
 
-    @include respond-to("<medium") {
+    @include respond-to("<large") {
       .txt {
         text-align: center;
         width:100%;
         padding-bottom: 10px;
       }
       .btn-viewall {
-        width:30%;
-        font-size: 18px;
+        width:28%;
       }
       .-logo {
-        width:30%;
+        width:28%;
+      }
+    }
+    @include respond-to("<medium") {
+      .btn-viewall {
+        font-size: 18px;
       }
     }
 
