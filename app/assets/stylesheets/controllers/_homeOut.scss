@@ -58,7 +58,7 @@ section.homeOut {
         justify-content: space-around;
         flex-wrap: wrap;
         padding:15px;
-        //padding-bottom:20px;
+        padding-bottom:30px;
       }
 
       margin-top:40px;
@@ -76,8 +76,8 @@ section.homeOut {
         font-family: $font-tertiary;
         text-decoration: none;
         transform: rotate(-3deg);
-        //position: absolute;
-        //bottom:-15px;
+        position: absolute;
+        bottom:-10px;
         left:auto;
         text-align: center;
         font-size: 25px;
@@ -114,15 +114,15 @@ section.homeOut {
         padding-bottom: 10px;
       }
       .btn-viewall {
-        width:28%;
+        //width:28%;
       }
       .-logo {
-        width:28%;
+        //width:28%;
       }
     }
     @include respond-to("<medium") {
       .btn-viewall {
-        font-size: 18px;
+        //font-size: 18px;
       }
     }
 
@@ -131,7 +131,7 @@ section.homeOut {
 
       display: block;
       position: absolute;
-      top: 145px;
+      top: 65px;
       left:0px;
       z-index:9;
 
