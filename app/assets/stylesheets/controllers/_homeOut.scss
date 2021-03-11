@@ -159,6 +159,10 @@ section.homeOut {
           transform: scale(1.1);
         }
       }
+      .-elif img {
+        margin-top:-10px;
+        margin-bottom:20px;
+      }
 
       .btn-viewall {
         @include headlineBarbapapaMint();
